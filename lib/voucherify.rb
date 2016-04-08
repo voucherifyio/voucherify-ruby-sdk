@@ -51,4 +51,17 @@ class Voucherify
     JSON.parse(response.body)
   end
 
+  def redeem(code, tracking_id = nil)
+    url = @backendUrl + "/vouchers/" + code + "/redemption"
+    url += ("?tracking_id=" + tracking_id) if tracking_id
+    
+    response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
+    JSON.parse(response.body)
+  end
+
+  def publish(campaign_name)
+    url = @backendUrl + "/vouchers/publish?campaign=" + campaign_name
+    response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
+    JSON.parse(response.body)
+  end
 end
