@@ -53,10 +53,18 @@ class Voucherify
   end
 
   def redeem(code, tracking_id = nil)
+    payload = {}
+
+    if code.is_a? Hash
+      payload = code
+      code = payload["voucher"]
+      payload.delete "voucher"
+    end
+
     url = @backendUrl + "/vouchers/" + URI.encode(code) + "/redemption"
     url += ("?tracking_id=" + URI.encode(tracking_id)) if tracking_id
-    
-    response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
+
+    response = RestClient.post(url, payload.to_json, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
 
