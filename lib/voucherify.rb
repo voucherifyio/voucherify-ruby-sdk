@@ -1,6 +1,6 @@
 require "voucherify/version"
 require "net/http"
-require "uri"
+require "rest-client"
 require "json"
 
 require "pry"
@@ -10,26 +10,35 @@ class Voucherify
   def initialize(options)
     @backendUrl = "https://api.voucherify.io/v1"
     @options = options
+    @headers = {
+      "X-App-Id" => @options["applicationId"],
+      "X-App-Token" => @options["clientSecretKey"],
+      "X-Voucherify-Channel" => "Ruby-SDK",
+      :accept => :json
+    }
   end
 
   def get(code)
-    uri = URI.parse("#{@backendUrl}/vouchers/#{URI.encode(code)}")
+    url = @backendUrl + "/vouchers/" + code
+    response = RestClient.get(url, @headers)
+    JSON.parse(response.body)
+  end
 
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+  def list(query)
+    url = @backendUrl + "/vouchers/"
+    response = RestClient.get(url, @headers.merge({ :params => query }))
+    JSON.parse(response.body)
+  end
 
-    request = Net::HTTP::Get.new(uri.request_uri)
-    request["X-App-Id"] = @options["applicationId"]
-    request["X-App-Token"] = @options["clientSecretKey"]
-    request["X-Voucherify-Channel"] = "Ruby-SDK"
-    request["Accept"] = "application/json"
+  def redemption(code)
+    url = @backendUrl + "/vouchers/" + code + "/redemption"
+    response = RestClient.get(url, @headers)
+    JSON.parse(response.body)
+  end
 
-    response = http.request(request)
-    # puts response.code             # => 301
-    # puts response.body             # => The body (HTML, XML, blob, whatever)
-
-    # binding.pry
+  def redemptions(query)
+    url = @backendUrl + "/redemptions/"
+    response = RestClient.get(url, @headers.merge({ :params => query }))
     JSON.parse(response.body)
   end
 
