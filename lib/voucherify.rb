@@ -73,4 +73,16 @@ class Voucherify
     response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
+
+  def enable(code)
+    url = @backendUrl + "/vouchers/" + URI.encode(code) + "/enable"
+    response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
+    nil
+  end
+
+  def disable(code)
+    url = @backendUrl + "/vouchers/" + URI.encode(code) + "/disable"
+    response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
+    nil
+  end
 end
