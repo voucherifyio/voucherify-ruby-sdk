@@ -1,5 +1,6 @@
 require "voucherify/version"
 require "net/http"
+require "uri"
 require "rest-client"
 require "json"
 
@@ -19,7 +20,7 @@ class Voucherify
   end
 
   def get(code)
-    url = @backendUrl + "/vouchers/" + code
+    url = @backendUrl + "/vouchers/" + URI.encode(code)
     response = RestClient.get(url, @headers)
     JSON.parse(response.body)
   end
@@ -32,7 +33,7 @@ class Voucherify
   end
 
   def redemption(code)
-    url = @backendUrl + "/vouchers/" + code + "/redemption"
+    url = @backendUrl + "/vouchers/" + URI.encode(code) + "/redemption"
     response = RestClient.get(url, @headers)
     JSON.parse(response.body)
   end
@@ -52,15 +53,15 @@ class Voucherify
   end
 
   def redeem(code, tracking_id = nil)
-    url = @backendUrl + "/vouchers/" + code + "/redemption"
-    url += ("?tracking_id=" + tracking_id) if tracking_id
+    url = @backendUrl + "/vouchers/" + URI.encode(code) + "/redemption"
+    url += ("?tracking_id=" + URI.encode(tracking_id)) if tracking_id
     
     response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
 
   def publish(campaign_name)
-    url = @backendUrl + "/vouchers/publish?campaign=" + campaign_name
+    url = @backendUrl + "/vouchers/publish?campaign=" + URI.encode(campaign_name)
     response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
