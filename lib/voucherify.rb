@@ -9,7 +9,7 @@ require "pry"
 
 class Voucherify
   def initialize(options)
-    @backendUrl = "https://api.voucherify.io/v1"
+    @backend_url = "https://api.voucherify.io/v1"
     @options = options
     @headers = {
       "X-App-Id" => @options["applicationId"],
@@ -20,20 +20,20 @@ class Voucherify
   end
 
   def get(code)
-    url = @backendUrl + "/vouchers/" + URI.encode(code)
+    url = @backend_url + "/vouchers/" + URI.encode(code)
     response = RestClient.get(url, @headers)
     JSON.parse(response.body)
   end
 
   # List vouchers. Sample query: { limit: 100, skip: 200, category: "Loyalty" }
   def list(query)
-    url = @backendUrl + "/vouchers/"
+    url = @backend_url + "/vouchers/"
     response = RestClient.get(url, @headers.merge({ :params => query }))
     JSON.parse(response.body)
   end
 
   def redemption(code)
-    url = @backendUrl + "/vouchers/" + URI.encode(code) + "/redemption"
+    url = @backend_url + "/vouchers/" + URI.encode(code) + "/redemption"
     response = RestClient.get(url, @headers)
     JSON.parse(response.body)
   end
@@ -47,7 +47,7 @@ class Voucherify
   #   result: "Success"
   # }
   def redemptions(query)
-    url = @backendUrl + "/redemptions/"
+    url = @backend_url + "/redemptions/"
     response = RestClient.get(url, @headers.merge({ :params => query }))
     JSON.parse(response.body)
   end
@@ -61,7 +61,7 @@ class Voucherify
       payload.delete "voucher"
     end
 
-    url = @backendUrl + "/vouchers/" + URI.encode(code) + "/redemption"
+    url = @backend_url + "/vouchers/" + URI.encode(code) + "/redemption"
     url += ("?tracking_id=" + URI.encode(tracking_id)) if tracking_id
 
     response = RestClient.post(url, payload.to_json, @headers.merge({ :content_type => :json }))
@@ -69,7 +69,7 @@ class Voucherify
   end
 
   def publish(campaign_name)
-    url = @backendUrl + "/vouchers/publish?campaign=" + URI.encode(campaign_name)
+    url = @backend_url + "/vouchers/publish?campaign=" + URI.encode(campaign_name)
     response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
@@ -89,20 +89,20 @@ class Voucherify
   #   }
   # }
   def create(code, options = {})
-    url = @backendUrl + "/vouchers/"
+    url = @backend_url + "/vouchers/"
     url += URI.encode(code) if code
     response = RestClient.post(url, options.to_json, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
 
   def enable(code)
-    url = @backendUrl + "/vouchers/" + URI.encode(code) + "/enable"
+    url = @backend_url + "/vouchers/" + URI.encode(code) + "/enable"
     response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
     nil
   end
 
   def disable(code)
-    url = @backendUrl + "/vouchers/" + URI.encode(code) + "/disable"
+    url = @backend_url + "/vouchers/" + URI.encode(code) + "/disable"
     response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
     nil
   end
