@@ -24,6 +24,7 @@ class Voucherify
     JSON.parse(response.body)
   end
 
+  # List vouchers. Sample query: { limit: 100, skip: 200, category: "Loyalty" }
   def list(query)
     url = @backendUrl + "/vouchers/"
     response = RestClient.get(url, @headers.merge({ :params => query }))
@@ -36,6 +37,14 @@ class Voucherify
     JSON.parse(response.body)
   end
 
+  # List redemptions. Sample query (1000 successful redemptions from April 2016):
+  # {
+  #   limit: 1000,
+  #   page: 0,
+  #   start_date: "2016-04-01T00:00:00",
+  #   end_date: "2016-04-30T23:59:59",
+  #   result: "Success"
+  # }
   def redemptions(query)
     url = @backendUrl + "/redemptions/"
     response = RestClient.get(url, @headers.merge({ :params => query }))
