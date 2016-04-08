@@ -74,6 +74,27 @@ class Voucherify
     JSON.parse(response.body)
   end
 
+  # `code` is optional - will be generated if absent.
+  # Sample `options` object:
+  # {
+  #   category: "New Customers",
+  #   discount: {
+  #     percent_off: 10.0,
+  #     type: "PERCENT"
+  #   },
+  #   start_date: "2016-01-01T00:00:00Z",
+  #   expiration_date: "2016-12-31T23:59:59Z",
+  #   redemption: {
+  #     quantity: 100 
+  #   }
+  # }
+  def create(code, options = {})
+    url = @backendUrl + "/vouchers/"
+    url += URI.encode(code) if code
+    response = RestClient.post(url, options.to_json, @headers.merge({ :content_type => :json }))
+    JSON.parse(response.body)
+  end
+
   def enable(code)
     url = @backendUrl + "/vouchers/" + URI.encode(code) + "/enable"
     response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
