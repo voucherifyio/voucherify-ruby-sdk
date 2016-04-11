@@ -1,10 +1,18 @@
-# Voucherify
+## Voucherify Ruby SDK
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/voucherify`. To experiment with that code, run `bin/console` for an interactive prompt.
+[Voucherify](http://voucherify.io?utm_source=inbound&utm_medium=github&utm_campaign=voucherify-ruby-sdk) has a new platform that will help your team automate voucher campaigns. It does this by providing composable API and the marketer-friendly interface that increases teams' productivity:
 
-TODO: Delete this and the text above, and describe your gem
+- **roll-out thousands** of vouchers **in minutes** instead of weeks,
+- **check status** or disable **every single** promo code in real time,
+- **track redemption** history and build reports on the fly.
 
-## Installation
+Here you can find a library that makes it easier to integrate Voucherify with your Ruby server.
+
+Full documentation is located at [voucherify.readme.io](https://voucherify.readme.io).
+
+### Usage
+
+#### Installation
 
 Add this line to your application's Gemfile:
 
@@ -20,9 +28,349 @@ Or install it yourself as:
 
     $ gem install voucherify
 
-## Usage
+#### Authentication
 
-TODO: Write usage instructions here
+[Log-in](http://app.voucherify.io/#/login) to Voucherify web interace and obtain your Application Keys from [Configuration](https://app.voucherify.io/#/app/configuration):
+
+![](https://www.filepicker.io/api/file/WKYkl2bSAWKHccEN9tEG)
+
+```javascript
+var voucherifyClient = require("voucherify");
+
+var voucherify = voucherifyClient({
+    applicationId: "YOUR-APPLICATION-ID-OBTAINED-FROM-CONFIGURATION",
+    clientSecretKey: "YOUR-CLIENT-SECRET-KEY-OBTAINED-FROM-CONFIGURATION"
+});
+```
+
+```ruby
+require "voucherify"
+
+voucherify = Voucherify.new({
+  "applicationId" => "YOUR-APPLICATION-ID-OBTAINED-FROM-CONFIGURATION",
+  "clientSecretKey" => "YOUR-CLIENT-SECRET-KEY-OBTAINED-FROM-CONFIGURATION"
+})
+```
+
+#### Listing vouchers
+
+```ruby
+vouchers = voucherify.list({ limit: 10, skip: 20, category: "API Test" })
+puts vouchers
+```
+
+Result:
+```json
+[{
+     "code": "9mYBpIk",
+     "campaign": null,
+     "category": "API Test",
+     "discount": {
+       "type": "AMOUNT",
+       "amount_off": 400
+     },
+     "start_date": "2016-03-01T12:00:00Z",
+     "expiration_date": null,
+     "redemption": {
+       "quantity": 1,
+       "redeemed_quantity": 0,
+       "redemption_entries": []
+     },
+     "active": true,
+     "additional_info": null,
+     "metadata": null
+   },
+   {
+       "code": "AzTsIH",
+       "campaign": null,
+       "category": "API Test",
+       "discount": {
+        "type": "AMOUNT",
+        "amount_off": 400
+       },
+       "start_date": "2016-03-01T10:00:00Z",
+       "expiration_date": null,
+       "redemption": {
+        "quantity": 1,
+        "redeemed_quantity": 0,
+        "redemption_entries": []
+       },
+       "active": true,
+       "additional_info": null,
+       "metadata": null
+   },
+   ...
+]  
+```
+
+#### Getting voucher details
+
+```ruby
+voucher = voucherify.get("v1GiJYuuS")
+puts voucher
+```
+
+Result:
+```json
+{
+    "code": "v1GiJYuuS",
+    "campaign": "vip",
+    "discount": {
+        "percent_off": 10.0,
+        "type": "PERCENT"
+    },
+    "expiration_date": "2015-12-31T23:59:59Z",
+    "redemption": {
+        "quantity": 3,
+        "redeemed_quantity": 1,
+        "redemption_entries": [
+            {
+                "date": "2015-09-24T06:03:35Z",
+                "tracking_id": "GENERATED-OR-PROVIDED-TRACKING-ID"
+            }
+        ]
+    },
+    "additional_info": ""
+}
+```
+
+#### Getting voucher redemption
+
+```ruby
+redemption = voucherify.redemption("v1GiJYuuS")
+puts redemption
+```
+
+Result:
+```json
+{
+    "quantity": 3,
+    "redeemed_quantity": 1,
+    "redemption_entries": [
+        {
+            "date": "2015-09-24T06:03:35Z",
+            "tracking_id": "GENERATED-OR-PROVIDED-TRACKING-ID"
+        }
+    ]
+}
+```
+
+#### Publishing voucher
+
+This method selects active, unpublished voucher from the specific campaign and returns it to client. 
+In effect, this voucher is marked as published and it will not be announced once again to customer. 
+
+Example:
+
+```ruby
+voucher = voucherify.publish("First Ride")
+puts voucher
+```
+
+Positive result:
+
+```json
+{
+   "code": "FR-zT-u9I7zG",
+   "campaign": "First Ride",
+   "category": null,
+   "discount": {
+      "type": "PERCENT",
+      "amount_off": 50
+   },
+   "start_date": "2015-01-01T00:00:00Z",
+   "expiration_date": "2016-12-31T23:59:59Z",
+   "redemption": {
+      "quantity": 1,
+      "redeemed_quantity": 0,
+      "redemption_entries": []
+   },
+   "active": true,
+   "additional_info": null,
+   "metadata": {
+      "published": "2016-01-22T09:25:07Z"
+   }
+}
+```
+
+Possible error:
+
+```json
+{
+  "code": 400,
+  "message": "Couldn't find any voucher suitable for publication."
+}
+```
+
+#### Redeeming voucher
+
+##### 1. Just by code
+
+```ruby
+voucher = voucherify.redeem("v1GiJYuuS")
+puts voucher
+```
+
+Result (voucher details after redemption):
+
+```json
+{
+    "code": "v1GiJYuuS",
+    "campaign": "vip",
+    "discount": {
+        "percent_off": 10.0,
+        "type": "PERCENT"
+    },
+    "expiration_date": "2015-12-31T23:59:59Z",
+    "redemption": {
+        "quantity": 3,
+        "redeemed_quantity": 2,
+        "redemption_entries": [
+            {
+                "date": "2015-09-24T06:03:35Z",
+                "tracking_id": "(tracking_id not set)"
+            },
+            {
+                "date": "2015-09-25T10:34:57Z",
+                "tracking_id": "(tracking_id not set)"
+            },
+        ]
+    },
+    "additional_info": ""
+}
+```
+
+Error:
+```json
+{
+  "code": 400,
+  "message": "voucher expired or quantity exceeded",
+  "details": "v1GiJYuuS"
+}
+```
+
+##### 2. With tracking id
+
+You can provide a tracking id (e.g. your customer's login or a generated id) to the voucher redemption request.
+
+```ruby
+voucher = voucherify.redeem("v1GiJYuuS", "alice.morgan")
+puts voucher
+```
+
+Result:
+```json
+{
+    "code": "v1GiJYuuS",
+    "campaign": "vip",
+    "discount": {
+        "percent_off": 10.0,
+        "type": "PERCENT"
+    },
+    "expiration_date": "2015-12-31T23:59:59Z",
+    "redemption": {
+        "quantity": 3,
+        "redeemed_quantity": 3,
+        "redemption_entries": [
+            {
+                "date": "2015-09-24T06:03:35Z",
+                "tracking_id": "(tracking_id not set)"
+            },
+            {
+                "date": "2015-09-25T10:34:57Z",
+                "tracking_id": "(tracking_id not set)"
+            },
+            {
+                "date": "2015-09-25T12:04:08Z",
+                "tracking_id": "alice.morgan"
+            },
+        ]
+    },
+    "additional_info": ""
+}
+```
+
+##### 3. With customer profile
+
+You can record a detailed customer profile consisting of an `id` (obligatory), `name`, `email`, `description` and a `metadata` section that can include any data you wish.
+
+```ruby
+voucherify.redeem({
+    voucher: "v1GiJYuuS",
+    customer: {
+        id: "alice.morgan",
+        name: "Alice Morgan",
+        email: "alice@morgan.com",
+        description: "",
+        metadata: {
+            locale: "en-GB",
+            shoeSize: 5,
+            favourite_brands: ["Armani", "L’Autre Chose", "Voucherify"]
+        }
+    })
+```
+
+### Listing redemptions
+
+Use `voucherify.redemptions(filter)` to get a filtered list of redemptions.
+
+Example - 1000 successful redemptions from April 2016:
+
+```ruby
+filter = {
+    limit: 1000,
+    page: 0,
+    start_date: "2016-04-01T00:00:00",
+    end_date: "2016-04-30T23:59:59",
+    result: "Success"
+}
+
+redemptions = voucherify.redemptions(filter)
+puts redemptions
+```
+
+#### Creating a voucher
+
+```ruby
+opts = {
+  category: "New Customers",
+  discount: {
+    percent_off: 10.0,
+    type: "PERCENT"
+  },
+  start_date: "2016-01-01T00:00:00Z",
+  expiration_date: "2016-12-31T23:59:59Z",
+  redemption: {
+    quantity: 1 
+  }
+}
+```
+
+##### 1. with a random code
+
+```ruby
+voucher = voucherify.create(nil, opts)
+puts voucher
+```
+
+##### 2. with a given code
+
+```ruby
+voucher = voucherify.create("EASTER-2016", opts)
+puts voucher
+```
+
+### Disable a voucher
+
+```ruby
+voucherify.disable("EASTER-2016")
+```
+
+### Enable a voucher
+
+```ruby
+voucherify.enable("EASTER-2016")
+```
 
 ## Development
 
@@ -34,8 +382,12 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
+## Changelog
+- **2016-04-11** - `0.1.0` - First version:
+  - Authentication
+  - Voucher information: *retrieve voucher*, *list vouchers*, *retrieve redemptions*, *list redemptions*
+  - Voucher operations: *redeem voucher*, *publish voucher*, *create voucher*, *enable/disable voucher*
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
