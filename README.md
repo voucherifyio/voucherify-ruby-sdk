@@ -43,11 +43,31 @@ voucherify = Voucherify.new({
 })
 ```
 
+#### Error handling
+
+This voucherify gem uses [rest-client](https://github.com/rest-client/rest-client) under the hood for handling HTTP calls. In case of an HTTP 4xx or 5xx error, a RestClient exception is thrown. The server's specific response is available in `.response` of the exception object.
+
+```ruby
+begin
+  voucherify.publish("test")
+rescue => e
+  JSON.parse(e.response)
+end
+```
+
+```json
+{
+    "code": 400,
+    "message": "Couldn't find any voucher suitable for publication."
+}
+```
+
+Please refer to [rest-client documentation](https://github.com/rest-client/rest-client#exceptions-see-httpwwww3orgprotocolsrfc2616rfc2616-sec10html) for more detailed information.
+
 #### Listing vouchers
 
 ```ruby
-vouchers = voucherify.list({ limit: 10, skip: 20, category: "API Test" })
-puts vouchers
+voucherify.list({ limit: 10, skip: 20, category: "API Test" })
 ```
 
 Result:
@@ -97,8 +117,7 @@ Result:
 #### Getting voucher details
 
 ```ruby
-voucher = voucherify.get("v1GiJYuuS")
-puts voucher
+voucherify.get("v1GiJYuuS")
 ```
 
 Result:
@@ -128,8 +147,7 @@ Result:
 #### Getting voucher redemption
 
 ```ruby
-redemption = voucherify.redemption("v1GiJYuuS")
-puts redemption
+voucherify.redemption("v1GiJYuuS")
 ```
 
 Result:
@@ -154,8 +172,7 @@ In effect, this voucher is marked as published and it will not be announced once
 Example:
 
 ```ruby
-voucher = voucherify.publish("First Ride")
-puts voucher
+voucherify.publish("First Ride")
 ```
 
 Positive result:
@@ -198,8 +215,7 @@ Possible error:
 ##### 1. Just by code
 
 ```ruby
-voucher = voucherify.redeem("v1GiJYuuS")
-puts voucher
+voucherify.redeem("v1GiJYuuS")
 ```
 
 Result (voucher details after redemption):
@@ -245,8 +261,7 @@ Error:
 You can provide a tracking id (e.g. your customer's login or a generated id) to the voucher redemption request.
 
 ```ruby
-voucher = voucherify.redeem("v1GiJYuuS", "alice.morgan")
-puts voucher
+voucherify.redeem("v1GiJYuuS", "alice.morgan")
 ```
 
 Result:
@@ -316,8 +331,7 @@ filter = {
     result: "Success"
 }
 
-redemptions = voucherify.redemptions(filter)
-puts redemptions
+voucherify.redemptions(filter)
 ```
 
 #### Creating vouchers
@@ -325,10 +339,10 @@ puts redemptions
 Use `voucherify.create(code, options)` to create new vouchers.
 
 ```ruby
-
-code = "EASTER-2016"
+code = "EASTER-2016" # use given voucher code
 code = nil # for an automatically generated string
 
+# single-use voucher with 10% off discount that is valid throughout the whole 2016
 opts = {
   category: "New Customers",
   discount: {
@@ -342,8 +356,30 @@ opts = {
   }
 }
 
-voucher = voucherify.create(code, opts)
-puts voucher
+voucherify.create(code, opts)
+```
+
+Result (voucher details):
+```json
+{
+    "code": "9Yi5g",
+    "campaign": null,
+    "category": "New Customers",
+    "discount": {
+        "type": "PERCENT",
+        "percent_off": 10.0
+    },
+    "start_date": "2016-01-01T00:00:00Z",
+    "expiration_date": "2016-12-31T23:59:59Z",
+    "redemption": {
+        "quantity": 1,
+        "redeemed_quantity": 0,
+        "redemption_entries": []
+    },
+    "active": true,
+    "additional_info": null,
+    "metadata": null
+}
 ```
 
 ### Disable a voucher
@@ -352,11 +388,15 @@ puts voucher
 voucherify.disable("EASTER-2016")
 ```
 
+The response has empty body.
+
 ### Enable a voucher
 
 ```ruby
 voucherify.enable("EASTER-2016")
 ```
+
+The response has empty body.
 
 ## Development
 
