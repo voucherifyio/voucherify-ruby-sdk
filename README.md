@@ -30,18 +30,9 @@ Or install it yourself as:
 
 #### Authentication
 
-[Log-in](http://app.voucherify.io/#/login) to Voucherify web interace and obtain your Application Keys from [Configuration](https://app.voucherify.io/#/app/configuration):
+[Log-in](http://app.voucherify.io/#/login) to Voucherify web interface and obtain your Application Keys from [Configuration](https://app.voucherify.io/#/app/configuration):
 
 ![](https://www.filepicker.io/api/file/WKYkl2bSAWKHccEN9tEG)
-
-```javascript
-var voucherifyClient = require("voucherify");
-
-var voucherify = voucherifyClient({
-    applicationId: "YOUR-APPLICATION-ID-OBTAINED-FROM-CONFIGURATION",
-    clientSecretKey: "YOUR-CLIENT-SECRET-KEY-OBTAINED-FROM-CONFIGURATION"
-});
-```
 
 ```ruby
 require "voucherify"
@@ -329,9 +320,15 @@ redemptions = voucherify.redemptions(filter)
 puts redemptions
 ```
 
-#### Creating a voucher
+#### Creating vouchers
+
+Use `voucherify.create(code, options)` to create new vouchers.
 
 ```ruby
+
+code = "EASTER-2016"
+code = nil # for an automatically generated string
+
 opts = {
   category: "New Customers",
   discount: {
@@ -341,22 +338,11 @@ opts = {
   start_date: "2016-01-01T00:00:00Z",
   expiration_date: "2016-12-31T23:59:59Z",
   redemption: {
-    quantity: 1 
+    quantity: 1
   }
 }
-```
 
-##### 1. with a random code
-
-```ruby
-voucher = voucherify.create(nil, opts)
-puts voucher
-```
-
-##### 2. with a given code
-
-```ruby
-voucher = voucherify.create("EASTER-2016", opts)
+voucher = voucherify.create(code, opts)
 puts voucher
 ```
 
