@@ -10,7 +10,6 @@ Gem::Specification.new do |spec|
   spec.email         = ["pawel.rychlik@rspective.pl"]
 
   spec.summary       = %q{Ruby SDK for Voucherify}
-  # spec.description   = %q{TODO: Write a longer description or delete this line.}
   spec.homepage      = "http://www.voucherify.io"
   spec.license       = "MIT"
 
@@ -23,5 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry", "~> 0.10"
-  spec.add_development_dependency "rest-client", "~> 1.8"
+
+  spec.add_dependency "rest-client", "~> 1.8"
+
+  spec.required_ruby_version = '>= 1.9.3'
 end
