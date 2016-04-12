@@ -10,7 +10,8 @@ Gem::Specification.new do |spec|
   spec.email         = ["pawel.rychlik@rspective.pl"]
 
   spec.summary       = %q{Ruby SDK for Voucherify}
-  spec.homepage      = "http://www.voucherify.io"
+  spec.description   = %q{More info on http://www.voucherify.io}
+  spec.homepage      = "https://github.com/rspective/voucherify-ruby-sdk/"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
