@@ -54,8 +54,9 @@ class Voucherify
 
     if code.is_a? Hash
       payload = code
-      code = payload["voucher"]
+      code = payload["voucher"] || payload[:voucher]
       payload.delete "voucher"
+      payload.delete :voucher
     end
 
     url = @backend_url + "/vouchers/" + URI.encode(code) + "/redemption"
