@@ -316,7 +316,7 @@ voucherify.redeem({
     })
 ```
 
-### Listing redemptions
+#### Listing redemptions
 
 Use `voucherify.redemptions(filter)` to get a filtered list of redemptions.
 
@@ -382,7 +382,7 @@ Result (voucher details):
 }
 ```
 
-### Disable a voucher
+#### Disabling a voucher
 
 ```ruby
 voucherify.disable("EASTER-2016")
@@ -390,7 +390,7 @@ voucherify.disable("EASTER-2016")
 
 The response has empty body.
 
-### Enable a voucher
+#### Enabling a voucher
 
 ```ruby
 voucherify.enable("EASTER-2016")
