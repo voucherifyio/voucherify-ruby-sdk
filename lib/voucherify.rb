@@ -4,9 +4,6 @@ require "uri"
 require "rest-client"
 require "json"
 
-require "pry"
-
-
 class Voucherify
   def initialize(options)
     @backend_url = "https://api.voucherify.io/v1"

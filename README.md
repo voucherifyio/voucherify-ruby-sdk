@@ -409,10 +409,12 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
-- **2016-04-11** - `0.1.0` - First version:
+- **2016-04-12** - `0.1.0` - First version:
   - Authentication
   - Voucher information: *retrieve voucher*, *list vouchers*, *retrieve redemptions*, *list redemptions*
   - Voucher operations: *redeem voucher*, *publish voucher*, *create voucher*, *enable/disable voucher*
+- **2016-04-12** - `0.1.1` - minor gemspec changes
+- **2016-04-13** - `0.1.2` - removed dependency to `pry`
 
 ## License
 
