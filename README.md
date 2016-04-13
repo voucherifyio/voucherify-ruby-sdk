@@ -302,18 +302,18 @@ You can record a detailed customer profile consisting of an `id` (obligatory), `
 
 ```ruby
 voucherify.redeem({
-    voucher: "v1GiJYuuS",
-    customer: {
-        id: "alice.morgan",
-        name: "Alice Morgan",
-        email: "alice@morgan.com",
-        description: "",
-        metadata: {
-            locale: "en-GB",
-            shoeSize: 5,
-            favourite_brands: ["Armani", "L’Autre Chose", "Voucherify"]
+    "voucher" => "v1GiJYuuS",
+    "customer" => {
+        "id" => "alice.morgan",
+        "name" => "Alice Morgan",
+        "email" => "alice@morgan.com",
+        "description" => "look ma no hands",
+        "metadata" => {
+            "locale" => "en-GB",
+            "shoeSize" => 36.6
         }
-    })
+    }
+})
 ```
 
 #### Listing redemptions
