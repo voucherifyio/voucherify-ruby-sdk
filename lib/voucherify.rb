@@ -29,6 +29,7 @@ class Voucherify
   # - category
   # - campaign
   # - customer
+  # Sample query: { limit: 100, skip: 200, category: "Loyalty" }
   def list(query)
     url = @backend_url + "/vouchers/"
     response = RestClient.get(url, @headers.merge({ :params => query }))
