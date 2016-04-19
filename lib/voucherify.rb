@@ -22,7 +22,13 @@ class Voucherify
     JSON.parse(response.body)
   end
 
-  # List vouchers. Sample query: { limit: 100, skip: 200, category: "Loyalty" }
+  # List vouchers. Query parameters:
+  # - code_query
+  # - limit (default 10)
+  # - skip (default 0)
+  # - category
+  # - campaign
+  # - customer
   def list(query)
     url = @backend_url + "/vouchers/"
     response = RestClient.get(url, @headers.merge({ :params => query }))
