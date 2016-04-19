@@ -66,6 +66,18 @@ Please refer to [rest-client documentation](https://github.com/rest-client/rest-
 
 #### Listing vouchers
 
+Use `voucherify.vouchers(filter)` to get a filtered list of vouchers.
+
+Filter paramters
+- code_query
+- limit (default 10)
+- skip (default 0)
+- category
+- campaign
+- customer
+
+Example:
+
 ```ruby
 voucherify.list({ limit: 10, skip: 20, category: "API Test" })
 ```
@@ -319,6 +331,15 @@ voucherify.redeem({
 #### Listing redemptions
 
 Use `voucherify.redemptions(filter)` to get a filtered list of redemptions.
+Filter parameters:
+
+- limit (default: 100)
+- page (default: 0)
+- start_date (default: beginning of current month) 
+- end_date (default: end of current month)
+- result - Success | Failure-NotExist | Failure-Inactive
+- customer
+
 
 Example - 1000 successful redemptions from April 2016:
 
