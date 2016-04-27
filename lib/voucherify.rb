@@ -110,4 +110,13 @@ class Voucherify
     response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
     nil
   end
+  
+  def rollback(redemption_id, tracking_id=nil, reason=nil)
+    url = @backend_url + "/redemptions/" + URI.encode(redemption_id) + "/rollback"
+    if tracking_id || reason
+        url += "?" + URI.encode_www_form(:tracking_id => tracking_id, :reason => reason)
+    end
+    response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
+    JSON.parse(response.body)
+  end
 end
