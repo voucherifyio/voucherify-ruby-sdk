@@ -141,14 +141,16 @@ Result:
         "percent_off": 10.0,
         "type": "PERCENT"
     },
-    "expiration_date": "2015-12-31T23:59:59Z",
+    "expiration_date": "2016-12-31T23:59:59Z",
     "redemption": {
         "quantity": 3,
         "redeemed_quantity": 1,
         "redemption_entries": [
             {
-                "date": "2015-09-24T06:03:35Z",
-                "tracking_id": "GENERATED-OR-PROVIDED-TRACKING-ID"
+                "id": "r_gQzOnTwmhn2nTLwW4sZslNKY",
+                "object": "redemption",
+                "date": "2016-04-24T06:03:35Z",
+                "tracking_id": "(tracking_id not set)"
             }
         ]
     },
@@ -169,8 +171,10 @@ Result:
     "redeemed_quantity": 1,
     "redemption_entries": [
         {
-            "date": "2015-09-24T06:03:35Z",
-            "tracking_id": "GENERATED-OR-PROVIDED-TRACKING-ID"
+            "id": "r_gQzOnTwmhn2nTLwW4sZslNKY",
+            "object": "redemption",
+            "date": "2016-04-24T06:03:35Z",
+            "tracking_id": "(tracking_id not set)"
         }
     ]
 }
@@ -234,28 +238,39 @@ Result (voucher details after redemption):
 
 ```json
 {
-    "code": "v1GiJYuuS",
-    "campaign": "vip",
-    "discount": {
-        "percent_off": 10.0,
-        "type": "PERCENT"
-    },
-    "expiration_date": "2015-12-31T23:59:59Z",
-    "redemption": {
-        "quantity": 3,
-        "redeemed_quantity": 2,
-        "redemption_entries": [
-            {
-                "date": "2015-09-24T06:03:35Z",
-                "tracking_id": "(tracking_id not set)"
-            },
-            {
-                "date": "2015-09-25T10:34:57Z",
-                "tracking_id": "(tracking_id not set)"
-            },
-        ]
-    },
-    "additional_info": ""
+    "id": "r_yRmanaA6EgSE9uDYvMQ5Evfp",
+    "object": "redemption",
+    "date": "2016-04-25T10:34:57Z",
+    "tracking_id": "(tracking_id not set)",
+    "voucher": {
+        "code": "v1GiJYuuS",
+        "campaign": "vip",
+        "discount": {
+            "percent_off": 10.0,
+            "type": "PERCENT"
+        },
+        "expiration_date": "2016-12-31T23:59:59Z",
+        "redemption": {
+            "quantity": 3,
+            "redeemed_quantity": 2,
+            "redemption_entries": [
+                {
+                    "id": "r_gQzOnTwmhn2nTLwW4sZslNKY",
+                    "object": "redemption",
+                    "date": "2016-04-24T06:03:35Z",
+                    "tracking_id": "(tracking_id not set)"
+                },
+                {
+                    "id": "r_yRmanaA6EgSE9uDYvMQ5Evfp",
+                    "object": "redemption",
+                    "date": "2016-04-25T10:34:57Z",
+                    "tracking_id": "(tracking_id not set)"
+                }
+            ]
+        },
+        "active": true,
+        "additional_info": ""
+    }
 }
 ```
 
@@ -279,32 +294,45 @@ voucherify.redeem("v1GiJYuuS", "alice.morgan")
 Result:
 ```json
 {
-    "code": "v1GiJYuuS",
-    "campaign": "vip",
-    "discount": {
-        "percent_off": 10.0,
-        "type": "PERCENT"
-    },
-    "expiration_date": "2015-12-31T23:59:59Z",
-    "redemption": {
-        "quantity": 3,
-        "redeemed_quantity": 3,
-        "redemption_entries": [
-            {
-                "date": "2015-09-24T06:03:35Z",
-                "tracking_id": "(tracking_id not set)"
-            },
-            {
-                "date": "2015-09-25T10:34:57Z",
-                "tracking_id": "(tracking_id not set)"
-            },
-            {
-                "date": "2015-09-25T12:04:08Z",
-                "tracking_id": "alice.morgan"
-            },
-        ]
-    },
-    "additional_info": ""
+    "id": "r_yRmanaA6EgSE9uDYvMQ5Evfp",
+    "object": "redemption",
+    "date": "2016-04-25T10:34:57Z",
+    "tracking_id": "(tracking_id not set)",
+    "voucher": {
+        "code": "v1GiJYuuS",
+        "campaign": "vip",
+        "discount": {
+            "percent_off": 10.0,
+            "type": "PERCENT"
+        },
+        "expiration_date": "2016-12-31T23:59:59Z",
+        "redemption": {
+            "quantity": 3,
+            "redeemed_quantity": 3,
+            "redemption_entries": [
+                {
+                    "id": "r_gQzOnTwmhn2nTLwW4sZslNKY",
+                    "object": "redemption",
+                    "date": "2016-04-24T06:03:35Z",
+                    "tracking_id": "(tracking_id not set)"
+                },
+                {
+                    "id": "r_yRmanaA6EgSE9uDYvMQ5Evfp",
+                    "object": "redemption",
+                    "date": "2016-04-25T10:34:57Z",
+                    "tracking_id": "(tracking_id not set)"
+                },
+                {
+                    "id": "r_irOQWUTAjthQwnkn5JQM1V6N",
+                    "object": "redemption",
+                    "date": "2016-04-25T12:04:08Z",
+                    "tracking_id": "alice.morgan"
+                }
+            ]
+        },
+        "active": true,
+        "additional_info": ""
+    }
 }
 ```
 
@@ -419,6 +447,69 @@ voucherify.enable("EASTER-2016")
 
 The response has empty body.
 
+#### Rollback redemption
+
+You can revert a redemption by calling `voucherify.rollback(redemption_id, tracking_id*, reason*, callback*)`.
+This operation creates a rollback entry in voucher's redemption history (`redemption.redemption_entries`)
+and gives 1 redemption back to the pool (decreases `redeemed_quantity` by 1).
+
+```ruby
+voucherify.rollback("r_irOQWUTAjthQwnkn5JQM1V6N", "alice.morgan")
+```
+
+Result:
+```
+{
+    "id": "rr_1634wLkb8glgRXrTmsxRzDBd",
+    "object": "redemption_rollback",
+    "date": "2016-04-25T10:35:02Z",
+    "tracking_id": "alice.morgan",
+    "redemption": "r_irOQWUTAjthQwnkn5JQM1V6N",
+    "voucher": {
+        "code": "v1GiJYuuS",
+        "campaign": "vip",
+        "discount": {
+            "percent_off": 10.0,
+            "type": "PERCENT"
+        },
+        "expiration_date": "2016-12-31T23:59:59Z",
+        "redemption": {
+            "quantity": 3,
+            "redeemed_quantity": 2,
+            "redemption_entries": [
+                {
+                    "id": "r_gQzOnTwmhn2nTLwW4sZslNKY",
+                    "object": "redemption",
+                    "date": "2016-04-24T06:03:35Z",
+                    "tracking_id": "(tracking_id not set)"
+                },
+                {
+                    "id": "r_yRmanaA6EgSE9uDYvMQ5Evfp",
+                    "object": "redemption",
+                    "date": "2016-04-25T10:34:57Z",
+                    "tracking_id": "(tracking_id not set)"
+                },
+                {
+                    "id": "r_irOQWUTAjthQwnkn5JQM1V6N",
+                    "object": "redemption",
+                    "date": "2016-04-25T12:04:08Z",
+                    "tracking_id": "alice.morgan"
+                },
+                {
+                    "id": "rr_1634wLkb8glgRXrTmsxRzDBd",
+                    "object": "redemption_rollback",
+                    "date": "2016-04-25T10:35:02Z",
+                    "tracking_id": "alice.morgan",
+                    "redemption": "r_irOQWUTAjthQwnkn5JQM1V6N"
+                }
+            ]
+        },
+        "active": true,
+        "additional_info": ""
+    }
+}
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -430,6 +521,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-04-27** - `0.2.0` - rollback redemption
 - **2016-04-13** - `0.1.3` - bugfix in redeem()
 - **2016-04-13** - `0.1.2` - removed dependency to `pry`
 - **2016-04-12** - `0.1.1` - minor gemspec changes
