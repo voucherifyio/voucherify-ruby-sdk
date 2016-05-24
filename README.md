@@ -182,13 +182,17 @@ Result:
 
 #### Publishing voucher
 
-This method selects active, unpublished voucher from the specific campaign and returns it to client. 
-In effect, this voucher is marked as published and it will not be announced once again to customer. 
+This method selects a voucher that is suitable for publication, adds a publish entry and returns the voucher.
+A voucher is suitable for publication when it's active and hasn't been published more times than the redemption limit.
 
 Example:
 
 ```ruby
 voucherify.publish("First Ride")
+```
+or
+```ruby
+voucherify.publish({campaign: "First Ride", channel: "Email", customer: "donny.roll@mail.com"})
 ```
 
 Positive result:
@@ -204,16 +208,21 @@ Positive result:
    },
    "start_date": "2015-01-01T00:00:00Z",
    "expiration_date": "2016-12-31T23:59:59Z",
+   "publish": {
+        "count": 1,
+        "entries": [{
+            "channel": "Email",
+            "customer": "donny.roll@mail.com",
+            "published_at": "2016-01-22T09:25:07Z"
+        }]
+   },
    "redemption": {
       "quantity": 1,
       "redeemed_quantity": 0,
       "redemption_entries": []
    },
    "active": true,
-   "additional_info": null,
-   "metadata": {
-      "published": "2016-01-22T09:25:07Z"
-   }
+   "additional_info": null
 }
 ```
 
@@ -521,6 +530,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-05-24** - `0.3.0` - new publish structure
 - **2016-04-27** - `0.2.0` - rollback redemption
 - **2016-04-13** - `0.1.3` - bugfix in redeem()
 - **2016-04-13** - `0.1.2` - removed dependency to `pry`

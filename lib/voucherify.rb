@@ -74,8 +74,16 @@ class Voucherify
   end
 
   def publish(campaign_name)
-    url = @backend_url + "/vouchers/publish?campaign=" + URI.encode(campaign_name)
-    response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
+    url = @backend_url + "/vouchers/publish"
+    payload = {}
+    
+    if campaign_name.is_a? String
+      url += "?campaign=" + URI.encode(campaign_name)
+    elsif campaign_name.is_a? Hash
+      payload = campaign_name
+    end
+        
+    response = RestClient.post(url, payload.to_json, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
 
