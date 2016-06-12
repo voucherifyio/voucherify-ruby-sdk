@@ -533,6 +533,93 @@ Result:
 }
 ```
 
+#### Create customer
+
+```ruby
+customer = {
+  name: "John Doe",
+  email: "natalie@email.com",
+  description: "Sample description about customer",
+  metadata: {
+    lang: "en"
+  }
+}
+
+voucherify.create_customer(customer)
+```
+
+Result:
+
+```json
+{
+    "id": "cust_WGG615E92dhOHz7PV9Vo9gk9",
+    "created_at": "2016-06-12T15:52:49Z",
+    "description": "Sample description about customer",
+    "email": "natalie@email.com",
+    "metadata": {
+        "lang": "en"
+    },
+    "name": "John Doe",
+    "object": "customer"
+}
+```
+
+#### Fetch customer
+
+```ruby
+voucherify.fetch_customer("cust_WGG615E92dhOHz7PV9Vo9gk9")
+```
+
+Result:
+
+```json
+{
+    "id": "cust_WGG615E92dhOHz7PV9Vo9gk9",
+    "created_at": "2016-06-12T15:52:49Z",
+    "description": "Sample description about customer",
+    "email": "john@email.com",
+    "metadata": {
+        "lang": "en"
+    },
+    "name": "John Doe",
+    "object": "customer"
+}
+```
+
+#### Update customer
+
+```ruby
+customer = {
+  id: "cust_WGG615E92dhOHz7PV9Vo9gk9",
+  description: "Sample description about customer with changes"
+}
+voucherify.update_customer(customer)
+```
+
+Result:
+
+```json
+{
+    "id": "cust_WGG615E92dhOHz7PV9Vo9gk9",
+    "created_at": "2016-06-12T15:52:49Z",
+    "description": "Sample description about customer with changes",
+    "email": "john@email.com",
+    "metadata": {
+        "lang": "en"
+    },
+    "name": "John Doe",
+    "object": "customer"
+}
+```
+
+#### Delete customer
+
+```ruby
+voucherify.delete_customer("cust_WGG615E92dhOHz7PV9Vo9gk9")
+```
+
+The response has empty body.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
