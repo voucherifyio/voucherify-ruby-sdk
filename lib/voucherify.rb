@@ -128,4 +128,28 @@ class Voucherify
     response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
+
+  def create_customer(customer)
+    url = @backend_url + "/customers/"
+    response = RestClient.post(url, customer.to_json, @headers.merge({ :content_type => :json }))
+    JSON.parse(response.body)
+  end
+
+  def fetch_customer(customer_id)
+    url = @backend_url + "/customers/" + customer_id
+    response = RestClient.get(url, @headers)
+    JSON.parse(response.body)
+  end
+
+  def update_customer(customer)
+    url = @backend_url + "/customers/" + (customer["id"] || customer[:id])
+    response = RestClient.put(url, customer.to_json, @headers.merge({ :content_type => :json }))
+    JSON.parse(response.body)
+  end
+
+  def delete_customer(customer_id)
+    url = @backend_url + "/customers/" + customer_id
+    response = RestClient.delete(url, @headers)
+    nil
+  end
 end

@@ -533,6 +533,93 @@ Result:
 }
 ```
 
+#### Create customer
+
+```ruby
+customer = {
+  name: "John Doe",
+  email: "john@email.com",
+  description: "Sample description about customer",
+  metadata: {
+    lang: "en"
+  }
+}
+
+voucherify.create_customer(customer)
+```
+
+Result:
+
+```json
+{
+    "id": "cust_WGG615E92dhOHz7PV9Vo9gk9",
+    "created_at": "2016-06-12T15:52:49Z",
+    "description": "Sample description about customer",
+    "email": "john@email.com",
+    "metadata": {
+        "lang": "en"
+    },
+    "name": "John Doe",
+    "object": "customer"
+}
+```
+
+#### Fetch customer
+
+```ruby
+voucherify.fetch_customer("cust_WGG615E92dhOHz7PV9Vo9gk9")
+```
+
+Result:
+
+```json
+{
+    "id": "cust_WGG615E92dhOHz7PV9Vo9gk9",
+    "created_at": "2016-06-12T15:52:49Z",
+    "description": "Sample description about customer",
+    "email": "john@email.com",
+    "metadata": {
+        "lang": "en"
+    },
+    "name": "John Doe",
+    "object": "customer"
+}
+```
+
+#### Update customer
+
+```ruby
+customer = {
+  id: "cust_WGG615E92dhOHz7PV9Vo9gk9",
+  description: "Sample description about customer with changes"
+}
+voucherify.update_customer(customer)
+```
+
+Result:
+
+```json
+{
+    "id": "cust_WGG615E92dhOHz7PV9Vo9gk9",
+    "created_at": "2016-06-12T15:52:49Z",
+    "description": "Sample description about customer with changes",
+    "email": "john@email.com",
+    "metadata": {
+        "lang": "en"
+    },
+    "name": "John Doe",
+    "object": "customer"
+}
+```
+
+#### Delete customer
+
+```ruby
+voucherify.delete_customer("cust_WGG615E92dhOHz7PV9Vo9gk9")
+```
+
+The response has empty body.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -544,6 +631,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-06-12** - `0.4.0` - new customer sdk methods
 - **2016-05-24** - `0.3.0` - new publish structure
 - **2016-04-27** - `0.2.0` - rollback redemption
 - **2016-04-13** - `0.1.3` - bugfix in redeem()
