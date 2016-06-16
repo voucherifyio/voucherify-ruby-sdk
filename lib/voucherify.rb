@@ -142,7 +142,7 @@ class Voucherify
   end
 
   def update_customer(customer)
-    url = @backend_url + "/customers/" + customer["id"] || customer[:id]
+    url = @backend_url + "/customers/" + (customer["id"] || customer[:id])
     response = RestClient.put(url, customer.to_json, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
