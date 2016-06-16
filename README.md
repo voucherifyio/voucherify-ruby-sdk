@@ -538,7 +538,7 @@ Result:
 ```ruby
 customer = {
   name: "John Doe",
-  email: "natalie@email.com",
+  email: "john@email.com",
   description: "Sample description about customer",
   metadata: {
     lang: "en"
@@ -555,7 +555,7 @@ Result:
     "id": "cust_WGG615E92dhOHz7PV9Vo9gk9",
     "created_at": "2016-06-12T15:52:49Z",
     "description": "Sample description about customer",
-    "email": "natalie@email.com",
+    "email": "john@email.com",
     "metadata": {
         "lang": "en"
     },
