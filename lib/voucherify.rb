@@ -135,7 +135,7 @@ class Voucherify
     JSON.parse(response.body)
   end
 
-  def fetch_customer(customer_id)
+  def get_customer(customer_id)
     url = @backend_url + "/customers/" + customer_id
     response = RestClient.get(url, @headers)
     JSON.parse(response.body)

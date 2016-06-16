@@ -16,7 +16,7 @@ new_customer = voucherify.create_customer({
 
 print(new_customer)
 
-customer = voucherify.fetch_customer(new_customer["id"])
+customer = voucherify.get_customer(new_customer["id"])
 
 print(customer)
 
