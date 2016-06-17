@@ -564,10 +564,10 @@ Result:
 }
 ```
 
-#### Fetch customer
+#### Get customer
 
 ```ruby
-voucherify.fetch_customer("cust_WGG615E92dhOHz7PV9Vo9gk9")
+voucherify.get_customer("cust_WGG615E92dhOHz7PV9Vo9gk9")
 ```
 
 Result:
@@ -631,6 +631,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-06-16** - `0.5.0` - unified naming convention
 - **2016-06-12** - `0.4.0` - new customer sdk methods
 - **2016-05-24** - `0.3.0` - new publish structure
 - **2016-04-27** - `0.2.0` - rollback redemption
