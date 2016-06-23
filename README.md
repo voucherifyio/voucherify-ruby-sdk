@@ -88,6 +88,7 @@ Result:
      "code": "9mYBpIk",
      "campaign": null,
      "category": "API Test",
+     "type": "DISCOUNT_VOUCHER",
      "discount": {
        "type": "AMOUNT",
        "amount_off": 400
@@ -107,15 +108,16 @@ Result:
        "code": "AzTsIH",
        "campaign": null,
        "category": "API Test",
-       "discount": {
-        "type": "AMOUNT",
-        "amount_off": 400
+       "type": "GIFT_VOUCHER",
+       "gift": {
+         "amount": 5000
        },
        "start_date": "2016-03-01T10:00:00Z",
        "expiration_date": null,
        "redemption": {
         "quantity": 1,
         "redeemed_quantity": 0,
+        "redeemed_amount": 0,
         "redemption_entries": []
        },
        "active": true,
@@ -137,6 +139,7 @@ Result:
 {
     "code": "v1GiJYuuS",
     "campaign": "vip",
+    "type": "DISCOUNT_VOUCHER",
     "discount": {
         "percent_off": 10.0,
         "type": "PERCENT"
@@ -257,6 +260,7 @@ Result (voucher details after redemption):
     "voucher": {
         "code": "v1GiJYuuS",
         "campaign": "vip",
+        "type": "DISCOUNT_VOUCHER",
         "discount": {
             "percent_off": 10.0,
             "type": "PERCENT"
@@ -316,6 +320,7 @@ Result:
     "voucher": {
         "code": "v1GiJYuuS",
         "campaign": "vip",
+        "type": "DISCOUNT_VOUCHER",
         "discount": {
             "percent_off": 10.0,
             "type": "PERCENT"
@@ -374,6 +379,32 @@ voucherify.redeem({
 })
 ```
 
+##### 4. With customer id
+
+If you already created a customer profile in Voucherify's database, whether it was implicitly by providing it to the `redeem` function or explicitly by invoking the [`customer.create`](#create-customer) method, you can identify your customer in following redemptions by a generated id (starting with `cust_`). 
+
+```ruby
+voucherify.redeem({
+        "voucher" => "v1GiJYuuS",
+        "customer" => {
+            "id" => "cust_C9qJ3xKgZFqkpMw7b21MF2ow"
+        })
+```
+
+##### 5. With order amount
+
+Redeeming a gift voucher requires to pass an amount that you wish to withdraw from the voucher.
+Order amount have to be expressed in cents, as an integer. For example $22.50 should be provided as 2250:    
+
+```ruby
+voucherify.redeem({
+        "voucher" => "91Ft4U",
+        "order" => {
+            "amount" => 2250
+        })
+```
+
+
 #### Listing redemptions
 
 Use `voucherify.redemptions(filter)` to get a filtered list of redemptions.
@@ -412,6 +443,7 @@ code = nil # for an automatically generated string
 # single-use voucher with 10% off discount that is valid throughout the whole 2016
 opts = {
   category: "New Customers",
+  type: "DISCOUNT_VOUCHER",
   discount: {
     percent_off: 10.0,
     type: "PERCENT"
@@ -432,6 +464,7 @@ Result (voucher details):
     "code": "9Yi5g",
     "campaign": null,
     "category": "New Customers",
+    "type": "DISCOUNT_VOUCHER",
     "discount": {
         "type": "PERCENT",
         "percent_off": 10.0
