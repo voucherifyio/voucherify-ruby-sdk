@@ -91,6 +91,7 @@ class Voucherify
   # Sample `options` object:
   # {
   #   category: "New Customers",
+  #   type: "DISCOUNT_VOUCHER",
   #   discount: {
   #     percent_off: 10.0,
   #     type: "PERCENT"
