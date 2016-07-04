@@ -22,11 +22,27 @@ class Utils
     end
 
     def calculate_price(base_price, voucher, unit_price)
-        @e = 100; # Number of digits after the decimal separator
-        @discount = 0;
+        if !voucher[:discount]
+            raise "Unsupported voucher type."
+        end
 
-        if !voucher.discount
-            return nil
+        if voucher[:discount][:type] === 'PERCENT'
+            discount = voucher[:discount][:percent_off]
+            validate_percent_discount(discount);
+            price_discount = base_price * (discount / 100)
+            return round_money(base_price - price_discount)
+        elsif voucher[:discount][:type] === 'AMOUNT'
+            discount = voucher[:discount][:amount_off]
+            validate_amount_discount(discount)
+            new_price = base_price - discount
+            return round_money(new_price > 0 ? (new_price) : 0)
+        elsif voucher[:discount][:type] === 'UNIT'
+            discount = voucher[:discount][:unit_off]
+            validate_unit_discount(discount)
+            new_price = base_price - unit_price * discount
+            return round_money(new_price > 0 ? (new_price) : 0)
+        else
+            raise "Unsupported discount type"
         end
     end
 end

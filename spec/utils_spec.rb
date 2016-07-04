@@ -34,4 +34,43 @@ describe Utils do
         expect{utils.validate_unit_discount('string')}.to raise_error("Invalid voucher, unit discount must be bigger than zero.")
 
     end
+
+    it 'calculates price with percent voucher' do
+        utils = Utils.new;
+
+        percent_voucher_object = {
+            discount: {
+                percent_off: 10.0,
+                type: 'PERCENT'
+            }
+        }
+
+        expect(utils.calculate_price(20, percent_voucher_object, 0)).to eq 18
+    end
+
+    it 'calculates price with amount voucher' do
+        utils = Utils.new;
+
+        amount_voucher_object = {
+            discount: {
+                amount_off: 10.0,
+                type: 'AMOUNT'
+            }
+        }
+
+        expect(utils.calculate_price(20, amount_voucher_object, 0)).to eq 10
+    end
+
+    it 'calculates price with unit voucher' do
+        utils = Utils.new;
+
+        unit_voucher_object = {
+            discount: {
+                unit_off: 2.0,
+                type: 'UNIT'
+            }
+        }
+
+        expect(utils.calculate_price(20, unit_voucher_object, 8)).to eq 4
+    end
 end
