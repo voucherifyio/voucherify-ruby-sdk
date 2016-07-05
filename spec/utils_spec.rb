@@ -37,7 +37,7 @@ describe Utils do
             }
         }
 
-        expect(Utils.calculate_price(20, percent_voucher_object, 0)).to eq 18
+        expect(Utils.calculate_price(20, percent_voucher_object)).to eq 18
     end
 
     it 'calculates price with amount voucher' do
@@ -48,7 +48,7 @@ describe Utils do
             }
         }
 
-        expect(Utils.calculate_price(20, amount_voucher_object, 0)).to eq 10
+        expect(Utils.calculate_price(20, amount_voucher_object)).to eq 10
     end
 
     it 'calculates price with unit voucher' do
@@ -62,6 +62,17 @@ describe Utils do
         expect(Utils.calculate_price(20, unit_voucher_object, 8)).to eq 4
     end
 
+    it 'calculates price with unit voucher without unit argument' do
+        unit_voucher_object = {
+            discount: {
+                unit_off: 2.0,
+                type: 'UNIT'
+            }
+        }
+
+        expect{Utils.calculate_price(20, unit_voucher_object)}.to raise_error("Missing unit_price argument.")
+    end
+
     it 'calculates price with unknown voucher' do
         void_voucher_object = {
             discount: {
@@ -69,7 +80,7 @@ describe Utils do
             }
         }
 
-        expect{Utils.calculate_price(20, void_voucher_object, 8)}.to raise_error("Unsupported discount type")
+        expect{Utils.calculate_price(20, void_voucher_object)}.to raise_error("Unsupported discount type")
     end
     
     it 'calculates discount with percent voucher' do
@@ -80,7 +91,7 @@ describe Utils do
             }
         }
 
-        expect(Utils.calculate_discount(20, percent_voucher_object, 0)).to eq 2
+        expect(Utils.calculate_discount(20, percent_voucher_object)).to eq 2
     end
 
     it 'calculates discount with amount voucher' do
@@ -91,7 +102,7 @@ describe Utils do
             }
         }
 
-        expect(Utils.calculate_discount(20, amount_voucher_object, 0)).to eq 7
+        expect(Utils.calculate_discount(20, amount_voucher_object)).to eq 7
     end
 
     it 'calculates discount with unit voucher' do
@@ -105,6 +116,17 @@ describe Utils do
         expect(Utils.calculate_discount(20, unit_voucher_object, 8)).to eq 16
     end
 
+    it 'calculates discount with unit voucher without unit argument' do
+        unit_voucher_object = {
+            discount: {
+                unit_off: 2.0,
+                type: 'UNIT'
+            }
+        }
+
+        expect{Utils.calculate_discount(20, unit_voucher_object)}.to raise_error("Missing unit_price argument.")
+    end
+
     it 'calculates discount with unknown voucher' do
         void_voucher_object = {
             discount: {
@@ -112,6 +134,6 @@ describe Utils do
             }
         }
 
-        expect{Utils.calculate_discount(20, void_voucher_object, 8)}.to raise_error("Unsupported discount type")
+        expect{Utils.calculate_discount(20, void_voucher_object)}.to raise_error("Unsupported discount type")
     end
 end
