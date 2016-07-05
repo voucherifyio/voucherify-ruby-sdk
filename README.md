@@ -381,7 +381,7 @@ voucherify.redeem({
 
 ##### 4. With customer id
 
-If you already created a customer profile in Voucherify's database, whether it was implicitly by providing it to the `redeem` function or explicitly by invoking the [`customer.create`](#create-customer) method, you can identify your customer in following redemptions by a generated id (starting with `cust_`). 
+If you already created a customer profile in Voucherify's database, whether it was implicitly by providing it to the `redeem` function or explicitly by invoking the [`customer.create`](#create-customer) method, you can identify your customer in following redemptions by a generated id (starting with `cust_`).
 
 ```ruby
 voucherify.redeem({
@@ -412,7 +412,7 @@ Filter parameters:
 
 - limit (default: 100)
 - page (default: 0)
-- start_date (default: beginning of current month) 
+- start_date (default: beginning of current month)
 - end_date (default: end of current month)
 - result - Success | Failure-NotExist | Failure-Inactive
 - customer - id or source_id
@@ -652,6 +652,67 @@ voucherify.delete_customer("cust_WGG615E92dhOHz7PV9Vo9gk9")
 ```
 
 The response has empty body.
+
+#### Utilities
+
+These methods are used to help calculate prices and discounts.
+
+```ruby
+Utils.calculate_price(base_price, voucher, unit_price)
+Utils.calculate_discount(base_price, voucher, unit_price)
+```
+
+Example:
+
+```ruby
+voucher = {
+  category: "New Customers",
+  type: "DISCOUNT_VOUCHER",
+  discount: {
+    percent_off: 10.0,
+    type: "PERCENT"
+  },
+  start_date: "2016-01-01T00:00:00Z",
+  expiration_date: "2016-12-31T23:59:59Z",
+  redemption: {
+    quantity: 1
+  }
+}
+```
+```ruby
+Utils.calculate_price(20.0, voucher, 0);
+```
+
+Result:
+```ruby
+18
+```
+
+Example:
+
+```ruby
+voucher = {
+  category: "New Customers",
+  type: "DISCOUNT_VOUCHER",
+  discount: {
+    amount_off: 7.0,
+    type: "AMOUNT"
+  },
+  start_date: "2016-01-01T00:00:00Z",
+  expiration_date: "2016-12-31T23:59:59Z",
+  redemption: {
+    quantity: 1
+  }
+}
+```
+```ruby
+Utils.calculate_discount(20.0, voucher, 0);
+```
+
+Result:
+```ruby
+7
+```
 
 ## Development
 
