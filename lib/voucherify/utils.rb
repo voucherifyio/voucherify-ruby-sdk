@@ -1,4 +1,4 @@
-class Utils
+module Utils
     def round_money(value)
         value.round(2)
     end
@@ -21,7 +21,7 @@ class Utils
         end
     end
 
-    def calculate_price(base_price, voucher, unit_price)
+    def calculate_price(base_price, voucher, unit_price = nil)
         if !voucher[:discount]
             raise "Unsupported voucher type."
         end
@@ -39,6 +39,9 @@ class Utils
             return round_money(new_price > 0 ? (new_price) : 0)
 
         elsif voucher[:discount][:type] === 'UNIT'
+            if !unit_price
+                raise "Missing unit_price argument."
+            end
             discount = voucher[:discount][:unit_off]
             validate_unit_discount(discount)
             new_price = base_price - unit_price * discount
@@ -49,7 +52,7 @@ class Utils
         end
     end
 
-    def calculate_discount(base_price, voucher, unit_price)
+    def calculate_discount(base_price, voucher, unit_price = nil)
         if !voucher[:discount]
             raise "Unsupported voucher type."
         end
@@ -67,6 +70,9 @@ class Utils
             return round_money(new_price > 0 ? (discount) : (base_price))
 
         elsif voucher[:discount][:type] === 'UNIT'
+            if !unit_price
+                raise "Missing unit_price argument."
+            end
             discount = voucher[:discount][:unit_off]
             validate_unit_discount(discount)
             price_discount = unit_price * discount
