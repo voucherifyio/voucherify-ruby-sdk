@@ -1,4 +1,4 @@
-class Utils
+module Utils
     def round_money(value)
         value.round(2)
     end
