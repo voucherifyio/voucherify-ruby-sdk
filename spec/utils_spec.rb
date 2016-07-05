@@ -86,7 +86,6 @@ describe Utils do
         expect{utils.calculate_price(20, void_voucher_object, 8)}.to raise_error("Unsupported discount type")
     end
     
-    #Discount
     it 'calculates discount with percent voucher' do
         utils = Utils.new;
 
@@ -97,7 +96,7 @@ describe Utils do
             }
         }
 
-        expect(utils.calculate_price(20, percent_voucher_object, 0)).to eq 18
+        expect(utils.calculate_discount(20, percent_voucher_object, 0)).to eq 2
     end
 
     it 'calculates discount with amount voucher' do
@@ -110,7 +109,7 @@ describe Utils do
             }
         }
 
-        expect(utils.calculate_price(20, amount_voucher_object, 0)).to eq 13
+        expect(utils.calculate_discount(20, amount_voucher_object, 0)).to eq 7
     end
 
     it 'calculates discount with unit voucher' do
@@ -123,7 +122,7 @@ describe Utils do
             }
         }
 
-        expect(utils.calculate_price(20, unit_voucher_object, 8)).to eq 4
+        expect(utils.calculate_discount(20, unit_voucher_object, 8)).to eq 16
     end
 
     it 'calculates discount with unknown voucher' do
@@ -135,6 +134,6 @@ describe Utils do
             }
         }
 
-        expect{utils.calculate_price(20, void_voucher_object, 8)}.to raise_error("Unsupported discount type")
+        expect{utils.calculate_discount(20, void_voucher_object, 8)}.to raise_error("Unsupported discount type")
     end
 end
