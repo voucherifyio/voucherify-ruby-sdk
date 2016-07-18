@@ -482,6 +482,31 @@ Result (voucher details):
 }
 ```
 
+#### Updating vouchers
+
+You can change some properties of a voucher that has been already created:
+- category
+- start date
+- expiration date
+- active
+- additinal info
+- metadata
+
+Other fields than listed above won't be modified. Even if provided they will be silently skipped.
+
+Use `voucherify.update(voucher_update)` to update a voucher.
+
+```ruby
+voucher_update = {
+  "code" => "Summer-2016",
+  "category" => "Season",
+  "start_date" => "2016-07-01T00:00:00Z",
+  "expiration_date" => "2016-08-31T23:59:59Z",
+}
+
+updated_voucher = voucherify.update(voucher_update)
+```
+
 #### Disabling a voucher
 
 ```ruby
@@ -725,6 +750,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-07-18** - `0.7.0` - voucher udpate
 - **2016-07-05** - `0.6.0` - new utils module
 - **2016-06-16** - `0.5.0` - unified naming convention
 - **2016-06-12** - `0.4.0` - new customer sdk methods
