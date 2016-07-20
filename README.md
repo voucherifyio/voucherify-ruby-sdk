@@ -436,12 +436,25 @@ voucherify.redemptions(filter)
 
 Use `voucherify.create(code, options)` to create new vouchers.
 
+You can specify voucher's code in the first parameter or pass `nil` to let Voucherify generate one.
+By default a generated code is a 8 characters long alphanumeric string, however,
+you can define how to create the random code passing a `code_config` hash:
+- `length` - Number of characters in a generated code (excluding prefix and postfix).
+- `charset` - Characters that can appear in the code.
+- `prefix` - A text appended before the code.
+- `postfix` - A text appended after the code.
+- `pattern` - A pattern for codes where hashes (#) will be replaced with random characters. Overrides `length`.
+
 ```ruby
 code = "EASTER-2016" # use given voucher code
 code = nil # for an automatically generated string
 
 # single-use voucher with 10% off discount that is valid throughout the whole 2016
 opts = {
+  code_config: {
+     charset: "0123456789",
+     pattern: "TEST-#####"
+  },
   category: "New Customers",
   type: "DISCOUNT_VOUCHER",
   discount: {
