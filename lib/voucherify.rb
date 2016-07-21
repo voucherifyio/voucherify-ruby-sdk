@@ -108,6 +108,12 @@ class Voucherify
     response = RestClient.post(url, options.to_json, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
+  
+  def update(voucher_update)
+    url = @backend_url + "/vouchers/" + URI.encode(voucher_update["code"])
+    response = RestClient.put(url, voucher_update.to_json, @headers.merge({ :content_type => :json }))
+    JSON.parse(response.body)
+  end
 
   def enable(code)
     url = @backend_url + "/vouchers/" + URI.encode(code) + "/enable"
