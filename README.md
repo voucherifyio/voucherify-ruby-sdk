@@ -240,6 +240,50 @@ Possible error:
 }
 ```
 
+#### Validating vouchers
+
+Validation lets you check if given voucher code can be successfuly redeemed.
+
+`voucherify.validate(code, context)`
+
+The `context` param is generaly optional unless you are validating a gift voucher. 
+Then you have to pass `order.amount` expressed in cents (e.g. $10 is 1000).
+
+Example:
+
+```
+validation_result = voucherify.validate("91Ft4U", {
+   tracking_id: "john@lemon.com",
+    customer: {
+         id: "cust_07sVjVsr71Ewot9lVZSrIVLH",
+         source_id: "john@lemon.com",
+         name: "John Lemon"
+     },
+     order: {
+        amount: 1000
+    }
+})
+```
+
+Successful validation result:
+```
+{"code"=>"91Ft4U", "valid"=>true, "gift"=>{"amount"=>10000}, "tracking_id"=>"john@lemon.com"}
+```
+
+Failed validation result:
+```
+{"code"=>"91Ft4U", "valid"=>true, "reason"=>"gift amount exceeded", "tracking_id"=>"john@lemon.com"}
+```
+
+There are several reasons why validation may fail (`valid: false` response). You can find the actual cause in the `reason` field:
+
+- `voucher not found`
+- `voucher is disabled`
+- `voucher not active yet`
+- `voucher expired`
+- `quantity exceeded`
+- `gift amount exceeded`
+
 #### Redeeming voucher
 
 ##### 1. Just by code
@@ -763,6 +807,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-08-02** - `0.8.0` - validate voucher
 - **2016-07-18** - `0.7.0` - voucher udpate
 - **2016-07-05** - `0.6.0` - new utils module
 - **2016-06-16** - `0.5.0` - unified naming convention
