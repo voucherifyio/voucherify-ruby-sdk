@@ -246,7 +246,7 @@ Validation lets you check if given voucher code can be successfuly redeemed.
 
 `voucherify.validate(code, context)`
 
-The `context` param is generaly optional unless you are validating a gift voucher. 
+The `context` param is generally optional unless you are validating a gift voucher. 
 Then you have to pass `order.amount` expressed in cents (e.g. $10 is 1000).
 
 Example:
@@ -272,7 +272,7 @@ Successful validation result:
 
 Failed validation result:
 ```
-{"code"=>"91Ft4U", "valid"=>true, "reason"=>"gift amount exceeded", "tracking_id"=>"john@lemon.com"}
+{"code"=>"91Ft4U", "valid"=>false, "reason"=>"gift amount exceeded", "tracking_id"=>"john@lemon.com"}
 ```
 
 There are several reasons why validation may fail (`valid: false` response). You can find the actual cause in the `reason` field:
