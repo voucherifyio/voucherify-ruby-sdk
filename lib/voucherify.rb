@@ -55,6 +55,25 @@ class Voucherify
     response = RestClient.get(url, @headers.merge({ :params => query }))
     JSON.parse(response.body)
   end
+  
+  # Sample context: 
+  # {
+  #     tracking_id: "john@lemon.com",
+  #     customer: {
+  #         id: "cust_07sVjVsr71Ewot9lVZSrIVLH",
+  #         source_id: "john@lemon.com",
+  #         name: "John Lemon"
+  #     },
+  #     order: {
+  #        amount: 1000
+  #     }
+  # }
+  def validate(code, context = {})
+    url = @backend_url + "/vouchers/" + URI.encode(code) + "/validate"
+
+    response = RestClient.post(url, context.to_json, @headers.merge({ :content_type => :json }))
+    JSON.parse(response.body)
+  end
 
   def redeem(code, tracking_id = nil)
     payload = {}
