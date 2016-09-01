@@ -244,21 +244,26 @@ Validation lets you check if given voucher code can be successfuly redeemed.
 
 `voucherify.validate(code, context)`
 
-The `context` param is generally optional unless you are validating a gift voucher. 
+The `context` param is generally optional unless you are validating a gift voucher or a voucher with order validation rules. 
 Then you have to pass `order.amount` expressed in cents (e.g. $10 is 1000).
+Validation rules also require to pass `order.items` as a list of objects including `product_id`, `sku_id` and `quantity`.
 
 Example:
 
 ```
 validation_result = voucherify.validate("91Ft4U", {
-   tracking_id: "john@lemon.com",
+    tracking_id: "john@lemon.com",
     customer: {
          id: "cust_07sVjVsr71Ewot9lVZSrIVLH",
          source_id: "john@lemon.com",
          name: "John Lemon"
-     },
-     order: {
-        amount: 1000
+    },
+    order: {
+        amount: 1250
+        items: [
+             { product_id: "prod_ELvEXqF4qzB7Rs", sku_id: "sku_GoXSOI4FwJZafb", quantity: 1 },
+             { product_id: "prod_wye1naw5JO5dh3", sku_id: "sku_U3rHSlfOCGUnbo", quantity: 2 }
+        ]
     }
 })
 ```
@@ -281,6 +286,8 @@ There are several reasons why validation may fail (`valid: false` response). You
 - `voucher expired`
 - `quantity exceeded`
 - `gift amount exceeded`
+- `customer does not match segment rules`
+- `order does not match validation rules`
 
 #### Redeeming voucher
 
@@ -436,6 +443,7 @@ voucherify.redeem({
 ##### 5. With order amount
 
 Redeeming a gift voucher requires to pass an amount that you wish to withdraw from the voucher.
+The same applies to vouchers with validation rules on order's total amount.
 Order amount have to be expressed in cents, as an integer. For example $22.50 should be provided as 2250:    
 
 ```ruby
@@ -446,6 +454,21 @@ voucherify.redeem({
         })
 ```
 
+##### 6. With order items
+
+Vouchers with validation rules regarding products or SKUs require to pass `order.items`.
+Items are a list of objects consisting of `product_id`, `sku_id` and `quantity`.
+
+```javascript
+voucherify.redeem({
+        voucher: "91Ft4U",
+        order: {
+            items: [
+                { product_id: "prod_ELvEXqF4qzB7Rs", sku_id: "sku_GoXSOI4FwJZafb", quantity: 1 },
+                { product_id: "prod_wye1naw5JO5dh3", sku_id: "sku_U3rHSlfOCGUnbo", quantity: 2 }
+            ]
+        })
+```
 
 #### Listing redemptions
 
