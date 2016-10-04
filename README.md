@@ -83,47 +83,76 @@ voucherify.list({ limit: 10, skip: 20, category: "API Test" })
 Result:
 ```json
 [{
-     "code": "9mYBpIk",
-     "campaign": null,
-     "category": "API Test",
-     "type": "DISCOUNT_VOUCHER",
-     "discount": {
-       "type": "AMOUNT",
-       "amount_off": 400
-     },
-     "start_date": "2016-03-01T12:00:00Z",
-     "expiration_date": null,
-     "redemption": {
-       "quantity": 1,
-       "redeemed_quantity": 0,
-       "redemption_entries": []
-     },
-     "active": true,
-     "additional_info": null,
-     "metadata": null
-   },
-   {
-       "code": "AzTsIH",
-       "campaign": null,
-       "category": "API Test",
-       "type": "GIFT_VOUCHER",
-       "gift": {
-         "amount": 5000
-       },
-       "start_date": "2016-03-01T10:00:00Z",
-       "expiration_date": null,
-       "redemption": {
-        "quantity": 1,
+    "code": "9mYBpIk",
+    "campaign": null,
+    "category": "API Test",
+    "type": "DISCOUNT_VOUCHER",
+    "discount": {
+    "type": "AMOUNT",
+        "amount_off": 400
+    },
+    "start_date": "2016-03-01T12:00:00Z",
+    "expiration_date": null,
+    "publish": {
+        "object": "list",
+        "count": 1,
+        "data_ref": "entries",
+        "entries": [{
+            "channel": "Email",
+            "customer": "alice.morgan@email.com",
+            "customer_id": "cust_1fnSUBno3iimKTPNDCkjg4xV",
+            "published_at": "2016-01-22T09:25:07Z"
+        }]
+    },
+    "redemption": {
+        "object": "list",
+        "quantity": 3,
+        "data_ref": "redemption_entries",
+        "redeemed_quantity": 1,
+        "redemption_entries": [{
+            "id": "r_gQzOnTwmhn2nTLwW4sZslNKY",
+            "object": "redemption",
+            "date": "2016-04-24T06:03:35Z",
+            "customer_id": null,
+            "tracking_id": "(tracking_id not set)"
+        }]
+    },
+    "active": true,
+    "additional_info": null,
+    "metadata": null
+}, {
+    "code": "AzTsIH",
+    "campaign": null,
+    "category": "API Test",
+    "type": "GIFT_VOUCHER",
+    "gift": {
+        "amount": 5000
+    },
+    "start_date": "2016-03-01T10:00:00Z",
+    "expiration_date": null,
+    "publish": {
+        "object": "list",
+        "count": 1,
+        "data_ref": "entries",
+        "entries": [{
+            "channel": "Email",
+            "customer": "alice.morgan@email.com",
+            "customer_id": "cust_1fnSUBno3iimKTPNDCkjg4xV",
+            "published_at": "2016-01-22T09:25:07Z"
+        }]
+    },
+    "redemption": {
+        "object": "list",
+        "quantity": 0,
+        "data_ref": "redemption_entries",
         "redeemed_quantity": 0,
         "redeemed_amount": 0,
         "redemption_entries": []
-       },
-       "active": true,
-       "additional_info": null,
-       "metadata": null
-   },
-   ...
-]  
+    },
+    "active": true,
+    "additional_info": null,
+    "metadata": null
+}]  
 ```
 
 #### Getting voucher details
@@ -143,8 +172,21 @@ Result:
         "type": "PERCENT"
     },
     "expiration_date": "2016-12-31T23:59:59Z",
+    "publish": {
+        "object": "list",
+        "count": 1,
+        "data_ref": "entries",
+        "entries": [{
+            "channel": "Email",
+            "customer": "alice.morgan@email.com",
+            "customer_id": "cust_1fnSUBno3iimKTPNDCkjg4xV",
+            "published_at": "2016-01-22T09:25:07Z"
+        }]
+    },
     "redemption": {
+        "object": "list",
         "quantity": 3,
+        "data_ref": "redemption_entries",
         "redeemed_quantity": 1,
         "redemption_entries": [
             {
@@ -193,9 +235,17 @@ Example:
 ```ruby
 voucherify.publish("First Ride")
 ```
+
 or
+
 ```ruby
 voucherify.publish({campaign: "First Ride", channel: "Email", customer: "donny.roll@mail.com"})
+```
+
+or
+
+```ruby
+voucherify.publish({voucher: "FR-zT-u9I7zG", channel: "Email", customer: "donny.roll@mail.com"})
 ```
 
 Positive result:
@@ -212,15 +262,20 @@ Positive result:
    "start_date": "2015-01-01T00:00:00Z",
    "expiration_date": "2016-12-31T23:59:59Z",
    "publish": {
+        "object": "list",
         "count": 1,
+        "data_ref": "entries",
         "entries": [{
             "channel": "Email",
             "customer": "donny.roll@mail.com",
+            "customer_id": "cust_1fnSUBno3iimKTPNDCkjg4xV",
             "published_at": "2016-01-22T09:25:07Z"
         }]
    },
    "redemption": {
-      "quantity": 1,
+      "object": "list",
+      "quantity": 0,
+      "data_ref": "redemption_entries",
       "redeemed_quantity": 0,
       "redemption_entries": []
    },
@@ -316,7 +371,9 @@ Result (voucher details after redemption):
         },
         "expiration_date": "2016-12-31T23:59:59Z",
         "redemption": {
+            "object": "list",
             "quantity": 3,
+            "data_ref": "redemption_entries",
             "redeemed_quantity": 2,
             "redemption_entries": [
                 {
@@ -549,8 +606,16 @@ Result (voucher details):
     },
     "start_date": "2016-01-01T00:00:00Z",
     "expiration_date": "2016-12-31T23:59:59Z",
+    "publish": {
+        "object": "list",
+        "count": 0,
+        "data_ref": "entries",
+        "entries": []
+    },
     "redemption": {
+        "object": "list",
         "quantity": 1,
+        "data_ref": "redemption_entries",
         "redeemed_quantity": 0,
         "redemption_entries": []
     },
@@ -628,8 +693,16 @@ Result:
             "type": "PERCENT"
         },
         "expiration_date": "2016-12-31T23:59:59Z",
+        "publish": {
+            "object": "list",
+            "count": 0,
+            "data_ref": "entries",
+            "entries": []
+        },
         "redemption": {
+            "object": "list",
             "quantity": 3,
+            "data_ref": "redemption_entries",
             "redeemed_quantity": 2,
             "redemption_entries": [
                 {
@@ -828,6 +901,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-10-03** - `0.8.1` - publish update 
 - **2016-08-02** - `0.8.0` - validate voucher
 - **2016-07-18** - `0.7.0` - voucher udpate
 - **2016-07-05** - `0.6.0` - new utils module
