@@ -126,7 +126,8 @@ Result:
     "category": "API Test",
     "type": "GIFT_VOUCHER",
     "gift": {
-        "amount": 5000
+        "amount": 10000,
+        "balance": 5000
     },
     "start_date": "2016-03-01T10:00:00Z",
     "expiration_date": null,
@@ -325,7 +326,7 @@ validation_result = voucherify.validate("91Ft4U", {
 
 Successful validation result:
 ```
-{"code"=>"91Ft4U", "valid"=>true, "gift"=>{"amount"=>10000}, "tracking_id"=>"john@lemon.com"}
+{"code"=>"91Ft4U", "valid"=>true, "gift"=>{"amount"=>10000, "balance"=>5000}, "tracking_id"=>"john@lemon.com"}
 ```
 
 Failed validation result:
@@ -499,9 +500,9 @@ voucherify.redeem({
 
 ##### 5. With order amount
 
-Redeeming a gift voucher requires to pass an amount that you wish to withdraw from the voucher.
-The same applies to vouchers with validation rules on order's total amount.
-Order amount have to be expressed in cents, as an integer. For example $22.50 should be provided as 2250:    
+Redeeming a gift voucher requires passing order amount. The same applies to vouchers with validation rules on order's total amount.  
+Order amount have to be expressed in cents, as an integer. For example $22.50 should be provided as 2250.
+Gift voucher balance will be used to cover the order amount entirely or partially.
 
 ```ruby
 voucherify.redeem({
@@ -901,6 +902,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-12-02** - `0.8.2` - support gift vouchers in utils, fix price and discount calculations for amount discounts 
 - **2016-10-03** - `0.8.1` - publish update 
 - **2016-08-02** - `0.8.0` - validate voucher
 - **2016-07-18** - `0.7.0` - voucher udpate
