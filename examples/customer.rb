@@ -1,29 +1,32 @@
 require 'voucherify'
 
-voucherify = Voucherify.new({
-                                "applicationId" => "c70a6f00-cf91-4756-9df5-47628850002b",
-                                "clientSecretKey" => "3266b9f8-e246-4f79-bdf0-833929b1380c"
-                            })
+voucherify = Voucherify::Client.new({
+                                        :applicationId => 'c70a6f00-cf91-4756-9df5-47628850002b',
+                                        :clientSecretKey => '3266b9f8-e246-4f79-bdf0-833929b1380c'
+                                    })
 
-new_customer = voucherify.create_customer({
-                                              name: "John Doe",
-                                              email: "john@email.com",
-                                              description: "Sample description about customer",
-                                              metadata: {
-                                                  lang: "en"
-                                              }
-                                          })
+new_customer = voucherify.customers.create_customer({
+                                                        name: 'John Doe',
+                                                        email: 'john@email.com',
+                                                        description: 'Sample description about customer',
+                                                        metadata: {
+                                                            lang: 'en'
+                                                        }
+                                                    })
 
-print(new_customer)
+puts 'Created Customer:'
+puts new_customer
 
-customer = voucherify.get_customer(new_customer["id"])
+customer = voucherify.customers.get_customer new_customer['id']
 
-print(customer)
+puts 'Retrieved Customer:'
+puts customer
 
-customer[:description] = "Sample description of customer with updates"
+customer[:description] = 'Sample description of customer with updates'
 
-updated_customer = voucherify.update_customer(customer)
+updated_customer = voucherify.customers.update_customer customer
 
-print(updated_customer)
+puts 'Updated Customer:'
+puts updated_customer
 
-voucherify.delete_customer(updated_customer["id"])
+voucherify.customers.delete_customer updated_customer['id']
