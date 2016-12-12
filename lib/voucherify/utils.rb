@@ -23,21 +23,28 @@ module Voucherify
     end
 
     def self.calculate_price(base_price, voucher, unit_price = nil)
+      e = 100.0
+
+      if voucher[:gift]
+        discount = [voucher[:gift][:balance] / e, base_price].min
+        return round_money(base_price - discount)
+      end
+
       if !voucher[:discount]
         raise 'Unsupported voucher type.'
       end
 
       if voucher[:discount][:type] === 'PERCENT'
         discount = voucher[:discount][:percent_off]
-        validate_percent_discount(discount)
-        price_discount = base_price * (discount / 100)
-        round_money(base_price - price_discount)
+        validate_percent_discount(discount);
+        price_discount = base_price * (discount / 100.0)
+        return round_money(base_price - price_discount)
 
       elsif voucher[:discount][:type] === 'AMOUNT'
-        discount = voucher[:discount][:amount_off]
+        discount = voucher[:discount][:amount_off] / e
         validate_amount_discount(discount)
         new_price = base_price - discount
-        round_money(new_price > 0 ? (new_price) : 0)
+        return round_money(new_price > 0 ? (new_price) : 0)
 
       elsif voucher[:discount][:type] === 'UNIT'
         if !unit_price
@@ -46,7 +53,7 @@ module Voucherify
         discount = voucher[:discount][:unit_off]
         validate_unit_discount(discount)
         new_price = base_price - unit_price * discount
-        round_money(new_price > 0 ? (new_price) : 0)
+        return round_money(new_price > 0 ? (new_price) : 0)
 
       else
         raise 'Unsupported discount type'
@@ -54,6 +61,13 @@ module Voucherify
     end
 
     def self.calculate_discount(base_price, voucher, unit_price = nil)
+      e = 100.0
+
+      if voucher[:gift]
+        discount = [voucher[:gift][:balance] / e, base_price].min
+        return round_money(discount)
+      end
+
       if !voucher[:discount]
         raise 'Unsupported voucher type.'
       end
@@ -61,11 +75,11 @@ module Voucherify
       if voucher[:discount][:type] === 'PERCENT'
         discount = voucher[:discount][:percent_off]
         validate_percent_discount(discount);
-        price_discount = base_price * (discount / 100)
+        price_discount = base_price * (discount / 100.0)
         return round_money(price_discount)
 
       elsif voucher[:discount][:type] === 'AMOUNT'
-        discount = voucher[:discount][:amount_off]
+        discount = voucher[:discount][:amount_off] / e
         validate_amount_discount(discount)
         new_price = base_price - discount
         return round_money(new_price > 0 ? (discount) : (base_price))

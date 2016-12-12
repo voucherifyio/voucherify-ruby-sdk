@@ -46,7 +46,7 @@ describe 'Utils' do
             }
         }
 
-        expect(Voucherify::Utils.calculate_price(20, amount_voucher_object)).to eq 10
+        expect(Voucherify::Utils.calculate_price(20, amount_voucher_object)).to eq 19.9
     end
 
     it 'calculates price with unit voucher' do
@@ -100,7 +100,7 @@ describe 'Utils' do
             }
         }
 
-        expect(Voucherify::Utils.calculate_discount(20, amount_voucher_object)).to eq 7
+        expect(Voucherify::Utils.calculate_discount(20, amount_voucher_object)).to eq 0.07
     end
 
     it 'calculates discount with unit voucher' do
