@@ -43,7 +43,12 @@ module Voucherify
     def post(path, body, params = {})
       url = @backend_url + path
       response = RestClient.post(url, body, @headers.merge({:params => params, :content_type => :json}))
-      JSON.parse(response.body)
+      if !response.body.empty?
+        JSON.parse(response.body)
+      else
+        nil
+      end
+
     end
 
     def delete(path, params = {})

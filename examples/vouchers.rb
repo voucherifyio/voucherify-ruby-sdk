@@ -5,11 +5,16 @@ voucherify = Voucherify::Client.new({
                                         :clientSecretKey => '3266b9f8-e246-4f79-bdf0-833929b1380c'
                                     })
 
-validation_result = voucherify.vouchers.validate('91Ft4U', {
+puts voucherify.vouchers.validate('91Ft4U', {
     tracking_id: 'john@lemon.com',
     order: {
         amount: 1000
     }
 })
 
-puts validation_result
+query = {limit: 10, skip: 20, category: 'API Test'}
+puts voucherify.vouchers.list(query)
+
+puts voucherify.vouchers.enable '91Ft4U'
+
+puts voucherify.vouchers.disable '91Ft4U'
