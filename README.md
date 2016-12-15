@@ -233,7 +233,7 @@ This voucherify gem uses [rest-client](https://github.com/rest-client/rest-clien
 
 ```ruby
 begin
-  voucherify.vouchers.publish('test')
+  voucherify.distributions.publish('test')
 rescue => e
   JSON.parse(e.response)
 end
