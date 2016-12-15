@@ -1,4 +1,14 @@
-## Voucherify Ruby SDK
+<p align="center">
+  <img src="./voucherify-ruby-sdk.png"/>
+</p>
+
+<h3 align="center">Official <a href="http://voucherify.io?utm_source=github&utm_medium=sdk&utm_campaign=acq">Voucherify</a> SDK for Ruby</h3>
+
+<p align="center">
+  <a href="https://rubygems.org/gems/voucherify"><img src="https://img.shields.io/gem/v/voucherify.svg" alt="Gem Version"/></a>
+  <a href="https://rubygems.org/gems/voucherify"><img src="https://img.shields.io/gem/dt/voucherify.svg" alt="Gem Downloads"/></a>
+</p>
+<hr />
 
 <p align="center">
 <b><a href="#migration-from-0-x">Migration from 0.x</a></b>
