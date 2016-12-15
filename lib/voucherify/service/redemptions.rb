@@ -9,7 +9,7 @@ module Voucherify
         @client = client
       end
 
-      def list(query)
+      def list(query = {})
         @client.get('/redemptions/', query)
       end
 
