@@ -18,6 +18,10 @@
 API:
 <a href="#vouchers-api">Vouchers</a>
 |
+<a href="#distributions-api">Distributions</a>
+|
+<a href="#validations-api">Validations</a>
+|
 <a href="#redemptions-api">Redemptions</a>
 |
 <a href="#customers-api">Customers</a>
@@ -65,14 +69,9 @@ Methods are provided within `voucherify.vouchers.*` namespace.
 - [Create Voucher](#create-voucher)
 - [Get Voucher](#get-voucher)
 - [Update Voucher](#update-voucher)
-- [Delete Voucher](#delete-voucher)
 - [List Vouchers](#list-vouchers)
 - [Enable Voucher](#enable-voucher)
 - [Disable Voucher](#disable-voucher)
-- [Voucher Redemption](#voucher-redemption)
-- [Validate Voucher](#validate-voucher)
-- [Redeem Voucher](#redeem-voucher)
-- [Publish Vouchers](#publish-vouchers)
 
 #### [Create Voucher]
 ```ruby
@@ -99,21 +98,28 @@ voucherify.vouchers.enable(code)
 ```ruby
 voucherify.vouchers.disable(code)
 ```
-#### [Voucher Redemption]
-```ruby
-voucherify.vouchers.redemption(code)
-```
-#### [Validate Voucher]
-```ruby
-voucherify.vouchers.validate(code, [context])
-```
-#### [Redeem Voucher]
-```ruby
-voucherify.vouchers.redeem(code, [tracking_id])
-```
+---
+
+### Distributions API
+Methods are provided within `voucherify.distributions.*` namespace.
+
+- [Publish Vouchers](#publish-vouchers)
+
 #### [Publish Vouchers]
 ```ruby
-voucherify.vouchers.publish(campaign_name)
+voucherify.distributions.publish(campaign_name)
+```
+
+---
+
+### Validations API
+Methods are provided within `voucherify.validations.*` namespace.
+
+- [Validate Voucher](#validate-voucher)
+
+#### [Validate Voucher]
+```ruby
+voucherify.validations.validate_voucher(code, [context])
 ```
 
 ---
@@ -121,13 +127,23 @@ voucherify.vouchers.publish(campaign_name)
 ### Redemptions API
 Methods are provided within `voucherify.redemptions.*` namespace.
 
+- [Redeem Voucher](#redeem-voucher)
 - [List Redemptions](#list-redemptions)
+- [Get Voucher's Redemptions](#get-vouchers-redemptions)
 - [Rollback Redemption](#rollback-redemption)
 
+#### [Redeem Voucher]
+```ruby
+voucherify.redemptions.redeem(code, [tracking_id])
+```
 #### [List Redemptions]
 ```ruby
 voucherify.redemptions.list
 voucherify.redemptions.list(params)
+```
+#### [Get Voucher's Redemptions]
+```ruby
+voucherify.redemptions.get_for_voucher(code)
 ```
 #### [Rollback Redemption]
 ```javascript
@@ -172,33 +188,23 @@ Changes made in version 1.x mostly relate to grouping methods within namespaces.
 So all you need to do is to follow the list bellow and just replace methods
 with their namespaced equivalent.
 
-##### Client
 - `Voucherify.new(params)` - `Vocherify::Client.new(params)`
-
-##### Vouchers
 - `voucherify.create(voucher)` - [voucherify.vouchers.create](#create-voucher)
 - `voucherify.get(voucher_code)` - [voucherify.vouchers.get](#get-voucher)
 - `voucherify.update(voucher)` - [voucherify.vouchers.update](#update-voucher)
 - `voucherify.list(params)` - [voucherify.vouchers.list](#list-vouchers)
 - `voucherify.enable(voucher_code)` - [voucherify.vouchers.enable](#enable-voucher)
 - `voucherify.disable(voucher_code)` - [voucherify.vouchers.disable](#disable-voucher)
-- `voucherify.redemption(voucher_code)` - [voucherify.vouchers.redemption](#voucher-redemption)
-- `voucherify.validate(voucher_code, params)` - [voucherify.vouchers.validate](#validate-voucher)
-- `voucherify.redeem(voucher_code, tracking_id)` - [voucherify.vouchers.redeem](#redeem-voucher)
-- `voucherify.publish(campaign_name)` - [voucherify.vouchers.publish](#publish-vouchers)
-
-##### Redemptions
+- `voucherify.publish(campaign_name)` - [voucherify.distributions.publish](#publish-vouchers)
+- `voucherify.validate(voucher_code, params)` - [voucherify.validations.validate](#validate-voucher)
+- `voucherify.redeem(voucher_code, tracking_id)` - [voucherify.redemptions.redeem](#redeem-voucher)
+- `voucherify.redemption(voucher_code)` - [voucherify.redemptions.get_for_voucher](#get-vouchers-redemptions)
 - `voucherify.redemptions(params)` - [voucherify.redemptions.list](#list-redemptions)
 - `voucherify.rollback(redemption_id, tracking_id, reason)` - [voucherify.redemptions.rollback](#rollback-redemptions)
-
-##### Customers
 - `voucherify.create_customer(customer)` - [voucherify.customers.create](#create-customer)
 - `voucherify.get_customer(customer_id)` - [voucherify.customers.get](#get-customer)
 - `voucherify.update_customer(customer)` - [voucherify.customers.update](#update-customer)
 - `voucherify.delete_customer(customer_id)` - [voucherify.customers.delete](#delete-customer)
-
-##### Util
-
 - `Utils.round_money(value)` - `Voucherify::Utils.round_money(value)`
 - `Utils.validate_percent_discount(discount)` - `Voucherify::Utils.validate_percent_discount(discount)`
 - `Utils.validate_amount_discount(discount)` - `Voucherify::Utils.validate_amount_discount(discount)`
@@ -275,3 +281,21 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/rspect
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+[Create Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-voucher
+[Get Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#vouchers-get
+[Update Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-voucher
+[List Vouchers]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-vouchers
+[Enable Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#enable-voucher
+[Disable Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#disable-voucher
+[Publish Vouchers]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#publish-voucher
+[Validate Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#validate-voucher
+[Redeem Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#redeem-voucher
+[List Redemptions]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-redemptions
+[Get Voucher's Redemptions]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#vouchers-redemptions
+[Rollback Redemption]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#rollback-redemption
+
+[Create Customer]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-customer
+[Get Customer]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#read-customer
+[Update Customer]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-customer
+[Delete Customer]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-customer

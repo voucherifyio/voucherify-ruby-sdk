@@ -20,6 +20,14 @@ module Voucherify
       Voucherify::Service::Vouchers.new(self)
     end
 
+    def distributions
+      Voucherify::Service::Distributions.new(self)
+    end
+
+    def validations
+      Voucherify::Service::Validations.new(self)
+    end
+
     def redemptions
       Voucherify::Service::Redemptions.new(self)
     end

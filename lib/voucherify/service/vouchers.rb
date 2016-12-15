@@ -39,43 +39,6 @@ module Voucherify
         @client.post(url, nil)
         nil
       end
-
-      def redemption(code)
-        @client.get('/vouchers/' + URI.encode(code) + '/redemption')
-      end
-
-      def validate(code, context = {})
-        @client.post('/vouchers/' + URI.encode(code) + '/validate', context.to_json)
-      end
-
-      def redeem(code, tracking_id = nil)
-        payload = {}
-
-        if code.is_a? Hash
-          payload = code
-          code = payload['voucher'] || payload[:voucher]
-          payload.delete 'voucher'
-          payload.delete :voucher
-        end
-
-        url = '/vouchers/' + URI.encode(code) + '/redemption'
-        url += ('?tracking_id=' + URI.encode(tracking_id)) if tracking_id
-
-        @client.post(url, payload.to_json)
-      end
-
-      def publish(campaign_name)
-        url = '/vouchers/publish'
-        payload = {}
-
-        if campaign_name.is_a? String
-          url += '?campaign=' + URI.encode(campaign_name)
-        elsif campaign_name.is_a? Hash
-          payload = campaign_name
-        end
-
-        @client.post(url, payload.to_json)
-      end
     end
   end
 end
