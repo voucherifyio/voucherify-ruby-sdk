@@ -22,7 +22,6 @@ module Utils
     end
 
     def calculate_price(base_price, voucher, unit_price = nil)
-        e = 100.0
     
         if voucher[:gift]
             discount = [voucher[:gift][:balance] / e, base_price].min
@@ -40,7 +39,7 @@ module Utils
             return round_money(base_price - price_discount)
 
         elsif voucher[:discount][:type] === 'AMOUNT'
-            discount = voucher[:discount][:amount_off] / e
+            discount = voucher[:discount][:amount_off] 
             validate_amount_discount(discount)
             new_price = base_price - discount
             return round_money(new_price > 0 ? (new_price) : 0)
@@ -60,7 +59,7 @@ module Utils
     end
 
     def calculate_discount(base_price, voucher, unit_price = nil)
-        e = 100.0
+
         
         if voucher[:gift]
             discount = [voucher[:gift][:balance] / e, base_price].min
@@ -78,7 +77,7 @@ module Utils
             return round_money(price_discount)
 
         elsif voucher[:discount][:type] === 'AMOUNT'
-            discount = voucher[:discount][:amount_off] / e
+            discount = voucher[:discount][:amount_off] 
             validate_amount_discount(discount)
             new_price = base_price - discount
             return round_money(new_price > 0 ? (discount) : (base_price))

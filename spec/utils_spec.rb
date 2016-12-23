@@ -1,4 +1,5 @@
 require 'voucherify/utils'
+require 'byebug'
 
 include Utils;
 
@@ -47,7 +48,7 @@ describe Utils do
                 type: 'AMOUNT'
             }
         }
-
+        # byebug
         expect(Utils.calculate_price(20, amount_voucher_object)).to eq 10
     end
 
