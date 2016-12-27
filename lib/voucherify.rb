@@ -92,6 +92,17 @@ class Voucherify
     JSON.parse(response.body)
   end
 
+  def redeem_voucher(voucher, tracking_id=nil)
+    code = voucher["code"]
+
+    url = @backend_url + "/vouchers/" + URI.encode(code) + "/redemption"
+    # TODO: Check if tracking id in voucher is enough.
+    # url += ("?tracking_id=" + URI.encode(tracking_id)) if tracking_id
+
+    response = RestClient.post(url, voucher.to_json, @headers.merge({ :content_type => :json }))
+    JSON.parse(response.body)
+  end 
+
   def publish(campaign_name)
     url = @backend_url + "/vouchers/publish"
     payload = {}
