@@ -3,12 +3,13 @@ require 'rest-client'
 
 describe 'Customers API' do
 
-  voucherify = Voucherify::Client.new({
-                                          :applicationId => 'c70a6f00-cf91-4756-9df5-47628850002b',
-                                          :clientSecretKey => '3266b9f8-e246-4f79-bdf0-833929b1380c'
-                                      })
-
-  $created_customer = nil
+  before(:all) do
+    @voucherify = Voucherify::Client.new({
+                                             :applicationId => 'c70a6f00-cf91-4756-9df5-47628850002b',
+                                             :clientSecretKey => '3266b9f8-e246-4f79-bdf0-833929b1380c'
+                                         })
+    $created_customer = nil
+  end
 
   it 'should create customer' do
     customer = {
@@ -20,7 +21,7 @@ describe 'Customers API' do
         }
     }
 
-    $created_customer = voucherify.customers.create customer
+    $created_customer = @voucherify.customers.create customer
 
     expect($created_customer['name']).to eql customer[:name]
     expect($created_customer['email']).to eql customer[:email]
@@ -29,7 +30,7 @@ describe 'Customers API' do
   end
 
   it 'should get customer by id' do
-    customer = voucherify.customers.get $created_customer['id']
+    customer = @voucherify.customers.get $created_customer['id']
 
     expect(customer['name']).to eql $created_customer['name']
     expect(customer['email']).to eql $created_customer['email']
@@ -39,7 +40,7 @@ describe 'Customers API' do
 
   it 'should update customer' do
     $created_customer['description'] = 'Sample description of customer with updates'
-    updated_customer = voucherify.customers.update $created_customer
+    updated_customer = @voucherify.customers.update $created_customer
 
     expect(updated_customer['name']).to eql $created_customer['name']
     expect(updated_customer['email']).to eql $created_customer['email']
@@ -48,8 +49,8 @@ describe 'Customers API' do
   end
 
   it 'should delete customer by id' do
-    voucherify.customers.delete $created_customer['id']
+    @voucherify.customers.delete $created_customer['id']
 
-    expect { voucherify.customers.get $created_customer['id'] }.to raise_error RestClient::NotFound
+    expect { @voucherify.customers.get $created_customer['id'] }.to raise_error RestClient::NotFound
   end
 end
