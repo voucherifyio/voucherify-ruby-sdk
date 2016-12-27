@@ -20,7 +20,7 @@ module Voucherify
       end
 
       def update(voucher_update)
-        url = '/vouchers/' + URI.encode(voucher_update[:code])
+        url = '/vouchers/' + URI.encode(voucher_update['code'])
         @client.put(url, voucher_update.to_json)
       end
 
@@ -37,6 +37,12 @@ module Voucherify
       def disable(code)
         url = '/vouchers/' + URI.encode(code) + '/disable'
         @client.post(url, nil)
+        nil
+      end
+
+      def delete(code, force = false)
+        url = '/vouchers/' + URI.encode(code)
+        @client.delete(url, {force: force})
         nil
       end
     end
