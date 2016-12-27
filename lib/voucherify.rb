@@ -127,6 +127,13 @@ class Voucherify
     response = RestClient.post(url, options.to_json, @headers.merge({ :content_type => :json }))
     JSON.parse(response.body)
   end
+
+  def create_in_campaign(campaign_name, options = {})
+    # https://api.voucherify.io/v1/campaigns/TESTING-CAMPAIGN/vouchers/
+    url = @backend_url + "/campaigns/" + URI.encode(campaign_name) + "/vouchers/"
+    response = RestClient.post(url, options.to_json, @headers.merge({ :content_type => :json }))
+    JSON.parse(response.body)
+  end
   
   def update(voucher_update)
     url = @backend_url + "/vouchers/" + URI.encode(voucher_update["code"])
