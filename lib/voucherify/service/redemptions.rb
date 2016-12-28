@@ -9,20 +9,9 @@ module Voucherify
         @client = client
       end
 
-      def redeem(code, tracking_id = nil)
-        payload = {}
-
-        if code.is_a? Hash
-          payload = code
-          code = payload['voucher'] || payload[:voucher]
-          payload.delete 'voucher'
-          payload.delete :voucher
-        end
-
+      def redeem(code, params = {})
         url = '/vouchers/' + URI.encode(code) + '/redemption'
-        url += ('?tracking_id=' + URI.encode(tracking_id)) if tracking_id
-
-        @client.post(url, payload.to_json)
+        @client.post(url, params.to_json)
       end
 
       def list(query = {})
@@ -33,12 +22,13 @@ module Voucherify
         @client.get('/vouchers/' + URI.encode(code) + '/redemption')
       end
 
-      def rollback(redemption_id, tracking_id = nil, reason = nil)
+      def rollback(redemption_id, params = {})
+        reason = params['reason'] || params[:reason]
         url = '/redemptions/'+ URI.encode(redemption_id) + '/rollback'
-        if tracking_id || reason
-          url += '?' + URI.encode_www_form(:tracking_id => tracking_id, :reason => reason)
-        end
-        @client.post(url, nil)
+        url += '?reason=' + URI.encode(reason) if reason
+        params.delete 'reason'
+        params.delete :reason
+        @client.post(url, params.to_json)
       end
 
     end

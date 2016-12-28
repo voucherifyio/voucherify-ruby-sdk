@@ -79,6 +79,7 @@ Methods are provided within `voucherify.vouchers.*` namespace.
 - [Create Voucher](#create-voucher)
 - [Get Voucher](#get-voucher)
 - [Update Voucher](#update-voucher)
+- [Delete Voucher](#delete-voucher)
 - [List Vouchers](#list-vouchers)
 - [Enable Voucher](#enable-voucher)
 - [Disable Voucher](#disable-voucher)
@@ -95,6 +96,10 @@ voucherify.vouchers.get(code)
 #### [Update Voucher]
 ```ruby
 voucherify.vouchers.update(voucher)
+```
+#### [Delete Voucher]
+```ruby
+voucherify.vouchers.delete(code, [params])
 ```
 #### [List Vouchers]
 ```ruby
@@ -144,7 +149,7 @@ Methods are provided within `voucherify.redemptions.*` namespace.
 
 #### [Redeem Voucher]
 ```ruby
-voucherify.redemptions.redeem(code, [tracking_id])
+voucherify.redemptions.redeem(code, [params])
 ```
 #### [List Redemptions]
 ```ruby
@@ -157,7 +162,7 @@ voucherify.redemptions.get_for_voucher(code)
 ```
 #### [Rollback Redemption]
 ```javascript
-voucherify.redemptions.rollback(redemption_id, [tracking_id], [reason])
+voucherify.redemptions.rollback(redemption_id, [params])
 ```
 Check [redemption rollback object](https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#the-redemption-rollback-object).
 
@@ -295,6 +300,7 @@ The gem is available as open source under the terms of the [MIT License](http://
 [Create Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-voucher
 [Get Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#vouchers-get
 [Update Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-voucher
+[Delete Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-voucher
 [List Vouchers]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-vouchers
 [Enable Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#enable-voucher
 [Disable Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#disable-voucher

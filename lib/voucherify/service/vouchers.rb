@@ -40,9 +40,11 @@ module Voucherify
         nil
       end
 
-      def delete(code, force = false)
+      def delete(code, params = {})
+        force = params['force'] || params[:force]
         url = '/vouchers/' + URI.encode(code)
-        @client.delete(url, {force: force})
+        url += '?force=' + (!!force).to_s
+        @client.delete(url, nil)
         nil
       end
     end
