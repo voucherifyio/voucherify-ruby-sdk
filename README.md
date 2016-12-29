@@ -339,6 +339,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-12-29** - `1.2.0` - introduced [products api](#products-api)
 - **2016-12-15** - `1.0.0` - introduced namespaces, unified method names, updated README. Migration from versions 0.x required [migration from version 0.x](#migration-from-0x)
 - **2016-12-02** - `0.8.2` - support gift vouchers in utils, fix price and discount calculations for amount discounts 
 - **2016-10-03** - `0.8.1` - publish update 
