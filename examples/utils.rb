@@ -1,24 +1,22 @@
-require '../lib/voucherify/utils'
-
-include Utils
+require 'voucherify/utils'
 
 base_price = 20.00
 
-puts "base price: " + base_price.to_s
+puts 'base price: ' + base_price.to_s
 
-puts "===== amount discount ====="
+puts '===== amount discount ====='
 amount_voucher = {
     discount: {
         amount_off: 1000, # 10.0
         type: 'AMOUNT'
     }
 }
-puts "discount:             " + Utils.calculate_discount(base_price, amount_voucher).to_s
-puts "price after discount: " + Utils.calculate_price(base_price, amount_voucher).to_s
+puts 'discount:             ' + Voucherify::Utils.calculate_discount(base_price, amount_voucher).to_s
+puts 'price after discount: ' + Voucherify::Utils.calculate_price(base_price, amount_voucher).to_s
 puts
 
 
-puts "===== percent discount ===="
+puts '===== percent discount ===='
 
 percent_discount_voucher = {
     discount: {
@@ -27,12 +25,12 @@ percent_discount_voucher = {
     }
 }
 
-puts "discount:             " + Utils.calculate_discount(base_price, percent_discount_voucher).to_s
-puts "price after discount: " + Utils.calculate_price(base_price, percent_discount_voucher).to_s
+puts 'discount:             ' + Voucherify::Utils.calculate_discount(base_price, percent_discount_voucher).to_s
+puts 'price after discount: ' + Voucherify::Utils.calculate_price(base_price, percent_discount_voucher).to_s
 puts
 
 
-puts "===== unit discount ======="
+puts '===== unit discount ======='
 
 unit_discount_voucher = {
     discount: {
@@ -41,12 +39,12 @@ unit_discount_voucher = {
     }
 }
 
-puts "discount:             " + Utils.calculate_discount(base_price, unit_discount_voucher, 5).to_s
-puts "price after discount: " + Utils.calculate_price(base_price, unit_discount_voucher, 5).to_s
+puts 'discount:             ' + Voucherify::Utils.calculate_discount(base_price, unit_discount_voucher, 5).to_s
+puts 'price after discount: ' + Voucherify::Utils.calculate_price(base_price, unit_discount_voucher, 5).to_s
 puts
 
 
-puts "===== gift voucher ========"
+puts '===== gift voucher ========'
 
 gift_voucher = {
     gift: {
@@ -55,11 +53,11 @@ gift_voucher = {
     }
 }
 
-puts "discount:             " + Utils.calculate_discount(base_price, gift_voucher).to_s
-puts "price after discount: " + Utils.calculate_price(base_price, gift_voucher).to_s
+puts 'discount:             ' + Voucherify::Utils.calculate_discount(base_price, gift_voucher).to_s
+puts 'price after discount: ' + Voucherify::Utils.calculate_price(base_price, gift_voucher).to_s
 puts
 
-puts "===== gift voucher 2 ======"
+puts '===== gift voucher 2 ======'
 
 gift_voucher2 = {
     gift: {
@@ -68,6 +66,6 @@ gift_voucher2 = {
     }
 }
 
-puts "discount:             " + Utils.calculate_discount(base_price, gift_voucher2).to_s
-puts "price after discount: " + Utils.calculate_price(base_price, gift_voucher2).to_s
+puts 'discount:             ' + Voucherify::Utils.calculate_discount(base_price, gift_voucher2).to_s
+puts 'price after discount: ' + Voucherify::Utils.calculate_price(base_price, gift_voucher2).to_s
 puts

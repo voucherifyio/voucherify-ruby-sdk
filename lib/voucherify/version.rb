@@ -1,3 +1,3 @@
-class Voucherify
-  VERSION = "0.8.2"
+module Voucherify
+  VERSION = '1.0.0'
 end
