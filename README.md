@@ -36,6 +36,8 @@ API:
 |
 <a href="#customers-api">Customers</a>
 |
+<a href="#products-api">Products</a>
+|
 <a href="#utils">Utils</a>
 </p>
 
@@ -200,6 +202,63 @@ voucherify.customers.update(customer)
 voucherify.customers.delete(customer_id)
 ```
 
+### Products API
+Methods are provided within `voucherify.products.*` namespace.
+
+- [Create Product](#create-product)
+- [Get Product](#get-product)
+- [Update Product](#update-product)
+- [Delete Product](#delete-product)
+- [List Products](#list-products)
+- [Create SKU](#create-sku)
+- [Get SKU](#get-sku)
+- [Update SKU](#update-sku)
+- [Delete SKU](#delete-sku)
+- [List all product SKUs](#list-all-product-skus)
+
+#### [Create Product]
+```ruby
+voucherify.products.create(product)
+```
+Check [product object](https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#the-product-object).
+#### [Get Product]
+```ruby
+voucherify.products.get(product_id)
+```
+#### [Update Product]
+```ruby
+voucherify.products.update(product)
+```
+#### [Delete Product]
+```ruby
+voucherify.products.delete(product_id)
+```
+#### [List Products]
+```ruby
+voucherify.products.list([params])
+```
+#### [Create SKU]
+```ruby
+voucherify.products.create_sku(product_id, sku)
+```
+Check [SKU object](https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#the-sku-object).
+#### [Get SKU]
+```ruby
+voucherify.products.get_sku(product_id, sku_id)
+```
+#### [Update SKU]
+```ruby
+voucherify.products.update_sku(product_id, sku)
+```
+#### [Delete SKU]
+```ruby
+voucherify.products.delete_sku(product_id, sku_id)
+```
+#### [List all product SKUs]
+```ruby
+voucherify.products.list_skus(product_id)
+```
+
 ---
 
 ### Migration from 0.x
@@ -321,3 +380,14 @@ The gem is available as open source under the terms of the [MIT License](http://
 [Get Customer]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#read-customer
 [Update Customer]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-customer
 [Delete Customer]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-customer
+
+[Create Product]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-product
+[Get Product]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-product
+[Update Product]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-product
+[Delete Product]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-product
+[List Products]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-products
+[Create SKU]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-sku
+[Get SKU]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-sku
+[Update SKU]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-sku
+[Delete SKU]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-sku
+[List all product SKUs]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-skus
