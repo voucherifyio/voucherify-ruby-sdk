@@ -209,7 +209,7 @@ Changes made in version 1.x mostly relate to grouping methods within namespaces.
 So all you need to do is to follow the list bellow and just replace methods
 with their namespaced equivalent.
 
-- `Voucherify.new(params)` - `Vocherify::Client.new(params)`
+- `Voucherify.new(params)` - `Voucherify::Client.new(params)`
 - `voucherify.create(voucher)` - [voucherify.vouchers.create](#create-voucher)
 - `voucherify.get(voucher_code)` - [voucherify.vouchers.get](#get-voucher)
 - `voucherify.update(voucher)` - [voucherify.vouchers.update](#update-voucher)
