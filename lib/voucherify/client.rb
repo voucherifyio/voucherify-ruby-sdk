@@ -36,6 +36,10 @@ module Voucherify
       Voucherify::Service::Customers.new(self)
     end
 
+    def campaigns
+      Voucherify::Service::Campaigns.new(self)
+    end
+
     def get(path, params = {})
       url = @backend_url + path
       response = RestClient.get(url, @headers.merge({:params => params}))

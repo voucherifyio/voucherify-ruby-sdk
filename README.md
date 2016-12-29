@@ -28,6 +28,8 @@
 API:
 <a href="#vouchers-api">Vouchers</a>
 |
+<a href="#campaigns-api">Campaigns</a>
+|
 <a href="#distributions-api">Distributions</a>
 |
 <a href="#validations-api">Validations</a>
@@ -113,6 +115,32 @@ voucherify.vouchers.enable(code)
 ```ruby
 voucherify.vouchers.disable(code)
 ```
+---
+
+### Campaigns API
+Methods are provided within `voucherify.campaigns.*` namespace.
+- [Create Campaign](#create-campaign)
+- [Get Campaign](#get-campaign)
+- [Add Voucher to Campaign](#add-voucher-to-campaign)
+- [Import Vouchers to Campaign](#import-vouchers-to-campaign)
+
+#### [Create Campaign]
+```ruby
+voucherify.campaigns.create(campaign)
+```
+#### [Get Campaign]
+```ruby
+voucherify.campaigns.get(campaign_name)
+```
+#### [Add Voucher to Campaign]
+```ruby
+voucherify.campaigns.add_voucher(campaign_name, [params])
+```
+#### [Import Vouchers to Campaign]
+```ruby
+voucherify.campaigns.import_vouchers(campaign_name, vouchers)
+```
+
 ---
 
 ### Distributions API
@@ -280,6 +308,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-12-15** - `1.1.0` - introduced [campaigns api](#campaigns-api)
 - **2016-12-15** - `1.0.0` - introduced namespaces, unified method names, updated README. Migration from versions 0.x required [migration from version 0.x](#migration-from-0x)
 - **2016-12-02** - `0.8.2` - support gift vouchers in utils, fix price and discount calculations for amount discounts 
 - **2016-10-03** - `0.8.1` - publish update 
@@ -310,8 +339,16 @@ The gem is available as open source under the terms of the [MIT License](http://
 [List Vouchers]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-vouchers
 [Enable Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#enable-voucher
 [Disable Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#disable-voucher
+
+[Create Campaign]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-campaign
+[Get Campaign]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-campaign
+[Add Voucher to Campaign]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#add-voucher-to-campaign
+[Import Vouchers to Campaign]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#import-vouchers
+
 [Publish Vouchers]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#publish-voucher
+
 [Validate Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#validate-voucher
+
 [Redeem Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#redeem-voucher
 [List Redemptions]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-redemptions
 [Get Voucher's Redemptions]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#vouchers-redemptions
