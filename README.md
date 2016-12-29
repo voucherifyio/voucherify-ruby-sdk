@@ -150,6 +150,9 @@ Methods are provided within `voucherify.redemptions.*` namespace.
 #### [Redeem Voucher]
 ```ruby
 voucherify.redemptions.redeem(code, [params])
+
+// Removed!
+voucherify.redemptions.redeem(code, tracking_id) // use: voucherify.redemptions.redeem(code, {:customer => {:source_id => 'source_id'}})
 ```
 #### [List Redemptions]
 ```ruby
@@ -161,8 +164,11 @@ voucherify.redemptions.list(params)
 voucherify.redemptions.get_for_voucher(code)
 ```
 #### [Rollback Redemption]
-```javascript
+```ruby
 voucherify.redemptions.rollback(redemption_id, [params])
+
+// Removed!
+voucherify.redemptions.rollback(code, tracking_id, reason) // use: voucherify.redemptions.rollback(code, {:customer => {:source_id => 'source_id'}, :reason => 'reason'})
 ```
 Check [redemption rollback object](https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#the-redemption-rollback-object).
 
