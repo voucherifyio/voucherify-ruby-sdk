@@ -10,19 +10,19 @@ module Voucherify
       end
 
       def create(customer)
-        @client.post('/customers/', customer.to_json)
+        @client.post('/customers', customer.to_json)
       end
 
       def get(customer_id)
-        @client.get('/customers/' + customer_id)
+        @client.get("/customers/#{URI.encode(customer_id)}")
       end
 
       def update(customer)
-        @client.put('/customers/' + (customer['id'] || customer[:id]), customer.to_json)
+        @client.put("/customers/#{URI.encode(customer['id'] || customer[:id])}", customer.to_json)
       end
 
       def delete(customer_id)
-        @client.delete('/customers/' + customer_id)
+        @client.delete("/customers/#{URI.encode(customer_id)}")
       end
     end
   end

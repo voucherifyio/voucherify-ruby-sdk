@@ -3,54 +3,53 @@ require 'rest-client'
 
 describe 'Customers API' do
 
-  before(:all) do
-    @voucherify = Voucherify::Client.new({
-                                             :applicationId => 'c70a6f00-cf91-4756-9df5-47628850002b',
-                                             :clientSecretKey => '3266b9f8-e246-4f79-bdf0-833929b1380c'
-                                         })
-    $created_customer = nil
-  end
+  let(:application_id) { 'application_id' }
+  let(:client_secret_key) { 'client_secret_key' }
+
+  let(:voucherify) { Voucherify::Client.new({:applicationId => application_id, :clientSecretKey => client_secret_key}) }
+  let(:headers) { {
+      'X-App-Id' => application_id,
+      'X-App-Token' => client_secret_key,
+      'X-Voucherify-Channel' => 'Ruby-SDK',
+      :accept => 'application/json'
+  } }
+
+  let(:customer) { {
+      :id => 'id',
+      :name => 'John Doe',
+      :email => 'john@email.com',
+      :description => 'Sample description about customer',
+      :metadata => {
+          :lang => 'en'
+      }} }
 
   it 'should create customer' do
-    customer = {
-        name: 'John Doe',
-        email: 'john@email.com',
-        description: 'Sample description about customer',
-        metadata: {
-            lang: 'en'
-        }
-    }
+    stub_request(:post, 'https://api.voucherify.io/v1/customers')
+        .with(body: customer.to_json, headers: headers)
+        .to_return(:status => 200, :body => customer.to_json, :headers => {})
 
-    $created_customer = @voucherify.customers.create customer
-
-    expect($created_customer['name']).to eql customer[:name]
-    expect($created_customer['email']).to eql customer[:email]
-    expect($created_customer['description']).to eql customer[:description]
-    expect($created_customer['metadata']['lang']).to eql customer[:metadata][:lang]
+    voucherify.customers.create(customer)
   end
 
   it 'should get customer by id' do
-    customer = @voucherify.customers.get $created_customer['id']
+    stub_request(:get, "https://api.voucherify.io/v1/customers/#{customer[:id]}")
+        .to_return(:status => 200, :body => customer.to_json, :headers => {})
 
-    expect(customer['name']).to eql $created_customer['name']
-    expect(customer['email']).to eql $created_customer['email']
-    expect(customer['description']).to eql $created_customer['description']
-    expect(customer['metadata']['lang']).to eql $created_customer['metadata']['lang']
+    voucherify.customers.get customer[:id]
   end
 
   it 'should update customer' do
-    $created_customer['description'] = 'Sample description of customer with updates'
-    updated_customer = @voucherify.customers.update $created_customer
+    stub_request(:put, "https://api.voucherify.io/v1/customers/#{customer[:id]}")
+        .to_return(:status => 200, :body => customer.to_json, :headers => {})
+    customer[:description] = 'Sample description of customer with updates'
 
-    expect(updated_customer['name']).to eql $created_customer['name']
-    expect(updated_customer['email']).to eql $created_customer['email']
-    expect(updated_customer['description']).to eql $created_customer['description']
-    expect(updated_customer['metadata']['lang']).to eql $created_customer['metadata']['lang']
+    voucherify.customers.update customer
   end
 
   it 'should delete customer by id' do
-    @voucherify.customers.delete $created_customer['id']
+    stub_request(:delete, "https://api.voucherify.io/v1/customers/#{customer[:id]}")
+        .to_return(:status => 200, :body => customer.to_json, :headers => {})
 
-    expect { @voucherify.customers.get $created_customer['id'] }.to raise_error RestClient::NotFound
+    voucherify.customers.delete customer[:id]
   end
 end

@@ -3,15 +3,30 @@ require 'rest-client'
 
 describe 'Distributions API' do
 
-  before(:all) do
-    @voucherify = Voucherify::Client.new({
-                                             :applicationId => 'c70a6f00-cf91-4756-9df5-47628850002b',
-                                             :clientSecretKey => '3266b9f8-e246-4f79-bdf0-833929b1380c'
-                                         })
-  end
+  let(:application_id) { 'application_id' }
+  let(:client_secret_key) { 'client_secret_key' }
 
-  it 'should publish campaign' do
-    expect { @voucherify.distributions.publish('fake_campaign') }.to raise_error RestClient::NotFound
+  let(:voucherify) { Voucherify::Client.new({:applicationId => application_id, :clientSecretKey => client_secret_key}) }
+  let(:headers) { {
+      'X-App-Id' => application_id,
+      'X-App-Token' => client_secret_key,
+      'X-Voucherify-Channel' => 'Ruby-SDK',
+      :accept => 'application/json'
+  } }
+
+  let(:payload) { {
+      :campaign => '300k-vouchers',
+      :customer => {
+          :source_id => 'source_id'
+      }
+  } }
+
+  it 'should publish vouchers' do
+    stub_request(:post, 'https://api.voucherify.io/v1/vouchers/publish')
+        .with(body: payload.to_json, headers: headers)
+        .to_return(:status => 200, :body => payload.to_json, :headers => {})
+
+    voucherify.distributions.publish(payload)
   end
 
 end

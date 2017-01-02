@@ -5,6 +5,8 @@ require 'json'
 module Voucherify
 
   class Client
+    attr_reader :backend_url
+
     def initialize (options)
       @options = options
       @backend_url = 'https://api.voucherify.io/v1'
