@@ -10,41 +10,35 @@ module Voucherify
       end
 
       def create(code, options = {})
-        url = '/vouchers/'
-        url += URI.encode(code) if code
+        url = '/vouchers'
+        url += '/' + URI.encode(code) if code
         @client.post(url, options.to_json)
       end
 
       def get(code)
-        @client.get('/vouchers/' + URI.encode(code))
+        @client.get("/vouchers/#{URI.encode(code)}")
       end
 
       def update(voucher_update)
-        url = '/vouchers/' + URI.encode(voucher_update['code'])
-        @client.put(url, voucher_update.to_json)
+        @client.put("/vouchers/#{URI.encode(voucher_update['code'] || voucher_update[:code])}", voucher_update.to_json)
       end
 
       def list(query)
-        @client.get('/vouchers/', query)
+        @client.get('/vouchers', query)
       end
 
       def enable(code)
-        url = '/vouchers/' + URI.encode(code) + '/enable'
-        @client.post(url, nil)
+        @client.post("/vouchers/#{URI.encode(code)}/enable", nil)
         nil
       end
 
       def disable(code)
-        url = '/vouchers/' + URI.encode(code) + '/disable'
-        @client.post(url, nil)
+        @client.post("/vouchers/#{URI.encode(code)}/disable", nil)
         nil
       end
 
       def delete(code, params = {})
-        force = params['force'] || params[:force]
-        url = '/vouchers/' + URI.encode(code)
-        url += '?force=' + (!!force).to_s
-        @client.delete(url, nil)
+        @client.delete("/vouchers/#{URI.encode(code)}", {:force => (!!(params['force'] || params[:force])).to_s})
         nil
       end
     end
