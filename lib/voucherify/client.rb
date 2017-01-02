@@ -11,8 +11,8 @@ module Voucherify
       @options = options
       @backend_url = 'https://api.voucherify.io/v1'
       @headers = {
-          'X-App-Id' => @options[:applicationId],
-          'X-App-Token' => @options[:clientSecretKey],
+          'X-App-Id' => @options[:applicationId] || @options['applicationId'],
+          'X-App-Token' => @options[:clientSecretKey] || @options['clientSecretKey'],
           'X-Voucherify-Channel' => 'Ruby-SDK',
           :accept => :json
       }
