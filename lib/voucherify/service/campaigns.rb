@@ -10,7 +10,7 @@ module Voucherify
       end
 
       def create(campaign)
-        @client.post('/campaigns/', campaign.to_json)
+        @client.post('/campaigns', campaign.to_json)
       end
 
       def get(campaign_name)
@@ -18,10 +18,7 @@ module Voucherify
       end
 
       def delete(campaign_name, params = {})
-        force = params['force'] || params[:force]
-        url = "/campaigns/#{URI.encode(campaign_name)}"
-        url += "?force=#{(!!force).to_s}"
-        @client.delete(url, nil)
+        @client.delete("/campaigns/#{URI.encode(campaign_name)}", {:force => (!!(params['force'] || params[:force])).to_s})
         nil
       end
 
