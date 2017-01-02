@@ -9,17 +9,15 @@ module Voucherify
         @client = client
       end
 
-      def publish(campaign_name)
-        url = '/vouchers/publish'
+      def publish(params)
         payload = {}
-
-        if campaign_name.is_a? String
-          url += '?campaign=' + URI.encode(campaign_name)
-        elsif campaign_name.is_a? Hash
-          payload = campaign_name
+        if params.is_a? String
+          payload = {:campaign => params}
+        elsif params.is_a? Hash
+          payload = params
         end
 
-        @client.post(url, payload.to_json)
+        @client.post('/vouchers/publish', payload.to_json)
       end
     end
   end

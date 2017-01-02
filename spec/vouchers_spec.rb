@@ -3,111 +3,120 @@ require 'rest-client'
 
 describe 'Vouchers API' do
 
-  before(:all) do
-    @voucherify = Voucherify::Client.new({
-                                             :applicationId => 'c70a6f00-cf91-4756-9df5-47628850002b',
-                                             :clientSecretKey => '3266b9f8-e246-4f79-bdf0-833929b1380c'
-                                         })
-    $voucher = nil
+  let(:application_id) { 'application_id' }
+  let(:client_secret_key) { 'client_secret_key' }
+  let(:voucherify) { Voucherify::Client.new({:applicationId => application_id, :clientSecretKey => client_secret_key}) }
+  let(:headers) { {
+      'X-App-Id' => application_id,
+      'X-App-Token' => client_secret_key,
+      'X-Voucherify-Channel' => 'Ruby-SDK',
+      :accept => 'application/json'
+  } }
 
-    @test_code = 'ruby-sdk-test-code'
-  end
+  let(:voucher_code) { 'ruby sdk-test-code' }
 
   it 'should create voucher with code' do
     body = {
-        type: 'DISCOUNT_VOUCHER',
-        discount: {
-            type: 'PERCENT',
-            percent_off: 10
+        :type => 'DISCOUNT_VOUCHER',
+        :discount => {
+            :type => 'PERCENT',
+            :percent_off => 10
         }
     }
 
-    $voucher = @voucherify.vouchers.create(@test_code, body)
+    stub_request(:post, "https://api.voucherify.io/v1/vouchers/#{voucher_code}")
+        .with(body: body.to_json, headers: headers)
+        .to_return(:status => 200, :body => '', :headers => {})
 
-    expect($voucher['code']).to eql(@test_code)
-    expect($voucher['type']).to eql('DISCOUNT_VOUCHER')
-    expect($voucher['discount']['type']).to eql('PERCENT')
-    expect($voucher['discount']['percent_off']).to eql(10.0)
+
+    voucherify.vouchers.create(voucher_code, body)
   end
 
   it 'should create voucher without specifying a code' do
     body = {
-        type: 'DISCOUNT_VOUCHER',
-        discount: {
-            type: 'PERCENT',
-            percent_off: 10
+        :type => 'DISCOUNT_VOUCHER',
+        :discount => {
+            :type => 'PERCENT',
+            :percent_off => 10
         }
     }
 
-    voucher = @voucherify.vouchers.create(nil, body)
+    stub_request(:post, 'https://api.voucherify.io/v1/vouchers')
+        .with(body: body.to_json, headers: headers)
+        .to_return(:status => 200, :body => '', :headers => {})
 
-    expect { voucher['code'].wont_be_nil }
-    expect(voucher['type']).to eql('DISCOUNT_VOUCHER')
-    expect(voucher['discount']['type']).to eql('PERCENT')
-    expect(voucher['discount']['percent_off']).to eql(10.0)
-
-    @voucherify.vouchers.delete(voucher['code'], {:force => true})
+    voucherify.vouchers.create(nil, body)
   end
 
   it 'should get voucher by code' do
-    voucher = @voucherify.vouchers.get(@test_code)
+    stub_request(:get, "https://api.voucherify.io/v1/vouchers/#{voucher_code}")
+        .with(body: {}, headers: headers)
+        .to_return(:status => 200, :body => '{}', :headers => {})
 
-    expect { voucher.wont_be_nil }
-    expect(voucher['code']).to eql(@test_code)
+    voucherify.vouchers.get(voucher_code)
   end
 
   it 'should update voucher' do
-    $voucher['category'] = 'New Customers'
-
-    updated = @voucherify.vouchers.update($voucher)
-
-    expect(updated['category']).to eql('New Customers')
-  end
-
-  it 'should enable voucher' do
-    @voucherify.vouchers.enable(@test_code)
-
-    voucher = @voucherify.vouchers.get(@test_code)
-
-    expect(voucher['active']).to eql(true)
-  end
-
-  it 'should disable voucher' do
-    @voucherify.vouchers.disable(@test_code)
-
-    voucher = @voucherify.vouchers.get(@test_code)
-
-    expect(voucher['active']).to eql(false)
-  end
-
-  it 'should delete voucher' do
-    params = {
-        type: 'DISCOUNT_VOUCHER',
-        discount: {
-            type: 'PERCENT',
-            percent_off: 10
+    update = {
+        :code => voucher_code,
+        :type => 'DISCOUNT_VOUCHER',
+        :discount => {
+            :type => 'PERCENT',
+            :percent_off => 20
         }
     }
 
-    voucher = @voucherify.vouchers.create(nil, params)
+    stub_request(:put, "https://api.voucherify.io/v1/vouchers/#{voucher_code}")
+        .with(body: update.to_json, headers: headers)
+        .to_return(:status => 200, :body => '{}', :headers => {})
 
-    @voucherify.vouchers.delete(voucher['code'])
-
-    expect { @voucherify.vouchers.get voucher['code'] }.to raise_error RestClient::NotFound
+    voucherify.vouchers.update(update)
   end
 
-  it 'should delete voucher with params' do
-    @voucherify.vouchers.delete(@test_code, {:force => true})
+  it 'should enable voucher' do
+    stub_request(:post, "https://api.voucherify.io/v1/vouchers/#{voucher_code}/enable")
+        .with(body: {}, headers: headers)
+        .to_return(:status => 200, :body => '', :headers => {})
 
-    expect { @voucherify.vouchers.get @test_code }.to raise_error RestClient::NotFound
+    voucherify.vouchers.enable(voucher_code)
+  end
+
+  it 'should disable voucher' do
+    stub_request(:post, "https://api.voucherify.io/v1/vouchers/#{voucher_code}/disable")
+        .with(body: {}, headers: headers)
+        .to_return(:status => 200, :body => '', :headers => {})
+
+    voucherify.vouchers.disable(voucher_code)
+  end
+
+  it 'should delete voucher' do
+    stub_request(:delete, "https://api.voucherify.io/v1/vouchers/#{voucher_code}?force=false")
+        .with(body: {}, headers: headers)
+        .to_return(:status => 200, :body => '', :headers => {})
+
+    voucherify.vouchers.delete(voucher_code)
+  end
+
+  it 'should force delete voucher' do
+    stub_request(:delete, "https://api.voucherify.io/v1/vouchers/#{voucher_code}?force=true")
+        .with(body: {}, headers: headers)
+        .to_return(:status => 200, :body => '', :headers => {})
+
+    voucherify.vouchers.delete(voucher_code, {:force => true})
   end
 
   it 'should list vouchers' do
-    query = {limit: 10, skip: 20, category: 'API Test'}
+    query = {
+        :limit => 10,
+        :skip => 20,
+        :category => 'API Test'
+    }
 
-    result = @voucherify.vouchers.list query
+    stub_request(:get, "https://api.voucherify.io/v1/vouchers?limit=#{query[:limit]}&skip=#{query[:skip]}&category=#{query[:category]}")
+        .with(body: {}, headers: headers)
+        .to_return(:status => 200, :body => '[]', :headers => {})
 
-    expect { result.wont_be_empty }
+    voucherify.vouchers.list query
   end
 
 end
