@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://rubygems.org/gems/voucherify"><img src="https://img.shields.io/gem/v/voucherify.svg" alt="Gem Version"/></a>
-  <a href="https://rubygems.org/gems/voucherify"><img src="https://img.shields.io/gem/dt/voucherify.svg" alt="Gem Downloads"/></a>
+  <a href="https://rubygems.org/gems/voucherify"><img src="https://img.shields.io/gem/dm/voucherify.svg" alt="Gem Downloads"/></a>
 </p>
 <hr />
 

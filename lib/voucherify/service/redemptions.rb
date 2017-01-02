@@ -10,25 +10,23 @@ module Voucherify
       end
 
       def redeem(code, params = {})
-        url = '/vouchers/' + URI.encode(code) + '/redemption'
-        @client.post(url, params.to_json)
+        @client.post("/vouchers/#{URI.encode(code)}/redemption", params.to_json)
       end
 
       def list(query = {})
-        @client.get('/redemptions/', query)
+        @client.get('/redemptions', query)
       end
 
       def get_for_voucher(code)
-        @client.get('/vouchers/' + URI.encode(code) + '/redemption')
+        @client.get("/vouchers/#{URI.encode(code)}/redemption")
       end
 
-      def rollback(redemption_id, params = {})
-        reason = params['reason'] || params[:reason]
-        url = '/redemptions/'+ URI.encode(redemption_id) + '/rollback'
-        url += '?reason=' + URI.encode(reason) if reason
-        params.delete 'reason'
-        params.delete :reason
-        @client.post(url, params.to_json)
+      def rollback(redemption_id, payload = {})
+        reason = payload['reason'] || payload[:reason]
+        params = reason ? {:reason => reason} : {}
+        payload.delete 'reason'
+        payload.delete :reason
+        @client.post("/redemptions/#{URI.encode(redemption_id)}/rollback", payload.to_json, params)
       end
 
     end

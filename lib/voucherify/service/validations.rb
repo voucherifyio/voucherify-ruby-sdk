@@ -10,7 +10,7 @@ module Voucherify
       end
 
       def validate_voucher(code, context = {})
-        @client.post('/vouchers/' + URI.encode(code) + '/validate', context.to_json)
+        @client.post("/vouchers/#{URI.encode(code)}/validate", context.to_json)
       end
     end
   end
