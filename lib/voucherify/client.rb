@@ -38,6 +38,10 @@ module Voucherify
       Voucherify::Service::Customers.new(self)
     end
 
+    def products
+      Voucherify::Service::Products.new(self)
+    end
+
     def campaigns
       Voucherify::Service::Campaigns.new(self)
     end
