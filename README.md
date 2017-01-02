@@ -25,7 +25,7 @@
 <b><a href="#changelog">Changelog</a></b>
 </p>
 
-<p align="center">introduced [products api](#products-api)
+<p align="center">
 API:
 <a href="#vouchers-api">Vouchers</a>
 |
