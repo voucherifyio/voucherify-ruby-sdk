@@ -119,4 +119,32 @@ describe 'Vouchers API' do
     voucherify.vouchers.list query
   end
 
+  it 'should import vouchers' do
+    vouchers = [
+        {
+            :code => 'code_1',
+            :category => 'new_category',
+            :type => 'DISCOUNT_VOUCHER',
+            :discount => {
+                :amount_off => 3000,
+                :type => 'AMOUNT'
+            }
+        }, {
+            :code => 'code_2',
+            :category => 'new_category',
+            :type => 'DISCOUNT_VOUCHER',
+            :discount => {
+                :amount_off => 3000,
+                :type => 'AMOUNT'
+            }
+        }
+    ]
+
+    stub_request(:post, 'https://api.voucherify.io/v1/vouchers/import')
+        .with(body: vouchers.to_json, headers: headers)
+        .to_return(:status => 200, :body => '[]', :headers => {})
+
+    voucherify.vouchers.import vouchers
+  end
+
 end

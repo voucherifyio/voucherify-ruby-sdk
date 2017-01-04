@@ -88,6 +88,7 @@ Methods are provided within `voucherify.vouchers.*` namespace.
 - [List Vouchers](#list-vouchers)
 - [Enable Voucher](#enable-voucher)
 - [Disable Voucher](#disable-voucher)
+- [Import Vouchers](#import-vouchers)
 
 #### [Create Voucher]
 ```ruby
@@ -117,6 +118,10 @@ voucherify.vouchers.enable(code)
 #### [Disable Voucher]
 ```ruby
 voucherify.vouchers.disable(code)
+```
+#### [Import Vouchers]
+```ruby
+voucherify.vouchers.import(vouchers)
 ```
 ---
 
@@ -182,8 +187,8 @@ Methods are provided within `voucherify.redemptions.*` namespace.
 ```ruby
 voucherify.redemptions.redeem(code, [params])
 
-// Removed!
-voucherify.redemptions.redeem(code, tracking_id) // use: voucherify.redemptions.redeem(code, {:customer => {:source_id => 'source_id'}})
+# Removed!
+voucherify.redemptions.redeem(code, tracking_id) # use: voucherify.redemptions.redeem(code, {:customer => {:source_id => 'source_id'}})
 ```
 #### [List Redemptions]
 ```ruby
@@ -198,8 +203,8 @@ voucherify.redemptions.get_for_voucher(code)
 ```ruby
 voucherify.redemptions.rollback(redemption_id, [params])
 
-// Removed!
-voucherify.redemptions.rollback(code, tracking_id, reason) // use: voucherify.redemptions.rollback(code, {:customer => {:source_id => 'source_id'}, :reason => 'reason'})
+# Removed!
+voucherify.redemptions.rollback(code, tracking_id, reason) # use: voucherify.redemptions.rollback(code, {:customer => {:source_id => 'source_id'}, :reason => 'reason'})
 ```
 Check [redemption rollback object](https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#the-redemption-rollback-object).
 
@@ -368,6 +373,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2016-01-04** - `1.2.0` - added [import vouchers](#import-vouchers) method.
 - **2016-12-29** - `1.1.0` - introduced [campaigns api](#campaigns-api) and [products api](#products-api).
 - **2016-12-15** - `1.0.0` - introduced namespaces, unified method names, updated README. Migration from versions 0.x required [migration from version 0.x](#migration-from-0x)
 - **2016-12-02** - `0.8.2` - support gift vouchers in utils, fix price and discount calculations for amount discounts 
