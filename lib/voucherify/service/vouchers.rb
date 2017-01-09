@@ -41,6 +41,10 @@ module Voucherify
         @client.delete("/vouchers/#{URI.encode(code)}", {:force => (!!(params['force'] || params[:force])).to_s})
         nil
       end
+
+      def import(vouchers)
+        @client.post('/vouchers/import', vouchers.to_json);
+      end
     end
   end
 end
