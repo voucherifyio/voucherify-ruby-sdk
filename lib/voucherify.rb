@@ -4,7 +4,12 @@ require "uri"
 require "rest-client"
 require "json"
 
+# :payload => payload, :headers
+
 class Voucherify
+
+  DEFAULT_REQUEST_TIMEOUT = 1
+
   def initialize(options)
     @backend_url = "https://api.voucherify.io/v1"
     @options = options
@@ -14,11 +19,12 @@ class Voucherify
       "X-Voucherify-Channel" => "Ruby-SDK",
       :accept => :json
     }
+    @timeout = options[:timeout], DEFAULT_REQUEST_TIMEOUT
   end
 
   def get(code)
     url = @backend_url + "/vouchers/" + URI.encode(code)
-    response = RestClient.get(url, @headers)
+    response = RestClient::Request.execute(method: :get, url: url, headers: headers, timeout: timeout)
     JSON.parse(response.body)
   end
 
@@ -32,13 +38,13 @@ class Voucherify
   # Sample query: { limit: 100, skip: 200, category: "Loyalty" }
   def list(query)
     url = @backend_url + "/vouchers/"
-    response = RestClient.get(url, @headers.merge({ :params => query }))
+    response = RestClient::Request.execute(method: :get, url: url, headers: headers.merge({ :params => query }), timeout: timeout)
     JSON.parse(response.body)
   end
 
   def redemption(code)
     url = @backend_url + "/vouchers/" + URI.encode(code) + "/redemption"
-    response = RestClient.get(url, @headers)
+    response = RestClient::Request.execute(method: :get, url: url, headers: headers, timeout: timeout)
     JSON.parse(response.body)
   end
 
@@ -52,7 +58,7 @@ class Voucherify
   # }
   def redemptions(query)
     url = @backend_url + "/redemptions/"
-    response = RestClient.get(url, @headers.merge({ :params => query }))
+    response = RestClient::Request.execute(method: :get, url: url, headers: headers.merge({ :params => query }), timeout: timeout)
     JSON.parse(response.body)
   end
   
@@ -70,8 +76,9 @@ class Voucherify
   # }
   def validate(code, context = {})
     url = @backend_url + "/vouchers/" + URI.encode(code) + "/validate"
-
-    response = RestClient.post(url, context.to_json, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :post, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: context.to_json, timeout: timeout)
     JSON.parse(response.body)
   end
 
@@ -88,7 +95,9 @@ class Voucherify
     url = @backend_url + "/vouchers/" + URI.encode(code) + "/redemption"
     url += ("?tracking_id=" + URI.encode(tracking_id)) if tracking_id
 
-    response = RestClient.post(url, payload.to_json, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :post, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: payload.to_json, timeout: timeout)
     JSON.parse(response.body)
   end
 
@@ -102,7 +111,9 @@ class Voucherify
       payload = campaign_name
     end
         
-    response = RestClient.post(url, payload.to_json, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :post, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: payload.to_json, timeout: timeout)
     JSON.parse(response.body)
   end
 
@@ -124,32 +135,42 @@ class Voucherify
   def create(code, options = {})
     url = @backend_url + "/vouchers/"
     url += URI.encode(code) if code
-    response = RestClient.post(url, options.to_json, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :post, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: options.to_json, timeout: timeout)
     JSON.parse(response.body)
   end
 
   def create_in_campaign(campaign_name, options = {})
     # https://api.voucherify.io/v1/campaigns/TESTING-CAMPAIGN/vouchers/
     url = @backend_url + "/campaigns/" + URI.encode(campaign_name) + "/vouchers/"
-    response = RestClient.post(url, options.to_json, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :post, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: options.to_json, timeout: timeout)
     JSON.parse(response.body)
   end
   
   def update(voucher_update)
     url = @backend_url + "/vouchers/" + URI.encode(voucher_update["code"])
-    response = RestClient.put(url, voucher_update.to_json, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :put, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: voucher_update.to_json, timeout: timeout)
     JSON.parse(response.body)
   end
 
   def enable(code)
     url = @backend_url + "/vouchers/" + URI.encode(code) + "/enable"
-    response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :post, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: nil, timeout: timeout)
     nil
   end
 
   def disable(code)
     url = @backend_url + "/vouchers/" + URI.encode(code) + "/disable"
-    response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :post, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: nil, timeout: timeout)
     nil
   end
   
@@ -159,30 +180,42 @@ class Voucherify
         url += "?" + URI.encode_www_form(:tracking_id => tracking_id, :reason => reason)
     end
     response = RestClient.post(url, nil, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :post, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: nil, timeout: timeout)
     JSON.parse(response.body)
   end
 
   def create_customer(customer)
     url = @backend_url + "/customers/"
-    response = RestClient.post(url, customer.to_json, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :post, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: customer.to_json, timeout: timeout)
     JSON.parse(response.body)
   end
 
   def get_customer(customer_id)
     url = @backend_url + "/customers/" + customer_id
-    response = RestClient.get(url, @headers)
+    response = RestClient::Request.execute( method: :get   , url:     url, 
+                                           headers: headers, timeout: timeout)
     JSON.parse(response.body)
   end
 
   def update_customer(customer)
     url = @backend_url + "/customers/" + (customer["id"] || customer[:id])
-    response = RestClient.put(url, customer.to_json, @headers.merge({ :content_type => :json }))
+    response = RestClient::Request.execute(method: :put, url: url, 
+                                          headers: headers.merge({ :content_type => :json }), 
+                                          payload: customer.to_json, timeout: timeout)
     JSON.parse(response.body)
   end
 
   def delete_customer(customer_id)
     url = @backend_url + "/customers/" + customer_id
-    response = RestClient.delete(url, @headers)
+    response = RestClient::Request.execute(method: :delete, url: url, 
+                                          headers: headers, timeout: timeout)
     nil
   end
+
+  private
+    attr_reader :timeout, :headers
 end
