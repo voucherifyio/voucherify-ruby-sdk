@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'rest-client'
 require 'date'
 
-describe 'Campaigns API' do
+describe 'Products API' do
 
   let(:application_id) { 'application_id' }
   let(:client_secret_key) { 'client_secret_key' }

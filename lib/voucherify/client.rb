@@ -47,32 +47,63 @@ module Voucherify
     end
 
     def get(path, params = {})
-      url = @backend_url + path
-      response = RestClient.get(url, @headers.merge({:params => params}))
-      JSON.parse(response.body)
+      begin
+        url = @backend_url + path
+        response = RestClient.get(url, @headers.merge({:params => params}))
+        JSON.parse(response.body)
+      rescue RestClient::Exception => e
+        raise VoucherifyError.new(e)
+      end
     end
 
     def put(path, body, params = {})
-      url = @backend_url + path
-      response = RestClient.put(url, body, @headers.merge({:params => params, :content_type => :json}))
-      JSON.parse(response.body)
+      begin
+        url = @backend_url + path
+        response = RestClient.put(url, body, @headers.merge({:params => params, :content_type => :json}))
+        JSON.parse(response.body)
+      rescue RestClient::Exception => e
+        raise VoucherifyError.new(e)
+      end
     end
 
     def post(path, body, params = {})
-      url = @backend_url + path
-      response = RestClient.post(url, body, @headers.merge({:params => params, :content_type => :json}))
-      if !response.body.empty?
-        JSON.parse(response.body)
-      else
-        nil
+      begin
+        url = @backend_url + path
+        response = RestClient.post(url, body, @headers.merge({:params => params, :content_type => :json}))
+        if !response.body.empty?
+          JSON.parse(response.body)
+        else
+          nil
+        end
+      rescue RestClient::Exception => e
+        raise VoucherifyError.new(e)
       end
-
     end
 
     def delete(path, params = {})
-      url = @backend_url + path
-      RestClient.delete(url, @headers.merge({:params => params}))
-      nil
+      begin
+        url = @backend_url + path
+        RestClient.delete(url, @headers.merge({:params => params}))
+        nil
+      rescue RestClient::Exception => e
+        raise VoucherifyError.new(e)
+      end
+    end
+  end
+  
+  class VoucherifyError < RuntimeError
+    attr_reader :response
+    attr_reader :code
+    attr_reader :details
+    attr_reader :key
+  
+    def initialize (restClientError)
+      @response = restClientError.response
+      parsedResponse = JSON.parse(@response)
+      @code = parsedResponse['code']
+      @details = parsedResponse['details']
+      @key = parsedResponse['key']
+      super(parsedResponse['message'])
     end
   end
 

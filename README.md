@@ -344,24 +344,34 @@ with their namespaced equivalent.
 
 ## Error handling
 
-This voucherify gem uses [rest-client](https://github.com/rest-client/rest-client) under the hood for handling HTTP calls. In case of an HTTP 4xx or 5xx error, a RestClient exception is thrown. The server's specific response is available in `.response` of the exception object.
+When the Voucherify API responds with an error (HTTP status code is 4xx or 5xx) then the client raises a `VoucherifyError`.
+It contains following properties:
+- `code` - HTTP status code
+- `message` - a human-readable message providing short description about the error.
+- `details` - a human-readable message providing more details about the error, usually includes a hint on how to fix the error
+- `key` - a short string describing the kind of error that occurred.
+
+Example:
 
 ```ruby
 begin
   voucherify.distributions.publish('test')
-rescue => e
-  JSON.parse(e.response)
+rescue Voucherify::VoucherifyError => e
+  puts e.code
+  puts e.message
+  puts e.details
+  puts e.key
 end
 ```
 
-```json
-{
-    "code": 400,
-    "message": "Couldn't find any voucher suitable for publication."
-}
-```
+The ouput may be:
 
-Please refer to [rest-client documentation](https://github.com/rest-client/rest-client#exceptions-see-httpwwww3orgprotocolsrfc2616rfc2616-sec10html) for more detailed information.
+```
+400
+Couldn't find any voucher suitable for publication.
+Use auto-update campaigns if you want Voucherify to generate vouchers automatically.
+no_voucher_suitable_for_publication
+```
 
 ## Development
 
@@ -374,7 +384,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
-- **2016-01-04** - `1.2.0` - added [import vouchers](#import-vouchers) method.
+- **2017-03-22** - `1.3.0` - improved error handling
+- **2017-01-04** - `1.2.0` - added [import vouchers](#import-vouchers) method.
 - **2016-12-29** - `1.1.0` - introduced [campaigns api](#campaigns-api) and [products api](#products-api).
 - **2016-12-15** - `1.0.0` - introduced namespaces, unified method names, updated README. Migration from versions 0.x required [migration from version 0.x](#migration-from-0x)
 - **2016-12-02** - `0.8.2` - support gift vouchers in utils, fix price and discount calculations for amount discounts 
