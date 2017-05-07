@@ -43,7 +43,11 @@ module Voucherify
       end
 
       def import(vouchers)
-        @client.post('/vouchers/import', vouchers.to_json);
+        @client.post('/vouchers/import', vouchers.to_json)
+      end
+
+      def add_balance(code, balance)
+        @client.post("/vouchers/#{URI.encode(code)}/balance", balance.to_json)
       end
     end
   end

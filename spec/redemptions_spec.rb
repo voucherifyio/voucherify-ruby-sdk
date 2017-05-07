@@ -22,6 +22,10 @@ describe 'Redemptions API' do
       }
   } }
 
+  let(:redemption) { {
+      :id => 'r_XbytKOFW8wnheSScssMgRNMm'
+  } }
+
   let (:redemption_id) { 'redemption_id' }
 
   it 'should redeem voucher' do
@@ -92,6 +96,14 @@ describe 'Redemptions API' do
         .to_return(:status => 200, :body => '', :headers => {})
 
     voucherify.redemptions.rollback(redemption_id, params)
+  end
+
+    it 'should get redemption' do
+    stub_request(:get, "https://api.voucherify.io/v1/redemptions/#{redemption[:id]}")
+        .with(:body => '', headers: headers)
+        .to_return(:status => 200, :body => '{}', :headers => {})
+
+    voucherify.redemptions.get_redemption redemption[:id]
   end
 
 end

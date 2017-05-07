@@ -29,6 +29,9 @@ module Voucherify
         @client.post("/redemptions/#{URI.encode(redemption_id)}/rollback", payload.to_json, params)
       end
 
+      def get_redemption(redemption_id)
+        @client.get("/redemptions/#{URI.encode(redemption_id)}")
+      end
     end
   end
 end
