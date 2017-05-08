@@ -15,6 +15,10 @@ describe 'Vouchers API' do
 
   let(:voucher_code) { 'ruby sdk-test-code' }
 
+  let(:balance) { {
+      :amount => 2000
+  } }
+
   it 'should create voucher with code' do
     body = {
         :type => 'DISCOUNT_VOUCHER',
@@ -145,6 +149,14 @@ describe 'Vouchers API' do
         .to_return(:status => 200, :body => '[]', :headers => {})
 
     voucherify.vouchers.import vouchers
+  end
+
+    it 'should add gift balance' do
+    stub_request(:post, "https://api.voucherify.io/v1/vouchers/#{voucher_code}/balance")
+        .with(body: balance.to_json, headers: headers)
+        .to_return(:status => 200, :body => '{}', :headers => {})
+
+    voucherify.vouchers.add_balance(voucher_code, balance)
   end
 
 end

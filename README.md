@@ -42,6 +42,10 @@ API:
 |
 <a href="#products-api">Products</a>
 |
+<a href="#validation-rules-api">Validation Rules</a>
+|
+<a href="#segments-api">Segments</a>
+|
 <a href="#utils">Utils</a>
 </p>
 
@@ -74,6 +78,14 @@ voucherify = Voucherify::Client.new({
 })
 ```
 
+You can also specify which API version you want to use:
+voucherify = Voucherify::Client.new({
+  :applicationId => 'YOUR-APPLICATION-ID',
+  :clientSecretKey => 'YOUR-CLIENT-SECRET-KEY',
+  :apiVersion => 'v2017-04-05'
+})
+```
+
 ## API
 
 This SDK is fully consistent with restful API Voucherify provides.
@@ -90,6 +102,7 @@ Methods are provided within `voucherify.vouchers.*` namespace.
 - [Enable Voucher](#enable-voucher)
 - [Disable Voucher](#disable-voucher)
 - [Import Vouchers](#import-vouchers)
+- [Add Gift Voucher Balance](#add-gift-voucher-balance)
 
 #### [Create Voucher]
 ```ruby
@@ -124,6 +137,11 @@ voucherify.vouchers.disable(code)
 ```ruby
 voucherify.vouchers.import(vouchers)
 ```
+#### [Add Gift Voucher Balance]
+```ruby
+voucherify.vouchers().add_balance(code, balance);
+```
+
 ---
 
 ### Campaigns API
@@ -156,10 +174,25 @@ voucherify.campaigns.import_vouchers(campaign_name, vouchers)
 Methods are provided within `voucherify.distributions.*` namespace.
 
 - [Publish Vouchers](#publish-vouchers)
+- [Create Export](#create-export)
+- [Get Export](#get-export)
+- [Delete Export](#delete-export)
 
 #### [Publish Vouchers]
 ```ruby
 voucherify.distributions.publish(campaign_name)
+```
+#### [Create Export]
+```ruby
+voucherify.distributions.create_export(export)
+```
+#### [Get Export]
+```ruby
+voucherify.distributions.get_export(export_id)
+```
+#### [Delete Export]
+```ruby
+voucherify.distributions.delete_export(export_id)
 ```
 
 ---
@@ -183,6 +216,7 @@ Methods are provided within `voucherify.redemptions.*` namespace.
 - [List Redemptions](#list-redemptions)
 - [Get Voucher's Redemptions](#get-vouchers-redemptions)
 - [Rollback Redemption](#rollback-redemption)
+- [Get Redemption](#get-redemption)
 
 #### [Redeem Voucher]
 ```ruby
@@ -199,6 +233,10 @@ voucherify.redemptions.list(params)
 #### [Get Voucher's Redemptions]
 ```ruby
 voucherify.redemptions.get_for_voucher(code)
+```
+#### [Get Redemption]
+```ruby
+voucherify.redemptions.get(redemption_id);
 ```
 #### [Rollback Redemption]
 ```ruby
@@ -296,6 +334,55 @@ voucherify.products.list_skus(product_id)
 
 ---
 
+### Validation Rules API
+Methods are provided within `voucherify.validation_rules.*` namespace.
+
+- [Create Validation Rules](#create-validation-rules)
+- [Get Validation Rules](#get-validation-rules)
+- [Update Validation Rules](#update-validation-rules)
+- [Delete Validation Rules](#delete-validation-rules)
+
+#### [Create Validation Rules]
+```ruby
+voucherify.validation_rules.create(rules);
+```
+#### [Get Validation Rules]
+```ruby
+voucherify.validation_rules.get(id);
+```
+#### [Update Validation Rules]
+```ruby
+voucherify.validation_rules.update(rules);
+```
+#### [Delete Validation Rules]
+```ruby
+voucherify.validation_rules.delete(id);
+```
+
+---
+
+### Segments API
+Methods are provided within `voucherify.segments.*` namespace.
+
+- [Create Segment](#create-segment)
+- [Get Segment](#get-segment)
+- [Delete Validation Rules](#delete-segment)
+
+#### [Create Segment]
+```ruby
+voucherify.segments.create(segment);
+```
+#### [Get Segment]
+```ruby
+voucherify.segments.get(id);
+```
+#### [Delete Segment]
+```ruby
+voucherify.segments.delete(id);
+```
+
+---
+
 ### Migration from 0.x
 
 Version 1.x of the SDK is not backwards compatible with versions 0.x.
@@ -384,6 +471,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2017-05-07** - `1.4.0` - Segments, Validation rules, API Versioning
 - **2017-03-22** - `1.3.0` - improved error handling
 - **2017-01-04** - `1.2.0` - added [import vouchers](#import-vouchers) method.
 - **2016-12-29** - `1.1.0` - introduced [campaigns api](#campaigns-api) and [products api](#products-api).
@@ -418,6 +506,7 @@ The gem is available as open source under the terms of the [MIT License](http://
 [Enable Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#enable-voucher
 [Disable Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#disable-voucher
 [Import Vouchers]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#import-vouchers-1
+[Add Gift Voucher Balance]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#add-gift-voucher-balance
 
 [Create Campaign]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-campaign
 [Get Campaign]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-campaign
@@ -425,12 +514,16 @@ The gem is available as open source under the terms of the [MIT License](http://
 [Import Vouchers to Campaign]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#import-vouchers
 
 [Publish Vouchers]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#publish-voucher
+[Create Export]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-export
+[Get Export]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-export
+[Delete Export]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#elete-export
 
 [Validate Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#validate-voucher
 
 [Redeem Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#redeem-voucher
 [List Redemptions]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-redemptions
 [Get Voucher's Redemptions]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#vouchers-redemptions
+[Get Redemption]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-redemption
 [Rollback Redemption]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#rollback-redemption
 
 [Create Customer]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-customer
@@ -449,3 +542,11 @@ The gem is available as open source under the terms of the [MIT License](http://
 [Delete SKU]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-sku
 [List all product SKUs]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-skus
 
+[Create Validation Rules]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-validation-rules
+[Get Validation Rules]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-validation-rules
+[Update Validation Rules]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-validation-rules
+[Delete Validation Rules]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-validation-rules
+
+[Create Segment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-segment
+[Get Segment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-segment
+[Delete Segment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-segment

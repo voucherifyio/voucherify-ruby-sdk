@@ -14,8 +14,9 @@ module Voucherify
           'X-App-Id' => @options[:applicationId] || @options['applicationId'],
           'X-App-Token' => @options[:clientSecretKey] || @options['clientSecretKey'],
           'X-Voucherify-Channel' => 'Ruby-SDK',
-          :accept => :json
-      }
+          'X-Voucherify-API-Version' => @options[:apiVersion] || @options['apiVersion'],
+          :accept => :json,
+      }.reject{ |k,v| v.nil? }
     end
 
     def vouchers
@@ -44,6 +45,14 @@ module Voucherify
 
     def campaigns
       Voucherify::Service::Campaigns.new(self)
+    end
+
+    def validation_rules
+      Voucherify::Service::ValidationRules.new(self)
+    end
+
+    def segments
+      Voucherify::Service::Segments.new(self)
     end
 
     def get(path, params = {})

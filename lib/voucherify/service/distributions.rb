@@ -19,6 +19,23 @@ module Voucherify
 
         @client.post('/vouchers/publish', payload.to_json)
       end
+
+      def create_export(export)
+        @client.post('/exports', export)
+      end
+
+      def get_export(id)
+        @client.get("/exports/#{URI.encode(id)}")
+      end
+
+      def delete_export(id)
+        @client.delete("/exports/#{URI.encode(id)}")
+      end
+
+      def list_publications(params = {})
+        @client.get('/publications', params)
+      end
+      
     end
   end
 end
