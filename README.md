@@ -79,6 +79,7 @@ voucherify = Voucherify::Client.new({
 ```
 
 You can also specify which API version you want to use:
+```ruby
 voucherify = Voucherify::Client.new({
   :applicationId => 'YOUR-APPLICATION-ID',
   :clientSecretKey => 'YOUR-CLIENT-SECRET-KEY',
