@@ -250,6 +250,50 @@ Check [redemption rollback object](https://docs.voucherify.io/reference?utm_sour
 
 ---
 
+### Promotions API
+Methods are provided within `voucherify.promotions.*` namespace.
+
+- [Create Promotion Campaign](#create-promotion-campaign)
+- [Validate Promotion Campaign](#validate-promotion-campaign)
+- [List Promotion's Tiers](#list-promotions-tiers)
+- [Create Promotion's Tier](#create-promotions-tier)
+- [Redeem Promotion's Tier](#redeem-promotions-tier)
+- [Update Promotion's Tier](#update-promotions-tier)
+- [Delete Promotion's Tier](#delete-promotions-tier)
+
+Check [promotion campaign object](http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-promotion-campaign).
+#### [Create Promotion Campaign]
+```ruby
+voucherify.promotions.create(promotion_campaign)
+```
+#### [Validate Promotion Campaign]
+```ruby
+voucherify.promotions.validate(validation_context)
+```
+#### [List Promotion's Tiers]
+```ruby
+voucherify.promotions.tiers.list(promotion_campaign_id)
+```
+Check [promotion's tier object](http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#the-promotion-object)
+#### [Create Promotion's Tier]
+```ruby
+voucherify.promotions.tiers.create(promotion_id, promotions_tier)
+```
+#### [Redeem Promotion's Tier]
+```ruby
+voucherify.promotions.tiers.redeem(promotions_tier_id, redemption_context)
+```
+#### [Update Promotion's Tier]
+```ruby
+voucherify.promotions.tiers.update(promotions_tier)
+```
+#### [Delete Promotion's Tier]
+```ruby
+voucherify.promotions.tiers.delete(promotions_tier_id)
+```
+
+---
+
 ### Customers API
 Methods are provided within `voucherify.customers.*` namespace.
 
@@ -472,6 +516,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2017-05-07** - `1.5.0` - Promotion campaigns, Promotion's tiers
 - **2017-05-07** - `1.4.0` - Segments, Validation rules, API Versioning
 - **2017-03-22** - `1.3.0` - improved error handling
 - **2017-01-04** - `1.2.0` - added [import vouchers](#import-vouchers) method.
@@ -526,6 +571,14 @@ The gem is available as open source under the terms of the [MIT License](http://
 [Get Voucher's Redemptions]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#vouchers-redemptions
 [Get Redemption]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-redemption
 [Rollback Redemption]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#rollback-redemption
+
+[Create Promotion Campaign]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-promotion-campaign
+[Validate Promotion Campaign]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#validate-promotions-1
+[List Promotion's Tiers]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-promotions
+[Create Promotion's Tier]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#add-promotion-tier-to-campaign
+[Redeem Promotion's Tier]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#redeem-promotion
+[Update Promotion's Tier]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-promotion
+[Delete Promotion's Tier]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-promotion
 
 [Create Customer]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-customer
 [Get Customer]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#read-customer
