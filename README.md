@@ -202,10 +202,15 @@ voucherify.distributions.delete_export(export_id)
 Methods are provided within `voucherify.validations.*` namespace.
 
 - [Validate Voucher](#validate-voucher)
+- [Validate Promotion Campaign](#validate-promotion-campaign)
 
 #### [Validate Voucher]
 ```ruby
 voucherify.validations.validate_voucher(code, [context])
+```
+#### [Validate Promotion Campaign]
+```ruby
+voucherify.promotions.validate(validation_context)
 ```
 
 ---
@@ -214,6 +219,7 @@ voucherify.validations.validate_voucher(code, [context])
 Methods are provided within `voucherify.redemptions.*` namespace.
 
 - [Redeem Voucher](#redeem-voucher)
+- [Redeem Promotion's Tier](#redeem-promotions-tier)
 - [List Redemptions](#list-redemptions)
 - [Get Voucher's Redemptions](#get-vouchers-redemptions)
 - [Rollback Redemption](#rollback-redemption)
@@ -225,6 +231,10 @@ voucherify.redemptions.redeem(code, [params])
 
 # Removed!
 voucherify.redemptions.redeem(code, tracking_id) # use: voucherify.redemptions.redeem(code, {:customer => {:source_id => 'source_id'}})
+```
+#### [Redeem Promotion's Tier]
+```ruby
+voucherify.promotions.tiers.redeem(promotions_tier_id, redemption_context)
 ```
 #### [List Redemptions]
 ```ruby
@@ -254,10 +264,8 @@ Check [redemption rollback object](https://docs.voucherify.io/reference?utm_sour
 Methods are provided within `voucherify.promotions.*` namespace.
 
 - [Create Promotion Campaign](#create-promotion-campaign)
-- [Validate Promotion Campaign](#validate-promotion-campaign)
 - [List Promotion's Tiers](#list-promotions-tiers)
 - [Create Promotion's Tier](#create-promotions-tier)
-- [Redeem Promotion's Tier](#redeem-promotions-tier)
 - [Update Promotion's Tier](#update-promotions-tier)
 - [Delete Promotion's Tier](#delete-promotions-tier)
 
@@ -265,10 +273,6 @@ Check [promotion campaign object](http://docs.voucherify.io/reference?utm_source
 #### [Create Promotion Campaign]
 ```ruby
 voucherify.promotions.create(promotion_campaign)
-```
-#### [Validate Promotion Campaign]
-```ruby
-voucherify.promotions.validate(validation_context)
 ```
 #### [List Promotion's Tiers]
 ```ruby
@@ -278,10 +282,6 @@ Check [promotion's tier object](http://docs.voucherify.io/reference?utm_source=g
 #### [Create Promotion's Tier]
 ```ruby
 voucherify.promotions.tiers.create(promotion_id, promotions_tier)
-```
-#### [Redeem Promotion's Tier]
-```ruby
-voucherify.promotions.tiers.redeem(promotions_tier_id, redemption_context)
 ```
 #### [Update Promotion's Tier]
 ```ruby
@@ -565,18 +565,18 @@ The gem is available as open source under the terms of the [MIT License](http://
 [Delete Export]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#elete-export
 
 [Validate Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#validate-voucher
+[Validate Promotion Campaign]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#validate-promotions-1
 
 [Redeem Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#redeem-voucher
+[Redeem Promotion's Tier]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#redeem-promotion
 [List Redemptions]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-redemptions
 [Get Voucher's Redemptions]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#vouchers-redemptions
 [Get Redemption]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-redemption
 [Rollback Redemption]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#rollback-redemption
 
 [Create Promotion Campaign]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-promotion-campaign
-[Validate Promotion Campaign]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#validate-promotions-1
 [List Promotion's Tiers]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-promotions
 [Create Promotion's Tier]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#add-promotion-tier-to-campaign
-[Redeem Promotion's Tier]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#redeem-promotion
 [Update Promotion's Tier]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-promotion
 [Delete Promotion's Tier]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-promotion
 
