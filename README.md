@@ -46,6 +46,8 @@ API:
 |
 <a href="#segments-api">Segments</a>
 |
+<a href="#promotions-api">Promotions</a>
+|
 <a href="#utils">Utils</a>
 </p>
 
