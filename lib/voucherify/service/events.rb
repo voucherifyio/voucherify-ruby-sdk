@@ -9,11 +9,11 @@ module Voucherify
         @client = client
       end
 
-      def track(event, customer, metadata)
+      def track(event, metadata, customer)
         @client.post('/events', {
             :event => event,
-            :customer => customer,
-            :metadata => metadata
+            :metadata => metadata,
+            :customer => customer
         }.to_json)
       end
     end
