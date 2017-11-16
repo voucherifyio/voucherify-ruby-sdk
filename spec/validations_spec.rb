@@ -70,7 +70,7 @@ describe 'Validations API' do
         .with(body: context.to_json, headers: headers)
         .to_return(:status => 200, :body => '', :headers => {})
 
-    voucherify.validations.create('91Ft4U', context)
+    voucherify.validations.validate('91Ft4U', context)
   end
 
   it 'should validate promotion campaign' do
@@ -78,7 +78,7 @@ describe 'Validations API' do
         .with(body: validation_context.to_json, headers: headers)
         .to_return(:status => 200, :body => validation_response.to_json, :headers => {})
 
-    voucherify.validations.create(validation_context)
+    voucherify.validations.validate(validation_context)
   end
 
 end

@@ -210,12 +210,12 @@ voucherify.validations.validate_voucher(code, [context])
 
 # or
 
-voucherify.validations.create(code, [context])
+voucherify.validations.validate(code, [context])
 ```
 
 #### [Validate Promotion Campaign]
 ```ruby
-voucherify.validations.create(promo_validation_context)
+voucherify.validations.validate(promo_validation_context)
 ```
 
 ---

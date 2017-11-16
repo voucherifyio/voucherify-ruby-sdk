@@ -13,7 +13,7 @@ module Voucherify
         @client.post("/vouchers/#{URI.encode(code)}/validate", context.to_json)
       end
 
-      def create(code, context = {})
+      def validate(code, context = {})
         if code.is_a? String
           @client.validations.validate_voucher(code, context)
         elsif code.is_a? Hash
