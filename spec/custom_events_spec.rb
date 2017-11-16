@@ -17,11 +17,11 @@ describe 'Custom Events API' do
 
   let(:custom_event_payload) {{
       :event => 'custom_event_name',
-      :customer => {
-          :id => 'cust_test_id'
-      },
       :metadata => {
           :test => true
+      },
+      :customer => {
+          :id => 'cust_test_id'
       }
   }}
 
@@ -35,7 +35,7 @@ describe 'Custom Events API' do
         .with(body: custom_event_payload.to_json, headers: headers)
         .to_return(:status => 200, :body => custom_event_response.to_json, :headers => {})
 
-    voucherify.events.track('custom_event_name', { :id => 'cust_test_id' }, { :test => true })
+    voucherify.events.track('custom_event_name', { :test => true }, { :id => 'cust_test_id' })
   end
 
 end
