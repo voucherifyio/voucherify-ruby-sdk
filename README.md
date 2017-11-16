@@ -202,10 +202,20 @@ voucherify.distributions.delete_export(export_id)
 Methods are provided within `voucherify.validations.*` namespace.
 
 - [Validate Voucher](#validate-voucher)
+- [Validate Promotion Campaign](#validate-promotion-campaign)
 
 #### [Validate Voucher]
 ```ruby
 voucherify.validations.validate_voucher(code, [context])
+
+# or
+
+voucherify.validations.create(code, [context])
+```
+
+#### [Validate Promotion Campaign]
+```ruby
+voucherify.validations.create(promo_validation_context)
 ```
 
 ---
