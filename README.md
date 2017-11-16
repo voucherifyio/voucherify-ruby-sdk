@@ -46,6 +46,8 @@ API:
 |
 <a href="#segments-api">Segments</a>
 |
+<a href="#custom-events-api">Custom events</a>
+|
 <a href="#utils">Utils</a>
 </p>
 
@@ -384,6 +386,18 @@ voucherify.segments.delete(id);
 
 ---
 
+### Custom Events API
+Methods are provided within `voucherify.events.*` namespace.
+
+- [Custom events](#custom-events)
+
+#### [Create custom event]
+```ruby
+voucherify.events.track(event, customer, metadata);
+```
+
+---
+
 ### Migration from 0.x
 
 Version 1.x of the SDK is not backwards compatible with versions 0.x.
@@ -472,6 +486,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2017-11-16** - `1.5.0` - Expose custom events API
 - **2017-05-07** - `1.4.0` - Segments, Validation rules, API Versioning
 - **2017-03-22** - `1.3.0` - improved error handling
 - **2017-01-04** - `1.2.0` - added [import vouchers](#import-vouchers) method.
@@ -551,3 +566,5 @@ The gem is available as open source under the terms of the [MIT License](http://
 [Create Segment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-segment
 [Get Segment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-segment
 [Delete Segment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-segment
+
+[Custom Events]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#the-custom-event-object
