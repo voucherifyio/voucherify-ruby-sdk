@@ -532,8 +532,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
-- **2017-11-16** - `1.5.1` - Redemptions and Validations namespace update
-- **2017-11-15** - `1.5.0` - Promotion campaigns, Promotion's tiers
+- **2017-11-16** - `1.5.0` - Expose Promotion API, Redemptions and Validations namespace update
 - **2017-05-07** - `1.4.0` - Segments, Validation rules, API Versioning
 - **2017-03-22** - `1.3.0` - improved error handling
 - **2017-01-04** - `1.2.0` - added [import vouchers](#import-vouchers) method.
