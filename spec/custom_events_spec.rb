@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'rest-client'
-require 'date'
 
 describe 'Custom Events API' do
 
