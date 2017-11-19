@@ -1,5 +1,3 @@
-require 'uri'
-
 module Voucherify
   module Service
     class Events
