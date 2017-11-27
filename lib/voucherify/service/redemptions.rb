@@ -10,10 +10,9 @@ module Voucherify
       end
 
       def redeem(code, params = {})
-        endpoint = nil
         if code.is_a? Hash
           endpoint = "/promotions/tiers/#{URI.encode(code[:id] || code['id'])}/redemption"
-        elsif code.is_a? String
+        else
           endpoint = "/vouchers/#{URI.encode(code)}/redemption"
         end
         @client.post(endpoint, params.to_json)
