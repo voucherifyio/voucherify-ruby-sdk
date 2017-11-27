@@ -14,12 +14,11 @@ module Voucherify
       end
 
       def validate(code, context = {})
-        if code.is_a? String
-          @client.validations.validate_voucher(code, context)
-        elsif code.is_a? Hash
+        if code.is_a? Hash
           context = code
-          @client.promotions.validate(context)
+          return @client.promotions.validate(context)
         end
+        @client.validations.validate_voucher(code, context)
       end
 
     end
