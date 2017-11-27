@@ -55,6 +55,10 @@ module Voucherify
       Voucherify::Service::Segments.new(self)
     end
 
+    def events
+      Voucherify::Service::Events.new(self)
+    end
+
     def promotions
       Voucherify::Service::Promotions.new(self)
     end
