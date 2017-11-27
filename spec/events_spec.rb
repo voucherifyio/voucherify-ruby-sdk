@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'rest-client'
 
-describe 'Custom Events API' do
+describe 'Events API' do
 
   let(:application_id) { 'application_id' }
   let(:client_secret_key) { 'client_secret_key' }
