@@ -21,8 +21,8 @@ module Voucherify
         @client.put("/products/#{URI.encode(product['id'] || product[:id])}", product.to_json)
       end
 
-      def delete(product_id)
-        @client.delete("/products/#{URI.encode(product_id)}")
+      def delete(product_id, params = {})
+        @client.delete("/products/#{URI.encode(product_id)}", {:force => (!!(params['force'] || params[:force])).to_s})
       end
 
       def list(query = {})

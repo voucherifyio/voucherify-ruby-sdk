@@ -23,7 +23,7 @@ module Voucherify
         @client.put("/vouchers/#{URI.encode(voucher_update['code'] || voucher_update[:code])}", voucher_update.to_json)
       end
 
-      def list(query)
+      def list(query=nil)
         @client.get('/vouchers', query)
       end
 
