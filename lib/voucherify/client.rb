@@ -17,6 +17,7 @@ module Voucherify
           'X-Voucherify-API-Version' => @options[:apiVersion] || @options['apiVersion'],
           :accept => :json,
       }.reject{ |k,v| v.nil? }
+      @timeout = @options[:timeout] || @options['timeout']
     end
 
     def vouchers
@@ -66,7 +67,7 @@ module Voucherify
     def get(path, params = {})
       begin
         url = @backend_url + path
-        response = RestClient.get(url, @headers.merge({:params => params}))
+        response = RestClient::Request::execute(method: :get, url: url, headers: @headers.merge({:params => params}), read_timeout: @timeout, open_timeout: @timeout)
         JSON.parse(response.body)
       rescue RestClient::Exception => e
         raise VoucherifyError.new(e)
@@ -76,7 +77,7 @@ module Voucherify
     def put(path, body, params = {})
       begin
         url = @backend_url + path
-        response = RestClient.put(url, body, @headers.merge({:params => params, :content_type => :json}))
+        response = RestClient::Request::execute(method: :put, url: url, payload: body, headers: @headers.merge({:params => params, :content_type => :json}), read_timeout: @timeout, open_timeout: @timeout)
         JSON.parse(response.body)
       rescue RestClient::Exception => e
         raise VoucherifyError.new(e)
@@ -86,7 +87,7 @@ module Voucherify
     def post(path, body, params = {})
       begin
         url = @backend_url + path
-        response = RestClient.post(url, body, @headers.merge({:params => params, :content_type => :json}))
+        response = RestClient::Request::execute(method: :post, url: url, payload: body, headers: @headers.merge({:params => params, :content_type => :json}), read_timeout: @timeout, open_timeout: @timeout)
         if !response.body.empty?
           JSON.parse(response.body)
         else
@@ -100,7 +101,7 @@ module Voucherify
     def delete(path, params = {})
       begin
         url = @backend_url + path
-        RestClient.delete(url, @headers.merge({:params => params}))
+        RestClient::Request::execute(method: :delete, url: url, headers: @headers.merge({:params => params}), read_timeout: @timeout, open_timeout: @timeout)
         nil
       rescue RestClient::Exception => e
         raise VoucherifyError.new(e)
@@ -115,6 +116,11 @@ module Voucherify
     attr_reader :key
   
     def initialize (restClientError)
+      if restClientError.is_a? RestClient::Exceptions::Timeout
+        @response = restClientError
+        @details = restClientError
+        super(restClientError)
+      else
       @response = restClientError.response
       parsedResponse = JSON.parse(@response)
       @code = parsedResponse['code']
@@ -122,6 +128,7 @@ module Voucherify
       @key = parsedResponse['key']
       super(parsedResponse['message'])
     end
+  end
   end
 
 end

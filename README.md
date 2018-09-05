@@ -91,6 +91,16 @@ voucherify = Voucherify::Client.new({
 })
 ```
 
+and timeout settings:
+```ruby
+voucherify = Voucherify::Client.new({
+  :applicationId => 'YOUR-APPLICATION-ID',
+  :clientSecretKey => 'YOUR-CLIENT-SECRET-KEY',
+  :apiVersion => 'v2017-04-05',
+  :timeout => 10 // in seconds
+})
+```
+
 ## API
 
 This SDK is fully consistent with restful API Voucherify provides.
@@ -546,6 +556,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2018-09-05** - `1.6.1` - Request timeout settings
 - **2017-11-16** - `1.6.0` - Expose promotion API, Redemptions and Validations namespace update
 - **2017-11-16** - `1.5.0` - Expose events API
 - **2017-05-07** - `1.4.0` - Segments, Validation rules, API Versioning
