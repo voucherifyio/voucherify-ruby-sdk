@@ -412,8 +412,13 @@ Methods are provided within `voucherify.validation_rules.*` namespace.
 
 - [Create Validation Rules](#create-validation-rules)
 - [Get Validation Rules](#get-validation-rules)
+- [List Validation Rules](#list-validation-rules)
 - [Update Validation Rules](#update-validation-rules)
 - [Delete Validation Rules](#delete-validation-rules)
+
+- [Create Validation Rule Assignment](#create-validation-rule-assignment)
+- [List Validation Rule Assignments](#list-validation-rule-assignments)
+- [Delete Validation Rule Assignment](#delete-validation-rule-assignment)
 
 #### [Create Validation Rules]
 ```ruby
@@ -422,6 +427,10 @@ voucherify.validation_rules.create(rules);
 #### [Get Validation Rules]
 ```ruby
 voucherify.validation_rules.get(id);
+```
+#### [List Validation Rules]
+```ruby
+voucherify.validation_rules.list(query);
 ```
 #### [Update Validation Rules]
 ```ruby
@@ -432,6 +441,18 @@ voucherify.validation_rules.update(rules);
 voucherify.validation_rules.delete(id);
 ```
 
+#### [Create Validation Rule Assignment]
+```ruby
+voucherify.validation_rules.createAssignment(rule_id, assignment);
+```
+#### [List Validation Rule Assignments]
+```ruby
+voucherify.validation_rules.listAssignments(rule_id, query);
+```
+#### [Delete Validation Rule Assignment]
+```ruby
+voucherify.validation_rules.deleteAssignment(rule_id, assignment_id);
+```
 ---
 
 ### Segments API
@@ -556,6 +577,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2018-12-27** - `2.0.0` - Business validation rules.
 - **2018-09-05** - `1.6.1` - Request timeout settings
 - **2017-11-16** - `1.6.0` - Expose promotion API, Redemptions and Validations namespace update
 - **2017-11-16** - `1.5.0` - Expose events API
@@ -564,8 +586,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/rspect
 - **2017-01-04** - `1.2.0` - added [import vouchers](#import-vouchers) method.
 - **2016-12-29** - `1.1.0` - introduced [campaigns api](#campaigns-api) and [products api](#products-api).
 - **2016-12-15** - `1.0.0` - introduced namespaces, unified method names, updated README. Migration from versions 0.x required [migration from version 0.x](#migration-from-0x)
-- **2016-12-02** - `0.8.2` - support gift vouchers in utils, fix price and discount calculations for amount discounts 
-- **2016-10-03** - `0.8.1` - publish update 
+- **2016-12-02** - `0.8.2` - support gift vouchers in utils, fix price and discount calculations for amount discounts
+- **2016-10-03** - `0.8.1` - publish update
 - **2016-08-02** - `0.8.0` - validate voucher
 - **2016-07-18** - `0.7.0` - voucher udpate
 - **2016-07-05** - `0.6.0` - new utils module
@@ -640,11 +662,15 @@ The gem is available as open source under the terms of the [MIT License](http://
 
 [Create Validation Rules]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-validation-rules
 [Get Validation Rules]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-validation-rules
+[List Validation Rules]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-validation-rules
 [Update Validation Rules]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-validation-rules
 [Delete Validation Rules]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-validation-rules
+[Create Validation Rule Assignment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-validation-rules-assignment
+[Delete Validation Rule Assignment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-validation-rules-assignment
+[List Validation Rule Assignments]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-validation-rules
 
 [Create Segment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-segment
 [Get Segment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-segment
 [Delete Segment]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-segment
-
+q
 [Events]: http://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#the-custom-event-object
