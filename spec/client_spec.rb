@@ -16,8 +16,8 @@ describe 'Voucherify Client' do
   it 'should have backend url set' do
     expect(voucherify.backend_url).to eql('https://api.voucherify.io/v1')
   end
-  
-  it 'should parse error' do 
+
+  it 'should parse error' do
     stub_request(:get, "https://api.voucherify.io/v1/vouchers/notFound")
         .with(body: {}, headers: headers)
         .to_return(:status => 404, :headers => {}, :body => {
@@ -26,9 +26,9 @@ describe 'Voucherify Client' do
             'details' => 'Cannot find Voucher with code: notFound',
             'key' => 'resource_not_found'
         }.to_json)
-    begin 
+    begin
         voucherify
-    rescue Voucherify::VoucherifyError => e 
+    rescue Voucherify::VoucherifyError => e
         expect(e.code).to eql(404)
         expect(e.message).to eql('Resource not found')
         expect(e.details).to eql('Cannot find Voucher with code: notFound')

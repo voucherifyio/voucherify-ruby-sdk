@@ -14,7 +14,7 @@ module Voucherify
           'X-App-Id' => @options[:applicationId] || @options['applicationId'],
           'X-App-Token' => @options[:clientSecretKey] || @options['clientSecretKey'],
           'X-Voucherify-Channel' => 'Ruby-SDK',
-          'X-Voucherify-API-Version' => @options[:apiVersion] || @options['apiVersion'],
+          'X-Voucherify-API-Version' => @options[:apiVersion] || @options['apiVersion'] || 'v2018-08-01',
           :accept => :json,
       }.reject{ |k,v| v.nil? }
       @timeout = @options[:timeout] || @options['timeout']
@@ -108,13 +108,13 @@ module Voucherify
       end
     end
   end
-  
+
   class VoucherifyError < RuntimeError
     attr_reader :response
     attr_reader :code
     attr_reader :details
     attr_reader :key
-  
+
     def initialize (restClientError)
       if restClientError.is_a? RestClient::Exceptions::Timeout
         @response = restClientError

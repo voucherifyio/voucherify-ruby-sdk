@@ -13,6 +13,10 @@ module Voucherify
         @client.post('/validation-rules', validation_rules.to_json)
       end
 
+      def list(query)
+        @client.get('/validation-rules', query)
+      end
+
       def get(id)
         @client.get("/validation-rules/#{URI.encode(id)}")
       end
@@ -23,6 +27,18 @@ module Voucherify
 
       def delete(id)
         @client.delete("/validation-rules/#{URI.encode(id)}")
+      end
+
+      def createAssignment(id, assignment)
+        @client.post("/validation-rules/#{URI.encode(id)}/assignments", assignment.to_json)
+      end
+
+      def deleteAssignment(rule_id, assignment_id)
+        @client.delete("/validation-rules/#{URI.encode(rule_id)}/assignments/#{URI.encode(assignment_id)}")
+      end
+
+      def listAssignments(id, query)
+        @client.get("/validation-rules/#{URI.encode(id)}/assignments", query)
       end
     end
   end

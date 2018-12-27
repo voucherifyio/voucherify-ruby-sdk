@@ -24,12 +24,31 @@ describe 'Validation Rules API' do
       }
   } }
 
+  let(:validation_rule_assignment) { {
+      :id => 'id',
+      :campaign => 'campaign',
+      :voucher => 'voucher_code',
+      :promotion_tier => 'promotion_tier'
+  } }
+
   it 'should create validation rule' do
     stub_request(:post, 'https://api.voucherify.io/v1/validation-rules')
         .with(body: validation_rule.to_json, headers: headers)
         .to_return(:status => 200, :body => validation_rule.to_json, :headers => {})
 
     voucherify.validation_rules.create(validation_rule)
+  end
+
+  it 'should list validation rules' do
+    query = {
+        :limit => 10,
+        :skip => 20
+    }
+
+    stub_request(:get, "https://api.voucherify.io/v1/validation-rules?limit=#{query[:limit]}&skip=#{query[:skip]}")
+        .to_return(:status => 200, :body => '[]', :headers => {})
+
+    voucherify.validation_rules.list query
   end
 
   it 'should get validation rule by id' do
@@ -52,5 +71,32 @@ describe 'Validation Rules API' do
         .to_return(:status => 200, :body => '', :headers => {})
 
     voucherify.validation_rules.delete validation_rule[:id]
+  end
+
+  it 'should create validation rule assignment' do
+    stub_request(:post, "https://api.voucherify.io/v1/validation-rules/#{validation_rule[:id]}/assignments")
+        .with(body: validation_rule_assignment.to_json, headers: headers)
+        .to_return(:status => 200, :body => validation_rule_assignment.to_json, :headers => {})
+
+    voucherify.validation_rules.createAssignment(validation_rule[:id], validation_rule_assignment)
+  end
+
+  it 'should delete validation rule assignment by id' do
+    stub_request(:delete, "https://api.voucherify.io/v1/validation-rules/#{validation_rule[:id]}/assignments/#{validation_rule_assignment[:id]}")
+        .to_return(:status => 200, :body => '', :headers => {})
+
+    voucherify.validation_rules.deleteAssignment(validation_rule[:id], validation_rule_assignment[:id])
+  end
+
+  it 'should list validation rule assignments' do
+    query = {
+        :limit => 10,
+        :skip => 20
+    }
+
+    stub_request(:get, "https://api.voucherify.io/v1/validation-rules/#{validation_rule[:id]}/assignments?limit=#{query[:limit]}&skip=#{query[:skip]}")
+        .to_return(:status => 200, :body => '[]', :headers => {})
+
+    voucherify.validation_rules.listAssignments(validation_rule[:id], query)
   end
 end
