@@ -484,7 +484,7 @@ Methods are provided within `voucherify.events.*` namespace.
 
 #### [Create event]
 ```ruby
-voucherify.events.track(event, metadata, customer);
+voucherify.events.track(event, metadata, customer, referral);
 ```
 
 ---
@@ -577,6 +577,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2019-02-19** - `2.1.0` - Handle `referral` in custom events tracking.
 - **2018-12-27** - `2.0.0` - Business validation rules.
 - **2018-09-05** - `1.6.1` - Request timeout settings
 - **2017-11-16** - `1.6.0` - Expose promotion API, Redemptions and Validations namespace update
