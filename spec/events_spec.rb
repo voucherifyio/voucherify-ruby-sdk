@@ -22,10 +22,7 @@ describe 'Events API' do
       :customer => {
           :id => 'cust_test_id'
       },
-      :referral => {
-         :code => "123",
-         :referrer_id => "referrer_id"
-      }
+      :referral => nil
   }}
 
   let(:custom_event_response) {{
@@ -38,7 +35,15 @@ describe 'Events API' do
         .with(body: custom_event_payload.to_json, headers: headers)
         .to_return(:status => 200, :body => custom_event_response.to_json, :headers => {})
 
-    voucherify.events.track('custom_event_name', { :test => true }, { :id => 'cust_test_id' }, { :code => "123", :referrer_id => "referrer_id" })
+    voucherify.events.track('custom_event_name', { :test => true }, { :id => 'cust_test_id' })
+  end
+
+  it 'should track custom event' do
+    stub_request(:post, 'https://api.voucherify.io/v1/events')
+        .with(body: custom_event_payload.to_json, headers: headers)
+        .to_return(:status => 200, :body => custom_event_response.to_json, :headers => {})
+
+    voucherify.events.track_event(custom_event_payload)
   end
 
 end

@@ -487,6 +487,9 @@ Methods are provided within `voucherify.events.*` namespace.
 voucherify.events.track(event, metadata, customer, referral);
 ```
 
+```ruby
+voucherify.events.track_event(data);
+```
 ---
 
 ### Migration from 0.x
@@ -577,6 +580,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2019-02-19** - `2.1.1` - Treat `referral` as optional in custom events. Added new method for custom event tracking.
 - **2019-02-19** - `2.1.0` - Handle `referral` in custom events tracking.
 - **2018-12-27** - `2.0.0` - Business validation rules.
 - **2018-09-05** - `1.6.1` - Request timeout settings
