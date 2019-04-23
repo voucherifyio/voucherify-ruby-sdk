@@ -50,6 +50,12 @@ API:
 |
 <a href="#events-api">Events</a>
 |
+<a href="#orders-api">Orders</a>
+|
+<a href="#loyalties-api">Loyalties</a>
+|
+<a href="#rewards-api">Rewards</a>
+|
 <a href="#utils">Utils</a>
 </p>
 
@@ -443,15 +449,15 @@ voucherify.validation_rules.delete(id);
 
 #### [Create Validation Rule Assignment]
 ```ruby
-voucherify.validation_rules.createAssignment(rule_id, assignment);
+voucherify.validation_rules.assignments.create(rule_id, assignment);
 ```
 #### [List Validation Rule Assignments]
 ```ruby
-voucherify.validation_rules.listAssignments(rule_id, query);
+voucherify.validation_rules.assignments.list(rule_id, query);
 ```
 #### [Delete Validation Rule Assignment]
 ```ruby
-voucherify.validation_rules.deleteAssignment(rule_id, assignment_id);
+voucherify.validation_rules.assignments.delete(rule_id, assignment_id);
 ```
 ---
 
@@ -475,6 +481,147 @@ voucherify.segments.get(id);
 voucherify.segments.delete(id);
 ```
 
+---
+
+### Orders API
+
+#### [Create Order]
+```ruby
+voucherify.orders.create(order);
+```
+#### [Get Order]
+```ruby
+voucherify.orders.get(id);
+```
+#### [Update Order]
+```ruby
+voucherify.orders.update(id, order);
+```
+#### [List orders]
+```ruby
+voucherify.orders.list(params);
+```
+
+---
+
+### Rewards API
+
+#### [Create Rewards]
+```ruby
+voucherify.rewards.create(reward);
+```
+#### [Get Reward]
+```ruby
+voucherify.rewards.get(id);
+```
+#### [Update Reward]
+```ruby
+voucherify.rewards.update(id, reward);
+```
+#### [List Rewards]
+```ruby
+voucherify.rewards.list(params);
+```
+#### [Delete Reward]
+```ruby
+voucherify.rewards.delete(id);
+```
+
+#### [List Reward Assignments]
+```ruby
+voucherify.rewards.assignments.list(reward_id, query);
+```
+#### [Create Reward Assignment]
+```ruby
+voucherify.rewards.assignments.create(reward_id, assignment);
+```
+#### [Update Reward Assignment]
+```ruby
+voucherify.rewards.assignments.update(reward_id, assignment_id, assignment);
+```
+#### [Delete Reward Assignment]
+```ruby
+voucherify.rewards.assignments.delete(reward_id, assignment_id);
+```
+---
+
+### Loyalties API
+
+#### [List Loyalties]
+```ruby
+voucherify.loyalties.list(query);
+```
+#### [Create Loyalty]
+```ruby
+voucherify.loyalties.create(loyalty);
+```
+#### [Get Loyalty]
+```ruby
+voucherify.loyalties.get(id);
+```
+#### [Update Loyalty]
+```ruby
+voucherify.loyalties.update(id, loyalty);
+```
+#### [Delete Loyalty]
+```ruby
+voucherify.loyalties.delete(id);
+```
+
+#### [List Loyalty Reward Assignments]
+```ruby
+voucherify.loyalties.assignments.list(loyalty_id, query);
+```
+#### [Create Loyalty Reward Assignment]
+```ruby
+voucherify.loyalties.assignments.create(loyalty_id, assignment);
+```
+#### [Update Loyalty Reward Assignment]
+```ruby
+voucherify.loyalties.assignments.update(loyalty_id, assignment_id, assignment);
+```
+#### [Delete Loyalty Reward Assignment]
+```ruby
+voucherify.loyalties.assignments.delete(loyalty_id, assignment_id);
+```
+
+#### [List Loyalty Earning Rules]
+```ruby
+voucherify.loyalties.earning_rules.list(loyalty_id, query);
+```
+#### [Create Loyalty Earning Rule]
+```ruby
+voucherify.loyalties.earning_rules.create(loyalty_id, earning_rule);
+```
+#### [Update Loyalty Earning Rule]
+```ruby
+voucherify.loyalties.earning_rules.update(loyalty_id, earning_rule_id, earning_rule);
+```
+#### [Delete Loyalty Earning Rule]
+```ruby
+voucherify.loyalties.earning_rules.delete(loyalty_id, earning_rule_id);
+```
+
+#### [List Loyalty Members]
+```ruby
+voucherify.loyalties.members.list(loyalty_id, query);
+```
+#### [Add Loyalty Member]
+```ruby
+voucherify.loyalties.members.add(loyalty_id, member);
+```
+#### [Get Loyalty Member]
+```ruby
+voucherify.loyalties.members.get(loyalty_id, member_id);
+```
+#### [Add Loyalty Card Balance]
+```ruby
+voucherify.loyalties.members.add_balance(loyalty_id, member_id, add_balance);
+```
+#### [Redeem Loyalty Reward]
+```ruby
+voucherify.loyalties.members.redeem_reward(loyalty_id, member_id, redeem_reward);
+```
 ---
 
 ### Events API
@@ -580,6 +727,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2019-04-23** - `2.2.0` - Loyalties API, Rewards API, Orders API.
 - **2019-02-19** - `2.1.1` - Treat `referral` as optional in custom events. Added new method for custom event tracking.
 - **2019-02-19** - `2.1.0` - Handle `referral` in custom events tracking.
 - **2018-12-27** - `2.0.0` - Business validation rules.
@@ -680,3 +828,40 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 [Events]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#the-custom-event-object
 [Create event]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-custom-event
+
+[Create Order]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-order
+[Get Order]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-order
+[Update Order]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-order
+[List orders]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-orders
+
+[Create Rewards]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-reward
+[Get Reward]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-reward
+[Update Reward]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-reward
+[List Rewards]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-rewards
+[Delete Reward]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-reward
+[List Reward Assignments]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-reward-assignments
+[Create Reward Assignment]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-reward-assgnment
+[Update Reward Assignment]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-reward-assignment
+[Delete Reward Assignment]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-reward-assignment
+
+[List Loyalties]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-loyalty-programs
+[Create Loyalty]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-loyalty-program
+[Get Loyalty]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-loyalty-program
+[Update Loyalty]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-loyalty-program
+[Delete Loyalty]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-loyalty-program
+
+[List Loyalty Reward Assignments]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-reward-assignments-1
+[Create Loyalty Reward Assignment]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-reward-assignment-1
+[Update Loyalty Reward Assignment]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-reward-assignment-1
+[Delete Loyalty Reward Assignment]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-reward-assignment-1
+
+[List Loyalty Earning Rules]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-earning-rules
+[Create Loyalty Earning Rule]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-earning-rule
+[Update Loyalty Earning Rule]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#update-earning-rule
+[Delete Loyalty Earning Rule]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-earning-rule
+
+[List Loyalty Members]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-members
+[Add Loyalty Member]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-member
+[Get Loyalty Member]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-member
+[Add Loyalty Card Balance]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#add-loyalty-card-balance
+[Redeem Loyalty Reward]:https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#redeem-loyalty-card

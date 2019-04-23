@@ -49,6 +49,10 @@ module Voucherify
         @client.delete("/promotions/tiers/#{URI.encode(promotions_tier_id)}")
         nil
       end
+
+      def list_tiers(query = {})
+        @client.get("/promotions/tiers", query)
+      end
     end
   end
 end

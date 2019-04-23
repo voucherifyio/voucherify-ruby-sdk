@@ -9,6 +9,10 @@ module Voucherify
         @client = client
       end
 
+      def assignments
+        Voucherify::Service::ValidationRulesAssignments.new(@client)
+      end
+
       def create(validation_rules)
         @client.post('/validation-rules', validation_rules.to_json)
       end
@@ -39,6 +43,26 @@ module Voucherify
 
       def listAssignments(id, query)
         @client.get("/validation-rules/#{URI.encode(id)}/assignments", query)
+      end
+    end
+
+    class ValidationRulesAssignments
+      attr_reader :client
+
+      def initialize(client)
+        @client = client
+      end
+
+      def create(rule_id, assignment)
+        @client.post("/validation-rules/#{URI.encode(rule_id)}/assignments", assignment.to_json)
+      end
+
+      def delete(rule_id, assignment_id)
+        @client.delete("/validation-rules/#{URI.encode(rule_id)}/assignments/#{URI.encode(assignment_id)}")
+      end
+
+      def list(rule_id, query)
+        @client.get("/validation-rules/#{URI.encode(rule_id)}/assignments", query)
       end
     end
   end

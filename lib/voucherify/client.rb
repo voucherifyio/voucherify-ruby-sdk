@@ -64,6 +64,18 @@ module Voucherify
       Voucherify::Service::Promotions.new(self)
     end
 
+    def orders
+      Voucherify::Service::Orders.new(self)
+    end
+
+    def rewards
+      Voucherify::Service::Rewards.new(self)
+    end
+
+    def loyalties
+      Voucherify::Service::Loyalties.new(self)
+    end
+
     def get(path, params = {})
       begin
         url = @backend_url + path

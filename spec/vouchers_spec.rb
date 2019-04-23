@@ -112,11 +112,11 @@ describe 'Vouchers API' do
   it 'should list vouchers' do
     query = {
         :limit => 10,
-        :skip => 20,
+        :page => 1,
         :category => 'API Test'
     }
 
-    stub_request(:get, "https://api.voucherify.io/v1/vouchers?limit=#{query[:limit]}&skip=#{query[:skip]}&category=#{query[:category]}")
+    stub_request(:get, "https://api.voucherify.io/v1/vouchers?limit=#{query[:limit]}&page=#{query[:page]}&category=#{query[:category]}")
         .with(body: {}, headers: headers)
         .to_return(:status => 200, :body => '[]', :headers => {})
 
