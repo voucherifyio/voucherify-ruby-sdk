@@ -64,11 +64,10 @@ describe 'Products API' do
   it 'should list products' do
     query = {
         :limit => 10,
-        :skip => 20,
         :page => 3
     }
 
-    stub_request(:get, "https://api.voucherify.io/v1/products?limit=#{query[:limit]}&skip=#{query[:skip]}&page=#{query[:page]}")
+    stub_request(:get, "https://api.voucherify.io/v1/products?limit=#{query[:limit]}&page=#{query[:page]}")
         .with(body: {}, headers: headers)
         .to_return(:status => 200, :body => '[]', :headers => {})
 

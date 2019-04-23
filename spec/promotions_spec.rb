@@ -177,4 +177,18 @@ describe 'Promotions API' do
     voucherify.promotions.tiers.delete(promotions_tier_id)
   end
 
+  it 'should list tiers' do
+    query = {
+        :limit => 10,
+        :page => 1,
+        :is_available => true
+    }
+
+    stub_request(:get, "#{api_url}/promotions/tiers?limit=#{query[:limit]}&page=#{query[:page]}&is_available=#{query[:is_available]}")
+        .with(body: nil, headers: headers)
+        .to_return(:status => 200, :body => '[]', :headers => {})
+
+    voucherify.promotions.tiers.list_tiers(query)
+  end
+
 end
