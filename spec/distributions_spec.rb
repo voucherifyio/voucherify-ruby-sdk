@@ -21,6 +21,16 @@ describe 'Distributions API' do
       }
   } }
 
+  let(:publication) { {
+    :campaign => {
+      :name => '300k-vouchers',
+      :count => 1
+    },
+    :customer => {
+        :source_id => 'source_id'
+    }
+  } }
+
   let(:export) { {
       :id => 'id',
       :exported_object => 'voucher',
@@ -58,6 +68,14 @@ describe 'Distributions API' do
         .to_return(:status => 200, :body => '', :headers => {})
 
     voucherify.distributions.delete_export export[:id]
+  end
+
+  it 'should create publication' do
+    stub_request(:post, 'https://api.voucherify.io/v1/publications')
+        .with(body: publication.to_json, headers: headers)
+        .to_return(:status => 200, :body => publication.to_json, :headers => {})
+
+    voucherify.distributions.create_publication(publication)
   end
 
 end

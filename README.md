@@ -198,6 +198,8 @@ Methods are provided within `voucherify.distributions.*` namespace.
 - [Create Export](#create-export)
 - [Get Export](#get-export)
 - [Delete Export](#delete-export)
+- [List Publications](#list-publications)
+- [Create Publication](#create-publication)
 
 #### [Publish Vouchers]
 ```ruby
@@ -215,7 +217,14 @@ voucherify.distributions.get_export(export_id)
 ```ruby
 voucherify.distributions.delete_export(export_id)
 ```
-
+#### [List Publications]
+```ruby
+voucherify.distributions.list_publications(params)
+```
+#### [Create Publication]
+```ruby
+voucherify.distributions.create_publication(publication)
+```
 ---
 
 ### Validations API
@@ -727,6 +736,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2019-05-09** - `2.3.0` - Added `create_publication` method in Distributions module..
 - **2019-04-23** - `2.2.0` - Loyalties API, Rewards API, Orders API.
 - **2019-02-19** - `2.1.1` - Treat `referral` as optional in custom events. Added new method for custom event tracking.
 - **2019-02-19** - `2.1.0` - Handle `referral` in custom events tracking.
@@ -780,6 +790,8 @@ The gem is available as open source under the terms of the [MIT License](https:/
 [Create Export]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-export
 [Get Export]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#get-export
 [Delete Export]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#delete-export
+[List Publications]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-publications
+[Create Publication]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#create-publication
 
 [Validate Voucher]: https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#validate-voucher
 
