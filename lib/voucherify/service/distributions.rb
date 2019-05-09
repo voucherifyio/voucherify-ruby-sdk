@@ -35,6 +35,10 @@ module Voucherify
       def list_publications(params = {})
         @client.get('/publications', params)
       end
+
+      def create_publication(params)
+        @client.post('/publications', params.to_json)
+      end
       
     end
   end
