@@ -9,7 +9,7 @@ module Voucherify
 
     def initialize (options)
       @options = options
-      @backend_url = 'https://api.voucherify.io/v1'
+      @backend_url = (@options[:apiUrl] || @options['apiUrl'] || 'https://api.voucherify.io') + '/v1'
       @headers = {
           'X-App-Id' => @options[:applicationId] || @options['applicationId'],
           'X-App-Token' => @options[:clientSecretKey] || @options['clientSecretKey'],

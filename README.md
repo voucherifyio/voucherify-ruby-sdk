@@ -107,6 +107,18 @@ voucherify = Voucherify::Client.new({
 })
 ```
 
+### API Endpoint
+
+Optionally, you can add `apiUrl` to the client options if you want to use Voucherify running in a specific region.
+
+```ruby
+voucherify = Voucherify::Client.new({
+  :applicationId => 'YOUR-APPLICATION-ID',
+  :clientSecretKey => 'YOUR-CLIENT-SECRET-KEY',
+  :apiUrl => 'https://<region>.api.voucherify.io'
+})
+```
+
 ## API
 
 This SDK is fully consistent with restful API Voucherify provides.
@@ -736,6 +748,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2019-06-19** - `2.4.0` - Added support for custom API endpoint, that allows to connect to projects created in specific Voucherify region.
 - **2019-05-09** - `2.3.0` - Added `create_publication` method in Distributions module..
 - **2019-04-23** - `2.2.0` - Loyalties API, Rewards API, Orders API.
 - **2019-02-19** - `2.1.1` - Treat `referral` as optional in custom events. Added new method for custom event tracking.
