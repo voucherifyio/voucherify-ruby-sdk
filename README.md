@@ -352,10 +352,17 @@ voucherify.promotions.tiers.delete(promotions_tier_id)
 ### Customers API
 Methods are provided within `voucherify.customers.*` namespace.
 
+- [List Customers](#list-customers)
 - [Create Customer](#create-customer)
 - [Get Customer](#get-customer)
 - [Update Customer](#update-customer)
 - [Delete Customer](#delete-customer)
+
+#### [List Customers]
+```ruby
+voucherify.customers.list(options)
+```
+Check [options](https://docs.voucherify.io/reference?utm_source=github&utm_medium=sdk&utm_campaign=acq#list-customers).
 
 #### [Create Customer]
 ```ruby

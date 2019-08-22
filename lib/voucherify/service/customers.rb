@@ -9,6 +9,10 @@ module Voucherify
         @client = client
       end
 
+      def list(params = {})
+        @client.get("/customers/", params)
+      end
+
       def create(customer)
         @client.post('/customers', customer.to_json)
       end
