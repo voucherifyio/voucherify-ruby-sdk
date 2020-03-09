@@ -63,6 +63,8 @@ API:
 
 ## Setup
 
+### Voucherify gem starting from 3.x requires ruby version >= 2.2
+
 Add this line to your application's Gemfile:
 
 ```ruby

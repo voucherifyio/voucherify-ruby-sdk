@@ -10,7 +10,7 @@ module Voucherify
       end
 
       def list(params = {})
-        @client.get("/customers/", params)
+        @client.get('/customers', params)
       end
 
       def create(customer)
