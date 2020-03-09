@@ -757,8 +757,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2020-03-09** - `3.0.0` - Bumped required ruby version, bumped dependencies, added `list` method in Customers module.
 - **2019-06-19** - `2.4.0` - Added support for custom API endpoint, that allows to connect to projects created in specific Voucherify region.
-- **2019-05-09** - `2.3.0` - Added `create_publication` method in Distributions module..
+- **2019-05-09** - `2.3.0` - Added `create_publication` method in Distributions module.
 - **2019-04-23** - `2.2.0` - Loyalties API, Rewards API, Orders API.
 - **2019-02-19** - `2.1.1` - Treat `referral` as optional in custom events. Added new method for custom event tracking.
 - **2019-02-19** - `2.1.0` - Handle `referral` in custom events tracking.
