@@ -14,11 +14,11 @@ module Voucherify
       end
 
       def get(id)
-        @client.get("/segments/#{URI.encode(id)}")
+        @client.get("/segments/#{ERB::Util.url_encode(id)}")
       end
 
       def delete(id)
-        @client.delete("/segments/#{URI.encode(id)}")
+        @client.delete("/segments/#{ERB::Util.url_encode(id)}")
       end
     end
   end

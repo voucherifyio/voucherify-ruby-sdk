@@ -144,7 +144,7 @@ describe 'Promotions API' do
   end
 
   it 'should list promotion\'s tiers' do
-    stub_request(:get, "#{api_url}/promotions/#{URI.encode(promotion_campaign_id)}/tiers")
+    stub_request(:get, "#{api_url}/promotions/#{ERB::Util.url_encode(promotion_campaign_id)}/tiers")
         .with(body: nil, headers: headers)
         .to_return(:status => 200, :body => promotions_tiers.to_json, :headers => {})
 
@@ -152,7 +152,7 @@ describe 'Promotions API' do
   end
 
   it 'should create promotion\'s tier' do
-    stub_request(:post, "#{api_url}/promotions/#{URI.encode(promotion_campaign_id)}/tiers")
+    stub_request(:post, "#{api_url}/promotions/#{ERB::Util.url_encode(promotion_campaign_id)}/tiers")
         .with(body: promotions_tier, headers: headers)
         .to_return(:status => 200, :body => promotions_tier.to_json, :headers => {})
 
@@ -162,7 +162,7 @@ describe 'Promotions API' do
   it 'should update promotion\'s tier' do
     promotions_tier_w_id = promotions_tier.merge({id: promotions_tier_id})
 
-    stub_request(:put, "#{api_url}/promotions/tiers/#{URI.encode(promotions_tier_id)}")
+    stub_request(:put, "#{api_url}/promotions/tiers/#{ERB::Util.url_encode(promotions_tier_id)}")
         .with(body: promotions_tier_w_id, headers: headers)
         .to_return(:status => 200, :body => promotions_tier_w_id.to_json, :headers => {})
 
@@ -170,7 +170,7 @@ describe 'Promotions API' do
   end
 
   it 'should delete promotion\'s tier' do
-    stub_request(:delete, "#{api_url}/promotions/tiers/#{URI.encode(promotions_tier_id)}")
+    stub_request(:delete, "#{api_url}/promotions/tiers/#{ERB::Util.url_encode(promotions_tier_id)}")
         .with(body: nil, headers: headers)
         .to_return(:status => 200, :body => nil, :headers => {})
 

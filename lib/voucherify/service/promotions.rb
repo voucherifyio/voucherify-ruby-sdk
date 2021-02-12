@@ -30,23 +30,23 @@ module Voucherify
       end
 
       def list(promotion_id)
-        @client.get("/promotions/#{URI.encode(promotion_id)}/tiers")
+        @client.get("/promotions/#{ERB::Util.url_encode(promotion_id)}/tiers")
       end
 
       def create(promotion_id, promotion_tier)
-        @client.post("/promotions/#{URI.encode(promotion_id)}/tiers", promotion_tier.to_json)
+        @client.post("/promotions/#{ERB::Util.url_encode(promotion_id)}/tiers", promotion_tier.to_json)
       end
 
       def redeem(promotions_tier_id, redemption_context)
-        @client.post("/promotions/tiers/#{URI.encode(promotions_tier_id)}/redemption", redemption_context.to_json)
+        @client.post("/promotions/tiers/#{ERB::Util.url_encode(promotions_tier_id)}/redemption", redemption_context.to_json)
       end
 
       def update(promotions_tier)
-        @client.put("/promotions/tiers/#{URI.encode(promotions_tier['id'] || promotions_tier[:id])}", promotions_tier.to_json)
+        @client.put("/promotions/tiers/#{ERB::Util.url_encode(promotions_tier['id'] || promotions_tier[:id])}", promotions_tier.to_json)
       end
 
       def delete(promotions_tier_id)
-        @client.delete("/promotions/tiers/#{URI.encode(promotions_tier_id)}")
+        @client.delete("/promotions/tiers/#{ERB::Util.url_encode(promotions_tier_id)}")
         nil
       end
 

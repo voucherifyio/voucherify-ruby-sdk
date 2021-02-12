@@ -11,9 +11,9 @@ module Voucherify
 
       def redeem(code, params = {})
         if code.is_a? Hash
-          endpoint = "/promotions/tiers/#{URI.encode(code[:id] || code['id'])}/redemption"
+          endpoint = "/promotions/tiers/#{ERB::Util.url_encode(code[:id] || code['id'])}/redemption"
         else
-          endpoint = "/vouchers/#{URI.encode(code)}/redemption"
+          endpoint = "/vouchers/#{ERB::Util.url_encode(code)}/redemption"
         end
         @client.post(endpoint, params.to_json)
       end
@@ -23,7 +23,7 @@ module Voucherify
       end
 
       def get_for_voucher(code)
-        @client.get("/vouchers/#{URI.encode(code)}/redemption")
+        @client.get("/vouchers/#{ERB::Util.url_encode(code)}/redemption")
       end
 
       def rollback(redemption_id, payload = {})
@@ -31,11 +31,11 @@ module Voucherify
         params = reason ? {:reason => reason} : {}
         payload.delete 'reason'
         payload.delete :reason
-        @client.post("/redemptions/#{URI.encode(redemption_id)}/rollback", payload.to_json, params)
+        @client.post("/redemptions/#{ERB::Util.url_encode(redemption_id)}/rollback", payload.to_json, params)
       end
 
       def get_redemption(redemption_id)
-        @client.get("/redemptions/#{URI.encode(redemption_id)}")
+        @client.get("/redemptions/#{ERB::Util.url_encode(redemption_id)}")
       end
     end
   end

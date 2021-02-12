@@ -18,15 +18,15 @@ module Voucherify
       end
 
       def get(customer_id)
-        @client.get("/customers/#{URI.encode(customer_id)}")
+        @client.get("/customers/#{ERB::Util.url_encode(customer_id)}")
       end
 
       def update(customer)
-        @client.put("/customers/#{URI.encode(customer['id'] || customer[:id])}", customer.to_json)
+        @client.put("/customers/#{ERB::Util.url_encode(customer['id'] || customer[:id])}", customer.to_json)
       end
 
       def delete(customer_id)
-        @client.delete("/customers/#{URI.encode(customer_id)}")
+        @client.delete("/customers/#{ERB::Util.url_encode(customer_id)}")
       end
     end
   end
