@@ -25,11 +25,11 @@ module Voucherify
       end
 
       def get_export(id)
-        @client.get("/exports/#{URI.encode(id)}")
+        @client.get("/exports/#{ERB::Util.url_encode(id)}")
       end
 
       def delete_export(id)
-        @client.delete("/exports/#{URI.encode(id)}")
+        @client.delete("/exports/#{ERB::Util.url_encode(id)}")
       end
 
       def list_publications(params = {})
@@ -39,7 +39,7 @@ module Voucherify
       def create_publication(params)
         @client.post('/publications', params.to_json)
       end
-      
+
     end
   end
 end

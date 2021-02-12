@@ -11,16 +11,16 @@ module Voucherify
 
       def create(code, options = {})
         url = '/vouchers'
-        url += '/' + URI.encode(code) if code
+        url += '/' + ERB::Util.url_encode(code) if code
         @client.post(url, options.to_json)
       end
 
       def get(code)
-        @client.get("/vouchers/#{URI.encode(code)}")
+        @client.get("/vouchers/#{ERB::Util.url_encode(code)}")
       end
 
       def update(voucher_update)
-        @client.put("/vouchers/#{URI.encode(voucher_update['code'] || voucher_update[:code])}", voucher_update.to_json)
+        @client.put("/vouchers/#{ERB::Util.url_encode(voucher_update['code'] || voucher_update[:code])}", voucher_update.to_json)
       end
 
       def list(query)
@@ -28,17 +28,17 @@ module Voucherify
       end
 
       def enable(code)
-        @client.post("/vouchers/#{URI.encode(code)}/enable", nil)
+        @client.post("/vouchers/#{ERB::Util.url_encode(code)}/enable", nil)
         nil
       end
 
       def disable(code)
-        @client.post("/vouchers/#{URI.encode(code)}/disable", nil)
+        @client.post("/vouchers/#{ERB::Util.url_encode(code)}/disable", nil)
         nil
       end
 
       def delete(code, params = {})
-        @client.delete("/vouchers/#{URI.encode(code)}", {:force => (!!(params['force'] || params[:force])).to_s})
+        @client.delete("/vouchers/#{ERB::Util.url_encode(code)}", {:force => (!!(params['force'] || params[:force])).to_s})
         nil
       end
 
@@ -47,7 +47,7 @@ module Voucherify
       end
 
       def add_balance(code, balance)
-        @client.post("/vouchers/#{URI.encode(code)}/balance", balance.to_json)
+        @client.post("/vouchers/#{ERB::Util.url_encode(code)}/balance", balance.to_json)
       end
     end
   end
