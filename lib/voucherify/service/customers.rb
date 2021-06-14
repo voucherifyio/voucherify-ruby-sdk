@@ -1,4 +1,4 @@
-require 'uri'
+require 'erb'
 
 module Voucherify
   module Service
@@ -27,6 +27,10 @@ module Voucherify
 
       def delete(customer_id)
         @client.delete("/customers/#{ERB::Util.url_encode(customer_id)}")
+      end
+
+      def update_consents(customer_id, consents)
+        @client.put("/customers/#{ERB::Util.url_encode(customer_id)}/consents", consents.to_json)
       end
     end
   end

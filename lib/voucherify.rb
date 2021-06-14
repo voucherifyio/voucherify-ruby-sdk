@@ -15,6 +15,7 @@ require 'voucherify/service/segments'
 require 'voucherify/service/validation_rules'
 require 'voucherify/service/validations'
 require 'voucherify/service/vouchers'
+require 'voucherify/service/consents'
 require 'voucherify/utils'
 
 module Voucherify
