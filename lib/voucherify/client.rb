@@ -76,6 +76,10 @@ module Voucherify
       Voucherify::Service::Loyalties.new(self)
     end
 
+    def consents
+        Voucherify::Service::Consents.new(self)
+      end
+
     def get(path, params = {})
       begin
         url = @backend_url + path

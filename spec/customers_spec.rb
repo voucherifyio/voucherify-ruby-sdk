@@ -23,6 +23,11 @@ describe 'Customers API' do
           :lang => 'en'
       }} }
 
+  let(:consents) { {
+      :groups => {},
+      :consents => {}
+  } }
+
   it 'should create customer' do
     stub_request(:post, 'https://api.voucherify.io/v1/customers')
         .with(body: customer.to_json, headers: headers)
@@ -51,5 +56,12 @@ describe 'Customers API' do
         .to_return(:status => 200, :body => customer.to_json, :headers => {})
 
     voucherify.customers.delete customer[:id]
+  end
+
+  it 'should update customer consents' do
+    stub_request(:put, "https://api.voucherify.io/v1/customers/#{customer[:id]}/consents")
+        .to_return(:status => 200, :body => customer.to_json, :headers => {})
+
+    voucherify.customers.update_consents(customer[:id], consents)
   end
 end
