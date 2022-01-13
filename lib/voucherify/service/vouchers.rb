@@ -49,6 +49,12 @@ module Voucherify
       def add_balance(code, balance)
         @client.post("/vouchers/#{ERB::Util.url_encode(code)}/balance", balance.to_json)
       end
+
+      def qualification(query, context = {})
+        url = '/vouchers/qualification'
+        url += '?' + URI.encode_www_form(query)
+        @client.post(url, context.to_json)
+      end
     end
   end
 end
