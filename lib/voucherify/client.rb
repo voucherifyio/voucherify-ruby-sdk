@@ -78,7 +78,7 @@ module Voucherify
 
     def consents
         Voucherify::Service::Consents.new(self)
-      end
+    end
 
     def get(path, params = {})
       begin

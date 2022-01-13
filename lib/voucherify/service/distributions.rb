@@ -40,6 +40,11 @@ module Voucherify
         @client.post('/publications', params.to_json)
       end
 
+      def create_publication(query, params = {})
+        url = '/publications'
+        url += "?#{URI.encode_www_form(query)}"
+        @client.post(url, params.to_json)
+      end
     end
   end
 end
