@@ -757,6 +757,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/rspective/voucherify-ruby-sdk.
 
 ## Changelog
+- **2022-01-18** - `4.1.0` - Async Actions support.
 - **2021-06-14** - `4.0.0` - Bumped required ruby version, bumped dependencies, added `Consents` API support, remove deprecated `URI.escape`.
 - **2020-03-09** - `3.0.0` - Bumped required ruby version, bumped dependencies, added `list` method in Customers module.
 - **2019-06-19** - `2.4.0` - Added support for custom API endpoint, that allows to connect to projects created in specific Voucherify region.
