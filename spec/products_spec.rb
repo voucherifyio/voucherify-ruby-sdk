@@ -53,6 +53,16 @@ describe 'Products API' do
     voucherify.products.update(product)
   end
 
+  it 'should update product with source id' do
+    product.delete(:id)
+
+    stub_request(:put, "https://api.voucherify.io/v1/products/#{product[:source_id]}")
+        .with(body: product.to_json, headers: headers)
+        .to_return(:status => 200, :body => product.to_json, :headers => {})
+
+    voucherify.products.update(product)
+  end
+
   it 'should delete product' do
     stub_request(:delete, "https://api.voucherify.io/v1/products/#{product[:id]}")
         .with(body: {}, headers: headers)
