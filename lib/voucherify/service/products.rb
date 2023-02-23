@@ -18,7 +18,7 @@ module Voucherify
       end
 
       def update(product)
-        @client.put("/products/#{ERB::Util.url_encode(product['id'] || product[:id])}", product.to_json)
+        @client.put("/products/#{ERB::Util.url_encode(product['id'] || product[:id] || product['source_id'] || product[:source_id])}", product.to_json)
       end
 
       def delete(product_id)
