@@ -1,3 +1,5 @@
+# This repository is no longer actively maintained, we have a new SDK for Ruby at [voucherifyio/sdk-ruby-openapi-based](https://github.com/voucherifyio/sdk-ruby-openapi-based).
+
 <p align="center">
   <img src="./voucherify-ruby-sdk.png"/>
 </p>
@@ -7,7 +9,7 @@
 <p align="center">
 <a href="https://codeclimate.com/github/voucherifyio/voucherify-ruby-sdk"><img src="https://codeclimate.com/github/voucherifyio/voucherify-ruby-sdk/badges/gpa.svg" /></a>
   <a href="https://travis-ci.org/voucherifyio/voucherify-ruby-sdk"><img src="https://travis-ci.org/voucherifyio/voucherify-ruby-sdk.svg?branch=master" alt="Build Status"/></a>
-  <a href="https://rubygems.org/gems/voucherify"><img src="https://img.shields.io/gem/v/voucherify.svg" alt="Gem Version"/></a>
+  <a href="https://rubygems.org/gems/voucherify/versions/4.1.0"><img src="https://img.shields.io/gem/v/voucherify.svg" alt="Gem Version"/></a>
   <a href="https://rubygems.org/gems/voucherify"><img src="https://img.shields.io/gem/dt/voucherify.svg" alt="Gem Downloads"/></a>
 </p>
 <hr />
