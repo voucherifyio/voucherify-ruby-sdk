@@ -1,0 +1,14 @@
+# VoucherifySdk::ClientQualificationsCheckEligibilityRequestBodyOptionsFilters
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **junction** | [**Junction**](Junction.md) |  | [optional] |
+| **category_id** | [**QualificationsFieldConditions**](QualificationsFieldConditions.md) |  | [optional] |
+| **campaign_id** | [**QualificationsFieldConditions**](QualificationsFieldConditions.md) |  | [optional] |
+| **resource_id** | [**QualificationsFieldConditions**](QualificationsFieldConditions.md) |  | [optional] |
+| **resource_type** | [**QualificationsFieldConditions**](QualificationsFieldConditions.md) |  | [optional] |
+| **voucher_type** | [**QualificationsFieldConditions**](QualificationsFieldConditions.md) |  | [optional] |
+| **code** | [**QualificationsFieldConditions**](QualificationsFieldConditions.md) |  | [optional] |
+

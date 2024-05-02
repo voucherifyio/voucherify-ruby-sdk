@@ -1,0 +1,20 @@
+# VoucherifySdk::PromotionTierCreateParams
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **name** | **String** | Name of the promotion tier. |  |
+| **banner** | **String** | Text to be displayed to your customers on your website. | [optional] |
+| **action** | [**PromotionTierAction**](PromotionTierAction.md) |  | [optional] |
+| **metadata** | **Object** | The metadata object stores all custom attributes assigned to the promotion tier. A set of key/value pairs that you can attach to a promotion tier object. It can be useful for storing additional information about the promotion tier in a structured format. | [optional] |
+| **validation_rules** | **Array&lt;String&gt;** | Array containing the ID of the validation rule associated with the promotion tier. | [optional] |
+| **active** | **Boolean** | A flag to toggle the promotion tier on or off. You can disable a promotion tier even though it&#39;s within the active period defined by the &#x60;start_date&#x60; and &#x60;expiration_date&#x60;.    - &#x60;true&#x60; indicates an *active* promotion tier - &#x60;false&#x60; indicates an *inactive* promotion tier | [optional] |
+| **hierarchy** | **Integer** | The promotions hierarchy defines the order in which the discounts from different tiers will be applied to a customer&#39;s order. If a customer qualifies for discounts from more than one tier, discounts will be applied in the order defined in the hierarchy. | [optional] |
+| **start_date** | **Time** | Activation timestamp defines when the promotion tier starts to be active in ISO 8601 format. Promotion tier is *inactive before* this date.  | [optional] |
+| **expiration_date** | **Time** | Activation timestamp defines when the promotion tier expires in ISO 8601 format. Promotion tier is *inactive after* this date.  | [optional] |
+| **validity_timeframe** | [**PromotionTierValidityTimeframe**](PromotionTierValidityTimeframe.md) |  | [optional] |
+| **validity_day_of_week** | **Array&lt;Integer&gt;** | Integer array corresponding to the particular days of the week in which the promotion tier is valid.  - &#x60;0&#x60;  Sunday   - &#x60;1&#x60;  Monday   - &#x60;2&#x60;  Tuesday   - &#x60;3&#x60;  Wednesday   - &#x60;4&#x60;  Thursday   - &#x60;5&#x60;  Friday   - &#x60;6&#x60;  Saturday   | [optional] |
+| **category** | **String** | Assign category to the promotion tier. | [optional] |
+| **category_id** | **String** | Instead of using the category name, you can alternatively assign a new category to a promotion tier using a unique category ID, i.e. &#x60;cat_0c9da30e7116ba6bba&#x60;. | [optional] |
+
