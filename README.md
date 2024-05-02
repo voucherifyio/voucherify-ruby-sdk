@@ -111,6 +111,14 @@ Read more about how to Contribute to Voucherify Ruby SDK by visiting main repo [
 
 Remember that this SDK is auto generated (except of the tests) so changes made here will be overwritten by generator.
 
+## Changelog
+
+- **2022-03-11** - `5.0.0` - The new version of the SKD includes coverage for all the most commonly used Voucherify endpoints and supports typed models.
+
+*Previous versions of the API are no longer supported, and we highly recommend upgrading to version 5.0.0, which is now designated as Long-Term Support (LTS).* 
+
+*Changelog for previous versions could be found in the [CHANGELOG.md file](./CHANGELOG.md)*
+
 ## 🔐 Documentation for Authorization
 
 ```ruby
@@ -935,3 +943,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::VouchersTransactionsExportCreateResponseBody](docs/VouchersTransactionsExportCreateResponseBody.md)
  - [VoucherifySdk::VouchersTransactionsListResponseBody](docs/VouchersTransactionsListResponseBody.md)
 
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
