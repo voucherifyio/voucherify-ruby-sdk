@@ -1,0 +1,29 @@
+name: Publish SDK
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  publish:
+    environment: prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Build GEM
+        run: gem build *.gemspec
+        
+      - name: Push GEM
+        run: gem push *.gem --debug
+        env:
+          GEM_HOST_API_KEY: ${{secrets.RUBYGEMS_AUTH_TOKEN}}
