@@ -15,6 +15,7 @@ class VoucherifyData
     @loyalty_card = nil
     @product_ids = []
     @sku = nil
+    @validation_rule = nil
   end
 
   def set_discount_campaign(discount_campaign)
@@ -35,6 +36,10 @@ class VoucherifyData
 
   def add_product_id(product_id)
     @product_ids.push(product_id)
+  end
+
+  def set_validation_rule(validation_rule)
+    @validation_rule = validation_rule
   end
 
   def get_product_ids
@@ -87,6 +92,10 @@ class VoucherifyData
 
   def get_loyalty_card
     @loyalty_card
+  end
+
+  def get_validation_rule
+    @validation_rule
   end
 
   def set_loyalty_card(loyalty_card)
