@@ -21,8 +21,6 @@ RSpec.describe 'Validation Rules API', :order => :defined do
         validation_rules_assignments_create_request_body: validationRulesAssignmentsCreateRequestBody
     })
 
-    puts(created_validation_rule_assignment)
-
     expect(created_validation_rule_assignment).not_to be_nil
     expect(created_validation_rule_assignment.id).not_to be_nil
     expect(created_validation_rule_assignment.created_at).not_to be_nil
