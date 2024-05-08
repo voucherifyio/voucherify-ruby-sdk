@@ -16,25 +16,55 @@ require 'time'
 module VoucherifySdk
   # Response body for **POST** `/validation-rules/{validationRuleId}/assignments`.
   class ValidationRulesAssignmentsCreateResponseBody
-    # The type of object represented by JSON. This object stores information about validation rule assignments.
+    # Validation rule assignment ID.
+    attr_accessor :id
+
+    # Validation rule ID.
+    attr_accessor :rule_id
+
+    # The resource ID to which the validation rule was assigned.
+    attr_accessor :related_object_id
+
+    # The type of resource to which the validation rule was assigned.
+    attr_accessor :related_object_type
+
+    # Timestamp representing the date and time when the validation rule assignment was created in ISO 8601 format.
+    attr_accessor :created_at
+
+    # The type of object represented by the ID.
     attr_accessor :object
 
-    # Identifies the name of the JSON property that contains the array of validation rule assignments.
-    attr_accessor :data_ref
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # A dictionary that contains an array of validation rule assignments.
-    attr_accessor :data
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # Total number of validation rule assignments.
-    attr_accessor :total
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'object' => :'object',
-        :'data_ref' => :'data_ref',
-        :'data' => :'data',
-        :'total' => :'total'
+        :'id' => :'id',
+        :'rule_id' => :'rule_id',
+        :'related_object_id' => :'related_object_id',
+        :'related_object_type' => :'related_object_type',
+        :'created_at' => :'created_at',
+        :'object' => :'object'
       }
     end
 
@@ -46,10 +76,12 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'object' => :'String',
-        :'data_ref' => :'String',
-        :'data' => :'Array<ValidationRuleAssignment>',
-        :'total' => :'Integer'
+        :'id' => :'String',
+        :'rule_id' => :'String',
+        :'related_object_id' => :'String',
+        :'related_object_type' => :'String',
+        :'created_at' => :'Time',
+        :'object' => :'String'
       }
     end
 
@@ -62,7 +94,7 @@ module VoucherifySdk
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
       [
-      :'ValidationRuleAssignmentsList'
+      :'ValidationRuleAssignment'
       ]
     end
 
@@ -81,30 +113,40 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      else
+        self.id = nil
+      end
+
+      if attributes.key?(:'rule_id')
+        self.rule_id = attributes[:'rule_id']
+      else
+        self.rule_id = nil
+      end
+
+      if attributes.key?(:'related_object_id')
+        self.related_object_id = attributes[:'related_object_id']
+      else
+        self.related_object_id = nil
+      end
+
+      if attributes.key?(:'related_object_type')
+        self.related_object_type = attributes[:'related_object_type']
+      else
+        self.related_object_type = nil
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      else
+        self.created_at = nil
+      end
+
       if attributes.key?(:'object')
         self.object = attributes[:'object']
       else
-        self.object = 'list'
-      end
-
-      if attributes.key?(:'data_ref')
-        self.data_ref = attributes[:'data_ref']
-      else
-        self.data_ref = 'data'
-      end
-
-      if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
-      else
-        self.data = nil
-      end
-
-      if attributes.key?(:'total')
-        self.total = attributes[:'total']
-      else
-        self.total = nil
+        self.object = 'validation_rules_assignment'
       end
     end
 
@@ -113,20 +155,28 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @rule_id.nil?
+        invalid_properties.push('invalid value for "rule_id", rule_id cannot be nil.')
+      end
+
+      if @related_object_id.nil?
+        invalid_properties.push('invalid value for "related_object_id", related_object_id cannot be nil.')
+      end
+
+      if @related_object_type.nil?
+        invalid_properties.push('invalid value for "related_object_type", related_object_type cannot be nil.')
+      end
+
+      if @created_at.nil?
+        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
+      end
+
       if @object.nil?
         invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @data_ref.nil?
-        invalid_properties.push('invalid value for "data_ref", data_ref cannot be nil.')
-      end
-
-      if @data.nil?
-        invalid_properties.push('invalid value for "data", data cannot be nil.')
-      end
-
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
       end
 
       invalid_properties
@@ -136,11 +186,37 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @id.nil?
+      return false if @rule_id.nil?
+      return false if @related_object_id.nil?
+      return false if @related_object_type.nil?
+      related_object_type_validator = EnumAttributeValidator.new('String', ["voucher", "campaign", "earning_rule", "reward_assignment", "promotion_tier", "distribution"])
+      return false unless related_object_type_validator.valid?(@related_object_type)
+      return false if @created_at.nil?
       return false if @object.nil?
-      return false if @data_ref.nil?
-      return false if @data.nil?
-      return false if @total.nil?
+      object_validator = EnumAttributeValidator.new('String', ["validation_rules_assignment"])
+      return false unless object_validator.valid?(@object)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] related_object_type Object to be assigned
+    def related_object_type=(related_object_type)
+      validator = EnumAttributeValidator.new('String', ["voucher", "campaign", "earning_rule", "reward_assignment", "promotion_tier", "distribution"])
+      unless validator.valid?(related_object_type)
+        fail ArgumentError, "invalid value for \"related_object_type\", must be one of #{validator.allowable_values}."
+      end
+      @related_object_type = related_object_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] object Object to be assigned
+    def object=(object)
+      validator = EnumAttributeValidator.new('String', ["validation_rules_assignment"])
+      unless validator.valid?(object)
+        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
+      end
+      @object = object
     end
 
     # Checks equality by comparing each attribute.
@@ -148,10 +224,12 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          object == o.object &&
-          data_ref == o.data_ref &&
-          data == o.data &&
-          total == o.total
+          id == o.id &&
+          rule_id == o.rule_id &&
+          related_object_id == o.related_object_id &&
+          related_object_type == o.related_object_type &&
+          created_at == o.created_at &&
+          object == o.object
     end
 
     # @see the `==` method
@@ -163,7 +241,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [object, data_ref, data, total].hash
+      [id, rule_id, related_object_id, related_object_type, created_at, object].hash
     end
 
     # Builds the object from hash
