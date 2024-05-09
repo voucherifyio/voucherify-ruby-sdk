@@ -14,7 +14,6 @@ RSpec.describe 'Campaigns API', :order => :defined do
   $created_promotion_campaign = nil
   $created_loyalty_campaign = nil
   $created_validation_rule_applicable_to = nil
-  $created_campaign_with_validation_rule = nil
 
   it 'create a validation rule with applicable_to', :order => :first do
     validation_rule = create_validation_rule_applicable_to(@validation_rules_api_instance, @voucherify_data.get_product.id)
@@ -22,6 +21,7 @@ RSpec.describe 'Campaigns API', :order => :defined do
     expect(validation_rule).not_to be_nil
 
     $created_validation_rule_applicable_to = validation_rule
+    @voucherify_data.set_validation_rule(validation_rule)
   end
 
   it 'create a discount campaign with applicable_to validation rule', :order => :second do

@@ -111,11 +111,13 @@ Read more about how to Contribute to Voucherify Ruby SDK by visiting main repo [
 
 Remember that this SDK is auto generated (except of the tests) so changes made here will be overwritten by generator.
 
-## Changelog
+## 📅 Changelog
 
-- **2022-03-11** - `5.0.0` - The new version of the SKD includes coverage for all the most commonly used Voucherify endpoints and supports typed models.
+- **2024-05-08** - `5.0.1` - Added support for [Create validation rule assignment](https://docs.voucherify.io/reference/create-validation-rule-assignment)
 
-*Previous versions of the API are no longer supported, and we highly recommend upgrading to version 5.0.0, which is now designated as Long-Term Support (LTS).* 
+- **2024-03-11** - `5.0.0` - The new version of the SKD includes coverage for all the most commonly used Voucherify endpoints and supports typed models.
+
+*Previous versions of the API are no longer supported, and we highly recommend upgrading to version 5.0.0, which is now designated as Long-Term Support (LTS).*
 
 *Changelog for previous versions could be found in the [CHANGELOG.md file](./CHANGELOG.md)*
 
@@ -262,6 +264,7 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::RewardsApi* | [**list_reward_assignments**](docs/RewardsApi.md#list_reward_assignments) | **GET** /v1/rewards/{rewardId}/assignments | List Reward Assignments
 *VoucherifySdk::RewardsApi* | [**update_reward_assignment**](docs/RewardsApi.md#update_reward_assignment) | **PUT** /v1/rewards/{rewardId}/assignments/{assignmentId} | Update Reward Assignment
 *VoucherifySdk::SegmentsApi* | [**delete_segment**](docs/SegmentsApi.md#delete_segment) | **DELETE** /v1/segments/{segmentId} | Delete Segment
+*VoucherifySdk::ValidationRulesApi* | [**create_validation_rule_assignment**](docs/ValidationRulesApi.md#create_validation_rule_assignment) | **POST** /v1/validation-rules/{validationRuleId}/assignments | Create Validation Rules Assignments
 *VoucherifySdk::ValidationRulesApi* | [**create_validation_rules**](docs/ValidationRulesApi.md#create_validation_rules) | **POST** /v1/validation-rules | Create Validation Rules
 *VoucherifySdk::ValidationRulesApi* | [**delete_validation_rule_assignment**](docs/ValidationRulesApi.md#delete_validation_rule_assignment) | **DELETE** /v1/validation-rules/{validationRuleId}/assignments/{assignmentId} | Delete Validation Rule Assignment
 *VoucherifySdk::ValidationRulesApi* | [**delete_validation_rules**](docs/ValidationRulesApi.md#delete_validation_rules) | **DELETE** /v1/validation-rules/{validationRuleId} | Delete Validation Rule
@@ -885,6 +888,8 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ValidationRuleBase](docs/ValidationRuleBase.md)
  - [VoucherifySdk::ValidationRuleBaseApplicableTo](docs/ValidationRuleBaseApplicableTo.md)
  - [VoucherifySdk::ValidationRuleBaseError](docs/ValidationRuleBaseError.md)
+ - [VoucherifySdk::ValidationRulesAssignmentsCreateRequestBody](docs/ValidationRulesAssignmentsCreateRequestBody.md)
+ - [VoucherifySdk::ValidationRulesAssignmentsCreateResponseBody](docs/ValidationRulesAssignmentsCreateResponseBody.md)
  - [VoucherifySdk::ValidationRulesAssignmentsList](docs/ValidationRulesAssignmentsList.md)
  - [VoucherifySdk::ValidationRulesAssignmentsListResponseBody](docs/ValidationRulesAssignmentsListResponseBody.md)
  - [VoucherifySdk::ValidationRulesCreateRequestBody](docs/ValidationRulesCreateRequestBody.md)
@@ -943,7 +948,3 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::VouchersTransactionsExportCreateResponseBody](docs/VouchersTransactionsExportCreateResponseBody.md)
  - [VoucherifySdk::VouchersTransactionsListResponseBody](docs/VouchersTransactionsListResponseBody.md)
 
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

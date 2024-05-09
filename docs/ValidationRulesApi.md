@@ -4,6 +4,7 @@ All URIs are relative to *https://api.voucherify.io*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**create_validation_rule_assignment**](ValidationRulesApi.md#create_validation_rule_assignment) | **POST** /v1/validation-rules/{validationRuleId}/assignments | Create Validation Rules Assignments |
 | [**create_validation_rules**](ValidationRulesApi.md#create_validation_rules) | **POST** /v1/validation-rules | Create Validation Rules |
 | [**delete_validation_rule_assignment**](ValidationRulesApi.md#delete_validation_rule_assignment) | **DELETE** /v1/validation-rules/{validationRuleId}/assignments/{assignmentId} | Delete Validation Rule Assignment |
 | [**delete_validation_rules**](ValidationRulesApi.md#delete_validation_rules) | **DELETE** /v1/validation-rules/{validationRuleId} | Delete Validation Rule |
@@ -12,6 +13,70 @@ All URIs are relative to *https://api.voucherify.io*
 | [**list_validation_rules**](ValidationRulesApi.md#list_validation_rules) | **GET** /v1/validation-rules | List Validation Rules |
 | [**list_validation_rules_assignments**](ValidationRulesApi.md#list_validation_rules_assignments) | **GET** /v1/validation-rules-assignments | List Validation Rules&#39; Assignment(s) |
 | [**update_validation_rule**](ValidationRulesApi.md#update_validation_rule) | **PUT** /v1/validation-rules/{validationRuleId} | Update Validation Rule |
+
+
+## create_validation_rule_assignment
+
+> <ValidationRulesAssignmentsCreateResponseBody> create_validation_rule_assignment(validation_rule_id, opts)
+
+Create Validation Rules Assignments
+
+Assign validation rule to either one of the following objects: voucher, campaign, promotion tier, earning rule, reward, distribution.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::ValidationRulesApi.new
+validation_rule_id = 'validation_rule_id_example' # String | Unique validation rule ID.
+opts = {
+  force: true, # Boolean | If this flag is set to true, the previous assignment with the same data will be deleted and a new one will be added.
+  validation_rules_assignments_create_request_body: VoucherifySdk::ValidationRulesAssignmentsCreateRequestBody.new # ValidationRulesAssignmentsCreateRequestBody | Specify the resource that you would like to assign the validation rule to.
+}
+
+begin
+  # Create Validation Rules Assignments
+  result = api_instance.create_validation_rule_assignment(validation_rule_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling ValidationRulesApi->create_validation_rule_assignment: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **validation_rule_id** | **String** | Unique validation rule ID. |  |
+| **force** | **Boolean** | If this flag is set to true, the previous assignment with the same data will be deleted and a new one will be added. | [optional] |
+| **validation_rules_assignments_create_request_body** | [**ValidationRulesAssignmentsCreateRequestBody**](ValidationRulesAssignmentsCreateRequestBody.md) | Specify the resource that you would like to assign the validation rule to. | [optional] |
+
+### Return type
+
+[**ValidationRulesAssignmentsCreateResponseBody**](ValidationRulesAssignmentsCreateResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## create_validation_rules
