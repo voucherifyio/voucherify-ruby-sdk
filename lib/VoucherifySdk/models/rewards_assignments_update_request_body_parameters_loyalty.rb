@@ -14,42 +14,15 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # This is an object representing a reward assignment.
-  class Model4ObjRewardAssignmentObject
-    # Unique reward assignment ID, assigned by Voucherify.
-    attr_accessor :id
-
-    # Associated reward ID.
-    attr_accessor :reward_id
-
-    # Related object ID to which the reward was assigned.
-    attr_accessor :related_object_id
-
-    # Related object type to which the reward was assigned.
-    attr_accessor :related_object_type
-
-    attr_accessor :parameters
-
-    # Timestamp representing the date and time when the reward assignment was created. The value is shown in the ISO 8601 format.
-    attr_accessor :created_at
-
-    # Timestamp representing the date and time when the reward assignment was updated. The value is shown in the ISO 8601 format.
-    attr_accessor :updated_at
-
-    # The type of the object represented by the JSON. This object stores information about the reward assignment.
-    attr_accessor :object
+  # Stores the points parameter.
+  class RewardsAssignmentsUpdateRequestBodyParametersLoyalty
+    # Defines how many points are required to obtain the reward.
+    attr_accessor :points
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'reward_id' => :'reward_id',
-        :'related_object_id' => :'related_object_id',
-        :'related_object_type' => :'related_object_type',
-        :'parameters' => :'parameters',
-        :'created_at' => :'created_at',
-        :'updated_at' => :'updated_at',
-        :'object' => :'object'
+        :'points' => :'points'
       }
     end
 
@@ -61,14 +34,7 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'reward_id' => :'String',
-        :'related_object_id' => :'String',
-        :'related_object_type' => :'String',
-        :'parameters' => :'4ObjRewardAssignmentObjectParameters',
-        :'created_at' => :'Time',
-        :'updated_at' => :'Time',
-        :'object' => :'String'
+        :'points' => :'Integer'
       }
     end
 
@@ -82,49 +48,19 @@ module VoucherifySdk
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::Model4ObjRewardAssignmentObject` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::RewardsAssignmentsUpdateRequestBodyParametersLoyalty` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::Model4ObjRewardAssignmentObject`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::RewardsAssignmentsUpdateRequestBodyParametersLoyalty`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'reward_id')
-        self.reward_id = attributes[:'reward_id']
-      end
-
-      if attributes.key?(:'related_object_id')
-        self.related_object_id = attributes[:'related_object_id']
-      end
-
-      if attributes.key?(:'related_object_type')
-        self.related_object_type = attributes[:'related_object_type']
-      end
-
-      if attributes.key?(:'parameters')
-        self.parameters = attributes[:'parameters']
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
-      end
-
-      if attributes.key?(:'object')
-        self.object = attributes[:'object']
-      else
-        self.object = 'reward_assignment'
+      if attributes.key?(:'points')
+        self.points = attributes[:'points']
       end
     end
 
@@ -148,14 +84,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          reward_id == o.reward_id &&
-          related_object_id == o.related_object_id &&
-          related_object_type == o.related_object_type &&
-          parameters == o.parameters &&
-          created_at == o.created_at &&
-          updated_at == o.updated_at &&
-          object == o.object
+          points == o.points
     end
 
     # @see the `==` method
@@ -167,7 +96,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, reward_id, related_object_id, related_object_type, parameters, created_at, updated_at, object].hash
+      [points].hash
     end
 
     # Builds the object from hash

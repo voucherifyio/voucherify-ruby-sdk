@@ -29,7 +29,6 @@ All URIs are relative to *https://api.voucherify.io*
 | [**transfer_points**](LoyaltiesApi.md#transfer_points) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/transfers | Transfer Loyalty Points |
 | [**update_loyalty_card_balance**](LoyaltiesApi.md#update_loyalty_card_balance) | **POST** /v1/loyalties/members/{memberId}/balance | Add or Remove Loyalty Card Balance |
 | [**update_loyalty_card_balance1**](LoyaltiesApi.md#update_loyalty_card_balance1) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/balance | Add or Remove Loyalty Card Balance |
-| [**update_reward_assignment1**](LoyaltiesApi.md#update_reward_assignment1) | **PUT** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Update Reward Assignment |
 
 
 ## create_in_bulk_loyalty_tiers
@@ -2022,88 +2021,6 @@ end
 ### Return type
 
 [**LoyaltiesMembersBalanceUpdateResponseBody**](LoyaltiesMembersBalanceUpdateResponseBody.md)
-
-### Authorization
-
-[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-
-## update_reward_assignment1
-
-> <Model4ObjRewardAssignmentObject> update_reward_assignment1(campaign_id, assignment_id, opts)
-
-Update Reward Assignment
-
-Updates rewards parameters, i.e. the points cost for the specific reward.
-
-### Examples
-
-```ruby
-require 'time'
-require 'VoucherifySdk'
-# setup authorization
-VoucherifySdk.configure do |config|
-  # Configure API key authorization: X-App-Id
-  config.api_key['X-App-Id'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['X-App-Id'] = 'Bearer'
-
-  # Configure API key authorization: X-App-Token
-  config.api_key['X-App-Token'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['X-App-Token'] = 'Bearer'
-end
-
-api_instance = VoucherifySdk::LoyaltiesApi.new
-campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the `name` of the campaign as the path parameter value, e.g., `Loyalty%20Campaign`. 
-assignment_id = 'assignment_id_example' # String | A unique reward assignment ID.
-opts = {
-  loyalties_rewards_update_request_body: VoucherifySdk::LoyaltiesRewardsUpdateRequestBody.new # LoyaltiesRewardsUpdateRequestBody | Update the points cost for the reward assignment.
-}
-
-begin
-  # Update Reward Assignment
-  result = api_instance.update_reward_assignment1(campaign_id, assignment_id, opts)
-  p result
-rescue VoucherifySdk::ApiError => e
-  puts "Error when calling LoyaltiesApi->update_reward_assignment1: #{e}"
-end
-```
-
-#### Using the update_reward_assignment1_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<Model4ObjRewardAssignmentObject>, Integer, Hash)> update_reward_assignment1_with_http_info(campaign_id, assignment_id, opts)
-
-```ruby
-begin
-  # Update Reward Assignment
-  data, status_code, headers = api_instance.update_reward_assignment1_with_http_info(campaign_id, assignment_id, opts)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <Model4ObjRewardAssignmentObject>
-rescue VoucherifySdk::ApiError => e
-  puts "Error when calling LoyaltiesApi->update_reward_assignment1_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty%20Campaign&#x60;.  |  |
-| **assignment_id** | **String** | A unique reward assignment ID. |  |
-| **loyalties_rewards_update_request_body** | [**LoyaltiesRewardsUpdateRequestBody**](LoyaltiesRewardsUpdateRequestBody.md) | Update the points cost for the reward assignment. | [optional] |
-
-### Return type
-
-[**Model4ObjRewardAssignmentObject**](Model4ObjRewardAssignmentObject.md)
 
 ### Authorization
 

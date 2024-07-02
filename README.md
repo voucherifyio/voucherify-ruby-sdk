@@ -163,7 +163,6 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::LoyaltiesApi* | [**transfer_points**](docs/LoyaltiesApi.md#transfer_points) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/transfers | Transfer Loyalty Points
 *VoucherifySdk::LoyaltiesApi* | [**update_loyalty_card_balance**](docs/LoyaltiesApi.md#update_loyalty_card_balance) | **POST** /v1/loyalties/members/{memberId}/balance | Add or Remove Loyalty Card Balance
 *VoucherifySdk::LoyaltiesApi* | [**update_loyalty_card_balance1**](docs/LoyaltiesApi.md#update_loyalty_card_balance1) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/balance | Add or Remove Loyalty Card Balance
-*VoucherifySdk::LoyaltiesApi* | [**update_reward_assignment1**](docs/LoyaltiesApi.md#update_reward_assignment1) | **PUT** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Update Reward Assignment
 *VoucherifySdk::OrdersApi* | [**create_order**](docs/OrdersApi.md#create_order) | **POST** /v1/orders | Create Order
 *VoucherifySdk::OrdersApi* | [**create_order_export**](docs/OrdersApi.md#create_order_export) | **POST** /v1/orders/export | Create Orders Export
 *VoucherifySdk::OrdersApi* | [**get_order**](docs/OrdersApi.md#get_order) | **GET** /v1/orders/{orderId} | Get Order
@@ -233,8 +232,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [VoucherifySdk::4ObjRewardAssignmentObjectParameters](docs/4ObjRewardAssignmentObjectParameters.md)
- - [VoucherifySdk::4ObjRewardAssignmentObjectParametersLoyalty](docs/4ObjRewardAssignmentObjectParametersLoyalty.md)
  - [VoucherifySdk::Any](docs/Any.md)
  - [VoucherifySdk::ApplicableTo](docs/ApplicableTo.md)
  - [VoucherifySdk::ApplicableToEffect](docs/ApplicableToEffect.md)
@@ -575,9 +572,6 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltiesRewardAssignmentsGetResponseBody](docs/LoyaltiesRewardAssignmentsGetResponseBody.md)
  - [VoucherifySdk::LoyaltiesRewardAssignmentsRewardGetResponseBody](docs/LoyaltiesRewardAssignmentsRewardGetResponseBody.md)
  - [VoucherifySdk::LoyaltiesRewardsGetResponseBody](docs/LoyaltiesRewardsGetResponseBody.md)
- - [VoucherifySdk::LoyaltiesRewardsUpdateRequestBody](docs/LoyaltiesRewardsUpdateRequestBody.md)
- - [VoucherifySdk::LoyaltiesRewardsUpdateRequestBodyParameters](docs/LoyaltiesRewardsUpdateRequestBodyParameters.md)
- - [VoucherifySdk::LoyaltiesRewardsUpdateRequestBodyParametersLoyalty](docs/LoyaltiesRewardsUpdateRequestBodyParametersLoyalty.md)
  - [VoucherifySdk::LoyaltiesTiersCreateInBulkRequestBodyItem](docs/LoyaltiesTiersCreateInBulkRequestBodyItem.md)
  - [VoucherifySdk::LoyaltiesTiersEarningRulesListResponseBody](docs/LoyaltiesTiersEarningRulesListResponseBody.md)
  - [VoucherifySdk::LoyaltiesTiersGetResponseBody](docs/LoyaltiesTiersGetResponseBody.md)
@@ -600,7 +594,6 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::MappingFixed](docs/MappingFixed.md)
  - [VoucherifySdk::MappingMultiply](docs/MappingMultiply.md)
  - [VoucherifySdk::MappingPoints](docs/MappingPoints.md)
- - [VoucherifySdk::Model4ObjRewardAssignmentObject](docs/Model4ObjRewardAssignmentObject.md)
  - [VoucherifySdk::Order](docs/Order.md)
  - [VoucherifySdk::OrderBase](docs/OrderBase.md)
  - [VoucherifySdk::OrderCalculated](docs/OrderCalculated.md)
@@ -794,6 +787,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::RewardAssignmentBase](docs/RewardAssignmentBase.md)
  - [VoucherifySdk::RewardAssignmentParameters](docs/RewardAssignmentParameters.md)
  - [VoucherifySdk::RewardAssignmentParametersParameters](docs/RewardAssignmentParametersParameters.md)
+ - [VoucherifySdk::RewardAssignmentParametersParametersLoyalty](docs/RewardAssignmentParametersParametersLoyalty.md)
  - [VoucherifySdk::RewardAssignmentsCreateCoinRewardRequestBody](docs/RewardAssignmentsCreateCoinRewardRequestBody.md)
  - [VoucherifySdk::RewardAssignmentsCreateDigitalOrMaterialRewardRequestBody](docs/RewardAssignmentsCreateDigitalOrMaterialRewardRequestBody.md)
  - [VoucherifySdk::RewardAssignmentsCreateDigitalOrMaterialRewardRequestBodyParameters](docs/RewardAssignmentsCreateDigitalOrMaterialRewardRequestBodyParameters.md)
@@ -811,6 +805,8 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::RewardsAssignmentsGetResponseBody](docs/RewardsAssignmentsGetResponseBody.md)
  - [VoucherifySdk::RewardsAssignmentsListResponseBody](docs/RewardsAssignmentsListResponseBody.md)
  - [VoucherifySdk::RewardsAssignmentsUpdateRequestBody](docs/RewardsAssignmentsUpdateRequestBody.md)
+ - [VoucherifySdk::RewardsAssignmentsUpdateRequestBodyParameters](docs/RewardsAssignmentsUpdateRequestBodyParameters.md)
+ - [VoucherifySdk::RewardsAssignmentsUpdateRequestBodyParametersLoyalty](docs/RewardsAssignmentsUpdateRequestBodyParametersLoyalty.md)
  - [VoucherifySdk::RewardsAssignmentsUpdateResponseBody](docs/RewardsAssignmentsUpdateResponseBody.md)
  - [VoucherifySdk::SchemaThatContainsUniquePropertiesForPromotionCampaignPromotion](docs/SchemaThatContainsUniquePropertiesForPromotionCampaignPromotion.md)
  - [VoucherifySdk::Session](docs/Session.md)

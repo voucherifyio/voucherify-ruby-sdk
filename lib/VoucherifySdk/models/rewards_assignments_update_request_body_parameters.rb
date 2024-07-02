@@ -14,15 +14,14 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Stores the points parameter.
-  class LoyaltiesRewardsUpdateRequestBodyParametersLoyalty
-    # Defines how many points are required to obtain the reward.
-    attr_accessor :points
+  # An object that defines the price of the reward in loyalty points.
+  class RewardsAssignmentsUpdateRequestBodyParameters
+    attr_accessor :loyalty
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'points' => :'points'
+        :'loyalty' => :'loyalty'
       }
     end
 
@@ -34,7 +33,7 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'points' => :'Integer'
+        :'loyalty' => :'RewardsAssignmentsUpdateRequestBodyParametersLoyalty'
       }
     end
 
@@ -48,19 +47,19 @@ module VoucherifySdk
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltiesRewardsUpdateRequestBodyParametersLoyalty` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::RewardsAssignmentsUpdateRequestBodyParameters` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltiesRewardsUpdateRequestBodyParametersLoyalty`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::RewardsAssignmentsUpdateRequestBodyParameters`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'points')
-        self.points = attributes[:'points']
+      if attributes.key?(:'loyalty')
+        self.loyalty = attributes[:'loyalty']
       end
     end
 
@@ -84,7 +83,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          points == o.points
+          loyalty == o.loyalty
     end
 
     # @see the `==` method
@@ -96,7 +95,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [points].hash
+      [loyalty].hash
     end
 
     # Builds the object from hash

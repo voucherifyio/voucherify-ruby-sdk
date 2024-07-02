@@ -33,7 +33,7 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'loyalty' => :'4ObjRewardAssignmentObjectParametersLoyalty'
+        :'loyalty' => :'RewardAssignmentParametersParametersLoyalty'
       }
     end
 
