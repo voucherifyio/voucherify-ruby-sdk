@@ -52,6 +52,8 @@ module VoucherifySdk
     # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
 
+    attr_accessor :validity_hours
+
     attr_accessor :publish
 
     attr_accessor :redemption
@@ -70,7 +72,7 @@ module VoucherifySdk
     # Flag indicating whether this voucher is a referral code; `true` for campaign type `REFERRAL_PROGRAM`.
     attr_accessor :is_referral_code
 
-    # Unique customer ID of voucher owner.
+    # Unique identifier of the customer who owns the voucher.
     attr_accessor :holder_id
 
     # Timestamp representing the date and time when the voucher was last updated in ISO 8601 format.
@@ -116,6 +118,7 @@ module VoucherifySdk
         :'expiration_date' => :'expiration_date',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours',
         :'publish' => :'publish',
         :'redemption' => :'redemption',
         :'active' => :'active',
@@ -150,6 +153,7 @@ module VoucherifySdk
         :'expiration_date' => :'Time',
         :'validity_timeframe' => :'LoyaltiesMembersTransfersCreateResponseBodyValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
+        :'validity_hours' => :'ValidityHours',
         :'publish' => :'LoyaltiesMembersTransfersCreateResponseBodyPublish',
         :'redemption' => :'LoyaltiesMembersTransfersCreateResponseBodyRedemption',
         :'active' => :'String',
@@ -265,6 +269,10 @@ module VoucherifySdk
         end
       else
         self.validity_day_of_week = nil
+      end
+
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
       end
 
       if attributes.key?(:'publish')
@@ -403,6 +411,7 @@ module VoucherifySdk
           expiration_date == o.expiration_date &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours &&
           publish == o.publish &&
           redemption == o.redemption &&
           active == o.active &&
@@ -424,7 +433,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, code, campaign, campaign_id, category, category_id, categories, type, loyalty_card, start_date, expiration_date, validity_timeframe, validity_day_of_week, publish, redemption, active, additional_info, metadata, assets, is_referral_code, holder_id, updated_at, created_at].hash
+      [id, code, campaign, campaign_id, category, category_id, categories, type, loyalty_card, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, publish, redemption, active, additional_info, metadata, assets, is_referral_code, holder_id, updated_at, created_at].hash
     end
 
     # Builds the object from hash

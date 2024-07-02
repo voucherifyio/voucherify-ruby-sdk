@@ -36,13 +36,13 @@ module VoucherifySdk
     # The HTTPS URL pointing to the .png or .jpg file that will be used to render the product image.
     attr_accessor :image_url
 
-    # Timestamp representing the date and time when the product was created in ISO 8601 format.
+    # Timestamp representing the date and time when the product was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the product was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the product was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
-    # The type of object represented by JSON. This object stores information about the product.
+    # The type of the object represented by JSON. This object stores information about the product.
     attr_accessor :object
 
     class EnumAttributeValidator

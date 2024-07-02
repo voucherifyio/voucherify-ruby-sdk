@@ -16,16 +16,16 @@ require 'time'
 module VoucherifySdk
   # Data filters used to narrow the data records to be returned in the result.
   class FilterConditionsString
-    # Array of resource values that should be included in the results. (multiple values)
+    # Array of resource values that should be included in the results (multiple values).
     attr_accessor :_in
 
-    # Array of resource values that should be included in the results. (multiple values)
+    # Array of resource values that should be included in the results (multiple values).
     attr_accessor :not_in
 
-    # Value is exactly this value. (single value)
+    # Value is exactly this value (single value).
     attr_accessor :is
 
-    # Results omit this value. (single value)
+    # Results omit this value (single value).
     attr_accessor :is_not
 
     # Value is NOT null. The value for this parameter is an empty string.

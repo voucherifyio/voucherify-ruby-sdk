@@ -67,7 +67,7 @@ module VoucherifySdk
         :'redemption' => :'RedemptionInternal',
         :'reward' => :'SimpleRedemptionRewardResult',
         :'referral_tier' => :'SimpleReferralTier',
-        :'balance' => :'Integer',
+        :'balance' => :'EventCustomerRewardedBalance',
         :'custom_event' => :'CustomEvent',
         :'customer_event' => :'Object'
       }
@@ -76,6 +76,7 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'balance',
       ])
     end
 

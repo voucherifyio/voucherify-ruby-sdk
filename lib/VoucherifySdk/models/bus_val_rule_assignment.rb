@@ -28,13 +28,13 @@ module VoucherifySdk
     # The type of related object
     attr_accessor :related_object_type
 
-    # Timestamp representing the date and time when the object was created in ISO 8601 format.
+    # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Timestamp representing the date and time when the object was last updated in ISO 8601 format.
     attr_accessor :updated_at
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # The validation status of the assignment

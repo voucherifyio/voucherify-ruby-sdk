@@ -51,6 +51,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the create_category_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CategoriesCreateResponseBody>, Integer, Hash)> create_category_with_http_info(opts)
+
+```ruby
+begin
+  # Create Category
+  data, status_code, headers = api_instance.create_category_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CategoriesCreateResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling CategoriesApi->create_category_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -105,6 +123,24 @@ begin
   api_instance.delete_category(category_id)
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling CategoriesApi->delete_category: #{e}"
+end
+```
+
+#### Using the delete_category_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> delete_category_with_http_info(category_id)
+
+```ruby
+begin
+  # Delete Category
+  data, status_code, headers = api_instance.delete_category_with_http_info(category_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling CategoriesApi->delete_category_with_http_info: #{e}"
 end
 ```
 
@@ -166,6 +202,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the get_category_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CategoriesGetResponseBody>, Integer, Hash)> get_category_with_http_info(category_id)
+
+```ruby
+begin
+  # Get Category
+  data, status_code, headers = api_instance.get_category_with_http_info(category_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CategoriesGetResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling CategoriesApi->get_category_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -220,6 +274,24 @@ begin
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling CategoriesApi->list_categories: #{e}"
+end
+```
+
+#### Using the list_categories_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CategoriesListResponseBody>, Integer, Hash)> list_categories_with_http_info
+
+```ruby
+begin
+  # List Categories
+  data, status_code, headers = api_instance.list_categories_with_http_info
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CategoriesListResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling CategoriesApi->list_categories_with_http_info: #{e}"
 end
 ```
 
@@ -279,6 +351,24 @@ begin
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling CategoriesApi->update_category: #{e}"
+end
+```
+
+#### Using the update_category_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<CategoriesUpdateResponseBody>, Integer, Hash)> update_category_with_http_info(category_id, opts)
+
+```ruby
+begin
+  # Update Category
+  data, status_code, headers = api_instance.update_category_with_http_info(category_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <CategoriesUpdateResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling CategoriesApi->update_category_with_http_info: #{e}"
 end
 ```
 

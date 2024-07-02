@@ -10,6 +10,7 @@
 | **voucher** | [**SimpleVoucher**](SimpleVoucher.md) |  | [optional] |
 | **holder** | [**SimpleCustomer**](SimpleCustomer.md) |  | [optional] |
 | **promotion_tier** | [**SimplePromotionTier**](SimplePromotionTier.md) |  | [optional] |
+| **promotion_stack** | [**SimplePromotionStack**](SimplePromotionStack.md) |  | [optional] |
 | **redemption** | [**SimpleRedemption**](SimpleRedemption.md) |  | [optional] |
 | **redemption_rollback** | [**SimpleRedemption**](SimpleRedemption.md) |  | [optional] |
 

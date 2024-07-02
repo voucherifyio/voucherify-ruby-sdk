@@ -11,7 +11,7 @@
 | **redemption** | [**RedemptionInternal**](RedemptionInternal.md) |  | [optional] |
 | **reward** | [**SimpleRedemptionRewardResult**](SimpleRedemptionRewardResult.md) |  | [optional] |
 | **referral_tier** | [**SimpleReferralTier**](SimpleReferralTier.md) |  | [optional] |
-| **balance** | **Integer** |  | [optional] |
+| **balance** | [**EventCustomerRewardedBalance**](EventCustomerRewardedBalance.md) |  | [optional] |
 | **custom_event** | [**CustomEvent**](CustomEvent.md) |  | [optional] |
 | **customer_event** | **Object** |  | [optional] |
 

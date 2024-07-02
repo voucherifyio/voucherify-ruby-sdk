@@ -27,13 +27,17 @@ module VoucherifySdk
 
     attr_accessor :campaign
 
+    # A set of custom key/value pairs that you can attach to a promotion tier. The metadata object stores all custom attributes assigned to the promotion tier.
+    attr_accessor :metadata
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'name' => :'name',
         :'banner' => :'banner',
-        :'campaign' => :'campaign'
+        :'campaign' => :'campaign',
+        :'metadata' => :'metadata'
       }
     end
 
@@ -48,7 +52,8 @@ module VoucherifySdk
         :'id' => :'String',
         :'name' => :'String',
         :'banner' => :'String',
-        :'campaign' => :'SimplePromotionTierCampaign'
+        :'campaign' => :'SimplePromotionTierCampaign',
+        :'metadata' => :'Object'
       }
     end
 
@@ -88,6 +93,10 @@ module VoucherifySdk
       if attributes.key?(:'campaign')
         self.campaign = attributes[:'campaign']
       end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -113,7 +122,8 @@ module VoucherifySdk
           id == o.id &&
           name == o.name &&
           banner == o.banner &&
-          campaign == o.campaign
+          campaign == o.campaign &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -125,7 +135,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, banner, campaign].hash
+      [id, name, banner, campaign, metadata].hash
     end
 
     # Builds the object from hash

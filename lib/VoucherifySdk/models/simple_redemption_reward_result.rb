@@ -32,16 +32,16 @@ module VoucherifySdk
     # Unique reward ID, assigned by Voucherify.
     attr_accessor :id
 
-    # The type of object represented by the JSON. This object stores information about the reward.
+    # The type of the object represented by the JSON. This object stores information about the reward.
     attr_accessor :object
 
     # Reward name.
     attr_accessor :name
 
-    # Timestamp representing the date and time when the reward was created in ISO 8601 format.
+    # Timestamp representing the date and time when the reward was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the reward was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the reward was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     # Defines how the reward is generated.

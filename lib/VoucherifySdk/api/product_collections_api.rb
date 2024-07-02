@@ -34,7 +34,7 @@ module VoucherifySdk
     # @param [Hash] opts the optional parameters
     # @option opts [ProductCollectionsCreateRequestBody] :product_collections_create_request_body 
     # @return [Array<(ProductCollectionsCreateResponseBody, Integer, Hash)>] ProductCollectionsCreateResponseBody data, response status code and response headers
-    private def create_product_collection_with_http_info(opts = {})
+    def create_product_collection_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductCollectionsApi.create_product_collection ...'
       end
@@ -98,7 +98,7 @@ module VoucherifySdk
     # @param product_collection_id [String] A unique product collection ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    private def delete_product_collection_with_http_info(product_collection_id, opts = {})
+    def delete_product_collection_with_http_info(product_collection_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductCollectionsApi.delete_product_collection ...'
       end
@@ -159,7 +159,7 @@ module VoucherifySdk
     # @param product_collection_id [String] A unique product collection ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ProductCollectionsGetResponseBody, Integer, Hash)>] ProductCollectionsGetResponseBody data, response status code and response headers
-    private def get_product_collection_with_http_info(product_collection_id, opts = {})
+    def get_product_collection_with_http_info(product_collection_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductCollectionsApi.get_product_collection ...'
       end
@@ -210,9 +210,9 @@ module VoucherifySdk
     # List Product Collections
     # This method returns a list of product collections.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
-    # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is &#x60;1&#x60;.
+    # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash &#x60;-&#x60; preceding a sorting option means sorting in a descending order.
     # @return [ProductCollectionsListResponseBody]
     def list_product_collections(opts = {})
       data, _status_code, _headers = list_product_collections_with_http_info(opts)
@@ -222,11 +222,11 @@ module VoucherifySdk
     # List Product Collections
     # This method returns a list of product collections.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
-    # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is &#x60;1&#x60;.
+    # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash &#x60;-&#x60; preceding a sorting option means sorting in a descending order.
     # @return [Array<(ProductCollectionsListResponseBody, Integer, Hash)>] ProductCollectionsListResponseBody data, response status code and response headers
-    private def list_product_collections_with_http_info(opts = {})
+    def list_product_collections_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductCollectionsApi.list_product_collections ...'
       end
@@ -240,6 +240,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductCollectionsApi.list_product_collections, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductCollectionsApi.list_product_collections, must be greater than or equal to 1.'
       end
 
       # resource path
@@ -289,9 +293,9 @@ module VoucherifySdk
     # Retrieves list of products from a product collection; works for both dynamic and static product collections.
     # @param product_collection_id [String] Unique product collection ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
-    # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is &#x60;1&#x60;.
+    # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash &#x60;-&#x60; preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :starting_after Timestamp representing the date and time to use in starting_after cursor to get more data. Represented in ISO 8601 format.
     # @return [ProductCollectionsProductsListResponseBody]
     def list_products_in_collection(product_collection_id, opts = {})
@@ -303,12 +307,12 @@ module VoucherifySdk
     # Retrieves list of products from a product collection; works for both dynamic and static product collections.
     # @param product_collection_id [String] Unique product collection ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
-    # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is &#x60;1&#x60;.
+    # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash &#x60;-&#x60; preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :starting_after Timestamp representing the date and time to use in starting_after cursor to get more data. Represented in ISO 8601 format.
     # @return [Array<(ProductCollectionsProductsListResponseBody, Integer, Hash)>] ProductCollectionsProductsListResponseBody data, response status code and response headers
-    private def list_products_in_collection_with_http_info(product_collection_id, opts = {})
+    def list_products_in_collection_with_http_info(product_collection_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductCollectionsApi.list_products_in_collection ...'
       end
@@ -326,6 +330,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductCollectionsApi.list_products_in_collection, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductCollectionsApi.list_products_in_collection, must be greater than or equal to 1.'
       end
 
       # resource path

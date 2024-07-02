@@ -22,13 +22,13 @@ module VoucherifySdk
     # Associated reward ID.
     attr_accessor :reward_id
 
-    # Timestamp representing the date and time when the reward assignment was created in ISO 8601 format.
+    # Timestamp representing the date and time when the reward assignment was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the reward assignment was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the reward assignment was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
-    # The type of object represented by the JSON. This object stores information about the reward assignment.
+    # The type of the object represented by the JSON. This object stores information about the reward assignment.
     attr_accessor :object
 
     # Related object ID to which the reward was assigned.

@@ -22,13 +22,10 @@ module VoucherifySdk
     # How many times a voucher has already been redeemed.
     attr_accessor :redeemed_quantity
 
-    # Total amount redeemed. Value is multiplied by 100 to precisely represent 2 decimal places. For example, $100 balance is written as 10000.
-    attr_accessor :redeemed_amount
-
     # Total loyalty points redeemed.
     attr_accessor :redeemed_points
 
-    # The type of object represented is by default `list`. To get this list, you need to make a call to the endpoint returned in the url attribute.
+    # The type of the object represented is by default `list`. To get this list, you need to make a call to the endpoint returned in the url attribute.
     attr_accessor :object
 
     # The endpoint where this list of redemptions can be accessed using a GET method. `/v1/vouchers/{voucher_code}/redemptions`
@@ -39,7 +36,6 @@ module VoucherifySdk
       {
         :'quantity' => :'quantity',
         :'redeemed_quantity' => :'redeemed_quantity',
-        :'redeemed_amount' => :'redeemed_amount',
         :'redeemed_points' => :'redeemed_points',
         :'object' => :'object',
         :'url' => :'url'
@@ -56,7 +52,6 @@ module VoucherifySdk
       {
         :'quantity' => :'Integer',
         :'redeemed_quantity' => :'Integer',
-        :'redeemed_amount' => :'Integer',
         :'redeemed_points' => :'Integer',
         :'object' => :'String',
         :'url' => :'String'
@@ -90,10 +85,6 @@ module VoucherifySdk
 
       if attributes.key?(:'redeemed_quantity')
         self.redeemed_quantity = attributes[:'redeemed_quantity']
-      end
-
-      if attributes.key?(:'redeemed_amount')
-        self.redeemed_amount = attributes[:'redeemed_amount']
       end
 
       if attributes.key?(:'redeemed_points')
@@ -133,7 +124,6 @@ module VoucherifySdk
       self.class == o.class &&
           quantity == o.quantity &&
           redeemed_quantity == o.redeemed_quantity &&
-          redeemed_amount == o.redeemed_amount &&
           redeemed_points == o.redeemed_points &&
           object == o.object &&
           url == o.url
@@ -148,7 +138,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quantity, redeemed_quantity, redeemed_amount, redeemed_points, object, url].hash
+      [quantity, redeemed_quantity, redeemed_points, object, url].hash
     end
 
     # Builds the object from hash

@@ -11,10 +11,10 @@
 | **sku** | [**SimpleSku**](SimpleSku.md) |  | [optional] |
 | **loyalty_tier_id** | **String** | Unique loyalty tier ID assigned by Voucherify. | [optional] |
 | **id** | **String** | Unique reward ID, assigned by Voucherify. | [optional] |
-| **object** | **String** | The type of object represented by the JSON. This object stores information about the reward. | [optional][default to &#39;reward&#39;] |
+| **object** | **String** | The type of the object represented by the JSON. This object stores information about the reward. | [optional][default to &#39;reward&#39;] |
 | **name** | **String** | Reward name. | [optional] |
-| **created_at** | **Time** | Timestamp representing the date and time when the reward was created in ISO 8601 format. | [optional] |
-| **updated_at** | **Time** | Timestamp representing the date and time when the reward was updated in ISO 8601 format. | [optional] |
+| **created_at** | **Time** | Timestamp representing the date and time when the reward was created. The value is shown in the ISO 8601 format. | [optional] |
+| **updated_at** | **Time** | Timestamp representing the date and time when the reward was updated. The value is shown in the ISO 8601 format. | [optional] |
 | **parameters** | **Object** | Defines how the reward is generated. | [optional] |
 | **type** | **String** | Reward type. | [optional] |
 

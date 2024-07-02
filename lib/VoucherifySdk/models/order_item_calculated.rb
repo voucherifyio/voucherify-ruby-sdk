@@ -61,7 +61,7 @@ module VoucherifySdk
 
     attr_accessor :sku
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # A set of custom key/value pairs that you can attach to an SKU. It can be useful for storing additional information about the SKU in a structured format.

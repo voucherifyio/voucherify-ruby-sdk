@@ -6,5 +6,5 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Unique segment ID. |  |
 | **name** | **String** | Segment name. |  |
-| **object** | **String** | The type of object represented by the ID. | [default to &#39;segment&#39;] |
+| **object** | **String** | The type of the object represented by the ID. | [default to &#39;segment&#39;] |
 

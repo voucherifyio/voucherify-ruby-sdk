@@ -21,10 +21,10 @@ module VoucherifySdk
     # Total number of objects defining included products, SKUs, or product collections.
     attr_accessor :total
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :data_ref
 
     class EnumAttributeValidator

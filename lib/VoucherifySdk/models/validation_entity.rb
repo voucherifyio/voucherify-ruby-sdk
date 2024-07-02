@@ -24,7 +24,7 @@ module VoucherifySdk
     # The validation status
     attr_accessor :status
 
-    # Timestamp representing the date and time when the validation was created in ISO 8601 format.
+    # Timestamp representing the date and time when the validation was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Unique customer ID of the customer making the purchase.

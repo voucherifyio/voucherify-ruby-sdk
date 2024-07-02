@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Response body schema for **GET** /product-collections/{productCollectionID}/products.
   class ProductCollectionsProductsList
-    # The type of object represented by JSON. This object stores information about products and SKUs.
+    # The type of the object represented by JSON. This object stores information about products and SKUs.
     attr_accessor :object
 
     # Identifies the name of the JSON property that contains the array of products and SKUs.

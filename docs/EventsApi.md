@@ -13,7 +13,7 @@ All URIs are relative to *https://api.voucherify.io*
 
 Track Custom Event
 
-To track a custom event, you create an event object.   The event object must be linked to the customer who performs the action. If a customer doesnt exist in Voucherify, the customer will be created.
+To track a custom event, you create an event object.    The event object must be linked to the customer who performs the action. If a customer doesn't exist in Voucherify, the customer will be created.
 
 ### Examples
 
@@ -44,6 +44,24 @@ begin
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling EventsApi->track_custom_event: #{e}"
+end
+```
+
+#### Using the track_custom_event_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<EventsCreateResponseBody>, Integer, Hash)> track_custom_event_with_http_info(opts)
+
+```ruby
+begin
+  # Track Custom Event
+  data, status_code, headers = api_instance.track_custom_event_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <EventsCreateResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling EventsApi->track_custom_event_with_http_info: #{e}"
 end
 ```
 

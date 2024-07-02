@@ -18,7 +18,7 @@ module VoucherifySdk
     # A unique identifier of an existing customer.
     attr_accessor :id
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     class EnumAttributeValidator

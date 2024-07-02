@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Response body schema for **GET** `/categories`.
   class CategoriesListResponseBody
-    # The type of object represented by JSON. This object stores information about categories in a dictionary.
+    # The type of the object represented by JSON. This object stores information about categories in a dictionary.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of category objects.

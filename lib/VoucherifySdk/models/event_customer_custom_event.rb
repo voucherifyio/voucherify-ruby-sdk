@@ -16,12 +16,24 @@ require 'time'
 module VoucherifySdk
   # Event data object schema for `customer.custom_event`.
   class EventCustomerCustomEvent
+    attr_accessor :event
+
+    attr_accessor :event_schema
+
     attr_accessor :customer
+
+    attr_accessor :referral
+
+    attr_accessor :loyalty
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'customer' => :'customer'
+        :'event' => :'event',
+        :'event_schema' => :'event_schema',
+        :'customer' => :'customer',
+        :'referral' => :'referral',
+        :'loyalty' => :'loyalty'
       }
     end
 
@@ -33,13 +45,19 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'customer' => :'CustomerWithSummaryLoyaltyReferrals'
+        :'event' => :'CustomEvent',
+        :'event_schema' => :'SimpleCustomEvent',
+        :'customer' => :'SimpleCustomer',
+        :'referral' => :'EventCustomerCustomEventReferral',
+        :'loyalty' => :'EventCustomerCustomEventLoyalty'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'referral',
+        :'loyalty'
       ])
     end
 
@@ -58,10 +76,34 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'event')
+        self.event = attributes[:'event']
+      else
+        self.event = nil
+      end
+
+      if attributes.key?(:'event_schema')
+        self.event_schema = attributes[:'event_schema']
+      else
+        self.event_schema = nil
+      end
+
       if attributes.key?(:'customer')
         self.customer = attributes[:'customer']
       else
         self.customer = nil
+      end
+
+      if attributes.key?(:'referral')
+        self.referral = attributes[:'referral']
+      else
+        self.referral = nil
+      end
+
+      if attributes.key?(:'loyalty')
+        self.loyalty = attributes[:'loyalty']
+      else
+        self.loyalty = nil
       end
     end
 
@@ -70,6 +112,14 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @event.nil?
+        invalid_properties.push('invalid value for "event", event cannot be nil.')
+      end
+
+      if @event_schema.nil?
+        invalid_properties.push('invalid value for "event_schema", event_schema cannot be nil.')
+      end
+
       if @customer.nil?
         invalid_properties.push('invalid value for "customer", customer cannot be nil.')
       end
@@ -81,6 +131,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @event.nil?
+      return false if @event_schema.nil?
       return false if @customer.nil?
       true
     end
@@ -90,7 +142,11 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          customer == o.customer
+          event == o.event &&
+          event_schema == o.event_schema &&
+          customer == o.customer &&
+          referral == o.referral &&
+          loyalty == o.loyalty
     end
 
     # @see the `==` method
@@ -102,7 +158,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer].hash
+      [event, event_schema, customer, referral, loyalty].hash
     end
 
     # Builds the object from hash

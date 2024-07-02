@@ -19,10 +19,10 @@ module VoucherifySdk
     # Unique redemption ID.
     attr_accessor :id
 
-    # The type of object represented by the JSON. This object stores information about the `redemption`.
+    # The type of the object represented by the JSON. This object stores information about the `redemption`.
     attr_accessor :object
 
-    # Timestamp representing the date and time when the redemption was created in ISO 8601 format.
+    # Timestamp representing the date and time when the redemption was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Hashed customer source ID.
@@ -178,7 +178,7 @@ module VoucherifySdk
         :'related_object_id' => :'String',
         :'related_object_parent_id' => :'String',
         :'campaign_name' => :'String',
-        :'voucher' => :'Voucher',
+        :'voucher' => :'RedemptionVoucher',
         :'promotion_tier' => :'PromotionTier'
       }
     end

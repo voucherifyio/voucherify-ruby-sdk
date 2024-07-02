@@ -4,5 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **customer** | [**CustomerWithSummaryLoyaltyReferrals**](CustomerWithSummaryLoyaltyReferrals.md) |  |  |
+| **event** | [**CustomEvent**](CustomEvent.md) |  |  |
+| **event_schema** | [**SimpleCustomEvent**](SimpleCustomEvent.md) |  |  |
+| **customer** | [**SimpleCustomer**](SimpleCustomer.md) |  |  |
+| **referral** | [**EventCustomerCustomEventReferral**](EventCustomerCustomEventReferral.md) |  |  |
+| **loyalty** | [**EventCustomerCustomEventLoyalty**](EventCustomerCustomEventLoyalty.md) |  |  |
 

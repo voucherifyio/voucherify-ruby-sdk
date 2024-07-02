@@ -30,7 +30,7 @@ module VoucherifySdk
 
     attr_accessor :operation_type
 
-    # The type of object represented by JSON. Default is `balance`.
+    # The type of the object represented by JSON. Default is `balance`.
     attr_accessor :object
 
     attr_accessor :related_object

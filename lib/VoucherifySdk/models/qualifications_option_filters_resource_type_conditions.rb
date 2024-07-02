@@ -20,33 +20,9 @@ module VoucherifySdk
 
     attr_accessor :is_not
 
-    # Array of qualified redeemables. Accepts more than one value. Returns the resource types entered in the array.
     attr_accessor :_in
 
-    # Array of qualified redeemables. Accepts more than one value. Returns the resource types except those entered in the array.
     attr_accessor :not_in
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -66,8 +42,8 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'is' => :'ResourceTypes',
-        :'is_not' => :'ResourceTypes',
+        :'is' => :'Array<ResourceTypes>',
+        :'is_not' => :'Array<ResourceTypes>',
         :'_in' => :'Array<ResourceTypes>',
         :'not_in' => :'Array<ResourceTypes>'
       }
@@ -95,11 +71,15 @@ module VoucherifySdk
       }
 
       if attributes.key?(:'is')
-        self.is = attributes[:'is']
+        if (value = attributes[:'is']).is_a?(Array)
+          self.is = value
+        end
       end
 
       if attributes.key?(:'is_not')
-        self.is_not = attributes[:'is_not']
+        if (value = attributes[:'is_not']).is_a?(Array)
+          self.is_not = value
+        end
       end
 
       if attributes.key?(:'_in')

@@ -28,6 +28,8 @@ module VoucherifySdk
 
     attr_accessor :promotion_tier
 
+    attr_accessor :promotion_stack
+
     attr_accessor :redemption
 
     attr_accessor :redemption_rollback
@@ -41,6 +43,7 @@ module VoucherifySdk
         :'voucher' => :'voucher',
         :'holder' => :'holder',
         :'promotion_tier' => :'promotion_tier',
+        :'promotion_stack' => :'promotion_stack',
         :'redemption' => :'redemption',
         :'redemption_rollback' => :'redemption_rollback'
       }
@@ -60,6 +63,7 @@ module VoucherifySdk
         :'voucher' => :'SimpleVoucher',
         :'holder' => :'SimpleCustomer',
         :'promotion_tier' => :'SimplePromotionTier',
+        :'promotion_stack' => :'SimplePromotionStack',
         :'redemption' => :'SimpleRedemption',
         :'redemption_rollback' => :'SimpleRedemption'
       }
@@ -117,6 +121,10 @@ module VoucherifySdk
         self.promotion_tier = attributes[:'promotion_tier']
       end
 
+      if attributes.key?(:'promotion_stack')
+        self.promotion_stack = attributes[:'promotion_stack']
+      end
+
       if attributes.key?(:'redemption')
         self.redemption = attributes[:'redemption']
       end
@@ -152,6 +160,7 @@ module VoucherifySdk
           voucher == o.voucher &&
           holder == o.holder &&
           promotion_tier == o.promotion_tier &&
+          promotion_stack == o.promotion_stack &&
           redemption == o.redemption &&
           redemption_rollback == o.redemption_rollback
     end
@@ -165,7 +174,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer, order, campaign, voucher, holder, promotion_tier, redemption, redemption_rollback].hash
+      [customer, order, campaign, voucher, holder, promotion_tier, promotion_stack, redemption, redemption_rollback].hash
     end
 
     # Builds the object from hash

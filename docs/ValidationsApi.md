@@ -47,6 +47,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the validate_stacked_discounts_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ValidationsValidateResponseBody>, Integer, Hash)> validate_stacked_discounts_with_http_info(opts)
+
+```ruby
+begin
+  # Validate Stackable Discounts
+  data, status_code, headers = api_instance.validate_stacked_discounts_with_http_info(opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ValidationsValidateResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling ValidationsApi->validate_stacked_discounts_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |

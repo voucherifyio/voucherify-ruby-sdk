@@ -25,13 +25,13 @@ module VoucherifySdk
     # Category hierarchy.
     attr_accessor :hierarchy
 
-    # The type of object represented by the JSON. This object stores information about the category.
+    # The type of the object represented by the JSON. This object stores information about the category.
     attr_accessor :object
 
-    # Timestamp representing the date and time when the category was created in ISO 8601 format.
+    # Timestamp representing the date and time when the category was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the category was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the category was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     # The type of the stacking rule eligibility.

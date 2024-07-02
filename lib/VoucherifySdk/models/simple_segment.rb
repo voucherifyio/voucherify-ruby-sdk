@@ -21,7 +21,7 @@ module VoucherifySdk
     # Segment name.
     attr_accessor :name
 
-    # The type of object represented by the ID.
+    # The type of the object represented by the ID.
     attr_accessor :object
 
     class EnumAttributeValidator

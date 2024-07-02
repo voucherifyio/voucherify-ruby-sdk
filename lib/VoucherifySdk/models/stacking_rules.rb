@@ -200,16 +200,16 @@ module VoucherifySdk
         invalid_properties.push('invalid value for "applicable_exclusive_redeemables_limit", applicable_exclusive_redeemables_limit cannot be nil.')
       end
 
-      if @applicable_exclusive_redeemables_limit > 30
-        invalid_properties.push('invalid value for "applicable_exclusive_redeemables_limit", must be smaller than or equal to 30.')
+      if @applicable_exclusive_redeemables_limit > 5
+        invalid_properties.push('invalid value for "applicable_exclusive_redeemables_limit", must be smaller than or equal to 5.')
       end
 
       if @applicable_exclusive_redeemables_limit < 1
         invalid_properties.push('invalid value for "applicable_exclusive_redeemables_limit", must be greater than or equal to 1.')
       end
 
-      if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit > 30
-        invalid_properties.push('invalid value for "applicable_redeemables_per_category_limit", must be smaller than or equal to 30.')
+      if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit > 5
+        invalid_properties.push('invalid value for "applicable_redeemables_per_category_limit", must be smaller than or equal to 5.')
       end
 
       if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit < 1
@@ -238,9 +238,9 @@ module VoucherifySdk
       return false if @applicable_redeemables_limit > 30
       return false if @applicable_redeemables_limit < 1
       return false if @applicable_exclusive_redeemables_limit.nil?
-      return false if @applicable_exclusive_redeemables_limit > 30
+      return false if @applicable_exclusive_redeemables_limit > 5
       return false if @applicable_exclusive_redeemables_limit < 1
-      return false if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit > 30
+      return false if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit > 5
       return false if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit < 1
       return false if @exclusive_categories.nil?
       return false if @joint_categories.nil?
@@ -294,8 +294,8 @@ module VoucherifySdk
         fail ArgumentError, 'applicable_exclusive_redeemables_limit cannot be nil'
       end
 
-      if applicable_exclusive_redeemables_limit > 30
-        fail ArgumentError, 'invalid value for "applicable_exclusive_redeemables_limit", must be smaller than or equal to 30.'
+      if applicable_exclusive_redeemables_limit > 5
+        fail ArgumentError, 'invalid value for "applicable_exclusive_redeemables_limit", must be smaller than or equal to 5.'
       end
 
       if applicable_exclusive_redeemables_limit < 1
@@ -312,8 +312,8 @@ module VoucherifySdk
         fail ArgumentError, 'applicable_redeemables_per_category_limit cannot be nil'
       end
 
-      if applicable_redeemables_per_category_limit > 30
-        fail ArgumentError, 'invalid value for "applicable_redeemables_per_category_limit", must be smaller than or equal to 30.'
+      if applicable_redeemables_per_category_limit > 5
+        fail ArgumentError, 'invalid value for "applicable_redeemables_per_category_limit", must be smaller than or equal to 5.'
       end
 
       if applicable_redeemables_per_category_limit < 1

@@ -40,7 +40,7 @@ module VoucherifySdk
     # The related transaction ID on the receiving card.
     attr_accessor :related_transaction_id
 
-    # Timestamp representing the date and time when the transaction was created in ISO 8601 format.
+    # Timestamp representing the date and time when the transaction was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     class EnumAttributeValidator

@@ -44,8 +44,10 @@ module VoucherifySdk
 
     attr_accessor :validity_timeframe
 
-    # Integer array corresponding to the particular days of the week in which the campaign is valid.  - `0`  Sunday   - `1`  Monday   - `2`  Tuesday   - `3`  Wednesday   - `4`  Thursday   - `5`  Friday   - `6`  Saturday  
+    # Integer array corresponding to the particular days of the week in which the campaign is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
+
+    attr_accessor :validity_hours
 
     # Defines the amount of time the campaign will be active in ISO 8601 format after publishing. For example, a campaign with a `duration` of `P24D` will be valid for a duration of 24 days.
     attr_accessor :activity_duration_after_publishing
@@ -65,10 +67,10 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the campaign. A set of key/value pairs that you can attach to a campaign object. It can be useful for storing additional information about the campaign in a structured format.
     attr_accessor :metadata
 
-    # Timestamp representing the date and time when the campaign was created in ISO 8601 format.
+    # Timestamp representing the date and time when the campaign was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the voucher was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the campaign was last updated in ISO 8601 format.
     attr_accessor :updated_at
 
     # Unique category name.
@@ -77,7 +79,7 @@ module VoucherifySdk
     # Indicates the status of the campaign creation.
     attr_accessor :creation_status
 
-    # Indicates the status of the campaign's vouchers.
+    # Indicates the status of the campaign's voucher generation.
     attr_accessor :vouchers_generation_status
 
     # Indicates whether the resource can be deleted.
@@ -89,7 +91,7 @@ module VoucherifySdk
     # Contains details about the category.
     attr_accessor :categories
 
-    # The type of object represented by JSON. This object stores information about the campaign.
+    # The type of the object represented by JSON. This object stores information about the campaign.
     attr_accessor :object
 
     attr_accessor :referral_program
@@ -132,6 +134,7 @@ module VoucherifySdk
         :'use_voucher_metadata_schema' => :'use_voucher_metadata_schema',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours',
         :'activity_duration_after_publishing' => :'activity_duration_after_publishing',
         :'vouchers_count' => :'vouchers_count',
         :'start_date' => :'start_date',
@@ -171,6 +174,7 @@ module VoucherifySdk
         :'use_voucher_metadata_schema' => :'Boolean',
         :'validity_timeframe' => :'CampaignBaseValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
+        :'validity_hours' => :'ValidityHours',
         :'activity_duration_after_publishing' => :'String',
         :'vouchers_count' => :'Integer',
         :'start_date' => :'Time',
@@ -271,6 +275,10 @@ module VoucherifySdk
         if (value = attributes[:'validity_day_of_week']).is_a?(Array)
           self.validity_day_of_week = value
         end
+      end
+
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
       end
 
       if attributes.key?(:'activity_duration_after_publishing')
@@ -502,6 +510,7 @@ module VoucherifySdk
           use_voucher_metadata_schema == o.use_voucher_metadata_schema &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours &&
           activity_duration_after_publishing == o.activity_duration_after_publishing &&
           vouchers_count == o.vouchers_count &&
           start_date == o.start_date &&
@@ -530,7 +539,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, description, campaign_type, type, voucher, auto_join, join_once, use_voucher_metadata_schema, validity_timeframe, validity_day_of_week, activity_duration_after_publishing, vouchers_count, start_date, expiration_date, active, metadata, created_at, updated_at, category, creation_status, vouchers_generation_status, protected, category_id, categories, object, referral_program, loyalty_tiers_expiration].hash
+      [id, name, description, campaign_type, type, voucher, auto_join, join_once, use_voucher_metadata_schema, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, vouchers_count, start_date, expiration_date, active, metadata, created_at, updated_at, category, creation_status, vouchers_generation_status, protected, category_id, categories, object, referral_program, loyalty_tiers_expiration].hash
     end
 
     # Builds the object from hash

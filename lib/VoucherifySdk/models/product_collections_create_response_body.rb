@@ -30,10 +30,10 @@ module VoucherifySdk
     # Defines a set of products for a `STATIC` product collection type.
     attr_accessor :products
 
-    # Timestamp representing the date and time when the product collection was created in ISO 8601 format.
+    # Timestamp representing the date and time when the product collection was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # The type of object represented by JSON. This object stores information about the static product collection.
+    # The type of the object represented by JSON. This object stores information about the static product collection.
     attr_accessor :object
 
     class EnumAttributeValidator

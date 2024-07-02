@@ -26,7 +26,7 @@ module VoucherifySdk
 
     attr_accessor :bucket
 
-    # Timestamp representing the date and time when the loyalty points bucket object was created in ISO 8601 format.
+    # Timestamp representing the date and time when the loyalty points bucket object was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Loyalty points bucket point status.
@@ -35,10 +35,10 @@ module VoucherifySdk
     # Date when the number of points defined in the bucket object are due to expire.
     attr_accessor :expires_at
 
-    # Timestamp representing the date and time when the loyalty points bucket object was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the loyalty points bucket object was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
-    # The type of object represented by JSON. This object stores information about the loyalty points bucket.
+    # The type of the object represented by JSON. This object stores information about the loyalty points bucket.
     attr_accessor :object
 
     class EnumAttributeValidator

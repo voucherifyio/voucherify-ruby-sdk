@@ -6,5 +6,5 @@
 | ---- | ---- | ----------- | ----- |
 | **reward** | [**Reward**](Reward.md) |  |  |
 | **assignment** | [**RewardAssignment**](RewardAssignment.md) |  |  |
-| **object** | **String** | The type of object represented by JSON. This object stores information about the loyalty tier reward. | [default to &#39;loyalty_tier_reward&#39;] |
+| **object** | **String** | The type of the object represented by JSON. This object stores information about the loyalty tier reward. | [default to &#39;loyalty_tier_reward&#39;] |
 

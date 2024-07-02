@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Schema representing list of product collections
   class ProductCollectionsList
-    # The type of object represented by JSON. This object stores information about product collections.
+    # The type of the object represented by JSON. This object stores information about product collections.
     attr_accessor :object
 
     # Identifies the name of the JSON property that contains the array of product collections.

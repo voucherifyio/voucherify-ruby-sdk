@@ -28,10 +28,10 @@ module VoucherifySdk
     # The type of resource to which the validation rule was assigned.
     attr_accessor :related_object_type
 
-    # Timestamp representing the date and time when the validation rule assignment was created in ISO 8601 format.
+    # Timestamp representing the date and time when the validation rule assignment was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # The type of object represented by the ID.
+    # The type of the object represented by the ID.
     attr_accessor :object
 
     class EnumAttributeValidator

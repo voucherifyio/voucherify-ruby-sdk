@@ -5,8 +5,8 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Unique redemption ID. |  |
-| **object** | **String** | The type of object represented by the JSON | [default to &#39;redemption_rollback&#39;] |
-| **date** | **Time** | Timestamp representing the date and time when the object was created in ISO 8601 format. |  |
+| **object** | **String** | The type of the object represented by the JSON | [default to &#39;redemption_rollback&#39;] |
+| **date** | **Time** | Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format. |  |
 | **customer_id** | **String** | Unique customer ID of the redeeming customer. |  |
 | **tracking_id** | **String** | Hashed customer source ID. |  |
 | **metadata** | **Object** | The metadata object stores all custom attributes assigned to the redemption. |  |

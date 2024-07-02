@@ -25,6 +25,7 @@ module VoucherifySdk
     CUSTOMER_SOURCE_ID = "customer_source_id".freeze
     CUSTOMER_NAME = "customer_name".freeze
     TRACKING_ID = "tracking_id".freeze
+    ORDER_ID = "order_id".freeze
     ORDER_AMOUNT = "order_amount".freeze
     GIFT_AMOUNT = "gift_amount".freeze
     LOYALTY_POINTS = "loyalty_points".freeze
@@ -34,7 +35,7 @@ module VoucherifySdk
     METADATA = "metadata".freeze
 
     def self.all_vars
-      @all_vars ||= [ID, OBJECT, DATE, VOUCHER_CODE, CAMPAIGN, PROMOTION_TIER_ID, CUSTOMER_ID, CUSTOMER_SOURCE_ID, CUSTOMER_NAME, TRACKING_ID, ORDER_AMOUNT, GIFT_AMOUNT, LOYALTY_POINTS, RESULT, FAILURE_CODE, FAILURE_MESSAGE, METADATA].freeze
+      @all_vars ||= [ID, OBJECT, DATE, VOUCHER_CODE, CAMPAIGN, PROMOTION_TIER_ID, CUSTOMER_ID, CUSTOMER_SOURCE_ID, CUSTOMER_NAME, TRACKING_ID, ORDER_ID, ORDER_AMOUNT, GIFT_AMOUNT, LOYALTY_POINTS, RESULT, FAILURE_CODE, FAILURE_MESSAGE, METADATA].freeze
     end
 
     # Builds the enum from string

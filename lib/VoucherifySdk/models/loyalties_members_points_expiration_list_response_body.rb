@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Response body schema for **GET** `/loyalties/{campaignId}/members/{memberId}/points-expiration`.
   class LoyaltiesMembersPointsExpirationListResponseBody
-    # The type of object represented by JSON. This object stores information about loyalty points expiration buckets in a dictionary.
+    # The type of the object represented by JSON. This object stores information about loyalty points expiration buckets in a dictionary.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of loyalty points expiration bucket objects.

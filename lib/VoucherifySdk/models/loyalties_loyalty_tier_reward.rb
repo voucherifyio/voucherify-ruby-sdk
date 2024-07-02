@@ -20,7 +20,7 @@ module VoucherifySdk
 
     attr_accessor :assignment
 
-    # The type of object represented by JSON. This object stores information about the loyalty tier reward.
+    # The type of the object represented by JSON. This object stores information about the loyalty tier reward.
     attr_accessor :object
 
     class EnumAttributeValidator

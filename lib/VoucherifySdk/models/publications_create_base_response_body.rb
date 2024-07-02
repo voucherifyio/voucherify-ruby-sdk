@@ -18,10 +18,10 @@ module VoucherifySdk
     # Unique publication ID, assigned by Voucherify.
     attr_accessor :id
 
-    # The type of object represented by the JSON. This object stores information about the `publication`.
+    # The type of the object represented by the JSON. This object stores information about the `publication`.
     attr_accessor :object
 
-    # Timestamp representing the date and time when the publication was created in ISO 8601 format.
+    # Timestamp representing the date and time when the publication was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Unique customer ID of the customer receiving the publication.

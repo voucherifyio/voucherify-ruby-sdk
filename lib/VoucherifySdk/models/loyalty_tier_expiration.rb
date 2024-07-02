@@ -31,10 +31,10 @@ module VoucherifySdk
     # Expiration timestamp defines when the loyalty tier expires in ISO 8601 format. Loyalty tier is inactive after this date.
     attr_accessor :expiration_date
 
-    # Timestamp representing the date and time when the loyalty tier was created in ISO 8601 format.
+    # Timestamp representing the date and time when the loyalty tier was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the loyalty tier was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the loyalty tier was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     # Attribute mapping from ruby-style variable name to JSON key.
