@@ -41,7 +41,7 @@ module VoucherifySdk
       {
         :'customer' => :'SimpleCustomer',
         :'campaign' => :'SimpleCampaign',
-        :'publication' => :'Object'
+        :'publication' => :'ListPublicationsItemValidSingleVoucher'
       }
     end
 

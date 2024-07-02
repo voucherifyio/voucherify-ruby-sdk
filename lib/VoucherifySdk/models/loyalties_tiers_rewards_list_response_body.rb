@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Response body schema for **GET** `/loyalties/{campaignId}/tiers/{loyaltyTierId}/rewards`.
   class LoyaltiesTiersRewardsListResponseBody
-    # The type of object represented by JSON. This object stores information about loyalty tier rewards in a dictionary.
+    # The type of the object represented by JSON. This object stores information about loyalty tier rewards in a dictionary.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of loyalty tier reward objects.

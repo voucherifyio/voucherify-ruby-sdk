@@ -33,7 +33,7 @@ module VoucherifySdk
     # Customer's phone number. This parameter is mandatory when you try to send out codes to customers via an SMS channel.
     attr_accessor :phone
 
-    # *Deprecated* Customer's birthdate; format YYYY-MM-DD.
+    # `Deprecated`. ~~Customer's birthdate; format YYYY-MM-DD~~.
     attr_accessor :birthday
 
     # Customer's birthdate; format YYYY-MM-DD.

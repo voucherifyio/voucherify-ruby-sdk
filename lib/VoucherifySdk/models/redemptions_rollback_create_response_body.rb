@@ -19,10 +19,10 @@ module VoucherifySdk
     # Unique redemption ID.
     attr_accessor :id
 
-    # The type of object represented by the JSON
+    # The type of the object represented by the JSON
     attr_accessor :object
 
-    # Timestamp representing the date and time when the object was created in ISO 8601 format.
+    # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :date
 
     # Unique customer ID of the redeeming customer.

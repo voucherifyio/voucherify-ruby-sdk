@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Contains the id of a customer segment. Required for the customer.segment.entered option in event.
+  # Contains the ID of a customer segment. Required for the customer.segment.entered option in event.
   class EarningRuleBaseSegment
     # Contains a unique identifier of a customer segment. Assigned by the Voucherify API.
     attr_accessor :id

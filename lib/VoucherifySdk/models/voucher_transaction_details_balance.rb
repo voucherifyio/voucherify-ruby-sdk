@@ -19,16 +19,16 @@ module VoucherifySdk
     # The type of voucher whose balance is being adjusted due to the transaction.
     attr_accessor :type
 
-    # The available points prior to the transaction.
+    # The number of all points accumulated on the card as affected by add or subtract operations.
     attr_accessor :total
 
-    # The type of object represented by the JSON.
+    # The type of the object represented by the JSON.
     attr_accessor :object
 
-    # The amount of points being used up in the transaction.
+    # Points added or subtracted in the transaction.
     attr_accessor :points
 
-    # The points balance on the loyalty card after the points in the transaction are subtracted from the loyalty card.
+    # The available points on the card after the transaction as affected by redemption or rollback.
     attr_accessor :balance
 
     attr_accessor :related_object

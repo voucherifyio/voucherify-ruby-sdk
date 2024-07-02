@@ -25,7 +25,7 @@ module VoucherifySdk
     # Hashed customer source ID.
     attr_accessor :tracking_id
 
-    # Timestamp representing the date and time when the redemption was created in ISO 8601 format.
+    # Timestamp representing the date and time when the redemption was created. The value is shown in the ISO 8601 format.
     attr_accessor :date
 
     # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.
@@ -47,7 +47,7 @@ module VoucherifySdk
     # Unique redemption ID of the parent redemption.
     attr_accessor :redemption
 
-    # The type of object represented by the JSON. This object stores information about the `redemption`.
+    # The type of the object represented by the JSON. This object stores information about the `redemption`.
     attr_accessor :object
 
     class EnumAttributeValidator

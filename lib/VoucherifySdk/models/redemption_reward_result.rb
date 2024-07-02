@@ -35,10 +35,10 @@ module VoucherifySdk
     # Name of the reward.
     attr_accessor :name
 
-    # The type of object represented by the JSON
+    # The type of the object represented by the JSON
     attr_accessor :object
 
-    # Timestamp representing the date and time when the redemption was created in ISO 8601 format.
+    # Timestamp representing the date and time when the redemption was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Timestamp in ISO 8601 format indicating when the reward was updated.

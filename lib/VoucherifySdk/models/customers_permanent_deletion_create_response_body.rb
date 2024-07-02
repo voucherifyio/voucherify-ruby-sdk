@@ -33,7 +33,7 @@ module VoucherifySdk
 
     attr_accessor :data_json
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # Attribute mapping from ruby-style variable name to JSON key.

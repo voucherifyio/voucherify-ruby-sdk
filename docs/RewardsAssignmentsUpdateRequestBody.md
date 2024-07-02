@@ -4,5 +4,5 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **parameters** | [**RewardsAssignmentsUpdateRequestBodyParameters**](RewardsAssignmentsUpdateRequestBodyParameters.md) |  | [optional] |
+| **parameters** | [**LoyaltiesRewardsUpdateRequestBodyParameters**](LoyaltiesRewardsUpdateRequestBodyParameters.md) |  | [optional] |
 

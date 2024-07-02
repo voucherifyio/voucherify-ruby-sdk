@@ -19,73 +19,9 @@ module VoucherifySdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Delete Voucher
-    # Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher.
-    # @param code [String] A unique **code** that identifies the voucher.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the voucher will be removed permanently. Going forward, the user will be able to create another voucher with exactly the same code.
-    # @return [nil]
-    def delete_voucher(code, opts = {})
-      delete_voucher_with_http_info(code, opts)
-      nil
-    end
-
-    # Delete Voucher
-    # Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher.
-    # @param code [String] A unique **code** that identifies the voucher.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the voucher will be removed permanently. Going forward, the user will be able to create another voucher with exactly the same code.
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    private def delete_voucher_with_http_info(code, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: VouchersApi.delete_voucher ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.delete_voucher"
-      end
-      # resource path
-      local_var_path = '/v1/vouchers/{code}'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'force'] = opts[:'force'] if !opts[:'force'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type]
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
-
-      new_options = opts.merge(
-        :operation => :"VouchersApi.delete_voucher",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: VouchersApi#delete_voucher\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Disable Voucher
-    # There are various times when youll want to manage a vouchers accessibility. This can be done by two API methods for managing the voucher state - *enable* and *disable*.   ___ This method sets the voucher state to **inactive**. The voucher cannot be redeemed.
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
+    # There are various times when you'll want to manage a voucher's accessibility. This can be done by two API methods for managing the voucher state - *enable* and *disable*.   ___ This method sets the voucher state to **inactive**. The voucher cannot be redeemed.
+    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. &#x60;v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u&#x60;.
     # @param [Hash] opts the optional parameters
     # @return [VouchersDisableResponseBody]
     def disable_voucher(code, opts = {})
@@ -94,11 +30,11 @@ module VoucherifySdk
     end
 
     # Disable Voucher
-    # There are various times when youll want to manage a vouchers accessibility. This can be done by two API methods for managing the voucher state - *enable* and *disable*.   ___ This method sets the voucher state to **inactive**. The voucher cannot be redeemed.
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
+    # There are various times when you&#39;ll want to manage a voucher&#39;s accessibility. This can be done by two API methods for managing the voucher state - *enable* and *disable*.   ___ This method sets the voucher state to **inactive**. The voucher cannot be redeemed.
+    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. &#x60;v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u&#x60;.
     # @param [Hash] opts the optional parameters
     # @return [Array<(VouchersDisableResponseBody, Integer, Hash)>] VouchersDisableResponseBody data, response status code and response headers
-    private def disable_voucher_with_http_info(code, opts = {})
+    def disable_voucher_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.disable_voucher ...'
       end
@@ -147,8 +83,8 @@ module VoucherifySdk
     end
 
     # Enable Voucher
-    # There are various times when youll want to manage a vouchers accessibility. This can be done by two API methods for managing the voucher state - *enable* and *disable*.   ___ The method sets the voucher state to **active**. The voucher can be redeemed - only if the redemption occurs after the start date and the voucher is not expired.
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
+    # There are various times when you'll want to manage a voucher's accessibility. This can be done by two API methods for managing the voucher state - *enable* and *disable*.   ___ The method sets the voucher state to **active**. The voucher can be redeemed - only if the redemption occurs after the start date and the voucher is not expired.
+    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. &#x60;v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u&#x60;.
     # @param [Hash] opts the optional parameters
     # @return [VouchersEnableResponseBody]
     def enable_voucher(code, opts = {})
@@ -157,11 +93,11 @@ module VoucherifySdk
     end
 
     # Enable Voucher
-    # There are various times when youll want to manage a vouchers accessibility. This can be done by two API methods for managing the voucher state - *enable* and *disable*.   ___ The method sets the voucher state to **active**. The voucher can be redeemed - only if the redemption occurs after the start date and the voucher is not expired.
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
+    # There are various times when you&#39;ll want to manage a voucher&#39;s accessibility. This can be done by two API methods for managing the voucher state - *enable* and *disable*.   ___ The method sets the voucher state to **active**. The voucher can be redeemed - only if the redemption occurs after the start date and the voucher is not expired.
+    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. &#x60;v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u&#x60;.
     # @param [Hash] opts the optional parameters
     # @return [Array<(VouchersEnableResponseBody, Integer, Hash)>] VouchersEnableResponseBody data, response status code and response headers
-    private def enable_voucher_with_http_info(code, opts = {})
+    def enable_voucher_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.enable_voucher ...'
       end
@@ -210,8 +146,8 @@ module VoucherifySdk
     end
 
     # Export Voucher Transactions
-    # Export transactions that are associated with credit movements on a gift card or loyalty card.   
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
+    # Export transactions that are associated with credit movements on a gift card or loyalty card.  | **Field** | **Definition** | **Example Export** | |:---|:---|:---| | id | Unique transaction ID. | vtx_0cb7811f1c07765800 | | type | Transaction type. | - `CREDITS_REMOVAL` <br> - `CREDITS_ADDITION` <br> - `CREDITS_REFUND` <br> - `CREDITS_REDEMPTION` <br> - `POINTS_ACCRUAL` <br> - `POINTS_CANCELLATION` <br> - `POINTS_REDEMPTION`<br> - `POINTS_REFUND`<br> - `POINTS_ADDITION`<br> - `POINTS_REMOVAL`<br> - `POINTS_EXPIRATION`<br> - `POINTS_TRANSFER_IN`<br> - `POINTS_TRANSFER_OUT` | | source_id | Unique transaction source ID. | 8638 | | reason | Contains the reason for the transaction if one was included originally. |  | | balance | The gift card or loyalty card balance after the transaction. |  | | amount | The amount of gift card or loyalty card credits being allocated during the transaction. This value can either be negative or positive depending on the nature of the transaction. |  | | created_at | Timestamp in ISO 8601 format representing the date and time when the transaction was created. | 2022-03-09T09:16:32.521Z  | | voucher_id | Unique Voucher ID. | v_dky7ksKfPX50Wb2Bxvcoeb1xT20b6tcp | | campaign_id | Parent campaign ID. | camp_FNYR4jhqZBM9xTptxDGgeNBV | | source|  Channel through which the transaction was initiated. | API | | details | More detailed information stored in the form of a JSON. | Provides more details related to the transaction in the form of an object. | | related_transaction_id | Unique transaction ID related to a receiver/donor card in the case of a points transfer from/to another card. | vtx_0c9afe802593b34b80 |
+    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. &#x60;v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u&#x60;.
     # @param [Hash] opts the optional parameters
     # @option opts [VouchersTransactionsExportCreateRequestBody] :vouchers_transactions_export_create_request_body Specify the parameters for the transaction export.
     # @return [VouchersTransactionsExportCreateResponseBody]
@@ -221,12 +157,12 @@ module VoucherifySdk
     end
 
     # Export Voucher Transactions
-    # Export transactions that are associated with credit movements on a gift card or loyalty card.   
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
+    # Export transactions that are associated with credit movements on a gift card or loyalty card.  | **Field** | **Definition** | **Example Export** | |:---|:---|:---| | id | Unique transaction ID. | vtx_0cb7811f1c07765800 | | type | Transaction type. | - &#x60;CREDITS_REMOVAL&#x60; &lt;br&gt; - &#x60;CREDITS_ADDITION&#x60; &lt;br&gt; - &#x60;CREDITS_REFUND&#x60; &lt;br&gt; - &#x60;CREDITS_REDEMPTION&#x60; &lt;br&gt; - &#x60;POINTS_ACCRUAL&#x60; &lt;br&gt; - &#x60;POINTS_CANCELLATION&#x60; &lt;br&gt; - &#x60;POINTS_REDEMPTION&#x60;&lt;br&gt; - &#x60;POINTS_REFUND&#x60;&lt;br&gt; - &#x60;POINTS_ADDITION&#x60;&lt;br&gt; - &#x60;POINTS_REMOVAL&#x60;&lt;br&gt; - &#x60;POINTS_EXPIRATION&#x60;&lt;br&gt; - &#x60;POINTS_TRANSFER_IN&#x60;&lt;br&gt; - &#x60;POINTS_TRANSFER_OUT&#x60; | | source_id | Unique transaction source ID. | 8638 | | reason | Contains the reason for the transaction if one was included originally. |  | | balance | The gift card or loyalty card balance after the transaction. |  | | amount | The amount of gift card or loyalty card credits being allocated during the transaction. This value can either be negative or positive depending on the nature of the transaction. |  | | created_at | Timestamp in ISO 8601 format representing the date and time when the transaction was created. | 2022-03-09T09:16:32.521Z  | | voucher_id | Unique Voucher ID. | v_dky7ksKfPX50Wb2Bxvcoeb1xT20b6tcp | | campaign_id | Parent campaign ID. | camp_FNYR4jhqZBM9xTptxDGgeNBV | | source|  Channel through which the transaction was initiated. | API | | details | More detailed information stored in the form of a JSON. | Provides more details related to the transaction in the form of an object. | | related_transaction_id | Unique transaction ID related to a receiver/donor card in the case of a points transfer from/to another card. | vtx_0c9afe802593b34b80 |
+    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. &#x60;v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u&#x60;.
     # @param [Hash] opts the optional parameters
     # @option opts [VouchersTransactionsExportCreateRequestBody] :vouchers_transactions_export_create_request_body Specify the parameters for the transaction export.
     # @return [Array<(VouchersTransactionsExportCreateResponseBody, Integer, Hash)>] VouchersTransactionsExportCreateResponseBody data, response status code and response headers
-    private def export_voucher_transactions_with_http_info(code, opts = {})
+    def export_voucher_transactions_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.export_voucher_transactions ...'
       end
@@ -280,7 +216,7 @@ module VoucherifySdk
     end
 
     # Get Voucher
-    # Retrieves the voucher with the given code or unique Voucherify ID. You can either pass the voucher ID which was assigned by Voucherify, e.g., v_7HxHkf4VAkMuc8u4lZs78lyRwhRze5UE, or the code of the voucher as the path parameter value, e.g., 7fjWdr.
+    # Retrieves the voucher with the given `code` or unique Voucherify ID. You can either pass the voucher ID which was assigned by Voucherify, e.g., `v_7HxHkf4VAkMuc8u4lZs78lyRwhRze5UE`, or the `code` of the voucher as the path parameter value, e.g., `7fjWdr`.
     # @param code [String] A unique **code** that identifies the voucher.
     # @param [Hash] opts the optional parameters
     # @return [VouchersGetResponseBody]
@@ -290,11 +226,11 @@ module VoucherifySdk
     end
 
     # Get Voucher
-    # Retrieves the voucher with the given code or unique Voucherify ID. You can either pass the voucher ID which was assigned by Voucherify, e.g., v_7HxHkf4VAkMuc8u4lZs78lyRwhRze5UE, or the code of the voucher as the path parameter value, e.g., 7fjWdr.
+    # Retrieves the voucher with the given &#x60;code&#x60; or unique Voucherify ID. You can either pass the voucher ID which was assigned by Voucherify, e.g., &#x60;v_7HxHkf4VAkMuc8u4lZs78lyRwhRze5UE&#x60;, or the &#x60;code&#x60; of the voucher as the path parameter value, e.g., &#x60;7fjWdr&#x60;.
     # @param code [String] A unique **code** that identifies the voucher.
     # @param [Hash] opts the optional parameters
     # @return [Array<(VouchersGetResponseBody, Integer, Hash)>] VouchersGetResponseBody data, response status code and response headers
-    private def get_voucher_with_http_info(code, opts = {})
+    def get_voucher_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.get_voucher ...'
       end
@@ -343,7 +279,7 @@ module VoucherifySdk
     end
 
     # Import Vouchers using CSV
-    # Import standalone vouchers into the repository using a CSV file. The CSV file has to include headers in the first line. All properties listed in the file headers that cannot be mapped to standard voucher fields will be added to the metadata object.   You can find an example CSV file [here](https://support.voucherify.io/article/45-import-codes-and-share-them-digitally#coupons). ___  📘 Standard voucher fields mapping  - Go to the import vouchers endpoint to see all standard CSV fields description (body params section).  - Supported CSV file headers: Code,Voucher Type,Value,Discount Type,Category,Start Date,Expiration Date,Redemption Limit,Redeemed Quantity, Redeemed Amount,Active,Additional Info,Custom Metadata Property Name - **Start and expiration dates** need to be provided in compliance with the ISO 8601 norms. For example, 2020-03-11T09:00:00.000Z.       - YYYY-MM-DD     - YYYY-MM-DDTHH     - YYYY-MM-DDTHH:mm     - YYYY-MM-DDTHH:mm:ss     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ss.SSSZ  - Custom code attributes (not supported by-default) need to be added as code **metadata**.  - You **cannot import the same codes** to a single Voucherify Project.  📘 Categories  In the structure representing your data, you can define a category that the voucher belongs to. You can later use the category of a voucher to group and search by specific criteria in the Dashboard and using the List Vouchers endpoint. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Import standalone vouchers into the repository using a CSV file.  The CSV file has to include headers in the first line. All properties listed in the file headers that cannot be mapped to standard voucher fields will be added to the metadata object.    You can find an example CSV file [here](https://support.voucherify.io/article/45-import-codes-and-share-them-digitally#coupons). ___ <!-- title: \"cURL Example Request\" lineNumbers: true --> ```cURL cURL example curl -X POST \\   https://api.voucherify.io/v1/vouchers/importCSV \\   -F file=@/path/to/vouchers.csv \\   -H \"X-App-Id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\" \\   -H \"X-App-Token: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\" ```  <!-- theme: info -->  > 📘 Standard voucher fields mapping > > - Go to the <!-- [import vouchers](OpenAPI.json/paths/~1vouchers~1import) -->[import vouchers](ref:import-vouchers) endpoint to see all standard CSV fields description (body params section). > - Supported CSV file headers: Code,Voucher Type,Value,Discount Type,Category,Start Date,Expiration Date,Redemption Limit,Redeemed Quantity, Redeemed Amount,Active,Additional Info,Custom Metadata Property Name >- **Start and expiration dates** need to be provided in compliance with the ISO 8601 norms. For example, 2020-03-11T09:00:00.000Z.   >    - `YYYY-MM-DD` >    - `YYYY-MM-DDTHH` >    - `YYYY-MM-DDTHH:mm` >    - `YYYY-MM-DDTHH:mm:ss` >    - `YYYY-MM-DDTHH:mm:ssZ` >    - `YYYY-MM-DDTHH:mm:ssZ` >    - `YYYY-MM-DDTHH:mm:ss.SSSZ` > - Custom code attributes (not supported by-default) need to be added as code **metadata**. > - You **cannot import the same codes** to a single Voucherify Project.  <!-- theme: info -->  > 📘 Categories > > In the structure representing your data, you can define a category that the voucher belongs to. You can later use the category of a voucher to group and search by specific criteria in the Dashboard and using the [List Vouchers](ref:list-vouchers) endpoint.  This API request starts a process that affects Voucherify data in bulk.   In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the `IN_PROGRESS` status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.   The result will return the async ID. You can verify the status of your request via this [API request](ref:get-async-action).
     # @param file [File] File path.
     # @param [Hash] opts the optional parameters
     # @return [VouchersImportCsvCreateResponseBody]
@@ -353,11 +289,11 @@ module VoucherifySdk
     end
 
     # Import Vouchers using CSV
-    # Import standalone vouchers into the repository using a CSV file. The CSV file has to include headers in the first line. All properties listed in the file headers that cannot be mapped to standard voucher fields will be added to the metadata object.   You can find an example CSV file [here](https://support.voucherify.io/article/45-import-codes-and-share-them-digitally#coupons). ___  📘 Standard voucher fields mapping  - Go to the import vouchers endpoint to see all standard CSV fields description (body params section).  - Supported CSV file headers: Code,Voucher Type,Value,Discount Type,Category,Start Date,Expiration Date,Redemption Limit,Redeemed Quantity, Redeemed Amount,Active,Additional Info,Custom Metadata Property Name - **Start and expiration dates** need to be provided in compliance with the ISO 8601 norms. For example, 2020-03-11T09:00:00.000Z.       - YYYY-MM-DD     - YYYY-MM-DDTHH     - YYYY-MM-DDTHH:mm     - YYYY-MM-DDTHH:mm:ss     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ss.SSSZ  - Custom code attributes (not supported by-default) need to be added as code **metadata**.  - You **cannot import the same codes** to a single Voucherify Project.  📘 Categories  In the structure representing your data, you can define a category that the voucher belongs to. You can later use the category of a voucher to group and search by specific criteria in the Dashboard and using the List Vouchers endpoint. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Import standalone vouchers into the repository using a CSV file.  The CSV file has to include headers in the first line. All properties listed in the file headers that cannot be mapped to standard voucher fields will be added to the metadata object.    You can find an example CSV file [here](https://support.voucherify.io/article/45-import-codes-and-share-them-digitally#coupons). ___ &lt;!-- title: \&quot;cURL Example Request\&quot; lineNumbers: true --&gt; &#x60;&#x60;&#x60;cURL cURL example curl -X POST \\   https://api.voucherify.io/v1/vouchers/importCSV \\   -F file&#x3D;@/path/to/vouchers.csv \\   -H \&quot;X-App-Id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\&quot; \\   -H \&quot;X-App-Token: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\&quot; &#x60;&#x60;&#x60;  &lt;!-- theme: info --&gt;  &gt; 📘 Standard voucher fields mapping &gt; &gt; - Go to the &lt;!-- [import vouchers](OpenAPI.json/paths/~1vouchers~1import) --&gt;[import vouchers](ref:import-vouchers) endpoint to see all standard CSV fields description (body params section). &gt; - Supported CSV file headers: Code,Voucher Type,Value,Discount Type,Category,Start Date,Expiration Date,Redemption Limit,Redeemed Quantity, Redeemed Amount,Active,Additional Info,Custom Metadata Property Name &gt;- **Start and expiration dates** need to be provided in compliance with the ISO 8601 norms. For example, 2020-03-11T09:00:00.000Z.   &gt;    - &#x60;YYYY-MM-DD&#x60; &gt;    - &#x60;YYYY-MM-DDTHH&#x60; &gt;    - &#x60;YYYY-MM-DDTHH:mm&#x60; &gt;    - &#x60;YYYY-MM-DDTHH:mm:ss&#x60; &gt;    - &#x60;YYYY-MM-DDTHH:mm:ssZ&#x60; &gt;    - &#x60;YYYY-MM-DDTHH:mm:ssZ&#x60; &gt;    - &#x60;YYYY-MM-DDTHH:mm:ss.SSSZ&#x60; &gt; - Custom code attributes (not supported by-default) need to be added as code **metadata**. &gt; - You **cannot import the same codes** to a single Voucherify Project.  &lt;!-- theme: info --&gt;  &gt; 📘 Categories &gt; &gt; In the structure representing your data, you can define a category that the voucher belongs to. You can later use the category of a voucher to group and search by specific criteria in the Dashboard and using the [List Vouchers](ref:list-vouchers) endpoint.  This API request starts a process that affects Voucherify data in bulk.   In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the &#x60;IN_PROGRESS&#x60; status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.   The result will return the async ID. You can verify the status of your request via this [API request](ref:get-async-action).
     # @param file [File] File path.
     # @param [Hash] opts the optional parameters
     # @return [Array<(VouchersImportCsvCreateResponseBody, Integer, Hash)>] VouchersImportCsvCreateResponseBody data, response status code and response headers
-    private def import_vouchers_using_csv_with_http_info(file, opts = {})
+    def import_vouchers_using_csv_with_http_info(file, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.import_vouchers_using_csv ...'
       end
@@ -413,10 +349,10 @@ module VoucherifySdk
 
     # List Voucher Transactions
     # List transactions that are associated with credit movements on a gift card or loyalty card.
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
+    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. &#x60;v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u&#x60;.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is &#x60;1&#x60;.
     # @return [VouchersTransactionsListResponseBody]
     def list_voucher_transactions(code, opts = {})
       data, _status_code, _headers = list_voucher_transactions_with_http_info(code, opts)
@@ -425,12 +361,12 @@ module VoucherifySdk
 
     # List Voucher Transactions
     # List transactions that are associated with credit movements on a gift card or loyalty card.
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
+    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. &#x60;v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u&#x60;.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is &#x60;1&#x60;.
     # @return [Array<(VouchersTransactionsListResponseBody, Integer, Hash)>] VouchersTransactionsListResponseBody data, response status code and response headers
-    private def list_voucher_transactions_with_http_info(code, opts = {})
+    def list_voucher_transactions_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.list_voucher_transactions ...'
       end
@@ -448,6 +384,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling VouchersApi.list_voucher_transactions, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling VouchersApi.list_voucher_transactions, must be greater than or equal to 1.'
       end
 
       # resource path
@@ -492,76 +432,9 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Release Validation Session
-    # Manually release a validation session that has been set up for the voucher. This method undos the actions that are explained in our guide on how a validation session was established, you can read more here.   📘 Release Session using Dashboard  You can also use the Validations Manager in the Dashboard to unlock sessions. [Read more](https://support.voucherify.io/article/16-dashboard-sections#validations).
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify.
-    # @param session_key [String] A unique session identifier.
-    # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def release_validation_session(code, session_key, opts = {})
-      release_validation_session_with_http_info(code, session_key, opts)
-      nil
-    end
-
-    # Release Validation Session
-    # Manually release a validation session that has been set up for the voucher. This method undos the actions that are explained in our guide on how a validation session was established, you can read more here.   📘 Release Session using Dashboard  You can also use the Validations Manager in the Dashboard to unlock sessions. [Read more](https://support.voucherify.io/article/16-dashboard-sections#validations).
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify.
-    # @param session_key [String] A unique session identifier.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    private def release_validation_session_with_http_info(code, session_key, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: VouchersApi.release_validation_session ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.release_validation_session"
-      end
-      # verify the required parameter 'session_key' is set
-      if @api_client.config.client_side_validation && session_key.nil?
-        fail ArgumentError, "Missing the required parameter 'session_key' when calling VouchersApi.release_validation_session"
-      end
-      # resource path
-      local_var_path = '/v1/vouchers/{code}/sessions/{sessionKey}'.sub('{' + 'code' + '}', CGI.escape(code.to_s)).sub('{' + 'sessionKey' + '}', CGI.escape(session_key.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type]
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
-
-      new_options = opts.merge(
-        :operation => :"VouchersApi.release_validation_session",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: VouchersApi#release_validation_session\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Add or Remove Voucher Balance
     # Add balance to an existing gift card or loyalty card.
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
+    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. &#x60;v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u&#x60;.
     # @param vouchers_balance_update_request_body [VouchersBalanceUpdateRequestBody] Provide the amount to be added to/subtracted from the voucher.
     # @param [Hash] opts the optional parameters
     # @return [VouchersBalanceUpdateResponseBody]
@@ -572,11 +445,11 @@ module VoucherifySdk
 
     # Add or Remove Voucher Balance
     # Add balance to an existing gift card or loyalty card.
-    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
+    # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. &#x60;v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u&#x60;.
     # @param vouchers_balance_update_request_body [VouchersBalanceUpdateRequestBody] Provide the amount to be added to/subtracted from the voucher.
     # @param [Hash] opts the optional parameters
     # @return [Array<(VouchersBalanceUpdateResponseBody, Integer, Hash)>] VouchersBalanceUpdateResponseBody data, response status code and response headers
-    private def update_voucher_balance_with_http_info(code, vouchers_balance_update_request_body, opts = {})
+    def update_voucher_balance_with_http_info(code, vouchers_balance_update_request_body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.update_voucher_balance ...'
       end

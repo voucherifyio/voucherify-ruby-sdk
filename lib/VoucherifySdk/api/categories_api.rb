@@ -34,7 +34,7 @@ module VoucherifySdk
     # @param [Hash] opts the optional parameters
     # @option opts [CategoriesCreateRequestBody] :categories_create_request_body Specify the details of the category that you would like to create.
     # @return [Array<(CategoriesCreateResponseBody, Integer, Hash)>] CategoriesCreateResponseBody data, response status code and response headers
-    private def create_category_with_http_info(opts = {})
+    def create_category_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CategoriesApi.create_category ...'
       end
@@ -98,7 +98,7 @@ module VoucherifySdk
     # @param category_id [String] Unique category ID assigned by Voucherify.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    private def delete_category_with_http_info(category_id, opts = {})
+    def delete_category_with_http_info(category_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CategoriesApi.delete_category ...'
       end
@@ -159,7 +159,7 @@ module VoucherifySdk
     # @param category_id [String] Unique category ID assigned by Voucherify.
     # @param [Hash] opts the optional parameters
     # @return [Array<(CategoriesGetResponseBody, Integer, Hash)>] CategoriesGetResponseBody data, response status code and response headers
-    private def get_category_with_http_info(category_id, opts = {})
+    def get_category_with_http_info(category_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CategoriesApi.get_category ...'
       end
@@ -220,7 +220,7 @@ module VoucherifySdk
     # List all categories.
     # @param [Hash] opts the optional parameters
     # @return [Array<(CategoriesListResponseBody, Integer, Hash)>] CategoriesListResponseBody data, response status code and response headers
-    private def list_categories_with_http_info(opts = {})
+    def list_categories_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CategoriesApi.list_categories ...'
       end
@@ -281,7 +281,7 @@ module VoucherifySdk
     # @param [Hash] opts the optional parameters
     # @option opts [CategoriesUpdateRequestBody] :categories_update_request_body Specify the details of the category that you would like to update.
     # @return [Array<(CategoriesUpdateResponseBody, Integer, Hash)>] CategoriesUpdateResponseBody data, response status code and response headers
-    private def update_category_with_http_info(category_id, opts = {})
+    def update_category_with_http_info(category_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CategoriesApi.update_category ...'
       end

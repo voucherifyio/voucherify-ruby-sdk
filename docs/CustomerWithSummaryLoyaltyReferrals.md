@@ -8,7 +8,7 @@
 | **description** | **String** | An arbitrary string that you can attach to a customer object. | [optional] |
 | **email** | **String** | Customer&#39;s email address. | [optional] |
 | **phone** | **String** | Customer&#39;s phone number. This parameter is mandatory when you try to send out codes to customers via an SMS channel. | [optional] |
-| **birthday** | **Date** | *Deprecated* Customer&#39;s birthdate; format YYYY-MM-DD. | [optional] |
+| **birthday** | **Date** | &#x60;Deprecated&#x60;. ~~Customer&#39;s birthdate; format YYYY-MM-DD~~. | [optional] |
 | **birthdate** | **Date** | Customer&#39;s birthdate; format YYYY-MM-DD. | [optional] |
 | **address** | [**CustomerBaseAddress**](CustomerBaseAddress.md) |  | [optional] |
 | **metadata** | **Object** | A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the customer. It can be useful for storing additional information about the customer in a structured format. This metadata can be used for validating whether the customer qualifies for a discount or it can be used in building customer segments. | [optional] |
@@ -18,8 +18,8 @@
 | **loyalty** | [**CustomerLoyalty**](CustomerLoyalty.md) |  |  |
 | **referrals** | [**CustomerReferrals**](CustomerReferrals.md) |  |  |
 | **system_metadata** | **Object** | Object used to store system metadata information. | [optional] |
-| **created_at** | **Time** | Timestamp representing the date and time when the customer was created in ISO 8601 format. | [optional] |
-| **updated_at** | **Time** | Timestamp representing the date and time when the customer was updated in ISO 8601 format. | [optional] |
+| **created_at** | **Time** | Timestamp representing the date and time when the customer was created. The value is shown in the ISO 8601 format. | [optional] |
+| **updated_at** | **Time** | Timestamp representing the date and time when the customer was updated. The value is shown in the ISO 8601 format. | [optional] |
 | **assets** | [**CustomerResponseDataAssets**](CustomerResponseDataAssets.md) |  | [optional] |
-| **object** | **String** | The type of object represented by JSON. | [default to &#39;customer&#39;] |
+| **object** | **String** | The type of the object represented by JSON. | [default to &#39;customer&#39;] |
 

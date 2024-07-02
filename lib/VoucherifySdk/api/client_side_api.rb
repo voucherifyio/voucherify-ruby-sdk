@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Check Eligibility (client-side)
-    # Generate a list of redeemables that are applicable in the context of the customer and order. The new qualifications method is an improved version of Campaign Qualifications, Voucher Qualifications, and Promotions Validation API requests. The new qualification method introduces the following improvements: - Qualification results are returned faster - No limit on the number of returned redeemables - Introduces new qualification scenarios, not available in the previous version  👍 Scenario Guide  Read our dedicated guide to learn about some use cases this endpoint can cover here. # Paging  The Voucherify Qualifications API request will return to you all of the redeemables available for the customer in batches of up to 50 redeemables. To get the next batch of redeemables, you need to use the starting_after cursor. To process of paging the redeemables works in the following manner: - You send the first API request for Qualifications without the starting_after parameter. - The response will contain a parameter named has_more. If the parameters value is set to true, then more redeemables are available. - Get the value of the created_at parameter of the last returned redeemable. The value of this parameter will be used as a cursor to retrieve the next page of redeemables. - Send another API request for Qualification with the starting_after parameter set to the value taken from the created_at parameter from the last returned redeemable. - Voucherify will return the next page of redeemables. - If the has_more parameter is set to true, apply steps 3-5 to get the next page of redeemables.
+    # Generate a list of redeemables that are applicable in the context of the customer and order.  The new qualifications method is an improved version of [Campaign Qualifications](ref:examine-campaigns-qualification), [Voucher Qualifications](ref:examine-vouchers-qualification), and [Promotions Validation](ref:validate-promotions) API requests. The new qualification method introduces the following improvements:  - Qualification results are returned faster - No limit on the number of returned redeemables - Introduces new qualification scenarios, not available in the previous version  > 👍 Scenario Guide > > Read our dedicated guide to learn about some use cases this endpoint can cover [here](doc:checking-eligibility).  ## Paging   The Voucherify Qualifications API request will return to you all of the redeemables available for the customer in batches of up to 50 redeemables. To get the next batch of redeemables, you need to use the `starting_after` cursor.  To process of paging the redeemables works in the following manner:  - You send the first API request for Qualifications without the `starting_after` parameter. - The response will contain a parameter named `has_more`. If the parameter's value is set to `true`, then more redeemables are available. - Get the value of the `created_at` parameter of the last returned redeemable. The value of this parameter will be used as a cursor to retrieve the next page of redeemables. - Send another API request for Qualification with the `starting_after` parameter set to the value taken from the `created_at` parameter from the last returned redeemable. - Voucherify will return the next page of redeemables. - If the `has_more` parameter is set to `true`, apply steps 3-5 to get the next page of redeemables.
     # @param [Hash] opts the optional parameters
     # @option opts [ClientQualificationsCheckEligibilityRequestBody] :client_qualifications_check_eligibility_request_body Define order and customer context.
     # @return [ClientQualificationsCheckEligibilityResponseBody]
@@ -30,11 +30,11 @@ module VoucherifySdk
     end
 
     # Check Eligibility (client-side)
-    # Generate a list of redeemables that are applicable in the context of the customer and order. The new qualifications method is an improved version of Campaign Qualifications, Voucher Qualifications, and Promotions Validation API requests. The new qualification method introduces the following improvements: - Qualification results are returned faster - No limit on the number of returned redeemables - Introduces new qualification scenarios, not available in the previous version  👍 Scenario Guide  Read our dedicated guide to learn about some use cases this endpoint can cover here. # Paging  The Voucherify Qualifications API request will return to you all of the redeemables available for the customer in batches of up to 50 redeemables. To get the next batch of redeemables, you need to use the starting_after cursor. To process of paging the redeemables works in the following manner: - You send the first API request for Qualifications without the starting_after parameter. - The response will contain a parameter named has_more. If the parameters value is set to true, then more redeemables are available. - Get the value of the created_at parameter of the last returned redeemable. The value of this parameter will be used as a cursor to retrieve the next page of redeemables. - Send another API request for Qualification with the starting_after parameter set to the value taken from the created_at parameter from the last returned redeemable. - Voucherify will return the next page of redeemables. - If the has_more parameter is set to true, apply steps 3-5 to get the next page of redeemables.
+    # Generate a list of redeemables that are applicable in the context of the customer and order.  The new qualifications method is an improved version of [Campaign Qualifications](ref:examine-campaigns-qualification), [Voucher Qualifications](ref:examine-vouchers-qualification), and [Promotions Validation](ref:validate-promotions) API requests. The new qualification method introduces the following improvements:  - Qualification results are returned faster - No limit on the number of returned redeemables - Introduces new qualification scenarios, not available in the previous version  &gt; 👍 Scenario Guide &gt; &gt; Read our dedicated guide to learn about some use cases this endpoint can cover [here](doc:checking-eligibility).  ## Paging   The Voucherify Qualifications API request will return to you all of the redeemables available for the customer in batches of up to 50 redeemables. To get the next batch of redeemables, you need to use the &#x60;starting_after&#x60; cursor.  To process of paging the redeemables works in the following manner:  - You send the first API request for Qualifications without the &#x60;starting_after&#x60; parameter. - The response will contain a parameter named &#x60;has_more&#x60;. If the parameter&#39;s value is set to &#x60;true&#x60;, then more redeemables are available. - Get the value of the &#x60;created_at&#x60; parameter of the last returned redeemable. The value of this parameter will be used as a cursor to retrieve the next page of redeemables. - Send another API request for Qualification with the &#x60;starting_after&#x60; parameter set to the value taken from the &#x60;created_at&#x60; parameter from the last returned redeemable. - Voucherify will return the next page of redeemables. - If the &#x60;has_more&#x60; parameter is set to &#x60;true&#x60;, apply steps 3-5 to get the next page of redeemables.
     # @param [Hash] opts the optional parameters
     # @option opts [ClientQualificationsCheckEligibilityRequestBody] :client_qualifications_check_eligibility_request_body Define order and customer context.
     # @return [Array<(ClientQualificationsCheckEligibilityResponseBody, Integer, Hash)>] ClientQualificationsCheckEligibilityResponseBody data, response status code and response headers
-    private def check_eligibility_client_side_with_http_info(opts = {})
+    def check_eligibility_client_side_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ClientSideApi.check_eligibility_client_side ...'
       end
@@ -84,7 +84,7 @@ module VoucherifySdk
     end
 
     # Redeem Stackable Discounts (client-side)
-    # This method is accessible through public keys which you can use in client side requests coming from mobile and web browser applications. # How API returns calculated discounts and order amounts in the response In the table below, you can see the logic the API follows to calculate discounts and amounts:    📘 Rollbacks  You cant roll back a child redemption. When you call rollback on a stacked redemption, all child redemptions will be rolled back. You need to refer to a parent redemption ID in your rollback request.
+    # This method is accessible through public keys which you can use in client side requests coming from mobile and web browser applications.  ## How API returns calculated discounts and order amounts in the response  In the table below, you can see the logic the API follows to calculate discounts and amounts:  | **Field** | **Calculation** | **Description** | |:---|:---|:---| | amount | N/A | This field shows the order amount before applying any discount | | total_amount | `total_amount` = `amount` - `total_discount_amount` | This field shows the order amount after applying all the discounts | | discount_amount | `discount_amount` = `previous_discount_amount` + `applied_discount_amount` | This field sums up all order-level discounts up to and including the specific discount being calculated for the stacked redemption. | | items_discount_amount | sum(items, i => i.discount_amount) | This field sums up all product-specific discounts | | total_discount_amount | `total_discount_amount` = `discount_amount` + `items_discount_amount` | This field sums up all order-level and all product-specific discounts | | applied_discount_amount | N/A | This field shows the order-level discount applied in a particular request | | items_applied_discount_amount | sum(items, i => i.applied_discount_amount) | This field sums up all product-specific discounts applied in a particular request | | total_applied_discount_amount | `total_applied_discount_amount` = `applied_discount_amount` + `items_applied_discount_amount` | This field sums up all order-level and all product-specific discounts applied in a particular request |  <!-- theme: info --> > 📘 Rollbacks > > You can't roll back a child redemption. When you call rollback on a stacked redemption, all child redemptions will be rolled back. You need to refer to a parent redemption ID in your <!-- [rollback request](OpenAPI.json/paths/~1redemptions~1{parentRedemptionId}~1rollbacks/post) -->[rollback request](ref:rollback-stacked-redemptions).
     # @param origin [String] Indicates the origin (scheme, hostname, and port).
     # @param [Hash] opts the optional parameters
     # @option opts [ClientRedemptionsRedeemRequestBody] :client_redemptions_redeem_request_body 
@@ -95,12 +95,12 @@ module VoucherifySdk
     end
 
     # Redeem Stackable Discounts (client-side)
-    # This method is accessible through public keys which you can use in client side requests coming from mobile and web browser applications. # How API returns calculated discounts and order amounts in the response In the table below, you can see the logic the API follows to calculate discounts and amounts:    📘 Rollbacks  You cant roll back a child redemption. When you call rollback on a stacked redemption, all child redemptions will be rolled back. You need to refer to a parent redemption ID in your rollback request.
+    # This method is accessible through public keys which you can use in client side requests coming from mobile and web browser applications.  ## How API returns calculated discounts and order amounts in the response  In the table below, you can see the logic the API follows to calculate discounts and amounts:  | **Field** | **Calculation** | **Description** | |:---|:---|:---| | amount | N/A | This field shows the order amount before applying any discount | | total_amount | &#x60;total_amount&#x60; &#x3D; &#x60;amount&#x60; - &#x60;total_discount_amount&#x60; | This field shows the order amount after applying all the discounts | | discount_amount | &#x60;discount_amount&#x60; &#x3D; &#x60;previous_discount_amount&#x60; + &#x60;applied_discount_amount&#x60; | This field sums up all order-level discounts up to and including the specific discount being calculated for the stacked redemption. | | items_discount_amount | sum(items, i &#x3D;&gt; i.discount_amount) | This field sums up all product-specific discounts | | total_discount_amount | &#x60;total_discount_amount&#x60; &#x3D; &#x60;discount_amount&#x60; + &#x60;items_discount_amount&#x60; | This field sums up all order-level and all product-specific discounts | | applied_discount_amount | N/A | This field shows the order-level discount applied in a particular request | | items_applied_discount_amount | sum(items, i &#x3D;&gt; i.applied_discount_amount) | This field sums up all product-specific discounts applied in a particular request | | total_applied_discount_amount | &#x60;total_applied_discount_amount&#x60; &#x3D; &#x60;applied_discount_amount&#x60; + &#x60;items_applied_discount_amount&#x60; | This field sums up all order-level and all product-specific discounts applied in a particular request |  &lt;!-- theme: info --&gt; &gt; 📘 Rollbacks &gt; &gt; You can&#39;t roll back a child redemption. When you call rollback on a stacked redemption, all child redemptions will be rolled back. You need to refer to a parent redemption ID in your &lt;!-- [rollback request](OpenAPI.json/paths/~1redemptions~1{parentRedemptionId}~1rollbacks/post) --&gt;[rollback request](ref:rollback-stacked-redemptions).
     # @param origin [String] Indicates the origin (scheme, hostname, and port).
     # @param [Hash] opts the optional parameters
     # @option opts [ClientRedemptionsRedeemRequestBody] :client_redemptions_redeem_request_body 
     # @return [Array<(ClientRedemptionsRedeemResponseBody, Integer, Hash)>] ClientRedemptionsRedeemResponseBody data, response status code and response headers
-    private def redeem_stacked_discounts_client_side_with_http_info(origin, opts = {})
+    def redeem_stacked_discounts_client_side_with_http_info(origin, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ClientSideApi.redeem_stacked_discounts_client_side ...'
       end
@@ -155,7 +155,7 @@ module VoucherifySdk
     end
 
     # Track Custom Event (client-side)
-    # To track a custom event, you create an event object.   The event object must be linked to the customer who performs the action. If a customer doesnt exist in Voucherify, the customer will be created.
+    # To track a custom event, you create an event object.    The event object must be linked to the customer who performs the action. If a customer doesn't exist in Voucherify, the customer will be created.
     # @param origin [String] Indicates the origin (scheme, hostname, and port).
     # @param [Hash] opts the optional parameters
     # @option opts [ClientEventsCreateRequestBody] :client_events_create_request_body Specify the details of the custom event.
@@ -166,12 +166,12 @@ module VoucherifySdk
     end
 
     # Track Custom Event (client-side)
-    # To track a custom event, you create an event object.   The event object must be linked to the customer who performs the action. If a customer doesnt exist in Voucherify, the customer will be created.
+    # To track a custom event, you create an event object.    The event object must be linked to the customer who performs the action. If a customer doesn&#39;t exist in Voucherify, the customer will be created.
     # @param origin [String] Indicates the origin (scheme, hostname, and port).
     # @param [Hash] opts the optional parameters
     # @option opts [ClientEventsCreateRequestBody] :client_events_create_request_body Specify the details of the custom event.
     # @return [Array<(ClientEventsCreateResponseBody, Integer, Hash)>] ClientEventsCreateResponseBody data, response status code and response headers
-    private def track_custom_event_client_side_with_http_info(origin, opts = {})
+    def track_custom_event_client_side_with_http_info(origin, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ClientSideApi.track_custom_event_client_side ...'
       end
@@ -227,9 +227,9 @@ module VoucherifySdk
 
     # Update Customer's consents (client-side)
     # Update marketing permissions for the specified customer.
-    # @param customer_id [String] A Voucherify customer identifier or source_id
+    # @param customer_id [String] A Voucherify customer identifier or &#x60;source_id&#x60;
     # @param [Hash] opts the optional parameters
-    # @option opts [Object] :body Key-value pairs where the key is the consent identifier and value is a boolean that identifies if a customer has given the consent or not. To deny all consents use unsubscribed as a consent identifier and true as its value.   ## Examples  Opt-out from all communication: 
+    # @option opts [Object] :body Key-value pairs where the key is the consent identifier and value is a boolean that identifies if a customer has given the consent or not. To deny all consents use \&quot;unsubscribed\&quot; as a consent identifier and \&quot;true\&quot; as its value.    #### Examples  &lt;!-- title: \&quot;Request Body\&quot; lineNumbers: true --&gt; &#x60;&#x60;&#x60;json {     \&quot;cnst_aIdUulAh0SCsOCaS3005y7yS\&quot;: true,     \&quot;cnst_aIdUulAhwewqaS31213fdsfds\&quot;: false } &#x60;&#x60;&#x60;  Opt-out from all communication:  &lt;!-- title: \&quot;Request Body\&quot; lineNumbers: true --&gt; &#x60;&#x60;&#x60;json {     \&quot;unsubscribed\&quot;: true } &#x60;&#x60;&#x60;
     # @return [nil]
     def update_customers_consents_client_side(customer_id, opts = {})
       update_customers_consents_client_side_with_http_info(customer_id, opts)
@@ -238,11 +238,11 @@ module VoucherifySdk
 
     # Update Customer&#39;s consents (client-side)
     # Update marketing permissions for the specified customer.
-    # @param customer_id [String] A Voucherify customer identifier or source_id
+    # @param customer_id [String] A Voucherify customer identifier or &#x60;source_id&#x60;
     # @param [Hash] opts the optional parameters
-    # @option opts [Object] :body Key-value pairs where the key is the consent identifier and value is a boolean that identifies if a customer has given the consent or not. To deny all consents use unsubscribed as a consent identifier and true as its value.   ## Examples  Opt-out from all communication: 
+    # @option opts [Object] :body Key-value pairs where the key is the consent identifier and value is a boolean that identifies if a customer has given the consent or not. To deny all consents use \&quot;unsubscribed\&quot; as a consent identifier and \&quot;true\&quot; as its value.    #### Examples  &lt;!-- title: \&quot;Request Body\&quot; lineNumbers: true --&gt; &#x60;&#x60;&#x60;json {     \&quot;cnst_aIdUulAh0SCsOCaS3005y7yS\&quot;: true,     \&quot;cnst_aIdUulAhwewqaS31213fdsfds\&quot;: false } &#x60;&#x60;&#x60;  Opt-out from all communication:  &lt;!-- title: \&quot;Request Body\&quot; lineNumbers: true --&gt; &#x60;&#x60;&#x60;json {     \&quot;unsubscribed\&quot;: true } &#x60;&#x60;&#x60;
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    private def update_customers_consents_client_side_with_http_info(customer_id, opts = {})
+    def update_customers_consents_client_side_with_http_info(customer_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ClientSideApi.update_customers_consents_client_side ...'
       end
@@ -310,7 +310,7 @@ module VoucherifySdk
     # @param [Hash] opts the optional parameters
     # @option opts [ClientValidationsValidateRequestBody] :client_validations_validate_request_body 
     # @return [Array<(ClientValidationsValidateResponseBody, Integer, Hash)>] ClientValidationsValidateResponseBody data, response status code and response headers
-    private def validate_stacked_discounts_client_side_with_http_info(origin, opts = {})
+    def validate_stacked_discounts_client_side_with_http_info(origin, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ClientSideApi.validate_stacked_discounts_client_side ...'
       end

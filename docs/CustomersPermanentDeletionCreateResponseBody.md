@@ -10,5 +10,5 @@
 | **related_object** | **String** | Object being deleted. | [default to &#39;customer&#39;] |
 | **status** | **String** | Deletion status. | [default to &#39;DONE&#39;] |
 | **data_json** | [**CustomersPermanentDeletionCreateResponseBodyDataJson**](CustomersPermanentDeletionCreateResponseBodyDataJson.md) |  |  |
-| **object** | **String** | The type of object represented by JSON. | [default to &#39;pernament_deletion&#39;] |
+| **object** | **String** | The type of the object represented by JSON. | [default to &#39;pernament_deletion&#39;] |
 

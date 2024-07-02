@@ -24,13 +24,13 @@ module VoucherifySdk
     # Unique promotion stack ID.
     attr_accessor :id
 
-    # Timestamp representing the date and time when the promotion stack was created in ISO 8601 format.
+    # Timestamp representing the date and time when the promotion stack was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Promotion stack's parent campaign's unique ID.
     attr_accessor :campaign_id
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # Promotion stack category ID.

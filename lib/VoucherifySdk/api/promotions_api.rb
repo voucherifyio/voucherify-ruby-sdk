@@ -36,7 +36,7 @@ module VoucherifySdk
     # @param [Hash] opts the optional parameters
     # @option opts [PromotionsStacksCreateRequestBody] :promotions_stacks_create_request_body Specify the order of promotion tiers for the promotion stack.
     # @return [Array<(PromotionsStacksCreateResponseBody, Integer, Hash)>] PromotionsStacksCreateResponseBody data, response status code and response headers
-    private def create_promotion_stack_with_http_info(campaign_id, opts = {})
+    def create_promotion_stack_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.create_promotion_stack ...'
       end
@@ -91,7 +91,7 @@ module VoucherifySdk
 
     # Delete Promotion Stack
     # This method deletes a promotion stack.
-    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty Campaign. 
+    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty Campaign&#x60;. 
     # @param stack_id [String] Promotion stack ID.
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -102,11 +102,11 @@ module VoucherifySdk
 
     # Delete Promotion Stack
     # This method deletes a promotion stack.
-    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty Campaign. 
+    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty Campaign&#x60;. 
     # @param stack_id [String] Promotion stack ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    private def delete_promotion_stack_with_http_info(campaign_id, stack_id, opts = {})
+    def delete_promotion_stack_with_http_info(campaign_id, stack_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.delete_promotion_stack ...'
       end
@@ -156,69 +156,8 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Delete Promotion Tier
-    # This method deletes a promotion tier.
-    # @param promotion_tier_id [String] Unique promotion tier ID.
-    # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def delete_promotion_tier(promotion_tier_id, opts = {})
-      delete_promotion_tier_with_http_info(promotion_tier_id, opts)
-      nil
-    end
-
-    # Delete Promotion Tier
-    # This method deletes a promotion tier.
-    # @param promotion_tier_id [String] Unique promotion tier ID.
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-    private def delete_promotion_tier_with_http_info(promotion_tier_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: PromotionsApi.delete_promotion_tier ...'
-      end
-      # verify the required parameter 'promotion_tier_id' is set
-      if @api_client.config.client_side_validation && promotion_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'promotion_tier_id' when calling PromotionsApi.delete_promotion_tier"
-      end
-      # resource path
-      local_var_path = '/v1/promotions/tiers/{promotionTierId}'.sub('{' + 'promotionTierId' + '}', CGI.escape(promotion_tier_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type]
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
-
-      new_options = opts.merge(
-        :operation => :"PromotionsApi.delete_promotion_tier",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: PromotionsApi#delete_promotion_tier\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # Disable Promotion Tier
-    # This method disables a promotion tier, i.e. makes the active parameter   false.
+    # This method disables a promotion tier, i.e. makes the `active` parameter = `false`.
     # @param promotion_tier_id [String] Unique promotion tier ID.
     # @param [Hash] opts the optional parameters
     # @return [PromotionsTiersDisableResponseBody]
@@ -228,11 +167,11 @@ module VoucherifySdk
     end
 
     # Disable Promotion Tier
-    # This method disables a promotion tier, i.e. makes the active parameter   false.
+    # This method disables a promotion tier, i.e. makes the &#x60;active&#x60; parameter &#x3D; &#x60;false&#x60;.
     # @param promotion_tier_id [String] Unique promotion tier ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(PromotionsTiersDisableResponseBody, Integer, Hash)>] PromotionsTiersDisableResponseBody data, response status code and response headers
-    private def disable_promotion_tier_with_http_info(promotion_tier_id, opts = {})
+    def disable_promotion_tier_with_http_info(promotion_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.disable_promotion_tier ...'
       end
@@ -281,7 +220,7 @@ module VoucherifySdk
     end
 
     # Enable Promotion Tier
-    # This method enables a promotion tier, i.e. makes the active parameter   true.
+    # This method enables a promotion tier, i.e. makes the `active` parameter = `true`.
     # @param promotion_tier_id [String] Unique promotion tier ID.
     # @param [Hash] opts the optional parameters
     # @return [PromotionsTiersEnableResponseBody]
@@ -291,11 +230,11 @@ module VoucherifySdk
     end
 
     # Enable Promotion Tier
-    # This method enables a promotion tier, i.e. makes the active parameter   true.
+    # This method enables a promotion tier, i.e. makes the &#x60;active&#x60; parameter &#x3D; &#x60;true&#x60;.
     # @param promotion_tier_id [String] Unique promotion tier ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(PromotionsTiersEnableResponseBody, Integer, Hash)>] PromotionsTiersEnableResponseBody data, response status code and response headers
-    private def enable_promotion_tier_with_http_info(promotion_tier_id, opts = {})
+    def enable_promotion_tier_with_http_info(promotion_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.enable_promotion_tier ...'
       end
@@ -345,7 +284,7 @@ module VoucherifySdk
 
     # Get Promotion Stack
     # This method returns the details of a promotion stack, including the promotion tiers grouped within the stack.
-    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty Campaign. 
+    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty Campaign&#x60;. 
     # @param stack_id [String] Promotion stack ID.
     # @param [Hash] opts the optional parameters
     # @return [PromotionsStacksGetResponseBody]
@@ -356,11 +295,11 @@ module VoucherifySdk
 
     # Get Promotion Stack
     # This method returns the details of a promotion stack, including the promotion tiers grouped within the stack.
-    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty Campaign. 
+    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty Campaign&#x60;. 
     # @param stack_id [String] Promotion stack ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(PromotionsStacksGetResponseBody, Integer, Hash)>] PromotionsStacksGetResponseBody data, response status code and response headers
-    private def get_promotion_stack_with_http_info(campaign_id, stack_id, opts = {})
+    def get_promotion_stack_with_http_info(campaign_id, stack_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.get_promotion_stack ...'
       end
@@ -427,7 +366,7 @@ module VoucherifySdk
     # @param promotion_tier_id [String] Unique promotion tier ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(PromotionsTiersGetResponseBody, Integer, Hash)>] PromotionsTiersGetResponseBody data, response status code and response headers
-    private def get_promotion_tier_with_http_info(promotion_tier_id, opts = {})
+    def get_promotion_tier_with_http_info(promotion_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.get_promotion_tier ...'
       end
@@ -476,13 +415,13 @@ module VoucherifySdk
     end
 
     # List Promotion Stacks
-    # This method enables you to list promotion stacks irrespective of the campaign they are associated with.  You can use filters in the query parameters to specify the stacks to be returned in the response. # Advanced filters for fetching promotion stacks  
+    # This method enables you to list promotion stacks irrespective of the campaign they are associated with.   You can use filters in the query parameters to specify the stacks to be returned in the response.  ## Advanced filters for fetching promotion stacks  | **Filters** | **Examples** | | :--- | :--- | | Created Before | - `[created_at][before]=2021-12-30T13:52:18.227Z`<br>- `[filters][created_at][conditions][$before][0]=2021-12-30T13:52:18.227Z` | | Created After | - `[created_at][after]=2021-12-30T13:52:18.227Z`<br>- `[filters][created_at][conditions][$after][0]=2021-12-30T13:52:18.227Z` | | Updated Before | - `[updated_at][before]=2021-12-30T13:52:18.227Z`<br>- `[filters][updated_at][conditions][$before][0]=2021-12-30T13:52:18.227Z` | | Updated After | - `[updated_at][after]=2021-12-30T13:52:18.227Z`<br>- `[filters][updated_at][conditions][$after][0]=2021-12-30T13:52:18.227Z` |
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
-    # @option opts [ParameterOrderListAllPromotionStacks] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-    # @option opts [ParameterCreatedBeforeAfter] :created_at A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z
-    # @option opts [ParameterUpdatedBeforeAfter] :updated_at A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is &#x60;1&#x60;.
+    # @option opts [ParameterOrderListAllPromotionStacks] :order Sorts the results using one of the filtering options, where the dash &#x60;-&#x60; preceding a sorting option means sorting in a descending order.
+    # @option opts [ParameterCreatedBeforeAfter] :created_at A filter on the list based on the object &#x60;created_at&#x60; field. The value is a dictionary with the following options: &#x60;before&#x60;, &#x60;after&#x60;. A date value must be presented in ISO 8601 format (&#x60;2016-11-16T14:14:31Z&#x60; or &#x60;2016-11-16&#x60;). An example: &#x60;[created_at][before]&#x3D;2017-09-08T13:52:18.227Z&#x60;
+    # @option opts [ParameterUpdatedBeforeAfter] :updated_at A filter on the list based on the object &#x60;updated_at&#x60; field. The value is a dictionary with the following options: &#x60;before&#x60;, &#x60;after&#x60;. A date value must be presented in ISO 8601 format (&#x60;2016-11-16T14:14:31Z&#x60; or &#x60;2016-11-16&#x60;). An example: &#x60;[updated_at][before]&#x3D;2017-09-08T13:52:18.227Z&#x60;
     # @return [PromotionsStacksListResponseBody]
     def list_all_promotion_stacks(opts = {})
       data, _status_code, _headers = list_all_promotion_stacks_with_http_info(opts)
@@ -490,15 +429,15 @@ module VoucherifySdk
     end
 
     # List Promotion Stacks
-    # This method enables you to list promotion stacks irrespective of the campaign they are associated with.  You can use filters in the query parameters to specify the stacks to be returned in the response. # Advanced filters for fetching promotion stacks  
+    # This method enables you to list promotion stacks irrespective of the campaign they are associated with.   You can use filters in the query parameters to specify the stacks to be returned in the response.  ## Advanced filters for fetching promotion stacks  | **Filters** | **Examples** | | :--- | :--- | | Created Before | - &#x60;[created_at][before]&#x3D;2021-12-30T13:52:18.227Z&#x60;&lt;br&gt;- &#x60;[filters][created_at][conditions][$before][0]&#x3D;2021-12-30T13:52:18.227Z&#x60; | | Created After | - &#x60;[created_at][after]&#x3D;2021-12-30T13:52:18.227Z&#x60;&lt;br&gt;- &#x60;[filters][created_at][conditions][$after][0]&#x3D;2021-12-30T13:52:18.227Z&#x60; | | Updated Before | - &#x60;[updated_at][before]&#x3D;2021-12-30T13:52:18.227Z&#x60;&lt;br&gt;- &#x60;[filters][updated_at][conditions][$before][0]&#x3D;2021-12-30T13:52:18.227Z&#x60; | | Updated After | - &#x60;[updated_at][after]&#x3D;2021-12-30T13:52:18.227Z&#x60;&lt;br&gt;- &#x60;[filters][updated_at][conditions][$after][0]&#x3D;2021-12-30T13:52:18.227Z&#x60; |
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
-    # @option opts [ParameterOrderListAllPromotionStacks] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-    # @option opts [ParameterCreatedBeforeAfter] :created_at A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z
-    # @option opts [ParameterUpdatedBeforeAfter] :updated_at A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is &#x60;1&#x60;.
+    # @option opts [ParameterOrderListAllPromotionStacks] :order Sorts the results using one of the filtering options, where the dash &#x60;-&#x60; preceding a sorting option means sorting in a descending order.
+    # @option opts [ParameterCreatedBeforeAfter] :created_at A filter on the list based on the object &#x60;created_at&#x60; field. The value is a dictionary with the following options: &#x60;before&#x60;, &#x60;after&#x60;. A date value must be presented in ISO 8601 format (&#x60;2016-11-16T14:14:31Z&#x60; or &#x60;2016-11-16&#x60;). An example: &#x60;[created_at][before]&#x3D;2017-09-08T13:52:18.227Z&#x60;
+    # @option opts [ParameterUpdatedBeforeAfter] :updated_at A filter on the list based on the object &#x60;updated_at&#x60; field. The value is a dictionary with the following options: &#x60;before&#x60;, &#x60;after&#x60;. A date value must be presented in ISO 8601 format (&#x60;2016-11-16T14:14:31Z&#x60; or &#x60;2016-11-16&#x60;). An example: &#x60;[updated_at][before]&#x3D;2017-09-08T13:52:18.227Z&#x60;
     # @return [Array<(PromotionsStacksListResponseBody, Integer, Hash)>] PromotionsStacksListResponseBody data, response status code and response headers
-    private def list_all_promotion_stacks_with_http_info(opts = {})
+    def list_all_promotion_stacks_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.list_all_promotion_stacks ...'
       end
@@ -512,6 +451,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PromotionsApi.list_all_promotion_stacks, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PromotionsApi.list_all_promotion_stacks, must be greater than or equal to 1.'
       end
 
       # resource path
@@ -574,7 +517,7 @@ module VoucherifySdk
     # @param campaign_id [String] Unique campaign ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(PromotionsStacksListResponseBody, Integer, Hash)>] PromotionsStacksListResponseBody data, response status code and response headers
-    private def list_promotion_stacks_in_campaign_with_http_info(campaign_id, opts = {})
+    def list_promotion_stacks_in_campaign_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.list_promotion_stacks_in_campaign ...'
       end
@@ -637,7 +580,7 @@ module VoucherifySdk
     # @param campaign_id [String] Unique campaign ID assigned by Voucherify.
     # @param [Hash] opts the optional parameters
     # @return [Array<(PromotionsTiersListResponseBody, Integer, Hash)>] PromotionsTiersListResponseBody data, response status code and response headers
-    private def list_promotion_tiers_from_campaign_with_http_info(campaign_id, opts = {})
+    def list_promotion_tiers_from_campaign_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.list_promotion_tiers_from_campaign ...'
       end
@@ -687,7 +630,7 @@ module VoucherifySdk
 
     # Update Promotion Stack
     # This methods allows for editing an existing stack.
-    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty Campaign. 
+    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty Campaign&#x60;. 
     # @param stack_id [String] Promotion stack ID.
     # @param [Hash] opts the optional parameters
     # @option opts [PromotionsStacksUpdateRequestBody] :promotions_stacks_update_request_body Specify the promotion stack parameters that you would like to update.
@@ -699,12 +642,12 @@ module VoucherifySdk
 
     # Update Promotion Stack
     # This methods allows for editing an existing stack.
-    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty Campaign. 
+    # @param campaign_id [String] ID of the promotion campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty Campaign&#x60;. 
     # @param stack_id [String] Promotion stack ID.
     # @param [Hash] opts the optional parameters
     # @option opts [PromotionsStacksUpdateRequestBody] :promotions_stacks_update_request_body Specify the promotion stack parameters that you would like to update.
     # @return [Array<(PromotionsStacksUpdateResponseBody, Integer, Hash)>] PromotionsStacksUpdateResponseBody data, response status code and response headers
-    private def update_promotion_stack_with_http_info(campaign_id, stack_id, opts = {})
+    def update_promotion_stack_with_http_info(campaign_id, stack_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.update_promotion_stack ...'
       end

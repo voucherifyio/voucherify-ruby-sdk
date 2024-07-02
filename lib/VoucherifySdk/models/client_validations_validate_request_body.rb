@@ -134,8 +134,8 @@ module VoucherifySdk
         invalid_properties.push('invalid value for "redeemables", redeemables cannot be nil.')
       end
 
-      if @redeemables.length > 5
-        invalid_properties.push('invalid value for "redeemables", number of items must be less than or equal to 5.')
+      if @redeemables.length > 30
+        invalid_properties.push('invalid value for "redeemables", number of items must be less than or equal to 30.')
       end
 
       if @redeemables.length < 1
@@ -150,7 +150,7 @@ module VoucherifySdk
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @redeemables.nil?
-      return false if @redeemables.length > 5
+      return false if @redeemables.length > 30
       return false if @redeemables.length < 1
       true
     end
@@ -162,8 +162,8 @@ module VoucherifySdk
         fail ArgumentError, 'redeemables cannot be nil'
       end
 
-      if redeemables.length > 5
-        fail ArgumentError, 'invalid value for "redeemables", number of items must be less than or equal to 5.'
+      if redeemables.length > 30
+        fail ArgumentError, 'invalid value for "redeemables", number of items must be less than or equal to 30.'
       end
 
       if redeemables.length < 1

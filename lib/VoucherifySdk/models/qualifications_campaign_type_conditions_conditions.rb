@@ -14,57 +14,23 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body for **POST** `/validation-rules/{validationRuleId}/assignments`.
-  class ValidationRulesAssignmentsCreateResponseBody
-    # Validation rule assignment ID.
-    attr_accessor :id
+  # Data filters used to narrow the data records to be returned in the result.
+  class QualificationsCampaignTypeConditionsConditions
+    attr_accessor :is
 
-    # Validation rule ID.
-    attr_accessor :rule_id
+    attr_accessor :is_not
 
-    # The resource ID to which the validation rule was assigned.
-    attr_accessor :related_object_id
+    attr_accessor :_in
 
-    # The type of resource to which the validation rule was assigned.
-    attr_accessor :related_object_type
-
-    # Timestamp representing the date and time when the validation rule assignment was created in ISO 8601 format.
-    attr_accessor :created_at
-
-    # The type of object represented by the ID.
-    attr_accessor :object
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :not_in
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'rule_id' => :'rule_id',
-        :'related_object_id' => :'related_object_id',
-        :'related_object_type' => :'related_object_type',
-        :'created_at' => :'created_at',
-        :'object' => :'object'
+        :'is' => :'$is',
+        :'is_not' => :'$is_not',
+        :'_in' => :'$in',
+        :'not_in' => :'$not_in'
       }
     end
 
@@ -76,12 +42,10 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'rule_id' => :'String',
-        :'related_object_id' => :'String',
-        :'related_object_type' => :'String',
-        :'created_at' => :'Time',
-        :'object' => :'String'
+        :'is' => :'Array<ParameterCampaignType>',
+        :'is_not' => :'Array<ParameterCampaignType>',
+        :'_in' => :'Array<ParameterCampaignType>',
+        :'not_in' => :'Array<ParameterCampaignType>'
       }
     end
 
@@ -91,62 +55,43 @@ module VoucherifySdk
       ])
     end
 
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'ValidationRuleAssignment'
-      ]
-    end
-
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ValidationRulesAssignmentsCreateResponseBody` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::QualificationsCampaignTypeConditionsConditions` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ValidationRulesAssignmentsCreateResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::QualificationsCampaignTypeConditionsConditions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      else
-        self.id = nil
+      if attributes.key?(:'is')
+        if (value = attributes[:'is']).is_a?(Array)
+          self.is = value
+        end
       end
 
-      if attributes.key?(:'rule_id')
-        self.rule_id = attributes[:'rule_id']
-      else
-        self.rule_id = nil
+      if attributes.key?(:'is_not')
+        if (value = attributes[:'is_not']).is_a?(Array)
+          self.is_not = value
+        end
       end
 
-      if attributes.key?(:'related_object_id')
-        self.related_object_id = attributes[:'related_object_id']
-      else
-        self.related_object_id = nil
+      if attributes.key?(:'_in')
+        if (value = attributes[:'_in']).is_a?(Array)
+          self._in = value
+        end
       end
 
-      if attributes.key?(:'related_object_type')
-        self.related_object_type = attributes[:'related_object_type']
-      else
-        self.related_object_type = nil
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
-      end
-
-      if attributes.key?(:'object')
-        self.object = attributes[:'object']
-      else
-        self.object = 'validation_rules_assignment'
+      if attributes.key?(:'not_in')
+        if (value = attributes[:'not_in']).is_a?(Array)
+          self.not_in = value
+        end
       end
     end
 
@@ -155,30 +100,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @rule_id.nil?
-        invalid_properties.push('invalid value for "rule_id", rule_id cannot be nil.')
-      end
-
-      if @related_object_id.nil?
-        invalid_properties.push('invalid value for "related_object_id", related_object_id cannot be nil.')
-      end
-
-      if @related_object_type.nil?
-        invalid_properties.push('invalid value for "related_object_type", related_object_type cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -186,37 +107,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @rule_id.nil?
-      return false if @related_object_id.nil?
-      return false if @related_object_type.nil?
-      related_object_type_validator = EnumAttributeValidator.new('String', ["voucher", "campaign", "earning_rule", "reward_assignment", "promotion_tier", "distribution"])
-      return false unless related_object_type_validator.valid?(@related_object_type)
-      return false if @created_at.nil?
-      return false if @object.nil?
-      object_validator = EnumAttributeValidator.new('String', ["validation_rules_assignment"])
-      return false unless object_validator.valid?(@object)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] related_object_type Object to be assigned
-    def related_object_type=(related_object_type)
-      validator = EnumAttributeValidator.new('String', ["voucher", "campaign", "earning_rule", "reward_assignment", "promotion_tier", "distribution"])
-      unless validator.valid?(related_object_type)
-        fail ArgumentError, "invalid value for \"related_object_type\", must be one of #{validator.allowable_values}."
-      end
-      @related_object_type = related_object_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["validation_rules_assignment"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
     end
 
     # Checks equality by comparing each attribute.
@@ -224,12 +115,10 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          rule_id == o.rule_id &&
-          related_object_id == o.related_object_id &&
-          related_object_type == o.related_object_type &&
-          created_at == o.created_at &&
-          object == o.object
+          is == o.is &&
+          is_not == o.is_not &&
+          _in == o._in &&
+          not_in == o.not_in
     end
 
     # @see the `==` method
@@ -241,7 +130,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, rule_id, related_object_id, related_object_type, created_at, object].hash
+      [is, is_not, _in, not_in].hash
     end
 
     # Builds the object from hash

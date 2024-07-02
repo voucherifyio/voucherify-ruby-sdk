@@ -19,7 +19,7 @@ module VoucherifySdk
     # Assigned by the Voucherify API, identifies the earning rule object.
     attr_accessor :id
 
-    # Timestamp representing the date and time when the earning rule was created in ISO 8601 format.
+    # Timestamp representing the date and time when the earning rule was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     attr_accessor :loyalty
@@ -32,22 +32,24 @@ module VoucherifySdk
 
     attr_accessor :source
 
-    # The type of object represented by JSON. Default is earning_rule.
+    # The type of the object represented by JSON. Default is earning_rule.
     attr_accessor :object
 
     # For internal use by Voucherify.
     attr_accessor :automation_id
 
-    # Start date defines when the earning rule starts to be active. Activation timestamp in ISO 8601 format. Earning rule is inactive before this date. If you don't define the start date for an earning rule, it'll inherit the campaign start date by default.
+    # Start date defines when the earning rule starts to be active. Activation timestamp is presented in the ISO 8601 format. Earning rule is inactive before this date. If you don't define the start date for an earning rule, it'll inherit the campaign start date by default.
     attr_accessor :start_date
 
-    # Expiration date defines when the earning rule expires. Expiration timestamp in ISO 8601 format. Earning rule is inactive after this date.If you don't define the expiration date for an earning rule, it'll inherit the campaign expiration date by default.
+    # Expiration date defines when the earning rule expires. Expiration timestamp is presented in the ISO 8601 format. Earning rule is inactive after this date.If you don't define the expiration date for an earning rule, it'll inherit the campaign expiration date by default.
     attr_accessor :expiration_date
 
     attr_accessor :validity_timeframe
 
     # Integer array corresponding to the particular days of the week in which the earning rule is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
+
+    attr_accessor :validity_hours
 
     # The metadata object stores all custom attributes assigned to the earning rule. A set of key/value pairs that you can attach to an earning rule object. It can be useful for storing additional information about the earning rule in a structured format.
     attr_accessor :metadata
@@ -96,6 +98,7 @@ module VoucherifySdk
         :'expiration_date' => :'expiration_date',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours',
         :'metadata' => :'metadata',
         :'updated_at' => :'updated_at',
         :'active' => :'active'
@@ -123,6 +126,7 @@ module VoucherifySdk
         :'expiration_date' => :'String',
         :'validity_timeframe' => :'EarningRuleBaseValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
+        :'validity_hours' => :'ValidityHours',
         :'metadata' => :'Object',
         :'updated_at' => :'Time',
         :'active' => :'Boolean'
@@ -222,6 +226,10 @@ module VoucherifySdk
         if (value = attributes[:'validity_day_of_week']).is_a?(Array)
           self.validity_day_of_week = value
         end
+      end
+
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
       end
 
       if attributes.key?(:'metadata')
@@ -328,6 +336,7 @@ module VoucherifySdk
           expiration_date == o.expiration_date &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours &&
           metadata == o.metadata &&
           updated_at == o.updated_at &&
           active == o.active
@@ -342,7 +351,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, loyalty, event, custom_event, segment, source, object, automation_id, start_date, expiration_date, validity_timeframe, validity_day_of_week, metadata, updated_at, active].hash
+      [id, created_at, loyalty, event, custom_event, segment, source, object, automation_id, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, metadata, updated_at, active].hash
     end
 
     # Builds the object from hash

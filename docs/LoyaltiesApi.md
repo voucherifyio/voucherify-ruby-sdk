@@ -5,7 +5,6 @@ All URIs are relative to *https://api.voucherify.io*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**create_in_bulk_loyalty_tiers**](LoyaltiesApi.md#create_in_bulk_loyalty_tiers) | **POST** /v1/loyalties/{campaignId}/tiers | Create loyalty tiers |
-| [**delete_earning_rule**](LoyaltiesApi.md#delete_earning_rule) | **DELETE** /v1/loyalties/{campaignId}/earning-rules/{earningRuleId} | Delete Earning Rule |
 | [**delete_loyalty_program**](LoyaltiesApi.md#delete_loyalty_program) | **DELETE** /v1/loyalties/{campaignId} | Delete Loyalty Campaign |
 | [**delete_reward_assignment1**](LoyaltiesApi.md#delete_reward_assignment1) | **DELETE** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Delete Reward Assignment |
 | [**disable_earning_rule**](LoyaltiesApi.md#disable_earning_rule) | **POST** /v1/loyalties/{campaignId}/earning-rules/{earningRuleId}/disable | Disable Earning Rule |
@@ -30,6 +29,7 @@ All URIs are relative to *https://api.voucherify.io*
 | [**transfer_points**](LoyaltiesApi.md#transfer_points) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/transfers | Transfer Loyalty Points |
 | [**update_loyalty_card_balance**](LoyaltiesApi.md#update_loyalty_card_balance) | **POST** /v1/loyalties/members/{memberId}/balance | Add or Remove Loyalty Card Balance |
 | [**update_loyalty_card_balance1**](LoyaltiesApi.md#update_loyalty_card_balance1) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/balance | Add or Remove Loyalty Card Balance |
+| [**update_reward_assignment1**](LoyaltiesApi.md#update_reward_assignment1) | **PUT** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Update Reward Assignment |
 
 
 ## create_in_bulk_loyalty_tiers
@@ -73,6 +73,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the create_in_bulk_loyalty_tiers_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Array<LoyaltyTier>>, Integer, Hash)> create_in_bulk_loyalty_tiers_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # Create loyalty tiers
+  data, status_code, headers = api_instance.create_in_bulk_loyalty_tiers_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Array<LoyaltyTier>>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->create_in_bulk_loyalty_tiers_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -94,72 +112,13 @@ end
 - **Accept**: application/json
 
 
-## delete_earning_rule
-
-> delete_earning_rule(campaign_id, earning_rule_id)
-
-Delete Earning Rule
-
-This method deletes an earning rule for a specific loyalty campaign.
-
-### Examples
-
-```ruby
-require 'time'
-require 'VoucherifySdk'
-# setup authorization
-VoucherifySdk.configure do |config|
-  # Configure API key authorization: X-App-Id
-  config.api_key['X-App-Id'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['X-App-Id'] = 'Bearer'
-
-  # Configure API key authorization: X-App-Token
-  config.api_key['X-App-Token'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['X-App-Token'] = 'Bearer'
-end
-
-api_instance = VoucherifySdk::LoyaltiesApi.new
-campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
-earning_rule_id = 'earning_rule_id_example' # String | A unique earning rule ID.
-
-begin
-  # Delete Earning Rule
-  api_instance.delete_earning_rule(campaign_id, earning_rule_id)
-rescue VoucherifySdk::ApiError => e
-  puts "Error when calling LoyaltiesApi->delete_earning_rule: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
-| **earning_rule_id** | **String** | A unique earning rule ID. |  |
-
-### Return type
-
-nil (empty response body)
-
-### Authorization
-
-[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-
 ## delete_loyalty_program
 
 > <LoyaltiesDeleteResponseBody> delete_loyalty_program(campaign_id, opts)
 
 Delete Loyalty Campaign
 
-This method permanently deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards.
+Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards.  If the `force` parameter is set to `false` or not set at all, the loyalty campaign and all related loyalty cards will be moved to [the bin](ref:list-bin-entries).
 
 ### Examples
 
@@ -180,9 +139,9 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LoyaltiesApi.new
-campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the `name` of the campaign as the path parameter value, e.g., `Loyalty%20Campaign`. 
 opts = {
-  force: true # Boolean | If this flag is set to true, the campaign and related vouchers will be removed permanently. Going forward, the user will be able to create the next campaign with the same name.
+  force: true # Boolean | If this flag is set to `true`, the campaign and related vouchers will be removed permanently. If it is set to `false` or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name.
 }
 
 begin
@@ -194,12 +153,30 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the delete_loyalty_program_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesDeleteResponseBody>, Integer, Hash)> delete_loyalty_program_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # Delete Loyalty Campaign
+  data, status_code, headers = api_instance.delete_loyalty_program_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesDeleteResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->delete_loyalty_program_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
-| **force** | **Boolean** | If this flag is set to true, the campaign and related vouchers will be removed permanently. Going forward, the user will be able to create the next campaign with the same name. | [optional] |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty%20Campaign&#x60;.  |  |
+| **force** | **Boolean** | If this flag is set to &#x60;true&#x60;, the campaign and related vouchers will be removed permanently. If it is set to &#x60;false&#x60; or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name. | [optional] |
 
 ### Return type
 
@@ -242,7 +219,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LoyaltiesApi.new
-campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the `name` of the campaign as the path parameter value, e.g., `Loyalty%20Campaign`. 
 assignment_id = 'assignment_id_example' # String | A unique reward assignment ID.
 
 begin
@@ -253,11 +230,29 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the delete_reward_assignment1_with_http_info variant
+
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
+
+> <Array(nil, Integer, Hash)> delete_reward_assignment1_with_http_info(campaign_id, assignment_id)
+
+```ruby
+begin
+  # Delete Reward Assignment
+  data, status_code, headers = api_instance.delete_reward_assignment1_with_http_info(campaign_id, assignment_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => nil
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->delete_reward_assignment1_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty%20Campaign&#x60;.  |  |
 | **assignment_id** | **String** | A unique reward assignment ID. |  |
 
 ### Return type
@@ -310,6 +305,24 @@ begin
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling LoyaltiesApi->disable_earning_rule: #{e}"
+end
+```
+
+#### Using the disable_earning_rule_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesEarningRulesDisableResponseBody>, Integer, Hash)> disable_earning_rule_with_http_info(campaign_id, earning_rule_id)
+
+```ruby
+begin
+  # Disable Earning Rule
+  data, status_code, headers = api_instance.disable_earning_rule_with_http_info(campaign_id, earning_rule_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesEarningRulesDisableResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->disable_earning_rule_with_http_info: #{e}"
 end
 ```
 
@@ -373,6 +386,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the enable_earning_rule_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesEarningRulesEnableResponseBody>, Integer, Hash)> enable_earning_rule_with_http_info(campaign_id, earning_rule_id)
+
+```ruby
+begin
+  # Enable Earning Rule
+  data, status_code, headers = api_instance.enable_earning_rule_with_http_info(campaign_id, earning_rule_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesEarningRulesEnableResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->enable_earning_rule_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -400,7 +431,7 @@ end
 
 Export Loyalty Card Transactions
 
-Export transactions that are associated with point movements on a loyalty card.   
+Export transactions that are associated with point movements on a loyalty card.  | **Field** | **Definition** | **Example Export** | |:---|:---|:---| | id | Unique transaction ID assigned by Voucherify. | vtx_0cb7811f1c07765800 | | type | Transaction type. | - `POINTS_EXPIRATION` <br> - `POINTS_ADDITION` <br> - `POINTS_REMOVAL` <br> - `POINTS_TRANSFER_OUT` <br> - `POINTS_ACCRUAL` <br> - `POINTS_REFUND` <br> - `POINTS_REDEMPTION` | | source_id | Custom source ID of the transaction if one was included originally. | source_id_custom | | reason | Contains the reason for the transaction if one was included originally. |  | | balance | The loyalty card balance after the transaction. |  | | amount | The amount of loyalty points being allocated during the transaction. This value can either be negative or positive depending on the nature of the transaction. |  | | created_at | Timestamp in ISO 8601 format representing the date and time when the transaction was created. | 2022-03-09T09:16:32.521Z  | | voucher_id | Unique Voucher ID. | v_dky7ksKfPX50Wb2Bxvcoeb1xT20b6tcp | | campaign_id | Parent campaign ID. | camp_FNYR4jhqZBM9xTptxDGgeNBV | | source|  Channel through which the transaction was initiated. | - `API` <br> - `voucherify-web-ui` <br> - `Automation` | | details | More detailed information stored in the form of a JSON. | Provides more details related to the transaction in the form of an object. | | related_transaction_id | Unique transaction ID related to a receiver/donor card in the case of a points transfer from/to another card. | vtx_0c9afe802593b34b80 |
 
 ### Examples
 
@@ -435,6 +466,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the export_loyalty_card_transactions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersTransactionsExportCreateResponseBody>, Integer, Hash)> export_loyalty_card_transactions_with_http_info(member_id, opts)
+
+```ruby
+begin
+  # Export Loyalty Card Transactions
+  data, status_code, headers = api_instance.export_loyalty_card_transactions_with_http_info(member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersTransactionsExportCreateResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->export_loyalty_card_transactions_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -462,7 +511,7 @@ end
 
 Export Loyalty Card Transactions
 
-Export transactions that are associated with point movements on a loyalty card.   
+Export transactions that are associated with point movements on a loyalty card.  | **Field** | **Definition** | **Example Export** | |:---|:---|:---| | id | Unique transaction ID assigned by Voucherify. | vtx_0cb7811f1c07765800 | | type | Transaction type. | - `POINTS_EXPIRATION` <br> - `POINTS_ADDITION` <br> - `POINTS_REMOVAL` <br> - `POINTS_TRANSFER_OUT` <br> - `POINTS_ACCRUAL` <br> - `POINTS_REFUND` <br> - `POINTS_REDEMPTION` | | source_id | Custom source ID of the transaction if one was included originally. | source_id_custom | | reason | Contains the reason for the transaction if one was included originally. |  | | balance | The loyalty card balance after the transaction. |  | | amount | The amount of loyalty points being allocated during the transaction. This value can either be negative or positive depending on the nature of the transaction. |  | | created_at | Timestamp in ISO 8601 format representing the date and time when the transaction was created. | 2022-03-09T09:16:32.521Z  | | voucher_id | Unique Voucher ID. | v_dky7ksKfPX50Wb2Bxvcoeb1xT20b6tcp | | campaign_id | Parent campaign ID. | camp_FNYR4jhqZBM9xTptxDGgeNBV | | source|  Channel through which the transaction was initiated. | - `API` <br> - `voucherify-web-ui` <br> - `Automation` | | details | More detailed information stored in the form of a JSON. | Provides more details related to the transaction in the form of an object. | | related_transaction_id | Unique transaction ID related to a receiver/donor card in the case of a points transfer from/to another card. | vtx_0c9afe802593b34b80 |
 
 ### Examples
 
@@ -495,6 +544,24 @@ begin
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling LoyaltiesApi->export_loyalty_card_transactions1: #{e}"
+end
+```
+
+#### Using the export_loyalty_card_transactions1_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersTransactionsExportCreateResponseBody>, Integer, Hash)> export_loyalty_card_transactions1_with_http_info(campaign_id, member_id, opts)
+
+```ruby
+begin
+  # Export Loyalty Card Transactions
+  data, status_code, headers = api_instance.export_loyalty_card_transactions1_with_http_info(campaign_id, member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersTransactionsExportCreateResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->export_loyalty_card_transactions1_with_http_info: #{e}"
 end
 ```
 
@@ -547,7 +614,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LoyaltiesApi.new
-campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the `name` of the campaign as the path parameter value, e.g., `Loyalty%20Campaign`. 
 earning_rule_id = 'earning_rule_id_example' # String | A unique earning rule ID.
 
 begin
@@ -559,11 +626,29 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the get_earning_rule_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesEarningRulesGetResponseBody>, Integer, Hash)> get_earning_rule_with_http_info(campaign_id, earning_rule_id)
+
+```ruby
+begin
+  # Get Earning Rule
+  data, status_code, headers = api_instance.get_earning_rule_with_http_info(campaign_id, earning_rule_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesEarningRulesGetResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->get_earning_rule_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty%20Campaign&#x60;.  |  |
 | **earning_rule_id** | **String** | A unique earning rule ID. |  |
 
 ### Return type
@@ -619,6 +704,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the get_loyalty_tier_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesTiersGetResponseBody>, Integer, Hash)> get_loyalty_tier_with_http_info(campaign_id, loyalty_tier_id)
+
+```ruby
+begin
+  # Get Loyalty Tier
+  data, status_code, headers = api_instance.get_loyalty_tier_with_http_info(campaign_id, loyalty_tier_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesTiersGetResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->get_loyalty_tier_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -667,7 +770,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LoyaltiesApi.new
-campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the `name` of the campaign as the path parameter value, e.g., `Loyalty%20Campaign`. 
 assignment_id = 'assignment_id_example' # String | Unique reward assignment ID.
 
 begin
@@ -679,11 +782,29 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the get_reward_assignment1_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesRewardAssignmentsGetResponseBody>, Integer, Hash)> get_reward_assignment1_with_http_info(campaign_id, assignment_id)
+
+```ruby
+begin
+  # Get Reward Assignment
+  data, status_code, headers = api_instance.get_reward_assignment1_with_http_info(campaign_id, assignment_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesRewardAssignmentsGetResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->get_reward_assignment1_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty%20Campaign&#x60;.  |  |
 | **assignment_id** | **String** | Unique reward assignment ID. |  |
 
 ### Return type
@@ -706,7 +827,7 @@ end
 
 Get Reward Assignment
 
-Retrieve specific reward assignment.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. 
+Retrieve specific reward assignment.  > 📘 Alternative endpoint > > This endpoint is an alternative to this [endpoint](ref:get-reward-assignment-2). 
 
 ### Examples
 
@@ -727,7 +848,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LoyaltiesApi.new
-campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the `name` of the campaign as the path parameter value, e.g., `Loyalty%20Campaign`. 
 assignment_id = 'assignment_id_example' # String | A unique reward assignment ID.
 
 begin
@@ -739,11 +860,29 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the get_reward_assignment2_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesRewardsGetResponseBody>, Integer, Hash)> get_reward_assignment2_with_http_info(campaign_id, assignment_id)
+
+```ruby
+begin
+  # Get Reward Assignment
+  data, status_code, headers = api_instance.get_reward_assignment2_with_http_info(campaign_id, assignment_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesRewardsGetResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->get_reward_assignment2_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty%20Campaign&#x60;.  |  |
 | **assignment_id** | **String** | A unique reward assignment ID. |  |
 
 ### Return type
@@ -787,7 +926,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LoyaltiesApi.new
-campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the `name` of the campaign as the path parameter value, e.g., `Loyalty%20Campaign`. 
 assignment_id = 'assignment_id_example' # String | Unique reward assignment ID.
 
 begin
@@ -799,11 +938,29 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the get_reward_details_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesRewardAssignmentsRewardGetResponseBody>, Integer, Hash)> get_reward_details_with_http_info(campaign_id, assignment_id)
+
+```ruby
+begin
+  # Get Reward Details
+  data, status_code, headers = api_instance.get_reward_details_with_http_info(campaign_id, assignment_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesRewardAssignmentsRewardGetResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->get_reward_details_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty%20Campaign&#x60;.  |  |
 | **assignment_id** | **String** | Unique reward assignment ID. |  |
 
 ### Return type
@@ -849,8 +1006,8 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 member_id = 'member_id_example' # String | A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is `1`.
 }
 
 begin
@@ -862,13 +1019,31 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the list_loyalty_card_transactions_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersTransactionsListResponseBody>, Integer, Hash)> list_loyalty_card_transactions_with_http_info(member_id, opts)
+
+```ruby
+begin
+  # List Loyalty Card Transactions
+  data, status_code, headers = api_instance.list_loyalty_card_transactions_with_http_info(member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersTransactionsListResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_loyalty_card_transactions_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **member_id** | **String** | A unique code identifying the loyalty card that you are looking to retrieve transaction data for. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is &#x60;1&#x60;. | [optional] |
 
 ### Return type
 
@@ -914,8 +1089,8 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return.
 member_id = 'member_id_example' # String | A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is `1`.
 }
 
 begin
@@ -927,14 +1102,32 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the list_loyalty_card_transactions1_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersTransactionsListResponseBody>, Integer, Hash)> list_loyalty_card_transactions1_with_http_info(campaign_id, member_id, opts)
+
+```ruby
+begin
+  # List Loyalty Card Transactions
+  data, status_code, headers = api_instance.list_loyalty_card_transactions1_with_http_info(campaign_id, member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersTransactionsListResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_loyalty_card_transactions1_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return. |  |
 | **member_id** | **String** | A unique code identifying the loyalty card that you are looking to retrieve transaction data for. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is &#x60;1&#x60;. | [optional] |
 
 ### Return type
 
@@ -980,8 +1173,8 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique campaign ID or name.
 loyalty_tier_id = 'loyalty_tier_id_example' # String | Unique loyalty tier ID.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is `1`.
 }
 
 begin
@@ -993,14 +1186,32 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the list_loyalty_tier_earning_rules_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesTiersEarningRulesListResponseBody>, Integer, Hash)> list_loyalty_tier_earning_rules_with_http_info(campaign_id, loyalty_tier_id, opts)
+
+```ruby
+begin
+  # List Loyalty Tier Earning Rules
+  data, status_code, headers = api_instance.list_loyalty_tier_earning_rules_with_http_info(campaign_id, loyalty_tier_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesTiersEarningRulesListResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_loyalty_tier_earning_rules_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Unique campaign ID or name. |  |
 | **loyalty_tier_id** | **String** | Unique loyalty tier ID. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is &#x60;1&#x60;. | [optional] |
 
 ### Return type
 
@@ -1055,6 +1266,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the list_loyalty_tier_rewards_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesTiersRewardsListResponseBody>, Integer, Hash)> list_loyalty_tier_rewards_with_http_info(campaign_id, loyalty_tier_id)
+
+```ruby
+begin
+  # List Loyalty Tier Rewards
+  data, status_code, headers = api_instance.list_loyalty_tier_rewards_with_http_info(campaign_id, loyalty_tier_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesTiersRewardsListResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_loyalty_tier_rewards_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -1105,7 +1334,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique loyalty campaign ID or name.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
   order: VoucherifySdk::ParameterOrderListLoyaltyTiers::CREATED_AT # ParameterOrderListLoyaltyTiers | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
 }
 
@@ -1118,12 +1347,30 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the list_loyalty_tiers_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesTiersListResponseBody>, Integer, Hash)> list_loyalty_tiers_with_http_info(campaign_id, opts)
+
+```ruby
+begin
+  # List Loyalty Tiers
+  data, status_code, headers = api_instance.list_loyalty_tiers_with_http_info(campaign_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesTiersListResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_loyalty_tiers_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Unique loyalty campaign ID or name. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
 | **order** | [**ParameterOrderListLoyaltyTiers**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 
 ### Return type
@@ -1178,6 +1425,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the list_member_loyalty_tier_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersTiersListResponseBody>, Integer, Hash)> list_member_loyalty_tier_with_http_info(member_id)
+
+```ruby
+begin
+  # List Member's Loyalty Tiers
+  data, status_code, headers = api_instance.list_member_loyalty_tier_with_http_info(member_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersTiersListResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_member_loyalty_tier_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -1204,7 +1469,7 @@ end
 
 List Member Rewards
 
-Retrieves the list of rewards that the given customer (identified by member_id, which is a loyalty card assigned to a particular customer) **can get in exchange for loyalty points**.   You can use the affordable_only parameter to limit the results to rewards that the customer can actually afford (only rewards whose price in points is not higher than the loyalty points balance on a loyalty card).   Please note that rewards that are disabled (i.e. set to Not Available in the Dashboard) for a given loyalty tier reward mapping will not be returned in this endpoint.
+Retrieves the list of rewards that the given customer (identified by `member_id`, which is a loyalty card assigned to a particular customer) **can get in exchange for loyalty points**.    You can use the `affordable_only` parameter to limit the results to rewards that the customer can actually afford (only rewards whose price in points is not higher than the loyalty points balance on a loyalty card).    Please note that rewards that are disabled (i.e. set to `Not Available` in the Dashboard) for a given loyalty tier reward mapping will not be returned in this endpoint.
 
 ### Examples
 
@@ -1227,7 +1492,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 member_id = 'member_id_example' # String | Unique loyalty card assigned to a particular customer.
 opts = {
-  affordable_only: true # Boolean | Limit the results to rewards that the customer can actually afford (only rewards whose price in points is not higher than the loyalty points balance on a loyalty card). Set this flag to true to return rewards which the customer can actually afford.
+  affordable_only: true # Boolean | Limit the results to rewards that the customer can actually afford (only rewards whose price in points is not higher than the loyalty points balance on a loyalty card). Set this flag to `true` to return rewards which the customer can actually afford.
 }
 
 begin
@@ -1239,12 +1504,30 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the list_member_rewards_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersRewardsListResponseBody>, Integer, Hash)> list_member_rewards_with_http_info(member_id, opts)
+
+```ruby
+begin
+  # List Member Rewards
+  data, status_code, headers = api_instance.list_member_rewards_with_http_info(member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersRewardsListResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_member_rewards_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **member_id** | **String** | Unique loyalty card assigned to a particular customer. |  |
-| **affordable_only** | **Boolean** | Limit the results to rewards that the customer can actually afford (only rewards whose price in points is not higher than the loyalty points balance on a loyalty card). Set this flag to true to return rewards which the customer can actually afford. | [optional] |
+| **affordable_only** | **Boolean** | Limit the results to rewards that the customer can actually afford (only rewards whose price in points is not higher than the loyalty points balance on a loyalty card). Set this flag to &#x60;true&#x60; to return rewards which the customer can actually afford. | [optional] |
 
 ### Return type
 
@@ -1266,7 +1549,7 @@ end
 
 Get Points Expiration
 
-Retrieve loyalty point expiration buckets for a given loyalty card. Expired point buckets are not returned in this endpoint. You can use the Exports API to retrieve a list of both ACTIVE and EXPIRED point buckets.
+Retrieve loyalty point expiration buckets for a given loyalty card. Expired point buckets are not returned in this endpoint. You can use the [Exports API](ref:create-export) to retrieve a list of both `ACTIVE` and `EXPIRED` point buckets.
 
 ### Examples
 
@@ -1287,11 +1570,11 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LoyaltiesApi.new
-campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the `name` of the campaign as the path parameter value, e.g., `Loyalty%20Campaign`. 
 member_id = 'member_id_example' # String | Loyalty card code.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is `1`.
 }
 
 begin
@@ -1303,14 +1586,32 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the list_points_expiration_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersPointsExpirationListResponseBody>, Integer, Hash)> list_points_expiration_with_http_info(campaign_id, member_id, opts)
+
+```ruby
+begin
+  # Get Points Expiration
+  data, status_code, headers = api_instance.list_points_expiration_with_http_info(campaign_id, member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersPointsExpirationListResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_points_expiration_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty%20Campaign&#x60;.  |  |
 | **member_id** | **String** | Loyalty card code. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is &#x60;1&#x60;. | [optional] |
 
 ### Return type
 
@@ -1332,7 +1633,7 @@ end
 
 Redeem Reward
 
-  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to redeem a reward without having to provide the campaignId as a path parameter.
+<!-- theme: info --> > 📘 Alternative endpoint > > This endpoint is an alternative to this <!-- [endpoint](OpenAPI.json/paths/~1loyalties~1{campaignId}~1members~1{memberId}~1redemption) -->[endpoint](ref:redeem-reward-1). The URL was re-designed to allow you to redeem a reward without having to provide the `campaignId` as a path parameter.
 
 ### Examples
 
@@ -1364,6 +1665,24 @@ begin
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling LoyaltiesApi->redeem_reward: #{e}"
+end
+```
+
+#### Using the redeem_reward_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersRedemptionRedeemResponseBody>, Integer, Hash)> redeem_reward_with_http_info(member_id, opts)
+
+```ruby
+begin
+  # Redeem Reward
+  data, status_code, headers = api_instance.redeem_reward_with_http_info(member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersRedemptionRedeemResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->redeem_reward_with_http_info: #{e}"
 end
 ```
 
@@ -1427,6 +1746,24 @@ begin
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling LoyaltiesApi->redeem_reward1: #{e}"
+end
+```
+
+#### Using the redeem_reward1_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersRedemptionRedeemResponseBody>, Integer, Hash)> redeem_reward1_with_http_info(campaign_id, member_id, opts)
+
+```ruby
+begin
+  # Redeem Reward
+  data, status_code, headers = api_instance.redeem_reward1_with_http_info(campaign_id, member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersRedemptionRedeemResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->redeem_reward1_with_http_info: #{e}"
 end
 ```
 
@@ -1494,6 +1831,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the transfer_points_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersTransfersCreateResponseBody>, Integer, Hash)> transfer_points_with_http_info(campaign_id, member_id, opts)
+
+```ruby
+begin
+  # Transfer Loyalty Points
+  data, status_code, headers = api_instance.transfer_points_with_http_info(campaign_id, member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersTransfersCreateResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->transfer_points_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -1522,7 +1877,7 @@ end
 
 Add or Remove Loyalty Card Balance
 
-This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
+This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   <!-- theme: info -->   >🚧 Async Action >  > This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.   > 📘 Alternative endpoint > This endpoint is an alternative to this <!-- [endpoint](OpenAPI.json/paths/~1loyalties~1{campaignId}~1members~1{memberId}~1balance) -->[endpoint](ref:update-loyalty-card-balance-1). The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the `campaignId` as a path parameter.
 
 ### Examples
 
@@ -1557,6 +1912,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the update_loyalty_card_balance_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersBalanceUpdateResponseBody>, Integer, Hash)> update_loyalty_card_balance_with_http_info(member_id, opts)
+
+```ruby
+begin
+  # Add or Remove Loyalty Card Balance
+  data, status_code, headers = api_instance.update_loyalty_card_balance_with_http_info(member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersBalanceUpdateResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->update_loyalty_card_balance_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -1584,7 +1957,7 @@ end
 
 Add or Remove Loyalty Card Balance
 
-This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.
+This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.    >🚧 Async Action >  > This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
 
 ### Examples
 
@@ -1620,6 +1993,24 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
+#### Using the update_loyalty_card_balance1_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<LoyaltiesMembersBalanceUpdateResponseBody>, Integer, Hash)> update_loyalty_card_balance1_with_http_info(campaign_id, member_id, opts)
+
+```ruby
+begin
+  # Add or Remove Loyalty Card Balance
+  data, status_code, headers = api_instance.update_loyalty_card_balance1_with_http_info(campaign_id, member_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <LoyaltiesMembersBalanceUpdateResponseBody>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->update_loyalty_card_balance1_with_http_info: #{e}"
+end
+```
+
 ### Parameters
 
 | Name | Type | Description | Notes |
@@ -1631,6 +2022,88 @@ end
 ### Return type
 
 [**LoyaltiesMembersBalanceUpdateResponseBody**](LoyaltiesMembersBalanceUpdateResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_reward_assignment1
+
+> <Model4ObjRewardAssignmentObject> update_reward_assignment1(campaign_id, assignment_id, opts)
+
+Update Reward Assignment
+
+Updates rewards parameters, i.e. the points cost for the specific reward.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the `name` of the campaign as the path parameter value, e.g., `Loyalty%20Campaign`. 
+assignment_id = 'assignment_id_example' # String | A unique reward assignment ID.
+opts = {
+  loyalties_rewards_update_request_body: VoucherifySdk::LoyaltiesRewardsUpdateRequestBody.new # LoyaltiesRewardsUpdateRequestBody | Update the points cost for the reward assignment.
+}
+
+begin
+  # Update Reward Assignment
+  result = api_instance.update_reward_assignment1(campaign_id, assignment_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->update_reward_assignment1: #{e}"
+end
+```
+
+#### Using the update_reward_assignment1_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Model4ObjRewardAssignmentObject>, Integer, Hash)> update_reward_assignment1_with_http_info(campaign_id, assignment_id, opts)
+
+```ruby
+begin
+  # Update Reward Assignment
+  data, status_code, headers = api_instance.update_reward_assignment1_with_http_info(campaign_id, assignment_id, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Model4ObjRewardAssignmentObject>
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->update_reward_assignment1_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the &#x60;name&#x60; of the campaign as the path parameter value, e.g., &#x60;Loyalty%20Campaign&#x60;.  |  |
+| **assignment_id** | **String** | A unique reward assignment ID. |  |
+| **loyalties_rewards_update_request_body** | [**LoyaltiesRewardsUpdateRequestBody**](LoyaltiesRewardsUpdateRequestBody.md) | Update the points cost for the reward assignment. | [optional] |
+
+### Return type
+
+[**Model4ObjRewardAssignmentObject**](Model4ObjRewardAssignmentObject.md)
 
 ### Authorization
 

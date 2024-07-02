@@ -14,14 +14,17 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # An object that defines the price of the reward in loyalty points.
-  class RewardsAssignmentsUpdateRequestBodyParameters
-    attr_accessor :loyalty
+  # Details about the loyalty activity.
+  class EventCustomerCustomEventLoyalty
+    attr_accessor :voucher
+
+    attr_accessor :campaign
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'loyalty' => :'loyalty'
+        :'voucher' => :'voucher',
+        :'campaign' => :'campaign'
       }
     end
 
@@ -33,7 +36,8 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'loyalty' => :'RewardsAssignmentsUpdateRequestBodyParametersLoyalty'
+        :'voucher' => :'SimpleVoucher',
+        :'campaign' => :'SimpleCampaign'
       }
     end
 
@@ -47,19 +51,27 @@ module VoucherifySdk
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::RewardsAssignmentsUpdateRequestBodyParameters` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::EventCustomerCustomEventLoyalty` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::RewardsAssignmentsUpdateRequestBodyParameters`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::EventCustomerCustomEventLoyalty`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'loyalty')
-        self.loyalty = attributes[:'loyalty']
+      if attributes.key?(:'voucher')
+        self.voucher = attributes[:'voucher']
+      else
+        self.voucher = nil
+      end
+
+      if attributes.key?(:'campaign')
+        self.campaign = attributes[:'campaign']
+      else
+        self.campaign = nil
       end
     end
 
@@ -68,6 +80,14 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @voucher.nil?
+        invalid_properties.push('invalid value for "voucher", voucher cannot be nil.')
+      end
+
+      if @campaign.nil?
+        invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -75,6 +95,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @voucher.nil?
+      return false if @campaign.nil?
       true
     end
 
@@ -83,7 +105,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          loyalty == o.loyalty
+          voucher == o.voucher &&
+          campaign == o.campaign
     end
 
     # @see the `==` method
@@ -95,7 +118,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [loyalty].hash
+      [voucher, campaign].hash
     end
 
     # Builds the object from hash

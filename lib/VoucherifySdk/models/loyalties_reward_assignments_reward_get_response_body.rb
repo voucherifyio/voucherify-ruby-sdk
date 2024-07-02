@@ -38,13 +38,13 @@ module VoucherifySdk
 
     attr_accessor :parameters
 
-    # Timestamp representing the date and time when the reward was created in ISO 8601 format.
+    # Timestamp representing the date and time when the reward was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the reward was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the reward was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
-    # The type of object represented by the JSON. This object stores information about the reward.
+    # The type of the object represented by the JSON. This object stores information about the reward.
     attr_accessor :object
 
     class EnumAttributeValidator

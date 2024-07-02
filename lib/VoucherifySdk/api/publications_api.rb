@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Create Publication
-    # This method selects vouchers that are suitable for publication, adds a publish entry and returns the publication. A voucher is suitable for publication when its active and hasnt been published yet.    🚧 Clearly define the source of the voucher  You must clearly define which source you want to publish the voucher code from. It can either be a code from a campaign or a specific voucher identified by a code.    🚧 Publish multiple vouchers  In case you want to publish multiple vouchers within a single publication, you need to specify the campaign name and number of vouchers you want to publish.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use an **auto-update** campaign.
+    # This method selects vouchers that are suitable for publication, adds a publish entry and returns the publication.  A voucher is suitable for publication when it's active and hasn't been published yet.    <!-- theme: warning --> > 🚧 Clearly define the source of the voucher > > You must clearly define which source you want to publish the voucher code from. It can either be a code from a campaign or a specific voucher identified by a code.   <!-- theme: warning --> > 🚧 Publish multiple vouchers > In case you want to publish multiple vouchers within a single publication, you need to specify the campaign name and number of vouchers you want to publish.   <!-- theme: info -->  > 📘 Auto-update campaign > > In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use an **auto-update** campaign.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :join_once Through this flag, you can control if a particular person gets only one and always the same code even if the app sends multiple publication requests. It means that if you have a referral program, a referrer is assigned only to one code if an integration sends publication requests more than once for the same customer.
     # @option opts [PublicationsCreateRequestBody] :publications_create_request_body Specify the publication parameters.
@@ -31,12 +31,12 @@ module VoucherifySdk
     end
 
     # Create Publication
-    # This method selects vouchers that are suitable for publication, adds a publish entry and returns the publication. A voucher is suitable for publication when its active and hasnt been published yet.    🚧 Clearly define the source of the voucher  You must clearly define which source you want to publish the voucher code from. It can either be a code from a campaign or a specific voucher identified by a code.    🚧 Publish multiple vouchers  In case you want to publish multiple vouchers within a single publication, you need to specify the campaign name and number of vouchers you want to publish.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use an **auto-update** campaign.
+    # This method selects vouchers that are suitable for publication, adds a publish entry and returns the publication.  A voucher is suitable for publication when it&#39;s active and hasn&#39;t been published yet.    &lt;!-- theme: warning --&gt; &gt; 🚧 Clearly define the source of the voucher &gt; &gt; You must clearly define which source you want to publish the voucher code from. It can either be a code from a campaign or a specific voucher identified by a code.   &lt;!-- theme: warning --&gt; &gt; 🚧 Publish multiple vouchers &gt; In case you want to publish multiple vouchers within a single publication, you need to specify the campaign name and number of vouchers you want to publish.   &lt;!-- theme: info --&gt;  &gt; 📘 Auto-update campaign &gt; &gt; In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use an **auto-update** campaign.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :join_once Through this flag, you can control if a particular person gets only one and always the same code even if the app sends multiple publication requests. It means that if you have a referral program, a referrer is assigned only to one code if an integration sends publication requests more than once for the same customer.
     # @option opts [PublicationsCreateRequestBody] :publications_create_request_body Specify the publication parameters.
     # @return [Array<(PublicationsCreateResponseBody, Integer, Hash)>] PublicationsCreateResponseBody data, response status code and response headers
-    private def create_publication_with_http_info(opts = {})
+    def create_publication_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PublicationsApi.create_publication ...'
       end
@@ -86,99 +86,20 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Create Publication
-    # This method selects vouchers that are suitable for publication, adds a publish entry and returns the publication. A voucher is suitable for publication when its active and hasnt been published yet.  ❗️ Limited access  Access to this endpoint is limited. This endpoint is designed for specific integrations and the API keys need to be configured to access this endpoint. Navigate to the **Dashboard** &rarr; **Project Settings** &rarr; **General** &rarr; **Integration Keys** to set up a pair of API keys and use them to send the request.    🚧 Clearly define the source of the voucher  You must clearly define which source you want to publish the voucher code from. It can either be a code from a campaign or a specific voucher identified by a code.    🚧 Publish multiple vouchers  This endpoint does not support the publishing of multiple vouchers from a single campaign. In case you want to publish multiple vouchers within a single publication, you need to use a dedicated endpoint.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use an **auto-update** campaign.   # Example Request      ❗️ Required    Query param voucher OR campaign MUST be filled out. If you provide both, campaign param will be skipped.
-    # @param customer [Customer] Contains information about the customer to whom the publication was directed.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :join_once Through this flag, you can control if a particular person gets only one and always the same code even if the app sends multiple publication requests. It means that if you have a referral program, a referrer is assigned only to one code if an integration sends publication requests more than once for the same customer.
-    # @option opts [String] :voucher Code of voucher being published.
-    # @option opts [CreatePublicationCampaign] :campaign Create publication with campaign.
-    # @option opts [String] :source_id The merchant’s publication ID if it is different from the Voucherify publication ID. Its an optional tracking identifier of a publication. It is really useful in case of an integration between multiple systems. It can be a publication ID from a CRM system, database or 3rd-party service. If source_id is provided only 1 voucher can be published per request.
-    # @option opts [Object] :metadata The metadata object stores all custom attributes assigned to the publication. A set of key/value pairs that you can attach to a publication object. It can be useful for storing additional information about the publication in a structured format.
-    # @return [PublicationsCreateResponseBody]
-    def create_publication1(customer, opts = {})
-      data, _status_code, _headers = create_publication1_with_http_info(customer, opts)
-      data
-    end
-
-    # Create Publication
-    # This method selects vouchers that are suitable for publication, adds a publish entry and returns the publication. A voucher is suitable for publication when its active and hasnt been published yet.  ❗️ Limited access  Access to this endpoint is limited. This endpoint is designed for specific integrations and the API keys need to be configured to access this endpoint. Navigate to the **Dashboard** &amp;rarr; **Project Settings** &amp;rarr; **General** &amp;rarr; **Integration Keys** to set up a pair of API keys and use them to send the request.    🚧 Clearly define the source of the voucher  You must clearly define which source you want to publish the voucher code from. It can either be a code from a campaign or a specific voucher identified by a code.    🚧 Publish multiple vouchers  This endpoint does not support the publishing of multiple vouchers from a single campaign. In case you want to publish multiple vouchers within a single publication, you need to use a dedicated endpoint.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use an **auto-update** campaign.   # Example Request      ❗️ Required    Query param voucher OR campaign MUST be filled out. If you provide both, campaign param will be skipped.
-    # @param customer [Customer] Contains information about the customer to whom the publication was directed.
-    # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :join_once Through this flag, you can control if a particular person gets only one and always the same code even if the app sends multiple publication requests. It means that if you have a referral program, a referrer is assigned only to one code if an integration sends publication requests more than once for the same customer.
-    # @option opts [String] :voucher Code of voucher being published.
-    # @option opts [CreatePublicationCampaign] :campaign Create publication with campaign.
-    # @option opts [String] :source_id The merchant’s publication ID if it is different from the Voucherify publication ID. Its an optional tracking identifier of a publication. It is really useful in case of an integration between multiple systems. It can be a publication ID from a CRM system, database or 3rd-party service. If source_id is provided only 1 voucher can be published per request.
-    # @option opts [Object] :metadata The metadata object stores all custom attributes assigned to the publication. A set of key/value pairs that you can attach to a publication object. It can be useful for storing additional information about the publication in a structured format.
-    # @return [Array<(PublicationsCreateResponseBody, Integer, Hash)>] PublicationsCreateResponseBody data, response status code and response headers
-    private def create_publication1_with_http_info(customer, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: PublicationsApi.create_publication1 ...'
-      end
-      # verify the required parameter 'customer' is set
-      if @api_client.config.client_side_validation && customer.nil?
-        fail ArgumentError, "Missing the required parameter 'customer' when calling PublicationsApi.create_publication1"
-      end
-      # resource path
-      local_var_path = '/v1/publications/create'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'customer'] = customer
-      query_params[:'join_once'] = opts[:'join_once'] if !opts[:'join_once'].nil?
-      query_params[:'voucher'] = opts[:'voucher'] if !opts[:'voucher'].nil?
-      query_params[:'campaign'] = opts[:'campaign'] if !opts[:'campaign'].nil?
-      query_params[:'source_id'] = opts[:'source_id'] if !opts[:'source_id'].nil?
-      query_params[:'metadata'] = opts[:'metadata'] if !opts[:'metadata'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'PublicationsCreateResponseBody'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
-
-      new_options = opts.merge(
-        :operation => :"PublicationsApi.create_publication1",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: PublicationsApi#create_publication1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers
-    end
-
     # List Publications
-    # Retrieve a list of publications. To return a **particular** publication, you can use the source_id query parameter and provide the source_id of the publication you are looking for specifically. # Pagination  🚧 Important!  If you want to scroll through a huge set of records, it is recommended to use the Exports API. This API will return an error page_over_limit if you reach a page above 1000. # Filter Query The filters query parameter allows for joining multiple parameters with logical operators. The syntax looks as follows:  ## Operators:  ## Examples  
+    # Retrieve a list of publications. To return a **particular** publication, you can use the `source_id` query parameter and provide the `source_id` of the publication you are looking for specifically.  ## Pagination  <!-- theme: warning --> > 🚧 Important! > > If you want to scroll through a huge set of records, it is recommended to use the <!-- [Exports API](OpenAPI.json/components/schemas/16_obj_export_object) -->[Exports API](ref:create-export). This API will return an error `page_over_limit` if you reach a page above 1000.  ## Filter Query  The `filters` query parameter allows for joining multiple parameters with logical operators. The syntax looks as follows:  <!-- title: \"Filter template\" --> ```url filters[<field_name>][conditions][<operator>][<index>]=<value> ```  ### Operators:  <!-- title: \"Operators\" --> ```     \"$in\"     \"$not_in\"     \"$is\"     \"$is_not\"     \"$has_value\"     \"$is_unknown\"     \"$contains\"     \"$starts_with\"     \"$ends_with\"     \"$more_than\"     \"$less_than\"     \"$more_than_equal\"     \"$less_than_equal\" ```  ### Examples  <!-- title: \"Example 1 - List publications of a given customer\" --> ```url GET /v1/publications?filters[customer_id][conditions][$is][0]=cust_lUET6gRpO5Wxlg5p2j2gRCgL ``` <!-- title: \"Example 2 - List publications of 2 customers\" --> ```url GET /v1/publications?filters[customer_id][conditions][$in][0]=cust_lUET6gRpO5Wxlg5p2j2gRCgL&filters[customer_id][conditions][$in][1]=cust_aR7NfHusxT7PdTMAKMfWDXnc ``` <!-- title: \"Example 3 - List publications of 2 customers using junction operator\" --> ```url GET /v1/publications?filters[customer_id][conditions][$is][0]=cust_lUET6gRpO5Wxlg5p2j2gRCgL&filters[customer_id][conditions][$is][1]=cust_aR7NfHusxT7PdTMAKMfWDXnc&filters[junction]=OR ```
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
-    # @option opts [ParameterOrderListPublications] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is &#x60;1&#x60;.
+    # @option opts [ParameterOrderListPublications] :order Sorts the results using one of the filtering options, where the dash &#x60;-&#x60; preceding a sorting option means sorting in a descending order.
     # @option opts [String] :campaign Filters by a given campaign name.
     # @option opts [String] :customer Filters by a unique customer ID.
     # @option opts [String] :voucher Filters by a given voucher code.
     # @option opts [ParameterResultListPublications] :result Filters by a publication result.
     # @option opts [ParameterVoucherTypeListPublications] :voucher_type Filters by a voucher type.
-    # @option opts [Boolean] :is_referral_code This filter works only for the true option. If set to true, the query returns only publications of codes from referral campaigns. 
+    # @option opts [Boolean] :is_referral_code This filter works only for the &#x60;true&#x60; option. If set to &#x60;true&#x60;, the query returns only publications of codes from referral campaigns. 
     # @option opts [String] :filters Allows for combining the filters mentioned in the endpoint description.
-    # @option opts [String] :source_id Using this endpoint with a particular publication source_id, which was sent with the original request to create a publication, returns in the response, exactly the same code published initially because the code was assigned to the given publication. As a result, you can use this endpoint as a reference and return a code that was assigned in a publication by using a particular source_id.
+    # @option opts [String] :source_id Using this endpoint with a particular publication &#x60;source_id&#x60;, which was sent with the original request to create a publication, returns in the response, exactly the same code published initially because the code was assigned to the given publication. As a result, you can use this endpoint as a reference and return a code that was assigned in a publication by using a particular &#x60;source_id&#x60;.
     # @return [PublicationsListResponseBody]
     def list_publications(opts = {})
       data, _status_code, _headers = list_publications_with_http_info(opts)
@@ -186,21 +107,21 @@ module VoucherifySdk
     end
 
     # List Publications
-    # Retrieve a list of publications. To return a **particular** publication, you can use the source_id query parameter and provide the source_id of the publication you are looking for specifically. # Pagination  🚧 Important!  If you want to scroll through a huge set of records, it is recommended to use the Exports API. This API will return an error page_over_limit if you reach a page above 1000. # Filter Query The filters query parameter allows for joining multiple parameters with logical operators. The syntax looks as follows:  ## Operators:  ## Examples  
+    # Retrieve a list of publications. To return a **particular** publication, you can use the &#x60;source_id&#x60; query parameter and provide the &#x60;source_id&#x60; of the publication you are looking for specifically.  ## Pagination  &lt;!-- theme: warning --&gt; &gt; 🚧 Important! &gt; &gt; If you want to scroll through a huge set of records, it is recommended to use the &lt;!-- [Exports API](OpenAPI.json/components/schemas/16_obj_export_object) --&gt;[Exports API](ref:create-export). This API will return an error &#x60;page_over_limit&#x60; if you reach a page above 1000.  ## Filter Query  The &#x60;filters&#x60; query parameter allows for joining multiple parameters with logical operators. The syntax looks as follows:  &lt;!-- title: \&quot;Filter template\&quot; --&gt; &#x60;&#x60;&#x60;url filters[&lt;field_name&gt;][conditions][&lt;operator&gt;][&lt;index&gt;]&#x3D;&lt;value&gt; &#x60;&#x60;&#x60;  ### Operators:  &lt;!-- title: \&quot;Operators\&quot; --&gt; &#x60;&#x60;&#x60;     \&quot;$in\&quot;     \&quot;$not_in\&quot;     \&quot;$is\&quot;     \&quot;$is_not\&quot;     \&quot;$has_value\&quot;     \&quot;$is_unknown\&quot;     \&quot;$contains\&quot;     \&quot;$starts_with\&quot;     \&quot;$ends_with\&quot;     \&quot;$more_than\&quot;     \&quot;$less_than\&quot;     \&quot;$more_than_equal\&quot;     \&quot;$less_than_equal\&quot; &#x60;&#x60;&#x60;  ### Examples  &lt;!-- title: \&quot;Example 1 - List publications of a given customer\&quot; --&gt; &#x60;&#x60;&#x60;url GET /v1/publications?filters[customer_id][conditions][$is][0]&#x3D;cust_lUET6gRpO5Wxlg5p2j2gRCgL &#x60;&#x60;&#x60; &lt;!-- title: \&quot;Example 2 - List publications of 2 customers\&quot; --&gt; &#x60;&#x60;&#x60;url GET /v1/publications?filters[customer_id][conditions][$in][0]&#x3D;cust_lUET6gRpO5Wxlg5p2j2gRCgL&amp;filters[customer_id][conditions][$in][1]&#x3D;cust_aR7NfHusxT7PdTMAKMfWDXnc &#x60;&#x60;&#x60; &lt;!-- title: \&quot;Example 3 - List publications of 2 customers using junction operator\&quot; --&gt; &#x60;&#x60;&#x60;url GET /v1/publications?filters[customer_id][conditions][$is][0]&#x3D;cust_lUET6gRpO5Wxlg5p2j2gRCgL&amp;filters[customer_id][conditions][$is][1]&#x3D;cust_aR7NfHusxT7PdTMAKMfWDXnc&amp;filters[junction]&#x3D;OR &#x60;&#x60;&#x60;
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
-    # @option opts [ParameterOrderListPublications] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is &#x60;1&#x60;.
+    # @option opts [ParameterOrderListPublications] :order Sorts the results using one of the filtering options, where the dash &#x60;-&#x60; preceding a sorting option means sorting in a descending order.
     # @option opts [String] :campaign Filters by a given campaign name.
     # @option opts [String] :customer Filters by a unique customer ID.
     # @option opts [String] :voucher Filters by a given voucher code.
     # @option opts [ParameterResultListPublications] :result Filters by a publication result.
     # @option opts [ParameterVoucherTypeListPublications] :voucher_type Filters by a voucher type.
-    # @option opts [Boolean] :is_referral_code This filter works only for the true option. If set to true, the query returns only publications of codes from referral campaigns. 
+    # @option opts [Boolean] :is_referral_code This filter works only for the &#x60;true&#x60; option. If set to &#x60;true&#x60;, the query returns only publications of codes from referral campaigns. 
     # @option opts [String] :filters Allows for combining the filters mentioned in the endpoint description.
-    # @option opts [String] :source_id Using this endpoint with a particular publication source_id, which was sent with the original request to create a publication, returns in the response, exactly the same code published initially because the code was assigned to the given publication. As a result, you can use this endpoint as a reference and return a code that was assigned in a publication by using a particular source_id.
+    # @option opts [String] :source_id Using this endpoint with a particular publication &#x60;source_id&#x60;, which was sent with the original request to create a publication, returns in the response, exactly the same code published initially because the code was assigned to the given publication. As a result, you can use this endpoint as a reference and return a code that was assigned in a publication by using a particular &#x60;source_id&#x60;.
     # @return [Array<(PublicationsListResponseBody, Integer, Hash)>] PublicationsListResponseBody data, response status code and response headers
-    private def list_publications_with_http_info(opts = {})
+    def list_publications_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PublicationsApi.list_publications ...'
       end
@@ -214,6 +135,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PublicationsApi.list_publications, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PublicationsApi.list_publications, must be greater than or equal to 1.'
       end
 
       # resource path

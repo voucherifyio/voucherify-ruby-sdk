@@ -14,13 +14,14 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **POST** `/validation-rules/{validationRuleId}/assignments`.
-  class ValidationRulesAssignmentsCreateRequestBody
-    # Defines the related object. i.e. `voucher`.
-    attr_accessor :related_object_type
+  # Contains the source of the object that initiated the sendout.
+  class CustomerActivityDataEventSource
+    # Determines the channel that initiated the sendout.
+    attr_accessor :channel
 
-    # Unique related object ID assigned by Voucherify, i.e. v_lfZi4rcEGe0sN9gmnj40bzwK2FH6QUno for a voucher.
-    attr_accessor :related_object_id
+    attr_accessor :user
+
+    attr_accessor :api_key
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -47,8 +48,9 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'related_object_type' => :'related_object_type',
-        :'related_object_id' => :'related_object_id'
+        :'channel' => :'channel',
+        :'user' => :'user',
+        :'api_key' => :'api_key'
       }
     end
 
@@ -60,8 +62,9 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'related_object_type' => :'String',
-        :'related_object_id' => :'String'
+        :'channel' => :'String',
+        :'user' => :'CustomerActivityDataEventSourceUser',
+        :'api_key' => :'CustomerActivityDataEventSourceApiKey'
       }
     end
 
@@ -75,25 +78,29 @@ module VoucherifySdk
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ValidationRulesAssignmentsCreateRequestBody` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CustomerActivityDataEventSource` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ValidationRulesAssignmentsCreateRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CustomerActivityDataEventSource`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'related_object_type')
-        self.related_object_type = attributes[:'related_object_type']
+      if attributes.key?(:'channel')
+        self.channel = attributes[:'channel']
       else
-        self.related_object_type = 'voucher'
+        self.channel = nil
       end
 
-      if attributes.key?(:'related_object_id')
-        self.related_object_id = attributes[:'related_object_id']
+      if attributes.key?(:'user')
+        self.user = attributes[:'user']
+      end
+
+      if attributes.key?(:'api_key')
+        self.api_key = attributes[:'api_key']
       end
     end
 
@@ -102,6 +109,10 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @channel.nil?
+        invalid_properties.push('invalid value for "channel", channel cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -109,19 +120,20 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      related_object_type_validator = EnumAttributeValidator.new('String', ["voucher", "promotion_tier", "campaign", "earning_rule", "distribution", "reward_assignment"])
-      return false unless related_object_type_validator.valid?(@related_object_type)
+      return false if @channel.nil?
+      channel_validator = EnumAttributeValidator.new('String', ["USER_PORTAL", "API", "CLIENT_API", "INTERNAL"])
+      return false unless channel_validator.valid?(@channel)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] related_object_type Object to be assigned
-    def related_object_type=(related_object_type)
-      validator = EnumAttributeValidator.new('String', ["voucher", "promotion_tier", "campaign", "earning_rule", "distribution", "reward_assignment"])
-      unless validator.valid?(related_object_type)
-        fail ArgumentError, "invalid value for \"related_object_type\", must be one of #{validator.allowable_values}."
+    # @param [Object] channel Object to be assigned
+    def channel=(channel)
+      validator = EnumAttributeValidator.new('String', ["USER_PORTAL", "API", "CLIENT_API", "INTERNAL"])
+      unless validator.valid?(channel)
+        fail ArgumentError, "invalid value for \"channel\", must be one of #{validator.allowable_values}."
       end
-      @related_object_type = related_object_type
+      @channel = channel
     end
 
     # Checks equality by comparing each attribute.
@@ -129,8 +141,9 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          related_object_type == o.related_object_type &&
-          related_object_id == o.related_object_id
+          channel == o.channel &&
+          user == o.user &&
+          api_key == o.api_key
     end
 
     # @see the `==` method
@@ -142,7 +155,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [related_object_type, related_object_id].hash
+      [channel, user, api_key].hash
     end
 
     # Builds the object from hash

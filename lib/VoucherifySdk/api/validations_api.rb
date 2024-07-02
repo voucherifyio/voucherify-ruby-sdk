@@ -34,7 +34,7 @@ module VoucherifySdk
     # @param [Hash] opts the optional parameters
     # @option opts [ValidationsValidateRequestBody] :validations_validate_request_body 
     # @return [Array<(ValidationsValidateResponseBody, Integer, Hash)>] ValidationsValidateResponseBody data, response status code and response headers
-    private def validate_stacked_discounts_with_http_info(opts = {})
+    def validate_stacked_discounts_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationsApi.validate_stacked_discounts ...'
       end

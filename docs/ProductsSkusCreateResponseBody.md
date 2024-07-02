@@ -13,7 +13,7 @@
 | **attributes** | **Object** | The attributes object stores values for all custom attributes inherited by the SKU from the parent product. A set of key/value pairs that are attached to a SKU object and are unique to each SKU within a product family. |  |
 | **image_url** | **String** | The HTTPS URL pointing to the .png or .jpg file that will be used to render the SKU image. |  |
 | **metadata** | **Object** | The metadata object stores all custom attributes assigned to the SKU. A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format. |  |
-| **created_at** | **Time** | Timestamp representing the date and time when the SKU was created in ISO 8601 format. |  |
-| **updated_at** | **Time** | Timestamp representing the date and time when the SKU was updated in ISO 8601 format. |  |
-| **object** | **String** | The type of object represented by JSON. This object stores information about the &#x60;SKU&#x60;. | [default to &#39;sku&#39;] |
+| **created_at** | **Time** | Timestamp representing the date and time when the SKU was created. The value is shown in the ISO 8601 format. |  |
+| **updated_at** | **Time** | Timestamp representing the date and time when the SKU was updated. The value is shown in the ISO 8601 format. |  |
+| **object** | **String** | The type of the object represented by JSON. This object stores information about the &#x60;SKU&#x60;. | [default to &#39;sku&#39;] |
 

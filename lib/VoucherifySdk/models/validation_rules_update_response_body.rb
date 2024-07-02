@@ -35,16 +35,16 @@ module VoucherifySdk
     # Unique validation rule ID.
     attr_accessor :id
 
-    # Timestamp representing the date and time when the validation rule was created in ISO 8601 format.
+    # Timestamp representing the date and time when the validation rule was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the validation rule was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the validation rule was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     # The number of instances the validation rule has been assigned to different types of redeemables.
     attr_accessor :assignments_count
 
-    # The type of object represented by JSON. This object stores information about the validation rule.
+    # The type of the object represented by JSON. This object stores information about the validation rule.
     attr_accessor :object
 
     class EnumAttributeValidator

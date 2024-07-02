@@ -23,8 +23,10 @@ module VoucherifySdk
 
     attr_accessor :validity_timeframe
 
-    # Integer array corresponding to the particular days of the week in which the campaign is valid.  - `0`  Sunday   - `1`  Monday   - `2`  Tuesday   - `3`  Wednesday   - `4`  Thursday   - `5`  Friday   - `6`  Saturday  
+    # Integer array corresponding to the particular days of the week in which the campaign is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
+
+    attr_accessor :validity_hours
 
     # An optional field to keep any extra textual information about the campaign such as a campaign description and details.
     attr_accessor :description
@@ -86,6 +88,7 @@ module VoucherifySdk
         :'expiration_date' => :'expiration_date',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours',
         :'description' => :'description',
         :'category' => :'category',
         :'metadata' => :'metadata',
@@ -112,6 +115,7 @@ module VoucherifySdk
         :'expiration_date' => :'Time',
         :'validity_timeframe' => :'CampaignBaseValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
+        :'validity_hours' => :'ValidityHours',
         :'description' => :'String',
         :'category' => :'String',
         :'metadata' => :'Object',
@@ -171,6 +175,10 @@ module VoucherifySdk
         if (value = attributes[:'validity_day_of_week']).is_a?(Array)
           self.validity_day_of_week = value
         end
+      end
+
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
       end
 
       if attributes.key?(:'description')
@@ -256,6 +264,7 @@ module VoucherifySdk
           expiration_date == o.expiration_date &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours &&
           description == o.description &&
           category == o.category &&
           metadata == o.metadata &&
@@ -278,7 +287,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [start_date, expiration_date, validity_timeframe, validity_day_of_week, description, category, metadata, unset_metadata_fields, category_id, activity_duration_after_publishing, join_once, auto_join, type, loyalty_tiers_expiration, options].hash
+      [start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, description, category, metadata, unset_metadata_fields, category_id, activity_duration_after_publishing, join_once, auto_join, type, loyalty_tiers_expiration, options].hash
     end
 
     # Builds the object from hash

@@ -33,18 +33,8 @@ module VoucherifySdk
     # The category assigned to the campaign. Either pass this parameter OR the `category_id`.
     attr_accessor :category
 
-    # Activation timestamp defines when the campaign starts to be active in ISO 8601 format. Campaign is *inactive before* this date. 
-    attr_accessor :start_date
-
-    attr_accessor :validity_timeframe
-
-    # Integer array corresponding to the particular days of the week in which the campaign is valid.  - `0`  Sunday   - `1`  Monday   - `2`  Tuesday   - `3`  Wednesday   - `4`  Thursday   - `5`  Friday   - `6`  Saturday  
-    attr_accessor :validity_day_of_week
-
     # An optional field to keep any extra textual information about the code such as a code description and details.
     attr_accessor :additional_info
-
-    attr_accessor :discount
 
     attr_accessor :gift
 
@@ -81,11 +71,7 @@ module VoucherifySdk
         :'active' => :'active',
         :'metadata' => :'metadata',
         :'category' => :'category',
-        :'start_date' => :'start_date',
-        :'validity_timeframe' => :'validity_timeframe',
-        :'validity_day_of_week' => :'validity_day_of_week',
         :'additional_info' => :'additional_info',
-        :'discount' => :'discount',
         :'gift' => :'gift',
         :'loyalty_card' => :'loyalty_card'
       }
@@ -105,11 +91,7 @@ module VoucherifySdk
         :'active' => :'Boolean',
         :'metadata' => :'Object',
         :'category' => :'String',
-        :'start_date' => :'Time',
-        :'validity_timeframe' => :'CampaignBaseValidityTimeframe',
-        :'validity_day_of_week' => :'Array<Integer>',
         :'additional_info' => :'String',
-        :'discount' => :'Discount',
         :'gift' => :'Gift',
         :'loyalty_card' => :'CampaignsImportVoucherLoyaltyCard'
       }
@@ -162,26 +144,8 @@ module VoucherifySdk
         self.category = attributes[:'category']
       end
 
-      if attributes.key?(:'start_date')
-        self.start_date = attributes[:'start_date']
-      end
-
-      if attributes.key?(:'validity_timeframe')
-        self.validity_timeframe = attributes[:'validity_timeframe']
-      end
-
-      if attributes.key?(:'validity_day_of_week')
-        if (value = attributes[:'validity_day_of_week']).is_a?(Array)
-          self.validity_day_of_week = value
-        end
-      end
-
       if attributes.key?(:'additional_info')
         self.additional_info = attributes[:'additional_info']
-      end
-
-      if attributes.key?(:'discount')
-        self.discount = attributes[:'discount']
       end
 
       if attributes.key?(:'gift')
@@ -236,11 +200,7 @@ module VoucherifySdk
           active == o.active &&
           metadata == o.metadata &&
           category == o.category &&
-          start_date == o.start_date &&
-          validity_timeframe == o.validity_timeframe &&
-          validity_day_of_week == o.validity_day_of_week &&
           additional_info == o.additional_info &&
-          discount == o.discount &&
           gift == o.gift &&
           loyalty_card == o.loyalty_card
     end
@@ -254,7 +214,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [code, type, redemption, active, metadata, category, start_date, validity_timeframe, validity_day_of_week, additional_info, discount, gift, loyalty_card].hash
+      [code, type, redemption, active, metadata, category, additional_info, gift, loyalty_card].hash
     end
 
     # Builds the object from hash

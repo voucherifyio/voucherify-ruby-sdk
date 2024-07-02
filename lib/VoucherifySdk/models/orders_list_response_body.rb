@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Response body schema representing **GET** `/orders`.
   class OrdersListResponseBody
-    # The type of object represented by JSON. This object stores information about orders in a dictionary.
+    # The type of the object represented by JSON. This object stores information about orders in a dictionary.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of order objects.

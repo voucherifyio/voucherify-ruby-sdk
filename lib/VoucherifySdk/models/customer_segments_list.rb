@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # List of customer's segments
   class CustomerSegmentsList
-    # The type of object represented by JSON. This object stores information about customer segments.
+    # The type of the object represented by JSON. This object stores information about customer segments.
     attr_accessor :object
 
     # Identifies the name of the JSON property that contains the array of segment IDs.

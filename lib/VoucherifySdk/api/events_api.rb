@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Track Custom Event
-    # To track a custom event, you create an event object.   The event object must be linked to the customer who performs the action. If a customer doesnt exist in Voucherify, the customer will be created.
+    # To track a custom event, you create an event object.    The event object must be linked to the customer who performs the action. If a customer doesn't exist in Voucherify, the customer will be created.
     # @param [Hash] opts the optional parameters
     # @option opts [EventsCreateRequestBody] :events_create_request_body Specify the details of the custom event.
     # @return [EventsCreateResponseBody]
@@ -30,11 +30,11 @@ module VoucherifySdk
     end
 
     # Track Custom Event
-    # To track a custom event, you create an event object.   The event object must be linked to the customer who performs the action. If a customer doesnt exist in Voucherify, the customer will be created.
+    # To track a custom event, you create an event object.    The event object must be linked to the customer who performs the action. If a customer doesn&#39;t exist in Voucherify, the customer will be created.
     # @param [Hash] opts the optional parameters
     # @option opts [EventsCreateRequestBody] :events_create_request_body Specify the details of the custom event.
     # @return [Array<(EventsCreateResponseBody, Integer, Hash)>] EventsCreateResponseBody data, response status code and response headers
-    private def track_custom_event_with_http_info(opts = {})
+    def track_custom_event_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: EventsApi.track_custom_event ...'
       end
