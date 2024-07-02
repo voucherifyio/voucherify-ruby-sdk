@@ -212,6 +212,7 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::RewardsApi* | [**get_reward_assignment**](docs/RewardsApi.md#get_reward_assignment) | **GET** /v1/rewards/{rewardId}/assignments/{assignmentId} | Get Reward Assignment
 *VoucherifySdk::RewardsApi* | [**list_reward_assignments**](docs/RewardsApi.md#list_reward_assignments) | **GET** /v1/rewards/{rewardId}/assignments | List Reward Assignments
 *VoucherifySdk::RewardsApi* | [**update_reward_assignment**](docs/RewardsApi.md#update_reward_assignment) | **PUT** /v1/rewards/{rewardId}/assignments/{assignmentId} | Update Reward Assignment
+*VoucherifySdk::ValidationRulesApi* | [**create_validation_rule_assignment**](docs/ValidationRulesApi.md#create_validation_rule_assignment) | **POST** /v1/validation-rules/{validationRuleId}/assignments | Create Validation Rules Assignments
 *VoucherifySdk::ValidationRulesApi* | [**create_validation_rules**](docs/ValidationRulesApi.md#create_validation_rules) | **POST** /v1/validation-rules | Create Validation Rules
 *VoucherifySdk::ValidationRulesApi* | [**delete_validation_rule_assignment**](docs/ValidationRulesApi.md#delete_validation_rule_assignment) | **DELETE** /v1/validation-rules/{validationRuleId}/assignments/{assignmentId} | Delete Validation Rule Assignment
 *VoucherifySdk::ValidationRulesApi* | [**delete_validation_rules**](docs/ValidationRulesApi.md#delete_validation_rules) | **DELETE** /v1/validation-rules/{validationRuleId} | Delete Validation Rule
@@ -849,6 +850,8 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ValidationRuleBase](docs/ValidationRuleBase.md)
  - [VoucherifySdk::ValidationRuleBaseApplicableTo](docs/ValidationRuleBaseApplicableTo.md)
  - [VoucherifySdk::ValidationRuleBaseError](docs/ValidationRuleBaseError.md)
+ - [VoucherifySdk::ValidationRulesAssignmentsCreateRequestBody](docs/ValidationRulesAssignmentsCreateRequestBody.md)
+ - [VoucherifySdk::ValidationRulesAssignmentsCreateResponseBody](docs/ValidationRulesAssignmentsCreateResponseBody.md)
  - [VoucherifySdk::ValidationRulesAssignmentsList](docs/ValidationRulesAssignmentsList.md)
  - [VoucherifySdk::ValidationRulesAssignmentsListResponseBody](docs/ValidationRulesAssignmentsListResponseBody.md)
  - [VoucherifySdk::ValidationRulesCreateRequestBody](docs/ValidationRulesCreateRequestBody.md)
