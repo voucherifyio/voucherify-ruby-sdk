@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # List of redeemables for examine qualification.
   class QualificationsRedeemables
-    # The type of object represented by JSON. Default is `list`.
+    # The type of the object represented by JSON. Default is `list`.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of qualified redeemables.
@@ -28,10 +28,10 @@ module VoucherifySdk
     # The number of redeemables returned in the API request.
     attr_accessor :total
 
-    # As results are always limited, the `has_more` flag indicates whether there are more records for given parameters. This let's you know if you are able to run another request (with different options) to get more records returned in the results.
+    # As results are always limited, the `has_more` flag indicates if there are more records for given parameters. This lets you know if you can run another request (with different options) to get more records returned in the results.
     attr_accessor :has_more
 
-    # Timestamp representing the date and time to use in starting_after cursor to get more redeemables.
+    # Timestamp representing the date and time to use in `starting_after` cursor to get more redeemables.
     attr_accessor :more_starting_after
 
     class EnumAttributeValidator

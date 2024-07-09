@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Validation Rule Assignments List
   class ValidationRuleAssignmentsList
-    # The type of object represented by JSON. This object stores information about validation rule assignments.
+    # The type of the object represented by JSON. This object stores information about validation rule assignments.
     attr_accessor :object
 
     # Identifies the name of the JSON property that contains the array of validation rule assignments.

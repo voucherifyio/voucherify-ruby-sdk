@@ -14,8 +14,7 @@ require 'VoucherifySdk'
 VoucherifySdk::OrderCalculatedCustomer.openapi_one_of
 # =>
 # [
-#   :'CustomerId',
-#   :'CustomerWithSummaryLoyaltyReferrals'
+#   :'CustomerId'
 # ]
 ```
 
@@ -44,6 +43,5 @@ VoucherifySdk::OrderCalculatedCustomer.build(data_that_doesnt_match)
 #### Return type
 
 - `CustomerId`
-- `CustomerWithSummaryLoyaltyReferrals`
 - `nil` (if no type matches)
 

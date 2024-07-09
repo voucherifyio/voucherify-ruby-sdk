@@ -315,7 +315,7 @@ end
 
 List Customer Activities
 
-Retrieve customer activities.
+> ❗️ Deprecated    This endpoint represents the deprecated version of the API responsible for listing customer activities and we do not recommend using it. Developers are encouraged to migrate to the latest version to take advantage of the latest enhancements and bug fixes. No updates will be provided to the deprecated endpoint. Retrieve customer activities.
 
 ### Examples
 
@@ -338,10 +338,10 @@ end
 api_instance = VoucherifySdk::CustomersApi.new
 customer_id = 'customer_id_example' # String | A Voucherify customers id or source ID of the customer who performed the activities.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
   order: VoucherifySdk::ParameterOrder::CREATED_AT, # ParameterOrder | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-  starting_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | A cursor for use in pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.
-  starting_after_id: 'starting_after_id_example', # String | By applying this filter value, you will get events starting after an event with the given ID.
+  starting_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | A cursor for pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.
+  starting_after_id: 'starting_after_id_example', # String | A cursor for pagination. It retrieves the events starting after an event with the given ID.
   campaign_type: VoucherifySdk::ParameterCampaignType::PROMOTION, # ParameterCampaignType | Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM
   campaign_id: 'campaign_id_example', # String | By applying this parameter you request only events related to specific campaign identified by its ID.
   product_id: 'product_id_example', # String | By applying this parameter you request only events related to specific product identified by its ID.
@@ -363,10 +363,10 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **customer_id** | **String** | A Voucherify customers id or source ID of the customer who performed the activities. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
 | **order** | [**ParameterOrder**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
-| **starting_after** | **Time** | A cursor for use in pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list. | [optional] |
-| **starting_after_id** | **String** | By applying this filter value, you will get events starting after an event with the given ID. | [optional] |
+| **starting_after** | **Time** | A cursor for pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the events starting after an event with the given ID. | [optional] |
 | **campaign_type** | [**ParameterCampaignType**](.md) | Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM | [optional] |
 | **campaign_id** | **String** | By applying this parameter you request only events related to specific campaign identified by its ID. | [optional] |
 | **product_id** | **String** | By applying this parameter you request only events related to specific product identified by its ID. | [optional] |
@@ -473,8 +473,8 @@ end
 
 api_instance = VoucherifySdk::CustomersApi.new
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   email: 'email_example', # String | Limit the customers to the ones that have this specific email address.
   city: 'city_example', # String | Limit the customers to the ones that are located in the specified city.
   name: 'name_example', # String | Filter customers by the name property.
@@ -484,7 +484,7 @@ opts = {
   updated_at_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Filter customers by date customer was updated last time.
   updated_at_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Filter customers by date customer was updated last time.
   order: VoucherifySdk::ParameterOrderListCustomers::CREATED_AT, # ParameterOrderListCustomers | This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-  starting_after: Time.parse('2013-10-20T19:20:30+01:00') # Time | A cursor for use in pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.  
+  starting_after: Time.parse('2013-10-20T19:20:30+01:00') # Time | A cursor for pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.  
 }
 
 begin
@@ -500,8 +500,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **email** | **String** | Limit the customers to the ones that have this specific email address. | [optional] |
 | **city** | **String** | Limit the customers to the ones that are located in the specified city. | [optional] |
 | **name** | **String** | Filter customers by the name property. | [optional] |
@@ -511,7 +511,7 @@ end
 | **updated_at_before** | **Time** | Filter customers by date customer was updated last time. | [optional] |
 | **updated_at_after** | **Time** | Filter customers by date customer was updated last time. | [optional] |
 | **order** | [**ParameterOrderListCustomers**](.md) | This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
-| **starting_after** | **Time** | A cursor for use in pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.   | [optional] |
+| **starting_after** | **Time** | A cursor for pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.   | [optional] |
 
 ### Return type
 

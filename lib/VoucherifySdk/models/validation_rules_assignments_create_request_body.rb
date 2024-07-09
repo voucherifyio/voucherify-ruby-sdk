@@ -16,10 +16,10 @@ require 'time'
 module VoucherifySdk
   # Request body schema for **POST** `/validation-rules/{validationRuleId}/assignments`.
   class ValidationRulesAssignmentsCreateRequestBody
-    # Defines the related object. i.e. `voucher`.
+    # Defines the related object, e.g. `voucher`.
     attr_accessor :related_object_type
 
-    # Unique related object ID assigned by Voucherify, i.e. v_lfZi4rcEGe0sN9gmnj40bzwK2FH6QUno for a voucher.
+    # Unique related object ID assigned by Voucherify, e.g. `v_lfZi4rcEGe0sN9gmnj40bzwK2FH6QUno` for a voucher.
     attr_accessor :related_object_id
 
     class EnumAttributeValidator

@@ -340,13 +340,13 @@ module VoucherifySdk
     end
 
     # List Customer Activities
-    # Retrieve customer activities.
+    # > ❗️ Deprecated    This endpoint represents the deprecated version of the API responsible for listing customer activities and we do not recommend using it. Developers are encouraged to migrate to the latest version to take advantage of the latest enhancements and bug fixes. No updates will be provided to the deprecated endpoint. Retrieve customer activities.
     # @param customer_id [String] A Voucherify customers id or source ID of the customer who performed the activities.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-    # @option opts [Time] :starting_after A cursor for use in pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.
-    # @option opts [String] :starting_after_id By applying this filter value, you will get events starting after an event with the given ID.
+    # @option opts [Time] :starting_after A cursor for pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the events starting after an event with the given ID.
     # @option opts [ParameterCampaignType] :campaign_type Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM
     # @option opts [String] :campaign_id By applying this parameter you request only events related to specific campaign identified by its ID.
     # @option opts [String] :product_id By applying this parameter you request only events related to specific product identified by its ID.
@@ -359,13 +359,13 @@ module VoucherifySdk
     end
 
     # List Customer Activities
-    # Retrieve customer activities.
+    # &gt; ❗️ Deprecated    This endpoint represents the deprecated version of the API responsible for listing customer activities and we do not recommend using it. Developers are encouraged to migrate to the latest version to take advantage of the latest enhancements and bug fixes. No updates will be provided to the deprecated endpoint. Retrieve customer activities.
     # @param customer_id [String] A Voucherify customers id or source ID of the customer who performed the activities.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-    # @option opts [Time] :starting_after A cursor for use in pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.
-    # @option opts [String] :starting_after_id By applying this filter value, you will get events starting after an event with the given ID.
+    # @option opts [Time] :starting_after A cursor for pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the events starting after an event with the given ID.
     # @option opts [ParameterCampaignType] :campaign_type Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM
     # @option opts [String] :campaign_id By applying this parameter you request only events related to specific campaign identified by its ID.
     # @option opts [String] :product_id By applying this parameter you request only events related to specific product identified by its ID.
@@ -503,8 +503,8 @@ module VoucherifySdk
     # List Customers
     # Returns a list of customers.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [String] :email Limit the customers to the ones that have this specific email address.
     # @option opts [String] :city Limit the customers to the ones that are located in the specified city.
     # @option opts [String] :name Filter customers by the name property.
@@ -514,7 +514,7 @@ module VoucherifySdk
     # @option opts [Time] :updated_at_before Filter customers by date customer was updated last time.
     # @option opts [Time] :updated_at_after Filter customers by date customer was updated last time.
     # @option opts [ParameterOrderListCustomers] :order This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-    # @option opts [Time] :starting_after A cursor for use in pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.  
+    # @option opts [Time] :starting_after A cursor for pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.  
     # @return [CustomersListResponseBody]
     def list_customers(opts = {})
       data, _status_code, _headers = list_customers_with_http_info(opts)
@@ -524,8 +524,8 @@ module VoucherifySdk
     # List Customers
     # Returns a list of customers.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [String] :email Limit the customers to the ones that have this specific email address.
     # @option opts [String] :city Limit the customers to the ones that are located in the specified city.
     # @option opts [String] :name Filter customers by the name property.
@@ -535,7 +535,7 @@ module VoucherifySdk
     # @option opts [Time] :updated_at_before Filter customers by date customer was updated last time.
     # @option opts [Time] :updated_at_after Filter customers by date customer was updated last time.
     # @option opts [ParameterOrderListCustomers] :order This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-    # @option opts [Time] :starting_after A cursor for use in pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.  
+    # @option opts [Time] :starting_after A cursor for pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.  
     # @return [Array<(CustomersListResponseBody, Integer, Hash)>] CustomersListResponseBody data, response status code and response headers
     private def list_customers_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -551,6 +551,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling CustomersApi.list_customers, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling CustomersApi.list_customers, must be greater than or equal to 1.'
       end
 
       # resource path

@@ -54,8 +54,10 @@ module VoucherifySdk
 
     attr_accessor :validity_timeframe
 
-    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0`  Sunday   - `1`  Monday   - `2`  Tuesday   - `3`  Wednesday   - `4`  Thursday   - `5`  Friday   - `6`  Saturday  
+    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
+
+    attr_accessor :validity_hours
 
     # A flag to toggle the voucher on or off. You can disable a voucher even though it's within the active period defined by the `start_date` and `expiration_date`.    - `true` indicates an *active* voucher - `false` indicates an *inactive* voucher
     attr_accessor :active
@@ -71,24 +73,20 @@ module VoucherifySdk
     # Flag indicating whether this voucher is a referral code; `true` for campaign type `REFERRAL_PROGRAM`.
     attr_accessor :is_referral_code
 
-    # Timestamp representing the date and time when the voucher was created in ISO 8601 format.
+    # Timestamp representing the date and time when the voucher was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Timestamp representing the date and time when the voucher was last updated in ISO 8601 format.
     attr_accessor :updated_at
 
-    # Unique customer ID of voucher owner.
+    # Unique identifier of the customer who owns the voucher.
     attr_accessor :holder_id
 
-    attr_accessor :holder
+    # Unique identifier of the referring person.
+    attr_accessor :referrer_id
 
-    # The type of object represented by JSON. Default is `voucher`.
+    # The type of the object represented by JSON. Default is `voucher`.
     attr_accessor :object
-
-    attr_accessor :distributions
-
-    # Flag indicating whether this voucher is deleted.
-    attr_accessor :deleted
 
     attr_accessor :validation_rules_assignments
 
@@ -136,6 +134,7 @@ module VoucherifySdk
         :'expiration_date' => :'expiration_date',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours',
         :'active' => :'active',
         :'additional_info' => :'additional_info',
         :'metadata' => :'metadata',
@@ -144,10 +143,8 @@ module VoucherifySdk
         :'created_at' => :'created_at',
         :'updated_at' => :'updated_at',
         :'holder_id' => :'holder_id',
-        :'holder' => :'holder',
+        :'referrer_id' => :'referrer_id',
         :'object' => :'object',
-        :'distributions' => :'distributions',
-        :'deleted' => :'deleted',
         :'validation_rules_assignments' => :'validation_rules_assignments',
         :'publish' => :'publish',
         :'redemption' => :'redemption'
@@ -177,6 +174,7 @@ module VoucherifySdk
         :'expiration_date' => :'Time',
         :'validity_timeframe' => :'VoucherValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
+        :'validity_hours' => :'ValidityHours',
         :'active' => :'Boolean',
         :'additional_info' => :'String',
         :'metadata' => :'Object',
@@ -185,10 +183,8 @@ module VoucherifySdk
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
         :'holder_id' => :'String',
-        :'holder' => :'SimpleCustomer',
+        :'referrer_id' => :'String',
         :'object' => :'String',
-        :'distributions' => :'Array<Object>',
-        :'deleted' => :'Boolean',
         :'validation_rules_assignments' => :'ValidationRulesAssignmentsList',
         :'publish' => :'VoucherPublish',
         :'redemption' => :'VoucherRedemption'
@@ -289,6 +285,10 @@ module VoucherifySdk
         end
       end
 
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
+      end
+
       if attributes.key?(:'active')
         self.active = attributes[:'active']
       end
@@ -321,24 +321,14 @@ module VoucherifySdk
         self.holder_id = attributes[:'holder_id']
       end
 
-      if attributes.key?(:'holder')
-        self.holder = attributes[:'holder']
+      if attributes.key?(:'referrer_id')
+        self.referrer_id = attributes[:'referrer_id']
       end
 
       if attributes.key?(:'object')
         self.object = attributes[:'object']
       else
         self.object = 'voucher'
-      end
-
-      if attributes.key?(:'distributions')
-        if (value = attributes[:'distributions']).is_a?(Array)
-          self.distributions = value
-        end
-      end
-
-      if attributes.key?(:'deleted')
-        self.deleted = attributes[:'deleted']
       end
 
       if attributes.key?(:'validation_rules_assignments')
@@ -401,6 +391,7 @@ module VoucherifySdk
           expiration_date == o.expiration_date &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours &&
           active == o.active &&
           additional_info == o.additional_info &&
           metadata == o.metadata &&
@@ -409,10 +400,8 @@ module VoucherifySdk
           created_at == o.created_at &&
           updated_at == o.updated_at &&
           holder_id == o.holder_id &&
-          holder == o.holder &&
+          referrer_id == o.referrer_id &&
           object == o.object &&
-          distributions == o.distributions &&
-          deleted == o.deleted &&
           validation_rules_assignments == o.validation_rules_assignments &&
           publish == o.publish &&
           redemption == o.redemption
@@ -427,7 +416,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, code, campaign, campaign_id, category, category_id, categories, type, discount, gift, loyalty_card, start_date, expiration_date, validity_timeframe, validity_day_of_week, active, additional_info, metadata, assets, is_referral_code, created_at, updated_at, holder_id, holder, object, distributions, deleted, validation_rules_assignments, publish, redemption].hash
+      [id, code, campaign, campaign_id, category, category_id, categories, type, discount, gift, loyalty_card, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, active, additional_info, metadata, assets, is_referral_code, created_at, updated_at, holder_id, referrer_id, object, validation_rules_assignments, publish, redemption].hash
     end
 
     # Builds the object from hash

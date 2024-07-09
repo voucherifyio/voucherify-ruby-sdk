@@ -62,8 +62,8 @@
   - [/v1/loyalties/{campaignId}/members](#v1loyaltiescampaignidmembers)
   - [/v1/loyalties/{campaignId}/members/{memberId}](#v1loyaltiescampaignidmembersmemberid)
   - [/v1/loyalties/members/{memberId}](#v1loyaltiesmembersmemberid)
-  - [/v1/loyalties/{campaignId}/members/{memberId}/activities](#v1loyaltiescampaignidmembersmemberidactivities)
-  - [/v1/loyalties/members/{memberId}/activities](#v1loyaltiesmembersmemberidactivities)
+  - [/v1/loyalties/{campaignId}/members/{memberId}/activity](#v1loyaltiescampaignidmembersmemberidactivity)
+  - [/v1/loyalties/members/{memberId}/activity](#v1loyaltiesmembersmemberidactivity)
   - [/v1/loyalties/{campaignId}/members/{memberId}/balance](#v1loyaltiescampaignidmembersmemberidbalance)
   - [/v1/loyalties/members/{memberId}/balance](#v1loyaltiesmembersmemberidbalance)
   - [/v1/loyalties/{campaignId}/members/{memberId}/transfers](#v1loyaltiescampaignidmembersmemberidtransfers)
@@ -98,8 +98,10 @@
   - [/v1/customers/bulk/async](#v1customersbulkasync)
   - [/v1/customers/metadata/async](#v1customersmetadataasync)
   - [/v1/customers/{customerId}/consents](#v1customerscustomeridconsents)
+  - [/v1/customers/{customerId}/activity](#v1customerscustomeridactivity)
   - [/v1/customers/{customerId}/activities](#v1customerscustomeridactivities)
   - [/v1/customers/{customerId}/segments](#v1customerscustomeridsegments)
+  - [/v1/customers/{customerId}/redeemables](#v1customerscustomeridredeemables)
 - [Orders](#orders)
   - [/v1/orders](#v1orders)
   - [/v1/orders/{orderId}](#v1ordersorderid)
@@ -148,6 +150,27 @@
 - [Locations](#locations)
   - [/v1/locations](#v1locations)
   - [/v1/locations/{locationId}](#v1locationslocationid)
+- [Referrals](#referrals)
+  - [/v1/referrals/{campaignId}/members/{memberId}/holders](#v1referralscampaignidmembersmemberidholders)
+  - [/v1/referrals/members/{memberId}/holders](#v1referralsmembersmemberidholders)
+- [Bin](#bin)
+  - [/v1/trash-bin](#v1trash-bin)
+  - [/v1/trash-bin/{binEntryId}](#v1trash-binbinentryid)
+- [Management](#management)
+  - [/management/v1/projects](#managementv1projects)
+  - [/management/v1/projects/{projectId}](#managementv1projectsprojectid)
+  - [/management/v1/projects/{projectId}/users](#managementv1projectsprojectidusers)
+  - [/management/v1/projects/{projectId}/users/{userId}](#managementv1projectsprojectidusersuserid)
+  - [/management/v1/projects/{projectId}/stacking-rules](#managementv1projectsprojectidstacking-rules)
+  - [/management/v1/projects/{projectId}/stacking-rules/{stackingRulesId}](#managementv1projectsprojectidstacking-rulesstackingrulesid)
+  - [/management/v1/projects/{projectId}/metadata-schemas](#managementv1projectsprojectidmetadata-schemas)
+  - [/management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId}](#managementv1projectsprojectidmetadata-schemasmetadataschemaid)
+  - [/management/v1/projects/{projectId}/custom-event-schemas](#managementv1projectsprojectidcustom-event-schemas)
+  - [/management/v1/projects/{projectId}/custom-event-schemas/{customEventSchemaId}](#managementv1projectsprojectidcustom-event-schemascustomeventschemaid)
+  - [/management/v1/projects/{projectId}/webhooks](#managementv1projectsprojectidwebhooks)
+  - [/management/v1/projects/{projectId}/webhooks/{webhookId}](#managementv1projectsprojectidwebhookswebhookid)
+  - [/management/v1/projects/{projectId}/branding](#managementv1projectsprojectidbranding)
+  - [/management/v1/projects/{projectId}/branding/{brandingId}](#managementv1projectsprojectidbrandingbrandingid)
 - [Client-side](#client-side)
   - [/client/v1/qualifications](#clientv1qualifications)
   - [/client/v1/promotions/tiers](#clientv1promotionstiers)
@@ -158,30 +181,26 @@
   - [/client/v1/consents](#clientv1consents)
   - [/client/v1/validate](#clientv1validate-deprecated)
   - [/client/v1/redeem](#clientv1redeem-deprecated)
+  - [/client/v1/publish](#clientv1publish)
 # Endpoints
 
 ## Publications
 ### /v1/publications/create
 #### Create Publication (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Supported ✅** 
 ### /v1/publications
 #### List Publications (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/publications_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create Publication (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/publications_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/publications_create_response_body.rb) ✅
+ **Supported ✅** 
 ## Qualifications
 ### /v1/qualifications
 #### Check Eligibility (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/qualifications_check_eligibility_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/qualifications_check_eligibility_response_body.rb) ✅
+ **Supported ✅** 
 ## Validations
 ### /v1/validations
 #### Validate Stackable Discounts (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/validations_validate_response_body.rb) ✅
-- **ResponseSupported:** ❌
+ **Supported ✅** 
 ### ~~❗/v1/vouchers/{code}/validate [Deprecated]❗~~
 #### ~~❗Validate Voucher [Deprecated] (post)❗~~
 ### ~~❗/v1/promotions/validation [Deprecated]❗~~
@@ -191,678 +210,611 @@
 ## Redemptions
 ### /v1/redemptions
 #### List Redemptions (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/redemptions_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Redeem Stackable Discounts (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/redemptions_redeem_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/redemptions_redeem_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/redemptions/{redemptionId}
 #### Get Redemption (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/redemptions_get_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/vouchers/{code}/redemption
 #### Get Voucher's Redemptions (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/vouchers_redemption_get_response_body.rb) ✅
+ **Supported ✅** 
 #### ~~❗Redeem Voucher [Deprecated] (post)❗~~
 ### /v1/redemptions/{redemptionId}/rollback
 #### Rollback Redemption (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/redemptions_rollback_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/redemptions_rollback_create_response_body.rb) ✅
+ **Supported ✅** 
 ### ~~❗/v1/promotions/tiers/{promotionTierId}/redemption [Deprecated]❗~~
 #### ~~❗Redeem Promotion [Deprecated] (post)❗~~
 ### /v1/redemptions/{parentRedemptionId}/rollbacks
 #### Rollback Stackable Redemptions (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/redemptions_rollbacks_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/redemptions_rollbacks_create_response_body.rb) ✅
+ **Supported ✅** 
 ## Vouchers
 ### /v1/vouchers
 #### List Vouchers (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Generate Random Code (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/vouchers/{code}
 #### Get Voucher (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/vouchers_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Update Voucher (put)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Delete Voucher (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 #### Create Voucher (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/vouchers/{code}/enable
 #### Enable Voucher (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/vouchers_enable_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/vouchers/{code}/disable
 #### Disable Voucher (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/vouchers_disable_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/vouchers/{code}/balance
 #### Add or Remove Voucher Balance (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/vouchers_balance_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/vouchers_balance_update_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/vouchers/{code}/transactions
 #### List Voucher Transactions (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/vouchers_transactions_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/vouchers/{code}/transactions/export
 #### Export Voucher Transactions (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/vouchers_transactions_export_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/vouchers_transactions_export_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/vouchers/import
 #### Import Vouchers (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/vouchers/importCSV
 #### Import Vouchers using CSV (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/vouchers_import_csv_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/vouchers/bulk/async
 #### Update Vouchers in bulk (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/vouchers/metadata/async
 #### Update Vouchers' metadata in bulk (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/vouchers/{code}/sessions/{sessionKey}
 #### Release Validation Session (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### ~~❗/v1/vouchers/qualification [Deprecated]❗~~
 #### ~~❗Examine Qualification [Deprecated] (post)❗~~
 ## Campaigns
 ### /v1/campaigns
 #### Create Campaign (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/campaigns_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_create_response_body.rb) ✅
+ **Supported ✅** 
 #### List Campaigns (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/campaigns/{campaignId}
 #### Get Campaign (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Update Campaign (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/campaigns_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_update_response_body.rb) ✅
+ **Supported ✅** 
 #### Delete Campaign (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_delete_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/campaigns/{campaignId}/vouchers
 #### Add Vouchers to Campaign (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/campaigns_vouchers_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_vouchers_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/campaigns/{campaignId}/vouchers/{code}
 #### Add Voucher with Specific Code to Campaign (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/campaigns_vouchers_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_vouchers_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/campaigns/{campaignId}/import
 #### Import Vouchers to Campaign (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/campaigns_import_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_import_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/campaigns/{campaignId}/importCSV
 #### Import Vouchers to Campaign by CSV (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_import_csv_create_response_body.rb) ✅
+ **Supported ✅** 
 ### ~~❗/v1/campaigns/qualification [Deprecated]❗~~
 #### ~~❗Examine Qualification [Deprecated] (post)❗~~
 ### /v1/campaigns/{campaignId}/enable
 #### Enable Campaign (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_enable_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/campaigns/{campaignId}/disable
 #### Disable Campaign (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/campaigns_disable_response_body.rb) ✅
+ **Supported ✅** 
 ## Promotions
 ### /v1/promotions/tiers
 #### List Promotion Tiers (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/promotions/{campaignId}/tiers
 #### List Promotion Tiers from Campaign (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/promotions_tiers_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Add Promotion Tier to Campaign (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/promotions/tiers/{promotionTierId}
 #### Get Promotion Tier (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/promotions_tiers_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Update Promotion Tier (put)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Delete Promotion Tier (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /v1/promotions/tiers/{promotionTierId}/enable
 #### Enable Promotion Tier (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/promotions_tiers_enable_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/promotions/tiers/{promotionTierId}/disable
 #### Disable Promotion Tier (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/promotions_tiers_disable_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/promotions/stacks
 #### List Promotion Stacks (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/promotions_stacks_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/promotions/{campaignId}/stacks
 #### List Promotion Stacks in Campaign (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/promotions_stacks_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create Promotion Stack (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/promotions_stacks_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/promotions_stacks_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/promotions/{campaignId}/stacks/{stackId}
 #### Get Promotion Stack (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/promotions_stacks_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Update Promotion Stack (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/promotions_stacks_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/promotions_stacks_update_response_body.rb) ✅
+ **Supported ✅** 
 #### Delete Promotion Stack (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ## Rewards
 ### /v1/rewards
 #### List Rewards (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Create Reward (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/rewards/{rewardId}
 #### Get Reward (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Update Reward (put)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Delete Reward (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /v1/rewards/{rewardId}/assignments
 #### List Reward Assignments (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/rewards_assignments_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create Reward Assignment (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/rewards_assignments_create_response_body.rb) ✅
-- **ResponseSupported:** ❌
+ **Supported ✅** 
 ### /v1/rewards/{rewardId}/assignments/{assignmentId}
 #### Update Reward Assignment (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/rewards_assignments_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/rewards_assignments_update_response_body.rb) ✅
+ **Supported ✅** 
 #### Delete Reward Assignment (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 #### Get Reward Assignment (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/rewards_assignments_get_response_body.rb) ✅
+ **Supported ✅** 
 ## Loyalties
 ### /v1/loyalties
 #### List Loyalty Campaigns (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Create Loyalty Campaign (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/loyalties/{campaignId}
 #### Get Loyalty Campaign (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Update Loyalty Campaign (put)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Delete Loyalty Campaign (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_delete_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/members
 #### List Members (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Add Member (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/loyalties/{campaignId}/members/{memberId}
 #### Get Member (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/loyalties/members/{memberId}
 #### Get Member (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
-### /v1/loyalties/{campaignId}/members/{memberId}/activities
-#### Get Member Activities (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
-### /v1/loyalties/members/{memberId}/activities
-#### Get Member Activities (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
+### /v1/loyalties/{campaignId}/members/{memberId}/activity
+#### List Member Activity (get)
+ **Not supported ❌** 
+### /v1/loyalties/members/{memberId}/activity
+#### List Member Activity (get)
+ **Not supported ❌** 
 ### /v1/loyalties/{campaignId}/members/{memberId}/balance
 #### Add or Remove Loyalty Card Balance (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_balance_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_balance_update_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/members/{memberId}/balance
 #### Add or Remove Loyalty Card Balance (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_balance_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_balance_update_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/members/{memberId}/transfers
 #### Transfer Loyalty Points (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_transfers_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_transfers_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/members/{memberId}/transactions
 #### List Loyalty Card Transactions (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_transactions_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/members/{memberId}/transactions
 #### List Loyalty Card Transactions (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_transactions_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/members/{memberId}/transactions/export
 #### Export Loyalty Card Transactions (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_transactions_export_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_transactions_export_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/members/{memberId}/transactions/export
 #### Export Loyalty Card Transactions (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_transactions_export_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_transactions_export_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/members/{memberId}/points-expiration
 #### Get Points Expiration (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_points_expiration_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/points-expiration/export
 #### Create Points Expiration Export (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/loyalties/{campaignId}/earning-rules
 #### List Earning Rules (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Create Earning Rule (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** *Not applicable*
+ **Not supported ❌** 
 ### /v1/loyalties/{campaignId}/earning-rules/{earningRuleId}
 #### Get Earning Rule (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_earning_rules_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Update Earning Rule (put)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Delete Earning Rule (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/earning-rules/{earningRuleId}/enable
 #### Enable Earning Rule (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_earning_rules_enable_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/earning-rules/{earningRuleId}/disable
 #### Disable Earning Rule (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_earning_rules_disable_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/members/{memberId}/rewards
 #### List Member Rewards (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_rewards_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/reward-assignments/{assignmentId}/reward
 #### Get Reward Details (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_reward_assignments_reward_get_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/reward-assignments
 #### List Reward Assignments (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/loyalties/{campaignId}/rewards
 #### List Reward Assignments (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Create Reward Assignment (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/loyalties/{campaignId}/reward-assignments/{assignmentId}
 #### Get Reward Assignment (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_reward_assignments_get_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/rewards/{assignmentId}
 #### Get Reward Assignment (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_rewards_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Update Reward Assignment (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/4_obj_reward_assignment_object.rb) ✅
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Delete Reward Assignment (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/members/{memberId}/redemption
 #### Redeem Reward (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_redemption_redeem_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_redemption_redeem_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/members/{memberId}/redemption
 #### Redeem Reward (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_redemption_redeem_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_redemption_redeem_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/tiers
 #### List Loyalty Tiers (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_tiers_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create loyalty tiers (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/loyalties_tiers_create_in_bulk_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_tiers_create_in_bulk_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/tiers/{loyaltyTierId}
 #### Get Loyalty Tier (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_tiers_get_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/members/{memberId}/tiers
 #### List Member's Loyalty Tiers (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_members_tiers_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/tiers/{loyaltyTierId}/earning-rules
 #### List Loyalty Tier Earning Rules (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_tiers_earning_rules_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/loyalties/{campaignId}/tiers/{loyaltyTierId}/rewards
 #### List Loyalty Tier Rewards (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/loyalties_tiers_rewards_list_response_body.rb) ✅
+ **Supported ✅** 
 ## Customers
 ### /v1/customers
 #### List Customers (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/customers_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create Customer (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/customers_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/customers_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/customers/{customerId}
 #### Get Customer (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/customers_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Delete Customer (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 #### Update Customer (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/customers_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/customers_update_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/customers/{customerId}/permanent-deletion
 #### Delete Customer Permanently (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/customers_permanent_deletion_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/customers/importCSV
 #### Import and Update Customers using CSV (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/customers_import_csv_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/customers/bulk/async
 #### Update Customers in bulk (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/customers_update_in_bulk_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/customers/metadata/async
 #### Update Customers' Metadata in bulk (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/customers_metadata_update_in_bulk_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/customers_metadata_update_in_bulk_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/customers/{customerId}/consents
 #### Update Customer's consents (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/.rb) ✅
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
+### /v1/customers/{customerId}/activity
+#### List Customer Activity (get)
+ **Not supported ❌** 
 ### /v1/customers/{customerId}/activities
 #### List Customer Activities (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/customers_activities_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/customers/{customerId}/segments
 #### List Customer's Segments (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/customers_segments_list_response_body.rb) ✅
+ **Supported ✅** 
+### /v1/customers/{customerId}/redeemables
+#### List Customer's Redeemables [Beta] (get)
+ **Not supported ❌** 
 ## Orders
 ### /v1/orders
 #### List Orders (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/orders_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create Order (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/orders_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/orders_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/orders/{orderId}
 #### Get Order (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/orders_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Update Order (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/orders_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/orders_update_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/orders/import
 #### Import Orders (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/orders_import_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/orders_import_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/orders/export
 #### Create Orders Export (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/orders_export_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/orders_export_create_response_body.rb) ✅
+ **Supported ✅** 
 ## Products
 ### /v1/products
 #### List Products (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/products_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create Product (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/products_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/products_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/products/{productId}
 #### Get Product (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/products_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Update Product (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/products_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/products_update_response_body.rb) ✅
+ **Supported ✅** 
 #### Delete Product (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /v1/products/bulk/async
 #### Update Products in bulk (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/products_update_in_bulk_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/products/metadata/async
 #### Update Products' Metadata in bulk (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/products_metadata_update_in_bulk_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/products_metadata_update_in_bulk_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/skus/{skuId}
 #### Get SKU (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/skus_get_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/products/{productId}/skus
 #### List SKUs in Product (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/products_skus_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create SKU (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/products_skus_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/products_skus_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/products/{productId}/skus/{skuId}
 #### Update SKU (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/products_skus_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/products_skus_update_response_body.rb) ✅
+ **Supported ✅** 
 #### Delete SKU (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /v1/products/importCSV
 #### Import Products using CSV (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/products_import_csv_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/skus/importCSV
 #### Import SKUs using CSV (post)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/skus_import_csv_create_response_body.rb) ✅
+ **Supported ✅** 
 ## Product Collections
 ### /v1/product-collections
 #### List Product Collections (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/product_collections_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create Product Collection (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/product_collections_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/product_collections_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/product-collections/{productCollectionId}
 #### Get Product Collection (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/product_collections_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Delete Product Collection (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /v1/product-collections/{productCollectionId}/products
 #### List Products in Collection (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/product_collections_products_list_response_body.rb) ✅
+ **Supported ✅** 
 ## Validation Rules
 ### /v1/validation-rules
 #### List Validation Rules (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/validation_rules_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create Validation Rules (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/validation_rules_create_response_body.rb) ✅
-- **ResponseSupported:** ❌
+ **Supported ✅** 
 ### /v1/validation-rules/{validationRuleId}
 #### Get Validation Rule (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/validation_rules_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Update Validation Rule (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/validation_rules_update_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/validation_rules_update_response_body.rb) ✅
+ **Supported ✅** 
 #### Delete Validation Rule (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /v1/validation-rules-assignments
 #### List Validation Rules' Assignment(s) (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/validation_rules_assignments_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/validation-rules/{validationRuleId}/assignments
 #### List Validation Rule Assignments (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/validation_rules_assignments_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create Validation Rules Assignments (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Supported ✅** 
 ### /v1/validation-rules/{validationRuleId}/assignments/{assignmentId}
 #### Delete Validation Rule Assignment (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ## Segments
 ### /v1/segments/{segmentId}
 #### Get Segment (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 #### Delete Segment (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /v1/segments
 #### Create Segment (post)
-- **RequestSupported:** ❌
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ## Events
 ### /v1/events
 #### Track Custom Event (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/events_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/events_create_response_body.rb) ✅
+ **Supported ✅** 
 ## Consents
 ### /v1/consents
 #### List Consents (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ## Async Actions
 ### /v1/async-actions
 #### List Async Actions (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/async-actions/{asyncActionId}
 #### Get Async Action (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ## Exports
 ### /v1/exports
 #### Create Export (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/exports_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/exports_create_response_body.rb) ✅
+ **Supported ✅** 
 #### List Exports (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/exports_list_response_body.rb) ✅
+ **Supported ✅** 
 ### /v1/exports/{exportId}
 #### Get Export (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/exports_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Delete Export (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /v1/exports/{export_Id}
 #### Download Export (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ## Categories
 ### /v1/categories
 #### List Categories (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/categories_list_response_body.rb) ✅
+ **Supported ✅** 
 #### Create Category (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/categories_create_response_body.rb) ✅
-- **ResponseSupported:** ❌
+ **Supported ✅** 
 ### /v1/categories/{categoryId}
 #### Get Category (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/categories_get_response_body.rb) ✅
+ **Supported ✅** 
 #### Delete Category (delete)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 #### Update Category (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/categories_update_response_body.rb) ✅
-- **ResponseSupported:** ❌
+ **Supported ✅** 
 ## Metadata Schemas
 ### /v1/metadata-schemas
 #### List Metadata Schemas (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/metadata-schemas/{resource}
 #### Get Metadata Schema (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ## Locations
 ### /v1/locations
 #### List Locations (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /v1/locations/{locationId}
 #### Get Location (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
+## Referrals
+### /v1/referrals/{campaignId}/members/{memberId}/holders
+#### List Referral Code Holders [Beta] (get)
+ **Not supported ❌** 
+### /v1/referrals/members/{memberId}/holders
+#### List Referral Code Holders [Beta] (get)
+ **Not supported ❌** 
+## Bin
+### /v1/trash-bin
+#### List Bin Entries (get)
+ **Not supported ❌** 
+### /v1/trash-bin/{binEntryId}
+#### Delete Bin Entry (delete)
+ **Not supported ❌** 
+## Management
+### /management/v1/projects
+#### Create Project (post)
+ **Not supported ❌** 
+#### List Projects (get)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}
+#### Get Project (get)
+ **Not supported ❌** 
+#### Update Project (put)
+ **Not supported ❌** 
+#### Delete Project (delete)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/users
+#### Assign User (post)
+ **Not supported ❌** 
+#### List Users (get)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/users/{userId}
+#### Get User (get)
+ **Not supported ❌** 
+#### Update User (put)
+ **Not supported ❌** 
+#### Unassign User (delete)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/stacking-rules
+#### Create Stacking Rules (post)
+ **Not supported ❌** 
+#### List Stacking Rules (get)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/stacking-rules/{stackingRulesId}
+#### Get Stacking Rules (get)
+ **Not supported ❌** 
+#### Update Stacking Rules (put)
+ **Not supported ❌** 
+#### Delete Stacking Rules (delete)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/metadata-schemas
+#### Create Metadata Schema (post)
+ **Not supported ❌** 
+#### List Metadata Schemas (get)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId}
+#### Get Metadata Schema (get)
+ **Not supported ❌** 
+#### Update Metadata Schema (put)
+ **Not supported ❌** 
+#### Delete Metadata Schema (delete)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/custom-event-schemas
+#### Create Custom Event Schema (post)
+ **Not supported ❌** 
+#### List Custom Event Schemas (get)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/custom-event-schemas/{customEventSchemaId}
+#### Get Custom Event Schema (get)
+ **Not supported ❌** 
+#### Update Custom Event Schema (put)
+ **Not supported ❌** 
+#### Delete Custom Event Schema (delete)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/webhooks
+#### Create Webhook (post)
+ **Not supported ❌** 
+#### List Webhooks (get)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/webhooks/{webhookId}
+#### Get Webhook (get)
+ **Not supported ❌** 
+#### Update Webhook (put)
+ **Not supported ❌** 
+#### Delete Webhook (delete)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/branding
+#### Create Brand (post)
+ **Not supported ❌** 
+#### List Brands (get)
+ **Not supported ❌** 
+### /management/v1/projects/{projectId}/branding/{brandingId}
+#### Get Brand (get)
+ **Not supported ❌** 
+#### Update Brand (put)
+ **Not supported ❌** 
+#### Delete Brand (delete)
+ **Not supported ❌** 
 ## Client-side
 ### /client/v1/qualifications
 #### Check Eligibility (client-side) (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/client_qualifications_check_eligibility_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/client_qualifications_check_eligibility_response_body.rb) ✅
+ **Supported ✅** 
 ### /client/v1/promotions/tiers
 #### List Promotion Tiers (client-side) (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### /client/v1/redemptions
 #### Redeem Stackable Discounts (client-side) (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/client_redemptions_redeem_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/client_redemptions_redeem_response_body.rb) ✅
+ **Supported ✅** 
 ### /client/v1/validations
 #### Validate Stackable Discounts (client-side) (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/client_validations_validate_response_body.rb) ✅
-- **ResponseSupported:** ❌
+ **Supported ✅** 
 ### /client/v1/customers/{customerId}/consents
 #### Update Customer's consents (client-side) (put)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/.rb) ✅
-- **ResponseSupported:** *Not applicable*
+ **Supported ✅** 
 ### /client/v1/events
 #### Track Custom Event (client-side) (post)
-- **RequestSupported:** [link](./lib/VoucherifySDK/models/client_events_create_response_body.rb) ✅
-- **ResponseSupported:** [link](./lib/VoucherifySDK/models/client_events_create_response_body.rb) ✅
+ **Supported ✅** 
 ### /client/v1/consents
 #### List Consents (client-side) (get)
-- **RequestSupported:** *Not applicable*
-- **ResponseSupported:** ❌
+ **Not supported ❌** 
 ### ~~❗/client/v1/validate [Deprecated]❗~~
 #### ~~❗Validate Voucher (client-side) [Deprecated] (get)❗~~
 ### ~~❗/client/v1/redeem [Deprecated]❗~~
 #### ~~❗Redeem Voucher (client-side) [Deprecated] (post)❗~~
+### /client/v1/publish
+#### Create Publication (client-side) (post)
+ **Not supported ❌** 

@@ -30,10 +30,10 @@ module VoucherifySdk
 
     attr_accessor :loyalty
 
-    # A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the custom event.
+    # A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the customer object.
     attr_accessor :metadata
 
-    # Timestamp representing the date and time when the custom event was created in ISO 8601 format.
+    # Timestamp representing the date and time when the custom event was created. Timestamp is presented in the ISO 8601 format.
     attr_accessor :created_at
 
     class EnumAttributeValidator
@@ -85,7 +85,7 @@ module VoucherifySdk
         :'type' => :'String',
         :'customer' => :'SimpleCustomerRequiredObjectType',
         :'referral' => :'CustomEventReferral',
-        :'loyalty' => :'Object',
+        :'loyalty' => :'CustomEventLoyalty',
         :'metadata' => :'Object',
         :'created_at' => :'Time'
       }

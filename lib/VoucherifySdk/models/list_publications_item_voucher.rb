@@ -18,7 +18,7 @@ module VoucherifySdk
     # Voucher code.
     attr_accessor :code
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # Campaign name

@@ -61,7 +61,7 @@ module VoucherifySdk
     # A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format.
     attr_accessor :metadata
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     class EnumAttributeValidator

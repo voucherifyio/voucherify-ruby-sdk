@@ -15,10 +15,10 @@ require 'time'
 
 module VoucherifySdk
   class ParameterUpdatedBeforeAfter
-    # Timestamp representing the date and time before the voucher was updated in ISO 8601 format.
+    # Timestamp representing the date and time before the voucher was updated. The value is shown in the ISO 8601 format.
     attr_accessor :before
 
-    # Timestamp representing the date and time after the voucher was updated in ISO 8601 format.
+    # Timestamp representing the date and time after the voucher was updated. The value is shown in the ISO 8601 format.
     attr_accessor :after
 
     # Attribute mapping from ruby-style variable name to JSON key.

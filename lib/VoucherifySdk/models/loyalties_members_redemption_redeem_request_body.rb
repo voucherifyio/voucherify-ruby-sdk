@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **POST** `/loyalties/{campaignId}/members/{memberId}/redemption` and for **POST** and `/loyalties/members/{memberId}/redemption`.
+  # Request body schema for **POST** `/loyalties/{campaignId}/members/{memberId}/redemption` and for **POST** `/loyalties/members/{memberId}/redemption`.
   class LoyaltiesMembersRedemptionRedeemRequestBody
     attr_accessor :reward
 

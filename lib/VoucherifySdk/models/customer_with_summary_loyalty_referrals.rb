@@ -27,7 +27,7 @@ module VoucherifySdk
     # Customer's phone number. This parameter is mandatory when you try to send out codes to customers via an SMS channel.
     attr_accessor :phone
 
-    # *Deprecated* Customer's birthdate; format YYYY-MM-DD.
+    # `Deprecated`. ~~Customer's birthdate; format YYYY-MM-DD~~.
     attr_accessor :birthday
 
     # Customer's birthdate; format YYYY-MM-DD.
@@ -53,15 +53,15 @@ module VoucherifySdk
     # Object used to store system metadata information.
     attr_accessor :system_metadata
 
-    # Timestamp representing the date and time when the customer was created in ISO 8601 format.
+    # Timestamp representing the date and time when the customer was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the customer was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the customer was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     attr_accessor :assets
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     class EnumAttributeValidator

@@ -18,10 +18,10 @@ module VoucherifySdk
     # Unique publication ID, assigned by Voucherify.
     attr_accessor :id
 
-    # The type of object represented by the JSON. This object stores information about the `publication`.
+    # The type of the object represented by the JSON. This object stores information about the `publication`.
     attr_accessor :object
 
-    # Timestamp representing the date and time when the publication was created in ISO 8601 format.
+    # Timestamp representing the date and time when the publication was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Unique customer ID of the customer receiving the publication.
@@ -30,7 +30,6 @@ module VoucherifySdk
     # Customer's `source_id`.
     attr_accessor :tracking_id
 
-    # The metadata object stores all custom attributes assigned to the publication. A set of key/value pairs that you can attach to a publication object. It can be useful for storing additional information about the publication in a structured format.
     attr_accessor :metadata
 
     # How the publication was originated. It can be your own custom channel or an example value provided here.
@@ -41,7 +40,10 @@ module VoucherifySdk
 
     attr_accessor :customer
 
-    # Contains the unique internal voucher ID that was assigned by Voucherify.
+    # Contains the voucher IDs that was assigned by Voucherify.
+    attr_accessor :vouchers
+
+    # Contains the unique internal voucher IDs that was assigned by Voucherify.
     attr_accessor :vouchers_id
 
     # Status of the publication attempt.
@@ -87,6 +89,7 @@ module VoucherifySdk
         :'channel' => :'channel',
         :'source_id' => :'source_id',
         :'customer' => :'customer',
+        :'vouchers' => :'vouchers',
         :'vouchers_id' => :'vouchers_id',
         :'result' => :'result',
         :'failure_code' => :'failure_code',
@@ -107,10 +110,11 @@ module VoucherifySdk
         :'created_at' => :'Time',
         :'customer_id' => :'String',
         :'tracking_id' => :'String',
-        :'metadata' => :'Object',
+        :'metadata' => :'ListPublicationsItemBaseMetadata',
         :'channel' => :'String',
         :'source_id' => :'String',
         :'customer' => :'CustomerWithSummaryLoyaltyReferrals',
+        :'vouchers' => :'Array<String>',
         :'vouchers_id' => :'Array<String>',
         :'result' => :'String',
         :'failure_code' => :'String',
@@ -199,6 +203,14 @@ module VoucherifySdk
         self.customer = nil
       end
 
+      if attributes.key?(:'vouchers')
+        if (value = attributes[:'vouchers']).is_a?(Array)
+          self.vouchers = value
+        end
+      else
+        self.vouchers = nil
+      end
+
       if attributes.key?(:'vouchers_id')
         if (value = attributes[:'vouchers_id']).is_a?(Array)
           self.vouchers_id = value
@@ -255,6 +267,10 @@ module VoucherifySdk
         invalid_properties.push('invalid value for "customer", customer cannot be nil.')
       end
 
+      if @vouchers.nil?
+        invalid_properties.push('invalid value for "vouchers", vouchers cannot be nil.')
+      end
+
       if @vouchers_id.nil?
         invalid_properties.push('invalid value for "vouchers_id", vouchers_id cannot be nil.')
       end
@@ -279,6 +295,7 @@ module VoucherifySdk
       return false if @metadata.nil?
       return false if @channel.nil?
       return false if @customer.nil?
+      return false if @vouchers.nil?
       return false if @vouchers_id.nil?
       return false if @result.nil?
       result_validator = EnumAttributeValidator.new('String', ["FAILURE"])
@@ -320,6 +337,7 @@ module VoucherifySdk
           channel == o.channel &&
           source_id == o.source_id &&
           customer == o.customer &&
+          vouchers == o.vouchers &&
           vouchers_id == o.vouchers_id &&
           result == o.result &&
           failure_code == o.failure_code &&
@@ -335,7 +353,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, object, created_at, customer_id, tracking_id, metadata, channel, source_id, customer, vouchers_id, result, failure_code, failure_message].hash
+      [id, object, created_at, customer_id, tracking_id, metadata, channel, source_id, customer, vouchers, vouchers_id, result, failure_code, failure_message].hash
     end
 
     # Builds the object from hash

@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Stores the number of points being added back to the loyalty card for the reward redemption rollback.
+  # Contains the number of points subtracted from the loyalty card for the redemption.
   class RedemptionLoyaltyCard
-    # Number of points being added back to the loyalty card for the reward redemption rollback.
+    # Number of points subtracted from the loyalty card as a result of the redemption.
     attr_accessor :points
 
     # Attribute mapping from ruby-style variable name to JSON key.

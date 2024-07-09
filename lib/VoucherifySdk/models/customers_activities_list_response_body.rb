@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **GET** `/customers/{customerId}/activities`.
+  # Response body schema for **GET** `/customers/{customerId}/activities`.
   class CustomersActivitiesListResponseBody
-    # The type of object represented by JSON. This object stores information about customer activities in a dictionary.
+    # The type of the object represented by JSON. This object stores information about customer activities in a dictionary.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of customer activity objects.

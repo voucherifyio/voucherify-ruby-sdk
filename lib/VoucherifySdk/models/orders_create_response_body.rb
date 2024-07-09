@@ -22,7 +22,7 @@ module VoucherifySdk
     # Unique source ID of an existing order that will be linked to the redemption of this request.
     attr_accessor :source_id
 
-    # Timestamp representing the date and time when the order was created in ISO 8601 format.
+    # Timestamp representing the date and time when the order was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Timestamp representing the date and time when the order was last updated in ISO 8601 format.
@@ -70,7 +70,7 @@ module VoucherifySdk
     # Unique referrer ID.
     attr_accessor :referrer_id
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     attr_accessor :redemptions

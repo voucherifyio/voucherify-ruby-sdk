@@ -22,11 +22,14 @@ module VoucherifySdk
     # Defines how many of the sent redeemables will be applied to the order. For example, a user can select 30 discounts but only 5 will be applied to the order and the remaining will be labelled as SKIPPED.
     attr_accessor :applicable_redeemables_limit
 
+    # Defines how many redeemables per category can be applied in one request.
+    attr_accessor :applicable_redeemables_per_category_limit
+
     # Defines how many redeemables with an exclusive category can be applied in one request.
     attr_accessor :applicable_exclusive_redeemables_limit
 
-    # Defines how many redeemables per category can be applied in one request.
-    attr_accessor :applicable_redeemables_per_category_limit
+    # Defines how many redeemables with an exclusive category per category in stacking rules can be applied in one request.
+    attr_accessor :applicable_exclusive_redeemables_per_category_limit
 
     # Lists all exclusive categories. A redeemable from a campaign with an exclusive category is the only redeemable to be redeemed when applied with redeemables from other campaigns unless these campaigns are exclusive or joint.
     attr_accessor :exclusive_categories
@@ -67,8 +70,9 @@ module VoucherifySdk
       {
         :'redeemables_limit' => :'redeemables_limit',
         :'applicable_redeemables_limit' => :'applicable_redeemables_limit',
-        :'applicable_exclusive_redeemables_limit' => :'applicable_exclusive_redeemables_limit',
         :'applicable_redeemables_per_category_limit' => :'applicable_redeemables_per_category_limit',
+        :'applicable_exclusive_redeemables_limit' => :'applicable_exclusive_redeemables_limit',
+        :'applicable_exclusive_redeemables_per_category_limit' => :'applicable_exclusive_redeemables_per_category_limit',
         :'exclusive_categories' => :'exclusive_categories',
         :'joint_categories' => :'joint_categories',
         :'redeemables_application_mode' => :'redeemables_application_mode',
@@ -86,8 +90,9 @@ module VoucherifySdk
       {
         :'redeemables_limit' => :'Integer',
         :'applicable_redeemables_limit' => :'Integer',
-        :'applicable_exclusive_redeemables_limit' => :'Integer',
         :'applicable_redeemables_per_category_limit' => :'Integer',
+        :'applicable_exclusive_redeemables_limit' => :'Integer',
+        :'applicable_exclusive_redeemables_per_category_limit' => :'Integer',
         :'exclusive_categories' => :'Array<String>',
         :'joint_categories' => :'Array<String>',
         :'redeemables_application_mode' => :'String',
@@ -128,16 +133,22 @@ module VoucherifySdk
         self.applicable_redeemables_limit = 5
       end
 
+      if attributes.key?(:'applicable_redeemables_per_category_limit')
+        self.applicable_redeemables_per_category_limit = attributes[:'applicable_redeemables_per_category_limit']
+      else
+        self.applicable_redeemables_per_category_limit = 1
+      end
+
       if attributes.key?(:'applicable_exclusive_redeemables_limit')
         self.applicable_exclusive_redeemables_limit = attributes[:'applicable_exclusive_redeemables_limit']
       else
         self.applicable_exclusive_redeemables_limit = 1
       end
 
-      if attributes.key?(:'applicable_redeemables_per_category_limit')
-        self.applicable_redeemables_per_category_limit = attributes[:'applicable_redeemables_per_category_limit']
+      if attributes.key?(:'applicable_exclusive_redeemables_per_category_limit')
+        self.applicable_exclusive_redeemables_per_category_limit = attributes[:'applicable_exclusive_redeemables_per_category_limit']
       else
-        self.applicable_redeemables_per_category_limit = 1
+        self.applicable_exclusive_redeemables_per_category_limit = 1
       end
 
       if attributes.key?(:'exclusive_categories')
@@ -158,6 +169,8 @@ module VoucherifySdk
 
       if attributes.key?(:'redeemables_application_mode')
         self.redeemables_application_mode = attributes[:'redeemables_application_mode']
+      else
+        self.redeemables_application_mode = nil
       end
 
       if attributes.key?(:'redeemables_sorting_rule')
@@ -196,24 +209,32 @@ module VoucherifySdk
         invalid_properties.push('invalid value for "applicable_redeemables_limit", must be greater than or equal to 1.')
       end
 
+      if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit > 5
+        invalid_properties.push('invalid value for "applicable_redeemables_per_category_limit", must be smaller than or equal to 5.')
+      end
+
+      if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit < 1
+        invalid_properties.push('invalid value for "applicable_redeemables_per_category_limit", must be greater than or equal to 1.')
+      end
+
       if @applicable_exclusive_redeemables_limit.nil?
         invalid_properties.push('invalid value for "applicable_exclusive_redeemables_limit", applicable_exclusive_redeemables_limit cannot be nil.')
       end
 
-      if @applicable_exclusive_redeemables_limit > 30
-        invalid_properties.push('invalid value for "applicable_exclusive_redeemables_limit", must be smaller than or equal to 30.')
+      if @applicable_exclusive_redeemables_limit > 5
+        invalid_properties.push('invalid value for "applicable_exclusive_redeemables_limit", must be smaller than or equal to 5.')
       end
 
       if @applicable_exclusive_redeemables_limit < 1
         invalid_properties.push('invalid value for "applicable_exclusive_redeemables_limit", must be greater than or equal to 1.')
       end
 
-      if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit > 30
-        invalid_properties.push('invalid value for "applicable_redeemables_per_category_limit", must be smaller than or equal to 30.')
+      if !@applicable_exclusive_redeemables_per_category_limit.nil? && @applicable_exclusive_redeemables_per_category_limit > 5
+        invalid_properties.push('invalid value for "applicable_exclusive_redeemables_per_category_limit", must be smaller than or equal to 5.')
       end
 
-      if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit < 1
-        invalid_properties.push('invalid value for "applicable_redeemables_per_category_limit", must be greater than or equal to 1.')
+      if !@applicable_exclusive_redeemables_per_category_limit.nil? && @applicable_exclusive_redeemables_per_category_limit < 1
+        invalid_properties.push('invalid value for "applicable_exclusive_redeemables_per_category_limit", must be greater than or equal to 1.')
       end
 
       if @exclusive_categories.nil?
@@ -222,6 +243,14 @@ module VoucherifySdk
 
       if @joint_categories.nil?
         invalid_properties.push('invalid value for "joint_categories", joint_categories cannot be nil.')
+      end
+
+      if @redeemables_application_mode.nil?
+        invalid_properties.push('invalid value for "redeemables_application_mode", redeemables_application_mode cannot be nil.')
+      end
+
+      if @redeemables_sorting_rule.nil?
+        invalid_properties.push('invalid value for "redeemables_sorting_rule", redeemables_sorting_rule cannot be nil.')
       end
 
       invalid_properties
@@ -237,15 +266,19 @@ module VoucherifySdk
       return false if @applicable_redeemables_limit.nil?
       return false if @applicable_redeemables_limit > 30
       return false if @applicable_redeemables_limit < 1
-      return false if @applicable_exclusive_redeemables_limit.nil?
-      return false if @applicable_exclusive_redeemables_limit > 30
-      return false if @applicable_exclusive_redeemables_limit < 1
-      return false if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit > 30
+      return false if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit > 5
       return false if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit < 1
+      return false if @applicable_exclusive_redeemables_limit.nil?
+      return false if @applicable_exclusive_redeemables_limit > 5
+      return false if @applicable_exclusive_redeemables_limit < 1
+      return false if !@applicable_exclusive_redeemables_per_category_limit.nil? && @applicable_exclusive_redeemables_per_category_limit > 5
+      return false if !@applicable_exclusive_redeemables_per_category_limit.nil? && @applicable_exclusive_redeemables_per_category_limit < 1
       return false if @exclusive_categories.nil?
       return false if @joint_categories.nil?
+      return false if @redeemables_application_mode.nil?
       redeemables_application_mode_validator = EnumAttributeValidator.new('String', ["ALL", "PARTIAL"])
       return false unless redeemables_application_mode_validator.valid?(@redeemables_application_mode)
+      return false if @redeemables_sorting_rule.nil?
       redeemables_sorting_rule_validator = EnumAttributeValidator.new('String', ["CATEGORY_HIERARCHY", "REQUESTED_ORDER"])
       return false unless redeemables_sorting_rule_validator.valid?(@redeemables_sorting_rule)
       true
@@ -288,14 +321,32 @@ module VoucherifySdk
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] applicable_redeemables_per_category_limit Value to be assigned
+    def applicable_redeemables_per_category_limit=(applicable_redeemables_per_category_limit)
+      if applicable_redeemables_per_category_limit.nil?
+        fail ArgumentError, 'applicable_redeemables_per_category_limit cannot be nil'
+      end
+
+      if applicable_redeemables_per_category_limit > 5
+        fail ArgumentError, 'invalid value for "applicable_redeemables_per_category_limit", must be smaller than or equal to 5.'
+      end
+
+      if applicable_redeemables_per_category_limit < 1
+        fail ArgumentError, 'invalid value for "applicable_redeemables_per_category_limit", must be greater than or equal to 1.'
+      end
+
+      @applicable_redeemables_per_category_limit = applicable_redeemables_per_category_limit
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] applicable_exclusive_redeemables_limit Value to be assigned
     def applicable_exclusive_redeemables_limit=(applicable_exclusive_redeemables_limit)
       if applicable_exclusive_redeemables_limit.nil?
         fail ArgumentError, 'applicable_exclusive_redeemables_limit cannot be nil'
       end
 
-      if applicable_exclusive_redeemables_limit > 30
-        fail ArgumentError, 'invalid value for "applicable_exclusive_redeemables_limit", must be smaller than or equal to 30.'
+      if applicable_exclusive_redeemables_limit > 5
+        fail ArgumentError, 'invalid value for "applicable_exclusive_redeemables_limit", must be smaller than or equal to 5.'
       end
 
       if applicable_exclusive_redeemables_limit < 1
@@ -306,21 +357,21 @@ module VoucherifySdk
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] applicable_redeemables_per_category_limit Value to be assigned
-    def applicable_redeemables_per_category_limit=(applicable_redeemables_per_category_limit)
-      if applicable_redeemables_per_category_limit.nil?
-        fail ArgumentError, 'applicable_redeemables_per_category_limit cannot be nil'
+    # @param [Object] applicable_exclusive_redeemables_per_category_limit Value to be assigned
+    def applicable_exclusive_redeemables_per_category_limit=(applicable_exclusive_redeemables_per_category_limit)
+      if applicable_exclusive_redeemables_per_category_limit.nil?
+        fail ArgumentError, 'applicable_exclusive_redeemables_per_category_limit cannot be nil'
       end
 
-      if applicable_redeemables_per_category_limit > 30
-        fail ArgumentError, 'invalid value for "applicable_redeemables_per_category_limit", must be smaller than or equal to 30.'
+      if applicable_exclusive_redeemables_per_category_limit > 5
+        fail ArgumentError, 'invalid value for "applicable_exclusive_redeemables_per_category_limit", must be smaller than or equal to 5.'
       end
 
-      if applicable_redeemables_per_category_limit < 1
-        fail ArgumentError, 'invalid value for "applicable_redeemables_per_category_limit", must be greater than or equal to 1.'
+      if applicable_exclusive_redeemables_per_category_limit < 1
+        fail ArgumentError, 'invalid value for "applicable_exclusive_redeemables_per_category_limit", must be greater than or equal to 1.'
       end
 
-      @applicable_redeemables_per_category_limit = applicable_redeemables_per_category_limit
+      @applicable_exclusive_redeemables_per_category_limit = applicable_exclusive_redeemables_per_category_limit
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -350,8 +401,9 @@ module VoucherifySdk
       self.class == o.class &&
           redeemables_limit == o.redeemables_limit &&
           applicable_redeemables_limit == o.applicable_redeemables_limit &&
-          applicable_exclusive_redeemables_limit == o.applicable_exclusive_redeemables_limit &&
           applicable_redeemables_per_category_limit == o.applicable_redeemables_per_category_limit &&
+          applicable_exclusive_redeemables_limit == o.applicable_exclusive_redeemables_limit &&
+          applicable_exclusive_redeemables_per_category_limit == o.applicable_exclusive_redeemables_per_category_limit &&
           exclusive_categories == o.exclusive_categories &&
           joint_categories == o.joint_categories &&
           redeemables_application_mode == o.redeemables_application_mode &&
@@ -367,7 +419,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [redeemables_limit, applicable_redeemables_limit, applicable_exclusive_redeemables_limit, applicable_redeemables_per_category_limit, exclusive_categories, joint_categories, redeemables_application_mode, redeemables_sorting_rule].hash
+      [redeemables_limit, applicable_redeemables_limit, applicable_redeemables_per_category_limit, applicable_exclusive_redeemables_limit, applicable_exclusive_redeemables_per_category_limit, exclusive_categories, joint_categories, redeemables_application_mode, redeemables_sorting_rule].hash
     end
 
     # Builds the object from hash

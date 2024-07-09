@@ -154,10 +154,10 @@ module VoucherifySdk
     end
 
     # Delete Product
-    # This method deletes a product.
+    # Deletes a product and all related SKUs. This operation cannot be undone.  If the force parameter is set to false or not set at all, the product and all related SKUs will be moved to the bin.
     # @param product_id [String] A Voucherify product ID or source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the product will be removed permanently. Going forward, the user will be able to create another product with exactly the same source_id.
+    # @option opts [Boolean] :force If this flag is set to true, the product and all related SKUs will be removed permanently. If it is set to false or not set at all, the product and all related SKUs will be moved to the bin. Going forward, the user will be able to create another product with exactly the same source_id.
     # @return [nil]
     def delete_product(product_id, opts = {})
       delete_product_with_http_info(product_id, opts)
@@ -165,10 +165,10 @@ module VoucherifySdk
     end
 
     # Delete Product
-    # This method deletes a product.
+    # Deletes a product and all related SKUs. This operation cannot be undone.  If the force parameter is set to false or not set at all, the product and all related SKUs will be moved to the bin.
     # @param product_id [String] A Voucherify product ID or source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the product will be removed permanently. Going forward, the user will be able to create another product with exactly the same source_id.
+    # @option opts [Boolean] :force If this flag is set to true, the product and all related SKUs will be removed permanently. If it is set to false or not set at all, the product and all related SKUs will be moved to the bin. Going forward, the user will be able to create another product with exactly the same source_id.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     private def delete_product_with_http_info(product_id, opts = {})
       if @api_client.config.debugging
@@ -218,11 +218,11 @@ module VoucherifySdk
     end
 
     # Delete SKU
-    # This method deletes a product SKU.
+    # Deletes a product SKU. This operation cannot be undone.  If the force parameter is set to false or not set at all, the SKU will be moved to the bin.
     # @param product_id [String] A unique Voucherify product ID or product source ID.
     # @param sku_id [String] A Voucherify SKU ID or SKU source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the SKU will be removed permanently. Going forward, the user will be able to create another SKU with exactly the same source_id.
+    # @option opts [Boolean] :force If this flag is set to true, the SKU will be removed permanently. If it is set to false or not set at all, the SKU will be moved to the bin. Going forward, the user will be able to create another SKU with exactly the same source_id.
     # @return [nil]
     def delete_sku(product_id, sku_id, opts = {})
       delete_sku_with_http_info(product_id, sku_id, opts)
@@ -230,11 +230,11 @@ module VoucherifySdk
     end
 
     # Delete SKU
-    # This method deletes a product SKU.
+    # Deletes a product SKU. This operation cannot be undone.  If the force parameter is set to false or not set at all, the SKU will be moved to the bin.
     # @param product_id [String] A unique Voucherify product ID or product source ID.
     # @param sku_id [String] A Voucherify SKU ID or SKU source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the SKU will be removed permanently. Going forward, the user will be able to create another SKU with exactly the same source_id.
+    # @option opts [Boolean] :force If this flag is set to true, the SKU will be removed permanently. If it is set to false or not set at all, the SKU will be moved to the bin. Going forward, the user will be able to create another SKU with exactly the same source_id.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     private def delete_sku_with_http_info(product_id, sku_id, opts = {})
       if @api_client.config.debugging
@@ -554,8 +554,8 @@ module VoucherifySdk
     # List Products
     # Retrieve a list of products.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -568,8 +568,8 @@ module VoucherifySdk
     # List Products
     # Retrieve a list of products.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -588,6 +588,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductsApi.list_products, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductsApi.list_products, must be greater than or equal to 1.'
       end
 
       # resource path
@@ -639,8 +643,8 @@ module VoucherifySdk
     # Retrieve all SKUs for a given product.
     # @param product_id [String] A Voucherify product ID or product source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -654,8 +658,8 @@ module VoucherifySdk
     # Retrieve all SKUs for a given product.
     # @param product_id [String] A Voucherify product ID or product source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -678,6 +682,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductsApi.list_skus_in_product, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductsApi.list_skus_in_product, must be greater than or equal to 1.'
       end
 
       # resource path

@@ -9,6 +9,6 @@
 | **balance** | **Integer** | The balance after adding or subtracting a specified amount. Value is multiplied by 100 to precisely represent 2 decimal places. For example, $100 amount is written as 10000. |  |
 | **type** | **String** | The type of voucher being modified. |  |
 | **operation_type** | **String** |  | [default to &#39;MANUAL&#39;] |
-| **object** | **String** | The type of object represented by JSON. Default is &#x60;balance&#x60;. | [default to &#39;balance&#39;] |
+| **object** | **String** | The type of the object represented by JSON. Default is &#x60;balance&#x60;. | [default to &#39;balance&#39;] |
 | **related_object** | [**VouchersBalanceUpdateResponseBodyRelatedObject**](VouchersBalanceUpdateResponseBodyRelatedObject.md) |  |  |
 

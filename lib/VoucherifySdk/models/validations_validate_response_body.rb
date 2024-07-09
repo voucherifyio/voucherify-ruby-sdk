@@ -35,6 +35,8 @@ module VoucherifySdk
 
     attr_accessor :session
 
+    attr_accessor :stacking_rules
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -44,7 +46,8 @@ module VoucherifySdk
         :'inapplicable_redeemables' => :'inapplicable_redeemables',
         :'order' => :'order',
         :'tracking_id' => :'tracking_id',
-        :'session' => :'session'
+        :'session' => :'session',
+        :'stacking_rules' => :'stacking_rules'
       }
     end
 
@@ -58,11 +61,12 @@ module VoucherifySdk
       {
         :'valid' => :'Boolean',
         :'redeemables' => :'Array<ValidationsValidateAllResponseBodyRedeemablesItem>',
-        :'skipped_redeemables' => :'Array<ValidationsRedeemableInapplicable>',
+        :'skipped_redeemables' => :'Array<ValidationsRedeemableSkipped>',
         :'inapplicable_redeemables' => :'Array<ValidationsRedeemableInapplicable>',
         :'order' => :'OrderCalculated',
         :'tracking_id' => :'String',
-        :'session' => :'Session'
+        :'session' => :'Session',
+        :'stacking_rules' => :'StackingRules'
       }
     end
 
@@ -124,6 +128,12 @@ module VoucherifySdk
       if attributes.key?(:'session')
         self.session = attributes[:'session']
       end
+
+      if attributes.key?(:'stacking_rules')
+        self.stacking_rules = attributes[:'stacking_rules']
+      else
+        self.stacking_rules = nil
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -139,6 +149,10 @@ module VoucherifySdk
         invalid_properties.push('invalid value for "redeemables", redeemables cannot be nil.')
       end
 
+      if @stacking_rules.nil?
+        invalid_properties.push('invalid value for "stacking_rules", stacking_rules cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -148,6 +162,7 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @valid.nil?
       return false if @redeemables.nil?
+      return false if @stacking_rules.nil?
       true
     end
 
@@ -162,7 +177,8 @@ module VoucherifySdk
           inapplicable_redeemables == o.inapplicable_redeemables &&
           order == o.order &&
           tracking_id == o.tracking_id &&
-          session == o.session
+          session == o.session &&
+          stacking_rules == o.stacking_rules
     end
 
     # @see the `==` method
@@ -174,7 +190,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [valid, redeemables, skipped_redeemables, inapplicable_redeemables, order, tracking_id, session].hash
+      [valid, redeemables, skipped_redeemables, inapplicable_redeemables, order, tracking_id, session, stacking_rules].hash
     end
 
     # Builds the object from hash

@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Contains the amount being subtracted from the gift card for the redemption.
+  # Contains the amount subtracted from the gift card for the redemption.
   class RedemptionGift
-    # The amount subtracted from the gift card expressed as the smallest currency unit (e.g. 100 cents for $1.00).
+    # Amount subtracted from the gift card as a result of the redemption. The amount is expressed as the smallest currency unit (e.g. 100 cents for $1.00).
     attr_accessor :amount
 
     # Attribute mapping from ruby-style variable name to JSON key.

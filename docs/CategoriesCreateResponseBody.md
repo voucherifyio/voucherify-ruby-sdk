@@ -8,5 +8,5 @@
 | **name** | **String** | Category name. |  |
 | **hierarchy** | **Integer** | Category hierarchy. |  |
 | **object** | **String** |  | [default to &#39;category&#39;] |
-| **created_at** | **Time** | Timestamp representing the date and time when the category was created in ISO 8601 format. |  |
+| **created_at** | **Time** | Timestamp representing the date and time when the category was created. The value is shown in the ISO 8601 format. |  |
 

@@ -157,10 +157,10 @@ module VoucherifySdk
     end
 
     # Delete Loyalty Campaign
-    # This method permanently deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards.
+    # Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards. If the force parameter is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. Going forward, the user will be able to create the next campaign with the same name.
+    # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name.
     # @return [LoyaltiesDeleteResponseBody]
     def delete_loyalty_program(campaign_id, opts = {})
       data, _status_code, _headers = delete_loyalty_program_with_http_info(campaign_id, opts)
@@ -168,10 +168,10 @@ module VoucherifySdk
     end
 
     # Delete Loyalty Campaign
-    # This method permanently deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards.
+    # Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards. If the force parameter is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. Going forward, the user will be able to create the next campaign with the same name.
+    # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name.
     # @return [Array<(LoyaltiesDeleteResponseBody, Integer, Hash)>] LoyaltiesDeleteResponseBody data, response status code and response headers
     private def delete_loyalty_program_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
@@ -922,8 +922,8 @@ module VoucherifySdk
     # Retrieve transaction data related to point movements for a specific loyalty card.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [LoyaltiesMembersTransactionsListResponseBody]
     def list_loyalty_card_transactions(member_id, opts = {})
       data, _status_code, _headers = list_loyalty_card_transactions_with_http_info(member_id, opts)
@@ -934,8 +934,8 @@ module VoucherifySdk
     # Retrieve transaction data related to point movements for a specific loyalty card.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(LoyaltiesMembersTransactionsListResponseBody, Integer, Hash)>] LoyaltiesMembersTransactionsListResponseBody data, response status code and response headers
     private def list_loyalty_card_transactions_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
@@ -955,6 +955,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_card_transactions, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_card_transactions, must be greater than or equal to 1.'
       end
 
       # resource path
@@ -1004,8 +1008,8 @@ module VoucherifySdk
     # @param campaign_id [String] A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [LoyaltiesMembersTransactionsListResponseBody]
     def list_loyalty_card_transactions1(campaign_id, member_id, opts = {})
       data, _status_code, _headers = list_loyalty_card_transactions1_with_http_info(campaign_id, member_id, opts)
@@ -1017,8 +1021,8 @@ module VoucherifySdk
     # @param campaign_id [String] A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(LoyaltiesMembersTransactionsListResponseBody, Integer, Hash)>] LoyaltiesMembersTransactionsListResponseBody data, response status code and response headers
     private def list_loyalty_card_transactions1_with_http_info(campaign_id, member_id, opts = {})
       if @api_client.config.debugging
@@ -1042,6 +1046,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_card_transactions1, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_card_transactions1, must be greater than or equal to 1.'
       end
 
       # resource path
@@ -1091,8 +1099,8 @@ module VoucherifySdk
     # @param campaign_id [String] Unique campaign ID or name.
     # @param loyalty_tier_id [String] Unique loyalty tier ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [LoyaltiesTiersEarningRulesListResponseBody]
     def list_loyalty_tier_earning_rules(campaign_id, loyalty_tier_id, opts = {})
       data, _status_code, _headers = list_loyalty_tier_earning_rules_with_http_info(campaign_id, loyalty_tier_id, opts)
@@ -1104,8 +1112,8 @@ module VoucherifySdk
     # @param campaign_id [String] Unique campaign ID or name.
     # @param loyalty_tier_id [String] Unique loyalty tier ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(LoyaltiesTiersEarningRulesListResponseBody, Integer, Hash)>] LoyaltiesTiersEarningRulesListResponseBody data, response status code and response headers
     private def list_loyalty_tier_earning_rules_with_http_info(campaign_id, loyalty_tier_id, opts = {})
       if @api_client.config.debugging
@@ -1129,6 +1137,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_tier_earning_rules, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_tier_earning_rules, must be greater than or equal to 1.'
       end
 
       # resource path
@@ -1246,7 +1258,7 @@ module VoucherifySdk
     # Retrieve a list of loyalty tiers which were added to the loyalty program.
     # @param campaign_id [String] Unique loyalty campaign ID or name.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [ParameterOrderListLoyaltyTiers] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @return [LoyaltiesTiersListResponseBody]
     def list_loyalty_tiers(campaign_id, opts = {})
@@ -1258,7 +1270,7 @@ module VoucherifySdk
     # Retrieve a list of loyalty tiers which were added to the loyalty program.
     # @param campaign_id [String] Unique loyalty campaign ID or name.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [ParameterOrderListLoyaltyTiers] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @return [Array<(LoyaltiesTiersListResponseBody, Integer, Hash)>] LoyaltiesTiersListResponseBody data, response status code and response headers
     private def list_loyalty_tiers_with_http_info(campaign_id, opts = {})
@@ -1453,8 +1465,8 @@ module VoucherifySdk
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param member_id [String] Loyalty card code.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [LoyaltiesMembersPointsExpirationListResponseBody]
     def list_points_expiration(campaign_id, member_id, opts = {})
       data, _status_code, _headers = list_points_expiration_with_http_info(campaign_id, member_id, opts)
@@ -1466,8 +1478,8 @@ module VoucherifySdk
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param member_id [String] Loyalty card code.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(LoyaltiesMembersPointsExpirationListResponseBody, Integer, Hash)>] LoyaltiesMembersPointsExpirationListResponseBody data, response status code and response headers
     private def list_points_expiration_with_http_info(campaign_id, member_id, opts = {})
       if @api_client.config.debugging
@@ -1491,6 +1503,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_points_expiration, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_points_expiration, must be greater than or equal to 1.'
       end
 
       # resource path
@@ -1758,7 +1774,7 @@ module VoucherifySdk
     end
 
     # Add or Remove Loyalty Card Balance
-    # This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
+    # This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesMembersBalanceUpdateRequestBody] :loyalties_members_balance_update_request_body Specify the point adjustment along with the expiration mechanism.
@@ -1769,7 +1785,7 @@ module VoucherifySdk
     end
 
     # Add or Remove Loyalty Card Balance
-    # This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
+    # This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   &gt;🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesMembersBalanceUpdateRequestBody] :loyalties_members_balance_update_request_body Specify the point adjustment along with the expiration mechanism.
@@ -1828,7 +1844,7 @@ module VoucherifySdk
     end
 
     # Add or Remove Loyalty Card Balance
-    # This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.
+    # This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] A code that identifies the loyalty card.
     # @param [Hash] opts the optional parameters
@@ -1840,7 +1856,7 @@ module VoucherifySdk
     end
 
     # Add or Remove Loyalty Card Balance
-    # This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.
+    # This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   &gt;🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] A code that identifies the loyalty card.
     # @param [Hash] opts the optional parameters

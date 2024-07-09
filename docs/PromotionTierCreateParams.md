@@ -14,7 +14,8 @@
 | **start_date** | **Time** | Activation timestamp defines when the promotion tier starts to be active in ISO 8601 format. Promotion tier is *inactive before* this date.  | [optional] |
 | **expiration_date** | **Time** | Activation timestamp defines when the promotion tier expires in ISO 8601 format. Promotion tier is *inactive after* this date.  | [optional] |
 | **validity_timeframe** | [**PromotionTierValidityTimeframe**](PromotionTierValidityTimeframe.md) |  | [optional] |
-| **validity_day_of_week** | **Array&lt;Integer&gt;** | Integer array corresponding to the particular days of the week in which the promotion tier is valid.  - &#x60;0&#x60;  Sunday   - &#x60;1&#x60;  Monday   - &#x60;2&#x60;  Tuesday   - &#x60;3&#x60;  Wednesday   - &#x60;4&#x60;  Thursday   - &#x60;5&#x60;  Friday   - &#x60;6&#x60;  Saturday   | [optional] |
+| **validity_day_of_week** | **Array&lt;Integer&gt;** | Integer array corresponding to the particular days of the week in which the promotion tier is valid.  - &#x60;0&#x60; Sunday - &#x60;1&#x60; Monday - &#x60;2&#x60; Tuesday - &#x60;3&#x60; Wednesday - &#x60;4&#x60; Thursday - &#x60;5&#x60; Friday - &#x60;6&#x60; Saturday | [optional] |
+| **validity_hours** | [**ValidityHours**](ValidityHours.md) |  | [optional] |
 | **category** | **String** | Assign category to the promotion tier. | [optional] |
 | **category_id** | **String** | Instead of using the category name, you can alternatively assign a new category to a promotion tier using a unique category ID, i.e. &#x60;cat_0c9da30e7116ba6bba&#x60;. | [optional] |
 

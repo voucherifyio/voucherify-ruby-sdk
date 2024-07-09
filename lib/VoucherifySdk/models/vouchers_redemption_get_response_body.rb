@@ -22,7 +22,7 @@ module VoucherifySdk
     # The number of times the voucher was redeemed successfully.
     attr_accessor :redeemed_quantity
 
-    # The type of object represented by JSON. This object stores information about redemptions in a dictionary.
+    # The type of the object represented by JSON. This object stores information about redemptions in a dictionary.
     attr_accessor :object
 
     # URL

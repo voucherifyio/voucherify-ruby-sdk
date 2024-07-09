@@ -26,6 +26,11 @@ module VoucherifySdk
 
     attr_accessor :result
 
+    # The metadata object stores all custom attributes in the form of key/value pairs assigned to the redeemable.
+    attr_accessor :metadata
+
+    attr_accessor :categories
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -54,7 +59,9 @@ module VoucherifySdk
         :'status' => :'status',
         :'id' => :'id',
         :'object' => :'object',
-        :'result' => :'result'
+        :'result' => :'result',
+        :'metadata' => :'metadata',
+        :'categories' => :'categories'
       }
     end
 
@@ -69,7 +76,9 @@ module VoucherifySdk
         :'status' => :'String',
         :'id' => :'String',
         :'object' => :'String',
-        :'result' => :'ValidationsRedeemableInapplicableResult'
+        :'result' => :'ValidationsRedeemableInapplicableResult',
+        :'metadata' => :'Object',
+        :'categories' => :'Array<Category>'
       }
     end
 
@@ -102,14 +111,30 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      else
+        self.id = nil
       end
 
       if attributes.key?(:'object')
         self.object = attributes[:'object']
+      else
+        self.object = nil
       end
 
       if attributes.key?(:'result')
         self.result = attributes[:'result']
+      else
+        self.result = nil
+      end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.key?(:'categories')
+        if (value = attributes[:'categories']).is_a?(Array)
+          self.categories = value
+        end
       end
     end
 
@@ -118,6 +143,22 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @status.nil?
+        invalid_properties.push('invalid value for "status", status cannot be nil.')
+      end
+
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @object.nil?
+        invalid_properties.push('invalid value for "object", object cannot be nil.')
+      end
+
+      if @result.nil?
+        invalid_properties.push('invalid value for "result", result cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -125,10 +166,14 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @status.nil?
       status_validator = EnumAttributeValidator.new('String', ["INAPPLICABLE"])
       return false unless status_validator.valid?(@status)
+      return false if @id.nil?
+      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["voucher", "promotion_tier"])
       return false unless object_validator.valid?(@object)
+      return false if @result.nil?
       true
     end
 
@@ -160,7 +205,9 @@ module VoucherifySdk
           status == o.status &&
           id == o.id &&
           object == o.object &&
-          result == o.result
+          result == o.result &&
+          metadata == o.metadata &&
+          categories == o.categories
     end
 
     # @see the `==` method
@@ -172,7 +219,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, id, object, result].hash
+      [status, id, object, result, metadata, categories].hash
     end
 
     # Builds the object from hash

@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Response body schema for **GET** `/loyalties/members/{memberId}/rewards`
   class LoyaltiesMembersRewardsListResponseBody
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of loyalty reward objects.

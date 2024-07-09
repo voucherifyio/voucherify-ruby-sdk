@@ -16,13 +16,13 @@ require 'time'
 module VoucherifySdk
   # Response body schema for **POST** `/redemptions/{redemptionId}/rollback`.
   class RedemptionsRollbackCreateResponseBody
-    # Unique redemption ID.
+    # Unique identifier of the redemption rollback.
     attr_accessor :id
 
-    # The type of object represented by the JSON
+    # The type of the object represented by the JSON
     attr_accessor :object
 
-    # Timestamp representing the date and time when the object was created in ISO 8601 format.
+    # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :date
 
     # Unique customer ID of the redeeming customer.
@@ -34,7 +34,7 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the redemption.
     attr_accessor :metadata
 
-    # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.
+    # For gift cards, this represents the number of the credits restored to the card in the rolledback redemption. The number is a negative integer in the smallest currency unit, e.g. -100 cents for $1.00 added back to the card. For loyalty cards, this represents the number of loyalty points restored to the card in the rolledback redemption. The number is a negative integer.
     attr_accessor :amount
 
     # Unique redemption ID of the parent redemption.
@@ -66,7 +66,7 @@ module VoucherifySdk
     # Defines the related object.
     attr_accessor :related_object_type
 
-    # Unique related object ID assigned by Voucherify, i.e. v_lfZi4rcEGe0sN9gmnj40bzwK2FH6QUno for a voucher.
+    # Unique identifier of the related object. It is assigned by Voucherify, i.e. `v_lfZi4rcEGe0sN9gmnj40bzwK2FH6QUno` for a voucher.
     attr_accessor :related_object_id
 
     attr_accessor :voucher
@@ -154,15 +154,15 @@ module VoucherifySdk
         :'failure_code' => :'String',
         :'failure_message' => :'String',
         :'order' => :'OrderCalculatedNoCustomerData',
-        :'channel' => :'RedemptionChannel',
+        :'channel' => :'RedemptionRollbackChannel',
         :'customer' => :'SimpleCustomer',
         :'related_object_type' => :'String',
         :'related_object_id' => :'String',
         :'voucher' => :'Voucher',
         :'promotion_tier' => :'PromotionTier',
         :'reward' => :'RedemptionRewardResult',
-        :'gift' => :'RedemptionGift',
-        :'loyalty_card' => :'RedemptionLoyaltyCard'
+        :'gift' => :'RedemptionRollbackGift',
+        :'loyalty_card' => :'RedemptionRollbackLoyaltyCard'
       }
     end
 

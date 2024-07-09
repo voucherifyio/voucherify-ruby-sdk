@@ -19,10 +19,10 @@ module VoucherifySdk
     # Unique redemption ID.
     attr_accessor :id
 
-    # The type of object represented by the JSON
+    # The type of the object represented by the JSON
     attr_accessor :object
 
-    # Timestamp representing the date and time when the object was created in ISO 8601 format.
+    # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :date
 
     # Unique customer ID of the redeeming customer.
@@ -34,7 +34,7 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the redemption.
     attr_accessor :metadata
 
-    # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.
+    # For gift cards, this is a positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the number of redeemed credits. For loyalty cards, this is the number of loyalty points used in the transaction.
     attr_accessor :amount
 
     # Unique redemption ID of the parent redemption.
@@ -153,7 +153,7 @@ module VoucherifySdk
         :'customer' => :'SimpleCustomer',
         :'related_object_type' => :'String',
         :'related_object_id' => :'String',
-        :'voucher' => :'Voucher',
+        :'voucher' => :'RedemptionVoucher',
         :'promotion_tier' => :'PromotionTier',
         :'reward' => :'RedemptionRewardResult',
         :'gift' => :'RedemptionGift',

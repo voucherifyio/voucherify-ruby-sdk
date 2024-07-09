@@ -290,8 +290,8 @@ module VoucherifySdk
     # Retrieve reward assignments by the reward ID.
     # @param reward_id [String] A unique reward ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [RewardsAssignmentsListResponseBody]
     def list_reward_assignments(reward_id, opts = {})
       data, _status_code, _headers = list_reward_assignments_with_http_info(reward_id, opts)
@@ -302,8 +302,8 @@ module VoucherifySdk
     # Retrieve reward assignments by the reward ID.
     # @param reward_id [String] A unique reward ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(RewardsAssignmentsListResponseBody, Integer, Hash)>] RewardsAssignmentsListResponseBody data, response status code and response headers
     private def list_reward_assignments_with_http_info(reward_id, opts = {})
       if @api_client.config.debugging
@@ -323,6 +323,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling RewardsApi.list_reward_assignments, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling RewardsApi.list_reward_assignments, must be greater than or equal to 1.'
       end
 
       # resource path

@@ -14,8 +14,7 @@ require 'VoucherifySdk'
 VoucherifySdk::OrderCalculatedReferrer.openapi_one_of
 # =>
 # [
-#   :'ReferrerId',
-#   :'ReferrerWithSummaryLoyaltyReferrals'
+#   :'ReferrerId'
 # ]
 ```
 
@@ -44,6 +43,5 @@ VoucherifySdk::OrderCalculatedReferrer.build(data_that_doesnt_match)
 #### Return type
 
 - `ReferrerId`
-- `ReferrerWithSummaryLoyaltyReferrals`
 - `nil` (if no type matches)
 

@@ -31,7 +31,7 @@ module VoucherifySdk
     # A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the customer. It can be useful for storing additional information about the customer in a structured format. This metadata can be used for validating whether the customer qualifies for a discount or it can be used in building customer segments. 
     attr_accessor :metadata
 
-    # The type of object represented by the JSON. This object stores information about the customer.
+    # The type of the object represented by the JSON. This object stores information about the customer.
     attr_accessor :object
 
     # Attribute mapping from ruby-style variable name to JSON key.
