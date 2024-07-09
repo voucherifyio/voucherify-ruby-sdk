@@ -4,5 +4,5 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **points** | [**LoyaltyTierAllOfConfigPoints**](LoyaltyTierAllOfConfigPoints.md) |  |  |
+| **points** | [**LoyaltyTierAllOfConfigPoints**](LoyaltyTierAllOfConfigPoints.md) |  | [optional] |
 

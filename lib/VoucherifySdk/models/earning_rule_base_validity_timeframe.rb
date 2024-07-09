@@ -46,6 +46,8 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'duration',
+        :'interval'
       ])
     end
 
@@ -66,14 +68,10 @@ module VoucherifySdk
 
       if attributes.key?(:'duration')
         self.duration = attributes[:'duration']
-      else
-        self.duration = nil
       end
 
       if attributes.key?(:'interval')
         self.interval = attributes[:'interval']
-      else
-        self.interval = nil
       end
     end
 
@@ -82,14 +80,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @duration.nil?
-        invalid_properties.push('invalid value for "duration", duration cannot be nil.')
-      end
-
-      if @interval.nil?
-        invalid_properties.push('invalid value for "interval", interval cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -97,8 +87,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @duration.nil?
-      return false if @interval.nil?
       true
     end
 

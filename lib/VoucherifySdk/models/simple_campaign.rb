@@ -139,7 +139,7 @@ module VoucherifySdk
         :'type' => :'String',
         :'is_referral_code' => :'Boolean',
         :'voucher' => :'SimpleCampaignVoucher',
-        :'lucky_draw' => :'LuckyDraw',
+        :'lucky_draw' => :'SimpleCampaignLuckyDraw',
         :'referral_program' => :'ReferralProgram',
         :'auto_join' => :'Boolean',
         :'join_once' => :'Boolean',
@@ -160,7 +160,25 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'name',
+        :'campaign_type',
+        :'type',
+        :'is_referral_code',
+        :'lucky_draw',
+        :'auto_join',
+        :'join_once',
+        :'active',
+        :'category',
         :'category_id',
+        :'categories',
+        :'metadata',
+        :'start_date',
+        :'expiration_date',
+        :'description',
+        :'created_at',
+        :'updated_at',
+        :'object'
       ])
     end
 

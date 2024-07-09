@@ -75,6 +75,14 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'date',
+        :'rollback_id',
+        :'rollback_date',
+        :'related_object_type',
+        :'related_object_id',
+        :'related_object_parent_id',
+        :'stacked',
+        :'rollback_stacked'
       ])
     end
 

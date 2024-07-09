@@ -35,7 +35,7 @@ end
 
 api_instance = VoucherifySdk::ValidationsApi.new
 opts = {
-  validations_validate_request_body: VoucherifySdk::ValidationsValidateRequestBody.new({redeemables: [VoucherifySdk::RedeemGiftCard.new({object: 'voucher', id: 'id_example'})]}) # ValidationsValidateRequestBody | 
+  validations_validate_request_body: VoucherifySdk::ValidationsValidateRequestBody.new # ValidationsValidateRequestBody | 
 }
 
 begin

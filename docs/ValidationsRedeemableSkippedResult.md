@@ -4,5 +4,5 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **details** | [**ValidationsRedeemableSkippedResultDetails**](ValidationsRedeemableSkippedResultDetails.md) |  | [optional] |
+| **details** | [**ValidationsRedeemableSkippedDetails**](ValidationsRedeemableSkippedDetails.md) |  | [optional] |
 

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **redeemables** | [**Array&lt;StackableValidateRedeemBaseRedeemablesItem&gt;**](StackableValidateRedeemBaseRedeemablesItem.md) | An array of redeemables. You can combine &#x60;voucher&#x60;(s) and &#x60;promotion_tier&#x60;(s). Alternatively, send one unique&#x60;promotion_stack&#x60; in the array. |  |
+| **redeemables** | [**Array&lt;StackableValidateRedeemBaseRedeemablesItem&gt;**](StackableValidateRedeemBaseRedeemablesItem.md) |  | [optional] |
 | **order** | [**Order**](Order.md) |  | [optional] |
 | **customer** | [**Customer**](Customer.md) |  | [optional] |
 | **session** | [**Session**](Session.md) |  | [optional] |

@@ -111,6 +111,13 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'type',
+        :'redemption',
+        :'is_referral_code',
+        :'start_date',
+        :'expiration_date',
+        :'validity_timeframe',
+        :'validity_day_of_week',
       ])
     end
 
@@ -149,8 +156,6 @@ module VoucherifySdk
 
       if attributes.key?(:'redemption')
         self.redemption = attributes[:'redemption']
-      else
-        self.redemption = nil
       end
 
       if attributes.key?(:'code_config')
@@ -161,8 +166,6 @@ module VoucherifySdk
 
       if attributes.key?(:'is_referral_code')
         self.is_referral_code = attributes[:'is_referral_code']
-      else
-        self.is_referral_code = nil
       end
 
       if attributes.key?(:'start_date')
@@ -193,20 +196,8 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @redemption.nil?
-        invalid_properties.push('invalid value for "redemption", redemption cannot be nil.')
-      end
-
       if @code_config.nil?
         invalid_properties.push('invalid value for "code_config", code_config cannot be nil.')
-      end
-
-      if @is_referral_code.nil?
-        invalid_properties.push('invalid value for "is_referral_code", is_referral_code cannot be nil.')
       end
 
       invalid_properties
@@ -216,10 +207,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @type.nil?
-      return false if @redemption.nil?
       return false if @code_config.nil?
-      return false if @is_referral_code.nil?
       true
     end
 

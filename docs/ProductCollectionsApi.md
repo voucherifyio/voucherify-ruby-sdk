@@ -39,7 +39,7 @@ end
 
 api_instance = VoucherifySdk::ProductCollectionsApi.new
 opts = {
-  product_collections_create_request_body: VoucherifySdk::ProductCollectionsCreateDynamicRequestBody.new({type: 'AUTO_UPDATE', name: 'name_example', filter: VoucherifySdk::ProductCollectionsCreateDynamicRequestBodyFilter.new({junction: VoucherifySdk::Junction::AND})}) # ProductCollectionsCreateRequestBody | 
+  product_collections_create_request_body: VoucherifySdk::ProductCollectionsCreateRequestBody.new # ProductCollectionsCreateRequestBody | 
 }
 
 begin

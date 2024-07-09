@@ -66,6 +66,12 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'city',
+        :'state',
+        :'line_1',
+        :'line_2',
+        :'country',
+        :'postal_code'
       ])
     end
 

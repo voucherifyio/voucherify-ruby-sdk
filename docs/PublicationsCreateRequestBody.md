@@ -1,49 +1,12 @@
 # VoucherifySdk::PublicationsCreateRequestBody
 
-## Class instance methods
+## Properties
 
-### `openapi_one_of`
-
-Returns the list of classes defined in oneOf.
-
-#### Example
-
-```ruby
-require 'VoucherifySdk'
-
-VoucherifySdk::PublicationsCreateRequestBody.openapi_one_of
-# =>
-# [
-#   :'CreatePublicationWithCampaign',
-#   :'CreatePublicationWithSpecificVoucher'
-# ]
-```
-
-### build
-
-Find the appropriate object from the `openapi_one_of` list and casts the data into it.
-
-#### Example
-
-```ruby
-require 'VoucherifySdk'
-
-VoucherifySdk::PublicationsCreateRequestBody.build(data)
-# => #<CreatePublicationWithCampaign:0x00007fdd4aab02a0>
-
-VoucherifySdk::PublicationsCreateRequestBody.build(data_that_doesnt_match)
-# => nil
-```
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| **data** | **Mixed** | data to be matched against the list of oneOf items |
-
-#### Return type
-
-- `CreatePublicationWithCampaign`
-- `CreatePublicationWithSpecificVoucher`
-- `nil` (if no type matches)
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **voucher** | **String** | Code of voucher being published. | [optional] |
+| **source_id** | **String** | The merchant’s publication ID if it is different from the Voucherify publication ID. It&#39;s an optional tracking identifier of a publication. It is really useful in case of an integration between multiple systems. It can be a publication ID from a CRM system, database or 3rd-party service. If &#x60;source_id&#x60; is provided only 1 voucher can be published per request. | [optional] |
+| **customer** | [**PublicationsCreateRequestBodyCustomer**](PublicationsCreateRequestBodyCustomer.md) |  | [optional] |
+| **metadata** | **Object** |  | [optional] |
+| **campaign** | [**CreatePublicationCampaign**](CreatePublicationCampaign.md) |  | [optional] |
 

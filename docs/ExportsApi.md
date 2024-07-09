@@ -39,7 +39,7 @@ end
 
 api_instance = VoucherifySdk::ExportsApi.new
 opts = {
-  exports_create_request_body: VoucherifySdk::ExportCustomerBase.new({exported_object: 'customer'}) # ExportsCreateRequestBody | Specify the details of the export that you would like to create.
+  exports_create_request_body: VoucherifySdk::ExportsCreateRequestBody.new # ExportsCreateRequestBody | Specify the details of the export that you would like to create.
 }
 
 begin

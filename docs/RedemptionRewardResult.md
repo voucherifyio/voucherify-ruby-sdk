@@ -4,12 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **customer** | [**SimpleCustomer**](SimpleCustomer.md) |  |  |
-| **assignment_id** | **String** | Unique reward assignment ID assigned by Voucherify. |  |
-| **voucher** | [**RedemptionRewardResultVoucher**](RedemptionRewardResultVoucher.md) |  |  |
-| **product** | [**RedemptionRewardResultProduct**](RedemptionRewardResultProduct.md) |  |  |
-| **sku** | [**RedemptionRewardResultSku**](RedemptionRewardResultSku.md) |  |  |
-| **loyalty_tier_id** | **String** | Unique loyalty tier ID assigned by Voucherify. |  |
+| **customer** | [**SimpleCustomer**](SimpleCustomer.md) |  | [optional] |
+| **assignment_id** | **String** | Unique reward assignment ID assigned by Voucherify. | [optional] |
+| **voucher** | [**RedemptionRewardResultVoucher**](RedemptionRewardResultVoucher.md) |  | [optional] |
+| **product** | [**RedemptionRewardResultProduct**](RedemptionRewardResultProduct.md) |  | [optional] |
+| **sku** | [**RedemptionRewardResultSku**](RedemptionRewardResultSku.md) |  | [optional] |
+| **loyalty_tier_id** | **String** | Unique loyalty tier ID assigned by Voucherify. | [optional] |
 | **id** | **String** | Unique reward ID. | [optional] |
 | **name** | **String** | Name of the reward. | [optional] |
 | **object** | **String** | The type of the object represented by the JSON | [optional][default to &#39;reward&#39;] |

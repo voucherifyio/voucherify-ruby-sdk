@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **quantity** | **Integer** | How many times a voucher can be redeemed. A null value means unlimited. |  |
+| **quantity** | **Integer** | How many times a voucher can be redeemed. A null value means unlimited. | [optional] |
 | **redeemed_points** | **Integer** | Total loyalty points redeemed. | [optional] |
 | **redeemed_quantity** | **Integer** | How many times a voucher has already been redeemed. | [optional] |
 | **redemption_entries** | **Array&lt;String&gt;** |  | [optional] |

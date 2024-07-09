@@ -123,6 +123,13 @@ module VoucherifySdk
         :'product',
         :'sku',
         :'loyalty_tier_id',
+        :'id',
+        :'name',
+        :'object',
+        :'created_at',
+        :'updated_at',
+        :'parameters',
+        :'type'
       ])
     end
 
@@ -143,38 +150,26 @@ module VoucherifySdk
 
       if attributes.key?(:'customer')
         self.customer = attributes[:'customer']
-      else
-        self.customer = nil
       end
 
       if attributes.key?(:'assignment_id')
         self.assignment_id = attributes[:'assignment_id']
-      else
-        self.assignment_id = nil
       end
 
       if attributes.key?(:'voucher')
         self.voucher = attributes[:'voucher']
-      else
-        self.voucher = nil
       end
 
       if attributes.key?(:'product')
         self.product = attributes[:'product']
-      else
-        self.product = nil
       end
 
       if attributes.key?(:'sku')
         self.sku = attributes[:'sku']
-      else
-        self.sku = nil
       end
 
       if attributes.key?(:'loyalty_tier_id')
         self.loyalty_tier_id = attributes[:'loyalty_tier_id']
-      else
-        self.loyalty_tier_id = nil
       end
 
       if attributes.key?(:'id')

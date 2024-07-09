@@ -33,13 +33,14 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'details' => :'ValidationsRedeemableSkippedResultDetails'
+        :'details' => :'ValidationsRedeemableSkippedDetails'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'details'
       ])
     end
 

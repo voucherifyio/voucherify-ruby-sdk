@@ -314,7 +314,7 @@ end
 
 ## import_vouchers_using_csv
 
-> <VouchersImportCsvCreateResponseBody> import_vouchers_using_csv(file)
+> <VouchersImportCsvCreateResponseBody> import_vouchers_using_csv(opts)
 
 Import Vouchers using CSV
 
@@ -339,11 +339,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::VouchersApi.new
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import Vouchers using CSV
-  result = api_instance.import_vouchers_using_csv(file)
+  result = api_instance.import_vouchers_using_csv(opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling VouchersApi->import_vouchers_using_csv: #{e}"
@@ -354,7 +356,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -521,7 +523,7 @@ end
 
 api_instance = VoucherifySdk::VouchersApi.new
 code = 'code_example' # String | A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
-vouchers_balance_update_request_body = VoucherifySdk::VouchersBalanceUpdateRequestBody.new({amount: 37}) # VouchersBalanceUpdateRequestBody | Provide the amount to be added to/subtracted from the voucher.
+vouchers_balance_update_request_body = VoucherifySdk::VouchersBalanceUpdateRequestBody.new # VouchersBalanceUpdateRequestBody | Provide the amount to be added to/subtracted from the voucher.
 
 begin
   # Add or Remove Voucher Balance

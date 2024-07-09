@@ -71,6 +71,9 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'conversion_event_type',
+        :'custom_event',
+        :'referee_reward'
       ])
     end
 

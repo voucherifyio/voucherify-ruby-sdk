@@ -49,8 +49,8 @@ module VoucherifySdk
       {
         :'is' => :'Array<String>',
         :'is_not' => :'Array<String>',
-        :'has_value' => :'Any',
-        :'is_unknown' => :'Any',
+        :'has_value' => :'Object',
+        :'is_unknown' => :'Object',
         :'_in' => :'Array<String>',
         :'not_in' => :'Array<String>'
       }
@@ -59,6 +59,12 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'is',
+        :'is_not',
+        :'has_value',
+        :'is_unknown',
+        :'_in',
+        :'not_in'
       ])
     end
 

@@ -35,7 +35,7 @@ end
 
 api_instance = VoucherifySdk::EventsApi.new
 opts = {
-  events_create_request_body: VoucherifySdk::EventsCreateRequestBody.new({event: 'event_example', customer: VoucherifySdk::Customer.new}) # EventsCreateRequestBody | Specify the details of the custom event.
+  events_create_request_body: VoucherifySdk::EventsCreateRequestBody.new({customer: VoucherifySdk::Customer.new}) # EventsCreateRequestBody | Specify the details of the custom event.
 }
 
 begin

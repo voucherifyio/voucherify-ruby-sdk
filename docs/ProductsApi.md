@@ -384,7 +384,7 @@ end
 
 ## import_products_using_csv
 
-> <ProductsImportCsvCreateResponseBody> import_products_using_csv(file)
+> <ProductsImportCsvCreateResponseBody> import_products_using_csv(opts)
 
 Import Products using CSV
 
@@ -409,11 +409,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::ProductsApi.new
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import Products using CSV
-  result = api_instance.import_products_using_csv(file)
+  result = api_instance.import_products_using_csv(opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling ProductsApi->import_products_using_csv: #{e}"
@@ -424,7 +426,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -442,7 +444,7 @@ end
 
 ## import_skus_using_csv
 
-> <SkusImportCsvCreateResponseBody> import_skus_using_csv(file)
+> <SkusImportCsvCreateResponseBody> import_skus_using_csv(opts)
 
 Import SKUs using CSV
 
@@ -467,11 +469,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::ProductsApi.new
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import SKUs using CSV
-  result = api_instance.import_skus_using_csv(file)
+  result = api_instance.import_skus_using_csv(opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling ProductsApi->import_skus_using_csv: #{e}"
@@ -482,7 +486,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -726,7 +730,7 @@ end
 
 api_instance = VoucherifySdk::ProductsApi.new
 opts = {
-  products_update_in_bulk_request_body: [VoucherifySdk::ProductsUpdateInBulkRequestBody.new({source_id: 'test_prod_id_1'})] # Array<ProductsUpdateInBulkRequestBody> | Create an array of product objects, each with the parameters which you want to update.
+  products_update_in_bulk_request_body: [VoucherifySdk::ProductsUpdateInBulkRequestBody.new] # Array<ProductsUpdateInBulkRequestBody> | Create an array of product objects, each with the parameters which you want to update.
 }
 
 begin
@@ -786,7 +790,7 @@ end
 
 api_instance = VoucherifySdk::ProductsApi.new
 opts = {
-  products_metadata_update_in_bulk_request_body: VoucherifySdk::ProductsMetadataUpdateInBulkRequestBody.new({source_ids: ['source_ids_example'], metadata: 3.56}) # ProductsMetadataUpdateInBulkRequestBody | Specify the list of product source IDs and the metadata key value pairs to be udpated for these products.
+  products_metadata_update_in_bulk_request_body: VoucherifySdk::ProductsMetadataUpdateInBulkRequestBody.new # ProductsMetadataUpdateInBulkRequestBody | Specify the list of product source IDs and the metadata key value pairs to be udpated for these products.
 }
 
 begin

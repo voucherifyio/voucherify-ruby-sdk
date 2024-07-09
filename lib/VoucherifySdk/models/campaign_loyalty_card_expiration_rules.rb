@@ -55,6 +55,10 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'period_type',
+        :'period_value',
+        :'rounding_type',
+        :'rounding_value'
       ])
     end
 
@@ -75,26 +79,18 @@ module VoucherifySdk
 
       if attributes.key?(:'period_type')
         self.period_type = attributes[:'period_type']
-      else
-        self.period_type = nil
       end
 
       if attributes.key?(:'period_value')
         self.period_value = attributes[:'period_value']
-      else
-        self.period_value = nil
       end
 
       if attributes.key?(:'rounding_type')
         self.rounding_type = attributes[:'rounding_type']
-      else
-        self.rounding_type = nil
       end
 
       if attributes.key?(:'rounding_value')
         self.rounding_value = attributes[:'rounding_value']
-      else
-        self.rounding_value = nil
       end
     end
 
@@ -103,22 +99,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @period_type.nil?
-        invalid_properties.push('invalid value for "period_type", period_type cannot be nil.')
-      end
-
-      if @period_value.nil?
-        invalid_properties.push('invalid value for "period_value", period_value cannot be nil.')
-      end
-
-      if @rounding_type.nil?
-        invalid_properties.push('invalid value for "rounding_type", rounding_type cannot be nil.')
-      end
-
-      if @rounding_value.nil?
-        invalid_properties.push('invalid value for "rounding_value", rounding_value cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -126,10 +106,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @period_type.nil?
-      return false if @period_value.nil?
-      return false if @rounding_type.nil?
-      return false if @rounding_value.nil?
       true
     end
 

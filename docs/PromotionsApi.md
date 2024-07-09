@@ -46,7 +46,7 @@ end
 api_instance = VoucherifySdk::PromotionsApi.new
 campaign_id = 'campaign_id_example' # String | Unique campaign ID.
 opts = {
-  promotions_stacks_create_request_body: VoucherifySdk::PromotionsStacksCreateRequestBody.new({name: 'name_example', tiers: VoucherifySdk::PromotionStackBaseTiers.new({ids: ['ids_example']})}) # PromotionsStacksCreateRequestBody | Specify the order of promotion tiers for the promotion stack.
+  promotions_stacks_create_request_body: VoucherifySdk::PromotionsStacksCreateRequestBody.new # PromotionsStacksCreateRequestBody | Specify the order of promotion tiers for the promotion stack.
 }
 
 begin

@@ -87,6 +87,12 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'type',
+        :'total',
+        :'object',
+        :'points',
+        :'balance',
+        :'related_object'
       ])
     end
 
@@ -113,8 +119,6 @@ module VoucherifySdk
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
 
       if attributes.key?(:'object')
@@ -125,20 +129,14 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
-      else
-        self.points = nil
       end
 
       if attributes.key?(:'balance')
         self.balance = attributes[:'balance']
-      else
-        self.balance = nil
       end
 
       if attributes.key?(:'related_object')
         self.related_object = attributes[:'related_object']
-      else
-        self.related_object = nil
       end
     end
 
@@ -147,38 +145,14 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
       pattern = Regexp.new(/loyalty_card/)
-      if @type !~ pattern
+      if !@type.nil? && @type !~ pattern
         invalid_properties.push("invalid value for \"type\", must conform to the pattern #{pattern}.")
       end
 
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       pattern = Regexp.new(/balance/)
-      if @object !~ pattern
+      if !@object.nil? && @object !~ pattern
         invalid_properties.push("invalid value for \"object\", must conform to the pattern #{pattern}.")
-      end
-
-      if @points.nil?
-        invalid_properties.push('invalid value for "points", points cannot be nil.')
-      end
-
-      if @balance.nil?
-        invalid_properties.push('invalid value for "balance", balance cannot be nil.')
-      end
-
-      if @related_object.nil?
-        invalid_properties.push('invalid value for "related_object", related_object cannot be nil.')
       end
 
       invalid_properties
@@ -188,18 +162,12 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["loyalty_card"])
       return false unless type_validator.valid?(@type)
-      return false if @type !~ Regexp.new(/loyalty_card/)
-      return false if @total.nil?
-      return false if @object.nil?
+      return false if !@type.nil? && @type !~ Regexp.new(/loyalty_card/)
       object_validator = EnumAttributeValidator.new('String', ["balance"])
       return false unless object_validator.valid?(@object)
-      return false if @object !~ Regexp.new(/balance/)
-      return false if @points.nil?
-      return false if @balance.nil?
-      return false if @related_object.nil?
+      return false if !@object.nil? && @object !~ Regexp.new(/balance/)
       true
     end
 

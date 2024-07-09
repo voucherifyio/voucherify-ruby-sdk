@@ -136,7 +136,7 @@ module VoucherifySdk
         :'code' => :'String',
         :'gift' => :'Gift',
         :'discount' => :'Discount',
-        :'loyalty_card' => :'SimpleLoyaltyCard',
+        :'loyalty_card' => :'SimpleVoucherLoyaltyCard',
         :'type' => :'String',
         :'campaign' => :'String',
         :'campaign_id' => :'String',
@@ -159,7 +159,25 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'code',
+        :'loyalty_card',
+        :'type',
+        :'campaign',
+        :'campaign_id',
+        :'is_referral_code',
+        :'holder_id',
+        :'referrer_id',
         :'category_id',
+        :'categories',
+        :'active',
+        :'created_at',
+        :'updated_at',
+        :'redemption',
+        :'start_date',
+        :'expiration_date',
+        :'metadata',
+        :'object'
       ])
     end
 
@@ -184,8 +202,6 @@ module VoucherifySdk
 
       if attributes.key?(:'code')
         self.code = attributes[:'code']
-      else
-        self.code = nil
       end
 
       if attributes.key?(:'gift')
@@ -202,8 +218,6 @@ module VoucherifySdk
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = nil
       end
 
       if attributes.key?(:'campaign')
@@ -242,8 +256,6 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'updated_at')
@@ -278,22 +290,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @code.nil?
-        invalid_properties.push('invalid value for "code", code cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -301,12 +297,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @code.nil?
-      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["DISCOUNT_VOUCHER", "LOYALTY_CARD", "GIFT_VOUCHER"])
       return false unless type_validator.valid?(@type)
-      return false if @created_at.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["voucher"])
       return false unless object_validator.valid?(@object)
       true

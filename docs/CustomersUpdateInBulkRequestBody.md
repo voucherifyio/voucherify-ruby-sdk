@@ -12,5 +12,5 @@
 | **birthdate** | **Date** | Customer&#39;s birthdate; format YYYY-MM-DD. | [optional] |
 | **address** | [**CustomerBaseAddress**](CustomerBaseAddress.md) |  | [optional] |
 | **metadata** | **Object** | A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the customer. It can be useful for storing additional information about the customer in a structured format. This metadata can be used for validating whether the customer qualifies for a discount or it can be used in building customer segments. | [optional] |
-| **source_id** | **String** | Unique customer source ID. |  |
+| **source_id** | **String** | Unique customer source ID. | [optional] |
 

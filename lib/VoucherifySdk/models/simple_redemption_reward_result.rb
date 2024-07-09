@@ -118,7 +118,15 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'assignment_id',
+        :'loyalty_tier_id',
+        :'id',
+        :'object',
+        :'name',
+        :'created_at',
         :'updated_at',
+        :'parameters',
+        :'type'
       ])
     end
 

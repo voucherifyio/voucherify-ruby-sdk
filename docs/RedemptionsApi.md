@@ -230,7 +230,7 @@ end
 
 api_instance = VoucherifySdk::RedemptionsApi.new
 opts = {
-  redemptions_redeem_request_body: VoucherifySdk::RedemptionsRedeemRequestBody.new({redeemables: [VoucherifySdk::RedeemGiftCard.new({object: 'voucher', id: 'id_example'})]}) # RedemptionsRedeemRequestBody | 
+  redemptions_redeem_request_body: VoucherifySdk::RedemptionsRedeemRequestBody.new # RedemptionsRedeemRequestBody | 
 }
 
 begin

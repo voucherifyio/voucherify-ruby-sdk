@@ -170,13 +170,29 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'code',
+        :'campaign',
+        :'campaign_id',
         :'category',
         :'category_id',
+        :'categories',
+        :'type',
+        :'loyalty_card',
         :'start_date',
         :'expiration_date',
         :'validity_timeframe',
         :'validity_day_of_week',
+        :'publish',
+        :'redemption',
+        :'active',
         :'additional_info',
+        :'metadata',
+        :'assets',
+        :'is_referral_code',
+        :'holder_id',
+        :'updated_at',
+        :'created_at'
       ])
     end
 
@@ -197,14 +213,10 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'code')
         self.code = attributes[:'code']
-      else
-        self.code = nil
       end
 
       if attributes.key?(:'campaign')
@@ -217,14 +229,10 @@ module VoucherifySdk
 
       if attributes.key?(:'category')
         self.category = attributes[:'category']
-      else
-        self.category = nil
       end
 
       if attributes.key?(:'category_id')
         self.category_id = attributes[:'category_id']
-      else
-        self.category_id = nil
       end
 
       if attributes.key?(:'categories')
@@ -241,34 +249,24 @@ module VoucherifySdk
 
       if attributes.key?(:'loyalty_card')
         self.loyalty_card = attributes[:'loyalty_card']
-      else
-        self.loyalty_card = nil
       end
 
       if attributes.key?(:'start_date')
         self.start_date = attributes[:'start_date']
-      else
-        self.start_date = nil
       end
 
       if attributes.key?(:'expiration_date')
         self.expiration_date = attributes[:'expiration_date']
-      else
-        self.expiration_date = nil
       end
 
       if attributes.key?(:'validity_timeframe')
         self.validity_timeframe = attributes[:'validity_timeframe']
-      else
-        self.validity_timeframe = nil
       end
 
       if attributes.key?(:'validity_day_of_week')
         if (value = attributes[:'validity_day_of_week']).is_a?(Array)
           self.validity_day_of_week = value
         end
-      else
-        self.validity_day_of_week = nil
       end
 
       if attributes.key?(:'validity_hours')
@@ -285,20 +283,14 @@ module VoucherifySdk
 
       if attributes.key?(:'active')
         self.active = attributes[:'active']
-      else
-        self.active = nil
       end
 
       if attributes.key?(:'additional_info')
         self.additional_info = attributes[:'additional_info']
-      else
-        self.additional_info = nil
       end
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      else
-        self.metadata = nil
       end
 
       if attributes.key?(:'assets')
@@ -307,8 +299,6 @@ module VoucherifySdk
 
       if attributes.key?(:'is_referral_code')
         self.is_referral_code = attributes[:'is_referral_code']
-      else
-        self.is_referral_code = nil
       end
 
       if attributes.key?(:'holder_id')
@@ -321,8 +311,6 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
     end
 
@@ -331,38 +319,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @code.nil?
-        invalid_properties.push('invalid value for "code", code cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @loyalty_card.nil?
-        invalid_properties.push('invalid value for "loyalty_card", loyalty_card cannot be nil.')
-      end
-
-      if @active.nil?
-        invalid_properties.push('invalid value for "active", active cannot be nil.')
-      end
-
-      if @metadata.nil?
-        invalid_properties.push('invalid value for "metadata", metadata cannot be nil.')
-      end
-
-      if @is_referral_code.nil?
-        invalid_properties.push('invalid value for "is_referral_code", is_referral_code cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -370,16 +326,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @code.nil?
-      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["LOYALTY_CARD"])
       return false unless type_validator.valid?(@type)
-      return false if @loyalty_card.nil?
-      return false if @active.nil?
-      return false if @metadata.nil?
-      return false if @is_referral_code.nil?
-      return false if @created_at.nil?
       true
     end
 

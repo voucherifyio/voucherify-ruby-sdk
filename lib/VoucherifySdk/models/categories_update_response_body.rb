@@ -87,6 +87,12 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'name',
+        :'hierarchy',
+        :'object',
+        :'created_at',
+        :'updated_at'
       ])
     end
 
@@ -107,20 +113,14 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'hierarchy')
         self.hierarchy = attributes[:'hierarchy']
-      else
-        self.hierarchy = nil
       end
 
       if attributes.key?(:'object')
@@ -131,14 +131,10 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
-      else
-        self.updated_at = nil
       end
     end
 
@@ -147,30 +143,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @hierarchy.nil?
-        invalid_properties.push('invalid value for "hierarchy", hierarchy cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @updated_at.nil?
-        invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -178,14 +150,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @name.nil?
-      return false if @hierarchy.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["category"])
       return false unless object_validator.valid?(@object)
-      return false if @created_at.nil?
-      return false if @updated_at.nil?
       true
     end
 

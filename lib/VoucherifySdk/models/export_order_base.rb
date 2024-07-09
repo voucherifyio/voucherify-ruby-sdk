@@ -66,6 +66,8 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'exported_object',
+        :'parameters'
       ])
     end
 
@@ -100,10 +102,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @exported_object.nil?
-        invalid_properties.push('invalid value for "exported_object", exported_object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -111,7 +109,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @exported_object.nil?
       exported_object_validator = EnumAttributeValidator.new('String', ["order"])
       return false unless exported_object_validator.valid?(@exported_object)
       true

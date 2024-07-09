@@ -60,6 +60,11 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'total_amount',
+        :'total_count',
+        :'average_amount',
+        :'last_order_amount',
+        :'last_order_date'
       ])
     end
 
@@ -80,26 +85,18 @@ module VoucherifySdk
 
       if attributes.key?(:'total_amount')
         self.total_amount = attributes[:'total_amount']
-      else
-        self.total_amount = nil
       end
 
       if attributes.key?(:'total_count')
         self.total_count = attributes[:'total_count']
-      else
-        self.total_count = nil
       end
 
       if attributes.key?(:'average_amount')
         self.average_amount = attributes[:'average_amount']
-      else
-        self.average_amount = nil
       end
 
       if attributes.key?(:'last_order_amount')
         self.last_order_amount = attributes[:'last_order_amount']
-      else
-        self.last_order_amount = nil
       end
 
       if attributes.key?(:'last_order_date')
@@ -112,22 +109,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @total_amount.nil?
-        invalid_properties.push('invalid value for "total_amount", total_amount cannot be nil.')
-      end
-
-      if @total_count.nil?
-        invalid_properties.push('invalid value for "total_count", total_count cannot be nil.')
-      end
-
-      if @average_amount.nil?
-        invalid_properties.push('invalid value for "average_amount", average_amount cannot be nil.')
-      end
-
-      if @last_order_amount.nil?
-        invalid_properties.push('invalid value for "last_order_amount", last_order_amount cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -135,10 +116,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @total_amount.nil?
-      return false if @total_count.nil?
-      return false if @average_amount.nil?
-      return false if @last_order_amount.nil?
       true
     end
 

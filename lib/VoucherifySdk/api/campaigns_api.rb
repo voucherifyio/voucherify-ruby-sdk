@@ -101,7 +101,7 @@ module VoucherifySdk
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :vouchers_count Number of vouchers that should be added.
     # @option opts [CampaignsVouchersCreateInBulkRequestBody] :campaigns_vouchers_create_in_bulk_request_body Specify the voucher parameters that you would like to overwrite.
-    # @return [CampaignsVouchersCreateResponseBody]
+    # @return [CampaignsVouchersCreateCombinedResponseBody]
     def add_vouchers_to_campaign(campaign_id, opts = {})
       data, _status_code, _headers = add_vouchers_to_campaign_with_http_info(campaign_id, opts)
       data
@@ -113,7 +113,7 @@ module VoucherifySdk
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :vouchers_count Number of vouchers that should be added.
     # @option opts [CampaignsVouchersCreateInBulkRequestBody] :campaigns_vouchers_create_in_bulk_request_body Specify the voucher parameters that you would like to overwrite.
-    # @return [Array<(CampaignsVouchersCreateResponseBody, Integer, Hash)>] CampaignsVouchersCreateResponseBody data, response status code and response headers
+    # @return [Array<(CampaignsVouchersCreateCombinedResponseBody, Integer, Hash)>] CampaignsVouchersCreateCombinedResponseBody data, response status code and response headers
     private def add_vouchers_to_campaign_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.add_vouchers_to_campaign ...'
@@ -146,7 +146,7 @@ module VoucherifySdk
       post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'campaigns_vouchers_create_in_bulk_request_body'])
 
       # return_type
-      return_type = opts[:debug_return_type] || 'CampaignsVouchersCreateResponseBody'
+      return_type = opts[:debug_return_type] || 'CampaignsVouchersCreateCombinedResponseBody'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
@@ -560,31 +560,27 @@ module VoucherifySdk
     # Import Vouchers to Campaign by CSV
     # Imports vouchers to an **existing** campaign.   The CSV file has to include headers in the first line.  This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
     # @param campaign_id [String] The campaign ID or name of the campaign being enabled. You can either pass the campaign ID, which was assigned by Voucherify or the name of the campaign as the path parameter value.
-    # @param file [File] File path.
     # @param [Hash] opts the optional parameters
+    # @option opts [File] :file File path.
     # @return [CampaignsImportCsvCreateResponseBody]
-    def import_vouchers_to_campaign_using_csv(campaign_id, file, opts = {})
-      data, _status_code, _headers = import_vouchers_to_campaign_using_csv_with_http_info(campaign_id, file, opts)
+    def import_vouchers_to_campaign_using_csv(campaign_id, opts = {})
+      data, _status_code, _headers = import_vouchers_to_campaign_using_csv_with_http_info(campaign_id, opts)
       data
     end
 
     # Import Vouchers to Campaign by CSV
     # Imports vouchers to an **existing** campaign.   The CSV file has to include headers in the first line.  This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
     # @param campaign_id [String] The campaign ID or name of the campaign being enabled. You can either pass the campaign ID, which was assigned by Voucherify or the name of the campaign as the path parameter value.
-    # @param file [File] File path.
     # @param [Hash] opts the optional parameters
+    # @option opts [File] :file File path.
     # @return [Array<(CampaignsImportCsvCreateResponseBody, Integer, Hash)>] CampaignsImportCsvCreateResponseBody data, response status code and response headers
-    private def import_vouchers_to_campaign_using_csv_with_http_info(campaign_id, file, opts = {})
+    private def import_vouchers_to_campaign_using_csv_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.import_vouchers_to_campaign_using_csv ...'
       end
       # verify the required parameter 'campaign_id' is set
       if @api_client.config.client_side_validation && campaign_id.nil?
         fail ArgumentError, "Missing the required parameter 'campaign_id' when calling CampaignsApi.import_vouchers_to_campaign_using_csv"
-      end
-      # verify the required parameter 'file' is set
-      if @api_client.config.client_side_validation && file.nil?
-        fail ArgumentError, "Missing the required parameter 'file' when calling CampaignsApi.import_vouchers_to_campaign_using_csv"
       end
       # resource path
       local_var_path = '/v1/campaigns/{campaignId}/importCSV'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -604,7 +600,7 @@ module VoucherifySdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['file'] = file
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]

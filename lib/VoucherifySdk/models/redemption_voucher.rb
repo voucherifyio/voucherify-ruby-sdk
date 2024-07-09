@@ -171,11 +171,11 @@ module VoucherifySdk
         :'categories' => :'Array<Category>',
         :'type' => :'String',
         :'discount' => :'Discount',
-        :'gift' => :'VoucherGift',
-        :'loyalty_card' => :'VoucherLoyaltyCard',
+        :'gift' => :'CampaignsVouchersCreateCombinedResponseBodyGift',
+        :'loyalty_card' => :'CampaignsVouchersCreateCombinedResponseBodyLoyaltyCard',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',
-        :'validity_timeframe' => :'VoucherValidityTimeframe',
+        :'validity_timeframe' => :'CampaignsVouchersCreateCombinedResponseBodyValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
         :'active' => :'Boolean',
@@ -189,8 +189,8 @@ module VoucherifySdk
         :'referrer_id' => :'String',
         :'object' => :'String',
         :'validation_rules_assignments' => :'ValidationRulesAssignmentsList',
-        :'publish' => :'VoucherPublish',
-        :'redemption' => :'VoucherRedemption',
+        :'publish' => :'CampaignsVouchersCreateCombinedResponseBodyPublish',
+        :'redemption' => :'CampaignsVouchersCreateCombinedResponseBodyRedemption',
         :'holder' => :'SimpleCustomer'
       }
     end
@@ -198,8 +198,31 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'code',
+        :'campaign',
+        :'campaign_id',
+        :'category',
+        :'category_id',
+        :'categories',
+        :'type',
+        :'gift',
+        :'loyalty_card',
+        :'start_date',
+        :'expiration_date',
+        :'validity_timeframe',
+        :'validity_day_of_week',
         :'active',
+        :'additional_info',
+        :'metadata',
         :'is_referral_code',
+        :'created_at',
+        :'updated_at',
+        :'holder_id',
+        :'referrer_id',
+        :'object',
+        :'publish',
+        :'redemption',
       ])
     end
 

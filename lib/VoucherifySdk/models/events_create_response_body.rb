@@ -82,6 +82,8 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'type',
         :'referral',
         :'loyalty'
       ])
@@ -110,8 +112,6 @@ module VoucherifySdk
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = nil
       end
 
       if attributes.key?(:'customer')
@@ -122,14 +122,10 @@ module VoucherifySdk
 
       if attributes.key?(:'referral')
         self.referral = attributes[:'referral']
-      else
-        self.referral = nil
       end
 
       if attributes.key?(:'loyalty')
         self.loyalty = attributes[:'loyalty']
-      else
-        self.loyalty = nil
       end
     end
 
@@ -138,14 +134,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
       if @customer.nil?
         invalid_properties.push('invalid value for "customer", customer cannot be nil.')
       end
@@ -157,10 +145,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["event"])
       return false unless object_validator.valid?(@object)
-      return false if @type.nil?
       return false if @customer.nil?
       true
     end

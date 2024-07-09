@@ -253,7 +253,7 @@ end
 
 ## import_customers_using_csv
 
-> <CustomersImportCsvCreateResponseBody> import_customers_using_csv(file)
+> <CustomersImportCsvCreateResponseBody> import_customers_using_csv(opts)
 
 Import and Update Customers using CSV
 
@@ -278,11 +278,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::CustomersApi.new
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import and Update Customers using CSV
-  result = api_instance.import_customers_using_csv(file)
+  result = api_instance.import_customers_using_csv(opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling CustomersApi->import_customers_using_csv: #{e}"
@@ -293,7 +295,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -678,7 +680,7 @@ end
 
 api_instance = VoucherifySdk::CustomersApi.new
 opts = {
-  customers_update_in_bulk_request_body: [VoucherifySdk::CustomersUpdateInBulkRequestBody.new({source_id: 'source_id_example'})] # Array<CustomersUpdateInBulkRequestBody> | Specify the customer fields that you would like to update in each customer object.
+  customers_update_in_bulk_request_body: [VoucherifySdk::CustomersUpdateInBulkRequestBody.new] # Array<CustomersUpdateInBulkRequestBody> | Specify the customer fields that you would like to update in each customer object.
 }
 
 begin
@@ -738,7 +740,7 @@ end
 
 api_instance = VoucherifySdk::CustomersApi.new
 opts = {
-  customers_metadata_update_in_bulk_request_body: VoucherifySdk::CustomersMetadataUpdateInBulkRequestBody.new({source_ids: ['source_ids_example'], metadata: 3.56}) # CustomersMetadataUpdateInBulkRequestBody | List the source_ids of the customers you would like to update along with the metadata key value pairs.
+  customers_metadata_update_in_bulk_request_body: VoucherifySdk::CustomersMetadataUpdateInBulkRequestBody.new # CustomersMetadataUpdateInBulkRequestBody | List the source_ids of the customers you would like to update along with the metadata key value pairs.
 }
 
 begin

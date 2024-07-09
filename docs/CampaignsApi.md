@@ -83,7 +83,7 @@ end
 
 ## add_vouchers_to_campaign
 
-> <CampaignsVouchersCreateResponseBody> add_vouchers_to_campaign(campaign_id, opts)
+> <CampaignsVouchersCreateCombinedResponseBody> add_vouchers_to_campaign(campaign_id, opts)
 
 Add Vouchers to Campaign
 
@@ -133,7 +133,7 @@ end
 
 ### Return type
 
-[**CampaignsVouchersCreateResponseBody**](CampaignsVouchersCreateResponseBody.md)
+[**CampaignsVouchersCreateCombinedResponseBody**](CampaignsVouchersCreateCombinedResponseBody.md)
 
 ### Authorization
 
@@ -173,7 +173,7 @@ end
 
 api_instance = VoucherifySdk::CampaignsApi.new
 opts = {
-  campaigns_create_request_body: VoucherifySdk::CampaignsCreateDiscountCouponsCampaign.new # CampaignsCreateRequestBody | Specify the details of the campaign that you would like to create.
+  campaigns_create_request_body: VoucherifySdk::CampaignsCreateRequestBody.new # CampaignsCreateRequestBody | Specify the details of the campaign that you would like to create.
 }
 
 begin
@@ -470,7 +470,7 @@ end
 api_instance = VoucherifySdk::CampaignsApi.new
 campaign_id = 'campaign_id_example' # String | The ID of an existing campaign to which youre importing the codes. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
 opts = {
-  campaigns_import_voucher_item: [VoucherifySdk::CampaignsImportVoucherItem.new({code: 'code_example'})] # Array<CampaignsImportVoucherItem> | Discount type, expiration date and the remaining attributes will be taken from the Campaign settings.
+  campaigns_import_voucher_item: [VoucherifySdk::CampaignsImportVoucherItem.new] # Array<CampaignsImportVoucherItem> | Discount type, expiration date and the remaining attributes will be taken from the Campaign settings.
 }
 
 begin
@@ -505,7 +505,7 @@ end
 
 ## import_vouchers_to_campaign_using_csv
 
-> <CampaignsImportCsvCreateResponseBody> import_vouchers_to_campaign_using_csv(campaign_id, file)
+> <CampaignsImportCsvCreateResponseBody> import_vouchers_to_campaign_using_csv(campaign_id, opts)
 
 Import Vouchers to Campaign by CSV
 
@@ -531,11 +531,13 @@ end
 
 api_instance = VoucherifySdk::CampaignsApi.new
 campaign_id = 'campaign_id_example' # String | The campaign ID or name of the campaign being enabled. You can either pass the campaign ID, which was assigned by Voucherify or the name of the campaign as the path parameter value.
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import Vouchers to Campaign by CSV
-  result = api_instance.import_vouchers_to_campaign_using_csv(campaign_id, file)
+  result = api_instance.import_vouchers_to_campaign_using_csv(campaign_id, opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling CampaignsApi->import_vouchers_to_campaign_using_csv: #{e}"
@@ -547,7 +549,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | The campaign ID or name of the campaign being enabled. You can either pass the campaign ID, which was assigned by Voucherify or the name of the campaign as the path parameter value. |  |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -660,7 +662,7 @@ end
 api_instance = VoucherifySdk::CampaignsApi.new
 campaign_id = 'campaign_id_example' # String | You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
 opts = {
-  campaigns_update_request_body: VoucherifySdk::CampaignsUpdateDiscountCouponsCampaign.new # CampaignsUpdateRequestBody | Specify the campaign parameters to be updated.
+  campaigns_update_request_body: VoucherifySdk::CampaignsUpdateRequestBody.new # CampaignsUpdateRequestBody | Specify the campaign parameters to be updated.
 }
 
 begin

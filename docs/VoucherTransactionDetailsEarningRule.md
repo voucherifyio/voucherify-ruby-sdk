@@ -4,6 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique earning rule ID. |  |
-| **source** | [**VoucherTransactionDetailsEarningRuleSource**](VoucherTransactionDetailsEarningRuleSource.md) |  |  |
+| **id** | **String** | Unique earning rule ID. | [optional] |
+| **source** | [**VoucherTransactionDetailsEarningRuleSource**](VoucherTransactionDetailsEarningRuleSource.md) |  | [optional] |
 

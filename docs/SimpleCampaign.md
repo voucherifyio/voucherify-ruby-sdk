@@ -10,7 +10,7 @@
 | **type** | **String** | Defines whether the campaign can be updated with new vouchers after campaign creation. - &#x60;AUTO_UPDATE&#x60;: By choosing the auto update option you will create a campaign that can be enhanced by new vouchers after the time of creation (e.g. by publish vouchers method). -  &#x60;STATIC&#x60;: vouchers need to be manually published. | [optional] |
 | **is_referral_code** | **Boolean** | Flag indicating whether this voucher is a referral code; &#x60;true&#x60; for campaign type &#x60;REFERRAL_PROGRAM&#x60;. | [optional] |
 | **voucher** | [**SimpleCampaignVoucher**](SimpleCampaignVoucher.md) |  | [optional] |
-| **lucky_draw** | [**LuckyDraw**](LuckyDraw.md) |  | [optional] |
+| **lucky_draw** | [**SimpleCampaignLuckyDraw**](SimpleCampaignLuckyDraw.md) |  | [optional] |
 | **referral_program** | [**ReferralProgram**](ReferralProgram.md) |  | [optional] |
 | **auto_join** | **Boolean** | Indicates whether customers will be able to auto-join the campaign if any earning rule is fulfilled. | [optional] |
 | **join_once** | **Boolean** | If this value is set to &#x60;true&#x60;, customers will be able to join the campaign only once. | [optional] |

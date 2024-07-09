@@ -164,10 +164,26 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
         :'source_id',
+        :'created_at',
         :'updated_at',
+        :'status',
+        :'amount',
+        :'initial_amount',
+        :'discount_amount',
+        :'items_discount_amount',
+        :'total_discount_amount',
+        :'total_amount',
+        :'applied_discount_amount',
+        :'items_applied_discount_amount',
+        :'total_applied_discount_amount',
+        :'items',
+        :'metadata',
         :'customer_id',
         :'referrer_id',
+        :'object',
+        :'redemptions',
       ])
     end
 
@@ -199,8 +215,6 @@ module VoucherifySdk
 
       if attributes.key?(:'source_id')
         self.source_id = attributes[:'source_id']
-      else
-        self.source_id = nil
       end
 
       if attributes.key?(:'created_at')
@@ -263,14 +277,10 @@ module VoucherifySdk
 
       if attributes.key?(:'customer_id')
         self.customer_id = attributes[:'customer_id']
-      else
-        self.customer_id = nil
       end
 
       if attributes.key?(:'referrer_id')
         self.referrer_id = attributes[:'referrer_id']
-      else
-        self.referrer_id = nil
       end
 
       if attributes.key?(:'object')
@@ -299,10 +309,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -312,7 +318,6 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       status_validator = EnumAttributeValidator.new('String', ["CREATED", "PAID", "CANCELED", "FULFILLED"])
       return false unless status_validator.valid?(@status)
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["order"])
       return false unless object_validator.valid?(@object)
       true

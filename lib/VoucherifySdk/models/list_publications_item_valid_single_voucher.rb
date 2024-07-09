@@ -119,7 +119,17 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'object',
+        :'created_at',
+        :'customer_id',
+        :'tracking_id',
+        :'metadata',
+        :'channel',
         :'source_id',
+        :'vouchers',
+        :'vouchers_id',
+        :'result',
       ])
     end
 
@@ -147,8 +157,6 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'object')
@@ -159,14 +167,10 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'customer_id')
         self.customer_id = attributes[:'customer_id']
-      else
-        self.customer_id = nil
       end
 
       if attributes.key?(:'tracking_id')
@@ -175,20 +179,14 @@ module VoucherifySdk
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      else
-        self.metadata = nil
       end
 
       if attributes.key?(:'channel')
         self.channel = attributes[:'channel']
-      else
-        self.channel = nil
       end
 
       if attributes.key?(:'source_id')
         self.source_id = attributes[:'source_id']
-      else
-        self.source_id = nil
       end
 
       if attributes.key?(:'customer')
@@ -207,8 +205,6 @@ module VoucherifySdk
         if (value = attributes[:'vouchers_id']).is_a?(Array)
           self.vouchers_id = value
         end
-      else
-        self.vouchers_id = nil
       end
 
       if attributes.key?(:'result')
@@ -229,40 +225,8 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @customer_id.nil?
-        invalid_properties.push('invalid value for "customer_id", customer_id cannot be nil.')
-      end
-
-      if @metadata.nil?
-        invalid_properties.push('invalid value for "metadata", metadata cannot be nil.')
-      end
-
-      if @channel.nil?
-        invalid_properties.push('invalid value for "channel", channel cannot be nil.')
-      end
-
       if @customer.nil?
         invalid_properties.push('invalid value for "customer", customer cannot be nil.')
-      end
-
-      if @vouchers_id.nil?
-        invalid_properties.push('invalid value for "vouchers_id", vouchers_id cannot be nil.')
-      end
-
-      if @result.nil?
-        invalid_properties.push('invalid value for "result", result cannot be nil.')
       end
 
       if @voucher.nil?
@@ -276,17 +240,9 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["publication"])
       return false unless object_validator.valid?(@object)
-      return false if @created_at.nil?
-      return false if @customer_id.nil?
-      return false if @metadata.nil?
-      return false if @channel.nil?
       return false if @customer.nil?
-      return false if @vouchers_id.nil?
-      return false if @result.nil?
       result_validator = EnumAttributeValidator.new('String', ["SUCCESS"])
       return false unless result_validator.valid?(@result)
       return false if @voucher.nil?

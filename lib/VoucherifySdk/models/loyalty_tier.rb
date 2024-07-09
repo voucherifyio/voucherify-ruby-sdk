@@ -114,8 +114,17 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'earning_rules',
+        :'rewards',
+        :'points',
+        :'id',
+        :'campaign_id',
         :'metadata',
+        :'created_at',
         :'updated_at',
+        :'config',
+        :'object'
       ])
     end
 
@@ -143,8 +152,6 @@ module VoucherifySdk
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'earning_rules')
@@ -161,32 +168,22 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
-      else
-        self.points = nil
       end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
-      else
-        self.campaign_id = nil
       end
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      else
-        self.metadata = nil
       end
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'updated_at')
@@ -195,8 +192,6 @@ module VoucherifySdk
 
       if attributes.key?(:'config')
         self.config = attributes[:'config']
-      else
-        self.config = nil
       end
 
       if attributes.key?(:'expiration')
@@ -215,34 +210,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @points.nil?
-        invalid_properties.push('invalid value for "points", points cannot be nil.')
-      end
-
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @config.nil?
-        invalid_properties.push('invalid value for "config", config cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -250,13 +217,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @name.nil?
-      return false if @points.nil?
-      return false if @id.nil?
-      return false if @campaign_id.nil?
-      return false if @created_at.nil?
-      return false if @config.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["loyalty_tier"])
       return false unless object_validator.valid?(@object)
       true

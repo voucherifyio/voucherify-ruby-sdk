@@ -50,6 +50,9 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'points',
+        :'referred_customers',
+        :'campaigns'
       ])
     end
 
@@ -70,22 +73,16 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
-      else
-        self.points = nil
       end
 
       if attributes.key?(:'referred_customers')
         self.referred_customers = attributes[:'referred_customers']
-      else
-        self.referred_customers = nil
       end
 
       if attributes.key?(:'campaigns')
         if (value = attributes[:'campaigns']).is_a?(Hash)
           self.campaigns = value
         end
-      else
-        self.campaigns = nil
       end
     end
 
@@ -94,18 +91,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @points.nil?
-        invalid_properties.push('invalid value for "points", points cannot be nil.')
-      end
-
-      if @referred_customers.nil?
-        invalid_properties.push('invalid value for "referred_customers", referred_customers cannot be nil.')
-      end
-
-      if @campaigns.nil?
-        invalid_properties.push('invalid value for "campaigns", campaigns cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -113,9 +98,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @points.nil?
-      return false if @referred_customers.nil?
-      return false if @campaigns.nil?
       true
     end
 

@@ -205,7 +205,31 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'name',
+        :'description',
+        :'campaign_type',
+        :'type',
+        :'auto_join',
+        :'join_once',
+        :'use_voucher_metadata_schema',
+        :'validity_timeframe',
+        :'validity_day_of_week',
+        :'activity_duration_after_publishing',
+        :'vouchers_count',
+        :'start_date',
+        :'expiration_date',
+        :'active',
+        :'metadata',
+        :'created_at',
+        :'updated_at',
+        :'category',
+        :'creation_status',
+        :'vouchers_generation_status',
+        :'protected',
         :'category_id',
+        :'categories',
+        :'object',
       ])
     end
 
@@ -233,14 +257,10 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'description')
@@ -249,14 +269,10 @@ module VoucherifySdk
 
       if attributes.key?(:'campaign_type')
         self.campaign_type = attributes[:'campaign_type']
-      else
-        self.campaign_type = nil
       end
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = nil
       end
 
       if attributes.key?(:'voucher')
@@ -265,20 +281,14 @@ module VoucherifySdk
 
       if attributes.key?(:'auto_join')
         self.auto_join = attributes[:'auto_join']
-      else
-        self.auto_join = nil
       end
 
       if attributes.key?(:'join_once')
         self.join_once = attributes[:'join_once']
-      else
-        self.join_once = nil
       end
 
       if attributes.key?(:'use_voucher_metadata_schema')
         self.use_voucher_metadata_schema = attributes[:'use_voucher_metadata_schema']
-      else
-        self.use_voucher_metadata_schema = nil
       end
 
       if attributes.key?(:'validity_timeframe')
@@ -321,8 +331,6 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'updated_at')
@@ -335,34 +343,24 @@ module VoucherifySdk
 
       if attributes.key?(:'creation_status')
         self.creation_status = attributes[:'creation_status']
-      else
-        self.creation_status = nil
       end
 
       if attributes.key?(:'vouchers_generation_status')
         self.vouchers_generation_status = attributes[:'vouchers_generation_status']
-      else
-        self.vouchers_generation_status = nil
       end
 
       if attributes.key?(:'protected')
         self.protected = attributes[:'protected']
-      else
-        self.protected = nil
       end
 
       if attributes.key?(:'category_id')
         self.category_id = attributes[:'category_id']
-      else
-        self.category_id = nil
       end
 
       if attributes.key?(:'categories')
         if (value = attributes[:'categories']).is_a?(Array)
           self.categories = value
         end
-      else
-        self.categories = nil
       end
 
       if attributes.key?(:'object')
@@ -393,58 +391,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @campaign_type.nil?
-        invalid_properties.push('invalid value for "campaign_type", campaign_type cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @auto_join.nil?
-        invalid_properties.push('invalid value for "auto_join", auto_join cannot be nil.')
-      end
-
-      if @join_once.nil?
-        invalid_properties.push('invalid value for "join_once", join_once cannot be nil.')
-      end
-
-      if @use_voucher_metadata_schema.nil?
-        invalid_properties.push('invalid value for "use_voucher_metadata_schema", use_voucher_metadata_schema cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @creation_status.nil?
-        invalid_properties.push('invalid value for "creation_status", creation_status cannot be nil.')
-      end
-
-      if @vouchers_generation_status.nil?
-        invalid_properties.push('invalid value for "vouchers_generation_status", vouchers_generation_status cannot be nil.')
-      end
-
-      if @protected.nil?
-        invalid_properties.push('invalid value for "protected", protected cannot be nil.')
-      end
-
-      if @categories.nil?
-        invalid_properties.push('invalid value for "categories", categories cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -452,27 +398,14 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @name.nil?
-      return false if @campaign_type.nil?
       campaign_type_validator = EnumAttributeValidator.new('String', ["LOYALTY_PROGRAM", "GIFT_VOUCHERS", "DISCOUNT_COUPONS", "PROMOTION", "REFERRAL_PROGRAM", "LUCKY_DRAW"])
       return false unless campaign_type_validator.valid?(@campaign_type)
-      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC"])
       return false unless type_validator.valid?(@type)
-      return false if @auto_join.nil?
-      return false if @join_once.nil?
-      return false if @use_voucher_metadata_schema.nil?
-      return false if @created_at.nil?
-      return false if @creation_status.nil?
       creation_status_validator = EnumAttributeValidator.new('String', ["DONE", "IN_PROGRESS", "FAILED", "DRAFT", "MODIFYING"])
       return false unless creation_status_validator.valid?(@creation_status)
-      return false if @vouchers_generation_status.nil?
       vouchers_generation_status_validator = EnumAttributeValidator.new('String', ["DONE", "IN_PROGRESS", "FAILED", "DRAFT", "MODIFYING"])
       return false unless vouchers_generation_status_validator.valid?(@vouchers_generation_status)
-      return false if @protected.nil?
-      return false if @categories.nil?
-      return false if @object.nil?
       true
     end
 

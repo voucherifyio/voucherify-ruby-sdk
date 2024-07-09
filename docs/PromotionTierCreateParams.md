@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | Name of the promotion tier. |  |
+| **name** | **String** | Name of the promotion tier. | [optional] |
 | **banner** | **String** | Text to be displayed to your customers on your website. | [optional] |
 | **action** | [**PromotionTierAction**](PromotionTierAction.md) |  | [optional] |
 | **metadata** | **Object** | The metadata object stores all custom attributes assigned to the promotion tier. A set of key/value pairs that you can attach to a promotion tier object. It can be useful for storing additional information about the promotion tier in a structured format. | [optional] |

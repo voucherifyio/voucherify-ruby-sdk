@@ -15,7 +15,7 @@
 | **discount_amount** | **Integer** |  Sum of all order-item-level discounts applied to the order. | [optional] |
 | **initial_amount** | **Integer** | A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items&#39; amounts. | [optional] |
 | **price** | **Integer** | Unit price of an item. Value is multiplied by 100 to precisely represent 2 decimal places. For example &#x60;10000 cents&#x60; for &#x60;$100.00&#x60;. | [optional] |
-| **product** | [**OrderItemProduct**](OrderItemProduct.md) |  | [optional] |
-| **sku** | [**OrderItemSku**](OrderItemSku.md) |  | [optional] |
+| **product** | [**OrderItemCalculatedProduct**](OrderItemCalculatedProduct.md) |  | [optional] |
+| **sku** | [**OrderItemCalculatedSku**](OrderItemCalculatedSku.md) |  | [optional] |
 | **metadata** | **Object** | A set of custom key/value pairs that you can attach to an SKU. It can be useful for storing additional information about the SKU in a structured format. | [optional] |
 

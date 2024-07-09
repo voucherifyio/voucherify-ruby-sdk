@@ -67,6 +67,8 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'ids',
+        :'hierarchy_mode'
       ])
     end
 
@@ -89,8 +91,6 @@ module VoucherifySdk
         if (value = attributes[:'ids']).is_a?(Array)
           self.ids = value
         end
-      else
-        self.ids = nil
       end
 
       if attributes.key?(:'hierarchy_mode')
@@ -105,11 +105,7 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @ids.nil?
-        invalid_properties.push('invalid value for "ids", ids cannot be nil.')
-      end
-
-      if @ids.length < 1
+      if !@ids.nil? && @ids.length < 1
         invalid_properties.push('invalid value for "ids", number of items must be greater than or equal to 1.')
       end
 
@@ -120,8 +116,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @ids.nil?
-      return false if @ids.length < 1
+      return false if !@ids.nil? && @ids.length < 1
       hierarchy_mode_validator = EnumAttributeValidator.new('String', ["MANUAL"])
       return false unless hierarchy_mode_validator.valid?(@hierarchy_mode)
       true
@@ -130,11 +125,7 @@ module VoucherifySdk
     # Custom attribute writer method with validation
     # @param [Object] ids Value to be assigned
     def ids=(ids)
-      if ids.nil?
-        fail ArgumentError, 'ids cannot be nil'
-      end
-
-      if ids.length < 1
+      if !ids.nil? && ids.length < 1
         fail ArgumentError, 'invalid value for "ids", number of items must be greater than or equal to 1.'
       end
 

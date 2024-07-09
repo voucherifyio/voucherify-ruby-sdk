@@ -71,6 +71,13 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'customer_id',
+        :'campaign_id',
+        :'tier_id',
+        :'start_date',
+        :'expiration_date',
+        :'created_at',
+        :'updated_at'
       ])
     end
 
@@ -91,20 +98,14 @@ module VoucherifySdk
 
       if attributes.key?(:'customer_id')
         self.customer_id = attributes[:'customer_id']
-      else
-        self.customer_id = nil
       end
 
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
-      else
-        self.campaign_id = nil
       end
 
       if attributes.key?(:'tier_id')
         self.tier_id = attributes[:'tier_id']
-      else
-        self.tier_id = nil
       end
 
       if attributes.key?(:'start_date')
@@ -117,8 +118,6 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'updated_at')
@@ -131,22 +130,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @customer_id.nil?
-        invalid_properties.push('invalid value for "customer_id", customer_id cannot be nil.')
-      end
-
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
-      end
-
-      if @tier_id.nil?
-        invalid_properties.push('invalid value for "tier_id", tier_id cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -154,10 +137,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @customer_id.nil?
-      return false if @campaign_id.nil?
-      return false if @tier_id.nil?
-      return false if @created_at.nil?
       true
     end
 

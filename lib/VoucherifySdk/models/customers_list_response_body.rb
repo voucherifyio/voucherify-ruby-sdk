@@ -61,6 +61,11 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'data_ref',
+        :'customers',
+        :'total',
+        :'has_more'
       ])
     end
 
@@ -95,14 +100,10 @@ module VoucherifySdk
         if (value = attributes[:'customers']).is_a?(Array)
           self.customers = value
         end
-      else
-        self.customers = nil
       end
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
 
       if attributes.key?(:'has_more')
@@ -115,22 +116,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @data_ref.nil?
-        invalid_properties.push('invalid value for "data_ref", data_ref cannot be nil.')
-      end
-
-      if @customers.nil?
-        invalid_properties.push('invalid value for "customers", customers cannot be nil.')
-      end
-
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -138,10 +123,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
-      return false if @data_ref.nil?
-      return false if @customers.nil?
-      return false if @total.nil?
       true
     end
 

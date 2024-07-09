@@ -14,13 +14,45 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Objects stores information about the campaign related to the reward.
   class RewardTypeCampaign
-    attr_accessor :campaign
+    # Unique campaign ID, assigned by Voucherify.
+    attr_accessor :id
+
+    # The incremental amout to be added to the current balance on the gift card. Value is multiplied by 100 to precisely represent 2 decimal places. For example, $100 amount is written as 10000.
+    attr_accessor :balance
+
+    # Campaign type.
+    attr_accessor :type
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'campaign' => :'campaign'
+        :'id' => :'id',
+        :'balance' => :'balance',
+        :'type' => :'type'
       }
     end
 
@@ -32,13 +64,18 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'campaign' => :'RewardTypeCampaignCampaign'
+        :'id' => :'String',
+        :'balance' => :'Integer',
+        :'type' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'balance',
+        :'type'
       ])
     end
 
@@ -57,10 +94,16 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'campaign')
-        self.campaign = attributes[:'campaign']
-      else
-        self.campaign = nil
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'balance')
+        self.balance = attributes[:'balance']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -69,10 +112,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @campaign.nil?
-        invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -80,8 +119,19 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @campaign.nil?
+      type_validator = EnumAttributeValidator.new('String', ["DISCOUNT_COUPONS", "PROMOTION", "GIFT_VOUCHERS", "REFERRAL_PROGRAM", "LOYALTY_PROGRAM"])
+      return false unless type_validator.valid?(@type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["DISCOUNT_COUPONS", "PROMOTION", "GIFT_VOUCHERS", "REFERRAL_PROGRAM", "LOYALTY_PROGRAM"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -89,7 +139,9 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          campaign == o.campaign
+          id == o.id &&
+          balance == o.balance &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -101,7 +153,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign].hash
+      [id, balance, type].hash
     end
 
     # Builds the object from hash

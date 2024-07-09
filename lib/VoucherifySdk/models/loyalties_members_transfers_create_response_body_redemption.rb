@@ -88,6 +88,11 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'quantity',
+        :'redeemed_points',
+        :'redeemed_quantity',
+        :'redemption_entries',
+        :'object',
+        :'url'
       ])
     end
 
@@ -108,8 +113,6 @@ module VoucherifySdk
 
       if attributes.key?(:'quantity')
         self.quantity = attributes[:'quantity']
-      else
-        self.quantity = nil
       end
 
       if attributes.key?(:'redeemed_points')

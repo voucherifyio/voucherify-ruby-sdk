@@ -19,7 +19,6 @@ module VoucherifySdk
     # The result of the validation. It takes all of the redeemables into account and returns a `false` if at least one redeemable is inapplicable. Returns `true` if all redeemables are applicable.
     attr_accessor :valid
 
-    # Lists validation results of each redeemable. If redeemables_application_mode=\"PARTIAL\" all redeemables here will be \"APPLICABLE\"
     attr_accessor :redeemables
 
     # Lists validation results of each skipped redeemable.
@@ -60,7 +59,7 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'valid' => :'Boolean',
-        :'redeemables' => :'Array<ValidationsValidateAllResponseBodyRedeemablesItem>',
+        :'redeemables' => :'Array<ValidationsValidateResponseBodyRedeemablesItem>',
         :'skipped_redeemables' => :'Array<ValidationsRedeemableSkipped>',
         :'inapplicable_redeemables' => :'Array<ValidationsRedeemableInapplicable>',
         :'order' => :'OrderCalculated',
@@ -73,6 +72,11 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'valid',
+        :'redeemables',
+        :'skipped_redeemables',
+        :'inapplicable_redeemables',
+        :'tracking_id',
       ])
     end
 
@@ -93,16 +97,12 @@ module VoucherifySdk
 
       if attributes.key?(:'valid')
         self.valid = attributes[:'valid']
-      else
-        self.valid = nil
       end
 
       if attributes.key?(:'redeemables')
         if (value = attributes[:'redeemables']).is_a?(Array)
           self.redeemables = value
         end
-      else
-        self.redeemables = nil
       end
 
       if attributes.key?(:'skipped_redeemables')
@@ -141,14 +141,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @valid.nil?
-        invalid_properties.push('invalid value for "valid", valid cannot be nil.')
-      end
-
-      if @redeemables.nil?
-        invalid_properties.push('invalid value for "redeemables", redeemables cannot be nil.')
-      end
-
       if @stacking_rules.nil?
         invalid_properties.push('invalid value for "stacking_rules", stacking_rules cannot be nil.')
       end
@@ -160,8 +152,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @valid.nil?
-      return false if @redeemables.nil?
       return false if @stacking_rules.nil?
       true
     end

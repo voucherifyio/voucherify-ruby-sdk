@@ -41,7 +41,7 @@ end
 api_instance = VoucherifySdk::RewardsApi.new
 reward_id = 'reward_id_example' # String | A unique reward ID.
 opts = {
-  rewards_assignments_create_request_body: VoucherifySdk::RewardAssignmentsCreateCoinRewardRequestBody.new({campaign: 'campaign_example'}) # RewardsAssignmentsCreateRequestBody | Provide the campaign ID of the campaign to which the reward is to be assigned and define the cost of the reward in terms of loyalty points.
+  rewards_assignments_create_request_body: VoucherifySdk::RewardsAssignmentsCreateRequestBody.new # RewardsAssignmentsCreateRequestBody | Provide the campaign ID of the campaign to which the reward is to be assigned and define the cost of the reward in terms of loyalty points.
 }
 
 begin

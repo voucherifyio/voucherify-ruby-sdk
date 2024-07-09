@@ -103,6 +103,15 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'rule_id',
+        :'related_object_id',
+        :'related_object_type',
+        :'created_at',
+        :'updated_at',
+        :'object',
+        :'validation_status',
+        :'validation_omitted_rules'
       ])
     end
 
@@ -123,26 +132,18 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'rule_id')
         self.rule_id = attributes[:'rule_id']
-      else
-        self.rule_id = nil
       end
 
       if attributes.key?(:'related_object_id')
         self.related_object_id = attributes[:'related_object_id']
-      else
-        self.related_object_id = nil
       end
 
       if attributes.key?(:'related_object_type')
         self.related_object_type = attributes[:'related_object_type']
-      else
-        self.related_object_type = nil
       end
 
       if attributes.key?(:'created_at')
@@ -175,26 +176,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @rule_id.nil?
-        invalid_properties.push('invalid value for "rule_id", rule_id cannot be nil.')
-      end
-
-      if @related_object_id.nil?
-        invalid_properties.push('invalid value for "related_object_id", related_object_id cannot be nil.')
-      end
-
-      if @related_object_type.nil?
-        invalid_properties.push('invalid value for "related_object_type", related_object_type cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -202,11 +183,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @rule_id.nil?
-      return false if @related_object_id.nil?
-      return false if @related_object_type.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["validation_rules_assignment"])
       return false unless object_validator.valid?(@object)
       validation_status_validator = EnumAttributeValidator.new('String', ["VALID", "PARTIALLY_VALID", "INVALID"])

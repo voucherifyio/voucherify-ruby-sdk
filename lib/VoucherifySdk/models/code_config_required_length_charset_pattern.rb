@@ -65,6 +65,12 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'length',
+        :'charset',
+        :'prefix',
+        :'postfix',
+        :'pattern',
+        :'initial_count'
       ])
     end
 
@@ -126,18 +132,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @length.nil?
-        invalid_properties.push('invalid value for "length", length cannot be nil.')
-      end
-
-      if @charset.nil?
-        invalid_properties.push('invalid value for "charset", charset cannot be nil.')
-      end
-
-      if @pattern.nil?
-        invalid_properties.push('invalid value for "pattern", pattern cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -145,9 +139,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @length.nil?
-      return false if @charset.nil?
-      return false if @pattern.nil?
       true
     end
 

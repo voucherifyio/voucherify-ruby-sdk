@@ -138,8 +138,22 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'source_id',
+        :'status',
         :'customer_id',
         :'referrer_id',
+        :'amount',
+        :'discount_amount',
+        :'applied_discount_amount',
+        :'items_discount_amount',
+        :'items_applied_discount_amount',
+        :'total_discount_amount',
+        :'total_applied_discount_amount',
+        :'total_amount',
+        :'items',
+        :'metadata',
+        :'object'
       ])
     end
 
@@ -232,10 +246,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -245,7 +255,6 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       status_validator = EnumAttributeValidator.new('String', ["CREATED", "PAID", "CANCELED", "FULFILLED"])
       return false unless status_validator.valid?(@status)
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["order"])
       return false unless object_validator.valid?(@object)
       true

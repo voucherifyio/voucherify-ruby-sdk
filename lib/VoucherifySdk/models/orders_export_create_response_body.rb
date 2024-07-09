@@ -102,7 +102,15 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'object',
+        :'created_at',
+        :'status',
+        :'channel',
         :'result',
+        :'user_id',
+        :'exported_object',
+        :'parameters'
       ])
     end
 
@@ -131,8 +139,6 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'object')
@@ -143,8 +149,6 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'status')
@@ -159,14 +163,10 @@ module VoucherifySdk
 
       if attributes.key?(:'result')
         self.result = attributes[:'result']
-      else
-        self.result = nil
       end
 
       if attributes.key?(:'user_id')
         self.user_id = attributes[:'user_id']
-      else
-        self.user_id = nil
       end
 
       if attributes.key?(:'exported_object')
@@ -185,30 +185,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @status.nil?
-        invalid_properties.push('invalid value for "status", status cannot be nil.')
-      end
-
-      if @user_id.nil?
-        invalid_properties.push('invalid value for "user_id", user_id cannot be nil.')
-      end
-
-      if @exported_object.nil?
-        invalid_properties.push('invalid value for "exported_object", exported_object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -216,16 +192,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["export"])
       return false unless object_validator.valid?(@object)
-      return false if @created_at.nil?
-      return false if @status.nil?
       status_validator = EnumAttributeValidator.new('String', ["SCHEDULED"])
       return false unless status_validator.valid?(@status)
-      return false if @user_id.nil?
-      return false if @exported_object.nil?
       exported_object_validator = EnumAttributeValidator.new('String', ["order"])
       return false unless exported_object_validator.valid?(@exported_object)
       true

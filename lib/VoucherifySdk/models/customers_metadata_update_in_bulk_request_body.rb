@@ -46,6 +46,8 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'source_ids',
+        :'metadata'
       ])
     end
 
@@ -68,14 +70,10 @@ module VoucherifySdk
         if (value = attributes[:'source_ids']).is_a?(Array)
           self.source_ids = value
         end
-      else
-        self.source_ids = nil
       end
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      else
-        self.metadata = nil
       end
     end
 
@@ -84,14 +82,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @source_ids.nil?
-        invalid_properties.push('invalid value for "source_ids", source_ids cannot be nil.')
-      end
-
-      if @metadata.nil?
-        invalid_properties.push('invalid value for "metadata", metadata cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -99,8 +89,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @source_ids.nil?
-      return false if @metadata.nil?
       true
     end
 

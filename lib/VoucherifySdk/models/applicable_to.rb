@@ -124,6 +124,19 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'id',
+        :'source_id',
+        :'product_id',
+        :'product_source_id',
+        :'strict',
+        :'price',
+        :'price_formula',
+        :'quantity_limit',
+        :'aggregated_quantity_limit',
+        :'amount_limit',
+        :'aggregated_amount_limit',
+        :'order_item_indices'
       ])
     end
 
@@ -144,14 +157,10 @@ module VoucherifySdk
 
       if attributes.key?(:'object')
         self.object = attributes[:'object']
-      else
-        self.object = nil
       end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'source_id')
@@ -168,8 +177,6 @@ module VoucherifySdk
 
       if attributes.key?(:'strict')
         self.strict = attributes[:'strict']
-      else
-        self.strict = nil
       end
 
       if attributes.key?(:'price')
@@ -214,18 +221,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @strict.nil?
-        invalid_properties.push('invalid value for "strict", strict cannot be nil.')
-      end
-
       if @effect.nil?
         invalid_properties.push('invalid value for "effect", effect cannot be nil.')
       end
@@ -237,11 +232,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["product", "sku", "products_collection"])
       return false unless object_validator.valid?(@object)
-      return false if @id.nil?
-      return false if @strict.nil?
       return false if @effect.nil?
       true
     end

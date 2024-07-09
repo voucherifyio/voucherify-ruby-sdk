@@ -68,6 +68,8 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'type'
       ])
     end
 
@@ -88,8 +90,6 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'type')
@@ -104,16 +104,8 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
       pattern = Regexp.new(/voucher/)
-      if @type !~ pattern
+      if !@type.nil? && @type !~ pattern
         invalid_properties.push("invalid value for \"type\", must conform to the pattern #{pattern}.")
       end
 
@@ -124,11 +116,9 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["voucher"])
       return false unless type_validator.valid?(@type)
-      return false if @type !~ Regexp.new(/voucher/)
+      return false if !@type.nil? && @type !~ Regexp.new(/voucher/)
       true
     end
 

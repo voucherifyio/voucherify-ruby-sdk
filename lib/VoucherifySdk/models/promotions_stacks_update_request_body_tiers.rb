@@ -68,6 +68,8 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'ids',
+        :'hierarchy_mode'
       ])
     end
 

@@ -100,7 +100,7 @@ end
 api_instance = VoucherifySdk::ClientSideApi.new
 origin = 'origin_example' # String | Indicates the origin (scheme, hostname, and port).
 opts = {
-  client_redemptions_redeem_request_body: VoucherifySdk::ClientRedemptionsRedeemRequestBody.new({redeemables: [VoucherifySdk::RedeemGiftCard.new({object: 'voucher', id: 'id_example'})]}) # ClientRedemptionsRedeemRequestBody | 
+  client_redemptions_redeem_request_body: VoucherifySdk::ClientRedemptionsRedeemRequestBody.new # ClientRedemptionsRedeemRequestBody | 
 }
 
 begin
@@ -162,7 +162,7 @@ end
 api_instance = VoucherifySdk::ClientSideApi.new
 origin = 'origin_example' # String | Indicates the origin (scheme, hostname, and port).
 opts = {
-  client_events_create_request_body: VoucherifySdk::ClientEventsCreateRequestBody.new({event: 'event_example', customer: VoucherifySdk::Customer.new}) # ClientEventsCreateRequestBody | Specify the details of the custom event.
+  client_events_create_request_body: VoucherifySdk::ClientEventsCreateRequestBody.new({customer: VoucherifySdk::Customer.new}) # ClientEventsCreateRequestBody | Specify the details of the custom event.
 }
 
 begin
@@ -285,7 +285,7 @@ end
 api_instance = VoucherifySdk::ClientSideApi.new
 origin = 'origin_example' # String | Indicates the origin (scheme, hostname, and port).
 opts = {
-  client_validations_validate_request_body: VoucherifySdk::ClientValidationsValidateRequestBody.new({redeemables: [VoucherifySdk::RedeemGiftCard.new({object: 'voucher', id: 'id_example'})]}) # ClientValidationsValidateRequestBody | 
+  client_validations_validate_request_body: VoucherifySdk::ClientValidationsValidateRequestBody.new # ClientValidationsValidateRequestBody | 
 }
 
 begin

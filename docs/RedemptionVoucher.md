@@ -13,11 +13,11 @@
 | **categories** | [**Array&lt;Category&gt;**](Category.md) | Contains details about the category. | [optional] |
 | **type** | **String** | Defines the type of the voucher.  | [optional] |
 | **discount** | [**Discount**](Discount.md) |  | [optional] |
-| **gift** | [**VoucherGift**](VoucherGift.md) |  | [optional] |
-| **loyalty_card** | [**VoucherLoyaltyCard**](VoucherLoyaltyCard.md) |  | [optional] |
+| **gift** | [**CampaignsVouchersCreateCombinedResponseBodyGift**](CampaignsVouchersCreateCombinedResponseBodyGift.md) |  | [optional] |
+| **loyalty_card** | [**CampaignsVouchersCreateCombinedResponseBodyLoyaltyCard**](CampaignsVouchersCreateCombinedResponseBodyLoyaltyCard.md) |  | [optional] |
 | **start_date** | **Time** | Activation timestamp defines when the code starts to be active in ISO 8601 format. Voucher is *inactive before* this date.  | [optional] |
 | **expiration_date** | **Time** | Expiration timestamp defines when the code expires in ISO 8601 format.  Voucher is *inactive after* this date. | [optional] |
-| **validity_timeframe** | [**VoucherValidityTimeframe**](VoucherValidityTimeframe.md) |  | [optional] |
+| **validity_timeframe** | [**CampaignsVouchersCreateCombinedResponseBodyValidityTimeframe**](CampaignsVouchersCreateCombinedResponseBodyValidityTimeframe.md) |  | [optional] |
 | **validity_day_of_week** | **Array&lt;Integer&gt;** | Integer array corresponding to the particular days of the week in which the voucher is valid.  - &#x60;0&#x60; Sunday - &#x60;1&#x60; Monday - &#x60;2&#x60; Tuesday - &#x60;3&#x60; Wednesday - &#x60;4&#x60; Thursday - &#x60;5&#x60; Friday - &#x60;6&#x60; Saturday | [optional] |
 | **validity_hours** | [**ValidityHours**](ValidityHours.md) |  | [optional] |
 | **active** | **Boolean** | A flag to toggle the voucher on or off. You can disable a voucher even though it&#39;s within the active period defined by the &#x60;start_date&#x60; and &#x60;expiration_date&#x60;.    - &#x60;true&#x60; indicates an *active* voucher - &#x60;false&#x60; indicates an *inactive* voucher | [optional] |
@@ -31,7 +31,7 @@
 | **referrer_id** | **String** | Unique identifier of the referring person. | [optional] |
 | **object** | **String** | The type of the object represented by JSON. Default is &#x60;voucher&#x60;. | [optional][default to &#39;voucher&#39;] |
 | **validation_rules_assignments** | [**ValidationRulesAssignmentsList**](ValidationRulesAssignmentsList.md) |  | [optional] |
-| **publish** | [**VoucherPublish**](VoucherPublish.md) |  | [optional] |
-| **redemption** | [**VoucherRedemption**](VoucherRedemption.md) |  | [optional] |
+| **publish** | [**CampaignsVouchersCreateCombinedResponseBodyPublish**](CampaignsVouchersCreateCombinedResponseBodyPublish.md) |  | [optional] |
+| **redemption** | [**CampaignsVouchersCreateCombinedResponseBodyRedemption**](CampaignsVouchersCreateCombinedResponseBodyRedemption.md) |  | [optional] |
 | **holder** | [**SimpleCustomer**](SimpleCustomer.md) |  | [optional] |
 
