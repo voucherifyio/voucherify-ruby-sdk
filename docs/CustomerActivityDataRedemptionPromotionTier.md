@@ -18,8 +18,8 @@
 | **active** | **Boolean** | A flag to toggle the promotion tier on or off. You can disable a promotion tier even though it&#39;s within the active period defined by the &#x60;start_date&#x60; and &#x60;expiration_date&#x60;.    - &#x60;true&#x60; indicates an *active* promotion tier - &#x60;false&#x60; indicates an *inactive* promotion tier | [optional] |
 | **start_date** | **Time** | Activation timestamp defines when the promotion tier starts to be active in ISO 8601 format. Promotion tier is *inactive before* this date.  | [optional] |
 | **expiration_date** | **Time** | Activation timestamp defines when the promotion tier expires in ISO 8601 format. Promotion tier is *inactive after* this date.  | [optional] |
-| **validity_timeframe** | [**CustomerActivityDataRedemptionPromotionTierValidityTimeframe**](CustomerActivityDataRedemptionPromotionTierValidityTimeframe.md) |  | [optional] |
-| **validity_day_of_week** | **Array&lt;Integer&gt;** | Integer array corresponding to the particular days of the week in which the promotion tier is valid.  - &#x60;0&#x60; Sunday - &#x60;1&#x60; Monday - &#x60;2&#x60; Tuesday - &#x60;3&#x60; Wednesday - &#x60;4&#x60; Thursday - &#x60;5&#x60; Friday - &#x60;6&#x60; Saturday | [optional] |
+| **validity_timeframe** | [**ValidityTimeframe**](ValidityTimeframe.md) |  | [optional] |
+| **validity_day_of_week** | **Array&lt;Integer&gt;** | Integer array corresponding to the particular days of the week in which the voucher is valid.  - &#x60;0&#x60; Sunday - &#x60;1&#x60; Monday - &#x60;2&#x60; Tuesday - &#x60;3&#x60; Wednesday - &#x60;4&#x60; Thursday - &#x60;5&#x60; Friday - &#x60;6&#x60; Saturday | [optional] |
 | **validity_hours** | [**ValidityHours**](ValidityHours.md) |  | [optional] |
 | **summary** | [**CustomerActivityDataRedemptionPromotionTierSummary**](CustomerActivityDataRedemptionPromotionTierSummary.md) |  | [optional] |
 | **object** | **String** | The type of the object represented by JSON. This object stores information about the promotion tier. | [optional][default to &#39;promotion_tier&#39;] |

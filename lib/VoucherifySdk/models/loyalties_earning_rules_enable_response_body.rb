@@ -46,7 +46,7 @@ module VoucherifySdk
 
     attr_accessor :validity_timeframe
 
-    # Integer array corresponding to the particular days of the week in which the earning rule is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
+    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
 
     attr_accessor :validity_hours
@@ -124,7 +124,7 @@ module VoucherifySdk
         :'automation_id' => :'String',
         :'start_date' => :'String',
         :'expiration_date' => :'String',
-        :'validity_timeframe' => :'EarningRuleBaseValidityTimeframe',
+        :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
         :'metadata' => :'Object',
@@ -146,8 +146,6 @@ module VoucherifySdk
         :'automation_id',
         :'start_date',
         :'expiration_date',
-        :'validity_timeframe',
-        :'validity_day_of_week',
         :'metadata',
         :'updated_at',
         :'active'

@@ -56,7 +56,7 @@ module VoucherifySdk
 
     attr_accessor :validity_timeframe
 
-    # Integer array corresponding to the particular days of the week in which the promotion tier is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
+    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
 
     attr_accessor :validity_hours
@@ -72,6 +72,28 @@ module VoucherifySdk
     attr_accessor :category_id
 
     attr_accessor :categories
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -123,7 +145,7 @@ module VoucherifySdk
         :'active' => :'Boolean',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',
-        :'validity_timeframe' => :'CustomerActivityDataRedemptionPromotionTierValidityTimeframe',
+        :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
         :'summary' => :'CustomerActivityDataRedemptionPromotionTierSummary',
@@ -151,8 +173,6 @@ module VoucherifySdk
         :'active',
         :'start_date',
         :'expiration_date',
-        :'validity_timeframe',
-        :'validity_day_of_week',
         :'summary',
         :'object',
         :'category_id',

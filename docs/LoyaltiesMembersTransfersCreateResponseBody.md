@@ -15,8 +15,8 @@
 | **loyalty_card** | [**LoyaltiesMembersTransfersCreateResponseBodyLoyaltyCard**](LoyaltiesMembersTransfersCreateResponseBodyLoyaltyCard.md) |  | [optional] |
 | **start_date** | **Time** | Activation timestamp defines when the code starts to be active in ISO 8601 format. Voucher is inactive before this date. | [optional] |
 | **expiration_date** | **Time** | Expiration timestamp defines when the code expires in ISO 8601 format. Voucher is inactive after this date. | [optional] |
-| **validity_timeframe** | [**LoyaltiesMembersTransfersCreateResponseBodyValidityTimeframe**](LoyaltiesMembersTransfersCreateResponseBodyValidityTimeframe.md) |  | [optional] |
-| **validity_day_of_week** | **Array&lt;Integer&gt;** | Integer array corresponding to the particular days of the week in which the voucher is valid.  - &#x60;0&#x60; Sunday - &#x60;1&#x60; Monday - &#x60;2&#x60; Tuesday - &#x60;3&#x60; Wednesday - &#x60;4&#x60; Thursday - &#x60;5&#x60; Friday - &#x60;6&#x60; Saturday | [optional] |
+| **validity_timeframe** | [**ValidityTimeframe**](ValidityTimeframe.md) |  |  |
+| **validity_day_of_week** | **Array&lt;Integer&gt;** | Integer array corresponding to the particular days of the week in which the voucher is valid.  - &#x60;0&#x60; Sunday - &#x60;1&#x60; Monday - &#x60;2&#x60; Tuesday - &#x60;3&#x60; Wednesday - &#x60;4&#x60; Thursday - &#x60;5&#x60; Friday - &#x60;6&#x60; Saturday |  |
 | **validity_hours** | [**ValidityHours**](ValidityHours.md) |  | [optional] |
 | **publish** | [**LoyaltiesMembersTransfersCreateResponseBodyPublish**](LoyaltiesMembersTransfersCreateResponseBodyPublish.md) |  | [optional] |
 | **redemption** | [**LoyaltiesMembersTransfersCreateResponseBodyRedemption**](LoyaltiesMembersTransfersCreateResponseBodyRedemption.md) |  | [optional] |

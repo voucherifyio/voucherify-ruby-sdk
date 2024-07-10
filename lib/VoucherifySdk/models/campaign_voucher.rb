@@ -102,7 +102,7 @@ module VoucherifySdk
         :'is_referral_code' => :'Boolean',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',
-        :'validity_timeframe' => :'CampaignBaseValidityTimeframe',
+        :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours'
       }
@@ -116,8 +116,6 @@ module VoucherifySdk
         :'is_referral_code',
         :'start_date',
         :'expiration_date',
-        :'validity_timeframe',
-        :'validity_day_of_week',
       ])
     end
 

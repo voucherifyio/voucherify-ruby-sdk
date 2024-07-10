@@ -14,19 +14,19 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Set recurrent time periods when the promotion tier is valid. For example, valid for 1 hour every other day.`start_date` **required** when including the `validity_timeframe`.
-  class PromotionTierValidityTimeframe
-    # Defines the intervening time between two time points in ISO 8601 format, expressed as a duration. For example, a promotion tier with an `interval` of `P2D` will be active every other day.
-    attr_accessor :interval
-
-    # Defines the amount of time the promotion tier will be active in ISO 8601 format. For example, a promotion tier with a `duration` of `P1D` will be valid for a duration of one day.
+  # Set recurrent time periods when the earning rule is valid. For example, valid for 1 hour every other day.`start_date` **required** when including the `validity_timeframe`.
+  class ValidityTimeframe
+    # Defines the amount of time an earning rule will be active in ISO 8601 format. For example, an earning rule with a `duration` of `PT1H` will be valid for a duration of one hour.
     attr_accessor :duration
+
+    # Defines the intervening time between two time points in ISO 8601 format, expressed as a duration. For example, an earning rule with an `interval` of `P2D` will be valid every other day.
+    attr_accessor :interval
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'interval' => :'interval',
-        :'duration' => :'duration'
+        :'duration' => :'duration',
+        :'interval' => :'interval'
       }
     end
 
@@ -38,16 +38,16 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'interval' => :'String',
-        :'duration' => :'String'
+        :'duration' => :'String',
+        :'interval' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'interval',
-        :'duration'
+        :'duration',
+        :'interval'
       ])
     end
 
@@ -55,23 +55,23 @@ module VoucherifySdk
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::PromotionTierValidityTimeframe` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ValidityTimeframe` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::PromotionTierValidityTimeframe`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ValidityTimeframe`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'interval')
-        self.interval = attributes[:'interval']
-      end
-
       if attributes.key?(:'duration')
         self.duration = attributes[:'duration']
+      end
+
+      if attributes.key?(:'interval')
+        self.interval = attributes[:'interval']
       end
     end
 
@@ -95,8 +95,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          interval == o.interval &&
-          duration == o.duration
+          duration == o.duration &&
+          interval == o.interval
     end
 
     # @see the `==` method
@@ -108,7 +108,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [interval, duration].hash
+      [duration, interval].hash
     end
 
     # Builds the object from hash

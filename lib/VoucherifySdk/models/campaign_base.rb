@@ -44,7 +44,7 @@ module VoucherifySdk
 
     attr_accessor :validity_timeframe
 
-    # Integer array corresponding to the particular days of the week in which the campaign is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
+    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
 
     attr_accessor :validity_hours
@@ -172,7 +172,7 @@ module VoucherifySdk
         :'auto_join' => :'Boolean',
         :'join_once' => :'Boolean',
         :'use_voucher_metadata_schema' => :'Boolean',
-        :'validity_timeframe' => :'CampaignBaseValidityTimeframe',
+        :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
         :'activity_duration_after_publishing' => :'String',
@@ -206,8 +206,6 @@ module VoucherifySdk
         :'auto_join',
         :'join_once',
         :'use_voucher_metadata_schema',
-        :'validity_timeframe',
-        :'validity_day_of_week',
         :'activity_duration_after_publishing',
         :'vouchers_count',
         :'start_date',

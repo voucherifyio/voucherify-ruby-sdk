@@ -151,7 +151,7 @@ module VoucherifySdk
         :'loyalty_card' => :'LoyaltiesMembersTransfersCreateResponseBodyLoyaltyCard',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',
-        :'validity_timeframe' => :'LoyaltiesMembersTransfersCreateResponseBodyValidityTimeframe',
+        :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
         :'publish' => :'LoyaltiesMembersTransfersCreateResponseBodyPublish',
@@ -181,8 +181,6 @@ module VoucherifySdk
         :'loyalty_card',
         :'start_date',
         :'expiration_date',
-        :'validity_timeframe',
-        :'validity_day_of_week',
         :'publish',
         :'redemption',
         :'active',
@@ -261,12 +259,16 @@ module VoucherifySdk
 
       if attributes.key?(:'validity_timeframe')
         self.validity_timeframe = attributes[:'validity_timeframe']
+      else
+        self.validity_timeframe = nil
       end
 
       if attributes.key?(:'validity_day_of_week')
         if (value = attributes[:'validity_day_of_week']).is_a?(Array)
           self.validity_day_of_week = value
         end
+      else
+        self.validity_day_of_week = nil
       end
 
       if attributes.key?(:'validity_hours')
@@ -319,6 +321,14 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @validity_timeframe.nil?
+        invalid_properties.push('invalid value for "validity_timeframe", validity_timeframe cannot be nil.')
+      end
+
+      if @validity_day_of_week.nil?
+        invalid_properties.push('invalid value for "validity_day_of_week", validity_day_of_week cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -328,6 +338,8 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["LOYALTY_CARD"])
       return false unless type_validator.valid?(@type)
+      return false if @validity_timeframe.nil?
+      return false if @validity_day_of_week.nil?
       true
     end
 
