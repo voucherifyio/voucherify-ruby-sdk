@@ -101,6 +101,8 @@ module VoucherifySdk
 
     attr_accessor :validation_rules_assignments
 
+    attr_accessor :access_settings_assignments
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -156,7 +158,8 @@ module VoucherifySdk
         :'referral_program' => :'referral_program',
         :'loyalty_tiers_expiration' => :'loyalty_tiers_expiration',
         :'promotion' => :'promotion',
-        :'validation_rules_assignments' => :'validation_rules_assignments'
+        :'validation_rules_assignments' => :'validation_rules_assignments',
+        :'access_settings_assignments' => :'access_settings_assignments'
       }
     end
 
@@ -198,7 +201,8 @@ module VoucherifySdk
         :'referral_program' => :'ReferralProgram',
         :'loyalty_tiers_expiration' => :'LoyaltyTiersExpirationAll',
         :'promotion' => :'PromotionTiersList',
-        :'validation_rules_assignments' => :'ValidationRulesAssignmentsList'
+        :'validation_rules_assignments' => :'ValidationRulesAssignmentsList',
+        :'access_settings_assignments' => :'AccessSettingsCampaignAssignmentsList'
       }
     end
 
@@ -384,6 +388,10 @@ module VoucherifySdk
       if attributes.key?(:'validation_rules_assignments')
         self.validation_rules_assignments = attributes[:'validation_rules_assignments']
       end
+
+      if attributes.key?(:'access_settings_assignments')
+        self.access_settings_assignments = attributes[:'access_settings_assignments']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -484,7 +492,8 @@ module VoucherifySdk
           referral_program == o.referral_program &&
           loyalty_tiers_expiration == o.loyalty_tiers_expiration &&
           promotion == o.promotion &&
-          validation_rules_assignments == o.validation_rules_assignments
+          validation_rules_assignments == o.validation_rules_assignments &&
+          access_settings_assignments == o.access_settings_assignments
     end
 
     # @see the `==` method
@@ -496,7 +505,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, description, campaign_type, type, voucher, auto_join, join_once, use_voucher_metadata_schema, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, vouchers_count, start_date, expiration_date, active, metadata, created_at, updated_at, category, creation_status, vouchers_generation_status, protected, category_id, categories, object, referral_program, loyalty_tiers_expiration, promotion, validation_rules_assignments].hash
+      [id, name, description, campaign_type, type, voucher, auto_join, join_once, use_voucher_metadata_schema, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, vouchers_count, start_date, expiration_date, active, metadata, created_at, updated_at, category, creation_status, vouchers_generation_status, protected, category_id, categories, object, referral_program, loyalty_tiers_expiration, promotion, validation_rules_assignments, access_settings_assignments].hash
     end
 
     # Builds the object from hash

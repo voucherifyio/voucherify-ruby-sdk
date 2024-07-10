@@ -287,9 +287,11 @@ Class | Method | HTTP request | Description
 
 ## 📚 Documentation for Models
 
+ - [VoucherifySdk::AccessSettingsCampaignAssignmentsList](docs/AccessSettingsCampaignAssignmentsList.md)
  - [VoucherifySdk::ApplicableTo](docs/ApplicableTo.md)
  - [VoucherifySdk::ApplicableToEffect](docs/ApplicableToEffect.md)
  - [VoucherifySdk::ApplicableToResultList](docs/ApplicableToResultList.md)
+ - [VoucherifySdk::AreaStoreCampaignAssignment](docs/AreaStoreCampaignAssignment.md)
  - [VoucherifySdk::AsyncActions](docs/AsyncActions.md)
  - [VoucherifySdk::BusValRuleAssignment](docs/BusValRuleAssignment.md)
  - [VoucherifySdk::Campaign](docs/Campaign.md)

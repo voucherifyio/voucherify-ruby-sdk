@@ -17,9 +17,11 @@ require 'VoucherifySdk/version'
 require 'VoucherifySdk/configuration'
 
 # Models
+require 'VoucherifySdk/models/access_settings_campaign_assignments_list'
 require 'VoucherifySdk/models/applicable_to'
 require 'VoucherifySdk/models/applicable_to_effect'
 require 'VoucherifySdk/models/applicable_to_result_list'
+require 'VoucherifySdk/models/area_store_campaign_assignment'
 require 'VoucherifySdk/models/async_actions'
 require 'VoucherifySdk/models/bus_val_rule_assignment'
 require 'VoucherifySdk/models/campaign'
