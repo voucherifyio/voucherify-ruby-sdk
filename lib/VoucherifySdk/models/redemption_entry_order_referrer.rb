@@ -14,22 +14,12 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Stores a summary of redemptions that have been applied to the voucher.
-  class LoyaltiesMembersTransfersCreateResponseBodyRedemption
-    # How many times a voucher can be redeemed. A null value means unlimited.
-    attr_accessor :quantity
+  class RedemptionEntryOrderReferrer
+    # A unique identifier of an existing customer.
+    attr_accessor :id
 
-    # Total loyalty points redeemed.
-    attr_accessor :redeemed_points
-
-    # How many times a voucher has already been redeemed.
-    attr_accessor :redeemed_quantity
-
-    # The type of the object represented is by default list. To get this list, you need to make a call to the endpoint returned in the url attribute.
+    # The type of the object represented by JSON.
     attr_accessor :object
-
-    # The endpoint where this list of redemptions can be accessed using a GET method. /v1/vouchers/{voucher_code}/redemptions
-    attr_accessor :url
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -56,11 +46,8 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'quantity' => :'quantity',
-        :'redeemed_points' => :'redeemed_points',
-        :'redeemed_quantity' => :'redeemed_quantity',
-        :'object' => :'object',
-        :'url' => :'url'
+        :'id' => :'id',
+        :'object' => :'object'
       }
     end
 
@@ -72,22 +59,16 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'quantity' => :'Integer',
-        :'redeemed_points' => :'Integer',
-        :'redeemed_quantity' => :'Integer',
-        :'object' => :'String',
-        :'url' => :'String'
+        :'id' => :'String',
+        :'object' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'quantity',
-        :'redeemed_points',
-        :'redeemed_quantity',
-        :'object',
-        :'url'
+        :'id',
+        :'object'
       ])
     end
 
@@ -95,37 +76,25 @@ module VoucherifySdk
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltiesMembersTransfersCreateResponseBodyRedemption` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::RedemptionEntryOrderReferrer` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltiesMembersTransfersCreateResponseBodyRedemption`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::RedemptionEntryOrderReferrer`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'quantity')
-        self.quantity = attributes[:'quantity']
-      end
-
-      if attributes.key?(:'redeemed_points')
-        self.redeemed_points = attributes[:'redeemed_points']
-      end
-
-      if attributes.key?(:'redeemed_quantity')
-        self.redeemed_quantity = attributes[:'redeemed_quantity']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.key?(:'object')
         self.object = attributes[:'object']
       else
-        self.object = 'list'
-      end
-
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+        self.object = 'customer'
       end
     end
 
@@ -141,7 +110,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      object_validator = EnumAttributeValidator.new('String', ["list"])
+      object_validator = EnumAttributeValidator.new('String', ["customer"])
       return false unless object_validator.valid?(@object)
       true
     end
@@ -149,7 +118,7 @@ module VoucherifySdk
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] object Object to be assigned
     def object=(object)
-      validator = EnumAttributeValidator.new('String', ["list"])
+      validator = EnumAttributeValidator.new('String', ["customer"])
       unless validator.valid?(object)
         fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
       end
@@ -161,11 +130,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          quantity == o.quantity &&
-          redeemed_points == o.redeemed_points &&
-          redeemed_quantity == o.redeemed_quantity &&
-          object == o.object &&
-          url == o.url
+          id == o.id &&
+          object == o.object
     end
 
     # @see the `==` method
@@ -177,7 +143,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quantity, redeemed_points, redeemed_quantity, object, url].hash
+      [id, object].hash
     end
 
     # Builds the object from hash

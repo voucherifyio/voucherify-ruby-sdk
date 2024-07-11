@@ -34,6 +34,7 @@ module VoucherifySdk
     # Total number of redemption objects.
     attr_accessor :total
 
+    # Contains the array of successful and failed redemption objects.
     attr_accessor :redemption_entries
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -63,7 +64,7 @@ module VoucherifySdk
         :'url' => :'String',
         :'data_ref' => :'String',
         :'total' => :'Integer',
-        :'redemption_entries' => :'Array<VouchersRedemptionGetResponseBodyRedemptionEntriesItem>'
+        :'redemption_entries' => :'Array<RedemptionEntry>'
       }
     end
 
@@ -76,7 +77,6 @@ module VoucherifySdk
         :'url',
         :'data_ref',
         :'total',
-        :'redemption_entries'
       ])
     end
 
@@ -127,6 +127,8 @@ module VoucherifySdk
         if (value = attributes[:'redemption_entries']).is_a?(Array)
           self.redemption_entries = value
         end
+      else
+        self.redemption_entries = nil
       end
     end
 
@@ -135,6 +137,10 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @redemption_entries.nil?
+        invalid_properties.push('invalid value for "redemption_entries", redemption_entries cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -142,6 +148,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @redemption_entries.nil?
       true
     end
 

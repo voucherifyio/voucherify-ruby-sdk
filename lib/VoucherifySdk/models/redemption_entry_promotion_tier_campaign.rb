@@ -14,22 +14,31 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Stores a summary of redemptions that have been applied to the voucher.
-  class LoyaltiesMembersTransfersCreateResponseBodyRedemption
-    # How many times a voucher can be redeemed. A null value means unlimited.
-    attr_accessor :quantity
+  class RedemptionEntryPromotionTierCampaign
+    # Unique campaign ID.
+    attr_accessor :id
 
-    # Total loyalty points redeemed.
-    attr_accessor :redeemed_points
+    # Activation timestamp defines when the campaign starts to be active in ISO 8601 format. Campaign is *inactive before* this date. 
+    attr_accessor :start_date
 
-    # How many times a voucher has already been redeemed.
-    attr_accessor :redeemed_quantity
+    # Expiration timestamp defines when the campaign expires in ISO 8601 format.  Campaign is *inactive after* this date.
+    attr_accessor :expiration_date
 
-    # The type of the object represented is by default list. To get this list, you need to make a call to the endpoint returned in the url attribute.
+    attr_accessor :validity_timeframe
+
+    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
+    attr_accessor :validity_day_of_week
+
+    attr_accessor :validity_hours
+
+    # A flag indicating whether the campaign is active or not active. A campaign can be disabled even though it's within the active period defined by the `start_date` and `expiration_date` using the <!-- [Disable Campaign](OpenAPI.json/paths/~1campaigns~1{campaignId}~1disable) -->[Disable Campaign](ref:disable-campaign) endpoint.    - `true` indicates an *active* campaign - `false` indicates an *inactive* campaign
+    attr_accessor :active
+
+    # Unique category ID that this campaign belongs to.
+    attr_accessor :category_id
+
+    # The type of the object represented by the campaign object. This object stores information about the campaign.
     attr_accessor :object
-
-    # The endpoint where this list of redemptions can be accessed using a GET method. /v1/vouchers/{voucher_code}/redemptions
-    attr_accessor :url
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -56,11 +65,15 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'quantity' => :'quantity',
-        :'redeemed_points' => :'redeemed_points',
-        :'redeemed_quantity' => :'redeemed_quantity',
-        :'object' => :'object',
-        :'url' => :'url'
+        :'id' => :'id',
+        :'start_date' => :'start_date',
+        :'expiration_date' => :'expiration_date',
+        :'validity_timeframe' => :'validity_timeframe',
+        :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours',
+        :'active' => :'active',
+        :'category_id' => :'category_id',
+        :'object' => :'object'
       }
     end
 
@@ -72,22 +85,27 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'quantity' => :'Integer',
-        :'redeemed_points' => :'Integer',
-        :'redeemed_quantity' => :'Integer',
-        :'object' => :'String',
-        :'url' => :'String'
+        :'id' => :'String',
+        :'start_date' => :'Time',
+        :'expiration_date' => :'Time',
+        :'validity_timeframe' => :'ValidityTimeframe',
+        :'validity_day_of_week' => :'Array<Integer>',
+        :'validity_hours' => :'ValidityHours',
+        :'active' => :'Boolean',
+        :'category_id' => :'String',
+        :'object' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'quantity',
-        :'redeemed_points',
-        :'redeemed_quantity',
-        :'object',
-        :'url'
+        :'id',
+        :'start_date',
+        :'expiration_date',
+        :'active',
+        :'category_id',
+        :'object'
       ])
     end
 
@@ -95,37 +113,55 @@ module VoucherifySdk
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltiesMembersTransfersCreateResponseBodyRedemption` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::RedemptionEntryPromotionTierCampaign` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltiesMembersTransfersCreateResponseBodyRedemption`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::RedemptionEntryPromotionTierCampaign`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'quantity')
-        self.quantity = attributes[:'quantity']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'redeemed_points')
-        self.redeemed_points = attributes[:'redeemed_points']
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
       end
 
-      if attributes.key?(:'redeemed_quantity')
-        self.redeemed_quantity = attributes[:'redeemed_quantity']
+      if attributes.key?(:'expiration_date')
+        self.expiration_date = attributes[:'expiration_date']
+      end
+
+      if attributes.key?(:'validity_timeframe')
+        self.validity_timeframe = attributes[:'validity_timeframe']
+      end
+
+      if attributes.key?(:'validity_day_of_week')
+        if (value = attributes[:'validity_day_of_week']).is_a?(Array)
+          self.validity_day_of_week = value
+        end
+      end
+
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
+      end
+
+      if attributes.key?(:'active')
+        self.active = attributes[:'active']
+      end
+
+      if attributes.key?(:'category_id')
+        self.category_id = attributes[:'category_id']
       end
 
       if attributes.key?(:'object')
         self.object = attributes[:'object']
       else
-        self.object = 'list'
-      end
-
-      if attributes.key?(:'url')
-        self.url = attributes[:'url']
+        self.object = 'campaign'
       end
     end
 
@@ -141,19 +177,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      object_validator = EnumAttributeValidator.new('String', ["list"])
-      return false unless object_validator.valid?(@object)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["list"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
     end
 
     # Checks equality by comparing each attribute.
@@ -161,11 +185,15 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          quantity == o.quantity &&
-          redeemed_points == o.redeemed_points &&
-          redeemed_quantity == o.redeemed_quantity &&
-          object == o.object &&
-          url == o.url
+          id == o.id &&
+          start_date == o.start_date &&
+          expiration_date == o.expiration_date &&
+          validity_timeframe == o.validity_timeframe &&
+          validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours &&
+          active == o.active &&
+          category_id == o.category_id &&
+          object == o.object
     end
 
     # @see the `==` method
@@ -177,7 +205,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quantity, redeemed_points, redeemed_quantity, object, url].hash
+      [id, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, active, category_id, object].hash
     end
 
     # Builds the object from hash

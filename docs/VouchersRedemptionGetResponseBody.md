@@ -10,5 +10,5 @@
 | **url** | **String** | URL | [optional] |
 | **data_ref** | **String** | Identifies the name of the attribute that contains the array of &#x60;redemption_entries&#x60;. | [optional][default to &#39;redemption_entries&#39;] |
 | **total** | **Integer** | Total number of redemption objects. | [optional] |
-| **redemption_entries** | [**Array&lt;VouchersRedemptionGetResponseBodyRedemptionEntriesItem&gt;**](VouchersRedemptionGetResponseBodyRedemptionEntriesItem.md) |  | [optional] |
+| **redemption_entries** | [**Array&lt;RedemptionEntry&gt;**](RedemptionEntry.md) | Contains the array of successful and failed redemption objects. |  |
 
