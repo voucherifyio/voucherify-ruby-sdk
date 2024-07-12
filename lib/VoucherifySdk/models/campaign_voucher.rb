@@ -98,7 +98,7 @@ module VoucherifySdk
         :'gift' => :'Gift',
         :'loyalty_card' => :'CampaignLoyaltyCard',
         :'redemption' => :'CampaignVoucherRedemption',
-        :'code_config' => :'CodeConfigRequiredLengthCharsetPattern',
+        :'code_config' => :'CodeConfig',
         :'is_referral_code' => :'Boolean',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',

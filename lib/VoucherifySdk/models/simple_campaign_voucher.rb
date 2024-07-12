@@ -76,7 +76,7 @@ module VoucherifySdk
         :'gift' => :'Gift',
         :'loyalty_card' => :'CampaignLoyaltyCard',
         :'redemption' => :'SimpleVoucherRedemption',
-        :'code_config' => :'CodeConfigRequiredLengthCharsetPattern'
+        :'code_config' => :'CodeConfig'
       }
     end
 

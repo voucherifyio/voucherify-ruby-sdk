@@ -345,7 +345,6 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ClientValidationsValidateRequestBodyAllOfOptions](docs/ClientValidationsValidateRequestBodyAllOfOptions.md)
  - [VoucherifySdk::ClientValidationsValidateResponseBody](docs/ClientValidationsValidateResponseBody.md)
  - [VoucherifySdk::CodeConfig](docs/CodeConfig.md)
- - [VoucherifySdk::CodeConfigRequiredLengthCharsetPattern](docs/CodeConfigRequiredLengthCharsetPattern.md)
  - [VoucherifySdk::CreatePublicationCampaign](docs/CreatePublicationCampaign.md)
  - [VoucherifySdk::CustomEvent](docs/CustomEvent.md)
  - [VoucherifySdk::Customer](docs/Customer.md)

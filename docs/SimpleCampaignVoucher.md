@@ -9,5 +9,5 @@
 | **gift** | [**Gift**](Gift.md) |  | [optional] |
 | **loyalty_card** | [**CampaignLoyaltyCard**](CampaignLoyaltyCard.md) |  | [optional] |
 | **redemption** | [**SimpleVoucherRedemption**](SimpleVoucherRedemption.md) |  | [optional] |
-| **code_config** | [**CodeConfigRequiredLengthCharsetPattern**](CodeConfigRequiredLengthCharsetPattern.md) |  |  |
+| **code_config** | [**CodeConfig**](CodeConfig.md) |  |  |
 
