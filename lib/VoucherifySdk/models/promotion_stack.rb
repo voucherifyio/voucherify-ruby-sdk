@@ -23,16 +23,16 @@ module VoucherifySdk
     # Unique promotion stack ID.
     attr_accessor :id
 
-    # Timestamp representing the date and time when the promotion stack was created in ISO 8601 format.
+    # Timestamp representing the date and time when the promotion stack was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the promotion stack was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the promotion stack was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     # Promotion stack's parent campaign's unique ID.
     attr_accessor :campaign_id
 
-    # The type of object represented by JSON. 
+    # The type of the object represented by JSON. 
     attr_accessor :object
 
     # Promotion stack category ID.
@@ -101,7 +101,15 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'tiers',
+        :'id',
+        :'created_at',
+        :'updated_at',
+        :'campaign_id',
+        :'object',
         :'category_id',
+        :'categories'
       ])
     end
 
@@ -129,26 +137,18 @@ module VoucherifySdk
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'tiers')
         self.tiers = attributes[:'tiers']
-      else
-        self.tiers = nil
       end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'updated_at')
@@ -157,8 +157,6 @@ module VoucherifySdk
 
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
-      else
-        self.campaign_id = nil
       end
 
       if attributes.key?(:'object')
@@ -169,16 +167,12 @@ module VoucherifySdk
 
       if attributes.key?(:'category_id')
         self.category_id = attributes[:'category_id']
-      else
-        self.category_id = nil
       end
 
       if attributes.key?(:'categories')
         if (value = attributes[:'categories']).is_a?(Array)
           self.categories = value
         end
-      else
-        self.categories = nil
       end
     end
 
@@ -187,34 +181,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @tiers.nil?
-        invalid_properties.push('invalid value for "tiers", tiers cannot be nil.')
-      end
-
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @categories.nil?
-        invalid_properties.push('invalid value for "categories", categories cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -222,15 +188,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @name.nil?
-      return false if @tiers.nil?
-      return false if @id.nil?
-      return false if @created_at.nil?
-      return false if @campaign_id.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["promotion_stack"])
       return false unless object_validator.valid?(@object)
-      return false if @categories.nil?
       true
     end
 

@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Schema model for **GET** `/campaigns`.
   class CampaignsListResponseBody
-    # The type of object represented by JSON. This object stores information about campaigns in a dictionary.
+    # The type of the object represented by JSON. This object stores information about campaigns in a dictionary.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of campaign objects.
@@ -56,6 +56,10 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'data_ref',
+        :'campaigns',
+        :'total'
       ])
     end
 

@@ -22,6 +22,8 @@ module VoucherifySdk
 
     attr_accessor :campaign_id
 
+    attr_accessor :campaign_type
+
     attr_accessor :resource_id
 
     attr_accessor :resource_type
@@ -58,6 +60,7 @@ module VoucherifySdk
         :'junction' => :'junction',
         :'category_id' => :'category_id',
         :'campaign_id' => :'campaign_id',
+        :'campaign_type' => :'campaign_type',
         :'resource_id' => :'resource_id',
         :'resource_type' => :'resource_type',
         :'voucher_type' => :'voucher_type',
@@ -76,6 +79,7 @@ module VoucherifySdk
         :'junction' => :'Junction',
         :'category_id' => :'QualificationsFieldConditions',
         :'campaign_id' => :'QualificationsFieldConditions',
+        :'campaign_type' => :'QualificationsCampaignTypeConditions',
         :'resource_id' => :'QualificationsFieldConditions',
         :'resource_type' => :'QualificationsOptionFiltersResourceType',
         :'voucher_type' => :'QualificationsFieldConditions',
@@ -86,6 +90,8 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'campaign_type',
+        :'resource_type',
       ])
     end
 
@@ -114,6 +120,10 @@ module VoucherifySdk
 
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
+      end
+
+      if attributes.key?(:'campaign_type')
+        self.campaign_type = attributes[:'campaign_type']
       end
 
       if attributes.key?(:'resource_id')
@@ -156,6 +166,7 @@ module VoucherifySdk
           junction == o.junction &&
           category_id == o.category_id &&
           campaign_id == o.campaign_id &&
+          campaign_type == o.campaign_type &&
           resource_id == o.resource_id &&
           resource_type == o.resource_type &&
           voucher_type == o.voucher_type &&
@@ -171,7 +182,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [junction, category_id, campaign_id, resource_id, resource_type, voucher_type, code].hash
+      [junction, category_id, campaign_id, campaign_type, resource_id, resource_type, voucher_type, code].hash
     end
 
     # Builds the object from hash

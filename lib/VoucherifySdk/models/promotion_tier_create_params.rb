@@ -44,14 +44,38 @@ module VoucherifySdk
 
     attr_accessor :validity_timeframe
 
-    # Integer array corresponding to the particular days of the week in which the promotion tier is valid.  - `0`  Sunday   - `1`  Monday   - `2`  Tuesday   - `3`  Wednesday   - `4`  Thursday   - `5`  Friday   - `6`  Saturday  
+    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
+
+    attr_accessor :validity_hours
 
     # Assign category to the promotion tier.
     attr_accessor :category
 
     # Instead of using the category name, you can alternatively assign a new category to a promotion tier using a unique category ID, i.e. `cat_0c9da30e7116ba6bba`.
     attr_accessor :category_id
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -67,6 +91,7 @@ module VoucherifySdk
         :'expiration_date' => :'expiration_date',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours',
         :'category' => :'category',
         :'category_id' => :'category_id'
       }
@@ -89,8 +114,9 @@ module VoucherifySdk
         :'hierarchy' => :'Integer',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',
-        :'validity_timeframe' => :'PromotionTierValidityTimeframe',
+        :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
+        :'validity_hours' => :'ValidityHours',
         :'category' => :'String',
         :'category_id' => :'String'
       }
@@ -99,6 +125,17 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'banner',
+        :'action',
+        :'metadata',
+        :'validation_rules',
+        :'active',
+        :'hierarchy',
+        :'start_date',
+        :'expiration_date',
+        :'category',
+        :'category_id'
       ])
     end
 
@@ -119,8 +156,6 @@ module VoucherifySdk
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'banner')
@@ -167,6 +202,10 @@ module VoucherifySdk
         end
       end
 
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
+      end
+
       if attributes.key?(:'category')
         self.category = attributes[:'category']
       end
@@ -181,10 +220,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -192,7 +227,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @name.nil?
       true
     end
 
@@ -212,6 +246,7 @@ module VoucherifySdk
           expiration_date == o.expiration_date &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours &&
           category == o.category &&
           category_id == o.category_id
     end
@@ -225,7 +260,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, banner, action, metadata, validation_rules, active, hierarchy, start_date, expiration_date, validity_timeframe, validity_day_of_week, category, category_id].hash
+      [name, banner, action, metadata, validation_rules, active, hierarchy, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, category, category_id].hash
     end
 
     # Builds the object from hash

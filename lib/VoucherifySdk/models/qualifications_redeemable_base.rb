@@ -22,7 +22,7 @@ module VoucherifySdk
     # Object type of the redeemable.
     attr_accessor :object
 
-    # Timestamp representing the date and time when the object was created in ISO 8601 format.
+    # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     attr_accessor :result
@@ -128,6 +128,16 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'object',
+        :'created_at',
+        :'validation_rule_id',
+        :'metadata',
+        :'categories',
+        :'banner',
+        :'name',
+        :'campaign_name',
+        :'campaign_id',
       ])
     end
 

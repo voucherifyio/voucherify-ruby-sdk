@@ -82,7 +82,11 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'limit',
         :'starting_after',
+        :'filters',
+        :'expand',
+        :'sorting_rule'
       ])
     end
 
@@ -149,11 +153,7 @@ module VoucherifySdk
     # Custom attribute writer method with validation
     # @param [Object] limit Value to be assigned
     def limit=(limit)
-      if limit.nil?
-        fail ArgumentError, 'limit cannot be nil'
-      end
-
-      if limit > 100
+      if !limit.nil? && limit > 100
         fail ArgumentError, 'invalid value for "limit", must be smaller than or equal to 100.'
       end
 

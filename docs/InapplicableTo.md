@@ -4,12 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **object** | **String** | This object stores information about the product collection. |  |
-| **id** | **String** | Unique product collection ID assigned by Voucherify. |  |
+| **object** | **String** | This object stores information about the product collection. | [optional] |
+| **id** | **String** | Unique product collection ID assigned by Voucherify. | [optional] |
 | **source_id** | **String** | The source ID from your inventory system. | [optional] |
 | **product_id** | **String** | Parent product&#39;s unique ID assigned by Voucherify. | [optional] |
 | **product_source_id** | **String** | Parent product&#39;s source ID from your inventory system. | [optional] |
-| **strict** | **Boolean** |  |  |
+| **strict** | **Boolean** |  | [optional] |
 | **price** | **Float** | New fixed price of an item. Value is multiplied by 100 to precisely represent 2 decimal places. For example, a $10 price is written as 1000. In case of the fixed price being calculated by the formula, i.e. the price_formula parameter is present in the fixed price definition, this value becomes the fallback value. Such that in a case where the formula cannot be calculated due to missing metadata, for example, this value will be used as the fixed price. | [optional] |
 | **price_formula** | **Float** | Formula used to calculate the discounted price of an item. | [optional] |
 | **effect** | [**ApplicableToEffect**](ApplicableToEffect.md) |  |  |

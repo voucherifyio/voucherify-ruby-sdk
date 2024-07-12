@@ -1,59 +1,16 @@
 # VoucherifySdk::Export
 
-## Class instance methods
+## Properties
 
-### `openapi_one_of`
-
-Returns the list of classes defined in oneOf.
-
-#### Example
-
-```ruby
-require 'VoucherifySdk'
-
-VoucherifySdk::Export.openapi_one_of
-# =>
-# [
-#   :'ExportCustomer',
-#   :'ExportOrder',
-#   :'ExportPointsExpiration',
-#   :'ExportPublication',
-#   :'ExportRedemption',
-#   :'ExportVoucher',
-#   :'ExportVoucherTransactions'
-# ]
-```
-
-### build
-
-Find the appropriate object from the `openapi_one_of` list and casts the data into it.
-
-#### Example
-
-```ruby
-require 'VoucherifySdk'
-
-VoucherifySdk::Export.build(data)
-# => #<ExportCustomer:0x00007fdd4aab02a0>
-
-VoucherifySdk::Export.build(data_that_doesnt_match)
-# => nil
-```
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| **data** | **Mixed** | data to be matched against the list of oneOf items |
-
-#### Return type
-
-- `ExportCustomer`
-- `ExportOrder`
-- `ExportPointsExpiration`
-- `ExportPublication`
-- `ExportRedemption`
-- `ExportVoucher`
-- `ExportVoucherTransactions`
-- `nil` (if no type matches)
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | Unique export ID. | [optional] |
+| **object** | **String** | The type of object being represented. This object stores information about the export. | [optional][default to &#39;export&#39;] |
+| **created_at** | **Time** | Timestamp representing the date and time when the export was scheduled in ISO 8601 format. | [optional] |
+| **status** | **String** | Status of the export. Informs you whether the export has already been completed, i.e. indicates whether the file containing the exported data has been generated. | [optional] |
+| **channel** | **String** | The channel through which the export was triggered. | [optional] |
+| **result** | [**ExportResult**](ExportResult.md) |  | [optional] |
+| **user_id** | **String** | Identifies the specific user who initiated the export through the Voucherify Dashboard; returned when the channel value is WEBSITE. | [optional] |
+| **exported_object** | **String** |  | [optional] |
+| **parameters** | [**ExportParameters**](ExportParameters.md) |  | [optional] |
 

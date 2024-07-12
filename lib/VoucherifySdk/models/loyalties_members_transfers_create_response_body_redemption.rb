@@ -25,9 +25,7 @@ module VoucherifySdk
     # How many times a voucher has already been redeemed.
     attr_accessor :redeemed_quantity
 
-    attr_accessor :redemption_entries
-
-    # The type of object represented is by default list. To get this list, you need to make a call to the endpoint returned in the url attribute.
+    # The type of the object represented is by default list. To get this list, you need to make a call to the endpoint returned in the url attribute.
     attr_accessor :object
 
     # The endpoint where this list of redemptions can be accessed using a GET method. /v1/vouchers/{voucher_code}/redemptions
@@ -61,7 +59,6 @@ module VoucherifySdk
         :'quantity' => :'quantity',
         :'redeemed_points' => :'redeemed_points',
         :'redeemed_quantity' => :'redeemed_quantity',
-        :'redemption_entries' => :'redemption_entries',
         :'object' => :'object',
         :'url' => :'url'
       }
@@ -78,7 +75,6 @@ module VoucherifySdk
         :'quantity' => :'Integer',
         :'redeemed_points' => :'Integer',
         :'redeemed_quantity' => :'Integer',
-        :'redemption_entries' => :'Array<String>',
         :'object' => :'String',
         :'url' => :'String'
       }
@@ -88,6 +84,10 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'quantity',
+        :'redeemed_points',
+        :'redeemed_quantity',
+        :'object',
+        :'url'
       ])
     end
 
@@ -108,8 +108,6 @@ module VoucherifySdk
 
       if attributes.key?(:'quantity')
         self.quantity = attributes[:'quantity']
-      else
-        self.quantity = nil
       end
 
       if attributes.key?(:'redeemed_points')
@@ -118,12 +116,6 @@ module VoucherifySdk
 
       if attributes.key?(:'redeemed_quantity')
         self.redeemed_quantity = attributes[:'redeemed_quantity']
-      end
-
-      if attributes.key?(:'redemption_entries')
-        if (value = attributes[:'redemption_entries']).is_a?(Array)
-          self.redemption_entries = value
-        end
       end
 
       if attributes.key?(:'object')
@@ -172,7 +164,6 @@ module VoucherifySdk
           quantity == o.quantity &&
           redeemed_points == o.redeemed_points &&
           redeemed_quantity == o.redeemed_quantity &&
-          redemption_entries == o.redemption_entries &&
           object == o.object &&
           url == o.url
     end
@@ -186,7 +177,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quantity, redeemed_points, redeemed_quantity, redemption_entries, object, url].hash
+      [quantity, redeemed_points, redeemed_quantity, object, url].hash
     end
 
     # Builds the object from hash

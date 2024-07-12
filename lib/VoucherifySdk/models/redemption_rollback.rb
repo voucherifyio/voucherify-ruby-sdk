@@ -16,13 +16,13 @@ require 'time'
 module VoucherifySdk
   # This is an object representing a redemption rollback.
   class RedemptionRollback
-    # Unique redemption ID.
+    # Unique identifier of the redemption rollback.
     attr_accessor :id
 
-    # The type of object represented by the JSON
+    # The type of the object represented by the JSON
     attr_accessor :object
 
-    # Timestamp representing the date and time when the object was created in ISO 8601 format.
+    # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :date
 
     # Unique customer ID of the redeeming customer.
@@ -34,7 +34,7 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the redemption.
     attr_accessor :metadata
 
-    # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.
+    # For gift cards, this represents the number of the credits restored to the card in the rolledback redemption. The number is a negative integer in the smallest currency unit, e.g. -100 cents for $1.00 added back to the card. For loyalty cards, this represents the number of loyalty points restored to the card in the rolledback redemption. The number is a negative integer.
     attr_accessor :amount
 
     # Unique redemption ID of the parent redemption.
@@ -66,7 +66,7 @@ module VoucherifySdk
     # Defines the related object.
     attr_accessor :related_object_type
 
-    # Unique related object ID assigned by Voucherify, i.e. v_lfZi4rcEGe0sN9gmnj40bzwK2FH6QUno for a voucher.
+    # Unique identifier of the related object. It is assigned by Voucherify, i.e. `v_lfZi4rcEGe0sN9gmnj40bzwK2FH6QUno` for a voucher.
     attr_accessor :related_object_id
 
     attr_accessor :voucher
@@ -154,27 +154,42 @@ module VoucherifySdk
         :'failure_code' => :'String',
         :'failure_message' => :'String',
         :'order' => :'OrderCalculatedNoCustomerData',
-        :'channel' => :'RedemptionChannel',
+        :'channel' => :'RedemptionRollbackChannel',
         :'customer' => :'SimpleCustomer',
         :'related_object_type' => :'String',
         :'related_object_id' => :'String',
         :'voucher' => :'Voucher',
         :'promotion_tier' => :'PromotionTier',
         :'reward' => :'RedemptionRewardResult',
-        :'gift' => :'RedemptionGift',
-        :'loyalty_card' => :'RedemptionLoyaltyCard'
+        :'gift' => :'RedemptionRollbackGift',
+        :'loyalty_card' => :'RedemptionRollbackLoyaltyCard'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'object',
+        :'date',
         :'customer_id',
         :'tracking_id',
         :'metadata',
+        :'amount',
         :'redemption',
+        :'reason',
+        :'result',
+        :'status',
+        :'related_redemptions',
+        :'failure_code',
+        :'failure_message',
         :'order',
+        :'channel',
         :'customer',
+        :'related_object_type',
+        :'related_object_id',
+        :'gift',
+        :'loyalty_card'
       ])
     end
 
@@ -195,8 +210,6 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'object')
@@ -207,26 +220,18 @@ module VoucherifySdk
 
       if attributes.key?(:'date')
         self.date = attributes[:'date']
-      else
-        self.date = nil
       end
 
       if attributes.key?(:'customer_id')
         self.customer_id = attributes[:'customer_id']
-      else
-        self.customer_id = nil
       end
 
       if attributes.key?(:'tracking_id')
         self.tracking_id = attributes[:'tracking_id']
-      else
-        self.tracking_id = nil
       end
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      else
-        self.metadata = nil
       end
 
       if attributes.key?(:'amount')
@@ -235,8 +240,6 @@ module VoucherifySdk
 
       if attributes.key?(:'redemption')
         self.redemption = attributes[:'redemption']
-      else
-        self.redemption = nil
       end
 
       if attributes.key?(:'reason')
@@ -245,14 +248,10 @@ module VoucherifySdk
 
       if attributes.key?(:'result')
         self.result = attributes[:'result']
-      else
-        self.result = nil
       end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
-      else
-        self.status = nil
       end
 
       if attributes.key?(:'related_redemptions')
@@ -269,32 +268,22 @@ module VoucherifySdk
 
       if attributes.key?(:'order')
         self.order = attributes[:'order']
-      else
-        self.order = nil
       end
 
       if attributes.key?(:'channel')
         self.channel = attributes[:'channel']
-      else
-        self.channel = nil
       end
 
       if attributes.key?(:'customer')
         self.customer = attributes[:'customer']
-      else
-        self.customer = nil
       end
 
       if attributes.key?(:'related_object_type')
         self.related_object_type = attributes[:'related_object_type']
-      else
-        self.related_object_type = nil
       end
 
       if attributes.key?(:'related_object_id')
         self.related_object_id = attributes[:'related_object_id']
-      else
-        self.related_object_id = nil
       end
 
       if attributes.key?(:'voucher')
@@ -323,38 +312,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @date.nil?
-        invalid_properties.push('invalid value for "date", date cannot be nil.')
-      end
-
-      if @result.nil?
-        invalid_properties.push('invalid value for "result", result cannot be nil.')
-      end
-
-      if @status.nil?
-        invalid_properties.push('invalid value for "status", status cannot be nil.')
-      end
-
-      if @channel.nil?
-        invalid_properties.push('invalid value for "channel", channel cannot be nil.')
-      end
-
-      if @related_object_type.nil?
-        invalid_properties.push('invalid value for "related_object_type", related_object_type cannot be nil.')
-      end
-
-      if @related_object_id.nil?
-        invalid_properties.push('invalid value for "related_object_id", related_object_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -362,22 +319,14 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["redemption_rollback"])
       return false unless object_validator.valid?(@object)
-      return false if @date.nil?
-      return false if @result.nil?
       result_validator = EnumAttributeValidator.new('String', ["SUCCESS", "FAILURE"])
       return false unless result_validator.valid?(@result)
-      return false if @status.nil?
       status_validator = EnumAttributeValidator.new('String', ["SUCCEEDED", "FAILED"])
       return false unless status_validator.valid?(@status)
-      return false if @channel.nil?
-      return false if @related_object_type.nil?
       related_object_type_validator = EnumAttributeValidator.new('String', ["voucher", "promotion_tier", "redemption"])
       return false unless related_object_type_validator.valid?(@related_object_type)
-      return false if @related_object_id.nil?
       true
     end
 

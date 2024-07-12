@@ -342,8 +342,8 @@ end
 api_instance = VoucherifySdk::ValidationRulesApi.new
 validation_rule_id = 'validation_rule_id_example' # String | Unique validation rule ID.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   order: VoucherifySdk::ParameterOrderListValidationRuleAssignments::CREATED_AT # ParameterOrderListValidationRuleAssignments | This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
 }
 
@@ -361,8 +361,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **validation_rule_id** | **String** | Unique validation rule ID. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **order** | [**ParameterOrderListValidationRuleAssignments**](.md) | This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 
 ### Return type
@@ -407,8 +407,8 @@ end
 
 api_instance = VoucherifySdk::ValidationRulesApi.new
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   order: VoucherifySdk::ParameterOrderListValidationRules::CREATED_AT, # ParameterOrderListValidationRules | This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
   start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Timestamp representing the date and time which results must start on. Represented in ISO 8601 format.
   end_date: Time.parse('2013-10-20T19:20:30+01:00') # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -427,8 +427,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **order** | [**ParameterOrderListValidationRules**](.md) | This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 | **start_date** | **Time** | Timestamp representing the date and time which results must start on. Represented in ISO 8601 format. | [optional] |
 | **end_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
@@ -477,8 +477,8 @@ api_instance = VoucherifySdk::ValidationRulesApi.new
 opts = {
   related_object_id: 'related_object_id_example', # String | The resource ID to which the validation rule was assigned; this could be, for example, a resource ID of a voucher, campaign, earning rule, reward assignment, promotion tier, or distribution.
   rule: 'rule_example', # String | Validation rule ID.
-  page: 56, # Integer | Which page of results to return.
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
   order: 'order_example' # String | Sorts the results using one of the filtering options: -created_at, created_at, where the dash - preceding a sorting option means sorting in a descending order.
 }
 
@@ -497,8 +497,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **related_object_id** | **String** | The resource ID to which the validation rule was assigned; this could be, for example, a resource ID of a voucher, campaign, earning rule, reward assignment, promotion tier, or distribution. | [optional] |
 | **rule** | **String** | Validation rule ID. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
 | **order** | **String** | Sorts the results using one of the filtering options: -created_at, created_at, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 
 ### Return type

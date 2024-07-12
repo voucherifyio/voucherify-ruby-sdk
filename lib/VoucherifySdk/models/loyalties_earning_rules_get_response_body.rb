@@ -19,7 +19,7 @@ module VoucherifySdk
     # Assigned by the Voucherify API, identifies the earning rule object.
     attr_accessor :id
 
-    # Timestamp representing the date and time when the earning rule was created in ISO 8601 format.
+    # Timestamp representing the date and time when the earning rule was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     attr_accessor :loyalty
@@ -32,22 +32,24 @@ module VoucherifySdk
 
     attr_accessor :source
 
-    # The type of object represented by JSON. Default is earning_rule.
+    # The type of the object represented by JSON. Default is earning_rule.
     attr_accessor :object
 
     # For internal use by Voucherify.
     attr_accessor :automation_id
 
-    # Start date defines when the earning rule starts to be active. Activation timestamp in ISO 8601 format. Earning rule is inactive before this date. If you don't define the start date for an earning rule, it'll inherit the campaign start date by default.
+    # Start date defines when the earning rule starts to be active. Activation timestamp is presented in the ISO 8601 format. Earning rule is inactive before this date. If you don't define the start date for an earning rule, it'll inherit the campaign start date by default.
     attr_accessor :start_date
 
-    # Expiration date defines when the earning rule expires. Expiration timestamp in ISO 8601 format. Earning rule is inactive after this date.If you don't define the expiration date for an earning rule, it'll inherit the campaign expiration date by default.
+    # Expiration date defines when the earning rule expires. Expiration timestamp is presented in the ISO 8601 format. Earning rule is inactive after this date.If you don't define the expiration date for an earning rule, it'll inherit the campaign expiration date by default.
     attr_accessor :expiration_date
 
     attr_accessor :validity_timeframe
 
-    # Integer array corresponding to the particular days of the week in which the earning rule is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
+    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
+
+    attr_accessor :validity_hours
 
     # The metadata object stores all custom attributes assigned to the earning rule. A set of key/value pairs that you can attach to an earning rule object. It can be useful for storing additional information about the earning rule in a structured format.
     attr_accessor :metadata
@@ -99,6 +101,7 @@ module VoucherifySdk
         :'expiration_date' => :'expiration_date',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours',
         :'metadata' => :'metadata',
         :'validation_rule_id' => :'validation_rule_id',
         :'updated_at' => :'updated_at',
@@ -125,8 +128,9 @@ module VoucherifySdk
         :'automation_id' => :'String',
         :'start_date' => :'String',
         :'expiration_date' => :'String',
-        :'validity_timeframe' => :'EarningRuleBaseValidityTimeframe',
+        :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
+        :'validity_hours' => :'ValidityHours',
         :'metadata' => :'Object',
         :'validation_rule_id' => :'String',
         :'updated_at' => :'Time',
@@ -137,8 +141,20 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'created_at',
+        :'loyalty',
+        :'custom_event',
+        :'segment',
+        :'source',
+        :'object',
+        :'automation_id',
+        :'start_date',
+        :'expiration_date',
+        :'metadata',
         :'validation_rule_id',
         :'updated_at',
+        :'active'
       ])
     end
 
@@ -166,20 +182,14 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'loyalty')
         self.loyalty = attributes[:'loyalty']
-      else
-        self.loyalty = nil
       end
 
       if attributes.key?(:'event')
@@ -196,8 +206,6 @@ module VoucherifySdk
 
       if attributes.key?(:'source')
         self.source = attributes[:'source']
-      else
-        self.source = nil
       end
 
       if attributes.key?(:'object')
@@ -208,8 +216,6 @@ module VoucherifySdk
 
       if attributes.key?(:'automation_id')
         self.automation_id = attributes[:'automation_id']
-      else
-        self.automation_id = nil
       end
 
       if attributes.key?(:'start_date')
@@ -230,28 +236,24 @@ module VoucherifySdk
         end
       end
 
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
+      end
+
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      else
-        self.metadata = nil
       end
 
       if attributes.key?(:'validation_rule_id')
         self.validation_rule_id = attributes[:'validation_rule_id']
-      else
-        self.validation_rule_id = nil
       end
 
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
-      else
-        self.updated_at = nil
       end
 
       if attributes.key?(:'active')
         self.active = attributes[:'active']
-      else
-        self.active = nil
       end
     end
 
@@ -260,38 +262,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @loyalty.nil?
-        invalid_properties.push('invalid value for "loyalty", loyalty cannot be nil.')
-      end
-
-      if @source.nil?
-        invalid_properties.push('invalid value for "source", source cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @automation_id.nil?
-        invalid_properties.push('invalid value for "automation_id", automation_id cannot be nil.')
-      end
-
-      if @metadata.nil?
-        invalid_properties.push('invalid value for "metadata", metadata cannot be nil.')
-      end
-
-      if @active.nil?
-        invalid_properties.push('invalid value for "active", active cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -299,16 +269,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @created_at.nil?
-      return false if @loyalty.nil?
-      return false if @source.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["earning_rule"])
       return false unless object_validator.valid?(@object)
-      return false if @automation_id.nil?
-      return false if @metadata.nil?
-      return false if @active.nil?
       true
     end
 
@@ -340,6 +302,7 @@ module VoucherifySdk
           expiration_date == o.expiration_date &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours &&
           metadata == o.metadata &&
           validation_rule_id == o.validation_rule_id &&
           updated_at == o.updated_at &&
@@ -355,7 +318,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, loyalty, event, custom_event, segment, source, object, automation_id, start_date, expiration_date, validity_timeframe, validity_day_of_week, metadata, validation_rule_id, updated_at, active].hash
+      [id, created_at, loyalty, event, custom_event, segment, source, object, automation_id, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, metadata, validation_rule_id, updated_at, active].hash
     end
 
     # Builds the object from hash

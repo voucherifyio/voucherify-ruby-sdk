@@ -82,6 +82,10 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'points',
+        :'expiration_date',
+        :'reason',
+        :'source_id'
       ])
     end
 
@@ -102,8 +106,6 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
-      else
-        self.points = nil
       end
 
       if attributes.key?(:'expiration_type')
@@ -128,10 +130,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @points.nil?
-        invalid_properties.push('invalid value for "points", points cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -139,7 +137,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @points.nil?
       true
     end
 

@@ -38,7 +38,7 @@ end
 api_instance = VoucherifySdk::PublicationsApi.new
 opts = {
   join_once: true, # Boolean | Through this flag, you can control if a particular person gets only one and always the same code even if the app sends multiple publication requests. It means that if you have a referral program, a referrer is assigned only to one code if an integration sends publication requests more than once for the same customer.
-  publications_create_request_body: VoucherifySdk::CreatePublicationWithCampaign.new({customer: VoucherifySdk::Customer.new, campaign: VoucherifySdk::CreatePublicationCampaign.new({name: 'camp_dphuwqH7BOVkgh4JmpDtS32l'})}) # PublicationsCreateRequestBody | Specify the publication parameters.
+  publications_create_request_body: VoucherifySdk::PublicationsCreateRequestBody.new # PublicationsCreateRequestBody | Specify the publication parameters.
 }
 
 begin
@@ -102,7 +102,7 @@ customer = VoucherifySdk::Customer.new # Customer | Contains information about t
 opts = {
   join_once: true, # Boolean | Through this flag, you can control if a particular person gets only one and always the same code even if the app sends multiple publication requests. It means that if you have a referral program, a referrer is assigned only to one code if an integration sends publication requests more than once for the same customer.
   voucher: 'voucher_example', # String | Code of voucher being published.
-  campaign: VoucherifySdk::CreatePublicationCampaign.new({name: 'camp_dphuwqH7BOVkgh4JmpDtS32l'}), # CreatePublicationCampaign | Create publication with campaign.
+  campaign: VoucherifySdk::CreatePublicationCampaign.new, # CreatePublicationCampaign | Create publication with campaign.
   source_id: 'source_id_example', # String | The merchant’s publication ID if it is different from the Voucherify publication ID. Its an optional tracking identifier of a publication. It is really useful in case of an integration between multiple systems. It can be a publication ID from a CRM system, database or 3rd-party service. If source_id is provided only 1 voucher can be published per request.
   metadata: { key: 3.56} # Object | The metadata object stores all custom attributes assigned to the publication. A set of key/value pairs that you can attach to a publication object. It can be useful for storing additional information about the publication in a structured format.
 }
@@ -169,8 +169,8 @@ end
 
 api_instance = VoucherifySdk::PublicationsApi.new
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   order: VoucherifySdk::ParameterOrderListPublications::ID, # ParameterOrderListPublications | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
   campaign: 'campaign_example', # String | Filters by a given campaign name.
   customer: 'customer_example', # String | Filters by a unique customer ID.
@@ -195,8 +195,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **order** | [**ParameterOrderListPublications**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 | **campaign** | **String** | Filters by a given campaign name. | [optional] |
 | **customer** | **String** | Filters by a unique customer ID. | [optional] |

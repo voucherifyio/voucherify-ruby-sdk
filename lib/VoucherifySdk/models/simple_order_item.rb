@@ -15,7 +15,7 @@ require 'time'
 
 module VoucherifySdk
   class SimpleOrderItem
-    # The type of object represented by JSON. This object stores information about the `order_item`.
+    # The type of the object represented by JSON. This object stores information about the `order_item`.
     attr_accessor :object
 
     # The merchant’s product/SKU ID (if it is different from the Voucherify product/SKU ID). It is useful in the integration between multiple systems. It can be an ID from an eCommerce site, a database, or a third-party service.
@@ -112,6 +112,17 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'source_id',
+        :'related_object',
+        :'product_id',
+        :'sku_id',
+        :'quantity',
+        :'discount_quantity',
+        :'amount',
+        :'discount_amount',
+        :'applied_discount_amount',
+        :'price'
       ])
     end
 

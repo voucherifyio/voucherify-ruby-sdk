@@ -22,7 +22,7 @@ module VoucherifySdk
     # The number of times the voucher was redeemed successfully.
     attr_accessor :redeemed_quantity
 
-    # The type of object represented by JSON. This object stores information about redemptions in a dictionary.
+    # The type of the object represented by JSON. This object stores information about redemptions in a dictionary.
     attr_accessor :object
 
     # URL
@@ -64,7 +64,7 @@ module VoucherifySdk
         :'url' => :'String',
         :'data_ref' => :'String',
         :'total' => :'Integer',
-        :'redemption_entries' => :'Array<VouchersRedemptionGetResponseBodyRedemptionEntriesItem>'
+        :'redemption_entries' => :'Array<RedemptionEntry>'
       }
     end
 
@@ -72,6 +72,11 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'quantity',
+        :'redeemed_quantity',
+        :'object',
+        :'url',
+        :'data_ref',
+        :'total',
       ])
     end
 
@@ -92,14 +97,10 @@ module VoucherifySdk
 
       if attributes.key?(:'quantity')
         self.quantity = attributes[:'quantity']
-      else
-        self.quantity = nil
       end
 
       if attributes.key?(:'redeemed_quantity')
         self.redeemed_quantity = attributes[:'redeemed_quantity']
-      else
-        self.redeemed_quantity = nil
       end
 
       if attributes.key?(:'object')
@@ -110,8 +111,6 @@ module VoucherifySdk
 
       if attributes.key?(:'url')
         self.url = attributes[:'url']
-      else
-        self.url = nil
       end
 
       if attributes.key?(:'data_ref')
@@ -122,8 +121,6 @@ module VoucherifySdk
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
 
       if attributes.key?(:'redemption_entries')
@@ -140,26 +137,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @redeemed_quantity.nil?
-        invalid_properties.push('invalid value for "redeemed_quantity", redeemed_quantity cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
-      end
-
-      if @data_ref.nil?
-        invalid_properties.push('invalid value for "data_ref", data_ref cannot be nil.')
-      end
-
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
       if @redemption_entries.nil?
         invalid_properties.push('invalid value for "redemption_entries", redemption_entries cannot be nil.')
       end
@@ -171,11 +148,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @redeemed_quantity.nil?
-      return false if @object.nil?
-      return false if @url.nil?
-      return false if @data_ref.nil?
-      return false if @total.nil?
       return false if @redemption_entries.nil?
       true
     end

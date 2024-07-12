@@ -62,8 +62,6 @@ module VoucherifySdk
 
       if attributes.key?(:'quantity')
         self.quantity = attributes[:'quantity']
-      else
-        self.quantity = nil
       end
     end
 

@@ -4,6 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique metadata schema ID. |  |
-| **name** | **String** | Type of custom event. |  |
+| **id** | **String** | Unique metadata schema ID. | [optional] |
+| **name** | **String** | Type of custom event. | [optional] |
 

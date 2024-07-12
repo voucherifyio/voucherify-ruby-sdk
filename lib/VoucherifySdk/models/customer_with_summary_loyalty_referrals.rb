@@ -27,7 +27,7 @@ module VoucherifySdk
     # Customer's phone number. This parameter is mandatory when you try to send out codes to customers via an SMS channel.
     attr_accessor :phone
 
-    # *Deprecated* Customer's birthdate; format YYYY-MM-DD.
+    # `Deprecated`. ~~Customer's birthdate; format YYYY-MM-DD~~.
     attr_accessor :birthday
 
     # Customer's birthdate; format YYYY-MM-DD.
@@ -53,15 +53,15 @@ module VoucherifySdk
     # Object used to store system metadata information.
     attr_accessor :system_metadata
 
-    # Timestamp representing the date and time when the customer was created in ISO 8601 format.
+    # Timestamp representing the date and time when the customer was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the customer was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the customer was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     attr_accessor :assets
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     class EnumAttributeValidator
@@ -142,10 +142,24 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'description',
+        :'email',
+        :'phone',
+        :'birthday',
+        :'birthdate',
         :'address',
+        :'metadata',
+        :'id',
+        :'source_id',
         :'summary',
         :'loyalty',
         :'referrals',
+        :'system_metadata',
+        :'created_at',
+        :'updated_at',
+        :'assets',
+        :'object'
       ])
     end
 
@@ -213,20 +227,14 @@ module VoucherifySdk
 
       if attributes.key?(:'summary')
         self.summary = attributes[:'summary']
-      else
-        self.summary = nil
       end
 
       if attributes.key?(:'loyalty')
         self.loyalty = attributes[:'loyalty']
-      else
-        self.loyalty = nil
       end
 
       if attributes.key?(:'referrals')
         self.referrals = attributes[:'referrals']
-      else
-        self.referrals = nil
       end
 
       if attributes.key?(:'system_metadata')
@@ -257,10 +265,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -268,7 +272,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["customer"])
       return false unless object_validator.valid?(@object)
       true

@@ -20,9 +20,6 @@ module VoucherifySdk
 
     attr_accessor :order
 
-    # Defines which resources Voucherify will use. The `ADVANCED` mode is available after purchase only.
-    attr_accessor :mode
-
     # Is correspondent to Customer's source_id
     attr_accessor :tracking_id
 
@@ -61,7 +58,6 @@ module VoucherifySdk
       {
         :'customer' => :'customer',
         :'order' => :'order',
-        :'mode' => :'mode',
         :'tracking_id' => :'tracking_id',
         :'scenario' => :'scenario',
         :'options' => :'options',
@@ -79,7 +75,6 @@ module VoucherifySdk
       {
         :'customer' => :'Customer',
         :'order' => :'Order',
-        :'mode' => :'String',
         :'tracking_id' => :'String',
         :'scenario' => :'String',
         :'options' => :'QualificationsOption',
@@ -90,6 +85,9 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'tracking_id',
+        :'scenario',
+        :'metadata'
       ])
     end
 
@@ -114,10 +112,6 @@ module VoucherifySdk
 
       if attributes.key?(:'order')
         self.order = attributes[:'order']
-      end
-
-      if attributes.key?(:'mode')
-        self.mode = attributes[:'mode']
       end
 
       if attributes.key?(:'tracking_id')
@@ -149,21 +143,9 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      mode_validator = EnumAttributeValidator.new('String', ["BASIC", "ADVANCED"])
-      return false unless mode_validator.valid?(@mode)
       scenario_validator = EnumAttributeValidator.new('String', ["ALL", "CUSTOMER_WALLET", "AUDIENCE_ONLY", "PRODUCTS", "PRODUCTS_DISCOUNT", "PROMOTION_STACKS", "PRODUCTS_BY_CUSTOMER", "PRODUCTS_DISCOUNT_BY_CUSTOMER"])
       return false unless scenario_validator.valid?(@scenario)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mode Object to be assigned
-    def mode=(mode)
-      validator = EnumAttributeValidator.new('String', ["BASIC", "ADVANCED"])
-      unless validator.valid?(mode)
-        fail ArgumentError, "invalid value for \"mode\", must be one of #{validator.allowable_values}."
-      end
-      @mode = mode
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -183,7 +165,6 @@ module VoucherifySdk
       self.class == o.class &&
           customer == o.customer &&
           order == o.order &&
-          mode == o.mode &&
           tracking_id == o.tracking_id &&
           scenario == o.scenario &&
           options == o.options &&
@@ -199,7 +180,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer, order, mode, tracking_id, scenario, options, metadata].hash
+      [customer, order, tracking_id, scenario, options, metadata].hash
     end
 
     # Builds the object from hash

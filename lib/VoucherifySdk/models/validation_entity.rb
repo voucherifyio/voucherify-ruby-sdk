@@ -24,7 +24,7 @@ module VoucherifySdk
     # The validation status
     attr_accessor :status
 
-    # Timestamp representing the date and time when the validation was created in ISO 8601 format.
+    # Timestamp representing the date and time when the validation was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Unique customer ID of the customer making the purchase.
@@ -97,6 +97,14 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'session_id',
+        :'status',
+        :'created_at',
+        :'customer_id',
+        :'redeemables',
+        :'skipped_redeemables',
+        :'inapplicable_redeemables'
       ])
     end
 

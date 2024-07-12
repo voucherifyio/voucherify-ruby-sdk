@@ -148,7 +148,7 @@ end
 
 Delete Product
 
-This method deletes a product.
+Deletes a product and all related SKUs. This operation cannot be undone.  If the force parameter is set to false or not set at all, the product and all related SKUs will be moved to the bin.
 
 ### Examples
 
@@ -171,7 +171,7 @@ end
 api_instance = VoucherifySdk::ProductsApi.new
 product_id = 'product_id_example' # String | A Voucherify product ID or source ID.
 opts = {
-  force: true # Boolean | If this flag is set to true, the product will be removed permanently. Going forward, the user will be able to create another product with exactly the same source_id.
+  force: true # Boolean | If this flag is set to true, the product and all related SKUs will be removed permanently. If it is set to false or not set at all, the product and all related SKUs will be moved to the bin. Going forward, the user will be able to create another product with exactly the same source_id.
 }
 
 begin
@@ -187,7 +187,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **product_id** | **String** | A Voucherify product ID or source ID. |  |
-| **force** | **Boolean** | If this flag is set to true, the product will be removed permanently. Going forward, the user will be able to create another product with exactly the same source_id. | [optional] |
+| **force** | **Boolean** | If this flag is set to true, the product and all related SKUs will be removed permanently. If it is set to false or not set at all, the product and all related SKUs will be moved to the bin. Going forward, the user will be able to create another product with exactly the same source_id. | [optional] |
 
 ### Return type
 
@@ -209,7 +209,7 @@ nil (empty response body)
 
 Delete SKU
 
-This method deletes a product SKU.
+Deletes a product SKU. This operation cannot be undone.  If the force parameter is set to false or not set at all, the SKU will be moved to the bin.
 
 ### Examples
 
@@ -233,7 +233,7 @@ api_instance = VoucherifySdk::ProductsApi.new
 product_id = 'product_id_example' # String | A unique Voucherify product ID or product source ID.
 sku_id = 'sku_id_example' # String | A Voucherify SKU ID or SKU source ID.
 opts = {
-  force: true # Boolean | If this flag is set to true, the SKU will be removed permanently. Going forward, the user will be able to create another SKU with exactly the same source_id.
+  force: true # Boolean | If this flag is set to true, the SKU will be removed permanently. If it is set to false or not set at all, the SKU will be moved to the bin. Going forward, the user will be able to create another SKU with exactly the same source_id.
 }
 
 begin
@@ -250,7 +250,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **product_id** | **String** | A unique Voucherify product ID or product source ID. |  |
 | **sku_id** | **String** | A Voucherify SKU ID or SKU source ID. |  |
-| **force** | **Boolean** | If this flag is set to true, the SKU will be removed permanently. Going forward, the user will be able to create another SKU with exactly the same source_id. | [optional] |
+| **force** | **Boolean** | If this flag is set to true, the SKU will be removed permanently. If it is set to false or not set at all, the SKU will be moved to the bin. Going forward, the user will be able to create another SKU with exactly the same source_id. | [optional] |
 
 ### Return type
 
@@ -384,7 +384,7 @@ end
 
 ## import_products_using_csv
 
-> <ProductsImportCsvCreateResponseBody> import_products_using_csv(file)
+> <ProductsImportCsvCreateResponseBody> import_products_using_csv(opts)
 
 Import Products using CSV
 
@@ -409,11 +409,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::ProductsApi.new
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import Products using CSV
-  result = api_instance.import_products_using_csv(file)
+  result = api_instance.import_products_using_csv(opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling ProductsApi->import_products_using_csv: #{e}"
@@ -424,7 +426,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -442,7 +444,7 @@ end
 
 ## import_skus_using_csv
 
-> <SkusImportCsvCreateResponseBody> import_skus_using_csv(file)
+> <SkusImportCsvCreateResponseBody> import_skus_using_csv(opts)
 
 Import SKUs using CSV
 
@@ -467,11 +469,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::ProductsApi.new
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import SKUs using CSV
-  result = api_instance.import_skus_using_csv(file)
+  result = api_instance.import_skus_using_csv(opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling ProductsApi->import_skus_using_csv: #{e}"
@@ -482,7 +486,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -526,8 +530,8 @@ end
 
 api_instance = VoucherifySdk::ProductsApi.new
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   order: VoucherifySdk::ParameterOrder::CREATED_AT, # ParameterOrder | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
   start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
   end_date: Time.parse('2013-10-20T19:20:30+01:00') # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -546,8 +550,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **order** | [**ParameterOrder**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 | **start_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
 | **end_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
@@ -595,8 +599,8 @@ end
 api_instance = VoucherifySdk::ProductsApi.new
 product_id = 'product_id_example' # String | A Voucherify product ID or product source ID.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   order: VoucherifySdk::ParameterOrder::CREATED_AT, # ParameterOrder | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
   start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
   end_date: Time.parse('2013-10-20T19:20:30+01:00') # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -616,8 +620,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **product_id** | **String** | A Voucherify product ID or product source ID. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **order** | [**ParameterOrder**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 | **start_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
 | **end_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
@@ -726,7 +730,7 @@ end
 
 api_instance = VoucherifySdk::ProductsApi.new
 opts = {
-  products_update_in_bulk_request_body: [VoucherifySdk::ProductsUpdateInBulkRequestBody.new({source_id: 'test_prod_id_1'})] # Array<ProductsUpdateInBulkRequestBody> | Create an array of product objects, each with the parameters which you want to update.
+  products_update_in_bulk_request_body: [VoucherifySdk::ProductsUpdateInBulkRequestBody.new] # Array<ProductsUpdateInBulkRequestBody> | Create an array of product objects, each with the parameters which you want to update.
 }
 
 begin
@@ -786,7 +790,7 @@ end
 
 api_instance = VoucherifySdk::ProductsApi.new
 opts = {
-  products_metadata_update_in_bulk_request_body: VoucherifySdk::ProductsMetadataUpdateInBulkRequestBody.new({source_ids: ['source_ids_example'], metadata: 3.56}) # ProductsMetadataUpdateInBulkRequestBody | Specify the list of product source IDs and the metadata key value pairs to be udpated for these products.
+  products_metadata_update_in_bulk_request_body: VoucherifySdk::ProductsMetadataUpdateInBulkRequestBody.new # ProductsMetadataUpdateInBulkRequestBody | Specify the list of product source IDs and the metadata key value pairs to be udpated for these products.
 }
 
 begin

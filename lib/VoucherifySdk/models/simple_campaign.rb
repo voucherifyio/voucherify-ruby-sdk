@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for creating a discount voucher campaign using **POST** `/campaigns`.
+  # Simplified campaign data.
   class SimpleCampaign
-    # Campaign name.
+    # Campaign ID.
     attr_accessor :id
 
     # Campaign name.
@@ -37,19 +37,43 @@ module VoucherifySdk
 
     attr_accessor :referral_program
 
-    # Indicates whether customers will be able to auto-join a loyalty campaign if any earning rule is fulfilled.
+    # Indicates whether customers will be able to auto-join the campaign if any earning rule is fulfilled.
     attr_accessor :auto_join
 
     # If this value is set to `true`, customers will be able to join the campaign only once.
     attr_accessor :join_once
 
-    # Indicates whether campaign is active
+    # Indicates whether the campaign is active.
     attr_accessor :active
 
-    # Timestamp representing the date and time when the campaign was created in ISO 8601 format.
+    # Unique category name.
+    attr_accessor :category
+
+    # The unique category ID that this campaign belongs to.
+    attr_accessor :category_id
+
+    # Contains details about the category.
+    attr_accessor :categories
+
+    # A set of custom key/value pairs that you can attach to a campaign. The metadata object stores all custom attributes assigned to the campaign.
+    attr_accessor :metadata
+
+    # Activation timestamp defines when the campaign starts to be active in ISO 8601 format. Campaign is inactive *before* this date. 
+    attr_accessor :start_date
+
+    # Expiration timestamp defines when the campaign expires in ISO 8601 format.  Campaign is inactive *after* this date.
+    attr_accessor :expiration_date
+
+    # An optional field to keep extra textual information about the campaign such as a campaign description and details.
+    attr_accessor :description
+
+    # Timestamp representing the date and time when the campaign was created. Timestamp is presented in the ISO 8601 format.
     attr_accessor :created_at
 
-    # The type of object represented by JSON. This object stores information about the campaign.
+    # Timestamp representing the date and time when the campaign was updated in the ISO 8601 format.
+    attr_accessor :updated_at
+
+    # The type of the object represented by JSON. This object stores information about the campaign.
     attr_accessor :object
 
     class EnumAttributeValidator
@@ -88,7 +112,15 @@ module VoucherifySdk
         :'auto_join' => :'auto_join',
         :'join_once' => :'join_once',
         :'active' => :'active',
+        :'category' => :'category',
+        :'category_id' => :'category_id',
+        :'categories' => :'categories',
+        :'metadata' => :'metadata',
+        :'start_date' => :'start_date',
+        :'expiration_date' => :'expiration_date',
+        :'description' => :'description',
         :'created_at' => :'created_at',
+        :'updated_at' => :'updated_at',
         :'object' => :'object'
       }
     end
@@ -106,13 +138,21 @@ module VoucherifySdk
         :'campaign_type' => :'String',
         :'type' => :'String',
         :'is_referral_code' => :'Boolean',
-        :'voucher' => :'Object',
-        :'lucky_draw' => :'Object',
+        :'voucher' => :'SimpleCampaignVoucher',
+        :'lucky_draw' => :'SimpleCampaignLuckyDraw',
         :'referral_program' => :'ReferralProgram',
         :'auto_join' => :'Boolean',
         :'join_once' => :'Boolean',
         :'active' => :'Boolean',
+        :'category' => :'String',
+        :'category_id' => :'String',
+        :'categories' => :'Array<Category>',
+        :'metadata' => :'Object',
+        :'start_date' => :'Time',
+        :'expiration_date' => :'Time',
+        :'description' => :'String',
         :'created_at' => :'Time',
+        :'updated_at' => :'Time',
         :'object' => :'String'
       }
     end
@@ -120,6 +160,25 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'name',
+        :'campaign_type',
+        :'type',
+        :'is_referral_code',
+        :'lucky_draw',
+        :'auto_join',
+        :'join_once',
+        :'active',
+        :'category',
+        :'category_id',
+        :'categories',
+        :'metadata',
+        :'start_date',
+        :'expiration_date',
+        :'description',
+        :'created_at',
+        :'updated_at',
+        :'object'
       ])
     end
 
@@ -182,8 +241,42 @@ module VoucherifySdk
         self.active = attributes[:'active']
       end
 
+      if attributes.key?(:'category')
+        self.category = attributes[:'category']
+      end
+
+      if attributes.key?(:'category_id')
+        self.category_id = attributes[:'category_id']
+      end
+
+      if attributes.key?(:'categories')
+        if (value = attributes[:'categories']).is_a?(Array)
+          self.categories = value
+        end
+      end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
+      end
+
+      if attributes.key?(:'expiration_date')
+        self.expiration_date = attributes[:'expiration_date']
+      end
+
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
       end
 
       if attributes.key?(:'object')
@@ -248,7 +341,15 @@ module VoucherifySdk
           auto_join == o.auto_join &&
           join_once == o.join_once &&
           active == o.active &&
+          category == o.category &&
+          category_id == o.category_id &&
+          categories == o.categories &&
+          metadata == o.metadata &&
+          start_date == o.start_date &&
+          expiration_date == o.expiration_date &&
+          description == o.description &&
           created_at == o.created_at &&
+          updated_at == o.updated_at &&
           object == o.object
     end
 
@@ -261,7 +362,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, campaign_type, type, is_referral_code, voucher, lucky_draw, referral_program, auto_join, join_once, active, created_at, object].hash
+      [id, name, campaign_type, type, is_referral_code, voucher, lucky_draw, referral_program, auto_join, join_once, active, category, category_id, categories, metadata, start_date, expiration_date, description, created_at, updated_at, object].hash
     end
 
     # Builds the object from hash

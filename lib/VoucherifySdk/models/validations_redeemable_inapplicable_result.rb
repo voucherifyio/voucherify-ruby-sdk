@@ -14,13 +14,17 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Includes the error object with details about the reason why the redeemable is inapplicable
   class ValidationsRedeemableInapplicableResult
     attr_accessor :error
+
+    attr_accessor :details
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'error' => :'error'
+        :'error' => :'error',
+        :'details' => :'details'
       }
     end
 
@@ -32,13 +36,15 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'error' => :'Error'
+        :'error' => :'Error',
+        :'details' => :'ValidationsRedeemableInapplicableResultDetails'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'details'
       ])
     end
 
@@ -59,6 +65,10 @@ module VoucherifySdk
 
       if attributes.key?(:'error')
         self.error = attributes[:'error']
+      end
+
+      if attributes.key?(:'details')
+        self.details = attributes[:'details']
       end
     end
 
@@ -82,7 +92,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          error == o.error
+          error == o.error &&
+          details == o.details
     end
 
     # @see the `==` method
@@ -94,7 +105,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error].hash
+      [error, details].hash
     end
 
     # Builds the object from hash

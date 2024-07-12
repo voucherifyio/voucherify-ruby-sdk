@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Response body schema for **GET** `/promotions/{campaignId}/tiers`.
   class PromotionsTiersListResponseBody
-    # The type of object represented by JSON. This object stores information about promotion tiers in a dictionary.
+    # The type of the object represented by JSON. This object stores information about promotion tiers in a dictionary.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of promotion tier objects.
@@ -28,7 +28,7 @@ module VoucherifySdk
     # Total number of promotion tiers.
     attr_accessor :total
 
-    # As query results are always limited (by the limit parameter), the `has_more` flag indicates whether there are more records for given filter parameters. This let's you know if you are able to run another request (with a different page or a different start date filter) to get more records returned in the results.
+    # As query results are always limited (by the limit parameter), the `has_more` flag indicates if there are more records for given filter parameters. This lets you know if you can run another request (with a different page or a different start date filter) to get more records returned in the results.
     attr_accessor :has_more
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -61,6 +61,11 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'data_ref',
+        :'tiers',
+        :'total',
+        :'has_more'
       ])
     end
 

@@ -30,7 +30,7 @@ module VoucherifySdk
 
     attr_accessor :operation_type
 
-    # The type of object represented by JSON. Default is `balance`.
+    # The type of the object represented by JSON. Default is `balance`.
     attr_accessor :object
 
     attr_accessor :related_object
@@ -91,6 +91,13 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'amount',
+        :'total',
+        :'balance',
+        :'type',
+        :'operation_type',
+        :'object',
+        :'related_object'
       ])
     end
 
@@ -111,26 +118,18 @@ module VoucherifySdk
 
       if attributes.key?(:'amount')
         self.amount = attributes[:'amount']
-      else
-        self.amount = nil
       end
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
 
       if attributes.key?(:'balance')
         self.balance = attributes[:'balance']
-      else
-        self.balance = nil
       end
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = nil
       end
 
       if attributes.key?(:'operation_type')
@@ -147,8 +146,6 @@ module VoucherifySdk
 
       if attributes.key?(:'related_object')
         self.related_object = attributes[:'related_object']
-      else
-        self.related_object = nil
       end
     end
 
@@ -157,34 +154,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @amount.nil?
-        invalid_properties.push('invalid value for "amount", amount cannot be nil.')
-      end
-
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
-      if @balance.nil?
-        invalid_properties.push('invalid value for "balance", balance cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @operation_type.nil?
-        invalid_properties.push('invalid value for "operation_type", operation_type cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @related_object.nil?
-        invalid_properties.push('invalid value for "related_object", related_object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -192,19 +161,12 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @amount.nil?
-      return false if @total.nil?
-      return false if @balance.nil?
-      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["gift_voucher", "loyalty_card"])
       return false unless type_validator.valid?(@type)
-      return false if @operation_type.nil?
       operation_type_validator = EnumAttributeValidator.new('String', ["MANUAL"])
       return false unless operation_type_validator.valid?(@operation_type)
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["balance"])
       return false unless object_validator.valid?(@object)
-      return false if @related_object.nil?
       true
     end
 

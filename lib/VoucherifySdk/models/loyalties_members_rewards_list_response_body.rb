@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Response body schema for **GET** `/loyalties/members/{memberId}/rewards`
   class LoyaltiesMembersRewardsListResponseBody
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of loyalty reward objects.
@@ -78,6 +78,10 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'data_ref',
+        :'data',
+        :'total'
       ])
     end
 
@@ -112,14 +116,10 @@ module VoucherifySdk
         if (value = attributes[:'data']).is_a?(Array)
           self.data = value
         end
-      else
-        self.data = nil
       end
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
     end
 
@@ -128,23 +128,7 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @data_ref.nil?
-        invalid_properties.push('invalid value for "data_ref", data_ref cannot be nil.')
-      end
-
-      if @data.nil?
-        invalid_properties.push('invalid value for "data", data cannot be nil.')
-      end
-
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
-      if @total < 0
+      if !@total.nil? && @total < 0
         invalid_properties.push('invalid value for "total", must be greater than or equal to 0.')
       end
 
@@ -155,15 +139,11 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["list"])
       return false unless object_validator.valid?(@object)
-      return false if @data_ref.nil?
       data_ref_validator = EnumAttributeValidator.new('String', ["data"])
       return false unless data_ref_validator.valid?(@data_ref)
-      return false if @data.nil?
-      return false if @total.nil?
-      return false if @total < 0
+      return false if !@total.nil? && @total < 0
       true
     end
 
@@ -190,11 +170,7 @@ module VoucherifySdk
     # Custom attribute writer method with validation
     # @param [Object] total Value to be assigned
     def total=(total)
-      if total.nil?
-        fail ArgumentError, 'total cannot be nil'
-      end
-
-      if total < 0
+      if !total.nil? && total < 0
         fail ArgumentError, 'invalid value for "total", must be greater than or equal to 0.'
       end
 

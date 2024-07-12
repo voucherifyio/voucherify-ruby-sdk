@@ -20,10 +20,10 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Delete Voucher
-    # Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher.
+    # Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher. If the force parameter is set to false or not set at all, the voucher will be moved to the bin.
     # @param code [String] A unique **code** that identifies the voucher.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the voucher will be removed permanently. Going forward, the user will be able to create another voucher with exactly the same code.
+    # @option opts [Boolean] :force If this flag is set to true, the voucher will be removed permanently. If it is set to false or not set at all, the voucher will be moved to the bin. Going forward, the user will be able to create another voucher with exactly the same code.
     # @return [nil]
     def delete_voucher(code, opts = {})
       delete_voucher_with_http_info(code, opts)
@@ -31,10 +31,10 @@ module VoucherifySdk
     end
 
     # Delete Voucher
-    # Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher.
+    # Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher. If the force parameter is set to false or not set at all, the voucher will be moved to the bin.
     # @param code [String] A unique **code** that identifies the voucher.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the voucher will be removed permanently. Going forward, the user will be able to create another voucher with exactly the same code.
+    # @option opts [Boolean] :force If this flag is set to true, the voucher will be removed permanently. If it is set to false or not set at all, the voucher will be moved to the bin. Going forward, the user will be able to create another voucher with exactly the same code.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     private def delete_voucher_with_http_info(code, opts = {})
       if @api_client.config.debugging
@@ -344,26 +344,22 @@ module VoucherifySdk
 
     # Import Vouchers using CSV
     # Import standalone vouchers into the repository using a CSV file. The CSV file has to include headers in the first line. All properties listed in the file headers that cannot be mapped to standard voucher fields will be added to the metadata object.   You can find an example CSV file [here](https://support.voucherify.io/article/45-import-codes-and-share-them-digitally#coupons). ___  📘 Standard voucher fields mapping  - Go to the import vouchers endpoint to see all standard CSV fields description (body params section).  - Supported CSV file headers: Code,Voucher Type,Value,Discount Type,Category,Start Date,Expiration Date,Redemption Limit,Redeemed Quantity, Redeemed Amount,Active,Additional Info,Custom Metadata Property Name - **Start and expiration dates** need to be provided in compliance with the ISO 8601 norms. For example, 2020-03-11T09:00:00.000Z.       - YYYY-MM-DD     - YYYY-MM-DDTHH     - YYYY-MM-DDTHH:mm     - YYYY-MM-DDTHH:mm:ss     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ss.SSSZ  - Custom code attributes (not supported by-default) need to be added as code **metadata**.  - You **cannot import the same codes** to a single Voucherify Project.  📘 Categories  In the structure representing your data, you can define a category that the voucher belongs to. You can later use the category of a voucher to group and search by specific criteria in the Dashboard and using the List Vouchers endpoint. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
-    # @param file [File] File path.
     # @param [Hash] opts the optional parameters
+    # @option opts [File] :file File path.
     # @return [VouchersImportCsvCreateResponseBody]
-    def import_vouchers_using_csv(file, opts = {})
-      data, _status_code, _headers = import_vouchers_using_csv_with_http_info(file, opts)
+    def import_vouchers_using_csv(opts = {})
+      data, _status_code, _headers = import_vouchers_using_csv_with_http_info(opts)
       data
     end
 
     # Import Vouchers using CSV
     # Import standalone vouchers into the repository using a CSV file. The CSV file has to include headers in the first line. All properties listed in the file headers that cannot be mapped to standard voucher fields will be added to the metadata object.   You can find an example CSV file [here](https://support.voucherify.io/article/45-import-codes-and-share-them-digitally#coupons). ___  📘 Standard voucher fields mapping  - Go to the import vouchers endpoint to see all standard CSV fields description (body params section).  - Supported CSV file headers: Code,Voucher Type,Value,Discount Type,Category,Start Date,Expiration Date,Redemption Limit,Redeemed Quantity, Redeemed Amount,Active,Additional Info,Custom Metadata Property Name - **Start and expiration dates** need to be provided in compliance with the ISO 8601 norms. For example, 2020-03-11T09:00:00.000Z.       - YYYY-MM-DD     - YYYY-MM-DDTHH     - YYYY-MM-DDTHH:mm     - YYYY-MM-DDTHH:mm:ss     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ss.SSSZ  - Custom code attributes (not supported by-default) need to be added as code **metadata**.  - You **cannot import the same codes** to a single Voucherify Project.  📘 Categories  In the structure representing your data, you can define a category that the voucher belongs to. You can later use the category of a voucher to group and search by specific criteria in the Dashboard and using the List Vouchers endpoint. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
-    # @param file [File] File path.
     # @param [Hash] opts the optional parameters
+    # @option opts [File] :file File path.
     # @return [Array<(VouchersImportCsvCreateResponseBody, Integer, Hash)>] VouchersImportCsvCreateResponseBody data, response status code and response headers
-    private def import_vouchers_using_csv_with_http_info(file, opts = {})
+    private def import_vouchers_using_csv_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.import_vouchers_using_csv ...'
-      end
-      # verify the required parameter 'file' is set
-      if @api_client.config.client_side_validation && file.nil?
-        fail ArgumentError, "Missing the required parameter 'file' when calling VouchersApi.import_vouchers_using_csv"
       end
       # resource path
       local_var_path = '/v1/vouchers/importCSV'
@@ -383,7 +379,7 @@ module VoucherifySdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['file'] = file
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]
@@ -415,8 +411,8 @@ module VoucherifySdk
     # List transactions that are associated with credit movements on a gift card or loyalty card.
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [VouchersTransactionsListResponseBody]
     def list_voucher_transactions(code, opts = {})
       data, _status_code, _headers = list_voucher_transactions_with_http_info(code, opts)
@@ -427,8 +423,8 @@ module VoucherifySdk
     # List transactions that are associated with credit movements on a gift card or loyalty card.
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(VouchersTransactionsListResponseBody, Integer, Hash)>] VouchersTransactionsListResponseBody data, response status code and response headers
     private def list_voucher_transactions_with_http_info(code, opts = {})
       if @api_client.config.debugging
@@ -448,6 +444,10 @@ module VoucherifySdk
 
       if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
         fail ArgumentError, 'invalid value for "opts[:"page"]" when calling VouchersApi.list_voucher_transactions, must be smaller than or equal to 100.'
+      end
+
+      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
+        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling VouchersApi.list_voucher_transactions, must be greater than or equal to 1.'
       end
 
       # resource path

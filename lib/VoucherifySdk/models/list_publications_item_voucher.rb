@@ -18,7 +18,7 @@ module VoucherifySdk
     # Voucher code.
     attr_accessor :code
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # Campaign name
@@ -90,6 +90,11 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'code',
+        :'object',
+        :'campaign',
+        :'loyalty_card',
+        :'is_referral_code'
       ])
     end
 
@@ -110,8 +115,6 @@ module VoucherifySdk
 
       if attributes.key?(:'code')
         self.code = attributes[:'code']
-      else
-        self.code = nil
       end
 
       if attributes.key?(:'object')
@@ -122,8 +125,6 @@ module VoucherifySdk
 
       if attributes.key?(:'campaign')
         self.campaign = attributes[:'campaign']
-      else
-        self.campaign = nil
       end
 
       if attributes.key?(:'gift')
@@ -148,18 +149,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @code.nil?
-        invalid_properties.push('invalid value for "code", code cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @campaign.nil?
-        invalid_properties.push('invalid value for "campaign", campaign cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -167,11 +156,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @code.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["voucher"])
       return false unless object_validator.valid?(@object)
-      return false if @campaign.nil?
       true
     end
 

@@ -28,7 +28,7 @@ module VoucherifySdk
     # The type of voucher being modified.
     attr_accessor :type
 
-    # The type of object represented by JSON. Default is balance.
+    # The type of the object represented by JSON. Default is balance.
     attr_accessor :object
 
     attr_accessor :related_object
@@ -91,6 +91,13 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'points',
+        :'total',
+        :'balance',
+        :'type',
+        :'object',
+        :'related_object',
+        :'operation_type'
       ])
     end
 
@@ -111,26 +118,18 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
-      else
-        self.points = nil
       end
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
 
       if attributes.key?(:'balance')
         self.balance = attributes[:'balance']
-      else
-        self.balance = nil
       end
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = nil
       end
 
       if attributes.key?(:'object')
@@ -141,8 +140,6 @@ module VoucherifySdk
 
       if attributes.key?(:'related_object')
         self.related_object = attributes[:'related_object']
-      else
-        self.related_object = nil
       end
 
       if attributes.key?(:'operation_type')
@@ -155,37 +152,13 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @points.nil?
-        invalid_properties.push('invalid value for "points", points cannot be nil.')
-      end
-
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
-      if @balance.nil?
-        invalid_properties.push('invalid value for "balance", balance cannot be nil.')
-      end
-
-      if @balance < 0
+      if !@balance.nil? && @balance < 0
         invalid_properties.push('invalid value for "balance", must be greater than or equal to 0.')
       end
 
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       pattern = Regexp.new(/balance/)
-      if @object !~ pattern
+      if !@object.nil? && @object !~ pattern
         invalid_properties.push("invalid value for \"object\", must conform to the pattern #{pattern}.")
-      end
-
-      if @related_object.nil?
-        invalid_properties.push('invalid value for "related_object", related_object cannot be nil.')
       end
 
       invalid_properties
@@ -195,18 +168,12 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @points.nil?
-      return false if @total.nil?
-      return false if @balance.nil?
-      return false if @balance < 0
-      return false if @type.nil?
+      return false if !@balance.nil? && @balance < 0
       type_validator = EnumAttributeValidator.new('String', ["loyalty_card", "gift_voucher"])
       return false unless type_validator.valid?(@type)
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["balance"])
       return false unless object_validator.valid?(@object)
-      return false if @object !~ Regexp.new(/balance/)
-      return false if @related_object.nil?
+      return false if !@object.nil? && @object !~ Regexp.new(/balance/)
       operation_type_validator = EnumAttributeValidator.new('String', ["MANUAL", "AUTOMATIC"])
       return false unless operation_type_validator.valid?(@operation_type)
       true
@@ -215,11 +182,7 @@ module VoucherifySdk
     # Custom attribute writer method with validation
     # @param [Object] balance Value to be assigned
     def balance=(balance)
-      if balance.nil?
-        fail ArgumentError, 'balance cannot be nil'
-      end
-
-      if balance < 0
+      if !balance.nil? && balance < 0
         fail ArgumentError, 'invalid value for "balance", must be greater than or equal to 0.'
       end
 

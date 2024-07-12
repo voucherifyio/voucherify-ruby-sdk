@@ -4,6 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique reward ID. |  |
-| **name** | **String** | Reward name. |  |
+| **id** | **String** | Unique reward ID. | [optional] |
+| **name** | **String** | Reward name. | [optional] |
 

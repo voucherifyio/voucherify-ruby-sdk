@@ -33,7 +33,7 @@ module VoucherifySdk
 
     attr_accessor :data_json
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -70,6 +70,13 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'created_at',
+        :'related_object_id',
+        :'related_object',
+        :'status',
+        :'data_json',
+        :'object'
       ])
     end
 
@@ -90,20 +97,14 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'related_object_id')
         self.related_object_id = attributes[:'related_object_id']
-      else
-        self.related_object_id = nil
       end
 
       if attributes.key?(:'related_object')
@@ -120,8 +121,6 @@ module VoucherifySdk
 
       if attributes.key?(:'data_json')
         self.data_json = attributes[:'data_json']
-      else
-        self.data_json = nil
       end
 
       if attributes.key?(:'object')
@@ -136,34 +135,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @related_object_id.nil?
-        invalid_properties.push('invalid value for "related_object_id", related_object_id cannot be nil.')
-      end
-
-      if @related_object.nil?
-        invalid_properties.push('invalid value for "related_object", related_object cannot be nil.')
-      end
-
-      if @status.nil?
-        invalid_properties.push('invalid value for "status", status cannot be nil.')
-      end
-
-      if @data_json.nil?
-        invalid_properties.push('invalid value for "data_json", data_json cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -171,13 +142,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @created_at.nil?
-      return false if @related_object_id.nil?
-      return false if @related_object.nil?
-      return false if @status.nil?
-      return false if @data_json.nil?
-      return false if @object.nil?
       true
     end
 

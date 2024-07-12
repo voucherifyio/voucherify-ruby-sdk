@@ -4,5 +4,5 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **schema_id** | **String** |  |  |
+| **schema_id** | **String** |  | [optional] |
 

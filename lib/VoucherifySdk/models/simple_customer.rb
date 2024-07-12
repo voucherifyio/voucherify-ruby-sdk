@@ -30,7 +30,7 @@ module VoucherifySdk
     # A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the customer. It can be useful for storing additional information about the customer in a structured format. This metadata can be used for validating whether the customer qualifies for a discount or it can be used in building customer segments.
     attr_accessor :metadata
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     class EnumAttributeValidator
@@ -87,6 +87,12 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'source_id',
+        :'name',
+        :'email',
+        :'metadata',
+        :'object'
       ])
     end
 

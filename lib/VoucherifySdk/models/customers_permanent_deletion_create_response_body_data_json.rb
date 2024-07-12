@@ -71,6 +71,13 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'events',
+        :'customer_events',
+        :'daily_events',
+        :'segments',
+        :'orders',
+        :'order_events',
+        :'customer'
       ])
     end
 
@@ -91,38 +98,26 @@ module VoucherifySdk
 
       if attributes.key?(:'events')
         self.events = attributes[:'events']
-      else
-        self.events = nil
       end
 
       if attributes.key?(:'customer_events')
         self.customer_events = attributes[:'customer_events']
-      else
-        self.customer_events = nil
       end
 
       if attributes.key?(:'daily_events')
         self.daily_events = attributes[:'daily_events']
-      else
-        self.daily_events = nil
       end
 
       if attributes.key?(:'segments')
         self.segments = attributes[:'segments']
-      else
-        self.segments = nil
       end
 
       if attributes.key?(:'orders')
         self.orders = attributes[:'orders']
-      else
-        self.orders = nil
       end
 
       if attributes.key?(:'order_events')
         self.order_events = attributes[:'order_events']
-      else
-        self.order_events = nil
       end
 
       if attributes.key?(:'customer')
@@ -137,34 +132,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @events.nil?
-        invalid_properties.push('invalid value for "events", events cannot be nil.')
-      end
-
-      if @customer_events.nil?
-        invalid_properties.push('invalid value for "customer_events", customer_events cannot be nil.')
-      end
-
-      if @daily_events.nil?
-        invalid_properties.push('invalid value for "daily_events", daily_events cannot be nil.')
-      end
-
-      if @segments.nil?
-        invalid_properties.push('invalid value for "segments", segments cannot be nil.')
-      end
-
-      if @orders.nil?
-        invalid_properties.push('invalid value for "orders", orders cannot be nil.')
-      end
-
-      if @order_events.nil?
-        invalid_properties.push('invalid value for "order_events", order_events cannot be nil.')
-      end
-
-      if @customer.nil?
-        invalid_properties.push('invalid value for "customer", customer cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -172,13 +139,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @events.nil?
-      return false if @customer_events.nil?
-      return false if @daily_events.nil?
-      return false if @segments.nil?
-      return false if @orders.nil?
-      return false if @order_events.nil?
-      return false if @customer.nil?
       true
     end
 

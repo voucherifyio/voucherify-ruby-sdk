@@ -15,13 +15,13 @@ require 'time'
 
 module VoucherifySdk
   class OrderRedemptions
-    # Timestamp representing the date and time when the redemption was created in ISO 8601 format.
+    # Timestamp representing the date and time when the redemption was created. The value is shown in the ISO 8601 format.
     attr_accessor :date
 
     # Unique ID of the redemption rollback.
     attr_accessor :rollback_id
 
-    # Timestamp representing the date and tiem when the redemption rollback was created in ISO 8601 format.
+    # Timestamp representing the date and tiem when the redemption rollback was created. The value is shown in the ISO 8601 format.
     attr_accessor :rollback_date
 
     # The source of the incentive.
@@ -75,6 +75,14 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'date',
+        :'rollback_id',
+        :'rollback_date',
+        :'related_object_type',
+        :'related_object_id',
+        :'related_object_parent_id',
+        :'stacked',
+        :'rollback_stacked'
       ])
     end
 

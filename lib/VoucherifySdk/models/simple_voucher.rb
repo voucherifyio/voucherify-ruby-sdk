@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Simplified voucher data.
   class SimpleVoucher
     # A unique identifier that represents the voucher assigned by Voucherify.
     attr_accessor :id
@@ -25,13 +26,12 @@ module VoucherifySdk
 
     attr_accessor :discount
 
-    # Defines the loyalty card details.
     attr_accessor :loyalty_card
 
-    # Type of the object.
+    # Type of the voucher.
     attr_accessor :type
 
-    # Campaign object
+    # Campaign name.
     attr_accessor :campaign
 
     # Campaign unique ID.
@@ -40,16 +40,39 @@ module VoucherifySdk
     # Flag indicating whether this voucher is a referral code; `true` for campaign type `REFERRAL_PROGRAM`.
     attr_accessor :is_referral_code
 
-    # Unique customer ID of campaign owner.
+    # Unique customer ID of the campaign owner.
     attr_accessor :holder_id
 
-    # Unique referrer ID.
+    # Unique identifier of the referrer assigned by Voucherify.
     attr_accessor :referrer_id
 
-    # Timestamp representing the date and time when the order was created in ISO 8601 format.
+    # Unique identifier of the category that this voucher belongs to.
+    attr_accessor :category_id
+
+    # Contains details about the category.
+    attr_accessor :categories
+
+    # Shows whether the voucher is on or off. `true` indicates an *active* voucher and `false` indicates an *inactive* voucher.
+    attr_accessor :active
+
+    # Timestamp representing the date and time when the order was created. Timestamp is presented in the ISO 8601 format.
     attr_accessor :created_at
 
-    # The type of object represented by JSON.
+    # Timestamp representing the date and time when the voucher was updated in the ISO 8601 format.
+    attr_accessor :updated_at
+
+    attr_accessor :redemption
+
+    # Activation timestamp defines when the code starts to be active in ISO 8601 format. Voucher is *inactive before* this date.
+    attr_accessor :start_date
+
+    # Expiration timestamp defines when the code expires in ISO 8601 format.  Voucher is *inactive after* this date.
+    attr_accessor :expiration_date
+
+    # A set of custom key/value pairs that you can attach to a voucher. The metadata object stores all custom attributes assigned to the voucher.
+    attr_accessor :metadata
+
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     class EnumAttributeValidator
@@ -88,7 +111,15 @@ module VoucherifySdk
         :'is_referral_code' => :'is_referral_code',
         :'holder_id' => :'holder_id',
         :'referrer_id' => :'referrer_id',
+        :'category_id' => :'category_id',
+        :'categories' => :'categories',
+        :'active' => :'active',
         :'created_at' => :'created_at',
+        :'updated_at' => :'updated_at',
+        :'redemption' => :'redemption',
+        :'start_date' => :'start_date',
+        :'expiration_date' => :'expiration_date',
+        :'metadata' => :'metadata',
         :'object' => :'object'
       }
     end
@@ -105,14 +136,22 @@ module VoucherifySdk
         :'code' => :'String',
         :'gift' => :'Gift',
         :'discount' => :'Discount',
-        :'loyalty_card' => :'Object',
+        :'loyalty_card' => :'SimpleVoucherLoyaltyCard',
         :'type' => :'String',
-        :'campaign' => :'Object',
+        :'campaign' => :'String',
         :'campaign_id' => :'String',
         :'is_referral_code' => :'Boolean',
         :'holder_id' => :'String',
         :'referrer_id' => :'String',
+        :'category_id' => :'String',
+        :'categories' => :'Array<Category>',
+        :'active' => :'Boolean',
         :'created_at' => :'Time',
+        :'updated_at' => :'Time',
+        :'redemption' => :'SimpleVoucherRedemption',
+        :'start_date' => :'Time',
+        :'expiration_date' => :'Time',
+        :'metadata' => :'Object',
         :'object' => :'String'
       }
     end
@@ -120,6 +159,25 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'code',
+        :'loyalty_card',
+        :'type',
+        :'campaign',
+        :'campaign_id',
+        :'is_referral_code',
+        :'holder_id',
+        :'referrer_id',
+        :'category_id',
+        :'categories',
+        :'active',
+        :'created_at',
+        :'updated_at',
+        :'redemption',
+        :'start_date',
+        :'expiration_date',
+        :'metadata',
+        :'object'
       ])
     end
 
@@ -144,8 +202,6 @@ module VoucherifySdk
 
       if attributes.key?(:'code')
         self.code = attributes[:'code']
-      else
-        self.code = nil
       end
 
       if attributes.key?(:'gift')
@@ -162,8 +218,6 @@ module VoucherifySdk
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = 'voucher'
       end
 
       if attributes.key?(:'campaign')
@@ -186,8 +240,42 @@ module VoucherifySdk
         self.referrer_id = attributes[:'referrer_id']
       end
 
+      if attributes.key?(:'category_id')
+        self.category_id = attributes[:'category_id']
+      end
+
+      if attributes.key?(:'categories')
+        if (value = attributes[:'categories']).is_a?(Array)
+          self.categories = value
+        end
+      end
+
+      if attributes.key?(:'active')
+        self.active = attributes[:'active']
+      end
+
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
+
+      if attributes.key?(:'redemption')
+        self.redemption = attributes[:'redemption']
+      end
+
+      if attributes.key?(:'start_date')
+        self.start_date = attributes[:'start_date']
+      end
+
+      if attributes.key?(:'expiration_date')
+        self.expiration_date = attributes[:'expiration_date']
+      end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
       end
 
       if attributes.key?(:'object')
@@ -202,10 +290,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @code.nil?
-        invalid_properties.push('invalid value for "code", code cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -213,8 +297,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @code.nil?
-      type_validator = EnumAttributeValidator.new('String', ["voucher"])
+      type_validator = EnumAttributeValidator.new('String', ["DISCOUNT_VOUCHER", "LOYALTY_CARD", "GIFT_VOUCHER"])
       return false unless type_validator.valid?(@type)
       object_validator = EnumAttributeValidator.new('String', ["voucher"])
       return false unless object_validator.valid?(@object)
@@ -224,7 +307,7 @@ module VoucherifySdk
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["voucher"])
+      validator = EnumAttributeValidator.new('String', ["DISCOUNT_VOUCHER", "LOYALTY_CARD", "GIFT_VOUCHER"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -257,7 +340,15 @@ module VoucherifySdk
           is_referral_code == o.is_referral_code &&
           holder_id == o.holder_id &&
           referrer_id == o.referrer_id &&
+          category_id == o.category_id &&
+          categories == o.categories &&
+          active == o.active &&
           created_at == o.created_at &&
+          updated_at == o.updated_at &&
+          redemption == o.redemption &&
+          start_date == o.start_date &&
+          expiration_date == o.expiration_date &&
+          metadata == o.metadata &&
           object == o.object
     end
 
@@ -270,7 +361,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, code, gift, discount, loyalty_card, type, campaign, campaign_id, is_referral_code, holder_id, referrer_id, created_at, object].hash
+      [id, code, gift, discount, loyalty_card, type, campaign, campaign_id, is_referral_code, holder_id, referrer_id, category_id, categories, active, created_at, updated_at, redemption, start_date, expiration_date, metadata, object].hash
     end
 
     # Builds the object from hash

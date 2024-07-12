@@ -116,8 +116,8 @@ module VoucherifySdk
         :'discount_amount' => :'Integer',
         :'initial_amount' => :'Integer',
         :'price' => :'Integer',
-        :'product' => :'OrderItemProduct',
-        :'sku' => :'OrderItemSku',
+        :'product' => :'OrderItemCalculatedProduct',
+        :'sku' => :'OrderItemCalculatedSku',
         :'metadata' => :'Object'
       }
     end
@@ -125,6 +125,20 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'sku_id',
+        :'product_id',
+        :'related_object',
+        :'source_id',
+        :'quantity',
+        :'discount_quantity',
+        :'initial_quantity',
+        :'amount',
+        :'discount_amount',
+        :'initial_amount',
+        :'price',
+        :'product',
+        :'sku',
+        :'metadata'
       ])
     end
 

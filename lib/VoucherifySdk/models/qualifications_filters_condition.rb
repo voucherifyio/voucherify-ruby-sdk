@@ -47,18 +47,24 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'is' => :'Any',
-        :'is_not' => :'Any',
-        :'has_value' => :'Any',
-        :'is_unknown' => :'Any',
-        :'_in' => :'Any',
-        :'not_in' => :'Any'
+        :'is' => :'Array<String>',
+        :'is_not' => :'Array<String>',
+        :'has_value' => :'Object',
+        :'is_unknown' => :'Object',
+        :'_in' => :'Array<String>',
+        :'not_in' => :'Array<String>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'is',
+        :'is_not',
+        :'has_value',
+        :'is_unknown',
+        :'_in',
+        :'not_in'
       ])
     end
 
@@ -78,11 +84,15 @@ module VoucherifySdk
       }
 
       if attributes.key?(:'is')
-        self.is = attributes[:'is']
+        if (value = attributes[:'is']).is_a?(Array)
+          self.is = value
+        end
       end
 
       if attributes.key?(:'is_not')
-        self.is_not = attributes[:'is_not']
+        if (value = attributes[:'is_not']).is_a?(Array)
+          self.is_not = value
+        end
       end
 
       if attributes.key?(:'has_value')
@@ -94,11 +104,15 @@ module VoucherifySdk
       end
 
       if attributes.key?(:'_in')
-        self._in = attributes[:'_in']
+        if (value = attributes[:'_in']).is_a?(Array)
+          self._in = value
+        end
       end
 
       if attributes.key?(:'not_in')
-        self.not_in = attributes[:'not_in']
+        if (value = attributes[:'not_in']).is_a?(Array)
+          self.not_in = value
+        end
       end
     end
 

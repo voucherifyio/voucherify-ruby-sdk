@@ -76,6 +76,10 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'qualification_type',
+        :'qualification_period',
+        :'start_date',
+        :'expiration_date'
       ])
     end
 
@@ -96,8 +100,6 @@ module VoucherifySdk
 
       if attributes.key?(:'qualification_type')
         self.qualification_type = attributes[:'qualification_type']
-      else
-        self.qualification_type = nil
       end
 
       if attributes.key?(:'qualification_period')
@@ -106,14 +108,10 @@ module VoucherifySdk
 
       if attributes.key?(:'start_date')
         self.start_date = attributes[:'start_date']
-      else
-        self.start_date = nil
       end
 
       if attributes.key?(:'expiration_date')
         self.expiration_date = attributes[:'expiration_date']
-      else
-        self.expiration_date = nil
       end
     end
 
@@ -122,18 +120,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @qualification_type.nil?
-        invalid_properties.push('invalid value for "qualification_type", qualification_type cannot be nil.')
-      end
-
-      if @start_date.nil?
-        invalid_properties.push('invalid value for "start_date", start_date cannot be nil.')
-      end
-
-      if @expiration_date.nil?
-        invalid_properties.push('invalid value for "expiration_date", expiration_date cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -141,13 +127,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @qualification_type.nil?
       qualification_type_validator = EnumAttributeValidator.new('String', ["BALANCE", "POINTS_IN_PERIOD"])
       return false unless qualification_type_validator.valid?(@qualification_type)
       qualification_period_validator = EnumAttributeValidator.new('String', ["MONTH", "QUARTER", "HALF_YEAR", "YEAR"])
       return false unless qualification_period_validator.valid?(@qualification_period)
-      return false if @start_date.nil?
-      return false if @expiration_date.nil?
       true
     end
 

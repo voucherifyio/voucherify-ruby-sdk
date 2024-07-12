@@ -26,6 +26,11 @@ module VoucherifySdk
 
     attr_accessor :result
 
+    # The metadata object stores all custom attributes in the form of key/value pairs assigned to the redeemable.
+    attr_accessor :metadata
+
+    attr_accessor :categories
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -54,7 +59,9 @@ module VoucherifySdk
         :'status' => :'status',
         :'id' => :'id',
         :'object' => :'object',
-        :'result' => :'result'
+        :'result' => :'result',
+        :'metadata' => :'metadata',
+        :'categories' => :'categories'
       }
     end
 
@@ -69,13 +76,21 @@ module VoucherifySdk
         :'status' => :'String',
         :'id' => :'String',
         :'object' => :'String',
-        :'result' => :'Object'
+        :'result' => :'ValidationsRedeemableSkippedResult',
+        :'metadata' => :'Object',
+        :'categories' => :'Array<Category>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'status',
+        :'id',
+        :'object',
+        :'result',
+        :'metadata',
+        :'categories'
       ])
     end
 
@@ -110,6 +125,16 @@ module VoucherifySdk
 
       if attributes.key?(:'result')
         self.result = attributes[:'result']
+      end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.key?(:'categories')
+        if (value = attributes[:'categories']).is_a?(Array)
+          self.categories = value
+        end
       end
     end
 
@@ -160,7 +185,9 @@ module VoucherifySdk
           status == o.status &&
           id == o.id &&
           object == o.object &&
-          result == o.result
+          result == o.result &&
+          metadata == o.metadata &&
+          categories == o.categories
     end
 
     # @see the `==` method
@@ -172,7 +199,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, id, object, result].hash
+      [status, id, object, result, metadata, categories].hash
     end
 
     # Builds the object from hash

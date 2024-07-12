@@ -51,6 +51,9 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'winners_count',
+        :'unique_winners_per_draw',
+        :'unique_winners'
       ])
     end
 
@@ -100,10 +103,6 @@ module VoucherifySdk
     # Custom attribute writer method with validation
     # @param [Object] winners_count Value to be assigned
     def winners_count=(winners_count)
-      if winners_count.nil?
-        fail ArgumentError, 'winners_count cannot be nil'
-      end
-
       @winners_count = winners_count
     end
 

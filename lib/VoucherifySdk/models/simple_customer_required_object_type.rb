@@ -31,7 +31,7 @@ module VoucherifySdk
     # A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the customer. It can be useful for storing additional information about the customer in a structured format. This metadata can be used for validating whether the customer qualifies for a discount or it can be used in building customer segments. 
     attr_accessor :metadata
 
-    # The type of object represented by the JSON. This object stores information about the customer.
+    # The type of the object represented by the JSON. This object stores information about the customer.
     attr_accessor :object
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -66,6 +66,12 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'source_id',
+        :'name',
+        :'email',
+        :'metadata',
+        :'object'
       ])
     end
 
@@ -116,10 +122,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -127,7 +129,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
       true
     end
 

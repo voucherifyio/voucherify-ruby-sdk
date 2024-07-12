@@ -61,7 +61,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique loyalty campaign ID or name.
 opts = {
-  loyalties_tiers_create_in_bulk_request_body_item: [VoucherifySdk::LoyaltiesTiersCreateInBulkRequestBodyItem.new({name: 'name_example', points: VoucherifySdk::LoyaltyTierBasePoints.new})] # Array<LoyaltiesTiersCreateInBulkRequestBodyItem> | Provide tier definitions you want to add to existing loyalty campaign.
+  loyalties_tiers_create_in_bulk_request_body_item: [VoucherifySdk::LoyaltiesTiersCreateInBulkRequestBodyItem.new] # Array<LoyaltiesTiersCreateInBulkRequestBodyItem> | Provide tier definitions you want to add to existing loyalty campaign.
 }
 
 begin
@@ -159,7 +159,7 @@ nil (empty response body)
 
 Delete Loyalty Campaign
 
-This method permanently deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards.
+Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards. If the force parameter is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin.
 
 ### Examples
 
@@ -182,7 +182,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
 opts = {
-  force: true # Boolean | If this flag is set to true, the campaign and related vouchers will be removed permanently. Going forward, the user will be able to create the next campaign with the same name.
+  force: true # Boolean | If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name.
 }
 
 begin
@@ -199,7 +199,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
-| **force** | **Boolean** | If this flag is set to true, the campaign and related vouchers will be removed permanently. Going forward, the user will be able to create the next campaign with the same name. | [optional] |
+| **force** | **Boolean** | If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name. | [optional] |
 
 ### Return type
 
@@ -849,8 +849,8 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 member_id = 'member_id_example' # String | A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is 1.
 }
 
 begin
@@ -867,8 +867,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **member_id** | **String** | A unique code identifying the loyalty card that you are looking to retrieve transaction data for. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 
 ### Return type
 
@@ -914,8 +914,8 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return.
 member_id = 'member_id_example' # String | A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is 1.
 }
 
 begin
@@ -933,8 +933,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return. |  |
 | **member_id** | **String** | A unique code identifying the loyalty card that you are looking to retrieve transaction data for. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 
 ### Return type
 
@@ -980,8 +980,8 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique campaign ID or name.
 loyalty_tier_id = 'loyalty_tier_id_example' # String | Unique loyalty tier ID.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is 1.
 }
 
 begin
@@ -999,8 +999,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Unique campaign ID or name. |  |
 | **loyalty_tier_id** | **String** | Unique loyalty tier ID. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 
 ### Return type
 
@@ -1105,7 +1105,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique loyalty campaign ID or name.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
   order: VoucherifySdk::ParameterOrderListLoyaltyTiers::CREATED_AT # ParameterOrderListLoyaltyTiers | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
 }
 
@@ -1123,7 +1123,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Unique loyalty campaign ID or name. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
 | **order** | [**ParameterOrderListLoyaltyTiers**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 
 ### Return type
@@ -1290,8 +1290,8 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
 member_id = 'member_id_example' # String | Loyalty card code.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is 1.
 }
 
 begin
@@ -1309,8 +1309,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
 | **member_id** | **String** | Loyalty card code. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 
 ### Return type
 
@@ -1482,7 +1482,7 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | A unique identifier of the loyalty campaign containing the voucher to which the loyalty points will be sent (destination).
 member_id = 'member_id_example' # String | A unique code identifying the loyalty card to which the user wants to transfer loyalty points (destination).
 opts = {
-  loyalties_transfer_points: [VoucherifySdk::LoyaltiesTransferPoints.new({code: 'code_example', points: 37, source_id: 'source_id_example'})] # Array<LoyaltiesTransferPoints> | Provide the loyalty cards you want the points to be transferred from and the number of points to transfer from each card.
+  loyalties_transfer_points: [VoucherifySdk::LoyaltiesTransferPoints.new] # Array<LoyaltiesTransferPoints> | Provide the loyalty cards you want the points to be transferred from and the number of points to transfer from each card.
 }
 
 begin
@@ -1522,7 +1522,7 @@ end
 
 Add or Remove Loyalty Card Balance
 
-This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
+This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
 
 ### Examples
 
@@ -1545,7 +1545,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 member_id = 'member_id_example' # String | Unique loyalty card assigned to a particular customer.
 opts = {
-  loyalties_members_balance_update_request_body: VoucherifySdk::LoyaltiesMembersBalanceUpdateRequestBody.new({points: 37}) # LoyaltiesMembersBalanceUpdateRequestBody | Specify the point adjustment along with the expiration mechanism.
+  loyalties_members_balance_update_request_body: VoucherifySdk::LoyaltiesMembersBalanceUpdateRequestBody.new # LoyaltiesMembersBalanceUpdateRequestBody | Specify the point adjustment along with the expiration mechanism.
 }
 
 begin
@@ -1584,7 +1584,7 @@ end
 
 Add or Remove Loyalty Card Balance
 
-This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.
+This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
 
 ### Examples
 
@@ -1608,7 +1608,7 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique campaign ID.
 member_id = 'member_id_example' # String | A code that identifies the loyalty card.
 opts = {
-  loyalties_members_balance_update_request_body: VoucherifySdk::LoyaltiesMembersBalanceUpdateRequestBody.new({points: 37}) # LoyaltiesMembersBalanceUpdateRequestBody | Specify the point adjustment along with the expiration mechanism.
+  loyalties_members_balance_update_request_body: VoucherifySdk::LoyaltiesMembersBalanceUpdateRequestBody.new # LoyaltiesMembersBalanceUpdateRequestBody | Specify the point adjustment along with the expiration mechanism.
 }
 
 begin

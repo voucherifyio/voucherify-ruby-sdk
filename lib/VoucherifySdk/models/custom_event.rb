@@ -30,10 +30,10 @@ module VoucherifySdk
 
     attr_accessor :loyalty
 
-    # A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the custom event.
+    # A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the customer object.
     attr_accessor :metadata
 
-    # Timestamp representing the date and time when the custom event was created in ISO 8601 format.
+    # Timestamp representing the date and time when the custom event was created. Timestamp is presented in the ISO 8601 format.
     attr_accessor :created_at
 
     class EnumAttributeValidator
@@ -84,8 +84,8 @@ module VoucherifySdk
         :'object' => :'String',
         :'type' => :'String',
         :'customer' => :'SimpleCustomerRequiredObjectType',
-        :'referral' => :'CustomEventReferral',
-        :'loyalty' => :'Object',
+        :'referral' => :'CustomerActivityDataEventReferral',
+        :'loyalty' => :'CustomerActivityDataEventLoyalty',
         :'metadata' => :'Object',
         :'created_at' => :'Time'
       }
@@ -94,6 +94,13 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'object',
+        :'type',
+        :'referral',
+        :'loyalty',
+        :'metadata',
+        :'created_at'
       ])
     end
 
@@ -124,8 +131,6 @@ module VoucherifySdk
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = nil
       end
 
       if attributes.key?(:'customer')
@@ -136,14 +141,10 @@ module VoucherifySdk
 
       if attributes.key?(:'referral')
         self.referral = attributes[:'referral']
-      else
-        self.referral = nil
       end
 
       if attributes.key?(:'loyalty')
         self.loyalty = attributes[:'loyalty']
-      else
-        self.loyalty = nil
       end
 
       if attributes.key?(:'metadata')
@@ -160,24 +161,8 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
       if @customer.nil?
         invalid_properties.push('invalid value for "customer", customer cannot be nil.')
-      end
-
-      if @referral.nil?
-        invalid_properties.push('invalid value for "referral", referral cannot be nil.')
-      end
-
-      if @loyalty.nil?
-        invalid_properties.push('invalid value for "loyalty", loyalty cannot be nil.')
       end
 
       invalid_properties
@@ -187,13 +172,9 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["event"])
       return false unless object_validator.valid?(@object)
-      return false if @type.nil?
       return false if @customer.nil?
-      return false if @referral.nil?
-      return false if @loyalty.nil?
       true
     end
 

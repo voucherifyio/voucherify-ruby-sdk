@@ -71,6 +71,13 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'code',
+        :'key',
+        :'message',
+        :'details',
+        :'request_id',
+        :'resource_id',
+        :'resource_type'
       ])
     end
 
@@ -91,32 +98,22 @@ module VoucherifySdk
 
       if attributes.key?(:'code')
         self.code = attributes[:'code']
-      else
-        self.code = nil
       end
 
       if attributes.key?(:'key')
         self.key = attributes[:'key']
-      else
-        self.key = nil
       end
 
       if attributes.key?(:'message')
         self.message = attributes[:'message']
-      else
-        self.message = nil
       end
 
       if attributes.key?(:'details')
         self.details = attributes[:'details']
-      else
-        self.details = nil
       end
 
       if attributes.key?(:'request_id')
         self.request_id = attributes[:'request_id']
-      else
-        self.request_id = nil
       end
 
       if attributes.key?(:'resource_id')
@@ -133,26 +130,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @code.nil?
-        invalid_properties.push('invalid value for "code", code cannot be nil.')
-      end
-
-      if @key.nil?
-        invalid_properties.push('invalid value for "key", key cannot be nil.')
-      end
-
-      if @message.nil?
-        invalid_properties.push('invalid value for "message", message cannot be nil.')
-      end
-
-      if @details.nil?
-        invalid_properties.push('invalid value for "details", details cannot be nil.')
-      end
-
-      if @request_id.nil?
-        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -160,11 +137,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @code.nil?
-      return false if @key.nil?
-      return false if @message.nil?
-      return false if @details.nil?
-      return false if @request_id.nil?
       true
     end
 

@@ -19,5 +19,5 @@
 | **total_amount** | **Integer** | Order amount after undoing all the discounts through the rollback redemption. | [optional] |
 | **items** | [**Array&lt;SimpleOrderItem&gt;**](SimpleOrderItem.md) | Array of items applied to the order. | [optional] |
 | **metadata** | **Object** | A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format. | [optional] |
-| **object** | **String** | The type of object represented by JSON. | [default to &#39;order&#39;] |
+| **object** | **String** | The type of the object represented by JSON. | [optional][default to &#39;order&#39;] |
 

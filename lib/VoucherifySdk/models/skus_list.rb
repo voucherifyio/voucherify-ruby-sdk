@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Contains information about SKUs.
   class SkusList
-    # The type of object represented by JSON. This object stores information about SKUs.
+    # The type of the object represented by JSON. This object stores information about SKUs.
     attr_accessor :object
 
     # Identifies the name of the JSON property that contains the array of SKUs.
@@ -56,6 +56,10 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'data_ref',
+        :'skus',
+        :'total'
       ])
     end
 
@@ -90,14 +94,10 @@ module VoucherifySdk
         if (value = attributes[:'skus']).is_a?(Array)
           self.skus = value
         end
-      else
-        self.skus = nil
       end
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
     end
 
@@ -106,22 +106,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @data_ref.nil?
-        invalid_properties.push('invalid value for "data_ref", data_ref cannot be nil.')
-      end
-
-      if @skus.nil?
-        invalid_properties.push('invalid value for "skus", skus cannot be nil.')
-      end
-
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -129,10 +113,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
-      return false if @data_ref.nil?
-      return false if @skus.nil?
-      return false if @total.nil?
       true
     end
 

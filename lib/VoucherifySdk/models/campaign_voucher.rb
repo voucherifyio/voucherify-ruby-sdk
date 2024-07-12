@@ -40,6 +40,33 @@ module VoucherifySdk
 
     attr_accessor :validity_timeframe
 
+    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
+    attr_accessor :validity_day_of_week
+
+    attr_accessor :validity_hours
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -52,7 +79,9 @@ module VoucherifySdk
         :'is_referral_code' => :'is_referral_code',
         :'start_date' => :'start_date',
         :'expiration_date' => :'expiration_date',
-        :'validity_timeframe' => :'validity_timeframe'
+        :'validity_timeframe' => :'validity_timeframe',
+        :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours'
       }
     end
 
@@ -69,17 +98,24 @@ module VoucherifySdk
         :'gift' => :'Gift',
         :'loyalty_card' => :'CampaignLoyaltyCard',
         :'redemption' => :'CampaignVoucherRedemption',
-        :'code_config' => :'CodeConfigRequiredLengthCharsetPattern',
+        :'code_config' => :'CodeConfig',
         :'is_referral_code' => :'Boolean',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',
-        :'validity_timeframe' => :'CampaignBaseValidityTimeframe'
+        :'validity_timeframe' => :'ValidityTimeframe',
+        :'validity_day_of_week' => :'Array<Integer>',
+        :'validity_hours' => :'ValidityHours'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'type',
+        :'redemption',
+        :'is_referral_code',
+        :'start_date',
+        :'expiration_date',
       ])
     end
 
@@ -118,8 +154,6 @@ module VoucherifySdk
 
       if attributes.key?(:'redemption')
         self.redemption = attributes[:'redemption']
-      else
-        self.redemption = nil
       end
 
       if attributes.key?(:'code_config')
@@ -130,8 +164,6 @@ module VoucherifySdk
 
       if attributes.key?(:'is_referral_code')
         self.is_referral_code = attributes[:'is_referral_code']
-      else
-        self.is_referral_code = nil
       end
 
       if attributes.key?(:'start_date')
@@ -145,6 +177,16 @@ module VoucherifySdk
       if attributes.key?(:'validity_timeframe')
         self.validity_timeframe = attributes[:'validity_timeframe']
       end
+
+      if attributes.key?(:'validity_day_of_week')
+        if (value = attributes[:'validity_day_of_week']).is_a?(Array)
+          self.validity_day_of_week = value
+        end
+      end
+
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -152,20 +194,8 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @redemption.nil?
-        invalid_properties.push('invalid value for "redemption", redemption cannot be nil.')
-      end
-
       if @code_config.nil?
         invalid_properties.push('invalid value for "code_config", code_config cannot be nil.')
-      end
-
-      if @is_referral_code.nil?
-        invalid_properties.push('invalid value for "is_referral_code", is_referral_code cannot be nil.')
       end
 
       invalid_properties
@@ -175,10 +205,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @type.nil?
-      return false if @redemption.nil?
       return false if @code_config.nil?
-      return false if @is_referral_code.nil?
       true
     end
 
@@ -196,7 +223,9 @@ module VoucherifySdk
           is_referral_code == o.is_referral_code &&
           start_date == o.start_date &&
           expiration_date == o.expiration_date &&
-          validity_timeframe == o.validity_timeframe
+          validity_timeframe == o.validity_timeframe &&
+          validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours
     end
 
     # @see the `==` method
@@ -208,7 +237,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, discount, gift, loyalty_card, redemption, code_config, is_referral_code, start_date, expiration_date, validity_timeframe].hash
+      [type, discount, gift, loyalty_card, redemption, code_config, is_referral_code, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours].hash
     end
 
     # Builds the object from hash

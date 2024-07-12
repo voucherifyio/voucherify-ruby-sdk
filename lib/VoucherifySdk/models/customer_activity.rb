@@ -22,11 +22,13 @@ module VoucherifySdk
     # Event type.
     attr_accessor :type
 
-    # Contains details about the event. The objects that are returned in the data attribute differ based on the context of the event type.
     attr_accessor :data
 
     # Timestamp representing the date and time when the customer activity occurred in ISO 8601 format.
     attr_accessor :created_at
+
+    # Unique identifier of the request that caused the event.
+    attr_accessor :group_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -56,7 +58,8 @@ module VoucherifySdk
         :'id' => :'id',
         :'type' => :'type',
         :'data' => :'data',
-        :'created_at' => :'created_at'
+        :'created_at' => :'created_at',
+        :'group_id' => :'group_id'
       }
     end
 
@@ -70,14 +73,20 @@ module VoucherifySdk
       {
         :'id' => :'String',
         :'type' => :'String',
-        :'data' => :'Array<CustomerActivityData>',
-        :'created_at' => :'Time'
+        :'data' => :'CustomerActivityData',
+        :'created_at' => :'Time',
+        :'group_id' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'type',
+        :'data',
+        :'created_at',
+        :'group_id'
       ])
     end
 
@@ -105,13 +114,15 @@ module VoucherifySdk
       end
 
       if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+        self.data = attributes[:'data']
       end
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'group_id')
+        self.group_id = attributes[:'group_id']
       end
     end
 
@@ -150,7 +161,8 @@ module VoucherifySdk
           id == o.id &&
           type == o.type &&
           data == o.data &&
-          created_at == o.created_at
+          created_at == o.created_at &&
+          group_id == o.group_id
     end
 
     # @see the `==` method
@@ -162,7 +174,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, data, created_at].hash
+      [id, type, data, created_at, group_id].hash
     end
 
     # Builds the object from hash

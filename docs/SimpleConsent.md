@@ -6,5 +6,5 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  | [optional] |
 | **name** | **String** |  | [optional] |
-| **object** | **String** |  | [default to &#39;consent&#39;] |
+| **object** | **String** |  | [optional][default to &#39;consent&#39;] |
 

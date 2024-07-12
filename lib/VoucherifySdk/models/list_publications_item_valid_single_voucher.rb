@@ -18,10 +18,10 @@ module VoucherifySdk
     # Unique publication ID, assigned by Voucherify.
     attr_accessor :id
 
-    # The type of object represented by the JSON. This object stores information about the `publication`.
+    # The type of the object represented by the JSON. This object stores information about the `publication`.
     attr_accessor :object
 
-    # Timestamp representing the date and time when the publication was created in ISO 8601 format.
+    # Timestamp representing the date and time when the publication was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Unique customer ID of the customer receiving the publication.
@@ -30,7 +30,6 @@ module VoucherifySdk
     # Customer's `source_id`.
     attr_accessor :tracking_id
 
-    # The metadata object stores all custom attributes assigned to the publication. A set of key/value pairs that you can attach to a publication object. It can be useful for storing additional information about the publication in a structured format.
     attr_accessor :metadata
 
     # How the publication was originated. It can be your own custom channel or an example value provided here.
@@ -41,7 +40,10 @@ module VoucherifySdk
 
     attr_accessor :customer
 
-    # Contains the unique internal voucher ID that was assigned by Voucherify.
+    # Contains the voucher IDs that was assigned by Voucherify.
+    attr_accessor :vouchers
+
+    # Contains the unique internal voucher IDs that was assigned by Voucherify.
     attr_accessor :vouchers_id
 
     # Status of the publication attempt.
@@ -83,6 +85,7 @@ module VoucherifySdk
         :'channel' => :'channel',
         :'source_id' => :'source_id',
         :'customer' => :'customer',
+        :'vouchers' => :'vouchers',
         :'vouchers_id' => :'vouchers_id',
         :'result' => :'result',
         :'voucher' => :'voucher'
@@ -102,10 +105,11 @@ module VoucherifySdk
         :'created_at' => :'Time',
         :'customer_id' => :'String',
         :'tracking_id' => :'String',
-        :'metadata' => :'Object',
+        :'metadata' => :'ListPublicationsItemBaseMetadata',
         :'channel' => :'String',
         :'source_id' => :'String',
         :'customer' => :'CustomerWithSummaryLoyaltyReferrals',
+        :'vouchers' => :'Array<String>',
         :'vouchers_id' => :'Array<String>',
         :'result' => :'String',
         :'voucher' => :'ListPublicationsItemVoucher'
@@ -115,7 +119,17 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'object',
+        :'created_at',
+        :'customer_id',
+        :'tracking_id',
+        :'metadata',
+        :'channel',
         :'source_id',
+        :'vouchers',
+        :'vouchers_id',
+        :'result',
       ])
     end
 
@@ -143,8 +157,6 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'object')
@@ -155,14 +167,10 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'customer_id')
         self.customer_id = attributes[:'customer_id']
-      else
-        self.customer_id = nil
       end
 
       if attributes.key?(:'tracking_id')
@@ -171,20 +179,14 @@ module VoucherifySdk
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      else
-        self.metadata = nil
       end
 
       if attributes.key?(:'channel')
         self.channel = attributes[:'channel']
-      else
-        self.channel = nil
       end
 
       if attributes.key?(:'source_id')
         self.source_id = attributes[:'source_id']
-      else
-        self.source_id = nil
       end
 
       if attributes.key?(:'customer')
@@ -193,12 +195,16 @@ module VoucherifySdk
         self.customer = nil
       end
 
+      if attributes.key?(:'vouchers')
+        if (value = attributes[:'vouchers']).is_a?(Array)
+          self.vouchers = value
+        end
+      end
+
       if attributes.key?(:'vouchers_id')
         if (value = attributes[:'vouchers_id']).is_a?(Array)
           self.vouchers_id = value
         end
-      else
-        self.vouchers_id = nil
       end
 
       if attributes.key?(:'result')
@@ -219,40 +225,8 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @customer_id.nil?
-        invalid_properties.push('invalid value for "customer_id", customer_id cannot be nil.')
-      end
-
-      if @metadata.nil?
-        invalid_properties.push('invalid value for "metadata", metadata cannot be nil.')
-      end
-
-      if @channel.nil?
-        invalid_properties.push('invalid value for "channel", channel cannot be nil.')
-      end
-
       if @customer.nil?
         invalid_properties.push('invalid value for "customer", customer cannot be nil.')
-      end
-
-      if @vouchers_id.nil?
-        invalid_properties.push('invalid value for "vouchers_id", vouchers_id cannot be nil.')
-      end
-
-      if @result.nil?
-        invalid_properties.push('invalid value for "result", result cannot be nil.')
       end
 
       if @voucher.nil?
@@ -266,17 +240,9 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["publication"])
       return false unless object_validator.valid?(@object)
-      return false if @created_at.nil?
-      return false if @customer_id.nil?
-      return false if @metadata.nil?
-      return false if @channel.nil?
       return false if @customer.nil?
-      return false if @vouchers_id.nil?
-      return false if @result.nil?
       result_validator = EnumAttributeValidator.new('String', ["SUCCESS"])
       return false unless result_validator.valid?(@result)
       return false if @voucher.nil?
@@ -317,6 +283,7 @@ module VoucherifySdk
           channel == o.channel &&
           source_id == o.source_id &&
           customer == o.customer &&
+          vouchers == o.vouchers &&
           vouchers_id == o.vouchers_id &&
           result == o.result &&
           voucher == o.voucher
@@ -331,7 +298,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, object, created_at, customer_id, tracking_id, metadata, channel, source_id, customer, vouchers_id, result, voucher].hash
+      [id, object, created_at, customer_id, tracking_id, metadata, channel, source_id, customer, vouchers, vouchers_id, result, voucher].hash
     end
 
     # Builds the object from hash

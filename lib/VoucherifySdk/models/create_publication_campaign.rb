@@ -46,6 +46,8 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'count'
       ])
     end
 
@@ -66,8 +68,6 @@ module VoucherifySdk
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'count')
@@ -80,10 +80,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
       if !@count.nil? && @count > 20
         invalid_properties.push('invalid value for "count", must be smaller than or equal to 20.')
       end
@@ -99,7 +95,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @name.nil?
       return false if !@count.nil? && @count > 20
       return false if !@count.nil? && @count < 1
       true
@@ -108,15 +103,11 @@ module VoucherifySdk
     # Custom attribute writer method with validation
     # @param [Object] count Value to be assigned
     def count=(count)
-      if count.nil?
-        fail ArgumentError, 'count cannot be nil'
-      end
-
-      if count > 20
+      if !count.nil? && count > 20
         fail ArgumentError, 'invalid value for "count", must be smaller than or equal to 20.'
       end
 
-      if count < 1
+      if !count.nil? && count < 1
         fail ArgumentError, 'invalid value for "count", must be greater than or equal to 1.'
       end
 

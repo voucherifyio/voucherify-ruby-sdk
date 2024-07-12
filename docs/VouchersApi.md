@@ -21,7 +21,7 @@ All URIs are relative to *https://api.voucherify.io*
 
 Delete Voucher
 
-Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher.
+Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher. If the force parameter is set to false or not set at all, the voucher will be moved to the bin.
 
 ### Examples
 
@@ -44,7 +44,7 @@ end
 api_instance = VoucherifySdk::VouchersApi.new
 code = 'code_example' # String | A unique **code** that identifies the voucher.
 opts = {
-  force: true # Boolean | If this flag is set to true, the voucher will be removed permanently. Going forward, the user will be able to create another voucher with exactly the same code.
+  force: true # Boolean | If this flag is set to true, the voucher will be removed permanently. If it is set to false or not set at all, the voucher will be moved to the bin. Going forward, the user will be able to create another voucher with exactly the same code.
 }
 
 begin
@@ -60,7 +60,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **code** | **String** | A unique **code** that identifies the voucher. |  |
-| **force** | **Boolean** | If this flag is set to true, the voucher will be removed permanently. Going forward, the user will be able to create another voucher with exactly the same code. | [optional] |
+| **force** | **Boolean** | If this flag is set to true, the voucher will be removed permanently. If it is set to false or not set at all, the voucher will be moved to the bin. Going forward, the user will be able to create another voucher with exactly the same code. | [optional] |
 
 ### Return type
 
@@ -314,7 +314,7 @@ end
 
 ## import_vouchers_using_csv
 
-> <VouchersImportCsvCreateResponseBody> import_vouchers_using_csv(file)
+> <VouchersImportCsvCreateResponseBody> import_vouchers_using_csv(opts)
 
 Import Vouchers using CSV
 
@@ -339,11 +339,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::VouchersApi.new
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import Vouchers using CSV
-  result = api_instance.import_vouchers_using_csv(file)
+  result = api_instance.import_vouchers_using_csv(opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling VouchersApi->import_vouchers_using_csv: #{e}"
@@ -354,7 +356,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -399,8 +401,8 @@ end
 api_instance = VoucherifySdk::VouchersApi.new
 code = 'code_example' # String | A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is 1.
 }
 
 begin
@@ -417,8 +419,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **code** | **String** | A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 
 ### Return type
 
@@ -521,7 +523,7 @@ end
 
 api_instance = VoucherifySdk::VouchersApi.new
 code = 'code_example' # String | A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
-vouchers_balance_update_request_body = VoucherifySdk::VouchersBalanceUpdateRequestBody.new({amount: 37}) # VouchersBalanceUpdateRequestBody | Provide the amount to be added to/subtracted from the voucher.
+vouchers_balance_update_request_body = VoucherifySdk::VouchersBalanceUpdateRequestBody.new # VouchersBalanceUpdateRequestBody | Provide the amount to be added to/subtracted from the voucher.
 
 begin
   # Add or Remove Voucher Balance

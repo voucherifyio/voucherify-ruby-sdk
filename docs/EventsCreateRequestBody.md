@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **event** | **String** | Event name. This is the same name that you used to define a custom event in the **Dashboard** &gt; **Project Settings** &gt; **Event Schema**. |  |
+| **event** | **String** | Event name. This is the same name that you used to define a custom event in the **Dashboard** &gt; **Project Settings** &gt; **Event Schema**. | [optional] |
 | **customer** | [**Customer**](Customer.md) |  |  |
 | **referral** | [**ClientEventsCreateRequestBodyReferral**](ClientEventsCreateRequestBodyReferral.md) |  | [optional] |
 | **loyalty** | [**ClientEventsCreateRequestBodyLoyalty**](ClientEventsCreateRequestBodyLoyalty.md) |  | [optional] |

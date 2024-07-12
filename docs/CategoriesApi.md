@@ -39,7 +39,7 @@ end
 
 api_instance = VoucherifySdk::CategoriesApi.new
 opts = {
-  categories_create_request_body: VoucherifySdk::CategoriesCreateRequestBody.new({name: 'name_example', hierarchy: 37}) # CategoriesCreateRequestBody | Specify the details of the category that you would like to create.
+  categories_create_request_body: VoucherifySdk::CategoriesCreateRequestBody.new # CategoriesCreateRequestBody | Specify the details of the category that you would like to create.
 }
 
 begin
@@ -270,7 +270,7 @@ end
 api_instance = VoucherifySdk::CategoriesApi.new
 category_id = 'category_id_example' # String | Unique category ID assigned by Voucherify.
 opts = {
-  categories_update_request_body: VoucherifySdk::CategoriesUpdateRequestBody.new({name: 'name_example', hierarchy: 37}) # CategoriesUpdateRequestBody | Specify the details of the category that you would like to update.
+  categories_update_request_body: VoucherifySdk::CategoriesUpdateRequestBody.new # CategoriesUpdateRequestBody | Specify the details of the category that you would like to update.
 }
 
 begin
