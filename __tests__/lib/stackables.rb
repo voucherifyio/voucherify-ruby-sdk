@@ -1,7 +1,7 @@
 def create_request_body_redeemable(voucher_id)
   begin
     validations_validate_request_body_redeemables = [
-      VoucherifySdk::RedeemVoucher.new({
+      VoucherifySdk::RedemptionEntryVoucher.new({
           object: "voucher", id: voucher_id
       })
     ]
