@@ -42,14 +42,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.add_voucher_with_specific_code_to_campaign ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling CampaignsApi.add_voucher_with_specific_code_to_campaign"
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling CampaignsApi.add_voucher_with_specific_code_to_campaign"
-      end
       # resource path
       local_var_path = '/v1/campaigns/{campaignId}/vouchers/{code}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'code' + '}', CGI.escape(code.to_s))
 
@@ -117,10 +109,6 @@ module VoucherifySdk
     private def add_vouchers_to_campaign_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.add_vouchers_to_campaign ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling CampaignsApi.add_vouchers_to_campaign"
       end
       # resource path
       local_var_path = '/v1/campaigns/{campaignId}/vouchers'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -253,10 +241,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.delete_campaign ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling CampaignsApi.delete_campaign"
-      end
       # resource path
       local_var_path = '/v1/campaigns/{campaignId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -317,10 +301,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.disable_campaign ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling CampaignsApi.disable_campaign"
-      end
       # resource path
       local_var_path = '/v1/campaigns/{campaignId}/disable'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -380,10 +360,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.enable_campaign ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling CampaignsApi.enable_campaign"
-      end
       # resource path
       local_var_path = '/v1/campaigns/{campaignId}/enable'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -442,10 +418,6 @@ module VoucherifySdk
     private def get_campaign_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.get_campaign ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling CampaignsApi.get_campaign"
       end
       # resource path
       local_var_path = '/v1/campaigns/{campaignId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -507,10 +479,6 @@ module VoucherifySdk
     private def import_vouchers_to_campaign_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.import_vouchers_to_campaign ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling CampaignsApi.import_vouchers_to_campaign"
       end
       # resource path
       local_var_path = '/v1/campaigns/{campaignId}/import'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -577,10 +545,6 @@ module VoucherifySdk
     private def import_vouchers_to_campaign_using_csv_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.import_vouchers_to_campaign_using_csv ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling CampaignsApi.import_vouchers_to_campaign_using_csv"
       end
       # resource path
       local_var_path = '/v1/campaigns/{campaignId}/importCSV'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -655,22 +619,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.list_campaigns ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CampaignsApi.list_campaigns, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CampaignsApi.list_campaigns, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling CampaignsApi.list_campaigns, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling CampaignsApi.list_campaigns, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/campaigns'
 
@@ -736,10 +684,6 @@ module VoucherifySdk
     private def update_campaign_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CampaignsApi.update_campaign ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling CampaignsApi.update_campaign"
       end
       # resource path
       local_var_path = '/v1/campaigns/{campaignId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))

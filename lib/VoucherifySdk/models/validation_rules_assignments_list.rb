@@ -88,15 +88,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ValidationRulesAssignmentsList` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ValidationRulesAssignmentsList`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -145,36 +138,6 @@ module VoucherifySdk
       return false unless data_ref_validator.valid?(@data_ref)
       return false if !@total.nil? && @total < 0
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["list"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] data_ref Object to be assigned
-    def data_ref=(data_ref)
-      validator = EnumAttributeValidator.new('String', ["data"])
-      unless validator.valid?(data_ref)
-        fail ArgumentError, "invalid value for \"data_ref\", must be one of #{validator.allowable_values}."
-      end
-      @data_ref = data_ref
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] total Value to be assigned
-    def total=(total)
-      if !total.nil? && total < 0
-        fail ArgumentError, 'invalid value for "total", must be greater than or equal to 0.'
-      end
-
-      @total = total
     end
 
     # Checks equality by comparing each attribute.

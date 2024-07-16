@@ -38,10 +38,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RedemptionsApi.get_redemption ...'
       end
-      # verify the required parameter 'redemption_id' is set
-      if @api_client.config.client_side_validation && redemption_id.nil?
-        fail ArgumentError, "Missing the required parameter 'redemption_id' when calling RedemptionsApi.get_redemption"
-      end
       # resource path
       local_var_path = '/v1/redemptions/{redemptionId}'.sub('{' + 'redemptionId' + '}', CGI.escape(redemption_id.to_s))
 
@@ -100,10 +96,6 @@ module VoucherifySdk
     private def get_voucher_redemptions_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RedemptionsApi.get_voucher_redemptions ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling RedemptionsApi.get_voucher_redemptions"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}/redemption'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
@@ -178,22 +170,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RedemptionsApi.list_redemptions ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RedemptionsApi.list_redemptions, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RedemptionsApi.list_redemptions, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling RedemptionsApi.list_redemptions, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling RedemptionsApi.list_redemptions, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/redemptions'
 
@@ -331,10 +307,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RedemptionsApi.rollback_redemption ...'
       end
-      # verify the required parameter 'redemption_id' is set
-      if @api_client.config.client_side_validation && redemption_id.nil?
-        fail ArgumentError, "Missing the required parameter 'redemption_id' when calling RedemptionsApi.rollback_redemption"
-      end
       # resource path
       local_var_path = '/v1/redemptions/{redemptionId}/rollback'.sub('{' + 'redemptionId' + '}', CGI.escape(redemption_id.to_s))
 
@@ -406,10 +378,6 @@ module VoucherifySdk
     private def rollback_stacked_redemptions_with_http_info(parent_redemption_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RedemptionsApi.rollback_stacked_redemptions ...'
-      end
-      # verify the required parameter 'parent_redemption_id' is set
-      if @api_client.config.client_side_validation && parent_redemption_id.nil?
-        fail ArgumentError, "Missing the required parameter 'parent_redemption_id' when calling RedemptionsApi.rollback_stacked_redemptions"
       end
       # resource path
       local_var_path = '/v1/redemptions/{parentRedemptionId}/rollbacks'.sub('{' + 'parentRedemptionId' + '}', CGI.escape(parent_redemption_id.to_s))

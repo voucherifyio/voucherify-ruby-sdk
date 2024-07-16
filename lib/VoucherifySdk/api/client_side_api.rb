@@ -104,10 +104,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ClientSideApi.redeem_stacked_discounts_client_side ...'
       end
-      # verify the required parameter 'origin' is set
-      if @api_client.config.client_side_validation && origin.nil?
-        fail ArgumentError, "Missing the required parameter 'origin' when calling ClientSideApi.redeem_stacked_discounts_client_side"
-      end
       # resource path
       local_var_path = '/client/v1/redemptions'
 
@@ -174,10 +170,6 @@ module VoucherifySdk
     private def track_custom_event_client_side_with_http_info(origin, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ClientSideApi.track_custom_event_client_side ...'
-      end
-      # verify the required parameter 'origin' is set
-      if @api_client.config.client_side_validation && origin.nil?
-        fail ArgumentError, "Missing the required parameter 'origin' when calling ClientSideApi.track_custom_event_client_side"
       end
       # resource path
       local_var_path = '/client/v1/events'
@@ -246,10 +238,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ClientSideApi.update_customers_consents_client_side ...'
       end
-      # verify the required parameter 'customer_id' is set
-      if @api_client.config.client_side_validation && customer_id.nil?
-        fail ArgumentError, "Missing the required parameter 'customer_id' when calling ClientSideApi.update_customers_consents_client_side"
-      end
       # resource path
       local_var_path = '/client/v1/customers/{customerId}/consents'.sub('{' + 'customerId' + '}', CGI.escape(customer_id.to_s))
 
@@ -313,10 +301,6 @@ module VoucherifySdk
     private def validate_stacked_discounts_client_side_with_http_info(origin, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ClientSideApi.validate_stacked_discounts_client_side ...'
-      end
-      # verify the required parameter 'origin' is set
-      if @api_client.config.client_side_validation && origin.nil?
-        fail ArgumentError, "Missing the required parameter 'origin' when calling ClientSideApi.validate_stacked_discounts_client_side"
       end
       # resource path
       local_var_path = '/client/v1/validations'

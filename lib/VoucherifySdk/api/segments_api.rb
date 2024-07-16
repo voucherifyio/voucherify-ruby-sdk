@@ -38,10 +38,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SegmentsApi.delete_segment ...'
       end
-      # verify the required parameter 'segment_id' is set
-      if @api_client.config.client_side_validation && segment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'segment_id' when calling SegmentsApi.delete_segment"
-      end
       # resource path
       local_var_path = '/v1/segments/{segmentId}'.sub('{' + 'segmentId' + '}', CGI.escape(segment_id.to_s))
 

@@ -40,10 +40,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.delete_voucher ...'
       end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.delete_voucher"
-      end
       # resource path
       local_var_path = '/v1/vouchers/{code}'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
 
@@ -101,10 +97,6 @@ module VoucherifySdk
     private def disable_voucher_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.disable_voucher ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.disable_voucher"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}/disable'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
@@ -164,10 +156,6 @@ module VoucherifySdk
     private def enable_voucher_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.enable_voucher ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.enable_voucher"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}/enable'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
@@ -229,10 +217,6 @@ module VoucherifySdk
     private def export_voucher_transactions_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.export_voucher_transactions ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.export_voucher_transactions"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}/transactions/export'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
@@ -297,10 +281,6 @@ module VoucherifySdk
     private def get_voucher_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.get_voucher ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.get_voucher"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
@@ -430,26 +410,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.list_voucher_transactions ...'
       end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.list_voucher_transactions"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling VouchersApi.list_voucher_transactions, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling VouchersApi.list_voucher_transactions, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling VouchersApi.list_voucher_transactions, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling VouchersApi.list_voucher_transactions, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/vouchers/{code}/transactions'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
 
@@ -513,14 +473,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.release_validation_session ...'
       end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.release_validation_session"
-      end
-      # verify the required parameter 'session_key' is set
-      if @api_client.config.client_side_validation && session_key.nil?
-        fail ArgumentError, "Missing the required parameter 'session_key' when calling VouchersApi.release_validation_session"
-      end
       # resource path
       local_var_path = '/v1/vouchers/{code}/sessions/{sessionKey}'.sub('{' + 'code' + '}', CGI.escape(code.to_s)).sub('{' + 'sessionKey' + '}', CGI.escape(session_key.to_s))
 
@@ -579,14 +531,6 @@ module VoucherifySdk
     private def update_voucher_balance_with_http_info(code, vouchers_balance_update_request_body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.update_voucher_balance ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.update_voucher_balance"
-      end
-      # verify the required parameter 'vouchers_balance_update_request_body' is set
-      if @api_client.config.client_side_validation && vouchers_balance_update_request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'vouchers_balance_update_request_body' when calling VouchersApi.update_voucher_balance"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}/balance'.sub('{' + 'code' + '}', CGI.escape(code.to_s))

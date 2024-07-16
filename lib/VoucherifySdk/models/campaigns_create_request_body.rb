@@ -182,15 +182,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CampaignsCreateRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CampaignsCreateRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -309,36 +302,6 @@ module VoucherifySdk
       campaign_type_validator = EnumAttributeValidator.new('String', ["DISCOUNT_COUPONS", "REFERRAL_PROGRAM", "GIFT_VOUCHERS", "LOYALTY_PROGRAM", "PROMOTION", "LUCKY_DRAW"])
       return false unless campaign_type_validator.valid?(@campaign_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] validation_rules Value to be assigned
-    def validation_rules=(validation_rules)
-      if !validation_rules.nil? && validation_rules.length > 1
-        fail ArgumentError, 'invalid value for "validation_rules", number of items must be less than or equal to 1.'
-      end
-
-      @validation_rules = validation_rules
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] campaign_type Object to be assigned
-    def campaign_type=(campaign_type)
-      validator = EnumAttributeValidator.new('String', ["DISCOUNT_COUPONS", "REFERRAL_PROGRAM", "GIFT_VOUCHERS", "LOYALTY_PROGRAM", "PROMOTION", "LUCKY_DRAW"])
-      unless validator.valid?(campaign_type)
-        fail ArgumentError, "invalid value for \"campaign_type\", must be one of #{validator.allowable_values}."
-      end
-      @campaign_type = campaign_type
     end
 
     # Checks equality by comparing each attribute.

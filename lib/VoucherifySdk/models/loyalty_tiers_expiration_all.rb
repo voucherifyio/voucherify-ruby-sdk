@@ -86,15 +86,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltyTiersExpirationAll` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltyTiersExpirationAll`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -132,26 +125,6 @@ module VoucherifySdk
       qualification_period_validator = EnumAttributeValidator.new('String', ["MONTH", "QUARTER", "HALF_YEAR", "YEAR"])
       return false unless qualification_period_validator.valid?(@qualification_period)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] qualification_type Object to be assigned
-    def qualification_type=(qualification_type)
-      validator = EnumAttributeValidator.new('String', ["BALANCE", "POINTS_IN_PERIOD"])
-      unless validator.valid?(qualification_type)
-        fail ArgumentError, "invalid value for \"qualification_type\", must be one of #{validator.allowable_values}."
-      end
-      @qualification_type = qualification_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] qualification_period Object to be assigned
-    def qualification_period=(qualification_period)
-      validator = EnumAttributeValidator.new('String', ["MONTH", "QUARTER", "HALF_YEAR", "YEAR"])
-      unless validator.valid?(qualification_period)
-        fail ArgumentError, "invalid value for \"qualification_period\", must be one of #{validator.allowable_values}."
-      end
-      @qualification_period = qualification_period
     end
 
     # Checks equality by comparing each attribute.

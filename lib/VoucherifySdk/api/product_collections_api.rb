@@ -102,10 +102,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductCollectionsApi.delete_product_collection ...'
       end
-      # verify the required parameter 'product_collection_id' is set
-      if @api_client.config.client_side_validation && product_collection_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_collection_id' when calling ProductCollectionsApi.delete_product_collection"
-      end
       # resource path
       local_var_path = '/v1/product-collections/{productCollectionId}'.sub('{' + 'productCollectionId' + '}', CGI.escape(product_collection_id.to_s))
 
@@ -162,10 +158,6 @@ module VoucherifySdk
     private def get_product_collection_with_http_info(product_collection_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductCollectionsApi.get_product_collection ...'
-      end
-      # verify the required parameter 'product_collection_id' is set
-      if @api_client.config.client_side_validation && product_collection_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_collection_id' when calling ProductCollectionsApi.get_product_collection"
       end
       # resource path
       local_var_path = '/v1/product-collections/{productCollectionId}'.sub('{' + 'productCollectionId' + '}', CGI.escape(product_collection_id.to_s))
@@ -230,22 +222,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductCollectionsApi.list_product_collections ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductCollectionsApi.list_product_collections, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductCollectionsApi.list_product_collections, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductCollectionsApi.list_product_collections, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductCollectionsApi.list_product_collections, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/product-collections'
 
@@ -316,26 +292,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductCollectionsApi.list_products_in_collection ...'
       end
-      # verify the required parameter 'product_collection_id' is set
-      if @api_client.config.client_side_validation && product_collection_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_collection_id' when calling ProductCollectionsApi.list_products_in_collection"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductCollectionsApi.list_products_in_collection, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductCollectionsApi.list_products_in_collection, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductCollectionsApi.list_products_in_collection, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductCollectionsApi.list_products_in_collection, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/product-collections/{productCollectionId}/products'.sub('{' + 'productCollectionId' + '}', CGI.escape(product_collection_id.to_s))
 

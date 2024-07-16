@@ -102,10 +102,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ExportsApi.delete_export ...'
       end
-      # verify the required parameter 'export_id' is set
-      if @api_client.config.client_side_validation && export_id.nil?
-        fail ArgumentError, "Missing the required parameter 'export_id' when calling ExportsApi.delete_export"
-      end
       # resource path
       local_var_path = '/v1/exports/{exportId}'.sub('{' + 'exportId' + '}', CGI.escape(export_id.to_s))
 
@@ -164,10 +160,6 @@ module VoucherifySdk
     private def download_export_with_http_info(export_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ExportsApi.download_export ...'
-      end
-      # verify the required parameter 'export_id' is set
-      if @api_client.config.client_side_validation && export_id.nil?
-        fail ArgumentError, "Missing the required parameter 'export_id' when calling ExportsApi.download_export"
       end
       # resource path
       local_var_path = '/v1/exports/{export_Id}'.sub('{' + 'export_Id' + '}', CGI.escape(export_id.to_s))
@@ -228,10 +220,6 @@ module VoucherifySdk
     private def get_export_with_http_info(export_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ExportsApi.get_export ...'
-      end
-      # verify the required parameter 'export_id' is set
-      if @api_client.config.client_side_validation && export_id.nil?
-        fail ArgumentError, "Missing the required parameter 'export_id' when calling ExportsApi.get_export"
       end
       # resource path
       local_var_path = '/v1/exports/{exportId}'.sub('{' + 'exportId' + '}', CGI.escape(export_id.to_s))
@@ -296,22 +284,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ExportsApi.list_exports ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ExportsApi.list_exports, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ExportsApi.list_exports, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ExportsApi.list_exports, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ExportsApi.list_exports, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/exports'
 

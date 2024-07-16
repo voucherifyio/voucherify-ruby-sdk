@@ -166,10 +166,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OrdersApi.get_order ...'
       end
-      # verify the required parameter 'order_id' is set
-      if @api_client.config.client_side_validation && order_id.nil?
-        fail ArgumentError, "Missing the required parameter 'order_id' when calling OrdersApi.get_order"
-      end
       # resource path
       local_var_path = '/v1/orders/{orderId}'.sub('{' + 'orderId' + '}', CGI.escape(order_id.to_s))
 
@@ -297,22 +293,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OrdersApi.list_orders ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling OrdersApi.list_orders, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling OrdersApi.list_orders, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling OrdersApi.list_orders, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling OrdersApi.list_orders, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/orders'
 
@@ -376,10 +356,6 @@ module VoucherifySdk
     private def update_order_with_http_info(order_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: OrdersApi.update_order ...'
-      end
-      # verify the required parameter 'order_id' is set
-      if @api_client.config.client_side_validation && order_id.nil?
-        fail ArgumentError, "Missing the required parameter 'order_id' when calling OrdersApi.update_order"
       end
       # resource path
       local_var_path = '/v1/orders/{orderId}'.sub('{' + 'orderId' + '}', CGI.escape(order_id.to_s))

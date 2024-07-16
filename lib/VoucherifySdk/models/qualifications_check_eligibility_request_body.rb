@@ -94,15 +94,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::QualificationsCheckEligibilityRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::QualificationsCheckEligibilityRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -146,16 +139,6 @@ module VoucherifySdk
       scenario_validator = EnumAttributeValidator.new('String', ["ALL", "CUSTOMER_WALLET", "AUDIENCE_ONLY", "PRODUCTS", "PRODUCTS_DISCOUNT", "PROMOTION_STACKS", "PRODUCTS_BY_CUSTOMER", "PRODUCTS_DISCOUNT_BY_CUSTOMER"])
       return false unless scenario_validator.valid?(@scenario)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] scenario Object to be assigned
-    def scenario=(scenario)
-      validator = EnumAttributeValidator.new('String', ["ALL", "CUSTOMER_WALLET", "AUDIENCE_ONLY", "PRODUCTS", "PRODUCTS_DISCOUNT", "PROMOTION_STACKS", "PRODUCTS_BY_CUSTOMER", "PRODUCTS_DISCOUNT_BY_CUSTOMER"])
-      unless validator.valid?(scenario)
-        fail ArgumentError, "invalid value for \"scenario\", must be one of #{validator.allowable_values}."
-      end
-      @scenario = scenario
     end
 
     # Checks equality by comparing each attribute.

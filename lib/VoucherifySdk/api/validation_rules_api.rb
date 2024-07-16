@@ -42,10 +42,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.create_validation_rule_assignment ...'
       end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.create_validation_rule_assignment"
-      end
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}/assignments'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s))
 
@@ -177,14 +173,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.delete_validation_rule_assignment ...'
       end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.delete_validation_rule_assignment"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling ValidationRulesApi.delete_validation_rule_assignment"
-      end
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}/assignments/{assignmentId}'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
 
@@ -242,10 +230,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.delete_validation_rules ...'
       end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.delete_validation_rules"
-      end
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s))
 
@@ -302,10 +286,6 @@ module VoucherifySdk
     private def get_validation_rule_with_http_info(validation_rule_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.get_validation_rule ...'
-      end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.get_validation_rule"
       end
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s))
@@ -372,26 +352,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.list_validation_rule_assignments ...'
       end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.list_validation_rule_assignments"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rule_assignments, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rule_assignments, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ValidationRulesApi.list_validation_rule_assignments, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ValidationRulesApi.list_validation_rule_assignments, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}/assignments'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s))
 
@@ -462,22 +422,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.list_validation_rules ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rules, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rules, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ValidationRulesApi.list_validation_rules, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ValidationRulesApi.list_validation_rules, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/validation-rules'
 
@@ -550,22 +494,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.list_validation_rules_assignments ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ValidationRulesApi.list_validation_rules_assignments, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ValidationRulesApi.list_validation_rules_assignments, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rules_assignments, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rules_assignments, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/validation-rules-assignments'
 
@@ -631,10 +559,6 @@ module VoucherifySdk
     private def update_validation_rule_with_http_info(validation_rule_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.update_validation_rule ...'
-      end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.update_validation_rule"
       end
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s))

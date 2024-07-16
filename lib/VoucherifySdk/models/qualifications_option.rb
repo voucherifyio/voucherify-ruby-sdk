@@ -93,15 +93,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::QualificationsOption` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::QualificationsOption`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -148,26 +141,6 @@ module VoucherifySdk
       sorting_rule_validator = EnumAttributeValidator.new('String', ["BEST_DEAL", "LEAST_DEAL", "DEFAULT"])
       return false unless sorting_rule_validator.valid?(@sorting_rule)
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] limit Value to be assigned
-    def limit=(limit)
-      if !limit.nil? && limit > 100
-        fail ArgumentError, 'invalid value for "limit", must be smaller than or equal to 100.'
-      end
-
-      @limit = limit
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] sorting_rule Object to be assigned
-    def sorting_rule=(sorting_rule)
-      validator = EnumAttributeValidator.new('String', ["BEST_DEAL", "LEAST_DEAL", "DEFAULT"])
-      unless validator.valid?(sorting_rule)
-        fail ArgumentError, "invalid value for \"sorting_rule\", must be one of #{validator.allowable_values}."
-      end
-      @sorting_rule = sorting_rule
     end
 
     # Checks equality by comparing each attribute.

@@ -87,15 +87,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::Session` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::Session`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -139,36 +132,6 @@ module VoucherifySdk
       ttl_unit_validator = EnumAttributeValidator.new('String', ["DAYS", "HOURS", "MICROSECONDS", "MILLISECONDS", "MINUTES", "NANOSECONDS", "SECONDS"])
       return false unless ttl_unit_validator.valid?(@ttl_unit)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] key Object to be assigned
-    def key=(key)
-      validator = EnumAttributeValidator.new('String', ["LOCK"])
-      unless validator.valid?(key)
-        fail ArgumentError, "invalid value for \"key\", must be one of #{validator.allowable_values}."
-      end
-      @key = key
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["LOCK"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] ttl_unit Object to be assigned
-    def ttl_unit=(ttl_unit)
-      validator = EnumAttributeValidator.new('String', ["DAYS", "HOURS", "MICROSECONDS", "MILLISECONDS", "MINUTES", "NANOSECONDS", "SECONDS"])
-      unless validator.valid?(ttl_unit)
-        fail ArgumentError, "invalid value for \"ttl_unit\", must be one of #{validator.allowable_values}."
-      end
-      @ttl_unit = ttl_unit
     end
 
     # Checks equality by comparing each attribute.

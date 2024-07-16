@@ -75,15 +75,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::PromotionStackBaseTiers` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::PromotionStackBaseTiers`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -120,26 +113,6 @@ module VoucherifySdk
       hierarchy_mode_validator = EnumAttributeValidator.new('String', ["MANUAL"])
       return false unless hierarchy_mode_validator.valid?(@hierarchy_mode)
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] ids Value to be assigned
-    def ids=(ids)
-      if !ids.nil? && ids.length < 1
-        fail ArgumentError, 'invalid value for "ids", number of items must be greater than or equal to 1.'
-      end
-
-      @ids = ids
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] hierarchy_mode Object to be assigned
-    def hierarchy_mode=(hierarchy_mode)
-      validator = EnumAttributeValidator.new('String', ["MANUAL"])
-      unless validator.valid?(hierarchy_mode)
-        fail ArgumentError, "invalid value for \"hierarchy_mode\", must be one of #{validator.allowable_values}."
-      end
-      @hierarchy_mode = hierarchy_mode
     end
 
     # Checks equality by comparing each attribute.

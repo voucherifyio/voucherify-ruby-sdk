@@ -80,15 +80,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ReferralProgram` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ReferralProgram`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -120,16 +113,6 @@ module VoucherifySdk
       conversion_event_type_validator = EnumAttributeValidator.new('String', ["redemption", "custom_event"])
       return false unless conversion_event_type_validator.valid?(@conversion_event_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] conversion_event_type Object to be assigned
-    def conversion_event_type=(conversion_event_type)
-      validator = EnumAttributeValidator.new('String', ["redemption", "custom_event"])
-      unless validator.valid?(conversion_event_type)
-        fail ArgumentError, "invalid value for \"conversion_event_type\", must be one of #{validator.allowable_values}."
-      end
-      @conversion_event_type = conversion_event_type
     end
 
     # Checks equality by comparing each attribute.

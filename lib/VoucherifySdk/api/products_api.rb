@@ -104,10 +104,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.create_sku ...'
       end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.create_sku"
-      end
       # resource path
       local_var_path = '/v1/products/{productId}/skus'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s))
 
@@ -174,10 +170,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.delete_product ...'
       end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.delete_product"
-      end
       # resource path
       local_var_path = '/v1/products/{productId}'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s))
 
@@ -240,14 +232,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.delete_sku ...'
       end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.delete_sku"
-      end
-      # verify the required parameter 'sku_id' is set
-      if @api_client.config.client_side_validation && sku_id.nil?
-        fail ArgumentError, "Missing the required parameter 'sku_id' when calling ProductsApi.delete_sku"
-      end
       # resource path
       local_var_path = '/v1/products/{productId}/skus/{skuId}'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s)).sub('{' + 'skuId' + '}', CGI.escape(sku_id.to_s))
 
@@ -305,10 +289,6 @@ module VoucherifySdk
     private def get_product_with_http_info(product_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.get_product ...'
-      end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.get_product"
       end
       # resource path
       local_var_path = '/v1/products/{productId}'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s))
@@ -368,10 +348,6 @@ module VoucherifySdk
     private def get_sku_with_http_info(sku_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.get_sku ...'
-      end
-      # verify the required parameter 'sku_id' is set
-      if @api_client.config.client_side_validation && sku_id.nil?
-        fail ArgumentError, "Missing the required parameter 'sku_id' when calling ProductsApi.get_sku"
       end
       # resource path
       local_var_path = '/v1/skus/{skuId}'.sub('{' + 'skuId' + '}', CGI.escape(sku_id.to_s))
@@ -570,22 +546,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.list_products ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductsApi.list_products, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductsApi.list_products, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductsApi.list_products, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductsApi.list_products, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/products'
 
@@ -660,26 +620,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.list_skus_in_product ...'
       end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.list_skus_in_product"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductsApi.list_skus_in_product, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductsApi.list_skus_in_product, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductsApi.list_skus_in_product, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductsApi.list_skus_in_product, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/products/{productId}/skus'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s))
 
@@ -745,10 +685,6 @@ module VoucherifySdk
     private def update_product_with_http_info(product_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.update_product ...'
-      end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.update_product"
       end
       # resource path
       local_var_path = '/v1/products/{productId}'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s))
@@ -945,14 +881,6 @@ module VoucherifySdk
     private def update_sku_with_http_info(product_id, sku_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.update_sku ...'
-      end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.update_sku"
-      end
-      # verify the required parameter 'sku_id' is set
-      if @api_client.config.client_side_validation && sku_id.nil?
-        fail ArgumentError, "Missing the required parameter 'sku_id' when calling ProductsApi.update_sku"
       end
       # resource path
       local_var_path = '/v1/products/{productId}/skus/{skuId}'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s)).sub('{' + 'skuId' + '}', CGI.escape(sku_id.to_s))

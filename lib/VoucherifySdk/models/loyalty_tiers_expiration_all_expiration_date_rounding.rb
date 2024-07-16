@@ -88,15 +88,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltyTiersExpirationAllExpirationDateRounding` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltyTiersExpirationAllExpirationDateRounding`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -138,36 +131,6 @@ module VoucherifySdk
       unit_validator = EnumAttributeValidator.new('String', ["MONTH"])
       return false unless unit_validator.valid?(@unit)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["MONTH", "QUARTER", "HALF_YEAR", "YEAR", "CUSTOM"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] strategy Object to be assigned
-    def strategy=(strategy)
-      validator = EnumAttributeValidator.new('String', ["START", "END"])
-      unless validator.valid?(strategy)
-        fail ArgumentError, "invalid value for \"strategy\", must be one of #{validator.allowable_values}."
-      end
-      @strategy = strategy
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] unit Object to be assigned
-    def unit=(unit)
-      validator = EnumAttributeValidator.new('String', ["MONTH"])
-      unless validator.valid?(unit)
-        fail ArgumentError, "invalid value for \"unit\", must be one of #{validator.allowable_values}."
-      end
-      @unit = unit
     end
 
     # Checks equality by comparing each attribute.

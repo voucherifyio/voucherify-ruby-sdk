@@ -40,10 +40,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.create_in_bulk_loyalty_tiers ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.create_in_bulk_loyalty_tiers"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/tiers'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -110,14 +106,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.delete_earning_rule ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.delete_earning_rule"
-      end
-      # verify the required parameter 'earning_rule_id' is set
-      if @api_client.config.client_side_validation && earning_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'earning_rule_id' when calling LoyaltiesApi.delete_earning_rule"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/earning-rules/{earningRuleId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'earningRuleId' + '}', CGI.escape(earning_rule_id.to_s))
 
@@ -176,10 +164,6 @@ module VoucherifySdk
     private def delete_loyalty_program_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.delete_loyalty_program ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.delete_loyalty_program"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -243,14 +227,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.delete_reward_assignment1 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.delete_reward_assignment1"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling LoyaltiesApi.delete_reward_assignment1"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/rewards/{assignmentId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
 
@@ -309,14 +285,6 @@ module VoucherifySdk
     private def disable_earning_rule_with_http_info(campaign_id, earning_rule_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.disable_earning_rule ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.disable_earning_rule"
-      end
-      # verify the required parameter 'earning_rule_id' is set
-      if @api_client.config.client_side_validation && earning_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'earning_rule_id' when calling LoyaltiesApi.disable_earning_rule"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/earning-rules/{earningRuleId}/disable'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'earningRuleId' + '}', CGI.escape(earning_rule_id.to_s))
@@ -379,14 +347,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.enable_earning_rule ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.enable_earning_rule"
-      end
-      # verify the required parameter 'earning_rule_id' is set
-      if @api_client.config.client_side_validation && earning_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'earning_rule_id' when calling LoyaltiesApi.enable_earning_rule"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/earning-rules/{earningRuleId}/enable'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'earningRuleId' + '}', CGI.escape(earning_rule_id.to_s))
 
@@ -447,10 +407,6 @@ module VoucherifySdk
     private def export_loyalty_card_transactions_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.export_loyalty_card_transactions ...'
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.export_loyalty_card_transactions"
       end
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/transactions/export'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
@@ -520,14 +476,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.export_loyalty_card_transactions1 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.export_loyalty_card_transactions1"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.export_loyalty_card_transactions1"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/transactions/export'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -594,14 +542,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_earning_rule ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.get_earning_rule"
-      end
-      # verify the required parameter 'earning_rule_id' is set
-      if @api_client.config.client_side_validation && earning_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'earning_rule_id' when calling LoyaltiesApi.get_earning_rule"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/earning-rules/{earningRuleId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'earningRuleId' + '}', CGI.escape(earning_rule_id.to_s))
 
@@ -662,14 +602,6 @@ module VoucherifySdk
     private def get_loyalty_tier_with_http_info(campaign_id, loyalty_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_loyalty_tier ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.get_loyalty_tier"
-      end
-      # verify the required parameter 'loyalty_tier_id' is set
-      if @api_client.config.client_side_validation && loyalty_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_tier_id' when calling LoyaltiesApi.get_loyalty_tier"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/tiers/{loyaltyTierId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'loyaltyTierId' + '}', CGI.escape(loyalty_tier_id.to_s))
@@ -732,14 +664,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_reward_assignment1 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.get_reward_assignment1"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling LoyaltiesApi.get_reward_assignment1"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/reward-assignments/{assignmentId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
 
@@ -801,14 +725,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_reward_assignment2 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.get_reward_assignment2"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling LoyaltiesApi.get_reward_assignment2"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/rewards/{assignmentId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
 
@@ -869,14 +785,6 @@ module VoucherifySdk
     private def get_reward_details_with_http_info(campaign_id, assignment_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_reward_details ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.get_reward_details"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling LoyaltiesApi.get_reward_details"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/reward-assignments/{assignmentId}/reward'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
@@ -941,26 +849,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_card_transactions ...'
       end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.list_loyalty_card_transactions"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_card_transactions, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_card_transactions, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_card_transactions, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_card_transactions, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/transactions'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1028,30 +916,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_card_transactions1 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.list_loyalty_card_transactions1"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.list_loyalty_card_transactions1"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_card_transactions1, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_card_transactions1, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_card_transactions1, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_card_transactions1, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/transactions'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1119,30 +983,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_tier_earning_rules ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.list_loyalty_tier_earning_rules"
-      end
-      # verify the required parameter 'loyalty_tier_id' is set
-      if @api_client.config.client_side_validation && loyalty_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_tier_id' when calling LoyaltiesApi.list_loyalty_tier_earning_rules"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_tier_earning_rules, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_tier_earning_rules, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_tier_earning_rules, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_tier_earning_rules, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/tiers/{loyaltyTierId}/earning-rules'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'loyaltyTierId' + '}', CGI.escape(loyalty_tier_id.to_s))
 
@@ -1205,14 +1045,6 @@ module VoucherifySdk
     private def list_loyalty_tier_rewards_with_http_info(campaign_id, loyalty_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_tier_rewards ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.list_loyalty_tier_rewards"
-      end
-      # verify the required parameter 'loyalty_tier_id' is set
-      if @api_client.config.client_side_validation && loyalty_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_tier_id' when calling LoyaltiesApi.list_loyalty_tier_rewards"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/tiers/{loyaltyTierId}/rewards'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'loyaltyTierId' + '}', CGI.escape(loyalty_tier_id.to_s))
@@ -1277,18 +1109,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_tiers ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.list_loyalty_tiers"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_tiers, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_tiers, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/tiers'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -1350,10 +1170,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_member_loyalty_tier ...'
       end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.list_member_loyalty_tier"
-      end
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/tiers'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1414,10 +1230,6 @@ module VoucherifySdk
     private def list_member_rewards_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_member_rewards ...'
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.list_member_rewards"
       end
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/rewards'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
@@ -1485,30 +1297,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_points_expiration ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.list_points_expiration"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.list_points_expiration"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_points_expiration, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_points_expiration, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_points_expiration, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_points_expiration, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/points-expiration'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1571,10 +1359,6 @@ module VoucherifySdk
     private def redeem_reward_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.redeem_reward ...'
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.redeem_reward"
       end
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/redemption'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
@@ -1644,14 +1428,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.redeem_reward1 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.redeem_reward1"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.redeem_reward1"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/redemption'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1720,14 +1496,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.transfer_points ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.transfer_points"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.transfer_points"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/transfers'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1793,10 +1561,6 @@ module VoucherifySdk
     private def update_loyalty_card_balance_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.update_loyalty_card_balance ...'
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.update_loyalty_card_balance"
       end
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/balance'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
@@ -1865,14 +1629,6 @@ module VoucherifySdk
     private def update_loyalty_card_balance1_with_http_info(campaign_id, member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.update_loyalty_card_balance1 ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.update_loyalty_card_balance1"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.update_loyalty_card_balance1"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/balance'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))

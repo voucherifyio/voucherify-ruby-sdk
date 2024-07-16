@@ -115,10 +115,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PublicationsApi.create_publication1 ...'
       end
-      # verify the required parameter 'customer' is set
-      if @api_client.config.client_side_validation && customer.nil?
-        fail ArgumentError, "Missing the required parameter 'customer' when calling PublicationsApi.create_publication1"
-      end
       # resource path
       local_var_path = '/v1/publications/create'
 
@@ -204,22 +200,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PublicationsApi.list_publications ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PublicationsApi.list_publications, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PublicationsApi.list_publications, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PublicationsApi.list_publications, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PublicationsApi.list_publications, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/publications'
 

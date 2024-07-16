@@ -40,10 +40,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.create_reward_assignment ...'
       end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.create_reward_assignment"
-      end
       # resource path
       local_var_path = '/v1/rewards/{rewardId}/assignments'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s))
 
@@ -108,10 +104,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.delete_reward ...'
       end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.delete_reward"
-      end
       # resource path
       local_var_path = '/v1/rewards/{rewardId}'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s))
 
@@ -171,14 +163,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.delete_reward_assignment ...'
       end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.delete_reward_assignment"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling RewardsApi.delete_reward_assignment"
-      end
       # resource path
       local_var_path = '/v1/rewards/{rewardId}/assignments/{assignmentId}'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
 
@@ -237,14 +221,6 @@ module VoucherifySdk
     private def get_reward_assignment_with_http_info(reward_id, assignment_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.get_reward_assignment ...'
-      end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.get_reward_assignment"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling RewardsApi.get_reward_assignment"
       end
       # resource path
       local_var_path = '/v1/rewards/{rewardId}/assignments/{assignmentId}'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
@@ -309,26 +285,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.list_reward_assignments ...'
       end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.list_reward_assignments"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RewardsApi.list_reward_assignments, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RewardsApi.list_reward_assignments, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling RewardsApi.list_reward_assignments, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling RewardsApi.list_reward_assignments, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/rewards/{rewardId}/assignments'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s))
 
@@ -393,14 +349,6 @@ module VoucherifySdk
     private def update_reward_assignment_with_http_info(reward_id, assignment_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.update_reward_assignment ...'
-      end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.update_reward_assignment"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling RewardsApi.update_reward_assignment"
       end
       # resource path
       local_var_path = '/v1/rewards/{rewardId}/assignments/{assignmentId}'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))

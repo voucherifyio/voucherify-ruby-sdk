@@ -73,15 +73,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ValidationsRedeemableSkippedDetails` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ValidationsRedeemableSkippedDetails`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -109,16 +102,6 @@ module VoucherifySdk
       key_validator = EnumAttributeValidator.new('String', ["applicable_redeemables_limit_exceeded", "applicable_redeemables_per_category_limit_exceeded", "applicable_exclusive_redeemables_limit_exceeded", "applicable_exclusive_redeemables_per_category_limit_exceeded", "exclusion_rules_not_met", "preceding_validation_failed"])
       return false unless key_validator.valid?(@key)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] key Object to be assigned
-    def key=(key)
-      validator = EnumAttributeValidator.new('String', ["applicable_redeemables_limit_exceeded", "applicable_redeemables_per_category_limit_exceeded", "applicable_exclusive_redeemables_limit_exceeded", "applicable_exclusive_redeemables_per_category_limit_exceeded", "exclusion_rules_not_met", "preceding_validation_failed"])
-      unless validator.valid?(key)
-        fail ArgumentError, "invalid value for \"key\", must be one of #{validator.allowable_values}."
-      end
-      @key = key
     end
 
     # Checks equality by comparing each attribute.

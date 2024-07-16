@@ -118,15 +118,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::StackingRules` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::StackingRules`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -250,96 +243,6 @@ module VoucherifySdk
       redeemables_sorting_rule_validator = EnumAttributeValidator.new('String', ["CATEGORY_HIERARCHY", "REQUESTED_ORDER"])
       return false unless redeemables_sorting_rule_validator.valid?(@redeemables_sorting_rule)
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] redeemables_limit Value to be assigned
-    def redeemables_limit=(redeemables_limit)
-      if !redeemables_limit.nil? && redeemables_limit > 30
-        fail ArgumentError, 'invalid value for "redeemables_limit", must be smaller than or equal to 30.'
-      end
-
-      if !redeemables_limit.nil? && redeemables_limit < 1
-        fail ArgumentError, 'invalid value for "redeemables_limit", must be greater than or equal to 1.'
-      end
-
-      @redeemables_limit = redeemables_limit
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] applicable_redeemables_limit Value to be assigned
-    def applicable_redeemables_limit=(applicable_redeemables_limit)
-      if !applicable_redeemables_limit.nil? && applicable_redeemables_limit > 30
-        fail ArgumentError, 'invalid value for "applicable_redeemables_limit", must be smaller than or equal to 30.'
-      end
-
-      if !applicable_redeemables_limit.nil? && applicable_redeemables_limit < 1
-        fail ArgumentError, 'invalid value for "applicable_redeemables_limit", must be greater than or equal to 1.'
-      end
-
-      @applicable_redeemables_limit = applicable_redeemables_limit
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] applicable_redeemables_per_category_limit Value to be assigned
-    def applicable_redeemables_per_category_limit=(applicable_redeemables_per_category_limit)
-      if !applicable_redeemables_per_category_limit.nil? && applicable_redeemables_per_category_limit > 5
-        fail ArgumentError, 'invalid value for "applicable_redeemables_per_category_limit", must be smaller than or equal to 5.'
-      end
-
-      if !applicable_redeemables_per_category_limit.nil? && applicable_redeemables_per_category_limit < 1
-        fail ArgumentError, 'invalid value for "applicable_redeemables_per_category_limit", must be greater than or equal to 1.'
-      end
-
-      @applicable_redeemables_per_category_limit = applicable_redeemables_per_category_limit
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] applicable_exclusive_redeemables_limit Value to be assigned
-    def applicable_exclusive_redeemables_limit=(applicable_exclusive_redeemables_limit)
-      if !applicable_exclusive_redeemables_limit.nil? && applicable_exclusive_redeemables_limit > 5
-        fail ArgumentError, 'invalid value for "applicable_exclusive_redeemables_limit", must be smaller than or equal to 5.'
-      end
-
-      if !applicable_exclusive_redeemables_limit.nil? && applicable_exclusive_redeemables_limit < 1
-        fail ArgumentError, 'invalid value for "applicable_exclusive_redeemables_limit", must be greater than or equal to 1.'
-      end
-
-      @applicable_exclusive_redeemables_limit = applicable_exclusive_redeemables_limit
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] applicable_exclusive_redeemables_per_category_limit Value to be assigned
-    def applicable_exclusive_redeemables_per_category_limit=(applicable_exclusive_redeemables_per_category_limit)
-      if !applicable_exclusive_redeemables_per_category_limit.nil? && applicable_exclusive_redeemables_per_category_limit > 5
-        fail ArgumentError, 'invalid value for "applicable_exclusive_redeemables_per_category_limit", must be smaller than or equal to 5.'
-      end
-
-      if !applicable_exclusive_redeemables_per_category_limit.nil? && applicable_exclusive_redeemables_per_category_limit < 1
-        fail ArgumentError, 'invalid value for "applicable_exclusive_redeemables_per_category_limit", must be greater than or equal to 1.'
-      end
-
-      @applicable_exclusive_redeemables_per_category_limit = applicable_exclusive_redeemables_per_category_limit
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] redeemables_application_mode Object to be assigned
-    def redeemables_application_mode=(redeemables_application_mode)
-      validator = EnumAttributeValidator.new('String', ["ALL", "PARTIAL"])
-      unless validator.valid?(redeemables_application_mode)
-        fail ArgumentError, "invalid value for \"redeemables_application_mode\", must be one of #{validator.allowable_values}."
-      end
-      @redeemables_application_mode = redeemables_application_mode
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] redeemables_sorting_rule Object to be assigned
-    def redeemables_sorting_rule=(redeemables_sorting_rule)
-      validator = EnumAttributeValidator.new('String', ["CATEGORY_HIERARCHY", "REQUESTED_ORDER"])
-      unless validator.valid?(redeemables_sorting_rule)
-        fail ArgumentError, "invalid value for \"redeemables_sorting_rule\", must be one of #{validator.allowable_values}."
-      end
-      @redeemables_sorting_rule = redeemables_sorting_rule
     end
 
     # Checks equality by comparing each attribute.

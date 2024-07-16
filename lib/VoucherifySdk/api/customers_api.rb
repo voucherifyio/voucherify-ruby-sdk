@@ -102,10 +102,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CustomersApi.customer_permanently_deletion ...'
       end
-      # verify the required parameter 'customer_id' is set
-      if @api_client.config.client_side_validation && customer_id.nil?
-        fail ArgumentError, "Missing the required parameter 'customer_id' when calling CustomersApi.customer_permanently_deletion"
-      end
       # resource path
       local_var_path = '/v1/customers/{customerId}/permanent-deletion'.sub('{' + 'customerId' + '}', CGI.escape(customer_id.to_s))
 
@@ -165,10 +161,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CustomersApi.delete_customer ...'
       end
-      # verify the required parameter 'customer_id' is set
-      if @api_client.config.client_side_validation && customer_id.nil?
-        fail ArgumentError, "Missing the required parameter 'customer_id' when calling CustomersApi.delete_customer"
-      end
       # resource path
       local_var_path = '/v1/customers/{customerId}'.sub('{' + 'customerId' + '}', CGI.escape(customer_id.to_s))
 
@@ -225,10 +217,6 @@ module VoucherifySdk
     private def get_customer_with_http_info(customer_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CustomersApi.get_customer ...'
-      end
-      # verify the required parameter 'customer_id' is set
-      if @api_client.config.client_side_validation && customer_id.nil?
-        fail ArgumentError, "Missing the required parameter 'customer_id' when calling CustomersApi.get_customer"
       end
       # resource path
       local_var_path = '/v1/customers/{customerId}'.sub('{' + 'customerId' + '}', CGI.escape(customer_id.to_s))
@@ -372,18 +360,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CustomersApi.list_customer_activities ...'
       end
-      # verify the required parameter 'customer_id' is set
-      if @api_client.config.client_side_validation && customer_id.nil?
-        fail ArgumentError, "Missing the required parameter 'customer_id' when calling CustomersApi.list_customer_activities"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CustomersApi.list_customer_activities, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CustomersApi.list_customer_activities, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/customers/{customerId}/activities'.sub('{' + 'customerId' + '}', CGI.escape(customer_id.to_s))
 
@@ -451,10 +427,6 @@ module VoucherifySdk
     private def list_customer_segments_with_http_info(customer_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CustomersApi.list_customer_segments ...'
-      end
-      # verify the required parameter 'customer_id' is set
-      if @api_client.config.client_side_validation && customer_id.nil?
-        fail ArgumentError, "Missing the required parameter 'customer_id' when calling CustomersApi.list_customer_segments"
       end
       # resource path
       local_var_path = '/v1/customers/{customerId}/segments'.sub('{' + 'customerId' + '}', CGI.escape(customer_id.to_s))
@@ -537,22 +509,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CustomersApi.list_customers ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CustomersApi.list_customers, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling CustomersApi.list_customers, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling CustomersApi.list_customers, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling CustomersApi.list_customers, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/customers'
 
@@ -626,10 +582,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CustomersApi.update_customer ...'
       end
-      # verify the required parameter 'customer_id' is set
-      if @api_client.config.client_side_validation && customer_id.nil?
-        fail ArgumentError, "Missing the required parameter 'customer_id' when calling CustomersApi.update_customer"
-      end
       # resource path
       local_var_path = '/v1/customers/{customerId}'.sub('{' + 'customerId' + '}', CGI.escape(customer_id.to_s))
 
@@ -695,10 +647,6 @@ module VoucherifySdk
     private def update_customers_consents_with_http_info(customer_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CustomersApi.update_customers_consents ...'
-      end
-      # verify the required parameter 'customer_id' is set
-      if @api_client.config.client_side_validation && customer_id.nil?
-        fail ArgumentError, "Missing the required parameter 'customer_id' when calling CustomersApi.update_customers_consents"
       end
       # resource path
       local_var_path = '/v1/customers/{customerId}/consents'.sub('{' + 'customerId' + '}', CGI.escape(customer_id.to_s))

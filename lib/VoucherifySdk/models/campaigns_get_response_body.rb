@@ -246,15 +246,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CampaignsGetResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CampaignsGetResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -414,46 +407,6 @@ module VoucherifySdk
       vouchers_generation_status_validator = EnumAttributeValidator.new('String', ["DONE", "IN_PROGRESS", "FAILED", "DRAFT", "MODIFYING"])
       return false unless vouchers_generation_status_validator.valid?(@vouchers_generation_status)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] campaign_type Object to be assigned
-    def campaign_type=(campaign_type)
-      validator = EnumAttributeValidator.new('String', ["LOYALTY_PROGRAM", "GIFT_VOUCHERS", "DISCOUNT_COUPONS", "PROMOTION", "REFERRAL_PROGRAM", "LUCKY_DRAW"])
-      unless validator.valid?(campaign_type)
-        fail ArgumentError, "invalid value for \"campaign_type\", must be one of #{validator.allowable_values}."
-      end
-      @campaign_type = campaign_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] creation_status Object to be assigned
-    def creation_status=(creation_status)
-      validator = EnumAttributeValidator.new('String', ["DONE", "IN_PROGRESS", "FAILED", "DRAFT", "MODIFYING"])
-      unless validator.valid?(creation_status)
-        fail ArgumentError, "invalid value for \"creation_status\", must be one of #{validator.allowable_values}."
-      end
-      @creation_status = creation_status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] vouchers_generation_status Object to be assigned
-    def vouchers_generation_status=(vouchers_generation_status)
-      validator = EnumAttributeValidator.new('String', ["DONE", "IN_PROGRESS", "FAILED", "DRAFT", "MODIFYING"])
-      unless validator.valid?(vouchers_generation_status)
-        fail ArgumentError, "invalid value for \"vouchers_generation_status\", must be one of #{validator.allowable_values}."
-      end
-      @vouchers_generation_status = vouchers_generation_status
     end
 
     # Checks equality by comparing each attribute.

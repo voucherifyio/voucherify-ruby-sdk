@@ -40,10 +40,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.create_promotion_stack ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.create_promotion_stack"
-      end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/stacks'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -110,14 +106,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.delete_promotion_stack ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.delete_promotion_stack"
-      end
-      # verify the required parameter 'stack_id' is set
-      if @api_client.config.client_side_validation && stack_id.nil?
-        fail ArgumentError, "Missing the required parameter 'stack_id' when calling PromotionsApi.delete_promotion_stack"
-      end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/stacks/{stackId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'stackId' + '}', CGI.escape(stack_id.to_s))
 
@@ -175,10 +163,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.delete_promotion_tier ...'
       end
-      # verify the required parameter 'promotion_tier_id' is set
-      if @api_client.config.client_side_validation && promotion_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'promotion_tier_id' when calling PromotionsApi.delete_promotion_tier"
-      end
       # resource path
       local_var_path = '/v1/promotions/tiers/{promotionTierId}'.sub('{' + 'promotionTierId' + '}', CGI.escape(promotion_tier_id.to_s))
 
@@ -235,10 +219,6 @@ module VoucherifySdk
     private def disable_promotion_tier_with_http_info(promotion_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.disable_promotion_tier ...'
-      end
-      # verify the required parameter 'promotion_tier_id' is set
-      if @api_client.config.client_side_validation && promotion_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'promotion_tier_id' when calling PromotionsApi.disable_promotion_tier"
       end
       # resource path
       local_var_path = '/v1/promotions/tiers/{promotionTierId}/disable'.sub('{' + 'promotionTierId' + '}', CGI.escape(promotion_tier_id.to_s))
@@ -298,10 +278,6 @@ module VoucherifySdk
     private def enable_promotion_tier_with_http_info(promotion_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.enable_promotion_tier ...'
-      end
-      # verify the required parameter 'promotion_tier_id' is set
-      if @api_client.config.client_side_validation && promotion_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'promotion_tier_id' when calling PromotionsApi.enable_promotion_tier"
       end
       # resource path
       local_var_path = '/v1/promotions/tiers/{promotionTierId}/enable'.sub('{' + 'promotionTierId' + '}', CGI.escape(promotion_tier_id.to_s))
@@ -364,14 +340,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.get_promotion_stack ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.get_promotion_stack"
-      end
-      # verify the required parameter 'stack_id' is set
-      if @api_client.config.client_side_validation && stack_id.nil?
-        fail ArgumentError, "Missing the required parameter 'stack_id' when calling PromotionsApi.get_promotion_stack"
-      end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/stacks/{stackId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'stackId' + '}', CGI.escape(stack_id.to_s))
 
@@ -430,10 +398,6 @@ module VoucherifySdk
     private def get_promotion_tier_with_http_info(promotion_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.get_promotion_tier ...'
-      end
-      # verify the required parameter 'promotion_tier_id' is set
-      if @api_client.config.client_side_validation && promotion_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'promotion_tier_id' when calling PromotionsApi.get_promotion_tier"
       end
       # resource path
       local_var_path = '/v1/promotions/tiers/{promotionTierId}'.sub('{' + 'promotionTierId' + '}', CGI.escape(promotion_tier_id.to_s))
@@ -502,22 +466,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.list_all_promotion_stacks ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PromotionsApi.list_all_promotion_stacks, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PromotionsApi.list_all_promotion_stacks, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PromotionsApi.list_all_promotion_stacks, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PromotionsApi.list_all_promotion_stacks, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/promotions/stacks'
 
@@ -582,10 +530,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.list_promotion_stacks_in_campaign ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.list_promotion_stacks_in_campaign"
-      end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/stacks'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -644,10 +588,6 @@ module VoucherifySdk
     private def list_promotion_tiers_from_campaign_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.list_promotion_tiers_from_campaign ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.list_promotion_tiers_from_campaign"
       end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/tiers'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -711,14 +651,6 @@ module VoucherifySdk
     private def update_promotion_stack_with_http_info(campaign_id, stack_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.update_promotion_stack ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.update_promotion_stack"
-      end
-      # verify the required parameter 'stack_id' is set
-      if @api_client.config.client_side_validation && stack_id.nil?
-        fail ArgumentError, "Missing the required parameter 'stack_id' when calling PromotionsApi.update_promotion_stack"
       end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/stacks/{stackId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'stackId' + '}', CGI.escape(stack_id.to_s))

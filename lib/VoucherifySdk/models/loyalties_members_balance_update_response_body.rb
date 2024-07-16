@@ -104,15 +104,8 @@ module VoucherifySdk
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltiesMembersBalanceUpdateResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltiesMembersBalanceUpdateResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -177,46 +170,6 @@ module VoucherifySdk
       operation_type_validator = EnumAttributeValidator.new('String', ["MANUAL", "AUTOMATIC"])
       return false unless operation_type_validator.valid?(@operation_type)
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] balance Value to be assigned
-    def balance=(balance)
-      if !balance.nil? && balance < 0
-        fail ArgumentError, 'invalid value for "balance", must be greater than or equal to 0.'
-      end
-
-      @balance = balance
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["loyalty_card", "gift_voucher"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["balance"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] operation_type Object to be assigned
-    def operation_type=(operation_type)
-      validator = EnumAttributeValidator.new('String', ["MANUAL", "AUTOMATIC"])
-      unless validator.valid?(operation_type)
-        fail ArgumentError, "invalid value for \"operation_type\", must be one of #{validator.allowable_values}."
-      end
-      @operation_type = operation_type
     end
 
     # Checks equality by comparing each attribute.
