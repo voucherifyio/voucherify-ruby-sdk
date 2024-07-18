@@ -9,7 +9,7 @@ RSpec.describe 'Publications API', :order => :defined do
   it 'create a publication', :order => :first do
     publication = @publications_api_instance.create_publication({
         join_once: true,
-        publications_create_request_body: VoucherifySdk::CreatePublicationWithCampaign.new({
+        publications_create_request_body: VoucherifySdk::PublicationsCreateRequestBody.new({
           customer: VoucherifySdk::Customer.new({
             id: @voucherify_data.get_customer().id
           }),

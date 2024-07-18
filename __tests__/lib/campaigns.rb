@@ -50,20 +50,21 @@ end
 def create_discount_campaign(campaigns_api_instance, validation_rule_id)
     begin
         campaign = campaigns_api_instance.create_campaign({
-            campaigns_create_request_body: VoucherifySdk::CampaignsCreateDiscountCouponsCampaign.new({
+            campaigns_create_request_body: VoucherifySdk::CampaignsCreateRequestBody.new({
                 campaign_type: "DISCOUNT_COUPONS",
                 name: generate_random_string(),
                 type: "AUTO_UPDATE",
-                voucher: VoucherifySdk::DiscountCouponsCampaignVoucher.new({
-                    discount: VoucherifySdk::DiscountAmount.new({
-                        type: "AMOUNT",
+                voucher: VoucherifySdk::CampaignsCreateRequestBodyVoucher.new({
+                    type: 'DISCOUNT_VOUCHER',
+                    discount: VoucherifySdk::Discount.new({
+                        type: 'AMOUNT',
                         amount_off: 1000
                     })
                 }),
                 validation_rules: [validation_rule_id]
             })
         })
-
+        
         return campaign
     rescue VoucherifySdk::ApiError => e
         return nil

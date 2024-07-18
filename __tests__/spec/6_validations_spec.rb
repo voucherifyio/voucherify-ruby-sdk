@@ -41,7 +41,7 @@ RSpec.describe 'Validations API', :order => :defined do
     expect(redeemable.order).to be_a(VoucherifySdk::OrderCalculated)
     expect(redeemable.applicable_to).to be_a(VoucherifySdk::ApplicableToResultList)
     expect(redeemable.inapplicable_to).to be_a(VoucherifySdk::InapplicableToResultList)
-    expect(redeemable.result).to be_a(VoucherifySdk::RedeemableResultPromotionTier)
+    expect(redeemable.result).to be_a(VoucherifySdk::ValidationsValidateResponseBodyRedeemablesItemResult)
   end
 
   it 'validates the order object structure (successful)', :order => :fourth do
