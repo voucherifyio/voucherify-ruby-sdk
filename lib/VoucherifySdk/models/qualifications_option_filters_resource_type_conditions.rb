@@ -14,39 +14,15 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Data filters used to narrow the data records to be returned in the result.
+  # Data filters used to narrow down the data records to be returned in the result.
   class QualificationsOptionFiltersResourceTypeConditions
     attr_accessor :is
 
     attr_accessor :is_not
 
-    # Array of qualified redeemables. Accepts more than one value. Returns the resource types entered in the array.
     attr_accessor :_in
 
-    # Array of qualified redeemables. Accepts more than one value. Returns the resource types except those entered in the array.
     attr_accessor :not_in
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -66,8 +42,8 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'is' => :'ResourceTypes',
-        :'is_not' => :'ResourceTypes',
+        :'is' => :'Array<ResourceTypes>',
+        :'is_not' => :'Array<ResourceTypes>',
         :'_in' => :'Array<ResourceTypes>',
         :'not_in' => :'Array<ResourceTypes>'
       }
@@ -76,30 +52,31 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'is',
+        :'is_not',
+        :'_in',
+        :'not_in'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::QualificationsOptionFiltersResourceTypeConditions` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::QualificationsOptionFiltersResourceTypeConditions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'is')
-        self.is = attributes[:'is']
+        if (value = attributes[:'is']).is_a?(Array)
+          self.is = value
+        end
       end
 
       if attributes.key?(:'is_not')
-        self.is_not = attributes[:'is_not']
+        if (value = attributes[:'is_not']).is_a?(Array)
+          self.is_not = value
+        end
       end
 
       if attributes.key?(:'_in')

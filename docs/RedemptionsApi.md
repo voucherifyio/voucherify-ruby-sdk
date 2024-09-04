@@ -156,8 +156,8 @@ end
 
 api_instance = VoucherifySdk::RedemptionsApi.new
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   result: 'result_example', # String | A filter on the list based on the redemption result. Available options are: SUCCESS, FAILURE. You can provide multiple values by repeating the param.
   campaign: 'campaign_example', # String | A filter by the campaign **name** that the redemption resources originate from.
   customer: 'customer_example', # String | Return redemptions performed by the customer with given id or source_id.
@@ -179,8 +179,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **result** | **String** | A filter on the list based on the redemption result. Available options are: SUCCESS, FAILURE. You can provide multiple values by repeating the param. | [optional] |
 | **campaign** | **String** | A filter by the campaign **name** that the redemption resources originate from. | [optional] |
 | **customer** | **String** | Return redemptions performed by the customer with given id or source_id. | [optional] |
@@ -230,7 +230,7 @@ end
 
 api_instance = VoucherifySdk::RedemptionsApi.new
 opts = {
-  redemptions_redeem_request_body: VoucherifySdk::RedemptionsRedeemRequestBody.new({redeemables: [VoucherifySdk::RedeemGiftCard.new({object: 'voucher', id: 'id_example'})]}) # RedemptionsRedeemRequestBody | 
+  redemptions_redeem_request_body: VoucherifySdk::RedemptionsRedeemRequestBody.new # RedemptionsRedeemRequestBody | 
 }
 
 begin
@@ -268,7 +268,7 @@ end
 
 Rollback Redemption
 
-Your business logic may include a case when you need to undo a redemption. You can revert a redemption by calling this API endpoint.   # Effect  The operation  - creates a rollback entry in vouchers redemption history (redemption.redemption_entries) and  - gives 1 redemption back to the pool (decreases redeemed_quantity by 1).  # Returned funds  In case of *gift card vouchers*, this method returns funds back according to the source redemption. In case of *loyalty card vouchers*, this method returns points back according to the source redemption.
+Your business logic may include a case when you need to undo a redemption. You can revert a redemption by calling this API endpoint.  🚧  You can roll back a redemption up to 3 months back.   # Effect  The operation  - creates a rollback entry in vouchers redemption history (redemption.redemption_entries) and  - gives 1 redemption back to the pool (decreases redeemed_quantity by 1).  # Returned funds  In case of *gift card vouchers*, this method returns funds back according to the source redemption. In case of *loyalty card vouchers*, this method returns points back according to the source redemption.
 
 ### Examples
 
@@ -334,7 +334,7 @@ end
 
 Rollback Stackable Redemptions
 
-Rollback a stackable redemption. When you rollback a stacked redemption, all child redemptions will be rolled back. Provide the parent redemption ID as the path parameter.
+Rollback a stackable redemption. When you rollback a stacked redemption, all child redemptions will be rolled back. Provide the parent redemption ID as the path parameter.  🚧   You can roll back a redemption up to 3 months back.
 
 ### Examples
 

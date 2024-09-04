@@ -4,7 +4,12 @@ All URIs are relative to *https://api.voucherify.io*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**add_member**](LoyaltiesApi.md#add_member) | **POST** /v1/loyalties/{campaignId}/members | Add Member |
+| [**create_earning_rule**](LoyaltiesApi.md#create_earning_rule) | **POST** /v1/loyalties/{campaignId}/earning-rules | Create Earning Rule |
 | [**create_in_bulk_loyalty_tiers**](LoyaltiesApi.md#create_in_bulk_loyalty_tiers) | **POST** /v1/loyalties/{campaignId}/tiers | Create loyalty tiers |
+| [**create_loyalty_program**](LoyaltiesApi.md#create_loyalty_program) | **POST** /v1/loyalties | Create Loyalty Campaign |
+| [**create_points_expiration_export**](LoyaltiesApi.md#create_points_expiration_export) | **POST** /v1/loyalties/{campaignId}/points-expiration/export | Create Points Expiration Export |
+| [**create_reward_assignment1**](LoyaltiesApi.md#create_reward_assignment1) | **POST** /v1/loyalties/{campaignId}/rewards | Create Reward Assignment |
 | [**delete_earning_rule**](LoyaltiesApi.md#delete_earning_rule) | **DELETE** /v1/loyalties/{campaignId}/earning-rules/{earningRuleId} | Delete Earning Rule |
 | [**delete_loyalty_program**](LoyaltiesApi.md#delete_loyalty_program) | **DELETE** /v1/loyalties/{campaignId} | Delete Loyalty Campaign |
 | [**delete_reward_assignment1**](LoyaltiesApi.md#delete_reward_assignment1) | **DELETE** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Delete Reward Assignment |
@@ -13,23 +18,160 @@ All URIs are relative to *https://api.voucherify.io*
 | [**export_loyalty_card_transactions**](LoyaltiesApi.md#export_loyalty_card_transactions) | **POST** /v1/loyalties/members/{memberId}/transactions/export | Export Loyalty Card Transactions |
 | [**export_loyalty_card_transactions1**](LoyaltiesApi.md#export_loyalty_card_transactions1) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/transactions/export | Export Loyalty Card Transactions |
 | [**get_earning_rule**](LoyaltiesApi.md#get_earning_rule) | **GET** /v1/loyalties/{campaignId}/earning-rules/{earningRuleId} | Get Earning Rule |
+| [**get_loyalty_program**](LoyaltiesApi.md#get_loyalty_program) | **GET** /v1/loyalties/{campaignId} | Get Loyalty Campaign |
 | [**get_loyalty_tier**](LoyaltiesApi.md#get_loyalty_tier) | **GET** /v1/loyalties/{campaignId}/tiers/{loyaltyTierId} | Get Loyalty Tier |
+| [**get_member**](LoyaltiesApi.md#get_member) | **GET** /v1/loyalties/members/{memberId} | Get Member |
+| [**get_member1**](LoyaltiesApi.md#get_member1) | **GET** /v1/loyalties/{campaignId}/members/{memberId} | Get Member |
 | [**get_reward_assignment1**](LoyaltiesApi.md#get_reward_assignment1) | **GET** /v1/loyalties/{campaignId}/reward-assignments/{assignmentId} | Get Reward Assignment |
 | [**get_reward_assignment2**](LoyaltiesApi.md#get_reward_assignment2) | **GET** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Get Reward Assignment |
 | [**get_reward_details**](LoyaltiesApi.md#get_reward_details) | **GET** /v1/loyalties/{campaignId}/reward-assignments/{assignmentId}/reward | Get Reward Details |
+| [**list_earning_rules**](LoyaltiesApi.md#list_earning_rules) | **GET** /v1/loyalties/{campaignId}/earning-rules | List Earning Rules |
 | [**list_loyalty_card_transactions**](LoyaltiesApi.md#list_loyalty_card_transactions) | **GET** /v1/loyalties/members/{memberId}/transactions | List Loyalty Card Transactions |
 | [**list_loyalty_card_transactions1**](LoyaltiesApi.md#list_loyalty_card_transactions1) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/transactions | List Loyalty Card Transactions |
+| [**list_loyalty_programs**](LoyaltiesApi.md#list_loyalty_programs) | **GET** /v1/loyalties | List Loyalty Campaigns |
 | [**list_loyalty_tier_earning_rules**](LoyaltiesApi.md#list_loyalty_tier_earning_rules) | **GET** /v1/loyalties/{campaignId}/tiers/{loyaltyTierId}/earning-rules | List Loyalty Tier Earning Rules |
 | [**list_loyalty_tier_rewards**](LoyaltiesApi.md#list_loyalty_tier_rewards) | **GET** /v1/loyalties/{campaignId}/tiers/{loyaltyTierId}/rewards | List Loyalty Tier Rewards |
 | [**list_loyalty_tiers**](LoyaltiesApi.md#list_loyalty_tiers) | **GET** /v1/loyalties/{campaignId}/tiers | List Loyalty Tiers |
+| [**list_member_activity**](LoyaltiesApi.md#list_member_activity) | **GET** /v1/loyalties/members/{memberId}/activity | List Member Activity |
+| [**list_member_activity1**](LoyaltiesApi.md#list_member_activity1) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/activity | List Member Activity |
 | [**list_member_loyalty_tier**](LoyaltiesApi.md#list_member_loyalty_tier) | **GET** /v1/loyalties/members/{memberId}/tiers | List Member&#39;s Loyalty Tiers |
 | [**list_member_rewards**](LoyaltiesApi.md#list_member_rewards) | **GET** /v1/loyalties/members/{memberId}/rewards | List Member Rewards |
+| [**list_members**](LoyaltiesApi.md#list_members) | **GET** /v1/loyalties/{campaignId}/members | List Members |
 | [**list_points_expiration**](LoyaltiesApi.md#list_points_expiration) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/points-expiration | Get Points Expiration |
+| [**list_reward_assignments1**](LoyaltiesApi.md#list_reward_assignments1) | **GET** /v1/loyalties/{campaignId}/reward-assignments | List Reward Assignments |
+| [**list_reward_assignments2**](LoyaltiesApi.md#list_reward_assignments2) | **GET** /v1/loyalties/{campaignId}/rewards | List Reward Assignments |
 | [**redeem_reward**](LoyaltiesApi.md#redeem_reward) | **POST** /v1/loyalties/members/{memberId}/redemption | Redeem Reward |
 | [**redeem_reward1**](LoyaltiesApi.md#redeem_reward1) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/redemption | Redeem Reward |
 | [**transfer_points**](LoyaltiesApi.md#transfer_points) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/transfers | Transfer Loyalty Points |
+| [**update_earning_rule**](LoyaltiesApi.md#update_earning_rule) | **PUT** /v1/loyalties/{campaignId}/earning-rules/{earningRuleId} | Update Earning Rule |
 | [**update_loyalty_card_balance**](LoyaltiesApi.md#update_loyalty_card_balance) | **POST** /v1/loyalties/members/{memberId}/balance | Add or Remove Loyalty Card Balance |
 | [**update_loyalty_card_balance1**](LoyaltiesApi.md#update_loyalty_card_balance1) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/balance | Add or Remove Loyalty Card Balance |
+| [**update_loyalty_program**](LoyaltiesApi.md#update_loyalty_program) | **PUT** /v1/loyalties/{campaignId} | Update Loyalty Campaign |
+| [**update_reward_assignment1**](LoyaltiesApi.md#update_reward_assignment1) | **PUT** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Update Reward Assignment |
+
+
+## add_member
+
+> <LoyaltiesMembersCreateResponseBody> add_member(campaign_id, opts)
+
+Add Member
+
+This method assigns a loyalty card to a customer. It selects a loyalty card suitable for publication, adds a publish entry, and returns the published voucher.   A voucher is suitable for publication when its active and hasnt been published yet.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use **auto-update** campaign.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | Unique campaign ID of the loyalty program.
+opts = {
+  loyalties_members_create_request_body: VoucherifySdk::LoyaltiesMembersCreateRequestBody.new # LoyaltiesMembersCreateRequestBody | Provide details to whom the loyalty card should be assigned.     You can choose to either specify the exact loyalty card code that you want to publish from existin (non-assigned) codes, or choose not to specify a voucher code. If you choose not to specify a code in the request paylaod, then the system will choose the next available voucher code available to be assigned to a customer.   You can also include metadata in the request payload. This metadata will be assigned to the publication object, but will not be returned in the response to this endpoint. To see of publications (assignments of particular codes to customers) and publication metadata, use the List Publications endpoint.
+}
+
+begin
+  # Add Member
+  result = api_instance.add_member(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->add_member: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Unique campaign ID of the loyalty program. |  |
+| **loyalties_members_create_request_body** | [**LoyaltiesMembersCreateRequestBody**](LoyaltiesMembersCreateRequestBody.md) | Provide details to whom the loyalty card should be assigned.     You can choose to either specify the exact loyalty card code that you want to publish from existin (non-assigned) codes, or choose not to specify a voucher code. If you choose not to specify a code in the request paylaod, then the system will choose the next available voucher code available to be assigned to a customer.   You can also include metadata in the request payload. This metadata will be assigned to the publication object, but will not be returned in the response to this endpoint. To see of publications (assignments of particular codes to customers) and publication metadata, use the List Publications endpoint. | [optional] |
+
+### Return type
+
+[**LoyaltiesMembersCreateResponseBody**](LoyaltiesMembersCreateResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_earning_rule
+
+> <Array<LoyaltiesEarningRulesCreateResponseBody>> create_earning_rule(campaign_id, opts)
+
+Create Earning Rule
+
+Create earning rules for a loyalty campaign.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+opts = {
+  loyalties_earning_rules_create_request_body_item: [VoucherifySdk::LoyaltiesEarningRulesCreateRequestBodyItem.new] # Array<LoyaltiesEarningRulesCreateRequestBodyItem> | Customize the request body based on the type of earning rules you would like to create. The request body is an array of objects. The required minimum properties to include in the payload for each object are event and loyalty. Additionally, if you choose to add a validity_timeframe, you must include a start_date. Furthermore, an earning rule event type:   - customer.segment.entered requires a segment object - a custom event requires a custom_event object - a customer.loyalty.tier.joined, customer.loyalty.tier.left, customer.loyalty.tier.upgraded, customer.loyalty.tier.downgraded, customer.loyalty.tier.prolonged requires a loyalty_tier object
+}
+
+begin
+  # Create Earning Rule
+  result = api_instance.create_earning_rule(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->create_earning_rule: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **loyalties_earning_rules_create_request_body_item** | [**Array&lt;LoyaltiesEarningRulesCreateRequestBodyItem&gt;**](LoyaltiesEarningRulesCreateRequestBodyItem.md) | Customize the request body based on the type of earning rules you would like to create. The request body is an array of objects. The required minimum properties to include in the payload for each object are event and loyalty. Additionally, if you choose to add a validity_timeframe, you must include a start_date. Furthermore, an earning rule event type:   - customer.segment.entered requires a segment object - a custom event requires a custom_event object - a customer.loyalty.tier.joined, customer.loyalty.tier.left, customer.loyalty.tier.upgraded, customer.loyalty.tier.downgraded, customer.loyalty.tier.prolonged requires a loyalty_tier object | [optional] |
+
+### Return type
+
+[**Array&lt;LoyaltiesEarningRulesCreateResponseBody&gt;**](LoyaltiesEarningRulesCreateResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## create_in_bulk_loyalty_tiers
@@ -61,7 +203,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique loyalty campaign ID or name.
 opts = {
-  loyalties_tiers_create_in_bulk_request_body_item: [VoucherifySdk::LoyaltiesTiersCreateInBulkRequestBodyItem.new({name: 'name_example', points: VoucherifySdk::LoyaltyTierBasePoints.new})] # Array<LoyaltiesTiersCreateInBulkRequestBodyItem> | Provide tier definitions you want to add to existing loyalty campaign.
+  loyalties_tiers_create_in_bulk_request_body_item: [VoucherifySdk::LoyaltiesTiersCreateInBulkRequestBodyItem.new] # Array<LoyaltiesTiersCreateInBulkRequestBodyItem> | Provide tier definitions you want to add to existing loyalty campaign.
 }
 
 begin
@@ -83,6 +225,190 @@ end
 ### Return type
 
 [**Array&lt;LoyaltyTier&gt;**](LoyaltyTier.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_loyalty_program
+
+> <LoyaltiesCreateCampaignResponseBody> create_loyalty_program(opts)
+
+Create Loyalty Campaign
+
+Creates a batch of loyalty cards aggregated in a single loyalty campaign. It also allows you to define a custom codes pattern.    📘 Global uniqueness  All codes are unique across the whole project. Voucherify wont allow to generate the same codes in any of your campaigns.  🚧 Asyncronous action!  This is an asynchronous action, you cant read or modify a newly created campaign until the code generation is completed. See creation_status field in the loyalty campaign object description.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+opts = {
+  loyalties_create_campaign_request_body: VoucherifySdk::LoyaltiesCreateCampaignRequestBody.new # LoyaltiesCreateCampaignRequestBody | Specify the loyalty campaign details.
+}
+
+begin
+  # Create Loyalty Campaign
+  result = api_instance.create_loyalty_program(opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->create_loyalty_program: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **loyalties_create_campaign_request_body** | [**LoyaltiesCreateCampaignRequestBody**](LoyaltiesCreateCampaignRequestBody.md) | Specify the loyalty campaign details. | [optional] |
+
+### Return type
+
+[**LoyaltiesCreateCampaignResponseBody**](LoyaltiesCreateCampaignResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_points_expiration_export
+
+> <LoyaltiesPointsExpirationExportCreateResponseBody> create_points_expiration_export(campaign_id, opts)
+
+Create Points Expiration Export
+
+Schedule the generation of a points expiration CSV file for a particular campaign.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | Unique campaign ID or name.
+opts = {
+  loyalties_points_expiration_export_create_request_body: VoucherifySdk::LoyaltiesPointsExpirationExportCreateRequestBody.new # LoyaltiesPointsExpirationExportCreateRequestBody | Specify the data filters, types of data to return and order in which the results should be returned.
+}
+
+begin
+  # Create Points Expiration Export
+  result = api_instance.create_points_expiration_export(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->create_points_expiration_export: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Unique campaign ID or name. |  |
+| **loyalties_points_expiration_export_create_request_body** | [**LoyaltiesPointsExpirationExportCreateRequestBody**](LoyaltiesPointsExpirationExportCreateRequestBody.md) | Specify the data filters, types of data to return and order in which the results should be returned. | [optional] |
+
+### Return type
+
+[**LoyaltiesPointsExpirationExportCreateResponseBody**](LoyaltiesPointsExpirationExportCreateResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## create_reward_assignment1
+
+> <LoyaltiesRewardsCreateAssignmentResponseBody> create_reward_assignment1(campaign_id, opts)
+
+Create Reward Assignment
+
+Add rewards to a loyalty campaign.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+opts = {
+  loyalties_rewards_create_assignment_item_request_body: [VoucherifySdk::LoyaltiesRewardsCreateAssignmentItemRequestBody.new] # Array<LoyaltiesRewardsCreateAssignmentItemRequestBody> | Define the cost of the rewards in loyalty points.
+}
+
+begin
+  # Create Reward Assignment
+  result = api_instance.create_reward_assignment1(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->create_reward_assignment1: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **loyalties_rewards_create_assignment_item_request_body** | [**Array&lt;LoyaltiesRewardsCreateAssignmentItemRequestBody&gt;**](LoyaltiesRewardsCreateAssignmentItemRequestBody.md) | Define the cost of the rewards in loyalty points. | [optional] |
+
+### Return type
+
+[**LoyaltiesRewardsCreateAssignmentResponseBody**](LoyaltiesRewardsCreateAssignmentResponseBody.md)
 
 ### Authorization
 
@@ -159,7 +485,7 @@ nil (empty response body)
 
 Delete Loyalty Campaign
 
-This method permanently deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards.
+Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards. If the force parameter is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin.
 
 ### Examples
 
@@ -182,7 +508,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
 opts = {
-  force: true # Boolean | If this flag is set to true, the campaign and related vouchers will be removed permanently. Going forward, the user will be able to create the next campaign with the same name.
+  force: true # Boolean | If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name.
 }
 
 begin
@@ -199,7 +525,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
-| **force** | **Boolean** | If this flag is set to true, the campaign and related vouchers will be removed permanently. Going forward, the user will be able to create the next campaign with the same name. | [optional] |
+| **force** | **Boolean** | If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name. | [optional] |
 
 ### Return type
 
@@ -580,6 +906,64 @@ end
 - **Accept**: application/json
 
 
+## get_loyalty_program
+
+> <LoyaltiesGetCampaignResponseBody> get_loyalty_program(campaign_id)
+
+Get Loyalty Campaign
+
+Retrieve a specific loyalty campaign.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+
+begin
+  # Get Loyalty Campaign
+  result = api_instance.get_loyalty_program(campaign_id)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->get_loyalty_program: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+
+### Return type
+
+[**LoyaltiesGetCampaignResponseBody**](LoyaltiesGetCampaignResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## get_loyalty_tier
 
 > <LoyaltiesTiersGetResponseBody> get_loyalty_tier(campaign_id, loyalty_tier_id)
@@ -629,6 +1013,124 @@ end
 ### Return type
 
 [**LoyaltiesTiersGetResponseBody**](LoyaltiesTiersGetResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_member
+
+> <LoyaltiesMembersGetResponseBody> get_member(member_id)
+
+Get Member
+
+Retrieve loyalty card with the given member ID (i.e. voucher code).      📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to retrieve loyalty card details without having to provide the campaignId as a path parameter.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+member_id = 'member_id_example' # String | Unique loyalty card code assigned to a particular customer.
+
+begin
+  # Get Member
+  result = api_instance.get_member(member_id)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->get_member: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **member_id** | **String** | Unique loyalty card code assigned to a particular customer. |  |
+
+### Return type
+
+[**LoyaltiesMembersGetResponseBody**](LoyaltiesMembersGetResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## get_member1
+
+> <LoyaltiesMembersGetResponseBody> get_member1(campaign_id, member_id)
+
+Get Member
+
+Retrieves the loyalty card with the given member ID (i.e. voucher code).
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | Unique campaign ID.
+member_id = 'member_id_example' # String | Unique code that identifies the loyalty card.
+
+begin
+  # Get Member
+  result = api_instance.get_member1(campaign_id, member_id)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->get_member1: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Unique campaign ID. |  |
+| **member_id** | **String** | Unique code that identifies the loyalty card. |  |
+
+### Return type
+
+[**LoyaltiesMembersGetResponseBody**](LoyaltiesMembersGetResponseBody.md)
 
 ### Authorization
 
@@ -820,6 +1322,72 @@ end
 - **Accept**: application/json
 
 
+## list_earning_rules
+
+> <LoyaltiesEarningRulesListResponseBody> list_earning_rules(campaign_id, opts)
+
+List Earning Rules
+
+Returns a list of all earning rules within a given campaign.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+opts = {
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
+  order: VoucherifySdk::ParameterOrderListEarningRules::CREATED_AT # ParameterOrderListEarningRules | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+}
+
+begin
+  # List Earning Rules
+  result = api_instance.list_earning_rules(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_earning_rules: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
+| **order** | [**ParameterOrderListEarningRules**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+
+### Return type
+
+[**LoyaltiesEarningRulesListResponseBody**](LoyaltiesEarningRulesListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_loyalty_card_transactions
 
 > <LoyaltiesMembersTransactionsListResponseBody> list_loyalty_card_transactions(member_id, opts)
@@ -849,8 +1417,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 member_id = 'member_id_example' # String | A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56 # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
 }
 
 begin
@@ -867,8 +1434,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **member_id** | **String** | A unique code identifying the loyalty card that you are looking to retrieve transaction data for. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
 
 ### Return type
 
@@ -914,8 +1480,8 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return.
 member_id = 'member_id_example' # String | A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is 1.
 }
 
 begin
@@ -933,12 +1499,76 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return. |  |
 | **member_id** | **String** | A unique code identifying the loyalty card that you are looking to retrieve transaction data for. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 
 ### Return type
 
 [**LoyaltiesMembersTransactionsListResponseBody**](LoyaltiesMembersTransactionsListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_loyalty_programs
+
+> <LoyaltiesListCampaignsResponseBody> list_loyalty_programs(opts)
+
+List Loyalty Campaigns
+
+Returns a list of your loyalty campaigns.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+opts = {
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
+  order: VoucherifySdk::ParameterOrderListCampaigns::CREATED_AT # ParameterOrderListCampaigns | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+}
+
+begin
+  # List Loyalty Campaigns
+  result = api_instance.list_loyalty_programs(opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_loyalty_programs: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
+| **order** | [**ParameterOrderListCampaigns**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+
+### Return type
+
+[**LoyaltiesListCampaignsResponseBody**](LoyaltiesListCampaignsResponseBody.md)
 
 ### Authorization
 
@@ -980,8 +1610,8 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique campaign ID or name.
 loyalty_tier_id = 'loyalty_tier_id_example' # String | Unique loyalty tier ID.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is 1.
 }
 
 begin
@@ -999,8 +1629,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Unique campaign ID or name. |  |
 | **loyalty_tier_id** | **String** | Unique loyalty tier ID. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 
 ### Return type
 
@@ -1105,7 +1735,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique loyalty campaign ID or name.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
   order: VoucherifySdk::ParameterOrderListLoyaltyTiers::CREATED_AT # ParameterOrderListLoyaltyTiers | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
 }
 
@@ -1123,12 +1753,146 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Unique loyalty campaign ID or name. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
 | **order** | [**ParameterOrderListLoyaltyTiers**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 
 ### Return type
 
 [**LoyaltiesTiersListResponseBody**](LoyaltiesTiersListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_member_activity
+
+> <LoyaltiesMemberActivityListResponseBody> list_member_activity(member_id, opts)
+
+List Member Activity
+
+  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to get member activities without having to provide the campaignId as a path parameter. Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+member_id = 'member_id_example' # String | Unique loyalty card assigned to a particular customer.
+opts = {
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  order: VoucherifySdk::ParameterOrderCreatedAt::CREATED_AT, # ParameterOrderCreatedAt | Apply this filter to order the events according the date and time when it was created. The dash - preceding a sorting option means sorting in a descending order.
+  starting_after_id: 'starting_after_id_example' # String | A cursor for pagination. It retrieves the events starting after an event with the given ID.
+}
+
+begin
+  # List Member Activity
+  result = api_instance.list_member_activity(member_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_member_activity: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **member_id** | **String** | Unique loyalty card assigned to a particular customer. |  |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **order** | [**ParameterOrderCreatedAt**](.md) | Apply this filter to order the events according the date and time when it was created. The dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the events starting after an event with the given ID. | [optional] |
+
+### Return type
+
+[**LoyaltiesMemberActivityListResponseBody**](LoyaltiesMemberActivityListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_member_activity1
+
+> <LoyaltiesMemberActivityListResponseBody> list_member_activity1(campaign_id, member_id, opts)
+
+List Member Activity
+
+Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | Unique campaign ID.
+member_id = 'member_id_example' # String | A code that identifies the loyalty card.
+opts = {
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  order: VoucherifySdk::ParameterOrderCreatedAt::CREATED_AT, # ParameterOrderCreatedAt | Apply this filter to order the events according the date and time when it was created. The dash - preceding a sorting option means sorting in a descending order.
+  starting_after_id: 'starting_after_id_example' # String | A cursor for pagination. It retrieves the events starting after an event with the given ID.
+}
+
+begin
+  # List Member Activity
+  result = api_instance.list_member_activity1(campaign_id, member_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_member_activity1: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Unique campaign ID. |  |
+| **member_id** | **String** | A code that identifies the loyalty card. |  |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **order** | [**ParameterOrderCreatedAt**](.md) | Apply this filter to order the events according the date and time when it was created. The dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the events starting after an event with the given ID. | [optional] |
+
+### Return type
+
+[**LoyaltiesMemberActivityListResponseBody**](LoyaltiesMemberActivityListResponseBody.md)
 
 ### Authorization
 
@@ -1260,6 +2024,82 @@ end
 - **Accept**: application/json
 
 
+## list_members
+
+> <LoyaltiesListMembersResponseBody> list_members(campaign_id, opts)
+
+List Members
+
+Returns a list of your loyalty cards. The loyalty cards are sorted by creation date, with the most recent loyalty cards appearing first.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | Unique campaign ID of the loyalty program.
+opts = {
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
+  customer: 'customer_example', # String | A tracking identifier of a customer who is the holder of the vouchers. It can be an id generated by Voucherify or the source_id. Remember to use the proper URL escape codes if the source_id contains special characters.
+  created_at: VoucherifySdk::ParameterCreatedBeforeAfter.new, # ParameterCreatedBeforeAfter | A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z
+  updated_at: VoucherifySdk::ParameterUpdatedBeforeAfter.new, # ParameterUpdatedBeforeAfter | A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z
+  order: VoucherifySdk::ParameterOrderVouchers::CREATED_AT, # ParameterOrderVouchers | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+  code: 'code_example', # String | 
+  ids: ['inner_example'] # Array<String> | 
+}
+
+begin
+  # List Members
+  result = api_instance.list_members(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_members: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Unique campaign ID of the loyalty program. |  |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
+| **customer** | **String** | A tracking identifier of a customer who is the holder of the vouchers. It can be an id generated by Voucherify or the source_id. Remember to use the proper URL escape codes if the source_id contains special characters. | [optional] |
+| **created_at** | [**ParameterCreatedBeforeAfter**](.md) | A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z | [optional] |
+| **updated_at** | [**ParameterUpdatedBeforeAfter**](.md) | A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z | [optional] |
+| **order** | [**ParameterOrderVouchers**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **code** | **String** |  | [optional] |
+| **ids** | [**Array&lt;String&gt;**](String.md) |  | [optional] |
+
+### Return type
+
+[**LoyaltiesListMembersResponseBody**](LoyaltiesListMembersResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_points_expiration
 
 > <LoyaltiesMembersPointsExpirationListResponseBody> list_points_expiration(campaign_id, member_id, opts)
@@ -1290,8 +2130,8 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
 member_id = 'member_id_example' # String | Loyalty card code.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56 # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56 # Integer | Which page of results to return. The lowest value is 1.
 }
 
 begin
@@ -1309,12 +2149,144 @@ end
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
 | **member_id** | **String** | Loyalty card code. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 
 ### Return type
 
 [**LoyaltiesMembersPointsExpirationListResponseBody**](LoyaltiesMembersPointsExpirationListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_reward_assignments1
+
+> <LoyaltiesRewardAssignmentsListResponseBody> list_reward_assignments1(campaign_id, opts)
+
+List Reward Assignments
+
+Returns reward assignments from a given loyalty campaign.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to be more contextual to the type of data returned in the response.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+opts = {
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
+  assignment_id: 'assignment_id_example' # String | A unique reward assignment ID.
+}
+
+begin
+  # List Reward Assignments
+  result = api_instance.list_reward_assignments1(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_reward_assignments1: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
+| **assignment_id** | **String** | A unique reward assignment ID. | [optional] |
+
+### Return type
+
+[**LoyaltiesRewardAssignmentsListResponseBody**](LoyaltiesRewardAssignmentsListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_reward_assignments2
+
+> <LoyaltiesRewardsListAssignmentsResponseBody> list_reward_assignments2(campaign_id, opts)
+
+List Reward Assignments
+
+Returns active rewards from a given loyalty campaign.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+opts = {
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
+  assignment_id: 'assignment_id_example' # String | A unique reward assignment ID.
+}
+
+begin
+  # List Reward Assignments
+  result = api_instance.list_reward_assignments2(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_reward_assignments2: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
+| **assignment_id** | **String** | A unique reward assignment ID. | [optional] |
+
+### Return type
+
+[**LoyaltiesRewardsListAssignmentsResponseBody**](LoyaltiesRewardsListAssignmentsResponseBody.md)
 
 ### Authorization
 
@@ -1482,7 +2454,7 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | A unique identifier of the loyalty campaign containing the voucher to which the loyalty points will be sent (destination).
 member_id = 'member_id_example' # String | A unique code identifying the loyalty card to which the user wants to transfer loyalty points (destination).
 opts = {
-  loyalties_transfer_points: [VoucherifySdk::LoyaltiesTransferPoints.new({code: 'code_example', points: 37, source_id: 'source_id_example'})] # Array<LoyaltiesTransferPoints> | Provide the loyalty cards you want the points to be transferred from and the number of points to transfer from each card.
+  loyalties_transfer_points: [VoucherifySdk::LoyaltiesTransferPoints.new] # Array<LoyaltiesTransferPoints> | Provide the loyalty cards you want the points to be transferred from and the number of points to transfer from each card.
 }
 
 begin
@@ -1516,13 +2488,77 @@ end
 - **Accept**: application/json
 
 
+## update_earning_rule
+
+> <LoyaltiesEarningRulesUpdateResponseBody> update_earning_rule(campaign_id, earning_rule_id, opts)
+
+Update Earning Rule
+
+Update an earning rule definition.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+earning_rule_id = 'earning_rule_id_example' # String | A unique earning rule ID.
+opts = {
+  loyalties_earning_rules_update_request_body: VoucherifySdk::LoyaltiesEarningRulesUpdateRequestBody.new # LoyaltiesEarningRulesUpdateRequestBody | Specify the parameters that you would like to update for the given earning rule.
+}
+
+begin
+  # Update Earning Rule
+  result = api_instance.update_earning_rule(campaign_id, earning_rule_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->update_earning_rule: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **earning_rule_id** | **String** | A unique earning rule ID. |  |
+| **loyalties_earning_rules_update_request_body** | [**LoyaltiesEarningRulesUpdateRequestBody**](LoyaltiesEarningRulesUpdateRequestBody.md) | Specify the parameters that you would like to update for the given earning rule. | [optional] |
+
+### Return type
+
+[**LoyaltiesEarningRulesUpdateResponseBody**](LoyaltiesEarningRulesUpdateResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## update_loyalty_card_balance
 
 > <LoyaltiesMembersBalanceUpdateResponseBody> update_loyalty_card_balance(member_id, opts)
 
 Add or Remove Loyalty Card Balance
 
-This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
+This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
 
 ### Examples
 
@@ -1545,7 +2581,7 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 member_id = 'member_id_example' # String | Unique loyalty card assigned to a particular customer.
 opts = {
-  loyalties_members_balance_update_request_body: VoucherifySdk::LoyaltiesMembersBalanceUpdateRequestBody.new({points: 37}) # LoyaltiesMembersBalanceUpdateRequestBody | Specify the point adjustment along with the expiration mechanism.
+  loyalties_members_balance_update_request_body: VoucherifySdk::LoyaltiesMembersBalanceUpdateRequestBody.new # LoyaltiesMembersBalanceUpdateRequestBody | Specify the point adjustment along with the expiration mechanism.
 }
 
 begin
@@ -1584,7 +2620,7 @@ end
 
 Add or Remove Loyalty Card Balance
 
-This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.
+This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
 
 ### Examples
 
@@ -1608,7 +2644,7 @@ api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique campaign ID.
 member_id = 'member_id_example' # String | A code that identifies the loyalty card.
 opts = {
-  loyalties_members_balance_update_request_body: VoucherifySdk::LoyaltiesMembersBalanceUpdateRequestBody.new({points: 37}) # LoyaltiesMembersBalanceUpdateRequestBody | Specify the point adjustment along with the expiration mechanism.
+  loyalties_members_balance_update_request_body: VoucherifySdk::LoyaltiesMembersBalanceUpdateRequestBody.new # LoyaltiesMembersBalanceUpdateRequestBody | Specify the point adjustment along with the expiration mechanism.
 }
 
 begin
@@ -1631,6 +2667,132 @@ end
 ### Return type
 
 [**LoyaltiesMembersBalanceUpdateResponseBody**](LoyaltiesMembersBalanceUpdateResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_loyalty_program
+
+> <LoyaltiesUpdateCampaignResponseBody> update_loyalty_program(campaign_id, opts)
+
+Update Loyalty Campaign
+
+Updates a loyalty program.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the loyalty cards which have not been published or redeemed yet.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+opts = {
+  loyalties_update_campaign_request_body: VoucherifySdk::LoyaltiesUpdateCampaignRequestBody.new # LoyaltiesUpdateCampaignRequestBody | Specify the new values for the parameters that you would like to update for the given loyalty campaign.
+}
+
+begin
+  # Update Loyalty Campaign
+  result = api_instance.update_loyalty_program(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->update_loyalty_program: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **loyalties_update_campaign_request_body** | [**LoyaltiesUpdateCampaignRequestBody**](LoyaltiesUpdateCampaignRequestBody.md) | Specify the new values for the parameters that you would like to update for the given loyalty campaign. | [optional] |
+
+### Return type
+
+[**LoyaltiesUpdateCampaignResponseBody**](LoyaltiesUpdateCampaignResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_reward_assignment1
+
+> <LoyaltiesRewardsUpdateAssignmentResponseBody> update_reward_assignment1(campaign_id, assignment_id, opts)
+
+Update Reward Assignment
+
+Updates rewards parameters, i.e. the points cost for the specific reward.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+assignment_id = 'assignment_id_example' # String | A unique reward assignment ID.
+opts = {
+  loyalties_rewards_update_assignment_request_body: VoucherifySdk::LoyaltiesRewardsUpdateAssignmentRequestBody.new # LoyaltiesRewardsUpdateAssignmentRequestBody | Update the points cost for the reward assignment.
+}
+
+begin
+  # Update Reward Assignment
+  result = api_instance.update_reward_assignment1(campaign_id, assignment_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->update_reward_assignment1: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign.  |  |
+| **assignment_id** | **String** | A unique reward assignment ID. |  |
+| **loyalties_rewards_update_assignment_request_body** | [**LoyaltiesRewardsUpdateAssignmentRequestBody**](LoyaltiesRewardsUpdateAssignmentRequestBody.md) | Update the points cost for the reward assignment. | [optional] |
+
+### Return type
+
+[**LoyaltiesRewardsUpdateAssignmentResponseBody**](LoyaltiesRewardsUpdateAssignmentResponseBody.md)
 
 ### Authorization
 

@@ -4,5 +4,5 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **points** | **Integer** | Number of points being added back to the loyalty card for the reward redemption rollback. | [optional] |
+| **points** | **Integer** | Number of points subtracted from the loyalty card as a result of the redemption. | [optional] |
 

@@ -19,11 +19,77 @@ module VoucherifySdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Delete Voucher
-    # Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher.
+    # Create Voucher
+    # Create a standalone voucher. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a LOYALTY_CARD. The code path parameter can use all letters of the English alphabet, Arabic numerals and special characters.   When you create a new voucher, you can specify a type to create it. Creating a new voucher will create a new stand alone voucher if no campaign name or campaign_id is provided. In case of the loyalty card, a campaign name is required.
     # @param code [String] A unique **code** that identifies the voucher.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the voucher will be removed permanently. Going forward, the user will be able to create another voucher with exactly the same code.
+    # @option opts [VouchersCreateWithSpecificCodeRequestBody] :vouchers_create_with_specific_code_request_body Specify the details of the voucher that you would like to create.
+    # @return [VouchersCreateResponseBody]
+    def create_voucher(code, opts = {})
+      data, _status_code, _headers = create_voucher_with_http_info(code, opts)
+      data
+    end
+
+    # Create Voucher
+    # Create a standalone voucher. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a LOYALTY_CARD. The code path parameter can use all letters of the English alphabet, Arabic numerals and special characters.   When you create a new voucher, you can specify a type to create it. Creating a new voucher will create a new stand alone voucher if no campaign name or campaign_id is provided. In case of the loyalty card, a campaign name is required.
+    # @param code [String] A unique **code** that identifies the voucher.
+    # @param [Hash] opts the optional parameters
+    # @option opts [VouchersCreateWithSpecificCodeRequestBody] :vouchers_create_with_specific_code_request_body Specify the details of the voucher that you would like to create.
+    # @return [Array<(VouchersCreateResponseBody, Integer, Hash)>] VouchersCreateResponseBody data, response status code and response headers
+    private def create_voucher_with_http_info(code, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VouchersApi.create_voucher ...'
+      end
+      # resource path
+      local_var_path = '/v1/vouchers/{code}'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'vouchers_create_with_specific_code_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'VouchersCreateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"VouchersApi.create_voucher",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VouchersApi#create_voucher\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Delete Voucher
+    # Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher. If the force parameter is set to false or not set at all, the voucher will be moved to the bin.
+    # @param code [String] A unique **code** that identifies the voucher.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :force If this flag is set to true, the voucher will be removed permanently. If it is set to false or not set at all, the voucher will be moved to the bin. Going forward, the user will be able to create another voucher with exactly the same code.
     # @return [nil]
     def delete_voucher(code, opts = {})
       delete_voucher_with_http_info(code, opts)
@@ -31,18 +97,14 @@ module VoucherifySdk
     end
 
     # Delete Voucher
-    # Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher.
+    # Deletes a voucher. This operation cannot be undone. Additionally, this operation removes any redemptions on the voucher. If the force parameter is set to false or not set at all, the voucher will be moved to the bin.
     # @param code [String] A unique **code** that identifies the voucher.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the voucher will be removed permanently. Going forward, the user will be able to create another voucher with exactly the same code.
+    # @option opts [Boolean] :force If this flag is set to true, the voucher will be removed permanently. If it is set to false or not set at all, the voucher will be moved to the bin. Going forward, the user will be able to create another voucher with exactly the same code.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     private def delete_voucher_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.delete_voucher ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.delete_voucher"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
@@ -102,10 +164,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.disable_voucher ...'
       end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.disable_voucher"
-      end
       # resource path
       local_var_path = '/v1/vouchers/{code}/disable'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
 
@@ -164,10 +222,6 @@ module VoucherifySdk
     private def enable_voucher_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.enable_voucher ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.enable_voucher"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}/enable'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
@@ -230,10 +284,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.export_voucher_transactions ...'
       end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.export_voucher_transactions"
-      end
       # resource path
       local_var_path = '/v1/vouchers/{code}/transactions/export'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
 
@@ -279,6 +329,70 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Generate Random Code
+    # Create a standalone voucher. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a LOYALTY_CARD.  When you create a new voucher, you can specify a type to create it. Creating a new voucher will create a new stand alone voucher if no campaign name or campaign_id is provided. In case of the loyalty card, a campaign name is required. You can optionally use the code parameter to define a specific code or the code_config parameter to design rules for Voucherify API to create a random code. If neither of the two parameters are passed, then a random code is generated by the Voucherify API. This method will return an error when trying to create a voucher that already exists.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Object] :body Specify the details of the voucher that you would like to create.
+    # @return [VouchersCreateResponseBody]
+    def generate_random_code(opts = {})
+      data, _status_code, _headers = generate_random_code_with_http_info(opts)
+      data
+    end
+
+    # Generate Random Code
+    # Create a standalone voucher. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a LOYALTY_CARD.  When you create a new voucher, you can specify a type to create it. Creating a new voucher will create a new stand alone voucher if no campaign name or campaign_id is provided. In case of the loyalty card, a campaign name is required. You can optionally use the code parameter to define a specific code or the code_config parameter to design rules for Voucherify API to create a random code. If neither of the two parameters are passed, then a random code is generated by the Voucherify API. This method will return an error when trying to create a voucher that already exists.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Object] :body Specify the details of the voucher that you would like to create.
+    # @return [Array<(VouchersCreateResponseBody, Integer, Hash)>] VouchersCreateResponseBody data, response status code and response headers
+    private def generate_random_code_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VouchersApi.generate_random_code ...'
+      end
+      # resource path
+      local_var_path = '/v1/vouchers'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'VouchersCreateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"VouchersApi.generate_random_code",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VouchersApi#generate_random_code\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Voucher
     # Retrieves the voucher with the given code or unique Voucherify ID. You can either pass the voucher ID which was assigned by Voucherify, e.g., v_7HxHkf4VAkMuc8u4lZs78lyRwhRze5UE, or the code of the voucher as the path parameter value, e.g., 7fjWdr.
     # @param code [String] A unique **code** that identifies the voucher.
@@ -297,10 +411,6 @@ module VoucherifySdk
     private def get_voucher_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.get_voucher ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.get_voucher"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
@@ -342,28 +452,88 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Import Vouchers
+    # Import standalone vouchers and gift cards into the repository.  📘 Important notes  - **Start and expiration dates** need to be provided in compliance with the ISO 8601 norms. For example, 2020-03-11T09:00:00.000Z.  - Custom code attributes (not supported by-default) need to be added as code **metadata**.  - You **cannot import the same codes** to a single Voucherify Project. Any parameters not provided in the payload will be left blank or null. For both **standalone discount vouchers and gift cards**, you can import the following fields:   - code - category - active - type - start_date - expiration_date - redemption.quantity - additional_info - metadata For **gift cards**, you can also import the following field: - gift.amount For **discount vouchers**, you can import the discount object. The object will slightly vary depending on the type of discount. Each discount type **requires** the type to be defined in the import.   Fields other than the ones listed above wont be imported. Even if provided, they will be silently skipped. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # @param vouchers_import_create_item_request_body [Array<VouchersImportCreateItemRequestBody>] The request body is an array of objects. Each object contains details about a specific voucher. 
+    # @param [Hash] opts the optional parameters
+    # @return [VouchersImportCreateResponseBody]
+    def import_vouchers(vouchers_import_create_item_request_body, opts = {})
+      data, _status_code, _headers = import_vouchers_with_http_info(vouchers_import_create_item_request_body, opts)
+      data
+    end
+
+    # Import Vouchers
+    # Import standalone vouchers and gift cards into the repository.  📘 Important notes  - **Start and expiration dates** need to be provided in compliance with the ISO 8601 norms. For example, 2020-03-11T09:00:00.000Z.  - Custom code attributes (not supported by-default) need to be added as code **metadata**.  - You **cannot import the same codes** to a single Voucherify Project. Any parameters not provided in the payload will be left blank or null. For both **standalone discount vouchers and gift cards**, you can import the following fields:   - code - category - active - type - start_date - expiration_date - redemption.quantity - additional_info - metadata For **gift cards**, you can also import the following field: - gift.amount For **discount vouchers**, you can import the discount object. The object will slightly vary depending on the type of discount. Each discount type **requires** the type to be defined in the import.   Fields other than the ones listed above wont be imported. Even if provided, they will be silently skipped. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # @param vouchers_import_create_item_request_body [Array<VouchersImportCreateItemRequestBody>] The request body is an array of objects. Each object contains details about a specific voucher. 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(VouchersImportCreateResponseBody, Integer, Hash)>] VouchersImportCreateResponseBody data, response status code and response headers
+    private def import_vouchers_with_http_info(vouchers_import_create_item_request_body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VouchersApi.import_vouchers ...'
+      end
+      # resource path
+      local_var_path = '/v1/vouchers/import'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(vouchers_import_create_item_request_body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'VouchersImportCreateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"VouchersApi.import_vouchers",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VouchersApi#import_vouchers\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Import Vouchers using CSV
     # Import standalone vouchers into the repository using a CSV file. The CSV file has to include headers in the first line. All properties listed in the file headers that cannot be mapped to standard voucher fields will be added to the metadata object.   You can find an example CSV file [here](https://support.voucherify.io/article/45-import-codes-and-share-them-digitally#coupons). ___  📘 Standard voucher fields mapping  - Go to the import vouchers endpoint to see all standard CSV fields description (body params section).  - Supported CSV file headers: Code,Voucher Type,Value,Discount Type,Category,Start Date,Expiration Date,Redemption Limit,Redeemed Quantity, Redeemed Amount,Active,Additional Info,Custom Metadata Property Name - **Start and expiration dates** need to be provided in compliance with the ISO 8601 norms. For example, 2020-03-11T09:00:00.000Z.       - YYYY-MM-DD     - YYYY-MM-DDTHH     - YYYY-MM-DDTHH:mm     - YYYY-MM-DDTHH:mm:ss     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ss.SSSZ  - Custom code attributes (not supported by-default) need to be added as code **metadata**.  - You **cannot import the same codes** to a single Voucherify Project.  📘 Categories  In the structure representing your data, you can define a category that the voucher belongs to. You can later use the category of a voucher to group and search by specific criteria in the Dashboard and using the List Vouchers endpoint. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
-    # @param file [File] File path.
     # @param [Hash] opts the optional parameters
+    # @option opts [File] :file File path.
     # @return [VouchersImportCsvCreateResponseBody]
-    def import_vouchers_using_csv(file, opts = {})
-      data, _status_code, _headers = import_vouchers_using_csv_with_http_info(file, opts)
+    def import_vouchers_using_csv(opts = {})
+      data, _status_code, _headers = import_vouchers_using_csv_with_http_info(opts)
       data
     end
 
     # Import Vouchers using CSV
     # Import standalone vouchers into the repository using a CSV file. The CSV file has to include headers in the first line. All properties listed in the file headers that cannot be mapped to standard voucher fields will be added to the metadata object.   You can find an example CSV file [here](https://support.voucherify.io/article/45-import-codes-and-share-them-digitally#coupons). ___  📘 Standard voucher fields mapping  - Go to the import vouchers endpoint to see all standard CSV fields description (body params section).  - Supported CSV file headers: Code,Voucher Type,Value,Discount Type,Category,Start Date,Expiration Date,Redemption Limit,Redeemed Quantity, Redeemed Amount,Active,Additional Info,Custom Metadata Property Name - **Start and expiration dates** need to be provided in compliance with the ISO 8601 norms. For example, 2020-03-11T09:00:00.000Z.       - YYYY-MM-DD     - YYYY-MM-DDTHH     - YYYY-MM-DDTHH:mm     - YYYY-MM-DDTHH:mm:ss     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ssZ     - YYYY-MM-DDTHH:mm:ss.SSSZ  - Custom code attributes (not supported by-default) need to be added as code **metadata**.  - You **cannot import the same codes** to a single Voucherify Project.  📘 Categories  In the structure representing your data, you can define a category that the voucher belongs to. You can later use the category of a voucher to group and search by specific criteria in the Dashboard and using the List Vouchers endpoint. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
-    # @param file [File] File path.
     # @param [Hash] opts the optional parameters
+    # @option opts [File] :file File path.
     # @return [Array<(VouchersImportCsvCreateResponseBody, Integer, Hash)>] VouchersImportCsvCreateResponseBody data, response status code and response headers
-    private def import_vouchers_using_csv_with_http_info(file, opts = {})
+    private def import_vouchers_using_csv_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.import_vouchers_using_csv ...'
-      end
-      # verify the required parameter 'file' is set
-      if @api_client.config.client_side_validation && file.nil?
-        fail ArgumentError, "Missing the required parameter 'file' when calling VouchersApi.import_vouchers_using_csv"
       end
       # resource path
       local_var_path = '/v1/vouchers/importCSV'
@@ -383,7 +553,7 @@ module VoucherifySdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['file'] = file
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]
@@ -415,8 +585,8 @@ module VoucherifySdk
     # List transactions that are associated with credit movements on a gift card or loyalty card.
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [VouchersTransactionsListResponseBody]
     def list_voucher_transactions(code, opts = {})
       data, _status_code, _headers = list_voucher_transactions_with_http_info(code, opts)
@@ -427,29 +597,13 @@ module VoucherifySdk
     # List transactions that are associated with credit movements on a gift card or loyalty card.
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(VouchersTransactionsListResponseBody, Integer, Hash)>] VouchersTransactionsListResponseBody data, response status code and response headers
     private def list_voucher_transactions_with_http_info(code, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.list_voucher_transactions ...'
       end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.list_voucher_transactions"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling VouchersApi.list_voucher_transactions, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling VouchersApi.list_voucher_transactions, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling VouchersApi.list_voucher_transactions, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/vouchers/{code}/transactions'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
 
@@ -492,6 +646,96 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Vouchers
+    # Returns a list of vouchers. By default, the vouchers are returned sorted by creation date, with the most recent vouchers appearing first. A maximum of 100 vouchers are returned in the response. When you get a list of vouchers, you can optionally specify query parameters to customize the number of vouchers returned per call using limit, which page of vouchers to return using page, sort the vouchers using the order query parameter and more. This method will return an error when trying to return a limit of more than 100 vouchers. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [String] :category Limit search results to vouchers within the specified category.
+    # @option opts [String] :campaign_id Limit search results to vouchers within the specified campaign
+    # @option opts [String] :customer A tracking identifier of a customer who is the holder of the vouchers. It can be an id generated by Voucherify or the source_id. Remember to use the proper URL escape codes if the source_id contains special characters.
+    # @option opts [String] :campaign A unique campaign name, identifies the parent campaign.
+    # @option opts [ParameterCreatedBeforeAfter] :created_at A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z
+    # @option opts [ParameterUpdatedBeforeAfter] :updated_at A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z
+    # @option opts [ParameterOrderVouchers] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :code 
+    # @option opts [Array<String>] :ids 
+    # @return [VouchersListResponseBody]
+    def list_vouchers(opts = {})
+      data, _status_code, _headers = list_vouchers_with_http_info(opts)
+      data
+    end
+
+    # List Vouchers
+    # Returns a list of vouchers. By default, the vouchers are returned sorted by creation date, with the most recent vouchers appearing first. A maximum of 100 vouchers are returned in the response. When you get a list of vouchers, you can optionally specify query parameters to customize the number of vouchers returned per call using limit, which page of vouchers to return using page, sort the vouchers using the order query parameter and more. This method will return an error when trying to return a limit of more than 100 vouchers. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [String] :category Limit search results to vouchers within the specified category.
+    # @option opts [String] :campaign_id Limit search results to vouchers within the specified campaign
+    # @option opts [String] :customer A tracking identifier of a customer who is the holder of the vouchers. It can be an id generated by Voucherify or the source_id. Remember to use the proper URL escape codes if the source_id contains special characters.
+    # @option opts [String] :campaign A unique campaign name, identifies the parent campaign.
+    # @option opts [ParameterCreatedBeforeAfter] :created_at A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z
+    # @option opts [ParameterUpdatedBeforeAfter] :updated_at A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z
+    # @option opts [ParameterOrderVouchers] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :code 
+    # @option opts [Array<String>] :ids 
+    # @return [Array<(VouchersListResponseBody, Integer, Hash)>] VouchersListResponseBody data, response status code and response headers
+    private def list_vouchers_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VouchersApi.list_vouchers ...'
+      end
+      # resource path
+      local_var_path = '/v1/vouchers'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'category'] = opts[:'category'] if !opts[:'category'].nil?
+      query_params[:'campaign_id'] = opts[:'campaign_id'] if !opts[:'campaign_id'].nil?
+      query_params[:'customer'] = opts[:'customer'] if !opts[:'customer'].nil?
+      query_params[:'campaign'] = opts[:'campaign'] if !opts[:'campaign'].nil?
+      query_params[:'created_at'] = opts[:'created_at'] if !opts[:'created_at'].nil?
+      query_params[:'updated_at'] = opts[:'updated_at'] if !opts[:'updated_at'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'code'] = opts[:'code'] if !opts[:'code'].nil?
+      query_params[:'ids'] = @api_client.build_collection_param(opts[:'ids'], :multi) if !opts[:'ids'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'VouchersListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"VouchersApi.list_vouchers",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VouchersApi#list_vouchers\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Release Validation Session
     # Manually release a validation session that has been set up for the voucher. This method undos the actions that are explained in our guide on how a validation session was established, you can read more here.   📘 Release Session using Dashboard  You can also use the Validations Manager in the Dashboard to unlock sessions. [Read more](https://support.voucherify.io/article/16-dashboard-sections#validations).
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify.
@@ -512,14 +756,6 @@ module VoucherifySdk
     private def release_validation_session_with_http_info(code, session_key, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.release_validation_session ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.release_validation_session"
-      end
-      # verify the required parameter 'session_key' is set
-      if @api_client.config.client_side_validation && session_key.nil?
-        fail ArgumentError, "Missing the required parameter 'session_key' when calling VouchersApi.release_validation_session"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}/sessions/{sessionKey}'.sub('{' + 'code' + '}', CGI.escape(code.to_s)).sub('{' + 'sessionKey' + '}', CGI.escape(session_key.to_s))
@@ -559,6 +795,72 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Update Voucher
+    # Updates the specified voucher by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged. Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped.
+    # @param code [String] A unique **code** that identifies the voucher.
+    # @param vouchers_update_request_body [VouchersUpdateRequestBody] Specify the parameters to be updated.
+    # @param [Hash] opts the optional parameters
+    # @return [VouchersUpdateResponseBody]
+    def update_voucher(code, vouchers_update_request_body, opts = {})
+      data, _status_code, _headers = update_voucher_with_http_info(code, vouchers_update_request_body, opts)
+      data
+    end
+
+    # Update Voucher
+    # Updates the specified voucher by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged. Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped.
+    # @param code [String] A unique **code** that identifies the voucher.
+    # @param vouchers_update_request_body [VouchersUpdateRequestBody] Specify the parameters to be updated.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(VouchersUpdateResponseBody, Integer, Hash)>] VouchersUpdateResponseBody data, response status code and response headers
+    private def update_voucher_with_http_info(code, vouchers_update_request_body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VouchersApi.update_voucher ...'
+      end
+      # resource path
+      local_var_path = '/v1/vouchers/{code}'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(vouchers_update_request_body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'VouchersUpdateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"VouchersApi.update_voucher",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VouchersApi#update_voucher\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Add or Remove Voucher Balance
     # Add balance to an existing gift card or loyalty card.
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
@@ -579,14 +881,6 @@ module VoucherifySdk
     private def update_voucher_balance_with_http_info(code, vouchers_balance_update_request_body, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: VouchersApi.update_voucher_balance ...'
-      end
-      # verify the required parameter 'code' is set
-      if @api_client.config.client_side_validation && code.nil?
-        fail ArgumentError, "Missing the required parameter 'code' when calling VouchersApi.update_voucher_balance"
-      end
-      # verify the required parameter 'vouchers_balance_update_request_body' is set
-      if @api_client.config.client_side_validation && vouchers_balance_update_request_body.nil?
-        fail ArgumentError, "Missing the required parameter 'vouchers_balance_update_request_body' when calling VouchersApi.update_voucher_balance"
       end
       # resource path
       local_var_path = '/v1/vouchers/{code}/balance'.sub('{' + 'code' + '}', CGI.escape(code.to_s))
@@ -629,6 +923,134 @@ module VoucherifySdk
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: VouchersApi#update_voucher_balance\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update Vouchers in Bulk
+    # Updates specific metadata parameters for each code, respectively, in one asynchronous operation. The request can include up to **10 MB** of data. Upserts are not supported.  🚧    Currently, only **metadata** updates are supported. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
+    # @param vouchers_update_in_bulk_item_request_body [Array<VouchersUpdateInBulkItemRequestBody>] List the codes to be updated with the metadata key/value pairs for that code.
+    # @param [Hash] opts the optional parameters
+    # @return [VouchersUpdateInBulkResponseBody]
+    def update_vouchers_in_bulk(vouchers_update_in_bulk_item_request_body, opts = {})
+      data, _status_code, _headers = update_vouchers_in_bulk_with_http_info(vouchers_update_in_bulk_item_request_body, opts)
+      data
+    end
+
+    # Update Vouchers in Bulk
+    # Updates specific metadata parameters for each code, respectively, in one asynchronous operation. The request can include up to **10 MB** of data. Upserts are not supported.  🚧    Currently, only **metadata** updates are supported. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
+    # @param vouchers_update_in_bulk_item_request_body [Array<VouchersUpdateInBulkItemRequestBody>] List the codes to be updated with the metadata key/value pairs for that code.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(VouchersUpdateInBulkResponseBody, Integer, Hash)>] VouchersUpdateInBulkResponseBody data, response status code and response headers
+    private def update_vouchers_in_bulk_with_http_info(vouchers_update_in_bulk_item_request_body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VouchersApi.update_vouchers_in_bulk ...'
+      end
+      # resource path
+      local_var_path = '/v1/vouchers/bulk/async'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(vouchers_update_in_bulk_item_request_body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'VouchersUpdateInBulkResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"VouchersApi.update_vouchers_in_bulk",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VouchersApi#update_vouchers_in_bulk\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update Vouchers' Metadata in Bulk
+    # Updates metadata parameters for a list of codes. Every resource in the list will receive the metadata defined in the request. The request can include up to **10 MB** of data. Upserts are not supported. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
+    # @param vouchers_metadata_update_in_bulk_request_body [VouchersMetadataUpdateInBulkRequestBody] List the codes of the vouchers you would like to update with the metadata key/value pairs.
+    # @param [Hash] opts the optional parameters
+    # @return [VouchersMetadataUpdateInBulkResponseBody]
+    def update_vouchers_metadata_in_bulk(vouchers_metadata_update_in_bulk_request_body, opts = {})
+      data, _status_code, _headers = update_vouchers_metadata_in_bulk_with_http_info(vouchers_metadata_update_in_bulk_request_body, opts)
+      data
+    end
+
+    # Update Vouchers&#39; Metadata in Bulk
+    # Updates metadata parameters for a list of codes. Every resource in the list will receive the metadata defined in the request. The request can include up to **10 MB** of data. Upserts are not supported. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
+    # @param vouchers_metadata_update_in_bulk_request_body [VouchersMetadataUpdateInBulkRequestBody] List the codes of the vouchers you would like to update with the metadata key/value pairs.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(VouchersMetadataUpdateInBulkResponseBody, Integer, Hash)>] VouchersMetadataUpdateInBulkResponseBody data, response status code and response headers
+    private def update_vouchers_metadata_in_bulk_with_http_info(vouchers_metadata_update_in_bulk_request_body, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: VouchersApi.update_vouchers_metadata_in_bulk ...'
+      end
+      # resource path
+      local_var_path = '/v1/vouchers/metadata/async'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(vouchers_metadata_update_in_bulk_request_body)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'VouchersMetadataUpdateInBulkResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"VouchersApi.update_vouchers_metadata_in_bulk",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: VouchersApi#update_vouchers_metadata_in_bulk\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

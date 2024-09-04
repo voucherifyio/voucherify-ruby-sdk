@@ -42,10 +42,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.create_validation_rule_assignment ...'
       end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.create_validation_rule_assignment"
-      end
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}/assignments'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s))
 
@@ -177,14 +173,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.delete_validation_rule_assignment ...'
       end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.delete_validation_rule_assignment"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling ValidationRulesApi.delete_validation_rule_assignment"
-      end
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}/assignments/{assignmentId}'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
 
@@ -241,10 +229,6 @@ module VoucherifySdk
     private def delete_validation_rules_with_http_info(validation_rule_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.delete_validation_rules ...'
-      end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.delete_validation_rules"
       end
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s))
@@ -303,10 +287,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.get_validation_rule ...'
       end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.get_validation_rule"
-      end
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s))
 
@@ -351,8 +331,8 @@ module VoucherifySdk
     # Retrieve validation rule assignments for a specific validation rule.
     # @param validation_rule_id [String] Unique validation rule ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrderListValidationRuleAssignments] :order This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @return [ValidationRulesAssignmentsListResponseBody]
     def list_validation_rule_assignments(validation_rule_id, opts = {})
@@ -364,30 +344,14 @@ module VoucherifySdk
     # Retrieve validation rule assignments for a specific validation rule.
     # @param validation_rule_id [String] Unique validation rule ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrderListValidationRuleAssignments] :order This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @return [Array<(ValidationRulesAssignmentsListResponseBody, Integer, Hash)>] ValidationRulesAssignmentsListResponseBody data, response status code and response headers
     private def list_validation_rule_assignments_with_http_info(validation_rule_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.list_validation_rule_assignments ...'
       end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.list_validation_rule_assignments"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rule_assignments, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rule_assignments, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ValidationRulesApi.list_validation_rule_assignments, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}/assignments'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s))
 
@@ -434,8 +398,8 @@ module VoucherifySdk
     # List Validation Rules
     # Retrieve validation rules.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrderListValidationRules] :order This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must start on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -448,8 +412,8 @@ module VoucherifySdk
     # List Validation Rules
     # Retrieve validation rules.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrderListValidationRules] :order This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must start on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -458,18 +422,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.list_validation_rules ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rules, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rules, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ValidationRulesApi.list_validation_rules, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/validation-rules'
 
@@ -520,8 +472,8 @@ module VoucherifySdk
     # @param [Hash] opts the optional parameters
     # @option opts [String] :related_object_id The resource ID to which the validation rule was assigned; this could be, for example, a resource ID of a voucher, campaign, earning rule, reward assignment, promotion tier, or distribution.
     # @option opts [String] :rule Validation rule ID.
-    # @option opts [Integer] :page Which page of results to return.
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [String] :order Sorts the results using one of the filtering options: -created_at, created_at, where the dash - preceding a sorting option means sorting in a descending order.
     # @return [ValidationRulesAssignmentsListResponseBody]
     def list_validation_rules_assignments(opts = {})
@@ -534,26 +486,14 @@ module VoucherifySdk
     # @param [Hash] opts the optional parameters
     # @option opts [String] :related_object_id The resource ID to which the validation rule was assigned; this could be, for example, a resource ID of a voucher, campaign, earning rule, reward assignment, promotion tier, or distribution.
     # @option opts [String] :rule Validation rule ID.
-    # @option opts [Integer] :page Which page of results to return.
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [String] :order Sorts the results using one of the filtering options: -created_at, created_at, where the dash - preceding a sorting option means sorting in a descending order.
     # @return [Array<(ValidationRulesAssignmentsListResponseBody, Integer, Hash)>] ValidationRulesAssignmentsListResponseBody data, response status code and response headers
     private def list_validation_rules_assignments_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.list_validation_rules_assignments ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ValidationRulesApi.list_validation_rules_assignments, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rules_assignments, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ValidationRulesApi.list_validation_rules_assignments, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/validation-rules-assignments'
 
@@ -619,10 +559,6 @@ module VoucherifySdk
     private def update_validation_rule_with_http_info(validation_rule_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ValidationRulesApi.update_validation_rule ...'
-      end
-      # verify the required parameter 'validation_rule_id' is set
-      if @api_client.config.client_side_validation && validation_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'validation_rule_id' when calling ValidationRulesApi.update_validation_rule"
       end
       # resource path
       local_var_path = '/v1/validation-rules/{validationRuleId}'.sub('{' + 'validationRuleId' + '}', CGI.escape(validation_rule_id.to_s))

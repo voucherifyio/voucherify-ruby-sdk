@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Schema model for **GET** `/campaigns`.
+  # Schema model for **GET** `v1/campaigns`.
   class CampaignsListResponseBody
-    # The type of object represented by JSON. This object stores information about campaigns in a dictionary.
+    # The type of the object represented by JSON. This object stores information about campaigns in a dictionary.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of campaign objects.
@@ -56,21 +56,18 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'data_ref',
+        :'campaigns',
+        :'total'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CampaignsListResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CampaignsListResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 

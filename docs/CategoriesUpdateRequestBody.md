@@ -4,6 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **name** | **String** | Category name. |  |
-| **hierarchy** | **Integer** | Category hierarchy. |  |
+| **name** | **String** | Category name. | [optional] |
+| **hierarchy** | **Integer** | Category hierarchy. | [optional] |
 

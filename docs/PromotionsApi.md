@@ -4,6 +4,7 @@ All URIs are relative to *https://api.voucherify.io*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**add_promotion_tier_to_campaign**](PromotionsApi.md#add_promotion_tier_to_campaign) | **POST** /v1/promotions/{campaignId}/tiers | Add Promotion Tier to Campaign |
 | [**create_promotion_stack**](PromotionsApi.md#create_promotion_stack) | **POST** /v1/promotions/{campaignId}/stacks | Create Promotion Stack |
 | [**delete_promotion_stack**](PromotionsApi.md#delete_promotion_stack) | **DELETE** /v1/promotions/{campaignId}/stacks/{stackId} | Delete Promotion Stack |
 | [**delete_promotion_tier**](PromotionsApi.md#delete_promotion_tier) | **DELETE** /v1/promotions/tiers/{promotionTierId} | Delete Promotion Tier |
@@ -13,8 +14,72 @@ All URIs are relative to *https://api.voucherify.io*
 | [**get_promotion_tier**](PromotionsApi.md#get_promotion_tier) | **GET** /v1/promotions/tiers/{promotionTierId} | Get Promotion Tier |
 | [**list_all_promotion_stacks**](PromotionsApi.md#list_all_promotion_stacks) | **GET** /v1/promotions/stacks | List Promotion Stacks |
 | [**list_promotion_stacks_in_campaign**](PromotionsApi.md#list_promotion_stacks_in_campaign) | **GET** /v1/promotions/{campaignId}/stacks | List Promotion Stacks in Campaign |
+| [**list_promotion_tiers**](PromotionsApi.md#list_promotion_tiers) | **GET** /v1/promotions/tiers | List Promotion Tiers |
 | [**list_promotion_tiers_from_campaign**](PromotionsApi.md#list_promotion_tiers_from_campaign) | **GET** /v1/promotions/{campaignId}/tiers | List Promotion Tiers from Campaign |
 | [**update_promotion_stack**](PromotionsApi.md#update_promotion_stack) | **PUT** /v1/promotions/{campaignId}/stacks/{stackId} | Update Promotion Stack |
+| [**update_promotion_tier**](PromotionsApi.md#update_promotion_tier) | **PUT** /v1/promotions/tiers/{promotionTierId} | Update Promotion Tier |
+
+
+## add_promotion_tier_to_campaign
+
+> <PromotionsTiersCreateResponseBody> add_promotion_tier_to_campaign(campaign_id, opts)
+
+Add Promotion Tier to Campaign
+
+This method allows you to add a new promotion tier to an existing campaign. The tier hierarchy will be set as the next consequtive integer following the lowest ranking tier.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::PromotionsApi.new
+campaign_id = 'campaign_id_example' # String | Unique campaign ID assigned by Voucherify.
+opts = {
+  promotions_tiers_create_request_body: VoucherifySdk::PromotionsTiersCreateRequestBody.new # PromotionsTiersCreateRequestBody | Specify the promotion tier parameters.
+}
+
+begin
+  # Add Promotion Tier to Campaign
+  result = api_instance.add_promotion_tier_to_campaign(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling PromotionsApi->add_promotion_tier_to_campaign: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Unique campaign ID assigned by Voucherify. |  |
+| **promotions_tiers_create_request_body** | [**PromotionsTiersCreateRequestBody**](PromotionsTiersCreateRequestBody.md) | Specify the promotion tier parameters. | [optional] |
+
+### Return type
+
+[**PromotionsTiersCreateResponseBody**](PromotionsTiersCreateResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 
 ## create_promotion_stack
@@ -46,7 +111,7 @@ end
 api_instance = VoucherifySdk::PromotionsApi.new
 campaign_id = 'campaign_id_example' # String | Unique campaign ID.
 opts = {
-  promotions_stacks_create_request_body: VoucherifySdk::PromotionsStacksCreateRequestBody.new({name: 'name_example', tiers: VoucherifySdk::PromotionStackBaseTiers.new({ids: ['ids_example']})}) # PromotionsStacksCreateRequestBody | Specify the order of promotion tiers for the promotion stack.
+  promotions_stacks_create_request_body: VoucherifySdk::PromotionsStacksCreateRequestBody.new # PromotionsStacksCreateRequestBody | Specify the order of promotion tiers for the promotion stack.
 }
 
 begin
@@ -457,8 +522,8 @@ end
 
 api_instance = VoucherifySdk::PromotionsApi.new
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   order: VoucherifySdk::ParameterOrderListAllPromotionStacks::CREATED_AT, # ParameterOrderListAllPromotionStacks | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
   created_at: VoucherifySdk::ParameterCreatedBeforeAfter.new, # ParameterCreatedBeforeAfter | A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z
   updated_at: VoucherifySdk::ParameterUpdatedBeforeAfter.new # ParameterUpdatedBeforeAfter | A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z
@@ -477,8 +542,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **order** | [**ParameterOrderListAllPromotionStacks**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 | **created_at** | [**ParameterCreatedBeforeAfter**](.md) | A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z | [optional] |
 | **updated_at** | [**ParameterUpdatedBeforeAfter**](.md) | A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z | [optional] |
@@ -544,6 +609,72 @@ end
 ### Return type
 
 [**PromotionsStacksListResponseBody**](PromotionsStacksListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_promotion_tiers
+
+> <PromotionsTiersListResponseBody> list_promotion_tiers(opts)
+
+List Promotion Tiers
+
+This method enables you to list promotion tiers.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::PromotionsApi.new
+opts = {
+  is_available: true, # Boolean | This parameter allows filtering promotions that are only available at the moment. When set to true, it selects only non-expired and active promotions.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
+  order: VoucherifySdk::ParameterOrderListPromotionTiers::CREATED_AT # ParameterOrderListPromotionTiers | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+}
+
+begin
+  # List Promotion Tiers
+  result = api_instance.list_promotion_tiers(opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling PromotionsApi->list_promotion_tiers: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **is_available** | **Boolean** | This parameter allows filtering promotions that are only available at the moment. When set to true, it selects only non-expired and active promotions. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
+| **order** | [**ParameterOrderListPromotionTiers**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+
+### Return type
+
+[**PromotionsTiersListResponseBody**](PromotionsTiersListResponseBody.md)
 
 ### Authorization
 
@@ -666,6 +797,68 @@ end
 ### Return type
 
 [**PromotionsStacksUpdateResponseBody**](PromotionsStacksUpdateResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_promotion_tier
+
+> <PromotionsTiersUpdateResponseBody> update_promotion_tier(promotion_tier_id, opts)
+
+Update Promotion Tier
+
+This method updates a promotion tier.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::PromotionsApi.new
+promotion_tier_id = 'promotion_tier_id_example' # String | Unique promotion tier ID.
+opts = {
+  promotions_tiers_update_request_body: VoucherifySdk::PromotionsTiersUpdateRequestBody.new # PromotionsTiersUpdateRequestBody | Specify the promotion tier parameters that you would like to update.
+}
+
+begin
+  # Update Promotion Tier
+  result = api_instance.update_promotion_tier(promotion_tier_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling PromotionsApi->update_promotion_tier: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **promotion_tier_id** | **String** | Unique promotion tier ID. |  |
+| **promotions_tiers_update_request_body** | [**PromotionsTiersUpdateRequestBody**](PromotionsTiersUpdateRequestBody.md) | Specify the promotion tier parameters that you would like to update. | [optional] |
+
+### Return type
+
+[**PromotionsTiersUpdateResponseBody**](PromotionsTiersUpdateResponseBody.md)
 
 ### Authorization
 

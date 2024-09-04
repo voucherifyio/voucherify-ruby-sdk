@@ -15,8 +15,8 @@ All URIs are relative to *https://api.voucherify.io*
 | [**list_products**](ProductsApi.md#list_products) | **GET** /v1/products | List Products |
 | [**list_skus_in_product**](ProductsApi.md#list_skus_in_product) | **GET** /v1/products/{productId}/skus | List SKUs in Product |
 | [**update_product**](ProductsApi.md#update_product) | **PUT** /v1/products/{productId} | Update Product |
-| [**update_products_in_bulk**](ProductsApi.md#update_products_in_bulk) | **POST** /v1/products/bulk/async | Update Products in bulk |
-| [**update_products_metadata_in_bulk**](ProductsApi.md#update_products_metadata_in_bulk) | **POST** /v1/products/metadata/async | Update Products&#39; Metadata in bulk |
+| [**update_products_in_bulk**](ProductsApi.md#update_products_in_bulk) | **POST** /v1/products/bulk/async | Update Products in Bulk |
+| [**update_products_metadata_in_bulk**](ProductsApi.md#update_products_metadata_in_bulk) | **POST** /v1/products/metadata/async | Update Products&#39; Metadata in Bulk |
 | [**update_sku**](ProductsApi.md#update_sku) | **PUT** /v1/products/{productId}/skus/{skuId} | Update SKU |
 
 
@@ -148,7 +148,7 @@ end
 
 Delete Product
 
-This method deletes a product.
+Deletes a product and all related SKUs. This operation cannot be undone.  If the force parameter is set to false or not set at all, the product and all related SKUs will be moved to the bin.
 
 ### Examples
 
@@ -171,7 +171,7 @@ end
 api_instance = VoucherifySdk::ProductsApi.new
 product_id = 'product_id_example' # String | A Voucherify product ID or source ID.
 opts = {
-  force: true # Boolean | If this flag is set to true, the product will be removed permanently. Going forward, the user will be able to create another product with exactly the same source_id.
+  force: true # Boolean | If this flag is set to true, the product and all related SKUs will be removed permanently. If it is set to false or not set at all, the product and all related SKUs will be moved to the bin. Going forward, the user will be able to create another product with exactly the same source_id.
 }
 
 begin
@@ -187,7 +187,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **product_id** | **String** | A Voucherify product ID or source ID. |  |
-| **force** | **Boolean** | If this flag is set to true, the product will be removed permanently. Going forward, the user will be able to create another product with exactly the same source_id. | [optional] |
+| **force** | **Boolean** | If this flag is set to true, the product and all related SKUs will be removed permanently. If it is set to false or not set at all, the product and all related SKUs will be moved to the bin. Going forward, the user will be able to create another product with exactly the same source_id. | [optional] |
 
 ### Return type
 
@@ -209,7 +209,7 @@ nil (empty response body)
 
 Delete SKU
 
-This method deletes a product SKU.
+Deletes a product SKU. This operation cannot be undone.  If the force parameter is set to false or not set at all, the SKU will be moved to the bin.
 
 ### Examples
 
@@ -233,7 +233,7 @@ api_instance = VoucherifySdk::ProductsApi.new
 product_id = 'product_id_example' # String | A unique Voucherify product ID or product source ID.
 sku_id = 'sku_id_example' # String | A Voucherify SKU ID or SKU source ID.
 opts = {
-  force: true # Boolean | If this flag is set to true, the SKU will be removed permanently. Going forward, the user will be able to create another SKU with exactly the same source_id.
+  force: true # Boolean | If this flag is set to true, the SKU will be removed permanently. If it is set to false or not set at all, the SKU will be moved to the bin. Going forward, the user will be able to create another SKU with exactly the same source_id.
 }
 
 begin
@@ -250,7 +250,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **product_id** | **String** | A unique Voucherify product ID or product source ID. |  |
 | **sku_id** | **String** | A Voucherify SKU ID or SKU source ID. |  |
-| **force** | **Boolean** | If this flag is set to true, the SKU will be removed permanently. Going forward, the user will be able to create another SKU with exactly the same source_id. | [optional] |
+| **force** | **Boolean** | If this flag is set to true, the SKU will be removed permanently. If it is set to false or not set at all, the SKU will be moved to the bin. Going forward, the user will be able to create another SKU with exactly the same source_id. | [optional] |
 
 ### Return type
 
@@ -384,7 +384,7 @@ end
 
 ## import_products_using_csv
 
-> <ProductsImportCsvCreateResponseBody> import_products_using_csv(file)
+> <ProductsImportCsvCreateResponseBody> import_products_using_csv(opts)
 
 Import Products using CSV
 
@@ -409,11 +409,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::ProductsApi.new
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import Products using CSV
-  result = api_instance.import_products_using_csv(file)
+  result = api_instance.import_products_using_csv(opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling ProductsApi->import_products_using_csv: #{e}"
@@ -424,7 +426,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -442,7 +444,7 @@ end
 
 ## import_skus_using_csv
 
-> <SkusImportCsvCreateResponseBody> import_skus_using_csv(file)
+> <SkusImportCsvCreateResponseBody> import_skus_using_csv(opts)
 
 Import SKUs using CSV
 
@@ -467,11 +469,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::ProductsApi.new
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import SKUs using CSV
-  result = api_instance.import_skus_using_csv(file)
+  result = api_instance.import_skus_using_csv(opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling ProductsApi->import_skus_using_csv: #{e}"
@@ -482,7 +486,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -526,8 +530,8 @@ end
 
 api_instance = VoucherifySdk::ProductsApi.new
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   order: VoucherifySdk::ParameterOrder::CREATED_AT, # ParameterOrder | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
   start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
   end_date: Time.parse('2013-10-20T19:20:30+01:00') # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -546,8 +550,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **order** | [**ParameterOrder**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 | **start_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
 | **end_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
@@ -595,8 +599,8 @@ end
 api_instance = VoucherifySdk::ProductsApi.new
 product_id = 'product_id_example' # String | A Voucherify product ID or product source ID.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   order: VoucherifySdk::ParameterOrder::CREATED_AT, # ParameterOrder | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
   start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
   end_date: Time.parse('2013-10-20T19:20:30+01:00') # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -616,8 +620,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **product_id** | **String** | A Voucherify product ID or product source ID. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **order** | [**ParameterOrder**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
 | **start_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
 | **end_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
@@ -702,9 +706,9 @@ end
 
 > <ProductsUpdateInBulkResponseBody> update_products_in_bulk(opts)
 
-Update Products in bulk
+Update Products in Bulk
 
-Update several products in one asynchronous operation.  In one request, it is possible to update a maximum of **100** records. In the response body, you get a unique async action identifier. If a requested product object is not found, then an **upsert** occurs. This is reflected in the Get Async Action endpoint as follows:    This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+Update products in one asynchronous operation. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a product object is not found, it is **upserted**. This is shown in the report file in the GET Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
 
 ### Examples
 
@@ -726,11 +730,11 @@ end
 
 api_instance = VoucherifySdk::ProductsApi.new
 opts = {
-  products_update_in_bulk_request_body: [VoucherifySdk::ProductsUpdateInBulkRequestBody.new({source_id: 'test_prod_id_1'})] # Array<ProductsUpdateInBulkRequestBody> | Create an array of product objects, each with the parameters which you want to update.
+  products_update_in_bulk_request_body: [VoucherifySdk::ProductsUpdateInBulkRequestBody.new] # Array<ProductsUpdateInBulkRequestBody> | List the product fields to be updated in each customer object.
 }
 
 begin
-  # Update Products in bulk
+  # Update Products in Bulk
   result = api_instance.update_products_in_bulk(opts)
   p result
 rescue VoucherifySdk::ApiError => e
@@ -742,7 +746,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **products_update_in_bulk_request_body** | [**Array&lt;ProductsUpdateInBulkRequestBody&gt;**](ProductsUpdateInBulkRequestBody.md) | Create an array of product objects, each with the parameters which you want to update. | [optional] |
+| **products_update_in_bulk_request_body** | [**Array&lt;ProductsUpdateInBulkRequestBody&gt;**](ProductsUpdateInBulkRequestBody.md) | List the product fields to be updated in each customer object. | [optional] |
 
 ### Return type
 
@@ -762,9 +766,9 @@ end
 
 > <ProductsMetadataUpdateInBulkResponseBody> update_products_metadata_in_bulk(opts)
 
-Update Products' Metadata in bulk
+Update Products' Metadata in Bulk
 
-Update several product metadata properties in one asynchronous operation.  In one request, it is possible to update a maximum of **100** records. In the response body, you get a unique async action identifier. If a requested product object is not found, then an **upsert** occurs. This is reflected in the Get Async Action endpoint as follows:    This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+Updates metadata parameters for a list of products. Every resource in the list will receive the metadata defined in the request. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a product object is not found, it is **upserted**. This is shown in the report file in the GET Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
 
 ### Examples
 
@@ -786,11 +790,11 @@ end
 
 api_instance = VoucherifySdk::ProductsApi.new
 opts = {
-  products_metadata_update_in_bulk_request_body: VoucherifySdk::ProductsMetadataUpdateInBulkRequestBody.new({source_ids: ['source_ids_example'], metadata: 3.56}) # ProductsMetadataUpdateInBulkRequestBody | Specify the list of product source IDs and the metadata key value pairs to be udpated for these products.
+  products_metadata_update_in_bulk_request_body: VoucherifySdk::ProductsMetadataUpdateInBulkRequestBody.new # ProductsMetadataUpdateInBulkRequestBody | List the source_ids of the products you would like to update with the metadata key/value pairs.
 }
 
 begin
-  # Update Products' Metadata in bulk
+  # Update Products' Metadata in Bulk
   result = api_instance.update_products_metadata_in_bulk(opts)
   p result
 rescue VoucherifySdk::ApiError => e
@@ -802,7 +806,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **products_metadata_update_in_bulk_request_body** | [**ProductsMetadataUpdateInBulkRequestBody**](ProductsMetadataUpdateInBulkRequestBody.md) | Specify the list of product source IDs and the metadata key value pairs to be udpated for these products. | [optional] |
+| **products_metadata_update_in_bulk_request_body** | [**ProductsMetadataUpdateInBulkRequestBody**](ProductsMetadataUpdateInBulkRequestBody.md) | List the source_ids of the products you would like to update with the metadata key/value pairs. | [optional] |
 
 ### Return type
 

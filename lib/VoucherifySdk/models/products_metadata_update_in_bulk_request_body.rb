@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request schema for **POST** `/products/metadata/async`.
+  # Request schema for **POST** `v1/products/metadata/async`.
   class ProductsMetadataUpdateInBulkRequestBody
     # Array of unique product source IDs.
     attr_accessor :source_ids
@@ -46,21 +46,16 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'source_ids',
+        :'metadata'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ProductsMetadataUpdateInBulkRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ProductsMetadataUpdateInBulkRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -68,14 +63,10 @@ module VoucherifySdk
         if (value = attributes[:'source_ids']).is_a?(Array)
           self.source_ids = value
         end
-      else
-        self.source_ids = nil
       end
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      else
-        self.metadata = nil
       end
     end
 
@@ -84,14 +75,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @source_ids.nil?
-        invalid_properties.push('invalid value for "source_ids", source_ids cannot be nil.')
-      end
-
-      if @metadata.nil?
-        invalid_properties.push('invalid value for "metadata", metadata cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -99,8 +82,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @source_ids.nil?
-      return false if @metadata.nil?
       true
     end
 

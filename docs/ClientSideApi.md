@@ -5,9 +5,9 @@ All URIs are relative to *https://api.voucherify.io*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**check_eligibility_client_side**](ClientSideApi.md#check_eligibility_client_side) | **POST** /client/v1/qualifications | Check Eligibility (client-side) |
+| [**list_promotion_tiers_client_side**](ClientSideApi.md#list_promotion_tiers_client_side) | **GET** /client/v1/promotions/tiers | List Promotion Tiers (client-side) |
 | [**redeem_stacked_discounts_client_side**](ClientSideApi.md#redeem_stacked_discounts_client_side) | **POST** /client/v1/redemptions | Redeem Stackable Discounts (client-side) |
 | [**track_custom_event_client_side**](ClientSideApi.md#track_custom_event_client_side) | **POST** /client/v1/events | Track Custom Event (client-side) |
-| [**update_customers_consents_client_side**](ClientSideApi.md#update_customers_consents_client_side) | **PUT** /client/v1/customers/{customerId}/consents | Update Customer&#39;s consents (client-side) |
 | [**validate_stacked_discounts_client_side**](ClientSideApi.md#validate_stacked_discounts_client_side) | **POST** /client/v1/validations | Validate Stackable Discounts (client-side) |
 
 
@@ -71,6 +71,74 @@ end
 - **Accept**: application/json
 
 
+## list_promotion_tiers_client_side
+
+> <ClientPromotionsTiersListResponseBody> list_promotion_tiers_client_side(origin, opts)
+
+List Promotion Tiers (client-side)
+
+This method enables you to list promotion tiers.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-Client-Application-Id
+  config.api_key['X-Client-Application-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Client-Application-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-Client-Token
+  config.api_key['X-Client-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-Client-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::ClientSideApi.new
+origin = 'origin_example' # String | Indicates the origin (scheme, hostname, and port).
+opts = {
+  is_available: true, # Boolean | This parameter allows filtering promotions that are only available at the moment. When set to true, it selects only non-expired and active promotions.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
+  order: VoucherifySdk::ParameterOrderListPromotionTiersClientSide::CREATED_AT # ParameterOrderListPromotionTiersClientSide | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+}
+
+begin
+  # List Promotion Tiers (client-side)
+  result = api_instance.list_promotion_tiers_client_side(origin, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling ClientSideApi->list_promotion_tiers_client_side: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **origin** | **String** | Indicates the origin (scheme, hostname, and port). |  |
+| **is_available** | **Boolean** | This parameter allows filtering promotions that are only available at the moment. When set to true, it selects only non-expired and active promotions. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
+| **order** | [**ParameterOrderListPromotionTiersClientSide**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+
+### Return type
+
+[**ClientPromotionsTiersListResponseBody**](ClientPromotionsTiersListResponseBody.md)
+
+### Authorization
+
+[X-Client-Application-Id](../README.md#X-Client-Application-Id), [X-Client-Token](../README.md#X-Client-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## redeem_stacked_discounts_client_side
 
 > <ClientRedemptionsRedeemResponseBody> redeem_stacked_discounts_client_side(origin, opts)
@@ -100,7 +168,7 @@ end
 api_instance = VoucherifySdk::ClientSideApi.new
 origin = 'origin_example' # String | Indicates the origin (scheme, hostname, and port).
 opts = {
-  client_redemptions_redeem_request_body: VoucherifySdk::ClientRedemptionsRedeemRequestBody.new({redeemables: [VoucherifySdk::RedeemGiftCard.new({object: 'voucher', id: 'id_example'})]}) # ClientRedemptionsRedeemRequestBody | 
+  client_redemptions_redeem_request_body: VoucherifySdk::ClientRedemptionsRedeemRequestBody.new # ClientRedemptionsRedeemRequestBody | 
 }
 
 begin
@@ -162,7 +230,7 @@ end
 api_instance = VoucherifySdk::ClientSideApi.new
 origin = 'origin_example' # String | Indicates the origin (scheme, hostname, and port).
 opts = {
-  client_events_create_request_body: VoucherifySdk::ClientEventsCreateRequestBody.new({event: 'event_example', customer: VoucherifySdk::Customer.new}) # ClientEventsCreateRequestBody | Specify the details of the custom event.
+  client_events_create_request_body: VoucherifySdk::ClientEventsCreateRequestBody.new({customer: VoucherifySdk::Customer.new}) # ClientEventsCreateRequestBody | Specify the details of the custom event.
 }
 
 begin
@@ -195,67 +263,6 @@ end
 - **Accept**: application/json
 
 
-## update_customers_consents_client_side
-
-> update_customers_consents_client_side(customer_id, opts)
-
-Update Customer's consents (client-side)
-
-Update marketing permissions for the specified customer.
-
-### Examples
-
-```ruby
-require 'time'
-require 'VoucherifySdk'
-# setup authorization
-VoucherifySdk.configure do |config|
-  # Configure API key authorization: X-Client-Application-Id
-  config.api_key['X-Client-Application-Id'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['X-Client-Application-Id'] = 'Bearer'
-
-  # Configure API key authorization: X-Client-Token
-  config.api_key['X-Client-Token'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['X-Client-Token'] = 'Bearer'
-end
-
-api_instance = VoucherifySdk::ClientSideApi.new
-customer_id = 'customer_id_example' # String | A Voucherify customer identifier or source_id
-opts = {
-  body: { ... } # Object | Key-value pairs where the key is the consent identifier and value is a boolean that identifies if a customer has given the consent or not. To deny all consents use unsubscribed as a consent identifier and true as its value.   ## Examples  Opt-out from all communication: 
-}
-
-begin
-  # Update Customer's consents (client-side)
-  api_instance.update_customers_consents_client_side(customer_id, opts)
-rescue VoucherifySdk::ApiError => e
-  puts "Error when calling ClientSideApi->update_customers_consents_client_side: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **customer_id** | **String** | A Voucherify customer identifier or source_id |  |
-| **body** | **Object** | Key-value pairs where the key is the consent identifier and value is a boolean that identifies if a customer has given the consent or not. To deny all consents use unsubscribed as a consent identifier and true as its value.   ## Examples  Opt-out from all communication:  | [optional] |
-
-### Return type
-
-nil (empty response body)
-
-### Authorization
-
-[X-Client-Application-Id](../README.md#X-Client-Application-Id), [X-Client-Token](../README.md#X-Client-Token)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: Not defined
-
-
 ## validate_stacked_discounts_client_side
 
 > <ClientValidationsValidateResponseBody> validate_stacked_discounts_client_side(origin, opts)
@@ -285,7 +292,7 @@ end
 api_instance = VoucherifySdk::ClientSideApi.new
 origin = 'origin_example' # String | Indicates the origin (scheme, hostname, and port).
 opts = {
-  client_validations_validate_request_body: VoucherifySdk::ClientValidationsValidateRequestBody.new({redeemables: [VoucherifySdk::RedeemGiftCard.new({object: 'voucher', id: 'id_example'})]}) # ClientValidationsValidateRequestBody | 
+  client_validations_validate_request_body: VoucherifySdk::ClientValidationsValidateRequestBody.new # ClientValidationsValidateRequestBody | 
 }
 
 begin

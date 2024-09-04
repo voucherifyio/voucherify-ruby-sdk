@@ -1,0 +1,1 @@
+{:object=>"event", :type=>"test-event", :customer=>{:id=>"cust_t10PA85aLTW0t5iWX6jayAkI", :source_id=>"test-customer", :name=>nil, :email=>nil, :object=>"customer"}, :referral=>nil, :loyalty=>nil}

@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **POST** `/promotions/{campaignId}/stacks`.
+  # Response body schema for **POST** `v1/promotions/{campaignId}/stacks`.
   class PromotionsStacksCreateResponseBody
     # Promotion stack name.
     attr_accessor :name
@@ -24,13 +24,13 @@ module VoucherifySdk
     # Unique promotion stack ID.
     attr_accessor :id
 
-    # Timestamp representing the date and time when the promotion stack was created in ISO 8601 format.
+    # Timestamp representing the date and time when the promotion stack was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Promotion stack's parent campaign's unique ID.
     attr_accessor :campaign_id
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # Promotion stack category ID.
@@ -84,7 +84,7 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'name' => :'String',
-        :'tiers' => :'PromotionStackBaseTiers',
+        :'tiers' => :'PromotionsStacksCreateResponseBodyTiers',
         :'id' => :'String',
         :'created_at' => :'Time',
         :'campaign_id' => :'String',
@@ -97,60 +97,43 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'tiers',
+        :'id',
+        :'created_at',
+        :'campaign_id',
+        :'object',
         :'category_id',
+        :'categories'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'PromotionStackBase'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::PromotionsStacksCreateResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::PromotionsStacksCreateResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'tiers')
         self.tiers = attributes[:'tiers']
-      else
-        self.tiers = nil
       end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
-      else
-        self.campaign_id = nil
       end
 
       if attributes.key?(:'object')
@@ -161,16 +144,12 @@ module VoucherifySdk
 
       if attributes.key?(:'category_id')
         self.category_id = attributes[:'category_id']
-      else
-        self.category_id = nil
       end
 
       if attributes.key?(:'categories')
         if (value = attributes[:'categories']).is_a?(Array)
           self.categories = value
         end
-      else
-        self.categories = nil
       end
     end
 
@@ -179,34 +158,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @tiers.nil?
-        invalid_properties.push('invalid value for "tiers", tiers cannot be nil.')
-      end
-
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @categories.nil?
-        invalid_properties.push('invalid value for "categories", categories cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -214,26 +165,9 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @name.nil?
-      return false if @tiers.nil?
-      return false if @id.nil?
-      return false if @created_at.nil?
-      return false if @campaign_id.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["promotion_stack"])
       return false unless object_validator.valid?(@object)
-      return false if @categories.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["promotion_stack"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
     end
 
     # Checks equality by comparing each attribute.

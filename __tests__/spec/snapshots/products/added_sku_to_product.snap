@@ -1,0 +1,1 @@
+{:id=>"sku_0f19725c9c461b91ec", :source_id=>"cZITJaY0E7", :product_id=>"prod_0f19725b46c61b91e1", :sku=>nil, :price=>5000, :currency=>nil, :attributes=>{:color=>"red", :memory=>"16GB", :processor=>"Intel Core i7"}, :image_url=>nil, :metadata=>{}, :created_at=>2024-07-23 09:08:58.609 UTC, :updated_at=>nil, :object=>"sku"}

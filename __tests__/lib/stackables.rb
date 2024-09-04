@@ -1,7 +1,7 @@
 def create_request_body_redeemable(voucher_id)
   begin
     validations_validate_request_body_redeemables = [
-      VoucherifySdk::RedeemVoucher.new({
+      VoucherifySdk::RedemptionEntryVoucher.new({
           object: "voucher", id: voucher_id
       })
     ]
@@ -10,11 +10,14 @@ def create_request_body_redeemable(voucher_id)
 end
 
 
-def validate_stacked_discounts(validations_api_instance, voucher_id, product_id, customer, amount)
+def validate_stacked_discounts(validations_api_instance, voucher_ids, product_id, customer, amount)
   begin
+    voucher_ids = [voucher_ids] unless voucher_ids.is_a?(Array)
+    redeemables = voucher_ids.map { |voucher_id| create_request_body_redeemable(voucher_id) }.flatten
+
     result = validations_api_instance.validate_stacked_discounts({
       validations_validate_request_body: VoucherifySdk::ValidationsValidateRequestBody.new({
-        redeemables: create_request_body_redeemable(voucher_id),
+        redeemables: redeemables,
         order: {
           items: [{
             related_object: "product",
@@ -39,19 +42,22 @@ def validate_stacked_discounts(validations_api_instance, voucher_id, product_id,
     })
     return result;
   rescue VoucherifySdk::ApiError => e
-    puts(e)
     return nil;
   end
 end
 
-def redeem_stacked_discounts(redemptions_api_instance, voucher_id)
+def redeem_stacked_discounts(redemptions_api_instance, voucher_ids)
   begin
+    voucher_ids = [voucher_ids] unless voucher_ids.is_a?(Array)
+    redeemables = voucher_ids.map { |voucher_id| create_request_body_redeemable(voucher_id) }.flatten
+    
     result = redemptions_api_instance.redeem_stacked_discounts({
       redemptions_redeem_request_body: VoucherifySdk::RedemptionsRedeemRequestBody.new({
-        redeemables: create_request_body_redeemable(voucher_id),
+        redeemables: redeemables,
         order: VoucherifySdk::Order.new(amount: 20000)
       })
     })
+
     return result;
   rescue VoucherifySdk::ApiError => e
     return nil;

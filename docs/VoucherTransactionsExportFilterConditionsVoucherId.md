@@ -4,5 +4,5 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **conditions** | [**VoucherTransactionsExportFilterConditionsVoucherIdConditions**](VoucherTransactionsExportFilterConditionsVoucherIdConditions.md) |  |  |
+| **conditions** | [**VoucherTransactionsExportFilterConditionsVoucherIdConditions**](VoucherTransactionsExportFilterConditionsVoucherIdConditions.md) |  | [optional] |
 

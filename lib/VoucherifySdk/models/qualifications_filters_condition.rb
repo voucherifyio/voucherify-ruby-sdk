@@ -47,42 +47,45 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'is' => :'Any',
-        :'is_not' => :'Any',
-        :'has_value' => :'Any',
-        :'is_unknown' => :'Any',
-        :'_in' => :'Any',
-        :'not_in' => :'Any'
+        :'is' => :'Array<String>',
+        :'is_not' => :'Array<String>',
+        :'has_value' => :'Object',
+        :'is_unknown' => :'Object',
+        :'_in' => :'Array<String>',
+        :'not_in' => :'Array<String>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'is',
+        :'is_not',
+        :'has_value',
+        :'is_unknown',
+        :'_in',
+        :'not_in'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::QualificationsFiltersCondition` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::QualificationsFiltersCondition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'is')
-        self.is = attributes[:'is']
+        if (value = attributes[:'is']).is_a?(Array)
+          self.is = value
+        end
       end
 
       if attributes.key?(:'is_not')
-        self.is_not = attributes[:'is_not']
+        if (value = attributes[:'is_not']).is_a?(Array)
+          self.is_not = value
+        end
       end
 
       if attributes.key?(:'has_value')
@@ -94,11 +97,15 @@ module VoucherifySdk
       end
 
       if attributes.key?(:'_in')
-        self._in = attributes[:'_in']
+        if (value = attributes[:'_in']).is_a?(Array)
+          self._in = value
+        end
       end
 
       if attributes.key?(:'not_in')
-        self.not_in = attributes[:'not_in']
+        if (value = attributes[:'not_in']).is_a?(Array)
+          self.not_in = value
+        end
       end
     end
 

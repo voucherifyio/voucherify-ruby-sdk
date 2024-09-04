@@ -9,13 +9,15 @@ All URIs are relative to *https://api.voucherify.io*
 | [**delete_customer**](CustomersApi.md#delete_customer) | **DELETE** /v1/customers/{customerId} | Delete Customer |
 | [**get_customer**](CustomersApi.md#get_customer) | **GET** /v1/customers/{customerId} | Get Customer |
 | [**import_customers_using_csv**](CustomersApi.md#import_customers_using_csv) | **POST** /v1/customers/importCSV | Import and Update Customers using CSV |
-| [**list_customer_activities**](CustomersApi.md#list_customer_activities) | **GET** /v1/customers/{customerId}/activities | List Customer Activities |
+| [**list_customer_activities**](CustomersApi.md#list_customer_activities) | **GET** /v1/customers/{customerId}/activities | List Customer Activities [Deprecated] |
+| [**list_customer_activity**](CustomersApi.md#list_customer_activity) | **GET** /v1/customers/{customerId}/activity | List Customer Activity |
+| [**list_customer_redeemables**](CustomersApi.md#list_customer_redeemables) | **GET** /v1/customers/{customerId}/redeemables | List Customer&#39;s Redeemables |
 | [**list_customer_segments**](CustomersApi.md#list_customer_segments) | **GET** /v1/customers/{customerId}/segments | List Customer&#39;s Segments |
 | [**list_customers**](CustomersApi.md#list_customers) | **GET** /v1/customers | List Customers |
 | [**update_customer**](CustomersApi.md#update_customer) | **PUT** /v1/customers/{customerId} | Update Customer |
-| [**update_customers_consents**](CustomersApi.md#update_customers_consents) | **PUT** /v1/customers/{customerId}/consents | Update Customer&#39;s consents |
-| [**update_customers_in_bulk**](CustomersApi.md#update_customers_in_bulk) | **POST** /v1/customers/bulk/async | Update Customers in bulk |
-| [**update_customers_metadata_in_bulk**](CustomersApi.md#update_customers_metadata_in_bulk) | **POST** /v1/customers/metadata/async | Update Customers&#39; Metadata in bulk |
+| [**update_customers_consents**](CustomersApi.md#update_customers_consents) | **PUT** /v1/customers/{customerId}/consents | Update Customer&#39;s consents [Deprecated] |
+| [**update_customers_in_bulk**](CustomersApi.md#update_customers_in_bulk) | **POST** /v1/customers/bulk/async | Update Customers in Bulk |
+| [**update_customers_metadata_in_bulk**](CustomersApi.md#update_customers_metadata_in_bulk) | **POST** /v1/customers/metadata/async | Update Customers&#39; Metadata in Bulk |
 
 
 ## create_customer
@@ -253,7 +255,7 @@ end
 
 ## import_customers_using_csv
 
-> <CustomersImportCsvCreateResponseBody> import_customers_using_csv(file)
+> <CustomersImportCsvCreateResponseBody> import_customers_using_csv(opts)
 
 Import and Update Customers using CSV
 
@@ -278,11 +280,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::CustomersApi.new
-file = File.new('/path/to/some/file') # File | File path.
+opts = {
+  file: File.new('/path/to/some/file') # File | File path.
+}
 
 begin
   # Import and Update Customers using CSV
-  result = api_instance.import_customers_using_csv(file)
+  result = api_instance.import_customers_using_csv(opts)
   p result
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling CustomersApi->import_customers_using_csv: #{e}"
@@ -293,7 +297,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **file** | **File** | File path. |  |
+| **file** | **File** | File path. | [optional] |
 
 ### Return type
 
@@ -313,7 +317,85 @@ end
 
 > <CustomersActivitiesListResponseBody> list_customer_activities(customer_id, opts)
 
-List Customer Activities
+List Customer Activities [Deprecated]
+
+> ❗️ Deprecated    This endpoint represents the deprecated version of the API responsible for listing customer activities and we do not recommend using it. Developers are encouraged to migrate to the latest version to take advantage of the latest enhancements and bug fixes. No updates will be provided to the deprecated endpoint. Retrieve customer activities.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::CustomersApi.new
+customer_id = 'customer_id_example' # String | A Voucherify customers id or source ID of the customer who performed the activities.
+opts = {
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  order: VoucherifySdk::ParameterOrder::CREATED_AT, # ParameterOrder | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+  starting_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | A cursor for pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.
+  starting_after_id: 'starting_after_id_example', # String | A cursor for pagination. It retrieves the events starting after an event with the given ID.
+  campaign_type: VoucherifySdk::ParameterCampaignType::PROMOTION, # ParameterCampaignType | Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM
+  campaign_id: 'campaign_id_example', # String | By applying this parameter you request only events related to specific campaign identified by its ID.
+  product_id: 'product_id_example', # String | By applying this parameter you request only events related to specific product identified by its ID.
+  start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
+  end_date: Time.parse('2013-10-20T19:20:30+01:00') # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
+}
+
+begin
+  # List Customer Activities [Deprecated]
+  result = api_instance.list_customer_activities(customer_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling CustomersApi->list_customer_activities: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **customer_id** | **String** | A Voucherify customers id or source ID of the customer who performed the activities. |  |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **order** | [**ParameterOrder**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after** | **Time** | A cursor for pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the events starting after an event with the given ID. | [optional] |
+| **campaign_type** | [**ParameterCampaignType**](.md) | Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM | [optional] |
+| **campaign_id** | **String** | By applying this parameter you request only events related to specific campaign identified by its ID. | [optional] |
+| **product_id** | **String** | By applying this parameter you request only events related to specific product identified by its ID. | [optional] |
+| **start_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
+| **end_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
+
+### Return type
+
+[**CustomersActivitiesListResponseBody**](CustomersActivitiesListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_customer_activity
+
+> <CustomersActivityListResponseBody> list_customer_activity(customer_id, opts)
+
+List Customer Activity
 
 Retrieve customer activities.
 
@@ -338,23 +420,23 @@ end
 api_instance = VoucherifySdk::CustomersApi.new
 customer_id = 'customer_id_example' # String | A Voucherify customers id or source ID of the customer who performed the activities.
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  order: VoucherifySdk::ParameterOrder::CREATED_AT, # ParameterOrder | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-  starting_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | A cursor for use in pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.
-  starting_after_id: 'starting_after_id_example', # String | By applying this filter value, you will get events starting after an event with the given ID.
-  campaign_type: VoucherifySdk::ParameterCampaignType::PROMOTION, # ParameterCampaignType | Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM
-  campaign_id: 'campaign_id_example', # String | By applying this parameter you request only events related to specific campaign identified by its ID.
-  product_id: 'product_id_example', # String | By applying this parameter you request only events related to specific product identified by its ID.
-  start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
-  end_date: Time.parse('2013-10-20T19:20:30+01:00') # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  order: VoucherifySdk::ParameterOrderCreatedAt::CREATED_AT, # ParameterOrderCreatedAt | Apply this filter to order the events according the date and time when it was created. 
+  starting_after_id: 'starting_after_id_example', # String | A cursor for pagination. It retrieves the events starting after an event with the given ID.
+  start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Timestamp representing the date and time which results must begin on. Represented in ISO 8601 format.
+  end_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
+  campaign_id: 'campaign_id_example', # String | Requests only events related to specific campaign identified by its ID.
+  campaign_type: VoucherifySdk::ParameterCampaignType::PROMOTION, # ParameterCampaignType | Filters related customers activity for the selected campaign types. Allowed values:  DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM.
+  category: VoucherifySdk::ParameterActivityCategory::ACTION, # ParameterActivityCategory | Filters activities for actions or effects. Allowed values:  ACTION, EFFECT.
+  type: 'type_example' # String | Event name of the customer event.
 }
 
 begin
-  # List Customer Activities
-  result = api_instance.list_customer_activities(customer_id, opts)
+  # List Customer Activity
+  result = api_instance.list_customer_activity(customer_id, opts)
   p result
 rescue VoucherifySdk::ApiError => e
-  puts "Error when calling CustomersApi->list_customer_activities: #{e}"
+  puts "Error when calling CustomersApi->list_customer_activity: #{e}"
 end
 ```
 
@@ -363,19 +445,87 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **customer_id** | **String** | A Voucherify customers id or source ID of the customer who performed the activities. |  |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **order** | [**ParameterOrder**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
-| **starting_after** | **Time** | A cursor for use in pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list. | [optional] |
-| **starting_after_id** | **String** | By applying this filter value, you will get events starting after an event with the given ID. | [optional] |
-| **campaign_type** | [**ParameterCampaignType**](.md) | Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM | [optional] |
-| **campaign_id** | **String** | By applying this parameter you request only events related to specific campaign identified by its ID. | [optional] |
-| **product_id** | **String** | By applying this parameter you request only events related to specific product identified by its ID. | [optional] |
-| **start_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **order** | [**ParameterOrderCreatedAt**](.md) | Apply this filter to order the events according the date and time when it was created.  | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the events starting after an event with the given ID. | [optional] |
+| **start_date** | **Time** | Timestamp representing the date and time which results must begin on. Represented in ISO 8601 format. | [optional] |
 | **end_date** | **Time** | Timestamp representing the date and time which results must end on. Represented in ISO 8601 format. | [optional] |
+| **campaign_id** | **String** | Requests only events related to specific campaign identified by its ID. | [optional] |
+| **campaign_type** | [**ParameterCampaignType**](.md) | Filters related customers activity for the selected campaign types. Allowed values:  DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM. | [optional] |
+| **category** | [**ParameterActivityCategory**](.md) | Filters activities for actions or effects. Allowed values:  ACTION, EFFECT. | [optional] |
+| **type** | **String** | Event name of the customer event. | [optional] |
 
 ### Return type
 
-[**CustomersActivitiesListResponseBody**](CustomersActivitiesListResponseBody.md)
+[**CustomersActivityListResponseBody**](CustomersActivityListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_customer_redeemables
+
+> <CustomersRedeemablesListResponseBody> list_customer_redeemables(customer_id, opts)
+
+List Customer's Redeemables
+
+Retrieves all the redeemables that have been assigned to the customer. To use this endpoint, you must have the following permissions: - Read Customers (customers.details.read)
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::CustomersApi.new
+customer_id = 'customer_id_example' # String | Unique identifier of a customer represented by an internal customer ID or customer source ID.
+opts = {
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  order: VoucherifySdk::ParameterOrderListRedeemables::ID, # ParameterOrderListRedeemables | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+  starting_after_id: 'starting_after_id_example', # String | A cursor for pagination. It retrieves the events starting after an event with the given ID.
+  filters: VoucherifySdk::ParameterFiltersListCustomerRedeemables.new # ParameterFiltersListCustomerRedeemables | Filters for listing customer redeemables.
+}
+
+begin
+  # List Customer's Redeemables
+  result = api_instance.list_customer_redeemables(customer_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling CustomersApi->list_customer_redeemables: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **customer_id** | **String** | Unique identifier of a customer represented by an internal customer ID or customer source ID. |  |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **order** | [**ParameterOrderListRedeemables**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the events starting after an event with the given ID. | [optional] |
+| **filters** | [**ParameterFiltersListCustomerRedeemables**](.md) | Filters for listing customer redeemables. | [optional] |
+
+### Return type
+
+[**CustomersRedeemablesListResponseBody**](CustomersRedeemablesListResponseBody.md)
 
 ### Authorization
 
@@ -473,8 +623,8 @@ end
 
 api_instance = VoucherifySdk::CustomersApi.new
 opts = {
-  limit: 56, # Integer | A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-  page: 56, # Integer | Which page of results to return.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  page: 56, # Integer | Which page of results to return. The lowest value is 1.
   email: 'email_example', # String | Limit the customers to the ones that have this specific email address.
   city: 'city_example', # String | Limit the customers to the ones that are located in the specified city.
   name: 'name_example', # String | Filter customers by the name property.
@@ -484,7 +634,7 @@ opts = {
   updated_at_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Filter customers by date customer was updated last time.
   updated_at_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Filter customers by date customer was updated last time.
   order: VoucherifySdk::ParameterOrderListCustomers::CREATED_AT, # ParameterOrderListCustomers | This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-  starting_after: Time.parse('2013-10-20T19:20:30+01:00') # Time | A cursor for use in pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.  
+  starting_after: Time.parse('2013-10-20T19:20:30+01:00') # Time | A cursor for pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.  
 }
 
 begin
@@ -500,8 +650,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **limit** | **Integer** | A limit on the number of objects to be returned. Limit can range between 1 and 100 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. | [optional] |
+| **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
 | **email** | **String** | Limit the customers to the ones that have this specific email address. | [optional] |
 | **city** | **String** | Limit the customers to the ones that are located in the specified city. | [optional] |
 | **name** | **String** | Filter customers by the name property. | [optional] |
@@ -511,7 +661,7 @@ end
 | **updated_at_before** | **Time** | Filter customers by date customer was updated last time. | [optional] |
 | **updated_at_after** | **Time** | Filter customers by date customer was updated last time. | [optional] |
 | **order** | [**ParameterOrderListCustomers**](.md) | This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
-| **starting_after** | **Time** | A cursor for use in pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.   | [optional] |
+| **starting_after** | **Time** | A cursor for pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.   | [optional] |
 
 ### Return type
 
@@ -593,9 +743,9 @@ end
 
 > update_customers_consents(customer_id, opts)
 
-Update Customer's consents
+Update Customer's consents [Deprecated]
 
-Update marketing permissions for the specified customer.
+Update marketing permissions for the specified customer. ❗️ Deprecated  This endpoint is deprecated. The feature of managing consents will be soon removed from Voucherify, including this endpoint.
 
 ### Examples
 
@@ -622,7 +772,7 @@ opts = {
 }
 
 begin
-  # Update Customer's consents
+  # Update Customer's consents [Deprecated]
   api_instance.update_customers_consents(customer_id, opts)
 rescue VoucherifySdk::ApiError => e
   puts "Error when calling CustomersApi->update_customers_consents: #{e}"
@@ -654,9 +804,9 @@ nil (empty response body)
 
 > <CustomersUpdateInBulkResponseBody> update_customers_in_bulk(opts)
 
-Update Customers in bulk
+Update Customers in Bulk
 
-Update several customers in one asynchronous operation.  In one request, it is possible to update a maximum of **100** records. In the response body, you get a unique async action identifier.   If a requested customer object is not found, then an **upsert** occurs. This is reflected in the Get Async Action endpoint as follows:    This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+Updates customers in one asynchronous operation. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a customer object is not found, it is **upserted**. This is shown in the report file in the GET Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
 
 ### Examples
 
@@ -678,11 +828,11 @@ end
 
 api_instance = VoucherifySdk::CustomersApi.new
 opts = {
-  customers_update_in_bulk_request_body: [VoucherifySdk::CustomersUpdateInBulkRequestBody.new({source_id: 'source_id_example'})] # Array<CustomersUpdateInBulkRequestBody> | Specify the customer fields that you would like to update in each customer object.
+  customers_update_in_bulk_request_body: [VoucherifySdk::CustomersUpdateInBulkRequestBody.new] # Array<CustomersUpdateInBulkRequestBody> | List the customer fields to be updated in each customer object.
 }
 
 begin
-  # Update Customers in bulk
+  # Update Customers in Bulk
   result = api_instance.update_customers_in_bulk(opts)
   p result
 rescue VoucherifySdk::ApiError => e
@@ -694,7 +844,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **customers_update_in_bulk_request_body** | [**Array&lt;CustomersUpdateInBulkRequestBody&gt;**](CustomersUpdateInBulkRequestBody.md) | Specify the customer fields that you would like to update in each customer object. | [optional] |
+| **customers_update_in_bulk_request_body** | [**Array&lt;CustomersUpdateInBulkRequestBody&gt;**](CustomersUpdateInBulkRequestBody.md) | List the customer fields to be updated in each customer object. | [optional] |
 
 ### Return type
 
@@ -714,9 +864,9 @@ end
 
 > <CustomersMetadataUpdateInBulkResponseBody> update_customers_metadata_in_bulk(opts)
 
-Update Customers' Metadata in bulk
+Update Customers' Metadata in Bulk
 
-Update several customers metadata properties in one asynchronous operation.  In one request, it is possible to update a maximum of **100** records. In the response body, you get a unique async action identifier.   If a requested customer object is not found, then an **upsert** occurs. This is reflected in the Get Async Action endpoint as follows:    This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+Updates metadata parameters for a list of customers. Every resource in the list will receive the metadata defined in the request. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a product object is not found, it is **upserted**. This is shown in the report file in the GET Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
 
 ### Examples
 
@@ -738,11 +888,11 @@ end
 
 api_instance = VoucherifySdk::CustomersApi.new
 opts = {
-  customers_metadata_update_in_bulk_request_body: VoucherifySdk::CustomersMetadataUpdateInBulkRequestBody.new({source_ids: ['source_ids_example'], metadata: 3.56}) # CustomersMetadataUpdateInBulkRequestBody | List the source_ids of the customers you would like to update along with the metadata key value pairs.
+  customers_metadata_update_in_bulk_request_body: VoucherifySdk::CustomersMetadataUpdateInBulkRequestBody.new # CustomersMetadataUpdateInBulkRequestBody | List the source_ids of the customers you would like to update with the metadata key/value pairs.
 }
 
 begin
-  # Update Customers' Metadata in bulk
+  # Update Customers' Metadata in Bulk
   result = api_instance.update_customers_metadata_in_bulk(opts)
   p result
 rescue VoucherifySdk::ApiError => e
@@ -754,7 +904,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **customers_metadata_update_in_bulk_request_body** | [**CustomersMetadataUpdateInBulkRequestBody**](CustomersMetadataUpdateInBulkRequestBody.md) | List the source_ids of the customers you would like to update along with the metadata key value pairs. | [optional] |
+| **customers_metadata_update_in_bulk_request_body** | [**CustomersMetadataUpdateInBulkRequestBody**](CustomersMetadataUpdateInBulkRequestBody.md) | List the source_ids of the customers you would like to update with the metadata key/value pairs. | [optional] |
 
 ### Return type
 

@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **PUT** `/loyalties/{campaignId}/rewards/{assignmentId}` and **PUT** `/rewards/{rewardId}/assignments/{assignmentId}`.
+  # Request body schema for **PUT** `v1/rewards/{rewardId}/assignments/{assignmentId}`.
   class RewardsAssignmentsUpdateRequestBody
     attr_accessor :parameters
 
@@ -40,21 +40,15 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'parameters'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::RewardsAssignmentsUpdateRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::RewardsAssignmentsUpdateRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 

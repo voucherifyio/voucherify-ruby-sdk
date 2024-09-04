@@ -31,10 +31,10 @@ module VoucherifySdk
     # Expiration timestamp defines when the loyalty tier expires in ISO 8601 format. Loyalty tier is inactive after this date.
     attr_accessor :expiration_date
 
-    # Timestamp representing the date and time when the loyalty tier was created in ISO 8601 format.
+    # Timestamp representing the date and time when the loyalty tier was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the loyalty tier was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the loyalty tier was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -71,40 +71,34 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'customer_id',
+        :'campaign_id',
+        :'tier_id',
+        :'start_date',
+        :'expiration_date',
+        :'created_at',
+        :'updated_at'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltyTierExpiration` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltyTierExpiration`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'customer_id')
         self.customer_id = attributes[:'customer_id']
-      else
-        self.customer_id = nil
       end
 
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
-      else
-        self.campaign_id = nil
       end
 
       if attributes.key?(:'tier_id')
         self.tier_id = attributes[:'tier_id']
-      else
-        self.tier_id = nil
       end
 
       if attributes.key?(:'start_date')
@@ -117,8 +111,6 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'updated_at')
@@ -131,22 +123,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @customer_id.nil?
-        invalid_properties.push('invalid value for "customer_id", customer_id cannot be nil.')
-      end
-
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
-      end
-
-      if @tier_id.nil?
-        invalid_properties.push('invalid value for "tier_id", tier_id cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -154,10 +130,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @customer_id.nil?
-      return false if @campaign_id.nil?
-      return false if @tier_id.nil?
-      return false if @created_at.nil?
       true
     end
 

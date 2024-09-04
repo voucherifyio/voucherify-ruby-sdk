@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # List of redeemables for examine qualification.
   class QualificationsRedeemables
-    # The type of object represented by JSON. Default is `list`.
+    # The type of the object represented by JSON. Default is `list`.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of qualified redeemables.
@@ -28,10 +28,10 @@ module VoucherifySdk
     # The number of redeemables returned in the API request.
     attr_accessor :total
 
-    # As results are always limited, the `has_more` flag indicates whether there are more records for given parameters. This let's you know if you are able to run another request (with different options) to get more records returned in the results.
+    # As results are always limited, the `has_more` flag indicates if there are more records for given parameters. This lets you know if you can run another request (with different options) to get more records returned in the results.
     attr_accessor :has_more
 
-    # Timestamp representing the date and time to use in starting_after cursor to get more redeemables.
+    # Timestamp representing the date and time to use in `starting_after` cursor to get more redeemables.
     attr_accessor :more_starting_after
 
     class EnumAttributeValidator
@@ -88,21 +88,20 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'data_ref',
+        :'data',
+        :'total',
+        :'has_more',
+        :'more_starting_after'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::QualificationsRedeemables` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::QualificationsRedeemables`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -122,20 +121,14 @@ module VoucherifySdk
         if (value = attributes[:'data']).is_a?(Array)
           self.data = value
         end
-      else
-        self.data = nil
       end
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
 
       if attributes.key?(:'has_more')
         self.has_more = attributes[:'has_more']
-      else
-        self.has_more = nil
       end
 
       if attributes.key?(:'more_starting_after')
@@ -148,26 +141,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @data_ref.nil?
-        invalid_properties.push('invalid value for "data_ref", data_ref cannot be nil.')
-      end
-
-      if @data.nil?
-        invalid_properties.push('invalid value for "data", data cannot be nil.')
-      end
-
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
-      if @has_more.nil?
-        invalid_properties.push('invalid value for "has_more", has_more cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -175,36 +148,11 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["list"])
       return false unless object_validator.valid?(@object)
-      return false if @data_ref.nil?
       data_ref_validator = EnumAttributeValidator.new('String', ["data"])
       return false unless data_ref_validator.valid?(@data_ref)
-      return false if @data.nil?
-      return false if @total.nil?
-      return false if @has_more.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["list"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] data_ref Object to be assigned
-    def data_ref=(data_ref)
-      validator = EnumAttributeValidator.new('String', ["data"])
-      unless validator.valid?(data_ref)
-        fail ArgumentError, "invalid value for \"data_ref\", must be one of #{validator.allowable_values}."
-      end
-      @data_ref = data_ref
     end
 
     # Checks equality by comparing each attribute.

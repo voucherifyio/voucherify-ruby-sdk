@@ -14,12 +14,12 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **POST** `/validation-rules/{validationRuleId}/assignments`.
+  # Request body schema for **POST** `v1/validation-rules/{validationRuleId}/assignments`.
   class ValidationRulesAssignmentsCreateRequestBody
-    # Defines the related object. i.e. `voucher`.
+    # Defines the related object, e.g. `voucher`.
     attr_accessor :related_object_type
 
-    # Unique related object ID assigned by Voucherify, i.e. v_lfZi4rcEGe0sN9gmnj40bzwK2FH6QUno for a voucher.
+    # Unique related object ID assigned by Voucherify, e.g. `v_lfZi4rcEGe0sN9gmnj40bzwK2FH6QUno` for a voucher.
     attr_accessor :related_object_id
 
     class EnumAttributeValidator
@@ -68,21 +68,16 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'related_object_type',
+        :'related_object_id'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ValidationRulesAssignmentsCreateRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ValidationRulesAssignmentsCreateRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -112,16 +107,6 @@ module VoucherifySdk
       related_object_type_validator = EnumAttributeValidator.new('String', ["voucher", "promotion_tier", "campaign", "earning_rule", "distribution", "reward_assignment"])
       return false unless related_object_type_validator.valid?(@related_object_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] related_object_type Object to be assigned
-    def related_object_type=(related_object_type)
-      validator = EnumAttributeValidator.new('String', ["voucher", "promotion_tier", "campaign", "earning_rule", "distribution", "reward_assignment"])
-      unless validator.valid?(related_object_type)
-        fail ArgumentError, "invalid value for \"related_object_type\", must be one of #{validator.allowable_values}."
-      end
-      @related_object_type = related_object_type
     end
 
     # Checks equality by comparing each attribute.

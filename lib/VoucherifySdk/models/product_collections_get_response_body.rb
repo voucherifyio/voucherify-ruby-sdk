@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `/product-collections/{productCollectionId}`.
+  # Response body schema for **GET** `v1/product-collections/{productCollectionId}`.
   class ProductCollectionsGetResponseBody
     # Product collection ID.
     attr_accessor :id
@@ -30,10 +30,10 @@ module VoucherifySdk
     # Defines a set of products for a `STATIC` product collection type.
     attr_accessor :products
 
-    # Timestamp representing the date and time when the product collection was created in ISO 8601 format.
+    # Timestamp representing the date and time when the product collection was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # The type of object represented by JSON. This object stores information about the static product collection.
+    # The type of the object represented by JSON. This object stores information about the static product collection.
     attr_accessor :object
 
     class EnumAttributeValidator
@@ -82,8 +82,8 @@ module VoucherifySdk
         :'id' => :'String',
         :'name' => :'String',
         :'type' => :'String',
-        :'filter' => :'ProductCollectionsCreateDynamicRequestBodyFilter',
-        :'products' => :'Array<ProductCollectionsItemProductsItem>',
+        :'filter' => :'ProductCollectionsGetResponseBodyFilter',
+        :'products' => :'Array<ProductCollectionsGetResponseBodyProductsItem>',
         :'created_at' => :'Time',
         :'object' => :'String'
       }
@@ -92,47 +92,34 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'name',
+        :'type',
+        :'filter',
+        :'products',
+        :'created_at',
+        :'object'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'ProductCollectionsItem'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ProductCollectionsGetResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ProductCollectionsGetResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = nil
       end
 
       if attributes.key?(:'filter')
@@ -147,8 +134,6 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'object')
@@ -163,26 +148,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -190,36 +155,11 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @name.nil?
-      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["STATIC", "AUTO_UPDATE"])
       return false unless type_validator.valid?(@type)
-      return false if @created_at.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["products_collection"])
       return false unless object_validator.valid?(@object)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["STATIC", "AUTO_UPDATE"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["products_collection"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
     end
 
     # Checks equality by comparing each attribute.

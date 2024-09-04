@@ -35,17 +35,17 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the loyalty tier. A set of key/value pairs that you can attach to a loyalty tier object. It can be useful for storing additional information about the loyalty tier in a structured format.
     attr_accessor :metadata
 
-    # Timestamp representing the date and time when the loyalty tier was created in ISO 8601 format.
+    # Timestamp representing the date and time when the loyalty tier was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the loyalty tier was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the loyalty tier was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     attr_accessor :config
 
     attr_accessor :expiration
 
-    # The type of object represented by JSON. This object stores information about the loyalty.
+    # The type of the object represented by JSON. This object stores information about the loyalty.
     attr_accessor :object
 
     class EnumAttributeValidator
@@ -99,13 +99,13 @@ module VoucherifySdk
         :'name' => :'String',
         :'earning_rules' => :'Hash<String, MappingPoints>',
         :'rewards' => :'Hash<String, MappingPoints>',
-        :'points' => :'LoyaltyTierBasePoints',
+        :'points' => :'LoyaltyTierPoints',
         :'id' => :'String',
         :'campaign_id' => :'String',
         :'metadata' => :'Object',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
-        :'config' => :'LoyaltyTierAllOfConfig',
+        :'config' => :'LoyaltyTierConfig',
         :'expiration' => :'LoyaltyTierExpiration',
         :'object' => :'String'
       }
@@ -114,37 +114,30 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'earning_rules',
+        :'rewards',
+        :'points',
+        :'id',
+        :'campaign_id',
         :'metadata',
+        :'created_at',
         :'updated_at',
+        :'config',
+        :'object'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'LoyaltyTierBase'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltyTier` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltyTier`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'earning_rules')
@@ -161,32 +154,22 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
-      else
-        self.points = nil
       end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
-      else
-        self.campaign_id = nil
       end
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      else
-        self.metadata = nil
       end
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'updated_at')
@@ -195,8 +178,6 @@ module VoucherifySdk
 
       if attributes.key?(:'config')
         self.config = attributes[:'config']
-      else
-        self.config = nil
       end
 
       if attributes.key?(:'expiration')
@@ -215,34 +196,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @points.nil?
-        invalid_properties.push('invalid value for "points", points cannot be nil.')
-      end
-
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @config.nil?
-        invalid_properties.push('invalid value for "config", config cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -250,26 +203,9 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @name.nil?
-      return false if @points.nil?
-      return false if @id.nil?
-      return false if @campaign_id.nil?
-      return false if @created_at.nil?
-      return false if @config.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["loyalty_tier"])
       return false unless object_validator.valid?(@object)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["loyalty_tier"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
     end
 
     # Checks equality by comparing each attribute.

@@ -76,28 +76,23 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'qualification_type',
+        :'qualification_period',
+        :'start_date',
+        :'expiration_date'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltyTiersExpirationAll` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltyTiersExpirationAll`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'qualification_type')
         self.qualification_type = attributes[:'qualification_type']
-      else
-        self.qualification_type = nil
       end
 
       if attributes.key?(:'qualification_period')
@@ -106,14 +101,10 @@ module VoucherifySdk
 
       if attributes.key?(:'start_date')
         self.start_date = attributes[:'start_date']
-      else
-        self.start_date = nil
       end
 
       if attributes.key?(:'expiration_date')
         self.expiration_date = attributes[:'expiration_date']
-      else
-        self.expiration_date = nil
       end
     end
 
@@ -122,18 +113,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @qualification_type.nil?
-        invalid_properties.push('invalid value for "qualification_type", qualification_type cannot be nil.')
-      end
-
-      if @start_date.nil?
-        invalid_properties.push('invalid value for "start_date", start_date cannot be nil.')
-      end
-
-      if @expiration_date.nil?
-        invalid_properties.push('invalid value for "expiration_date", expiration_date cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -141,34 +120,11 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @qualification_type.nil?
       qualification_type_validator = EnumAttributeValidator.new('String', ["BALANCE", "POINTS_IN_PERIOD"])
       return false unless qualification_type_validator.valid?(@qualification_type)
       qualification_period_validator = EnumAttributeValidator.new('String', ["MONTH", "QUARTER", "HALF_YEAR", "YEAR"])
       return false unless qualification_period_validator.valid?(@qualification_period)
-      return false if @start_date.nil?
-      return false if @expiration_date.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] qualification_type Object to be assigned
-    def qualification_type=(qualification_type)
-      validator = EnumAttributeValidator.new('String', ["BALANCE", "POINTS_IN_PERIOD"])
-      unless validator.valid?(qualification_type)
-        fail ArgumentError, "invalid value for \"qualification_type\", must be one of #{validator.allowable_values}."
-      end
-      @qualification_type = qualification_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] qualification_period Object to be assigned
-    def qualification_period=(qualification_period)
-      validator = EnumAttributeValidator.new('String', ["MONTH", "QUARTER", "HALF_YEAR", "YEAR"])
-      unless validator.valid?(qualification_period)
-        fail ArgumentError, "invalid value for \"qualification_period\", must be one of #{validator.allowable_values}."
-      end
-      @qualification_period = qualification_period
     end
 
     # Checks equality by comparing each attribute.

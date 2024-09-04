@@ -14,13 +14,17 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Includes the error object with details about the reason why the redeemable is inapplicable
   class ValidationsRedeemableInapplicableResult
     attr_accessor :error
+
+    attr_accessor :details
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'error' => :'error'
+        :'error' => :'error',
+        :'details' => :'details'
       }
     end
 
@@ -32,33 +36,32 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'error' => :'Error'
+        :'error' => :'Error',
+        :'details' => :'ValidationsRedeemableInapplicableResultDetails'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'details'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ValidationsRedeemableInapplicableResult` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ValidationsRedeemableInapplicableResult`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'error')
         self.error = attributes[:'error']
+      end
+
+      if attributes.key?(:'details')
+        self.details = attributes[:'details']
       end
     end
 
@@ -82,7 +85,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          error == o.error
+          error == o.error &&
+          details == o.details
     end
 
     # @see the `==` method
@@ -94,7 +98,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error].hash
+      [error, details].hash
     end
 
     # Builds the object from hash

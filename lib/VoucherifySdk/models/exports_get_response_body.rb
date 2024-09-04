@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `/exports/{exportId}`.
+  # Response body schema for **GET** `v1/exports/{exportId}`.
   class ExportsGetResponseBody
     # Unique export ID.
     attr_accessor :id
@@ -36,7 +36,6 @@ module VoucherifySdk
     # Identifies the specific user who initiated the export through the Voucherify Dashboard; returned when the channel value is WEBSITE.
     attr_accessor :user_id
 
-    # The type of object to be exported.
     attr_accessor :exported_object
 
     attr_accessor :parameters
@@ -91,47 +90,38 @@ module VoucherifySdk
         :'created_at' => :'Time',
         :'status' => :'String',
         :'channel' => :'String',
-        :'result' => :'ExportBaseResult',
+        :'result' => :'ExportsGetResponseBodyResult',
         :'user_id' => :'String',
         :'exported_object' => :'String',
-        :'parameters' => :'LoyaltiesMembersTransactionsExportCreateRequestBodyParameters'
+        :'parameters' => :'ExportsGetResponseBodyParameters'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'object',
+        :'created_at',
+        :'status',
+        :'channel',
         :'result',
         :'user_id',
+        :'exported_object',
+        :'parameters'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'Export'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ExportsGetResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ExportsGetResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'object')
@@ -142,14 +132,10 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
-      else
-        self.status = nil
       end
 
       if attributes.key?(:'channel')
@@ -158,20 +144,14 @@ module VoucherifySdk
 
       if attributes.key?(:'result')
         self.result = attributes[:'result']
-      else
-        self.result = nil
       end
 
       if attributes.key?(:'user_id')
         self.user_id = attributes[:'user_id']
-      else
-        self.user_id = nil
       end
 
       if attributes.key?(:'exported_object')
         self.exported_object = attributes[:'exported_object']
-      else
-        self.exported_object = 'voucher_transactions'
       end
 
       if attributes.key?(:'parameters')
@@ -184,26 +164,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @status.nil?
-        invalid_properties.push('invalid value for "status", status cannot be nil.')
-      end
-
-      if @exported_object.nil?
-        invalid_properties.push('invalid value for "exported_object", exported_object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -211,48 +171,13 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["export"])
       return false unless object_validator.valid?(@object)
-      return false if @created_at.nil?
-      return false if @status.nil?
       status_validator = EnumAttributeValidator.new('String', ["SCHEDULED", "IN_PROGRESS", "DONE", "ERROR"])
       return false unless status_validator.valid?(@status)
-      return false if @exported_object.nil?
-      exported_object_validator = EnumAttributeValidator.new('String', ["voucher_transactions"])
+      exported_object_validator = EnumAttributeValidator.new('String', ["voucher", "redemption", "customer", "publication", "order", "points_expiration", "voucher_transactions"])
       return false unless exported_object_validator.valid?(@exported_object)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["export"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["SCHEDULED", "IN_PROGRESS", "DONE", "ERROR"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] exported_object Object to be assigned
-    def exported_object=(exported_object)
-      validator = EnumAttributeValidator.new('String', ["voucher_transactions"])
-      unless validator.valid?(exported_object)
-        fail ArgumentError, "invalid value for \"exported_object\", must be one of #{validator.allowable_values}."
-      end
-      @exported_object = exported_object
     end
 
     # Checks equality by comparing each attribute.

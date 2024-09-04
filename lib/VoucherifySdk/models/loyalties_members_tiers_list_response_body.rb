@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `/loyalties/members/{memberId}/tiers`.
+  # Response body schema for **GET** `v1/loyalties/members/{memberId}/tiers`.
   class LoyaltiesMembersTiersListResponseBody
-    # The type of object represented by JSON. This object stores information about loyalty tiers in a dictionary.
+    # The type of the object represented by JSON. This object stores information about loyalty tiers in a dictionary.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of loyalty tier objects.
@@ -77,21 +77,18 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'data_ref',
+        :'data',
+        :'total'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltiesMembersTiersListResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltiesMembersTiersListResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -111,14 +108,10 @@ module VoucherifySdk
         if (value = attributes[:'data']).is_a?(Array)
           self.data = value
         end
-      else
-        self.data = nil
       end
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
     end
 
@@ -127,22 +120,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @data_ref.nil?
-        invalid_properties.push('invalid value for "data_ref", data_ref cannot be nil.')
-      end
-
-      if @data.nil?
-        invalid_properties.push('invalid value for "data", data cannot be nil.')
-      end
-
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -150,35 +127,11 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["list"])
       return false unless object_validator.valid?(@object)
-      return false if @data_ref.nil?
       data_ref_validator = EnumAttributeValidator.new('String', ["data"])
       return false unless data_ref_validator.valid?(@data_ref)
-      return false if @data.nil?
-      return false if @total.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["list"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] data_ref Object to be assigned
-    def data_ref=(data_ref)
-      validator = EnumAttributeValidator.new('String', ["data"])
-      unless validator.valid?(data_ref)
-        fail ArgumentError, "invalid value for \"data_ref\", must be one of #{validator.allowable_values}."
-      end
-      @data_ref = data_ref
     end
 
     # Checks equality by comparing each attribute.

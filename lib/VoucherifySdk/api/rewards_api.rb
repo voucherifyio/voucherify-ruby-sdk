@@ -19,6 +19,70 @@ module VoucherifySdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Create Reward
+    # Create a new reward.
+    # @param [Hash] opts the optional parameters
+    # @option opts [RewardsCreateRequestBody] :rewards_create_request_body Define parameters of the new reward.
+    # @return [RewardsCreateResponseBody]
+    def create_reward(opts = {})
+      data, _status_code, _headers = create_reward_with_http_info(opts)
+      data
+    end
+
+    # Create Reward
+    # Create a new reward.
+    # @param [Hash] opts the optional parameters
+    # @option opts [RewardsCreateRequestBody] :rewards_create_request_body Define parameters of the new reward.
+    # @return [Array<(RewardsCreateResponseBody, Integer, Hash)>] RewardsCreateResponseBody data, response status code and response headers
+    private def create_reward_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RewardsApi.create_reward ...'
+      end
+      # resource path
+      local_var_path = '/v1/rewards'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'rewards_create_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RewardsCreateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"RewardsApi.create_reward",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RewardsApi#create_reward\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create Reward Assignment
     # Assigns a reward to a specified loyalty campaign.
     # @param reward_id [String] A unique reward ID.
@@ -39,10 +103,6 @@ module VoucherifySdk
     private def create_reward_assignment_with_http_info(reward_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.create_reward_assignment ...'
-      end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.create_reward_assignment"
       end
       # resource path
       local_var_path = '/v1/rewards/{rewardId}/assignments'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s))
@@ -108,10 +168,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.delete_reward ...'
       end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.delete_reward"
-      end
       # resource path
       local_var_path = '/v1/rewards/{rewardId}'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s))
 
@@ -171,14 +227,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.delete_reward_assignment ...'
       end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.delete_reward_assignment"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling RewardsApi.delete_reward_assignment"
-      end
       # resource path
       local_var_path = '/v1/rewards/{rewardId}/assignments/{assignmentId}'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
 
@@ -217,6 +265,65 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Get Reward
+    # Retrieve a reward by the reward ID.
+    # @param reward_id [String] A unique reward ID.
+    # @param [Hash] opts the optional parameters
+    # @return [Reward]
+    def get_reward(reward_id, opts = {})
+      data, _status_code, _headers = get_reward_with_http_info(reward_id, opts)
+      data
+    end
+
+    # Get Reward
+    # Retrieve a reward by the reward ID.
+    # @param reward_id [String] A unique reward ID.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Reward, Integer, Hash)>] Reward data, response status code and response headers
+    private def get_reward_with_http_info(reward_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RewardsApi.get_reward ...'
+      end
+      # resource path
+      local_var_path = '/v1/rewards/{rewardId}'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Reward'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"RewardsApi.get_reward",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RewardsApi#get_reward\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Reward Assignment
     # Retrieve a reward assignment.
     # @param reward_id [String] A unique reward ID.
@@ -237,14 +344,6 @@ module VoucherifySdk
     private def get_reward_assignment_with_http_info(reward_id, assignment_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.get_reward_assignment ...'
-      end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.get_reward_assignment"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling RewardsApi.get_reward_assignment"
       end
       # resource path
       local_var_path = '/v1/rewards/{rewardId}/assignments/{assignmentId}'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
@@ -290,8 +389,8 @@ module VoucherifySdk
     # Retrieve reward assignments by the reward ID.
     # @param reward_id [String] A unique reward ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [RewardsAssignmentsListResponseBody]
     def list_reward_assignments(reward_id, opts = {})
       data, _status_code, _headers = list_reward_assignments_with_http_info(reward_id, opts)
@@ -302,29 +401,13 @@ module VoucherifySdk
     # Retrieve reward assignments by the reward ID.
     # @param reward_id [String] A unique reward ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(RewardsAssignmentsListResponseBody, Integer, Hash)>] RewardsAssignmentsListResponseBody data, response status code and response headers
     private def list_reward_assignments_with_http_info(reward_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.list_reward_assignments ...'
       end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.list_reward_assignments"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RewardsApi.list_reward_assignments, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling RewardsApi.list_reward_assignments, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling RewardsApi.list_reward_assignments, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/rewards/{rewardId}/assignments'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s))
 
@@ -367,6 +450,138 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Rewards
+    # Retrieve rewards.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [String] :assignment_id A unique reward assignment ID. Use this parameter to get the reward details in the context of an assignment ID.
+    # @return [RewardsListResponseBody]
+    def list_rewards(opts = {})
+      data, _status_code, _headers = list_rewards_with_http_info(opts)
+      data
+    end
+
+    # List Rewards
+    # Retrieve rewards.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [String] :assignment_id A unique reward assignment ID. Use this parameter to get the reward details in the context of an assignment ID.
+    # @return [Array<(RewardsListResponseBody, Integer, Hash)>] RewardsListResponseBody data, response status code and response headers
+    private def list_rewards_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RewardsApi.list_rewards ...'
+      end
+      # resource path
+      local_var_path = '/v1/rewards'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'assignment_id'] = opts[:'assignment_id'] if !opts[:'assignment_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RewardsListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"RewardsApi.list_rewards",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RewardsApi#list_rewards\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update Reward
+    # Update the details of a reward.
+    # @param reward_id [String] A unique reward ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [RewardsUpdateRequestBody] :rewards_update_request_body Define the parameters to be updated for the reward.
+    # @return [RewardsUpdateResponseBody]
+    def update_reward(reward_id, opts = {})
+      data, _status_code, _headers = update_reward_with_http_info(reward_id, opts)
+      data
+    end
+
+    # Update Reward
+    # Update the details of a reward.
+    # @param reward_id [String] A unique reward ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [RewardsUpdateRequestBody] :rewards_update_request_body Define the parameters to be updated for the reward.
+    # @return [Array<(RewardsUpdateResponseBody, Integer, Hash)>] RewardsUpdateResponseBody data, response status code and response headers
+    private def update_reward_with_http_info(reward_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: RewardsApi.update_reward ...'
+      end
+      # resource path
+      local_var_path = '/v1/rewards/{rewardId}'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'rewards_update_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'RewardsUpdateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"RewardsApi.update_reward",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: RewardsApi#update_reward\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Update Reward Assignment
     # Update the number of points needed to successfully redeem the reward.
     # @param reward_id [String] A unique reward ID.
@@ -389,14 +604,6 @@ module VoucherifySdk
     private def update_reward_assignment_with_http_info(reward_id, assignment_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: RewardsApi.update_reward_assignment ...'
-      end
-      # verify the required parameter 'reward_id' is set
-      if @api_client.config.client_side_validation && reward_id.nil?
-        fail ArgumentError, "Missing the required parameter 'reward_id' when calling RewardsApi.update_reward_assignment"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling RewardsApi.update_reward_assignment"
       end
       # resource path
       local_var_path = '/v1/rewards/{rewardId}/assignments/{assignmentId}'.sub('{' + 'rewardId' + '}', CGI.escape(reward_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
