@@ -35,16 +35,19 @@ module VoucherifySdk
     # Name of the reward.
     attr_accessor :name
 
-    # The type of object represented by the JSON
+    # The type of the object represented by the JSON
     attr_accessor :object
 
-    # Timestamp representing the date and time when the redemption was created in ISO 8601 format.
+    # Timestamp representing the date and time when the redemption was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Timestamp in ISO 8601 format indicating when the reward was updated.
     attr_accessor :updated_at
 
     attr_accessor :parameters
+
+    # A set of custom key/value pairs that you can attach to a reward. The metadata object stores all custom attributes assigned to the reward.
+    attr_accessor :metadata
 
     # Reward type.
     attr_accessor :type
@@ -86,6 +89,7 @@ module VoucherifySdk
         :'created_at' => :'created_at',
         :'updated_at' => :'updated_at',
         :'parameters' => :'parameters',
+        :'metadata' => :'metadata',
         :'type' => :'type'
       }
     end
@@ -100,9 +104,9 @@ module VoucherifySdk
       {
         :'customer' => :'SimpleCustomer',
         :'assignment_id' => :'String',
-        :'voucher' => :'RedemptionRewardResultVoucher',
-        :'product' => :'RedemptionRewardResultProduct',
-        :'sku' => :'RedemptionRewardResultSku',
+        :'voucher' => :'Voucher',
+        :'product' => :'Product',
+        :'sku' => :'Sku',
         :'loyalty_tier_id' => :'String',
         :'id' => :'String',
         :'name' => :'String',
@@ -110,6 +114,7 @@ module VoucherifySdk
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
         :'parameters' => :'RedemptionRewardResultParameters',
+        :'metadata' => :'Object',
         :'type' => :'String'
       }
     end
@@ -117,64 +122,49 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'customer',
         :'assignment_id',
-        :'voucher',
-        :'product',
-        :'sku',
         :'loyalty_tier_id',
+        :'id',
+        :'name',
+        :'object',
+        :'created_at',
+        :'updated_at',
+        :'parameters',
+        :'metadata',
+        :'type'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::RedemptionRewardResult` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::RedemptionRewardResult`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'customer')
         self.customer = attributes[:'customer']
-      else
-        self.customer = nil
       end
 
       if attributes.key?(:'assignment_id')
         self.assignment_id = attributes[:'assignment_id']
-      else
-        self.assignment_id = nil
       end
 
       if attributes.key?(:'voucher')
         self.voucher = attributes[:'voucher']
-      else
-        self.voucher = nil
       end
 
       if attributes.key?(:'product')
         self.product = attributes[:'product']
-      else
-        self.product = nil
       end
 
       if attributes.key?(:'sku')
         self.sku = attributes[:'sku']
-      else
-        self.sku = nil
       end
 
       if attributes.key?(:'loyalty_tier_id')
         self.loyalty_tier_id = attributes[:'loyalty_tier_id']
-      else
-        self.loyalty_tier_id = nil
       end
 
       if attributes.key?(:'id')
@@ -203,6 +193,10 @@ module VoucherifySdk
         self.parameters = attributes[:'parameters']
       end
 
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
       if attributes.key?(:'type')
         self.type = attributes[:'type']
       end
@@ -227,26 +221,6 @@ module VoucherifySdk
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["reward"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["CAMPAIGN", "COIN", "MATERIAL"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -264,6 +238,7 @@ module VoucherifySdk
           created_at == o.created_at &&
           updated_at == o.updated_at &&
           parameters == o.parameters &&
+          metadata == o.metadata &&
           type == o.type
     end
 
@@ -276,7 +251,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer, assignment_id, voucher, product, sku, loyalty_tier_id, id, name, object, created_at, updated_at, parameters, type].hash
+      [customer, assignment_id, voucher, product, sku, loyalty_tier_id, id, name, object, created_at, updated_at, parameters, metadata, type].hash
     end
 
     # Builds the object from hash

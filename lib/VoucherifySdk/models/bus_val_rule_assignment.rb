@@ -28,13 +28,13 @@ module VoucherifySdk
     # The type of related object
     attr_accessor :related_object_type
 
-    # Timestamp representing the date and time when the object was created in ISO 8601 format.
+    # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
     # Timestamp representing the date and time when the object was last updated in ISO 8601 format.
     attr_accessor :updated_at
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # The validation status of the assignment
@@ -103,46 +103,40 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'rule_id',
+        :'related_object_id',
+        :'related_object_type',
+        :'created_at',
+        :'updated_at',
+        :'object',
+        :'validation_status',
+        :'validation_omitted_rules'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::BusValRuleAssignment` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::BusValRuleAssignment`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'rule_id')
         self.rule_id = attributes[:'rule_id']
-      else
-        self.rule_id = nil
       end
 
       if attributes.key?(:'related_object_id')
         self.related_object_id = attributes[:'related_object_id']
-      else
-        self.related_object_id = nil
       end
 
       if attributes.key?(:'related_object_type')
         self.related_object_type = attributes[:'related_object_type']
-      else
-        self.related_object_type = nil
       end
 
       if attributes.key?(:'created_at')
@@ -175,26 +169,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @rule_id.nil?
-        invalid_properties.push('invalid value for "rule_id", rule_id cannot be nil.')
-      end
-
-      if @related_object_id.nil?
-        invalid_properties.push('invalid value for "related_object_id", related_object_id cannot be nil.')
-      end
-
-      if @related_object_type.nil?
-        invalid_properties.push('invalid value for "related_object_type", related_object_type cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -202,36 +176,11 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @rule_id.nil?
-      return false if @related_object_id.nil?
-      return false if @related_object_type.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["validation_rules_assignment"])
       return false unless object_validator.valid?(@object)
       validation_status_validator = EnumAttributeValidator.new('String', ["VALID", "PARTIALLY_VALID", "INVALID"])
       return false unless validation_status_validator.valid?(@validation_status)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["validation_rules_assignment"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] validation_status Object to be assigned
-    def validation_status=(validation_status)
-      validator = EnumAttributeValidator.new('String', ["VALID", "PARTIALLY_VALID", "INVALID"])
-      unless validator.valid?(validation_status)
-        fail ArgumentError, "invalid value for \"validation_status\", must be one of #{validator.allowable_values}."
-      end
-      @validation_status = validation_status
     end
 
     # Checks equality by comparing each attribute.

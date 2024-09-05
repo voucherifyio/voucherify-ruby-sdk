@@ -14,8 +14,11 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **POST** `/customers/bulk/async`.
+  # Request body schema for **POST** `v1/customers/bulk/async`.
   class CustomersUpdateInBulkRequestBody
+    # Unique customer source ID.
+    attr_accessor :source_id
+
     # Customer's first and last name.
     attr_accessor :name
 
@@ -28,7 +31,7 @@ module VoucherifySdk
     # Customer's phone number. This parameter is mandatory when you try to send out codes to customers via an SMS channel.
     attr_accessor :phone
 
-    # *Deprecated* Customer's birthdate; format YYYY-MM-DD.
+    # `Deprecated`. ~~Customer's birthdate; format YYYY-MM-DD~~.
     attr_accessor :birthday
 
     # Customer's birthdate; format YYYY-MM-DD.
@@ -39,12 +42,10 @@ module VoucherifySdk
     # A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the customer. It can be useful for storing additional information about the customer in a structured format. This metadata can be used for validating whether the customer qualifies for a discount or it can be used in building customer segments.
     attr_accessor :metadata
 
-    # Unique customer source ID.
-    attr_accessor :source_id
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'source_id' => :'source_id',
         :'name' => :'name',
         :'description' => :'description',
         :'email' => :'email',
@@ -52,8 +53,7 @@ module VoucherifySdk
         :'birthday' => :'birthday',
         :'birthdate' => :'birthdate',
         :'address' => :'address',
-        :'metadata' => :'metadata',
-        :'source_id' => :'source_id'
+        :'metadata' => :'metadata'
       }
     end
 
@@ -65,46 +65,44 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'source_id' => :'String',
         :'name' => :'String',
         :'description' => :'String',
         :'email' => :'String',
         :'phone' => :'String',
         :'birthday' => :'Date',
         :'birthdate' => :'Date',
-        :'address' => :'CustomerBaseAddress',
-        :'metadata' => :'Object',
-        :'source_id' => :'String'
+        :'address' => :'CustomersUpdateInBulkRequestBodyAddress',
+        :'metadata' => :'Object'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'source_id',
+        :'name',
+        :'description',
+        :'email',
+        :'phone',
+        :'birthday',
+        :'birthdate',
         :'address',
+        :'metadata'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'CustomerBase'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CustomersUpdateInBulkRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CustomersUpdateInBulkRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'source_id')
+        self.source_id = attributes[:'source_id']
+      end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
@@ -137,12 +135,6 @@ module VoucherifySdk
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
       end
-
-      if attributes.key?(:'source_id')
-        self.source_id = attributes[:'source_id']
-      else
-        self.source_id = nil
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -150,10 +142,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @source_id.nil?
-        invalid_properties.push('invalid value for "source_id", source_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -161,7 +149,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @source_id.nil?
       true
     end
 
@@ -170,6 +157,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          source_id == o.source_id &&
           name == o.name &&
           description == o.description &&
           email == o.email &&
@@ -177,8 +165,7 @@ module VoucherifySdk
           birthday == o.birthday &&
           birthdate == o.birthdate &&
           address == o.address &&
-          metadata == o.metadata &&
-          source_id == o.source_id
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -190,7 +177,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, email, phone, birthday, birthdate, address, metadata, source_id].hash
+      [source_id, name, description, email, phone, birthday, birthdate, address, metadata].hash
     end
 
     # Builds the object from hash

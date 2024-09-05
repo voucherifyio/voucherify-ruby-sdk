@@ -27,6 +27,28 @@ module VoucherifySdk
     # Value of rounding
     attr_accessor :rounding_value
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -55,46 +77,37 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'period_type',
+        :'period_value',
+        :'rounding_type',
+        :'rounding_value'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CampaignLoyaltyCardExpirationRules` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CampaignLoyaltyCardExpirationRules`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'period_type')
         self.period_type = attributes[:'period_type']
       else
-        self.period_type = nil
+        self.period_type = 'MONTH'
       end
 
       if attributes.key?(:'period_value')
         self.period_value = attributes[:'period_value']
-      else
-        self.period_value = nil
       end
 
       if attributes.key?(:'rounding_type')
         self.rounding_type = attributes[:'rounding_type']
-      else
-        self.rounding_type = nil
       end
 
       if attributes.key?(:'rounding_value')
         self.rounding_value = attributes[:'rounding_value']
-      else
-        self.rounding_value = nil
       end
     end
 
@@ -103,22 +116,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @period_type.nil?
-        invalid_properties.push('invalid value for "period_type", period_type cannot be nil.')
-      end
-
-      if @period_value.nil?
-        invalid_properties.push('invalid value for "period_value", period_value cannot be nil.')
-      end
-
-      if @rounding_type.nil?
-        invalid_properties.push('invalid value for "rounding_type", rounding_type cannot be nil.')
-      end
-
-      if @rounding_value.nil?
-        invalid_properties.push('invalid value for "rounding_value", rounding_value cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -126,10 +123,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @period_type.nil?
-      return false if @period_value.nil?
-      return false if @rounding_type.nil?
-      return false if @rounding_value.nil?
+      period_type_validator = EnumAttributeValidator.new('String', ["MONTH"])
+      return false unless period_type_validator.valid?(@period_type)
+      rounding_type_validator = EnumAttributeValidator.new('String', ["END_OF_MONTH", "END_OF_QUARTER", "END_OF_HALF_YEAR", "END_OF_YEAR", "PARTICULAR_MONTH"])
+      return false unless rounding_type_validator.valid?(@rounding_type)
       true
     end
 

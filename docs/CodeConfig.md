@@ -9,5 +9,5 @@
 | **prefix** | **String** | A text appended before the code. | [optional] |
 | **postfix** | **String** | A text appended after the code. | [optional] |
 | **pattern** | **String** | A pattern for codes where hashes (#) will be replaced with random characters. Overrides &#x60;length&#x60;. | [optional] |
-| **initial_count** | **Integer** | The initial count | [optional] |
+| **initial_count** | **Integer** | Internal value, does not change anything if provided. | [optional] |
 

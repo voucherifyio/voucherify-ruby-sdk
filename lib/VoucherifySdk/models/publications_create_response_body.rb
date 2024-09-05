@@ -14,93 +14,361 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **POST** `/publication` and **GET** `/publications/create`.
-  module PublicationsCreateResponseBody
-    class << self
-      # List of class defined in oneOf (OpenAPI v3)
-      def openapi_one_of
-        [
-          :'PublicationsCreateVoucherResponseBody',
-          :'PublicationsCreateVouchersResponseBody'
-        ]
-      end
+  class PublicationsCreateResponseBody
+    # Unique publication ID, assigned by Voucherify.
+    attr_accessor :id
 
-      # Builds the object
-      # @param [Mixed] Data to be matched against the list of oneOf items
-      # @return [Object] Returns the model or the data itself
-      def build(data)
-        # Go through the list of oneOf items and attempt to identify the appropriate one.
-        # Note:
-        # - We do not attempt to check whether exactly one item matches.
-        # - No advanced validation of types in some cases (e.g. "x: { type: string }" will happily match { x: 123 })
-        #   due to the way the deserialization is made in the base_object template (it just casts without verifying).
-        # - TODO: scalar values are de facto behaving as if they were nullable.
-        # - TODO: logging when debugging is set.
-        openapi_one_of.each do |klass|
-          begin
-            next if klass == :AnyType # "nullable: true"
-            typed_data = find_and_cast_into_type(klass, data)
-            return typed_data if typed_data
-          rescue # rescue all errors so we keep iterating even if the current item lookup raises
+    # The type of the object represented by the JSON. This object stores information about the `publication`.
+    attr_accessor :object
+
+    # Timestamp representing the date and time when the publication was created. The value is shown in the ISO 8601 format.
+    attr_accessor :created_at
+
+    # Unique customer ID of the customer receiving the publication.
+    attr_accessor :customer_id
+
+    # Customer's `source_id`.
+    attr_accessor :tracking_id
+
+    attr_accessor :metadata
+
+    # How the publication was originated. It can be your own custom channel or an example value provided here.
+    attr_accessor :channel
+
+    # The merchant's publication ID if it is different from the Voucherify publication ID. It's an optional tracking identifier of a publication. It is really useful in case of an integration between multiple systems. It can be a publication ID from a CRM system, database or 3rd-party service. 
+    attr_accessor :source_id
+
+    # Status of the publication attempt.
+    attr_accessor :result
+
+    attr_accessor :customer
+
+    # Contains the unique internal voucher ID that was assigned by Voucherify.
+    attr_accessor :vouchers_id
+
+    attr_accessor :voucher
+
+    # Contains the unique voucher codes that was assigned by Voucherify.
+    attr_accessor :vouchers
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
           end
         end
-
-        openapi_one_of.include?(:AnyType) ? data : nil
       end
 
-      private
-
-      SchemaMismatchError = Class.new(StandardError)
-
-      # Note: 'File' is missing here because in the regular case we get the data _after_ a call to JSON.parse.
-      def find_and_cast_into_type(klass, data)
-        return if data.nil?
-
-        case klass.to_s
-        when 'Boolean'
-          return data if data.instance_of?(TrueClass) || data.instance_of?(FalseClass)
-        when 'Float'
-          return data if data.instance_of?(Float)
-        when 'Integer'
-          return data if data.instance_of?(Integer)
-        when 'Time'
-          return Time.parse(data)
-        when 'Date'
-          return Date.parse(data)
-        when 'String'
-          return data if data.instance_of?(String)
-        when 'Object' # "type: object"
-          return data if data.instance_of?(Hash)
-        when /\AArray<(?<sub_type>.+)>\z/ # "type: array"
-          if data.instance_of?(Array)
-            sub_type = Regexp.last_match[:sub_type]
-            return data.map { |item| find_and_cast_into_type(sub_type, item) }
-          end
-        when /\AHash<String, (?<sub_type>.+)>\z/ # "type: object" with "additionalProperties: { ... }"
-          if data.instance_of?(Hash) && data.keys.all? { |k| k.instance_of?(Symbol) || k.instance_of?(String) }
-            sub_type = Regexp.last_match[:sub_type]
-            return data.each_with_object({}) { |(k, v), hsh| hsh[k] = find_and_cast_into_type(sub_type, v) }
-          end
-        else # model
-          const = VoucherifySdk.const_get(klass)
-          if const
-            if const.respond_to?(:openapi_one_of) # nested oneOf model
-              model = const.build(data)
-              return model if model
-            else
-              # raise if data contains keys that are not known to the model
-              raise unless (data.keys - const.acceptable_attributes).empty?
-              model = const.build_from_hash(data)
-              return model if model
-            end
-          end
-        end
-
-        raise # if no match by now, raise
-      rescue
-        raise SchemaMismatchError, "#{data} doesn't match the #{klass} type"
+      def valid?(value)
+        !value || allowable_values.include?(value)
       end
     end
+
+    # Attribute mapping from ruby-style variable name to JSON key.
+    def self.attribute_map
+      {
+        :'id' => :'id',
+        :'object' => :'object',
+        :'created_at' => :'created_at',
+        :'customer_id' => :'customer_id',
+        :'tracking_id' => :'tracking_id',
+        :'metadata' => :'metadata',
+        :'channel' => :'channel',
+        :'source_id' => :'source_id',
+        :'result' => :'result',
+        :'customer' => :'customer',
+        :'vouchers_id' => :'vouchers_id',
+        :'voucher' => :'voucher',
+        :'vouchers' => :'vouchers'
+      }
+    end
+
+    # Returns all the JSON keys this model knows about
+    def self.acceptable_attributes
+      attribute_map.values
+    end
+
+    # Attribute type mapping.
+    def self.openapi_types
+      {
+        :'id' => :'String',
+        :'object' => :'String',
+        :'created_at' => :'Time',
+        :'customer_id' => :'String',
+        :'tracking_id' => :'String',
+        :'metadata' => :'Object',
+        :'channel' => :'String',
+        :'source_id' => :'String',
+        :'result' => :'String',
+        :'customer' => :'CustomerWithSummaryLoyaltyReferrals',
+        :'vouchers_id' => :'Array<String>',
+        :'voucher' => :'Voucher',
+        :'vouchers' => :'Array<String>'
+      }
+    end
+
+    # List of attributes with nullable: true
+    def self.openapi_nullable
+      Set.new([
+        :'id',
+        :'object',
+        :'created_at',
+        :'customer_id',
+        :'tracking_id',
+        :'metadata',
+        :'channel',
+        :'source_id',
+        :'result',
+        :'vouchers_id',
+        :'vouchers'
+      ])
+    end
+
+    # Initializes the object
+    # @param [Hash] attributes Model attributes in the form of hash
+    def initialize(attributes = {})
+      # check to see if the attribute exists and convert string to symbol for hash key
+      attributes = attributes.each_with_object({}) { |(k, v), h|
+        h[k.to_sym] = v
+      }
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'object')
+        self.object = attributes[:'object']
+      else
+        self.object = 'publication'
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'customer_id')
+        self.customer_id = attributes[:'customer_id']
+      end
+
+      if attributes.key?(:'tracking_id')
+        self.tracking_id = attributes[:'tracking_id']
+      end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.key?(:'channel')
+        self.channel = attributes[:'channel']
+      else
+        self.channel = 'API'
+      end
+
+      if attributes.key?(:'source_id')
+        self.source_id = attributes[:'source_id']
+      end
+
+      if attributes.key?(:'result')
+        self.result = attributes[:'result']
+      else
+        self.result = 'SUCCESS'
+      end
+
+      if attributes.key?(:'customer')
+        self.customer = attributes[:'customer']
+      end
+
+      if attributes.key?(:'vouchers_id')
+        if (value = attributes[:'vouchers_id']).is_a?(Array)
+          self.vouchers_id = value
+        end
+      end
+
+      if attributes.key?(:'voucher')
+        self.voucher = attributes[:'voucher']
+      end
+
+      if attributes.key?(:'vouchers')
+        if (value = attributes[:'vouchers']).is_a?(Array)
+          self.vouchers = value
+        end
+      end
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properties with the reasons
+    def list_invalid_properties
+      warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
+      invalid_properties = Array.new
+      invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      warn '[DEPRECATED] the `valid?` method is obsolete'
+      object_validator = EnumAttributeValidator.new('String', ["publication"])
+      return false unless object_validator.valid?(@object)
+      channel_validator = EnumAttributeValidator.new('String', ["API"])
+      return false unless channel_validator.valid?(@channel)
+      result_validator = EnumAttributeValidator.new('String', ["SUCCESS"])
+      return false unless result_validator.valid?(@result)
+      true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param [Object] Object to be compared
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          id == o.id &&
+          object == o.object &&
+          created_at == o.created_at &&
+          customer_id == o.customer_id &&
+          tracking_id == o.tracking_id &&
+          metadata == o.metadata &&
+          channel == o.channel &&
+          source_id == o.source_id &&
+          result == o.result &&
+          customer == o.customer &&
+          vouchers_id == o.vouchers_id &&
+          voucher == o.voucher &&
+          vouchers == o.vouchers
+    end
+
+    # @see the `==` method
+    # @param [Object] Object to be compared
+    def eql?(o)
+      self == o
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Integer] Hash code
+    def hash
+      [id, object, created_at, customer_id, tracking_id, metadata, channel, source_id, result, customer, vouchers_id, voucher, vouchers].hash
+    end
+
+    # Builds the object from hash
+    # @param [Hash] attributes Model attributes in the form of hash
+    # @return [Object] Returns the model itself
+    def self.build_from_hash(attributes)
+      return nil unless attributes.is_a?(Hash)
+      attributes = attributes.transform_keys(&:to_sym)
+      transformed_hash = {}
+      openapi_types.each_pair do |key, type|
+        if attributes.key?(attribute_map[key]) && attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = nil
+        elsif type =~ /\AArray<(.*)>/i
+          # check to ensure the input is an array given that the attribute
+          # is documented as an array but the input is not
+          if attributes[attribute_map[key]].is_a?(Array)
+            transformed_hash["#{key}"] = attributes[attribute_map[key]].map { |v| _deserialize($1, v) }
+          end
+        elsif !attributes[attribute_map[key]].nil?
+          transformed_hash["#{key}"] = _deserialize(type, attributes[attribute_map[key]])
+        end
+      end
+      new(transformed_hash)
+    end
+
+    # Deserializes the data based on type
+    # @param string type Data type
+    # @param string value Value to be deserialized
+    # @return [Object] Deserialized data
+    def self._deserialize(type, value)
+      case type.to_sym
+      when :Time
+        Time.parse(value)
+      when :Date
+        Date.parse(value)
+      when :String
+        value.to_s
+      when :Integer
+        value.to_i
+      when :Float
+        value.to_f
+      when :Boolean
+        if value.to_s =~ /\A(true|t|yes|y|1)\z/i
+          true
+        else
+          false
+        end
+      when :Object
+        # generic object (usually a Hash), return directly
+        value
+      when /\AArray<(?<inner_type>.+)>\z/
+        inner_type = Regexp.last_match[:inner_type]
+        value.map { |v| _deserialize(inner_type, v) }
+      when /\AHash<(?<k_type>.+?), (?<v_type>.+)>\z/
+        k_type = Regexp.last_match[:k_type]
+        v_type = Regexp.last_match[:v_type]
+        {}.tap do |hash|
+          value.each do |k, v|
+            hash[_deserialize(k_type, k)] = _deserialize(v_type, v)
+          end
+        end
+      else # model
+        # models (e.g. Pet) or oneOf
+        klass = VoucherifySdk.const_get(type)
+        klass.respond_to?(:openapi_one_of) ? klass.build(value) : klass.build_from_hash(value)
+      end
+    end
+
+    # Returns the string representation of the object
+    # @return [String] String presentation of the object
+    def to_s
+      to_hash.to_s
+    end
+
+    # to_body is an alias to to_hash (backward compatibility)
+    # @return [Hash] Returns the object in the form of hash
+    def to_body
+      to_hash
+    end
+
+    # Returns the object in the form of hash
+    # @return [Hash] Returns the object in the form of hash
+    def to_hash
+      hash = {}
+      self.class.attribute_map.each_pair do |attr, param|
+        value = self.send(attr)
+        if value.nil?
+          is_nullable = self.class.openapi_nullable.include?(attr)
+          next if !is_nullable || (is_nullable && !instance_variable_defined?(:"@#{attr}"))
+        end
+
+        hash[param] = _to_hash(value)
+      end
+      hash
+    end
+
+    # Outputs non-array value in the form of hash
+    # For object, use to_hash. Otherwise, just return the value
+    # @param [Object] value Any valid value
+    # @return [Hash] Returns the value in the form of hash
+    def _to_hash(value)
+      if value.is_a?(Array)
+        value.compact.map { |v| _to_hash(v) }
+      elsif value.is_a?(Hash)
+        {}.tap do |hash|
+          value.each { |k, v| hash[k] = _to_hash(v) }
+        end
+      elsif value.respond_to? :to_hash
+        value.to_hash
+      else
+        value
+      end
+    end
+
   end
 
 end

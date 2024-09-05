@@ -22,6 +22,8 @@ module VoucherifySdk
 
     attr_accessor :campaign_id
 
+    attr_accessor :campaign_type
+
     attr_accessor :resource_id
 
     attr_accessor :resource_type
@@ -29,6 +31,8 @@ module VoucherifySdk
     attr_accessor :voucher_type
 
     attr_accessor :code
+
+    attr_accessor :holder_role
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -58,10 +62,12 @@ module VoucherifySdk
         :'junction' => :'junction',
         :'category_id' => :'category_id',
         :'campaign_id' => :'campaign_id',
+        :'campaign_type' => :'campaign_type',
         :'resource_id' => :'resource_id',
         :'resource_type' => :'resource_type',
         :'voucher_type' => :'voucher_type',
-        :'code' => :'code'
+        :'code' => :'code',
+        :'holder_role' => :'holder_role'
       }
     end
 
@@ -76,31 +82,29 @@ module VoucherifySdk
         :'junction' => :'Junction',
         :'category_id' => :'QualificationsFieldConditions',
         :'campaign_id' => :'QualificationsFieldConditions',
+        :'campaign_type' => :'QualificationsOptionFiltersCampaignType',
         :'resource_id' => :'QualificationsFieldConditions',
         :'resource_type' => :'QualificationsOptionFiltersResourceType',
         :'voucher_type' => :'QualificationsFieldConditions',
-        :'code' => :'QualificationsFieldConditions'
+        :'code' => :'QualificationsFieldConditions',
+        :'holder_role' => :'QualificationsOptionFiltersHolderRole'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'campaign_type',
+        :'resource_type',
+        :'holder_role'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::QualificationsOptionFilters` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::QualificationsOptionFilters`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -114,6 +118,10 @@ module VoucherifySdk
 
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
+      end
+
+      if attributes.key?(:'campaign_type')
+        self.campaign_type = attributes[:'campaign_type']
       end
 
       if attributes.key?(:'resource_id')
@@ -130,6 +138,10 @@ module VoucherifySdk
 
       if attributes.key?(:'code')
         self.code = attributes[:'code']
+      end
+
+      if attributes.key?(:'holder_role')
+        self.holder_role = attributes[:'holder_role']
       end
     end
 
@@ -156,10 +168,12 @@ module VoucherifySdk
           junction == o.junction &&
           category_id == o.category_id &&
           campaign_id == o.campaign_id &&
+          campaign_type == o.campaign_type &&
           resource_id == o.resource_id &&
           resource_type == o.resource_type &&
           voucher_type == o.voucher_type &&
-          code == o.code
+          code == o.code &&
+          holder_role == o.holder_role
     end
 
     # @see the `==` method
@@ -171,7 +185,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [junction, category_id, campaign_id, resource_id, resource_type, voucher_type, code].hash
+      [junction, category_id, campaign_id, campaign_type, resource_id, resource_type, voucher_type, code, holder_role].hash
     end
 
     # Builds the object from hash

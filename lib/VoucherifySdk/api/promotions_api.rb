@@ -19,6 +19,72 @@ module VoucherifySdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Add Promotion Tier to Campaign
+    # This method allows you to add a new promotion tier to an existing campaign. The tier hierarchy will be set as the next consequtive integer following the lowest ranking tier.
+    # @param campaign_id [String] Unique campaign ID assigned by Voucherify.
+    # @param [Hash] opts the optional parameters
+    # @option opts [PromotionsTiersCreateRequestBody] :promotions_tiers_create_request_body Specify the promotion tier parameters.
+    # @return [PromotionsTiersCreateResponseBody]
+    def add_promotion_tier_to_campaign(campaign_id, opts = {})
+      data, _status_code, _headers = add_promotion_tier_to_campaign_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Add Promotion Tier to Campaign
+    # This method allows you to add a new promotion tier to an existing campaign. The tier hierarchy will be set as the next consequtive integer following the lowest ranking tier.
+    # @param campaign_id [String] Unique campaign ID assigned by Voucherify.
+    # @param [Hash] opts the optional parameters
+    # @option opts [PromotionsTiersCreateRequestBody] :promotions_tiers_create_request_body Specify the promotion tier parameters.
+    # @return [Array<(PromotionsTiersCreateResponseBody, Integer, Hash)>] PromotionsTiersCreateResponseBody data, response status code and response headers
+    private def add_promotion_tier_to_campaign_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PromotionsApi.add_promotion_tier_to_campaign ...'
+      end
+      # resource path
+      local_var_path = '/v1/promotions/{campaignId}/tiers'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'promotions_tiers_create_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PromotionsTiersCreateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"PromotionsApi.add_promotion_tier_to_campaign",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PromotionsApi#add_promotion_tier_to_campaign\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create Promotion Stack
     # This method creates one promotion stack. The sequence of promotion tier IDs will determine the promotion stacking order.
     # @param campaign_id [String] Unique campaign ID.
@@ -39,10 +105,6 @@ module VoucherifySdk
     private def create_promotion_stack_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.create_promotion_stack ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.create_promotion_stack"
       end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/stacks'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -110,14 +172,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.delete_promotion_stack ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.delete_promotion_stack"
-      end
-      # verify the required parameter 'stack_id' is set
-      if @api_client.config.client_side_validation && stack_id.nil?
-        fail ArgumentError, "Missing the required parameter 'stack_id' when calling PromotionsApi.delete_promotion_stack"
-      end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/stacks/{stackId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'stackId' + '}', CGI.escape(stack_id.to_s))
 
@@ -175,10 +229,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.delete_promotion_tier ...'
       end
-      # verify the required parameter 'promotion_tier_id' is set
-      if @api_client.config.client_side_validation && promotion_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'promotion_tier_id' when calling PromotionsApi.delete_promotion_tier"
-      end
       # resource path
       local_var_path = '/v1/promotions/tiers/{promotionTierId}'.sub('{' + 'promotionTierId' + '}', CGI.escape(promotion_tier_id.to_s))
 
@@ -235,10 +285,6 @@ module VoucherifySdk
     private def disable_promotion_tier_with_http_info(promotion_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.disable_promotion_tier ...'
-      end
-      # verify the required parameter 'promotion_tier_id' is set
-      if @api_client.config.client_side_validation && promotion_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'promotion_tier_id' when calling PromotionsApi.disable_promotion_tier"
       end
       # resource path
       local_var_path = '/v1/promotions/tiers/{promotionTierId}/disable'.sub('{' + 'promotionTierId' + '}', CGI.escape(promotion_tier_id.to_s))
@@ -298,10 +344,6 @@ module VoucherifySdk
     private def enable_promotion_tier_with_http_info(promotion_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.enable_promotion_tier ...'
-      end
-      # verify the required parameter 'promotion_tier_id' is set
-      if @api_client.config.client_side_validation && promotion_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'promotion_tier_id' when calling PromotionsApi.enable_promotion_tier"
       end
       # resource path
       local_var_path = '/v1/promotions/tiers/{promotionTierId}/enable'.sub('{' + 'promotionTierId' + '}', CGI.escape(promotion_tier_id.to_s))
@@ -364,14 +406,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.get_promotion_stack ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.get_promotion_stack"
-      end
-      # verify the required parameter 'stack_id' is set
-      if @api_client.config.client_side_validation && stack_id.nil?
-        fail ArgumentError, "Missing the required parameter 'stack_id' when calling PromotionsApi.get_promotion_stack"
-      end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/stacks/{stackId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'stackId' + '}', CGI.escape(stack_id.to_s))
 
@@ -431,10 +465,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.get_promotion_tier ...'
       end
-      # verify the required parameter 'promotion_tier_id' is set
-      if @api_client.config.client_side_validation && promotion_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'promotion_tier_id' when calling PromotionsApi.get_promotion_tier"
-      end
       # resource path
       local_var_path = '/v1/promotions/tiers/{promotionTierId}'.sub('{' + 'promotionTierId' + '}', CGI.escape(promotion_tier_id.to_s))
 
@@ -478,8 +508,8 @@ module VoucherifySdk
     # List Promotion Stacks
     # This method enables you to list promotion stacks irrespective of the campaign they are associated with.  You can use filters in the query parameters to specify the stacks to be returned in the response. # Advanced filters for fetching promotion stacks  
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrderListAllPromotionStacks] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [ParameterCreatedBeforeAfter] :created_at A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z
     # @option opts [ParameterUpdatedBeforeAfter] :updated_at A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z
@@ -492,8 +522,8 @@ module VoucherifySdk
     # List Promotion Stacks
     # This method enables you to list promotion stacks irrespective of the campaign they are associated with.  You can use filters in the query parameters to specify the stacks to be returned in the response. # Advanced filters for fetching promotion stacks  
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrderListAllPromotionStacks] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [ParameterCreatedBeforeAfter] :created_at A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z
     # @option opts [ParameterUpdatedBeforeAfter] :updated_at A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z
@@ -502,18 +532,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.list_all_promotion_stacks ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PromotionsApi.list_all_promotion_stacks, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PromotionsApi.list_all_promotion_stacks, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PromotionsApi.list_all_promotion_stacks, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/promotions/stacks'
 
@@ -578,10 +596,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.list_promotion_stacks_in_campaign ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.list_promotion_stacks_in_campaign"
-      end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/stacks'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -622,6 +636,75 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Promotion Tiers
+    # This method enables you to list promotion tiers.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :is_available This parameter allows filtering promotions that are only available at the moment. When set to true, it selects only non-expired and active promotions.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [ParameterOrderListPromotionTiers] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @return [PromotionsTiersListResponseBody]
+    def list_promotion_tiers(opts = {})
+      data, _status_code, _headers = list_promotion_tiers_with_http_info(opts)
+      data
+    end
+
+    # List Promotion Tiers
+    # This method enables you to list promotion tiers.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :is_available This parameter allows filtering promotions that are only available at the moment. When set to true, it selects only non-expired and active promotions.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [ParameterOrderListPromotionTiers] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @return [Array<(PromotionsTiersListResponseBody, Integer, Hash)>] PromotionsTiersListResponseBody data, response status code and response headers
+    private def list_promotion_tiers_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PromotionsApi.list_promotion_tiers ...'
+      end
+      # resource path
+      local_var_path = '/v1/promotions/tiers'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'is_available'] = opts[:'is_available'] if !opts[:'is_available'].nil?
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PromotionsTiersListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"PromotionsApi.list_promotion_tiers",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PromotionsApi#list_promotion_tiers\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List Promotion Tiers from Campaign
     # This method enables you to list promotion tiers from a specified campaign.
     # @param campaign_id [String] Unique campaign ID assigned by Voucherify.
@@ -640,10 +723,6 @@ module VoucherifySdk
     private def list_promotion_tiers_from_campaign_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.list_promotion_tiers_from_campaign ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.list_promotion_tiers_from_campaign"
       end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/tiers'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -708,14 +787,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PromotionsApi.update_promotion_stack ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling PromotionsApi.update_promotion_stack"
-      end
-      # verify the required parameter 'stack_id' is set
-      if @api_client.config.client_side_validation && stack_id.nil?
-        fail ArgumentError, "Missing the required parameter 'stack_id' when calling PromotionsApi.update_promotion_stack"
-      end
       # resource path
       local_var_path = '/v1/promotions/{campaignId}/stacks/{stackId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'stackId' + '}', CGI.escape(stack_id.to_s))
 
@@ -757,6 +828,72 @@ module VoucherifySdk
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PromotionsApi#update_promotion_stack\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update Promotion Tier
+    # This method updates a promotion tier.
+    # @param promotion_tier_id [String] Unique promotion tier ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [PromotionsTiersUpdateRequestBody] :promotions_tiers_update_request_body Specify the promotion tier parameters that you would like to update.
+    # @return [PromotionsTiersUpdateResponseBody]
+    def update_promotion_tier(promotion_tier_id, opts = {})
+      data, _status_code, _headers = update_promotion_tier_with_http_info(promotion_tier_id, opts)
+      data
+    end
+
+    # Update Promotion Tier
+    # This method updates a promotion tier.
+    # @param promotion_tier_id [String] Unique promotion tier ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [PromotionsTiersUpdateRequestBody] :promotions_tiers_update_request_body Specify the promotion tier parameters that you would like to update.
+    # @return [Array<(PromotionsTiersUpdateResponseBody, Integer, Hash)>] PromotionsTiersUpdateResponseBody data, response status code and response headers
+    private def update_promotion_tier_with_http_info(promotion_tier_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PromotionsApi.update_promotion_tier ...'
+      end
+      # resource path
+      local_var_path = '/v1/promotions/tiers/{promotionTierId}'.sub('{' + 'promotionTierId' + '}', CGI.escape(promotion_tier_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'promotions_tiers_update_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PromotionsTiersUpdateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"PromotionsApi.update_promotion_tier",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PromotionsApi#update_promotion_tier\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

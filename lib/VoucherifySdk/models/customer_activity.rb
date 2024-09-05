@@ -28,27 +28,8 @@ module VoucherifySdk
     # Timestamp representing the date and time when the customer activity occurred in ISO 8601 format.
     attr_accessor :created_at
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Unique identifier of the request that caused the event.
+    attr_accessor :group_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -56,7 +37,8 @@ module VoucherifySdk
         :'id' => :'id',
         :'type' => :'type',
         :'data' => :'data',
-        :'created_at' => :'created_at'
+        :'created_at' => :'created_at',
+        :'group_id' => :'group_id'
       }
     end
 
@@ -70,29 +52,28 @@ module VoucherifySdk
       {
         :'id' => :'String',
         :'type' => :'String',
-        :'data' => :'Array<CustomerActivityData>',
-        :'created_at' => :'Time'
+        :'data' => :'Object',
+        :'created_at' => :'Time',
+        :'group_id' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'type',
+        :'data',
+        :'created_at',
+        :'group_id'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CustomerActivity` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CustomerActivity`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -105,13 +86,15 @@ module VoucherifySdk
       end
 
       if attributes.key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+        self.data = attributes[:'data']
       end
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'group_id')
+        self.group_id = attributes[:'group_id']
       end
     end
 
@@ -127,19 +110,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["customer.confirmed", "customer.created", "customer.updated", "customer.deleted", "customer.referred", "customer.custom_event", "customer.segment.entered", "customer.segment.left", "customer.sms.sent", "customer.sms.recovered", "customer.sms.failed", "customer.email.sent", "customer.email.recovered", "customer.email.failed", "customer.activecampaign.sent", "customer.activecampaign.recovered", "customer.activecampaign.failed", "customer.braze.sent", "customer.braze.recovered", "customer.braze.failed", "customer.mailchimp.sent", "customer.mailchimp.recovered", "customer.mailchimp.failed", "customer.intercom.sent", "customer.intercom.recovered", "customer.intercom.failed", "customer.shopify.sent", "customer.shopify.recovered", "customer.shopify.failed", "customer.klaviyo.sent", "customer.klaviyo.recovered", "customer.klaviyo.failed", "customer.batch.sent", "customer.batch.recovered", "customer.batch.failed", "customer.rewarded", "customer.rewarded.loyalty_points", "customer.voucher.gift.balance_added", "customer.voucher.loyalty_card.points_added", "customer.voucher.loyalty_card.points_transferred", "customer.voucher.loyalty_card.points_expired", "customer.voucher.deleted", "customer.publication.succeeded", "customer.publication.failed", "customer.validation.succeeded", "customer.validation.failed", "customer.redemption.failed", "customer.redemption.succeeded", "customer.redemption.rollback.failed", "customer.redemption.rollback.succeeded", "customer.consents.given", "customer.consents.revoked", "customer.order.canceled", "customer.order.created", "customer.order.fulfilled", "customer.order.paid", "customer.order.processing", "customer.order.updated", "customer.reward_redemptions.created", "customer.reward_redemptions.pending", "customer.reward_redemptions.completed", "customer.reward_redemptions.rolledback", "customer.loyalty.updated", "customer.loyalty.tier.upgraded", "customer.loyalty.tier.downgraded", "customer.loyalty.tier.prolonged", "customer.loyalty.tier.expiration.changed", "customer.loyalty.tier.joined", "customer.loyalty.tier.left"])
-      return false unless type_validator.valid?(@type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["customer.confirmed", "customer.created", "customer.updated", "customer.deleted", "customer.referred", "customer.custom_event", "customer.segment.entered", "customer.segment.left", "customer.sms.sent", "customer.sms.recovered", "customer.sms.failed", "customer.email.sent", "customer.email.recovered", "customer.email.failed", "customer.activecampaign.sent", "customer.activecampaign.recovered", "customer.activecampaign.failed", "customer.braze.sent", "customer.braze.recovered", "customer.braze.failed", "customer.mailchimp.sent", "customer.mailchimp.recovered", "customer.mailchimp.failed", "customer.intercom.sent", "customer.intercom.recovered", "customer.intercom.failed", "customer.shopify.sent", "customer.shopify.recovered", "customer.shopify.failed", "customer.klaviyo.sent", "customer.klaviyo.recovered", "customer.klaviyo.failed", "customer.batch.sent", "customer.batch.recovered", "customer.batch.failed", "customer.rewarded", "customer.rewarded.loyalty_points", "customer.voucher.gift.balance_added", "customer.voucher.loyalty_card.points_added", "customer.voucher.loyalty_card.points_transferred", "customer.voucher.loyalty_card.points_expired", "customer.voucher.deleted", "customer.publication.succeeded", "customer.publication.failed", "customer.validation.succeeded", "customer.validation.failed", "customer.redemption.failed", "customer.redemption.succeeded", "customer.redemption.rollback.failed", "customer.redemption.rollback.succeeded", "customer.consents.given", "customer.consents.revoked", "customer.order.canceled", "customer.order.created", "customer.order.fulfilled", "customer.order.paid", "customer.order.processing", "customer.order.updated", "customer.reward_redemptions.created", "customer.reward_redemptions.pending", "customer.reward_redemptions.completed", "customer.reward_redemptions.rolledback", "customer.loyalty.updated", "customer.loyalty.tier.upgraded", "customer.loyalty.tier.downgraded", "customer.loyalty.tier.prolonged", "customer.loyalty.tier.expiration.changed", "customer.loyalty.tier.joined", "customer.loyalty.tier.left"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -150,7 +121,8 @@ module VoucherifySdk
           id == o.id &&
           type == o.type &&
           data == o.data &&
-          created_at == o.created_at
+          created_at == o.created_at &&
+          group_id == o.group_id
     end
 
     # @see the `==` method
@@ -162,7 +134,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, data, created_at].hash
+      [id, type, data, created_at, group_id].hash
     end
 
     # Builds the object from hash

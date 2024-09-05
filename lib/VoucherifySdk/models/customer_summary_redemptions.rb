@@ -73,70 +73,55 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'total_redeemed',
+        :'total_failed',
+        :'total_succeeded',
+        :'total_rolled_back',
+        :'total_rollback_failed',
+        :'total_rollback_succeeded',
+        :'gift',
+        :'loyalty_card'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CustomerSummaryRedemptions` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CustomerSummaryRedemptions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'total_redeemed')
         self.total_redeemed = attributes[:'total_redeemed']
-      else
-        self.total_redeemed = nil
       end
 
       if attributes.key?(:'total_failed')
         self.total_failed = attributes[:'total_failed']
-      else
-        self.total_failed = nil
       end
 
       if attributes.key?(:'total_succeeded')
         self.total_succeeded = attributes[:'total_succeeded']
-      else
-        self.total_succeeded = nil
       end
 
       if attributes.key?(:'total_rolled_back')
         self.total_rolled_back = attributes[:'total_rolled_back']
-      else
-        self.total_rolled_back = nil
       end
 
       if attributes.key?(:'total_rollback_failed')
         self.total_rollback_failed = attributes[:'total_rollback_failed']
-      else
-        self.total_rollback_failed = nil
       end
 
       if attributes.key?(:'total_rollback_succeeded')
         self.total_rollback_succeeded = attributes[:'total_rollback_succeeded']
-      else
-        self.total_rollback_succeeded = nil
       end
 
       if attributes.key?(:'gift')
         self.gift = attributes[:'gift']
-      else
-        self.gift = nil
       end
 
       if attributes.key?(:'loyalty_card')
         self.loyalty_card = attributes[:'loyalty_card']
-      else
-        self.loyalty_card = nil
       end
     end
 
@@ -145,38 +130,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @total_redeemed.nil?
-        invalid_properties.push('invalid value for "total_redeemed", total_redeemed cannot be nil.')
-      end
-
-      if @total_failed.nil?
-        invalid_properties.push('invalid value for "total_failed", total_failed cannot be nil.')
-      end
-
-      if @total_succeeded.nil?
-        invalid_properties.push('invalid value for "total_succeeded", total_succeeded cannot be nil.')
-      end
-
-      if @total_rolled_back.nil?
-        invalid_properties.push('invalid value for "total_rolled_back", total_rolled_back cannot be nil.')
-      end
-
-      if @total_rollback_failed.nil?
-        invalid_properties.push('invalid value for "total_rollback_failed", total_rollback_failed cannot be nil.')
-      end
-
-      if @total_rollback_succeeded.nil?
-        invalid_properties.push('invalid value for "total_rollback_succeeded", total_rollback_succeeded cannot be nil.')
-      end
-
-      if @gift.nil?
-        invalid_properties.push('invalid value for "gift", gift cannot be nil.')
-      end
-
-      if @loyalty_card.nil?
-        invalid_properties.push('invalid value for "loyalty_card", loyalty_card cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -184,14 +137,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @total_redeemed.nil?
-      return false if @total_failed.nil?
-      return false if @total_succeeded.nil?
-      return false if @total_rolled_back.nil?
-      return false if @total_rollback_failed.nil?
-      return false if @total_rollback_succeeded.nil?
-      return false if @gift.nil?
-      return false if @loyalty_card.nil?
       true
     end
 

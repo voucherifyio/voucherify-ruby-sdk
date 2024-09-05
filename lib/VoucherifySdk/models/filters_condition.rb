@@ -104,52 +104,70 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'_in' => :'Any',
-        :'not_in' => :'Any',
-        :'is' => :'Any',
-        :'is_days_ago' => :'Any',
-        :'is_days_in_future' => :'Any',
-        :'is_not' => :'Any',
-        :'has_value' => :'Any',
-        :'is_unknown' => :'Any',
-        :'contains' => :'Any',
-        :'not_contain' => :'Any',
-        :'starts_with' => :'Any',
-        :'ends_with' => :'Any',
-        :'more_than' => :'Any',
-        :'less_than' => :'Any',
-        :'more_than_ago' => :'Any',
-        :'less_than_ago' => :'Any',
-        :'more_than_future' => :'Any',
-        :'less_than_future' => :'Any',
-        :'more_than_equal' => :'Any',
-        :'less_than_equal' => :'Any',
-        :'after' => :'Any',
-        :'before' => :'Any',
-        :'count' => :'Any',
-        :'count_less' => :'Any',
-        :'count_more' => :'Any'
+        :'_in' => :'Object',
+        :'not_in' => :'Object',
+        :'is' => :'Object',
+        :'is_days_ago' => :'Object',
+        :'is_days_in_future' => :'Object',
+        :'is_not' => :'Object',
+        :'has_value' => :'Object',
+        :'is_unknown' => :'Object',
+        :'contains' => :'Object',
+        :'not_contain' => :'Object',
+        :'starts_with' => :'Object',
+        :'ends_with' => :'Object',
+        :'more_than' => :'Object',
+        :'less_than' => :'Object',
+        :'more_than_ago' => :'Object',
+        :'less_than_ago' => :'Object',
+        :'more_than_future' => :'Object',
+        :'less_than_future' => :'Object',
+        :'more_than_equal' => :'Object',
+        :'less_than_equal' => :'Object',
+        :'after' => :'Object',
+        :'before' => :'Object',
+        :'count' => :'Object',
+        :'count_less' => :'Object',
+        :'count_more' => :'Object'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'_in',
+        :'not_in',
+        :'is',
+        :'is_days_ago',
+        :'is_days_in_future',
+        :'is_not',
+        :'has_value',
+        :'is_unknown',
+        :'contains',
+        :'not_contain',
+        :'starts_with',
+        :'ends_with',
+        :'more_than',
+        :'less_than',
+        :'more_than_ago',
+        :'less_than_ago',
+        :'more_than_future',
+        :'less_than_future',
+        :'more_than_equal',
+        :'less_than_equal',
+        :'after',
+        :'before',
+        :'count',
+        :'count_less',
+        :'count_more'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::FiltersCondition` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::FiltersCondition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 

@@ -1,0 +1,35 @@
+- **2024-05-08** - `5.0.1` - Added support for [Create validation rule assignment](https://docs.voucherify.io/reference/create-validation-rule-assignment)
+- **2024-03-11** - `5.0.0` - The new version generated from OpenAPI, supports union models. Covers most common endpoints.
+- **2022-01-18** - `4.1.0` - Async Actions support.
+- **2021-06-14** - `4.0.0` - Bumped required ruby version, bumped dependencies, added `Consents` API support, remove deprecated `URI.escape`.
+- **2020-03-09** - `3.0.0` - Bumped required ruby version, bumped dependencies, added `list` method in Customers module.
+- **2019-06-19** - `2.4.0` - Added support for custom API endpoint, that allows to connect to projects created in specific Voucherify region.
+- **2019-05-09** - `2.3.0` - Added `create_publication` method in Distributions module.
+- **2019-04-23** - `2.2.0` - Loyalties API, Rewards API, Orders API.
+- **2019-02-19** - `2.1.1` - Treat `referral` as optional in custom events. Added new method for custom event tracking.
+- **2019-02-19** - `2.1.0` - Handle `referral` in custom events tracking.
+- **2018-12-27** - `2.0.0` - Business validation rules.
+- **2018-09-05** - `1.6.1` - Request timeout settings
+- **2017-11-16** - `1.6.0` - Expose promotion API, Redemptions and Validations namespace update
+- **2017-11-16** - `1.5.0` - Expose events API
+- **2017-05-07** - `1.4.0` - Segments, Validation rules, API Versioning
+- **2017-03-22** - `1.3.0` - improved error handling
+- **2017-01-04** - `1.2.0` - added [import vouchers](#import-vouchers) method.
+- **2016-12-29** - `1.1.0` - introduced [campaigns api](#campaigns-api) and [products api](#products-api).
+- **2016-12-15** - `1.0.0` - introduced namespaces, unified method names, updated README. Migration from versions 0.x required [migration from version 0.x](#migration-from-0x)
+- **2016-12-02** - `0.8.2` - support gift vouchers in utils, fix price and discount calculations for amount discounts
+- **2016-10-03** - `0.8.1` - publish update
+- **2016-08-02** - `0.8.0` - validate voucher
+- **2016-07-18** - `0.7.0` - voucher udpate
+- **2016-07-05** - `0.6.0` - new utils module
+- **2016-06-16** - `0.5.0` - unified naming convention
+- **2016-06-12** - `0.4.0` - new customer sdk methods
+- **2016-05-24** - `0.3.0` - new publish structure
+- **2016-04-27** - `0.2.0` - rollback redemption
+- **2016-04-13** - `0.1.3` - bugfix in redeem()
+- **2016-04-13** - `0.1.2` - removed dependency to `pry`
+- **2016-04-12** - `0.1.1` - minor gemspec changes
+- **2016-04-12** - `0.1.0` - First version:
+    - Authentication
+    - Voucher information: *retrieve voucher*, *list vouchers*, *retrieve redemptions*, *list redemptions*
+    - Voucher operations: *redeem voucher*, *publish voucher*, *create voucher*, *enable/disable voucher*

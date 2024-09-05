@@ -16,7 +16,6 @@ require 'time'
 module VoucherifySdk
   class LoyaltyCardTransactionsType
     ACCRUAL = "POINTS_ACCRUAL".freeze
-    CANCELLATION = "POINTS_CANCELLATION".freeze
     REDEMPTION = "POINTS_REDEMPTION".freeze
     REFUND = "POINTS_REFUND".freeze
     ADDITION = "POINTS_ADDITION".freeze
@@ -26,7 +25,7 @@ module VoucherifySdk
     TRANSFER_OUT = "POINTS_TRANSFER_OUT".freeze
 
     def self.all_vars
-      @all_vars ||= [ACCRUAL, CANCELLATION, REDEMPTION, REFUND, ADDITION, REMOVAL, EXPIRATION, TRANSFER_IN, TRANSFER_OUT].freeze
+      @all_vars ||= [ACCRUAL, REDEMPTION, REFUND, ADDITION, REMOVAL, EXPIRATION, TRANSFER_IN, TRANSFER_OUT].freeze
     end
 
     # Builds the enum from string

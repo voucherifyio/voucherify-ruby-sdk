@@ -102,10 +102,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CategoriesApi.delete_category ...'
       end
-      # verify the required parameter 'category_id' is set
-      if @api_client.config.client_side_validation && category_id.nil?
-        fail ArgumentError, "Missing the required parameter 'category_id' when calling CategoriesApi.delete_category"
-      end
       # resource path
       local_var_path = '/v1/categories/{categoryId}'.sub('{' + 'categoryId' + '}', CGI.escape(category_id.to_s))
 
@@ -162,10 +158,6 @@ module VoucherifySdk
     private def get_category_with_http_info(category_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CategoriesApi.get_category ...'
-      end
-      # verify the required parameter 'category_id' is set
-      if @api_client.config.client_side_validation && category_id.nil?
-        fail ArgumentError, "Missing the required parameter 'category_id' when calling CategoriesApi.get_category"
       end
       # resource path
       local_var_path = '/v1/categories/{categoryId}'.sub('{' + 'categoryId' + '}', CGI.escape(category_id.to_s))
@@ -284,10 +276,6 @@ module VoucherifySdk
     private def update_category_with_http_info(category_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CategoriesApi.update_category ...'
-      end
-      # verify the required parameter 'category_id' is set
-      if @api_client.config.client_side_validation && category_id.nil?
-        fail ArgumentError, "Missing the required parameter 'category_id' when calling CategoriesApi.update_category"
       end
       # resource path
       local_var_path = '/v1/categories/{categoryId}'.sub('{' + 'categoryId' + '}', CGI.escape(category_id.to_s))

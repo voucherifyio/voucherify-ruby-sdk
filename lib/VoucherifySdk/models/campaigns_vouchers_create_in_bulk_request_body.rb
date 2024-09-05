@@ -14,8 +14,13 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **POST** `/campaigns/{campaignId}/vouchers`.
+  # Request body schema for **POST** `v1/campaigns/{campaignId}/vouchers`.
   class CampaignsVouchersCreateInBulkRequestBody
+    # Unique voucher code.
+    attr_accessor :code
+
+    attr_accessor :code_config
+
     # The category assigned to the campaign. Either pass this parameter OR the `category_id`.
     attr_accessor :category
 
@@ -33,22 +38,17 @@ module VoucherifySdk
     # Expiration timestamp defines when the voucher expires in ISO 8601 format.  Voucher is *inactive after* this date.
     attr_accessor :expiration_date
 
-    # Unique voucher code.
-    attr_accessor :code
-
-    attr_accessor :code_config
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'code' => :'code',
+        :'code_config' => :'code_config',
         :'category' => :'category',
         :'metadata' => :'metadata',
         :'redemption' => :'redemption',
         :'additional_info' => :'additional_info',
         :'start_date' => :'start_date',
-        :'expiration_date' => :'expiration_date',
-        :'code' => :'code',
-        :'code_config' => :'code_config'
+        :'expiration_date' => :'expiration_date'
       }
     end
 
@@ -60,44 +60,45 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'code' => :'String',
+        :'code_config' => :'CodeConfig',
         :'category' => :'String',
         :'metadata' => :'Object',
-        :'redemption' => :'CampaignsImportVoucherItemRedemption',
+        :'redemption' => :'CampaignsVouchersCreateInBulkRequestBodyRedemption',
         :'additional_info' => :'String',
         :'start_date' => :'Time',
-        :'expiration_date' => :'Time',
-        :'code' => :'String',
-        :'code_config' => :'CodeConfig'
+        :'expiration_date' => :'Time'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'code',
+        :'category',
+        :'metadata',
+        :'redemption',
+        :'additional_info',
+        :'start_date',
+        :'expiration_date'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'CampaignsVouchersCreateBaseRequestBody'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CampaignsVouchersCreateInBulkRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CampaignsVouchersCreateInBulkRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
+      end
+
+      if attributes.key?(:'code_config')
+        self.code_config = attributes[:'code_config']
+      end
 
       if attributes.key?(:'category')
         self.category = attributes[:'category']
@@ -122,14 +123,6 @@ module VoucherifySdk
       if attributes.key?(:'expiration_date')
         self.expiration_date = attributes[:'expiration_date']
       end
-
-      if attributes.key?(:'code')
-        self.code = attributes[:'code']
-      end
-
-      if attributes.key?(:'code_config')
-        self.code_config = attributes[:'code_config']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -152,14 +145,14 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          code == o.code &&
+          code_config == o.code_config &&
           category == o.category &&
           metadata == o.metadata &&
           redemption == o.redemption &&
           additional_info == o.additional_info &&
           start_date == o.start_date &&
-          expiration_date == o.expiration_date &&
-          code == o.code &&
-          code_config == o.code_config
+          expiration_date == o.expiration_date
     end
 
     # @see the `==` method
@@ -171,7 +164,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [category, metadata, redemption, additional_info, start_date, expiration_date, code, code_config].hash
+      [code, code_config, category, metadata, redemption, additional_info, start_date, expiration_date].hash
     end
 
     # Builds the object from hash

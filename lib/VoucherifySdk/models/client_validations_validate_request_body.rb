@@ -14,9 +14,10 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **POST** `/validations`.
+  # Response body schema for **POST** `v1/validations`.
   class ClientValidationsValidateRequestBody
-    # An array of redeemables. You can combine `voucher`(s) and `promotion_tier`(s). Alternatively, send one unique`promotion_stack` in the array.
+    attr_accessor :options
+
     attr_accessor :redeemables
 
     attr_accessor :order
@@ -31,18 +32,16 @@ module VoucherifySdk
     # A set of key/value pairs that you can attach to a redemption object. It can be useful for storing additional information about the redemption in a structured format.
     attr_accessor :metadata
 
-    attr_accessor :options
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'options' => :'options',
         :'redeemables' => :'redeemables',
         :'order' => :'order',
         :'customer' => :'customer',
         :'session' => :'session',
         :'tracking_id' => :'tracking_id',
-        :'metadata' => :'metadata',
-        :'options' => :'options'
+        :'metadata' => :'metadata'
       }
     end
 
@@ -54,50 +53,42 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'redeemables' => :'Array<StackableValidateRedeemBaseRedeemablesItem>',
+        :'options' => :'ClientValidationsValidateRequestBodyOptions',
+        :'redeemables' => :'Array<ClientValidationsValidateRequestBodyRedeemablesItem>',
         :'order' => :'Order',
         :'customer' => :'Customer',
         :'session' => :'Session',
         :'tracking_id' => :'String',
-        :'metadata' => :'Object',
-        :'options' => :'ClientValidationsValidateRequestBodyAllOfOptions'
+        :'metadata' => :'Object'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'options',
+        :'redeemables',
+        :'tracking_id',
+        :'metadata'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'StackableValidateRedeemBase'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ClientValidationsValidateRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ClientValidationsValidateRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'options')
+        self.options = attributes[:'options']
+      end
 
       if attributes.key?(:'redeemables')
         if (value = attributes[:'redeemables']).is_a?(Array)
           self.redeemables = value
         end
-      else
-        self.redeemables = nil
       end
 
       if attributes.key?(:'order')
@@ -119,10 +110,6 @@ module VoucherifySdk
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
       end
-
-      if attributes.key?(:'options')
-        self.options = attributes[:'options']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -130,18 +117,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @redeemables.nil?
-        invalid_properties.push('invalid value for "redeemables", redeemables cannot be nil.')
-      end
-
-      if @redeemables.length > 5
-        invalid_properties.push('invalid value for "redeemables", number of items must be less than or equal to 5.')
-      end
-
-      if @redeemables.length < 1
-        invalid_properties.push('invalid value for "redeemables", number of items must be greater than or equal to 1.')
-      end
-
       invalid_properties
     end
 
@@ -149,28 +124,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @redeemables.nil?
-      return false if @redeemables.length > 5
-      return false if @redeemables.length < 1
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] redeemables Value to be assigned
-    def redeemables=(redeemables)
-      if redeemables.nil?
-        fail ArgumentError, 'redeemables cannot be nil'
-      end
-
-      if redeemables.length > 5
-        fail ArgumentError, 'invalid value for "redeemables", number of items must be less than or equal to 5.'
-      end
-
-      if redeemables.length < 1
-        fail ArgumentError, 'invalid value for "redeemables", number of items must be greater than or equal to 1.'
-      end
-
-      @redeemables = redeemables
     end
 
     # Checks equality by comparing each attribute.
@@ -178,13 +132,13 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          options == o.options &&
           redeemables == o.redeemables &&
           order == o.order &&
           customer == o.customer &&
           session == o.session &&
           tracking_id == o.tracking_id &&
-          metadata == o.metadata &&
-          options == o.options
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -196,7 +150,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [redeemables, order, customer, session, tracking_id, metadata, options].hash
+      [options, redeemables, order, customer, session, tracking_id, metadata].hash
     end
 
     # Builds the object from hash

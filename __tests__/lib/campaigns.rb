@@ -7,7 +7,7 @@ def create_validation_rule_applicable_to(validation_rules_api_instance, product_
         created_validation_rule = validation_rules_api_instance.create_validation_rules({
             validation_rules_create_request_body: VoucherifySdk::ValidationRulesCreateRequestBody.new({
                 name: generate_random_string(),
-                applicable_to: VoucherifySdk::ValidationRuleBaseApplicableTo.new({
+                applicable_to: VoucherifySdk::ValidationRulesCreateRequestBodyApplicableTo.new({
                     included: [VoucherifySdk::ApplicableTo.new({
                         object: "product",
                         id: product_id
@@ -50,20 +50,21 @@ end
 def create_discount_campaign(campaigns_api_instance, validation_rule_id)
     begin
         campaign = campaigns_api_instance.create_campaign({
-            campaigns_create_request_body: VoucherifySdk::CampaignsCreateDiscountCouponsCampaign.new({
+            campaigns_create_request_body: VoucherifySdk::CampaignsCreateRequestBody.new({
                 campaign_type: "DISCOUNT_COUPONS",
                 name: generate_random_string(),
                 type: "AUTO_UPDATE",
-                voucher: VoucherifySdk::DiscountCouponsCampaignVoucher.new({
-                    discount: VoucherifySdk::DiscountAmount.new({
-                        type: "AMOUNT",
+                voucher: VoucherifySdk::CampaignsCreateRequestBodyVoucher.new({
+                    type: 'DISCOUNT_VOUCHER',
+                    discount: VoucherifySdk::Discount.new({
+                        type: 'AMOUNT',
                         amount_off: 1000
                     })
                 }),
                 validation_rules: [validation_rule_id]
             })
         })
-
+        
         return campaign
     rescue VoucherifySdk::ApiError => e
         return nil
@@ -111,6 +112,7 @@ def create_loyalty_campaign(campaigns_api_instance)
                 }
             }
         })
+        return campaign
     end
 end
 
@@ -124,5 +126,23 @@ def delete_campaign(campaigns_api_instance, campaign_id)
     end
 end
 
-
+def add_vouchers_to_campaign(campaigns_api_instance, campaign_id, voucher_count)
+    begin
+      vouchers = []
+  
+      voucher_count.times do
+        voucher = campaigns_api_instance.add_vouchers_to_campaign(
+          campaign_id,
+          {
+            vouchers_count: 1
+          }
+        )
+        vouchers << voucher.code
+      end
+  
+      return vouchers
+    rescue VoucherifySdk::ApiError => e
+      return nil
+    end
+  end
 

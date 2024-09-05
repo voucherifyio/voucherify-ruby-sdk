@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Schema containing information about config used for voucher. Defines code's pattern (prefix, suffix, length, charset, etc).
+  # Contains information about the config used for the voucher code. Defines the code's pattern (prefix, postfix, length, charset, etc).
   class CodeConfig
     # Number of characters in a generated code (excluding prefix and postfix).
     attr_accessor :length
@@ -31,7 +31,7 @@ module VoucherifySdk
     # A pattern for codes where hashes (#) will be replaced with random characters. Overrides `length`.
     attr_accessor :pattern
 
-    # The initial count
+    # Internal value, does not change anything if provided.
     attr_accessor :initial_count
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -66,21 +66,20 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'length',
+        :'charset',
+        :'prefix',
+        :'postfix',
+        :'pattern',
+        :'initial_count'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CodeConfig` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CodeConfig`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 

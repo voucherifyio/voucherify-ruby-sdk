@@ -1,49 +1,31 @@
 # VoucherifySdk::RedemptionsGetResponseBody
 
-## Class instance methods
+## Properties
 
-### `openapi_one_of`
-
-Returns the list of classes defined in oneOf.
-
-#### Example
-
-```ruby
-require 'VoucherifySdk'
-
-VoucherifySdk::RedemptionsGetResponseBody.openapi_one_of
-# =>
-# [
-#   :'Redemption',
-#   :'RedemptionRollback'
-# ]
-```
-
-### build
-
-Find the appropriate object from the `openapi_one_of` list and casts the data into it.
-
-#### Example
-
-```ruby
-require 'VoucherifySdk'
-
-VoucherifySdk::RedemptionsGetResponseBody.build(data)
-# => #<Redemption:0x00007fdd4aab02a0>
-
-VoucherifySdk::RedemptionsGetResponseBody.build(data_that_doesnt_match)
-# => nil
-```
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| **data** | **Mixed** | data to be matched against the list of oneOf items |
-
-#### Return type
-
-- `Redemption`
-- `RedemptionRollback`
-- `nil` (if no type matches)
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** |  | [optional] |
+| **object** | **String** |  | [optional] |
+| **date** | **Time** | Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format. | [optional] |
+| **customer_id** | **String** | Unique customer ID of the redeeming customer. | [optional] |
+| **tracking_id** | **String** | Hashed customer source ID. | [optional] |
+| **metadata** | **Object** |  | [optional] |
+| **amount** | **Integer** | For gift cards, this is a positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the number of redeemed credits. For loyalty cards, this is the number of loyalty points used in the transaction. and For gift cards, this represents the number of the credits restored to the card in the rolledback redemption. The number is a negative integer in the smallest currency unit, e.g. -100 cents for $1.00 added back to the card. For loyalty cards, this represents the number of loyalty points restored to the card in the rolledback redemption. The number is a negative integer. | [optional] |
+| **redemption** | **String** | Unique redemption ID of the parent redemption. | [optional] |
+| **result** | **String** | Redemption result. | [optional] |
+| **status** | **String** |  | [optional] |
+| **related_redemptions** | [**RedemptionsGetResponseBodyRelatedRedemptions**](RedemptionsGetResponseBodyRelatedRedemptions.md) |  | [optional] |
+| **failure_code** | **String** | If the result is &#x60;FAILURE&#x60;, this parameter will provide a generic reason as to why the redemption failed. | [optional] |
+| **failure_message** | **String** | If the result is &#x60;FAILURE&#x60;, this parameter will provide a more expanded reason as to why the redemption failed. | [optional] |
+| **order** | [**RedemptionsGetResponseBodyOrder**](RedemptionsGetResponseBodyOrder.md) |  | [optional] |
+| **channel** | [**RedemptionsGetResponseBodyChannel**](RedemptionsGetResponseBodyChannel.md) |  | [optional] |
+| **customer** | [**RedemptionsGetResponseBodyCustomer**](RedemptionsGetResponseBodyCustomer.md) |  | [optional] |
+| **related_object_type** | **String** | Defines the related object. | [optional] |
+| **related_object_id** | **String** |  | [optional] |
+| **voucher** | [**RedemptionsGetResponseBodyVoucher**](RedemptionsGetResponseBodyVoucher.md) |  | [optional] |
+| **promotion_tier** | [**RedemptionsGetResponseBodyPromotionTier**](RedemptionsGetResponseBodyPromotionTier.md) |  | [optional] |
+| **reward** | [**RedemptionRewardResult**](RedemptionRewardResult.md) |  | [optional] |
+| **gift** | [**RedemptionsGetResponseBodyGift**](RedemptionsGetResponseBodyGift.md) |  | [optional] |
+| **loyalty_card** | [**RedemptionsGetResponseBodyLoyaltyCard**](RedemptionsGetResponseBodyLoyaltyCard.md) |  | [optional] |
+| **reason** | **String** | System generated cause for the redemption being invalid in the context of the provided parameters. | [optional] |
 

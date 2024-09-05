@@ -26,6 +26,11 @@ module VoucherifySdk
 
     attr_accessor :result
 
+    # The metadata object stores all custom attributes in the form of key/value pairs assigned to the redeemable.
+    attr_accessor :metadata
+
+    attr_accessor :categories
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -54,7 +59,9 @@ module VoucherifySdk
         :'status' => :'status',
         :'id' => :'id',
         :'object' => :'object',
-        :'result' => :'result'
+        :'result' => :'result',
+        :'metadata' => :'metadata',
+        :'categories' => :'categories'
       }
     end
 
@@ -69,28 +76,29 @@ module VoucherifySdk
         :'status' => :'String',
         :'id' => :'String',
         :'object' => :'String',
-        :'result' => :'Object'
+        :'result' => :'ValidationsRedeemableSkippedResult',
+        :'metadata' => :'Object',
+        :'categories' => :'Array<Category>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'status',
+        :'id',
+        :'object',
+        :'result',
+        :'metadata',
+        :'categories'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ValidationsRedeemableSkipped` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ValidationsRedeemableSkipped`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -110,6 +118,16 @@ module VoucherifySdk
 
       if attributes.key?(:'result')
         self.result = attributes[:'result']
+      end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.key?(:'categories')
+        if (value = attributes[:'categories']).is_a?(Array)
+          self.categories = value
+        end
       end
     end
 
@@ -132,26 +150,6 @@ module VoucherifySdk
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["SKIPPED"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["voucher", "promotion_tier"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -160,7 +158,9 @@ module VoucherifySdk
           status == o.status &&
           id == o.id &&
           object == o.object &&
-          result == o.result
+          result == o.result &&
+          metadata == o.metadata &&
+          categories == o.categories
     end
 
     # @see the `==` method
@@ -172,7 +172,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, id, object, result].hash
+      [status, id, object, result, metadata, categories].hash
     end
 
     # Builds the object from hash

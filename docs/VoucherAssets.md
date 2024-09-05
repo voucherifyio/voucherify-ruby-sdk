@@ -4,6 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **qr** | [**LoyaltiesMembersTransfersCreateResponseBodyAssetsQr**](LoyaltiesMembersTransfersCreateResponseBodyAssetsQr.md) |  | [optional] |
-| **barcode** | [**LoyaltiesMembersTransfersCreateResponseBodyAssetsBarcode**](LoyaltiesMembersTransfersCreateResponseBodyAssetsBarcode.md) |  | [optional] |
+| **qr** | [**VoucherAssetsQr**](VoucherAssetsQr.md) |  | [optional] |
+| **barcode** | [**VoucherAssetsBarcode**](VoucherAssetsBarcode.md) |  | [optional] |
 

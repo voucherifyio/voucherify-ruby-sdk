@@ -46,34 +46,25 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'redeemed_points',
+        :'points_to_go'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CustomerSummaryRedemptionsLoyaltyCard` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CustomerSummaryRedemptionsLoyaltyCard`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'redeemed_points')
         self.redeemed_points = attributes[:'redeemed_points']
-      else
-        self.redeemed_points = nil
       end
 
       if attributes.key?(:'points_to_go')
         self.points_to_go = attributes[:'points_to_go']
-      else
-        self.points_to_go = nil
       end
     end
 
@@ -82,14 +73,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @redeemed_points.nil?
-        invalid_properties.push('invalid value for "redeemed_points", redeemed_points cannot be nil.')
-      end
-
-      if @points_to_go.nil?
-        invalid_properties.push('invalid value for "points_to_go", points_to_go cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -97,8 +80,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @redeemed_points.nil?
-      return false if @points_to_go.nil?
       true
     end
 

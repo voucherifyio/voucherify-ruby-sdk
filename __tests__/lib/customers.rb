@@ -8,7 +8,7 @@ def create_customer(customers_api_instance)
             customers_create_request_body: VoucherifySdk::CustomersCreateRequestBody.new({
             source_id: generate_random_string(),
             name: "John Doe",
-            address: VoucherifySdk::CustomerBaseAddress.new({
+            address: VoucherifySdk::CustomerAddress.new({
                 country: "US",
                 city: "New York",
                 line_1: "5th Avenue",

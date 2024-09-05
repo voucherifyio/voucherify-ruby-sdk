@@ -14,12 +14,10 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Simplified customer data.
   class SimpleCustomer
-    # The ID of an existing customer that will be linked to redemption in this request.
+    # Unique identifier of an existing customer. It is assigned by Voucherify.
     attr_accessor :id
-
-    # A unique identifier of the customer who validates a voucher. It can be a customer ID or email from a CRM system, database, or a third-party service. If you also pass a customer ID (unique ID assigned by Voucherify), the source ID will be ignored.
-    attr_accessor :source_id
 
     # Customer's first and last name.
     attr_accessor :name
@@ -27,10 +25,13 @@ module VoucherifySdk
     # Customer's email address.
     attr_accessor :email
 
-    # A set of custom key/value pairs that you can attach to a customer. The metadata object stores all custom attributes assigned to the customer. It can be useful for storing additional information about the customer in a structured format. This metadata can be used for validating whether the customer qualifies for a discount or it can be used in building customer segments.
+    # A unique identifier of the customer. It can be a customer ID or email from a CRM system, database, or a third-party service.
+    attr_accessor :source_id
+
+    # A set of custom key/value pairs that are attached to the customer. It stores all custom attributes assigned to the customer.
     attr_accessor :metadata
 
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     class EnumAttributeValidator
@@ -59,9 +60,9 @@ module VoucherifySdk
     def self.attribute_map
       {
         :'id' => :'id',
-        :'source_id' => :'source_id',
         :'name' => :'name',
         :'email' => :'email',
+        :'source_id' => :'source_id',
         :'metadata' => :'metadata',
         :'object' => :'object'
       }
@@ -76,9 +77,9 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'id' => :'String',
-        :'source_id' => :'String',
         :'name' => :'String',
         :'email' => :'String',
+        :'source_id' => :'String',
         :'metadata' => :'Object',
         :'object' => :'String'
       }
@@ -87,30 +88,25 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'name',
+        :'email',
+        :'source_id',
+        :'metadata',
+        :'object'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::SimpleCustomer` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::SimpleCustomer`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'source_id')
-        self.source_id = attributes[:'source_id']
       end
 
       if attributes.key?(:'name')
@@ -119,6 +115,10 @@ module VoucherifySdk
 
       if attributes.key?(:'email')
         self.email = attributes[:'email']
+      end
+
+      if attributes.key?(:'source_id')
+        self.source_id = attributes[:'source_id']
       end
 
       if attributes.key?(:'metadata')
@@ -149,25 +149,15 @@ module VoucherifySdk
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["customer"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          source_id == o.source_id &&
           name == o.name &&
           email == o.email &&
+          source_id == o.source_id &&
           metadata == o.metadata &&
           object == o.object
     end
@@ -181,7 +171,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, source_id, name, email, metadata, object].hash
+      [id, name, email, source_id, metadata, object].hash
     end
 
     # Builds the object from hash

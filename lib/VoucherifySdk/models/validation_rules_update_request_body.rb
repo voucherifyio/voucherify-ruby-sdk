@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **PUT** `/validation-rules/{validationRuleId}`.
+  # Response body schema for **PUT** `v1/validation-rules/{validationRuleId}`.
   class ValidationRulesUpdateRequestBody
     # Custom, unique name for set of validation rules.
     attr_accessor :name
@@ -76,8 +76,8 @@ module VoucherifySdk
       {
         :'name' => :'String',
         :'rules' => :'Object',
-        :'error' => :'ValidationRuleBaseError',
-        :'applicable_to' => :'ValidationRuleBaseApplicableTo',
+        :'error' => :'ValidationRulesUpdateRequestBodyError',
+        :'applicable_to' => :'ValidationRulesUpdateRequestBodyApplicableTo',
         :'type' => :'String',
         :'context_type' => :'String'
       }
@@ -86,28 +86,19 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'error',
+        :'applicable_to',
+        :'type',
+        :'context_type'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'ValidationRuleBase'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ValidationRulesUpdateRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ValidationRulesUpdateRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -157,26 +148,6 @@ module VoucherifySdk
       context_type_validator = EnumAttributeValidator.new('String', ["earning_rule.order.paid", "earning_rule.custom_event", "earning_rule.customer.segment.entered", "earning_rule.customer.tier.joined", "earning_rule.customer.tier.left", "earning_rule.customer.tier.upgraded", "earning_rule.customer.tier.downgraded", "earning_rule.customer.tier.prolonged", "campaign.discount_coupons", "campaign.discount_coupons.discount.apply_to_order", "campaign.discount_coupons.discount.apply_to_items", "campaign.discount_coupons.discount.apply_to_items_proportionally", "campaign.discount_coupons.discount.apply_to_items_proportionally_by_quantity", "campaign.discount_coupons.discount.apply_to_items_by_quantity", "campaign.discount_coupons.discount.fixed.apply_to_items", "campaign.discount_coupons.discount.percent.apply_to_items", "campaign.gift_vouchers", "campaign.gift_vouchers.gift.apply_to_order", "campaign.gift_vouchers.gift.apply_to_items", "campaign.referral_program", "campaign.referral_program.discount.apply_to_order", "campaign.referral_program.discount.apply_to_items", "campaign.referral_program.discount.apply_to_items_proportionally", "campaign.referral_program.discount.apply_to_items_proportionally_by_quantity", "campaign.referral_program.discount.apply_to_items_by_quantity", "campaign.referral_program.discount.fixed.apply_to_items", "campaign.referral_program.discount.percent.apply_to_items", "campaign.promotion", "campaign.promotion.discount.apply_to_order", "campaign.promotion.discount.apply_to_items", "campaign.promotion.discount.apply_to_items_proportionally", "campaign.promotion.discount.apply_to_items_proportionally_by_quantity", "campaign.promotion.discount.apply_to_items_by_quantity", "campaign.promotion.discount.fixed.apply_to_items", "campaign.promotion.discount.percent.apply_to_items", "campaign.loyalty_program", "campaign.lucky_draw", "voucher.discount_voucher", "voucher.discount_voucher.discount.apply_to_order", "voucher.discount_voucher.discount.apply_to_items", "voucher.discount_voucher.discount.apply_to_items_proportionally", "voucher.discount_voucher.discount.apply_to_items_proportionally_by_quantity", "voucher.discount_voucher.discount.apply_to_items_by_quantity", "voucher.discount_voucher.discount.fixed.apply_to_items", "voucher.discount_voucher.discount.percent.apply_to_items", "voucher.gift_voucher", "voucher.gift_voucher.gift.apply_to_order", "voucher.gift_voucher.gift.apply_to_items", "voucher.loyalty_card", "voucher.lucky_draw_code", "distribution.custom_event", "distribution.order.paid", "distribution.order.created", "distribution.order.canceled", "distribution.order.updated", "reward_assignment.pay_with_points", "global"])
       return false unless context_type_validator.valid?(@context_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["expression", "basic", "advanced", "complex"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] context_type Object to be assigned
-    def context_type=(context_type)
-      validator = EnumAttributeValidator.new('String', ["earning_rule.order.paid", "earning_rule.custom_event", "earning_rule.customer.segment.entered", "earning_rule.customer.tier.joined", "earning_rule.customer.tier.left", "earning_rule.customer.tier.upgraded", "earning_rule.customer.tier.downgraded", "earning_rule.customer.tier.prolonged", "campaign.discount_coupons", "campaign.discount_coupons.discount.apply_to_order", "campaign.discount_coupons.discount.apply_to_items", "campaign.discount_coupons.discount.apply_to_items_proportionally", "campaign.discount_coupons.discount.apply_to_items_proportionally_by_quantity", "campaign.discount_coupons.discount.apply_to_items_by_quantity", "campaign.discount_coupons.discount.fixed.apply_to_items", "campaign.discount_coupons.discount.percent.apply_to_items", "campaign.gift_vouchers", "campaign.gift_vouchers.gift.apply_to_order", "campaign.gift_vouchers.gift.apply_to_items", "campaign.referral_program", "campaign.referral_program.discount.apply_to_order", "campaign.referral_program.discount.apply_to_items", "campaign.referral_program.discount.apply_to_items_proportionally", "campaign.referral_program.discount.apply_to_items_proportionally_by_quantity", "campaign.referral_program.discount.apply_to_items_by_quantity", "campaign.referral_program.discount.fixed.apply_to_items", "campaign.referral_program.discount.percent.apply_to_items", "campaign.promotion", "campaign.promotion.discount.apply_to_order", "campaign.promotion.discount.apply_to_items", "campaign.promotion.discount.apply_to_items_proportionally", "campaign.promotion.discount.apply_to_items_proportionally_by_quantity", "campaign.promotion.discount.apply_to_items_by_quantity", "campaign.promotion.discount.fixed.apply_to_items", "campaign.promotion.discount.percent.apply_to_items", "campaign.loyalty_program", "campaign.lucky_draw", "voucher.discount_voucher", "voucher.discount_voucher.discount.apply_to_order", "voucher.discount_voucher.discount.apply_to_items", "voucher.discount_voucher.discount.apply_to_items_proportionally", "voucher.discount_voucher.discount.apply_to_items_proportionally_by_quantity", "voucher.discount_voucher.discount.apply_to_items_by_quantity", "voucher.discount_voucher.discount.fixed.apply_to_items", "voucher.discount_voucher.discount.percent.apply_to_items", "voucher.gift_voucher", "voucher.gift_voucher.gift.apply_to_order", "voucher.gift_voucher.gift.apply_to_items", "voucher.loyalty_card", "voucher.lucky_draw_code", "distribution.custom_event", "distribution.order.paid", "distribution.order.created", "distribution.order.canceled", "distribution.order.updated", "reward_assignment.pay_with_points", "global"])
-      unless validator.valid?(context_type)
-        fail ArgumentError, "invalid value for \"context_type\", must be one of #{validator.allowable_values}."
-      end
-      @context_type = context_type
     end
 
     # Checks equality by comparing each attribute.

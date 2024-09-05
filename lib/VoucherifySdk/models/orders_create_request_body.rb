@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **POST** `/orders`.
+  # Request body schema for **POST** `v1/orders`.
   class OrdersCreateRequestBody
     # Unique ID assigned by Voucherify of an existing order that will be linked to the redemption of this request.
     attr_accessor :id
@@ -25,30 +25,30 @@ module VoucherifySdk
     # The order status.
     attr_accessor :status
 
-    # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.  
+    # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.
     attr_accessor :amount
-
-    # Sum of all order-level discounts applied to the order.
-    attr_accessor :discount_amount
 
     # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.
     attr_accessor :initial_amount
 
+    # Sum of all order-level discounts applied to the order.
+    attr_accessor :discount_amount
+
     # Array of items applied to the order.
     attr_accessor :items
 
-    attr_accessor :customer
+    # A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format.
+    attr_accessor :metadata
 
-    # Unique customer ID of the customer making the purchase.
-    attr_accessor :customer_id
-
-    attr_accessor :referrer
+    # Timestamp representing the date and time when the order was created. The value is shown in the ISO 8601 format.
+    attr_accessor :created_at
 
     # Unique referrer ID.
     attr_accessor :referrer_id
 
-    # A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format.
-    attr_accessor :metadata
+    attr_accessor :customer
+
+    attr_accessor :referrer
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -79,14 +79,14 @@ module VoucherifySdk
         :'source_id' => :'source_id',
         :'status' => :'status',
         :'amount' => :'amount',
-        :'discount_amount' => :'discount_amount',
         :'initial_amount' => :'initial_amount',
+        :'discount_amount' => :'discount_amount',
         :'items' => :'items',
-        :'customer' => :'customer',
-        :'customer_id' => :'customer_id',
-        :'referrer' => :'referrer',
+        :'metadata' => :'metadata',
+        :'created_at' => :'created_at',
         :'referrer_id' => :'referrer_id',
-        :'metadata' => :'metadata'
+        :'customer' => :'customer',
+        :'referrer' => :'referrer'
       }
     end
 
@@ -102,42 +102,38 @@ module VoucherifySdk
         :'source_id' => :'String',
         :'status' => :'String',
         :'amount' => :'Integer',
-        :'discount_amount' => :'Integer',
         :'initial_amount' => :'Integer',
+        :'discount_amount' => :'Integer',
         :'items' => :'Array<OrderItem>',
-        :'customer' => :'Customer',
-        :'customer_id' => :'String',
-        :'referrer' => :'Referrer',
+        :'metadata' => :'Object',
+        :'created_at' => :'Time',
         :'referrer_id' => :'String',
-        :'metadata' => :'Object'
+        :'customer' => :'Customer',
+        :'referrer' => :'Referrer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'source_id',
+        :'status',
+        :'amount',
+        :'initial_amount',
+        :'discount_amount',
+        :'items',
+        :'metadata',
+        :'created_at',
+        :'referrer_id',
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'Order'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::OrdersCreateRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::OrdersCreateRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -157,12 +153,12 @@ module VoucherifySdk
         self.amount = attributes[:'amount']
       end
 
-      if attributes.key?(:'discount_amount')
-        self.discount_amount = attributes[:'discount_amount']
-      end
-
       if attributes.key?(:'initial_amount')
         self.initial_amount = attributes[:'initial_amount']
+      end
+
+      if attributes.key?(:'discount_amount')
+        self.discount_amount = attributes[:'discount_amount']
       end
 
       if attributes.key?(:'items')
@@ -171,24 +167,24 @@ module VoucherifySdk
         end
       end
 
-      if attributes.key?(:'customer')
-        self.customer = attributes[:'customer']
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
       end
 
-      if attributes.key?(:'customer_id')
-        self.customer_id = attributes[:'customer_id']
-      end
-
-      if attributes.key?(:'referrer')
-        self.referrer = attributes[:'referrer']
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
       if attributes.key?(:'referrer_id')
         self.referrer_id = attributes[:'referrer_id']
       end
 
-      if attributes.key?(:'metadata')
-        self.metadata = attributes[:'metadata']
+      if attributes.key?(:'customer')
+        self.customer = attributes[:'customer']
+      end
+
+      if attributes.key?(:'referrer')
+        self.referrer = attributes[:'referrer']
       end
     end
 
@@ -209,16 +205,6 @@ module VoucherifySdk
       true
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["CREATED", "PAID", "CANCELED", "FULFILLED"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -228,14 +214,14 @@ module VoucherifySdk
           source_id == o.source_id &&
           status == o.status &&
           amount == o.amount &&
-          discount_amount == o.discount_amount &&
           initial_amount == o.initial_amount &&
+          discount_amount == o.discount_amount &&
           items == o.items &&
-          customer == o.customer &&
-          customer_id == o.customer_id &&
-          referrer == o.referrer &&
+          metadata == o.metadata &&
+          created_at == o.created_at &&
           referrer_id == o.referrer_id &&
-          metadata == o.metadata
+          customer == o.customer &&
+          referrer == o.referrer
     end
 
     # @see the `==` method
@@ -247,7 +233,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, source_id, status, amount, discount_amount, initial_amount, items, customer, customer_id, referrer, referrer_id, metadata].hash
+      [id, source_id, status, amount, initial_amount, discount_amount, items, metadata, created_at, referrer_id, customer, referrer].hash
     end
 
     # Builds the object from hash

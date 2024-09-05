@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **POST** `/events`.
+  # Request body schema for **POST** `v1/events`.
   class ClientEventsCreateRequestBody
     # Event name. This is the same name that you used to define a custom event in the **Dashboard** > **Project Settings** > **Event Schema**.
     attr_accessor :event
@@ -58,28 +58,23 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'event',
+        :'referral',
+        :'loyalty',
+        :'metadata'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ClientEventsCreateRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ClientEventsCreateRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'event')
         self.event = attributes[:'event']
-      else
-        self.event = nil
       end
 
       if attributes.key?(:'customer')
@@ -106,15 +101,11 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @event.nil?
-        invalid_properties.push('invalid value for "event", event cannot be nil.')
-      end
-
-      if @event.to_s.length > 300
+      if !@event.nil? && @event.to_s.length > 300
         invalid_properties.push('invalid value for "event", the character length must be smaller than or equal to 300.')
       end
 
-      if @event.to_s.length < 1
+      if !@event.nil? && @event.to_s.length < 1
         invalid_properties.push('invalid value for "event", the character length must be great than or equal to 1.')
       end
 
@@ -129,29 +120,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @event.nil?
-      return false if @event.to_s.length > 300
-      return false if @event.to_s.length < 1
+      return false if !@event.nil? && @event.to_s.length > 300
+      return false if !@event.nil? && @event.to_s.length < 1
       return false if @customer.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] event Value to be assigned
-    def event=(event)
-      if event.nil?
-        fail ArgumentError, 'event cannot be nil'
-      end
-
-      if event.to_s.length > 300
-        fail ArgumentError, 'invalid value for "event", the character length must be smaller than or equal to 300.'
-      end
-
-      if event.to_s.length < 1
-        fail ArgumentError, 'invalid value for "event", the character length must be great than or equal to 1.'
-      end
-
-      @event = event
     end
 
     # Checks equality by comparing each attribute.

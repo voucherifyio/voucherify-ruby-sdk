@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `/customers`.
+  # Response body schema for **GET** `v1/customers`.
   class CustomersListResponseBody
-    # The type of object represented by JSON. This object stores information about customers in a dictionary.
+    # The type of the object represented by JSON. This object stores information about customers in a dictionary.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of customer objects.
@@ -28,7 +28,7 @@ module VoucherifySdk
     # Total number of customers.
     attr_accessor :total
 
-    # As query results are always limited (by the limit parameter), the `has_more` flag indicates whether there are more records for given filter parameters. This let's you know if you are able to run another request (with a different end date filter) to get more records returned in the results.
+    # As query results are always limited (by the limit parameter), the `has_more` flag indicates if there are more records for given filter parameters. This lets you know if you can run another request (with a different end date filter) to get more records returned in the results.
     attr_accessor :has_more
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -61,21 +61,19 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'data_ref',
+        :'customers',
+        :'total',
+        :'has_more'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CustomersListResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CustomersListResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -95,14 +93,10 @@ module VoucherifySdk
         if (value = attributes[:'customers']).is_a?(Array)
           self.customers = value
         end
-      else
-        self.customers = nil
       end
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
 
       if attributes.key?(:'has_more')
@@ -115,22 +109,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @data_ref.nil?
-        invalid_properties.push('invalid value for "data_ref", data_ref cannot be nil.')
-      end
-
-      if @customers.nil?
-        invalid_properties.push('invalid value for "customers", customers cannot be nil.')
-      end
-
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -138,10 +116,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
-      return false if @data_ref.nil?
-      return false if @customers.nil?
-      return false if @total.nil?
       true
     end
 

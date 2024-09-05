@@ -14,19 +14,16 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **POST** `/qualifications`.
+  # Request body schema for **POST** `v1/qualifications`.
   class QualificationsCheckEligibilityRequestBody
     attr_accessor :customer
 
     attr_accessor :order
 
-    # Defines which resources Voucherify will use. The `ADVANCED` mode is available after purchase only.
-    attr_accessor :mode
-
     # Is correspondent to Customer's source_id
     attr_accessor :tracking_id
 
-    # Defines the scenario Voucherify should consider during the qualification process.  - `ALL` - Scenario that returns all redeemables available for the customer in one API request. This scenario is used by default when no value is selected. - `CUSTOMER_WALLET` - returns vouchers applicable to the customer’s cart based on the vouchers assigned to the customer’s profile. - `AUDIENCE_ONLY` - returns all vouchers, promotion tiers, and campaigns available to the customer. Voucherify validates the rules based on the customer profile only. - `PRODUCTS` - returns all promotions available for the products (when a discount is defined to be applied to the item or when the item is required in the validation rule). - `PRODUCTS_DISCOUNT` - returns all promotions available for products when a discount is defined as applicable to specific item(s). - `PROMOTION_STACKS` - returns the applicable promotion stacks. - `PRODUCTS_BY_CUSTOMER` - returns all promotions available for a customer for the products (when a discount is defined to be applied to the item or when the item is required in the validation rule). - `PRODUCTS_DISCOUNT_BY_CUSTOMER` - returns all promotions available for a customer for products when a discount is defined as applicable to specific item(s).
+    # Defines the scenario Voucherify should consider during the qualification process.  - `ALL` - Scenario that returns all redeemables available for the customer in one API request. This scenario is used by default when no value is selected. - `CUSTOMER_WALLET` - returns vouchers applicable to the customer's cart based on the vouchers assigned to the customer's profile. - `AUDIENCE_ONLY` - returns all vouchers, promotion tiers, and campaigns available to the customer. Voucherify validates the rules based on the customer profile only. - `PRODUCTS` - returns all promotions available for the products (when a discount is defined to be applied to the item or when the item is required in the validation rule). - `PRODUCTS_DISCOUNT` - returns all promotions available for products when a discount is defined as applicable to specific item(s). - `PROMOTION_STACKS` - returns the applicable promotion stacks. - `PRODUCTS_BY_CUSTOMER` - returns all promotions available for a customer for the products (when a discount is defined to be applied to the item or when the item is required in the validation rule). - `PRODUCTS_DISCOUNT_BY_CUSTOMER` - returns all promotions available for a customer for products when a discount is defined as applicable to specific item(s).
     attr_accessor :scenario
 
     attr_accessor :options
@@ -61,7 +58,6 @@ module VoucherifySdk
       {
         :'customer' => :'customer',
         :'order' => :'order',
-        :'mode' => :'mode',
         :'tracking_id' => :'tracking_id',
         :'scenario' => :'scenario',
         :'options' => :'options',
@@ -79,7 +75,6 @@ module VoucherifySdk
       {
         :'customer' => :'Customer',
         :'order' => :'Order',
-        :'mode' => :'String',
         :'tracking_id' => :'String',
         :'scenario' => :'String',
         :'options' => :'QualificationsOption',
@@ -90,21 +85,17 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'tracking_id',
+        :'scenario',
+        :'metadata'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::QualificationsCheckEligibilityRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::QualificationsCheckEligibilityRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -114,10 +105,6 @@ module VoucherifySdk
 
       if attributes.key?(:'order')
         self.order = attributes[:'order']
-      end
-
-      if attributes.key?(:'mode')
-        self.mode = attributes[:'mode']
       end
 
       if attributes.key?(:'tracking_id')
@@ -149,31 +136,9 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      mode_validator = EnumAttributeValidator.new('String', ["BASIC", "ADVANCED"])
-      return false unless mode_validator.valid?(@mode)
       scenario_validator = EnumAttributeValidator.new('String', ["ALL", "CUSTOMER_WALLET", "AUDIENCE_ONLY", "PRODUCTS", "PRODUCTS_DISCOUNT", "PROMOTION_STACKS", "PRODUCTS_BY_CUSTOMER", "PRODUCTS_DISCOUNT_BY_CUSTOMER"])
       return false unless scenario_validator.valid?(@scenario)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mode Object to be assigned
-    def mode=(mode)
-      validator = EnumAttributeValidator.new('String', ["BASIC", "ADVANCED"])
-      unless validator.valid?(mode)
-        fail ArgumentError, "invalid value for \"mode\", must be one of #{validator.allowable_values}."
-      end
-      @mode = mode
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] scenario Object to be assigned
-    def scenario=(scenario)
-      validator = EnumAttributeValidator.new('String', ["ALL", "CUSTOMER_WALLET", "AUDIENCE_ONLY", "PRODUCTS", "PRODUCTS_DISCOUNT", "PROMOTION_STACKS", "PRODUCTS_BY_CUSTOMER", "PRODUCTS_DISCOUNT_BY_CUSTOMER"])
-      unless validator.valid?(scenario)
-        fail ArgumentError, "invalid value for \"scenario\", must be one of #{validator.allowable_values}."
-      end
-      @scenario = scenario
     end
 
     # Checks equality by comparing each attribute.
@@ -183,7 +148,6 @@ module VoucherifySdk
       self.class == o.class &&
           customer == o.customer &&
           order == o.order &&
-          mode == o.mode &&
           tracking_id == o.tracking_id &&
           scenario == o.scenario &&
           options == o.options &&
@@ -199,7 +163,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer, order, mode, tracking_id, scenario, options, metadata].hash
+      [customer, order, tracking_id, scenario, options, metadata].hash
     end
 
     # Builds the object from hash

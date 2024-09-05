@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # This object stores a summary of publish events: an events counter and an endpoint which can be called to return details of each event.  A publication is required for loyalty cards and referral codes. This object gets updated whenever a voucher has been published. Publication means assigning a code to a particular customer. Typically, a publication is made by distributing your codes to your customers, e.g. through Export to MailChimp or <!-- [publish voucher](OpenAPI.json/paths/~1publications/post) -->[publish voucher](ref:create-publication) API method.   <!-- title: My Table Title -->  | Required | Optional | | -------- | :------: | | `type`:`LOYALTY_CARD` |  `type`:`DISCOUNT_VOUCHER`   |  | `is_referral_code`:`true`      |    `type`:`GIFT_VOUCHER`   | 
+  # Stores a summary of publication events: an event counter and endpoint to return details of each event. Publication is an assignment of a code to a customer, e.g. through a distribution.
   class VoucherPublish
-    # The type of object represented is by default `list`. To get this list, you need to make a call to the endpoint returned in the `url` attribute.
+    # The type of the object represented is by default `list`. To get this list, you need to make a call to the endpoint returned in the `url` attribute.
     attr_accessor :object
 
     # Publication events counter.
@@ -51,21 +51,17 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'count',
+        :'url'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::VoucherPublish` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::VoucherPublish`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 

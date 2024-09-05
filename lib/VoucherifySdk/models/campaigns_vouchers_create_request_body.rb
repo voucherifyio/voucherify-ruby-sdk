@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **POST** `/campaigns/{campaignId}/vouchers/{code}`.
+  # Request body schema for **POST** `v1/campaigns/{campaignId}/vouchers/{code}`.
   class CampaignsVouchersCreateRequestBody
     # The category assigned to the campaign. Either pass this parameter OR the `category_id`.
     attr_accessor :category
@@ -55,7 +55,7 @@ module VoucherifySdk
       {
         :'category' => :'String',
         :'metadata' => :'Object',
-        :'redemption' => :'CampaignsImportVoucherItemRedemption',
+        :'redemption' => :'CampaignsVouchersCreateRequestBodyRedemption',
         :'additional_info' => :'String',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time'
@@ -65,28 +65,20 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'category',
+        :'metadata',
+        :'redemption',
+        :'additional_info',
+        :'start_date',
+        :'expiration_date'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'CampaignsVouchersCreateBaseRequestBody'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CampaignsVouchersCreateRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CampaignsVouchersCreateRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 

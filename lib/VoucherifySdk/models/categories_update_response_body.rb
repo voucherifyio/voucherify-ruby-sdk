@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **PUT** `/categories/{categoryId}`.
+  # Response body schema for **PUT** `v1/categories/{categoryId}`.
   class CategoriesUpdateResponseBody
     # Unique category ID assigned by Voucherify.
     attr_accessor :id
@@ -27,10 +27,10 @@ module VoucherifySdk
 
     attr_accessor :object
 
-    # Timestamp representing the date and time when the category was created in ISO 8601 format.
+    # Timestamp representing the date and time when the category was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the category was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the category was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     class EnumAttributeValidator
@@ -87,40 +87,33 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'name',
+        :'hierarchy',
+        :'object',
+        :'created_at',
+        :'updated_at'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CategoriesUpdateResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CategoriesUpdateResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'hierarchy')
         self.hierarchy = attributes[:'hierarchy']
-      else
-        self.hierarchy = nil
       end
 
       if attributes.key?(:'object')
@@ -131,14 +124,10 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
-      else
-        self.updated_at = nil
       end
     end
 
@@ -147,30 +136,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @hierarchy.nil?
-        invalid_properties.push('invalid value for "hierarchy", hierarchy cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @updated_at.nil?
-        invalid_properties.push('invalid value for "updated_at", updated_at cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -178,25 +143,9 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @name.nil?
-      return false if @hierarchy.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["category"])
       return false unless object_validator.valid?(@object)
-      return false if @created_at.nil?
-      return false if @updated_at.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["category"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
     end
 
     # Checks equality by comparing each attribute.

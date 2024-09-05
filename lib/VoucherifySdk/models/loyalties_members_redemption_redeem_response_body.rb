@@ -14,15 +14,15 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **POST** `/loyalties/{campaignId}/members/{memberId}/redemption` and for **POST** `/loyalties/members/{memberId}/redemption`.
+  # Response body schema for **POST** `v1/loyalties/{campaignId}/members/{memberId}/redemption` and for **POST** `v1/loyalties/members/{memberId}/redemption`.
   class LoyaltiesMembersRedemptionRedeemResponseBody
     # Unique redemption ID.
     attr_accessor :id
 
-    # The type of object represented by the JSON
+    # The type of the object represented by the JSON
     attr_accessor :object
 
-    # Timestamp representing the date and time when the object was created in ISO 8601 format.
+    # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :date
 
     # Unique customer ID of the redeeming customer.
@@ -34,7 +34,7 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the redemption.
     attr_accessor :metadata
 
-    # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.
+    # For gift cards, this is a positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the number of redeemed credits. For loyalty cards, this is the number of loyalty points used in the transaction.
     attr_accessor :amount
 
     # Unique redemption ID of the parent redemption.
@@ -145,60 +145,57 @@ module VoucherifySdk
         :'redemption' => :'String',
         :'result' => :'String',
         :'status' => :'String',
-        :'related_redemptions' => :'RedemptionRelatedRedemptions',
+        :'related_redemptions' => :'LoyaltiesMembersRedemptionRedeemResponseBodyRelatedRedemptions',
         :'failure_code' => :'String',
         :'failure_message' => :'String',
-        :'order' => :'OrderCalculatedNoCustomerData',
-        :'channel' => :'RedemptionChannel',
+        :'order' => :'OrderCalculated',
+        :'channel' => :'LoyaltiesMembersRedemptionRedeemResponseBodyChannel',
         :'customer' => :'SimpleCustomer',
         :'related_object_type' => :'String',
         :'related_object_id' => :'String',
-        :'voucher' => :'Voucher',
+        :'voucher' => :'LoyaltiesMembersRedemptionRedeemResponseBodyVoucher',
         :'promotion_tier' => :'PromotionTier',
         :'reward' => :'RedemptionRewardResult',
-        :'gift' => :'RedemptionGift',
-        :'loyalty_card' => :'RedemptionLoyaltyCard'
+        :'gift' => :'LoyaltiesMembersRedemptionRedeemResponseBodyGift',
+        :'loyalty_card' => :'LoyaltiesMembersRedemptionRedeemResponseBodyLoyaltyCard'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'object',
+        :'date',
         :'customer_id',
         :'tracking_id',
         :'metadata',
+        :'amount',
         :'redemption',
-        :'order',
-        :'customer',
+        :'result',
+        :'status',
+        :'related_redemptions',
+        :'failure_code',
+        :'failure_message',
+        :'channel',
+        :'related_object_type',
+        :'related_object_id',
+        :'voucher',
+        :'gift',
+        :'loyalty_card'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'Redemption'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::LoyaltiesMembersRedemptionRedeemResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::LoyaltiesMembersRedemptionRedeemResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'object')
@@ -209,26 +206,18 @@ module VoucherifySdk
 
       if attributes.key?(:'date')
         self.date = attributes[:'date']
-      else
-        self.date = nil
       end
 
       if attributes.key?(:'customer_id')
         self.customer_id = attributes[:'customer_id']
-      else
-        self.customer_id = nil
       end
 
       if attributes.key?(:'tracking_id')
         self.tracking_id = attributes[:'tracking_id']
-      else
-        self.tracking_id = nil
       end
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
-      else
-        self.metadata = nil
       end
 
       if attributes.key?(:'amount')
@@ -237,20 +226,14 @@ module VoucherifySdk
 
       if attributes.key?(:'redemption')
         self.redemption = attributes[:'redemption']
-      else
-        self.redemption = nil
       end
 
       if attributes.key?(:'result')
         self.result = attributes[:'result']
-      else
-        self.result = nil
       end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
-      else
-        self.status = nil
       end
 
       if attributes.key?(:'related_redemptions')
@@ -267,32 +250,22 @@ module VoucherifySdk
 
       if attributes.key?(:'order')
         self.order = attributes[:'order']
-      else
-        self.order = nil
       end
 
       if attributes.key?(:'channel')
         self.channel = attributes[:'channel']
-      else
-        self.channel = nil
       end
 
       if attributes.key?(:'customer')
         self.customer = attributes[:'customer']
-      else
-        self.customer = nil
       end
 
       if attributes.key?(:'related_object_type')
         self.related_object_type = attributes[:'related_object_type']
-      else
-        self.related_object_type = nil
       end
 
       if attributes.key?(:'related_object_id')
         self.related_object_id = attributes[:'related_object_id']
-      else
-        self.related_object_id = nil
       end
 
       if attributes.key?(:'voucher')
@@ -305,8 +278,6 @@ module VoucherifySdk
 
       if attributes.key?(:'reward')
         self.reward = attributes[:'reward']
-      else
-        self.reward = nil
       end
 
       if attributes.key?(:'gift')
@@ -323,42 +294,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @date.nil?
-        invalid_properties.push('invalid value for "date", date cannot be nil.')
-      end
-
-      if @result.nil?
-        invalid_properties.push('invalid value for "result", result cannot be nil.')
-      end
-
-      if @status.nil?
-        invalid_properties.push('invalid value for "status", status cannot be nil.')
-      end
-
-      if @channel.nil?
-        invalid_properties.push('invalid value for "channel", channel cannot be nil.')
-      end
-
-      if @related_object_type.nil?
-        invalid_properties.push('invalid value for "related_object_type", related_object_type cannot be nil.')
-      end
-
-      if @related_object_id.nil?
-        invalid_properties.push('invalid value for "related_object_id", related_object_id cannot be nil.')
-      end
-
-      if @reward.nil?
-        invalid_properties.push('invalid value for "reward", reward cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -366,64 +301,15 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["redemption"])
       return false unless object_validator.valid?(@object)
-      return false if @date.nil?
-      return false if @result.nil?
       result_validator = EnumAttributeValidator.new('String', ["SUCCESS", "FAILURE"])
       return false unless result_validator.valid?(@result)
-      return false if @status.nil?
       status_validator = EnumAttributeValidator.new('String', ["SUCCEEDED", "FAILED", "ROLLED_BACK"])
       return false unless status_validator.valid?(@status)
-      return false if @channel.nil?
-      return false if @related_object_type.nil?
       related_object_type_validator = EnumAttributeValidator.new('String', ["voucher", "promotion_tier", "redemption"])
       return false unless related_object_type_validator.valid?(@related_object_type)
-      return false if @related_object_id.nil?
-      return false if @reward.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["redemption"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] result Object to be assigned
-    def result=(result)
-      validator = EnumAttributeValidator.new('String', ["SUCCESS", "FAILURE"])
-      unless validator.valid?(result)
-        fail ArgumentError, "invalid value for \"result\", must be one of #{validator.allowable_values}."
-      end
-      @result = result
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["SUCCEEDED", "FAILED", "ROLLED_BACK"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for \"status\", must be one of #{validator.allowable_values}."
-      end
-      @status = status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] related_object_type Object to be assigned
-    def related_object_type=(related_object_type)
-      validator = EnumAttributeValidator.new('String', ["voucher", "promotion_tier", "redemption"])
-      unless validator.valid?(related_object_type)
-        fail ArgumentError, "invalid value for \"related_object_type\", must be one of #{validator.allowable_values}."
-      end
-      @related_object_type = related_object_type
     end
 
     # Checks equality by comparing each attribute.

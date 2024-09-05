@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **PUT** `/customers/{customerId}`.
+  # Request body schema for **PUT** `v1/customers/{customerId}`.
   class CustomersUpdateRequestBody
     # Customer's first and last name.
     attr_accessor :name
@@ -28,7 +28,7 @@ module VoucherifySdk
     # Customer's phone number. This parameter is mandatory when you try to send out codes to customers via an SMS channel.
     attr_accessor :phone
 
-    # *Deprecated* Customer's birthdate; format YYYY-MM-DD.
+    # `Deprecated`. ~~Customer's birthdate; format YYYY-MM-DD~~.
     attr_accessor :birthday
 
     # Customer's birthdate; format YYYY-MM-DD.
@@ -67,7 +67,7 @@ module VoucherifySdk
         :'phone' => :'String',
         :'birthday' => :'Date',
         :'birthdate' => :'Date',
-        :'address' => :'CustomerBaseAddress',
+        :'address' => :'CustomersUpdateRequestBodyAddress',
         :'metadata' => :'Object'
       }
     end
@@ -75,29 +75,22 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'description',
+        :'email',
+        :'phone',
+        :'birthday',
+        :'birthdate',
         :'address',
+        :'metadata'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'CustomerBase'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CustomersUpdateRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CustomersUpdateRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 

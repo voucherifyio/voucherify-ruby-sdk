@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `/vouchers/{code}/transactions`.
+  # Response body schema for **GET** `v1/vouchers/{code}/transactions`.
   class VouchersTransactionsListResponseBody
-    # The type of object represented by JSON.
+    # The type of the object represented by JSON.
     attr_accessor :object
 
     # Identifies the name of the attribute that contains the array of transaction objects.
@@ -25,7 +25,7 @@ module VoucherifySdk
     # A dictionary that contains an array of transactions. Each entry in the array is a separate transaction object.
     attr_accessor :data
 
-    # As query results are always limited (by the limit parameter), the `has_more` flag indicates whether there are more records for given filter parameters. This let's you know if you are able to run another request (with a different page or a different start date filter) to get more records returned in the results.
+    # As query results are always limited (by the limit parameter), the `has_more` flag indicates if there are more records for given filter parameters. This lets you know if you can run another request (with a different page or a different start date filter) to get more records returned in the results.
     attr_accessor :has_more
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -56,21 +56,18 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'object',
+        :'data_ref',
+        :'data',
+        :'has_more'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::VouchersTransactionsListResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::VouchersTransactionsListResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -90,14 +87,10 @@ module VoucherifySdk
         if (value = attributes[:'data']).is_a?(Array)
           self.data = value
         end
-      else
-        self.data = nil
       end
 
       if attributes.key?(:'has_more')
         self.has_more = attributes[:'has_more']
-      else
-        self.has_more = nil
       end
     end
 
@@ -106,22 +99,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      if @data_ref.nil?
-        invalid_properties.push('invalid value for "data_ref", data_ref cannot be nil.')
-      end
-
-      if @data.nil?
-        invalid_properties.push('invalid value for "data", data cannot be nil.')
-      end
-
-      if @has_more.nil?
-        invalid_properties.push('invalid value for "has_more", has_more cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -129,10 +106,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @object.nil?
-      return false if @data_ref.nil?
-      return false if @data.nil?
-      return false if @has_more.nil?
       true
     end
 

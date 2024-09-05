@@ -14,15 +14,15 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `/promotions/tiers/{promotionTierId}`.
+  # Response body schema for **GET** `v1/promotions/tiers/{promotionTierId}`.
   class PromotionsTiersGetResponseBody
     # Unique promotion tier ID.
     attr_accessor :id
 
-    # Timestamp representing the date and time when the promotion tier was created in ISO 8601 format.
+    # Timestamp representing the date and time when the promotion tier was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the promotion tier was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the promotion tier was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
     # Name of the promotion tier.
@@ -58,12 +58,14 @@ module VoucherifySdk
 
     attr_accessor :validity_timeframe
 
-    # Integer array corresponding to the particular days of the week in which the promotion tier is valid.  - `0`  Sunday   - `1`  Monday   - `2`  Tuesday   - `3`  Wednesday   - `4`  Thursday   - `5`  Friday   - `6`  Saturday  
+    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
+
+    attr_accessor :validity_hours
 
     attr_accessor :summary
 
-    # The type of object represented by JSON. This object stores information about the promotion tier.
+    # The type of the object represented by JSON. This object stores information about the promotion tier.
     attr_accessor :object
 
     attr_accessor :validation_rule_assignments
@@ -72,6 +74,28 @@ module VoucherifySdk
     attr_accessor :category_id
 
     attr_accessor :categories
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -92,6 +116,7 @@ module VoucherifySdk
         :'expiration_date' => :'expiration_date',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours',
         :'summary' => :'summary',
         :'object' => :'object',
         :'validation_rule_assignments' => :'validation_rule_assignments',
@@ -113,18 +138,19 @@ module VoucherifySdk
         :'updated_at' => :'Time',
         :'name' => :'String',
         :'banner' => :'String',
-        :'action' => :'PromotionTierAction',
+        :'action' => :'PromotionsTiersGetResponseBodyAction',
         :'metadata' => :'Object',
         :'hierarchy' => :'Integer',
         :'promotion_id' => :'String',
-        :'campaign' => :'PromotionTierCampaign',
+        :'campaign' => :'PromotionsTiersGetResponseBodyCampaign',
         :'campaign_id' => :'String',
         :'active' => :'Boolean',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',
-        :'validity_timeframe' => :'PromotionTierValidityTimeframe',
+        :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
-        :'summary' => :'PromotionTierSummary',
+        :'validity_hours' => :'ValidityHours',
+        :'summary' => :'PromotionsTiersGetResponseBodySummary',
         :'object' => :'String',
         :'validation_rule_assignments' => :'ValidationRuleAssignmentsList',
         :'category_id' => :'String',
@@ -135,28 +161,32 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'created_at',
+        :'updated_at',
+        :'name',
+        :'banner',
+        :'action',
+        :'metadata',
+        :'hierarchy',
+        :'promotion_id',
+        :'campaign',
+        :'campaign_id',
+        :'active',
+        :'start_date',
+        :'expiration_date',
+        :'summary',
+        :'object',
+        :'category_id',
+        :'categories'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'PromotionTier'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::PromotionsTiersGetResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::PromotionsTiersGetResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -226,6 +256,10 @@ module VoucherifySdk
         end
       end
 
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
+      end
+
       if attributes.key?(:'summary')
         self.summary = attributes[:'summary']
       end
@@ -287,6 +321,7 @@ module VoucherifySdk
           expiration_date == o.expiration_date &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours &&
           summary == o.summary &&
           object == o.object &&
           validation_rule_assignments == o.validation_rule_assignments &&
@@ -303,7 +338,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, updated_at, name, banner, action, metadata, hierarchy, promotion_id, campaign, campaign_id, active, start_date, expiration_date, validity_timeframe, validity_day_of_week, summary, object, validation_rule_assignments, category_id, categories].hash
+      [id, created_at, updated_at, name, banner, action, metadata, hierarchy, promotion_id, campaign, campaign_id, active, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, summary, object, validation_rule_assignments, category_id, categories].hash
     end
 
     # Builds the object from hash

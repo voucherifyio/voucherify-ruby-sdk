@@ -19,6 +19,138 @@ module VoucherifySdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Add Member
+    # This method assigns a loyalty card to a customer. It selects a loyalty card suitable for publication, adds a publish entry, and returns the published voucher.   A voucher is suitable for publication when its active and hasnt been published yet.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use **auto-update** campaign.
+    # @param campaign_id [String] Unique campaign ID of the loyalty program.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesMembersCreateRequestBody] :loyalties_members_create_request_body Provide details to whom the loyalty card should be assigned.     You can choose to either specify the exact loyalty card code that you want to publish from existin (non-assigned) codes, or choose not to specify a voucher code. If you choose not to specify a code in the request paylaod, then the system will choose the next available voucher code available to be assigned to a customer.   You can also include metadata in the request payload. This metadata will be assigned to the publication object, but will not be returned in the response to this endpoint. To see of publications (assignments of particular codes to customers) and publication metadata, use the List Publications endpoint.
+    # @return [LoyaltiesMembersCreateResponseBody]
+    def add_member(campaign_id, opts = {})
+      data, _status_code, _headers = add_member_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Add Member
+    # This method assigns a loyalty card to a customer. It selects a loyalty card suitable for publication, adds a publish entry, and returns the published voucher.   A voucher is suitable for publication when its active and hasnt been published yet.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use **auto-update** campaign.
+    # @param campaign_id [String] Unique campaign ID of the loyalty program.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesMembersCreateRequestBody] :loyalties_members_create_request_body Provide details to whom the loyalty card should be assigned.     You can choose to either specify the exact loyalty card code that you want to publish from existin (non-assigned) codes, or choose not to specify a voucher code. If you choose not to specify a code in the request paylaod, then the system will choose the next available voucher code available to be assigned to a customer.   You can also include metadata in the request payload. This metadata will be assigned to the publication object, but will not be returned in the response to this endpoint. To see of publications (assignments of particular codes to customers) and publication metadata, use the List Publications endpoint.
+    # @return [Array<(LoyaltiesMembersCreateResponseBody, Integer, Hash)>] LoyaltiesMembersCreateResponseBody data, response status code and response headers
+    private def add_member_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.add_member ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/members'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'loyalties_members_create_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesMembersCreateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.add_member",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#add_member\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create Earning Rule
+    # Create earning rules for a loyalty campaign.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<LoyaltiesEarningRulesCreateRequestBodyItem>] :loyalties_earning_rules_create_request_body_item Customize the request body based on the type of earning rules you would like to create. The request body is an array of objects. The required minimum properties to include in the payload for each object are event and loyalty. Additionally, if you choose to add a validity_timeframe, you must include a start_date. Furthermore, an earning rule event type:   - customer.segment.entered requires a segment object - a custom event requires a custom_event object - a customer.loyalty.tier.joined, customer.loyalty.tier.left, customer.loyalty.tier.upgraded, customer.loyalty.tier.downgraded, customer.loyalty.tier.prolonged requires a loyalty_tier object
+    # @return [Array<LoyaltiesEarningRulesCreateResponseBody>]
+    def create_earning_rule(campaign_id, opts = {})
+      data, _status_code, _headers = create_earning_rule_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Create Earning Rule
+    # Create earning rules for a loyalty campaign.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<LoyaltiesEarningRulesCreateRequestBodyItem>] :loyalties_earning_rules_create_request_body_item Customize the request body based on the type of earning rules you would like to create. The request body is an array of objects. The required minimum properties to include in the payload for each object are event and loyalty. Additionally, if you choose to add a validity_timeframe, you must include a start_date. Furthermore, an earning rule event type:   - customer.segment.entered requires a segment object - a custom event requires a custom_event object - a customer.loyalty.tier.joined, customer.loyalty.tier.left, customer.loyalty.tier.upgraded, customer.loyalty.tier.downgraded, customer.loyalty.tier.prolonged requires a loyalty_tier object
+    # @return [Array<(Array<LoyaltiesEarningRulesCreateResponseBody>, Integer, Hash)>] Array<LoyaltiesEarningRulesCreateResponseBody> data, response status code and response headers
+    private def create_earning_rule_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.create_earning_rule ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/earning-rules'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'loyalties_earning_rules_create_request_body_item'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Array<LoyaltiesEarningRulesCreateResponseBody>'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.create_earning_rule",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#create_earning_rule\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create loyalty tiers
     # Creates loyalty tiers for desired campaign.
     # @param campaign_id [String] Unique loyalty campaign ID or name.
@@ -39,10 +171,6 @@ module VoucherifySdk
     private def create_in_bulk_loyalty_tiers_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.create_in_bulk_loyalty_tiers ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.create_in_bulk_loyalty_tiers"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/tiers'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -89,6 +217,202 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Create Loyalty Campaign
+    # Creates a batch of loyalty cards aggregated in a single loyalty campaign. It also allows you to define a custom codes pattern.    📘 Global uniqueness  All codes are unique across the whole project. Voucherify wont allow to generate the same codes in any of your campaigns.  🚧 Asyncronous action!  This is an asynchronous action, you cant read or modify a newly created campaign until the code generation is completed. See creation_status field in the loyalty campaign object description.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesCreateCampaignRequestBody] :loyalties_create_campaign_request_body Specify the loyalty campaign details.
+    # @return [LoyaltiesCreateCampaignResponseBody]
+    def create_loyalty_program(opts = {})
+      data, _status_code, _headers = create_loyalty_program_with_http_info(opts)
+      data
+    end
+
+    # Create Loyalty Campaign
+    # Creates a batch of loyalty cards aggregated in a single loyalty campaign. It also allows you to define a custom codes pattern.    📘 Global uniqueness  All codes are unique across the whole project. Voucherify wont allow to generate the same codes in any of your campaigns.  🚧 Asyncronous action!  This is an asynchronous action, you cant read or modify a newly created campaign until the code generation is completed. See creation_status field in the loyalty campaign object description.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesCreateCampaignRequestBody] :loyalties_create_campaign_request_body Specify the loyalty campaign details.
+    # @return [Array<(LoyaltiesCreateCampaignResponseBody, Integer, Hash)>] LoyaltiesCreateCampaignResponseBody data, response status code and response headers
+    private def create_loyalty_program_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.create_loyalty_program ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'loyalties_create_campaign_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesCreateCampaignResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.create_loyalty_program",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#create_loyalty_program\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create Points Expiration Export
+    # Schedule the generation of a points expiration CSV file for a particular campaign.
+    # @param campaign_id [String] Unique campaign ID or name.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesPointsExpirationExportCreateRequestBody] :loyalties_points_expiration_export_create_request_body Specify the data filters, types of data to return and order in which the results should be returned.
+    # @return [LoyaltiesPointsExpirationExportCreateResponseBody]
+    def create_points_expiration_export(campaign_id, opts = {})
+      data, _status_code, _headers = create_points_expiration_export_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Create Points Expiration Export
+    # Schedule the generation of a points expiration CSV file for a particular campaign.
+    # @param campaign_id [String] Unique campaign ID or name.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesPointsExpirationExportCreateRequestBody] :loyalties_points_expiration_export_create_request_body Specify the data filters, types of data to return and order in which the results should be returned.
+    # @return [Array<(LoyaltiesPointsExpirationExportCreateResponseBody, Integer, Hash)>] LoyaltiesPointsExpirationExportCreateResponseBody data, response status code and response headers
+    private def create_points_expiration_export_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.create_points_expiration_export ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/points-expiration/export'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'loyalties_points_expiration_export_create_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesPointsExpirationExportCreateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.create_points_expiration_export",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#create_points_expiration_export\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create Reward Assignment
+    # Add rewards to a loyalty campaign.
+    # @param campaign_id [String] Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<LoyaltiesRewardsCreateAssignmentItemRequestBody>] :loyalties_rewards_create_assignment_item_request_body Define the cost of the rewards in loyalty points.
+    # @return [LoyaltiesRewardsCreateAssignmentResponseBody]
+    def create_reward_assignment1(campaign_id, opts = {})
+      data, _status_code, _headers = create_reward_assignment1_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Create Reward Assignment
+    # Add rewards to a loyalty campaign.
+    # @param campaign_id [String] Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Array<LoyaltiesRewardsCreateAssignmentItemRequestBody>] :loyalties_rewards_create_assignment_item_request_body Define the cost of the rewards in loyalty points.
+    # @return [Array<(LoyaltiesRewardsCreateAssignmentResponseBody, Integer, Hash)>] LoyaltiesRewardsCreateAssignmentResponseBody data, response status code and response headers
+    private def create_reward_assignment1_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.create_reward_assignment1 ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/rewards'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'loyalties_rewards_create_assignment_item_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesRewardsCreateAssignmentResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.create_reward_assignment1",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#create_reward_assignment1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Delete Earning Rule
     # This method deletes an earning rule for a specific loyalty campaign.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
@@ -109,14 +433,6 @@ module VoucherifySdk
     private def delete_earning_rule_with_http_info(campaign_id, earning_rule_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.delete_earning_rule ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.delete_earning_rule"
-      end
-      # verify the required parameter 'earning_rule_id' is set
-      if @api_client.config.client_side_validation && earning_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'earning_rule_id' when calling LoyaltiesApi.delete_earning_rule"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/earning-rules/{earningRuleId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'earningRuleId' + '}', CGI.escape(earning_rule_id.to_s))
@@ -157,10 +473,10 @@ module VoucherifySdk
     end
 
     # Delete Loyalty Campaign
-    # This method permanently deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards.
+    # Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards. If the force parameter is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. Going forward, the user will be able to create the next campaign with the same name.
+    # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name.
     # @return [LoyaltiesDeleteResponseBody]
     def delete_loyalty_program(campaign_id, opts = {})
       data, _status_code, _headers = delete_loyalty_program_with_http_info(campaign_id, opts)
@@ -168,18 +484,14 @@ module VoucherifySdk
     end
 
     # Delete Loyalty Campaign
-    # This method permanently deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards.
+    # Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards. If the force parameter is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. Going forward, the user will be able to create the next campaign with the same name.
+    # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name.
     # @return [Array<(LoyaltiesDeleteResponseBody, Integer, Hash)>] LoyaltiesDeleteResponseBody data, response status code and response headers
     private def delete_loyalty_program_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.delete_loyalty_program ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.delete_loyalty_program"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
@@ -243,14 +555,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.delete_reward_assignment1 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.delete_reward_assignment1"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling LoyaltiesApi.delete_reward_assignment1"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/rewards/{assignmentId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
 
@@ -309,14 +613,6 @@ module VoucherifySdk
     private def disable_earning_rule_with_http_info(campaign_id, earning_rule_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.disable_earning_rule ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.disable_earning_rule"
-      end
-      # verify the required parameter 'earning_rule_id' is set
-      if @api_client.config.client_side_validation && earning_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'earning_rule_id' when calling LoyaltiesApi.disable_earning_rule"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/earning-rules/{earningRuleId}/disable'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'earningRuleId' + '}', CGI.escape(earning_rule_id.to_s))
@@ -379,14 +675,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.enable_earning_rule ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.enable_earning_rule"
-      end
-      # verify the required parameter 'earning_rule_id' is set
-      if @api_client.config.client_side_validation && earning_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'earning_rule_id' when calling LoyaltiesApi.enable_earning_rule"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/earning-rules/{earningRuleId}/enable'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'earningRuleId' + '}', CGI.escape(earning_rule_id.to_s))
 
@@ -447,10 +735,6 @@ module VoucherifySdk
     private def export_loyalty_card_transactions_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.export_loyalty_card_transactions ...'
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.export_loyalty_card_transactions"
       end
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/transactions/export'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
@@ -520,14 +804,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.export_loyalty_card_transactions1 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.export_loyalty_card_transactions1"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.export_loyalty_card_transactions1"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/transactions/export'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -594,14 +870,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_earning_rule ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.get_earning_rule"
-      end
-      # verify the required parameter 'earning_rule_id' is set
-      if @api_client.config.client_side_validation && earning_rule_id.nil?
-        fail ArgumentError, "Missing the required parameter 'earning_rule_id' when calling LoyaltiesApi.get_earning_rule"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/earning-rules/{earningRuleId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'earningRuleId' + '}', CGI.escape(earning_rule_id.to_s))
 
@@ -642,6 +910,65 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Get Loyalty Campaign
+    # Retrieve a specific loyalty campaign.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @return [LoyaltiesGetCampaignResponseBody]
+    def get_loyalty_program(campaign_id, opts = {})
+      data, _status_code, _headers = get_loyalty_program_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Get Loyalty Campaign
+    # Retrieve a specific loyalty campaign.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(LoyaltiesGetCampaignResponseBody, Integer, Hash)>] LoyaltiesGetCampaignResponseBody data, response status code and response headers
+    private def get_loyalty_program_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_loyalty_program ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesGetCampaignResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.get_loyalty_program",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#get_loyalty_program\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Loyalty Tier
     # Retrieve a loyalty tier from a loyalty campaign by the loyalty tier ID.
     # @param campaign_id [String] Unique loyalty campaign ID or name.
@@ -662,14 +989,6 @@ module VoucherifySdk
     private def get_loyalty_tier_with_http_info(campaign_id, loyalty_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_loyalty_tier ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.get_loyalty_tier"
-      end
-      # verify the required parameter 'loyalty_tier_id' is set
-      if @api_client.config.client_side_validation && loyalty_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_tier_id' when calling LoyaltiesApi.get_loyalty_tier"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/tiers/{loyaltyTierId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'loyaltyTierId' + '}', CGI.escape(loyalty_tier_id.to_s))
@@ -711,6 +1030,126 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Get Member
+    # Retrieve loyalty card with the given member ID (i.e. voucher code).      📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to retrieve loyalty card details without having to provide the campaignId as a path parameter.
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param [Hash] opts the optional parameters
+    # @return [LoyaltiesMembersGetResponseBody]
+    def get_member(member_id, opts = {})
+      data, _status_code, _headers = get_member_with_http_info(member_id, opts)
+      data
+    end
+
+    # Get Member
+    # Retrieve loyalty card with the given member ID (i.e. voucher code).      📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to retrieve loyalty card details without having to provide the campaignId as a path parameter.
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(LoyaltiesMembersGetResponseBody, Integer, Hash)>] LoyaltiesMembersGetResponseBody data, response status code and response headers
+    private def get_member_with_http_info(member_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_member ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/members/{memberId}'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesMembersGetResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.get_member",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#get_member\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get Member
+    # Retrieves the loyalty card with the given member ID (i.e. voucher code).
+    # @param campaign_id [String] Unique campaign ID.
+    # @param member_id [String] Unique code that identifies the loyalty card.
+    # @param [Hash] opts the optional parameters
+    # @return [LoyaltiesMembersGetResponseBody]
+    def get_member1(campaign_id, member_id, opts = {})
+      data, _status_code, _headers = get_member1_with_http_info(campaign_id, member_id, opts)
+      data
+    end
+
+    # Get Member
+    # Retrieves the loyalty card with the given member ID (i.e. voucher code).
+    # @param campaign_id [String] Unique campaign ID.
+    # @param member_id [String] Unique code that identifies the loyalty card.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(LoyaltiesMembersGetResponseBody, Integer, Hash)>] LoyaltiesMembersGetResponseBody data, response status code and response headers
+    private def get_member1_with_http_info(campaign_id, member_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_member1 ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesMembersGetResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.get_member1",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#get_member1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Reward Assignment
     # Retrieve specific reward assignment.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
@@ -731,14 +1170,6 @@ module VoucherifySdk
     private def get_reward_assignment1_with_http_info(campaign_id, assignment_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_reward_assignment1 ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.get_reward_assignment1"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling LoyaltiesApi.get_reward_assignment1"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/reward-assignments/{assignmentId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
@@ -801,14 +1232,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_reward_assignment2 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.get_reward_assignment2"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling LoyaltiesApi.get_reward_assignment2"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/rewards/{assignmentId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
 
@@ -870,14 +1293,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.get_reward_details ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.get_reward_details"
-      end
-      # verify the required parameter 'assignment_id' is set
-      if @api_client.config.client_side_validation && assignment_id.nil?
-        fail ArgumentError, "Missing the required parameter 'assignment_id' when calling LoyaltiesApi.get_reward_details"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/reward-assignments/{assignmentId}/reward'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
 
@@ -918,12 +1333,79 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Earning Rules
+    # Returns a list of all earning rules within a given campaign.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [ParameterOrderListEarningRules] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @return [LoyaltiesEarningRulesListResponseBody]
+    def list_earning_rules(campaign_id, opts = {})
+      data, _status_code, _headers = list_earning_rules_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # List Earning Rules
+    # Returns a list of all earning rules within a given campaign.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [ParameterOrderListEarningRules] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @return [Array<(LoyaltiesEarningRulesListResponseBody, Integer, Hash)>] LoyaltiesEarningRulesListResponseBody data, response status code and response headers
+    private def list_earning_rules_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_earning_rules ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/earning-rules'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesEarningRulesListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_earning_rules",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_earning_rules\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List Loyalty Card Transactions
     # Retrieve transaction data related to point movements for a specific loyalty card.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @return [LoyaltiesMembersTransactionsListResponseBody]
     def list_loyalty_card_transactions(member_id, opts = {})
       data, _status_code, _headers = list_loyalty_card_transactions_with_http_info(member_id, opts)
@@ -934,36 +1416,18 @@ module VoucherifySdk
     # Retrieve transaction data related to point movements for a specific loyalty card.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @return [Array<(LoyaltiesMembersTransactionsListResponseBody, Integer, Hash)>] LoyaltiesMembersTransactionsListResponseBody data, response status code and response headers
     private def list_loyalty_card_transactions_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_card_transactions ...'
       end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.list_loyalty_card_transactions"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_card_transactions, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_card_transactions, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_card_transactions, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/transactions'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
-      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1004,8 +1468,8 @@ module VoucherifySdk
     # @param campaign_id [String] A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [LoyaltiesMembersTransactionsListResponseBody]
     def list_loyalty_card_transactions1(campaign_id, member_id, opts = {})
       data, _status_code, _headers = list_loyalty_card_transactions1_with_http_info(campaign_id, member_id, opts)
@@ -1017,33 +1481,13 @@ module VoucherifySdk
     # @param campaign_id [String] A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(LoyaltiesMembersTransactionsListResponseBody, Integer, Hash)>] LoyaltiesMembersTransactionsListResponseBody data, response status code and response headers
     private def list_loyalty_card_transactions1_with_http_info(campaign_id, member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_card_transactions1 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.list_loyalty_card_transactions1"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.list_loyalty_card_transactions1"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_card_transactions1, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_card_transactions1, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_card_transactions1, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/transactions'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1086,13 +1530,79 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Loyalty Campaigns
+    # Returns a list of your loyalty campaigns.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [ParameterOrderListCampaigns] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @return [LoyaltiesListCampaignsResponseBody]
+    def list_loyalty_programs(opts = {})
+      data, _status_code, _headers = list_loyalty_programs_with_http_info(opts)
+      data
+    end
+
+    # List Loyalty Campaigns
+    # Returns a list of your loyalty campaigns.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [ParameterOrderListCampaigns] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @return [Array<(LoyaltiesListCampaignsResponseBody, Integer, Hash)>] LoyaltiesListCampaignsResponseBody data, response status code and response headers
+    private def list_loyalty_programs_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_programs ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesListCampaignsResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_loyalty_programs",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_loyalty_programs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List Loyalty Tier Earning Rules
     # Retrieve available earning rules for a given tier and the calculation method for earning points.
     # @param campaign_id [String] Unique campaign ID or name.
     # @param loyalty_tier_id [String] Unique loyalty tier ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [LoyaltiesTiersEarningRulesListResponseBody]
     def list_loyalty_tier_earning_rules(campaign_id, loyalty_tier_id, opts = {})
       data, _status_code, _headers = list_loyalty_tier_earning_rules_with_http_info(campaign_id, loyalty_tier_id, opts)
@@ -1104,33 +1614,13 @@ module VoucherifySdk
     # @param campaign_id [String] Unique campaign ID or name.
     # @param loyalty_tier_id [String] Unique loyalty tier ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(LoyaltiesTiersEarningRulesListResponseBody, Integer, Hash)>] LoyaltiesTiersEarningRulesListResponseBody data, response status code and response headers
     private def list_loyalty_tier_earning_rules_with_http_info(campaign_id, loyalty_tier_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_tier_earning_rules ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.list_loyalty_tier_earning_rules"
-      end
-      # verify the required parameter 'loyalty_tier_id' is set
-      if @api_client.config.client_side_validation && loyalty_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_tier_id' when calling LoyaltiesApi.list_loyalty_tier_earning_rules"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_tier_earning_rules, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_tier_earning_rules, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_loyalty_tier_earning_rules, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/tiers/{loyaltyTierId}/earning-rules'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'loyaltyTierId' + '}', CGI.escape(loyalty_tier_id.to_s))
 
@@ -1194,14 +1684,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_tier_rewards ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.list_loyalty_tier_rewards"
-      end
-      # verify the required parameter 'loyalty_tier_id' is set
-      if @api_client.config.client_side_validation && loyalty_tier_id.nil?
-        fail ArgumentError, "Missing the required parameter 'loyalty_tier_id' when calling LoyaltiesApi.list_loyalty_tier_rewards"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/tiers/{loyaltyTierId}/rewards'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'loyaltyTierId' + '}', CGI.escape(loyalty_tier_id.to_s))
 
@@ -1246,7 +1728,7 @@ module VoucherifySdk
     # Retrieve a list of loyalty tiers which were added to the loyalty program.
     # @param campaign_id [String] Unique loyalty campaign ID or name.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [ParameterOrderListLoyaltyTiers] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @return [LoyaltiesTiersListResponseBody]
     def list_loyalty_tiers(campaign_id, opts = {})
@@ -1258,25 +1740,13 @@ module VoucherifySdk
     # Retrieve a list of loyalty tiers which were added to the loyalty program.
     # @param campaign_id [String] Unique loyalty campaign ID or name.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [ParameterOrderListLoyaltyTiers] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @return [Array<(LoyaltiesTiersListResponseBody, Integer, Hash)>] LoyaltiesTiersListResponseBody data, response status code and response headers
     private def list_loyalty_tiers_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_tiers ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.list_loyalty_tiers"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_tiers, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_loyalty_tiers, must be greater than or equal to 1.'
-      end
-
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/tiers'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
 
@@ -1319,6 +1789,144 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Member Activity
+    #   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to get member activities without having to provide the campaignId as a path parameter. Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
+    # @param member_id [String] Unique loyalty card assigned to a particular customer.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [ParameterOrderCreatedAt] :order Apply this filter to order the events according the date and time when it was created. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the events starting after an event with the given ID.
+    # @return [LoyaltiesMemberActivityListResponseBody]
+    def list_member_activity(member_id, opts = {})
+      data, _status_code, _headers = list_member_activity_with_http_info(member_id, opts)
+      data
+    end
+
+    # List Member Activity
+    #   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to get member activities without having to provide the campaignId as a path parameter. Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
+    # @param member_id [String] Unique loyalty card assigned to a particular customer.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [ParameterOrderCreatedAt] :order Apply this filter to order the events according the date and time when it was created. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the events starting after an event with the given ID.
+    # @return [Array<(LoyaltiesMemberActivityListResponseBody, Integer, Hash)>] LoyaltiesMemberActivityListResponseBody data, response status code and response headers
+    private def list_member_activity_with_http_info(member_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_member_activity ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/members/{memberId}/activity'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'starting_after_id'] = opts[:'starting_after_id'] if !opts[:'starting_after_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesMemberActivityListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_member_activity",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_member_activity\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List Member Activity
+    # Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
+    # @param campaign_id [String] Unique campaign ID.
+    # @param member_id [String] A code that identifies the loyalty card.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [ParameterOrderCreatedAt] :order Apply this filter to order the events according the date and time when it was created. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the events starting after an event with the given ID.
+    # @return [LoyaltiesMemberActivityListResponseBody]
+    def list_member_activity1(campaign_id, member_id, opts = {})
+      data, _status_code, _headers = list_member_activity1_with_http_info(campaign_id, member_id, opts)
+      data
+    end
+
+    # List Member Activity
+    # Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
+    # @param campaign_id [String] Unique campaign ID.
+    # @param member_id [String] A code that identifies the loyalty card.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [ParameterOrderCreatedAt] :order Apply this filter to order the events according the date and time when it was created. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the events starting after an event with the given ID.
+    # @return [Array<(LoyaltiesMemberActivityListResponseBody, Integer, Hash)>] LoyaltiesMemberActivityListResponseBody data, response status code and response headers
+    private def list_member_activity1_with_http_info(campaign_id, member_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_member_activity1 ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/activity'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'starting_after_id'] = opts[:'starting_after_id'] if !opts[:'starting_after_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesMemberActivityListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_member_activity1",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_member_activity1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List Member's Loyalty Tiers
     # Retrieve member tiers using the loyalty card ID.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
@@ -1337,10 +1945,6 @@ module VoucherifySdk
     private def list_member_loyalty_tier_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_member_loyalty_tier ...'
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.list_member_loyalty_tier"
       end
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/tiers'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
@@ -1403,10 +2007,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_member_rewards ...'
       end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.list_member_rewards"
-      end
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/rewards'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1448,13 +2048,96 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Members
+    # Returns a list of your loyalty cards. The loyalty cards are sorted by creation date, with the most recent loyalty cards appearing first.
+    # @param campaign_id [String] Unique campaign ID of the loyalty program.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [String] :customer A tracking identifier of a customer who is the holder of the vouchers. It can be an id generated by Voucherify or the source_id. Remember to use the proper URL escape codes if the source_id contains special characters.
+    # @option opts [ParameterCreatedBeforeAfter] :created_at A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z
+    # @option opts [ParameterUpdatedBeforeAfter] :updated_at A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z
+    # @option opts [ParameterOrderVouchers] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :code 
+    # @option opts [Array<String>] :ids 
+    # @return [LoyaltiesListMembersResponseBody]
+    def list_members(campaign_id, opts = {})
+      data, _status_code, _headers = list_members_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # List Members
+    # Returns a list of your loyalty cards. The loyalty cards are sorted by creation date, with the most recent loyalty cards appearing first.
+    # @param campaign_id [String] Unique campaign ID of the loyalty program.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [String] :customer A tracking identifier of a customer who is the holder of the vouchers. It can be an id generated by Voucherify or the source_id. Remember to use the proper URL escape codes if the source_id contains special characters.
+    # @option opts [ParameterCreatedBeforeAfter] :created_at A filter on the list based on the object created_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [created_at][before] 2017-09-08T13:52:18.227Z
+    # @option opts [ParameterUpdatedBeforeAfter] :updated_at A filter on the list based on the object updated_at field. The value is a dictionary with the following options: before, after. A date value must be presented in ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). An example: [updated_at][before] 2017-09-08T13:52:18.227Z
+    # @option opts [ParameterOrderVouchers] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :code 
+    # @option opts [Array<String>] :ids 
+    # @return [Array<(LoyaltiesListMembersResponseBody, Integer, Hash)>] LoyaltiesListMembersResponseBody data, response status code and response headers
+    private def list_members_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_members ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/members'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'customer'] = opts[:'customer'] if !opts[:'customer'].nil?
+      query_params[:'created_at'] = opts[:'created_at'] if !opts[:'created_at'].nil?
+      query_params[:'updated_at'] = opts[:'updated_at'] if !opts[:'updated_at'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'code'] = opts[:'code'] if !opts[:'code'].nil?
+      query_params[:'ids'] = @api_client.build_collection_param(opts[:'ids'], :multi) if !opts[:'ids'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesListMembersResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_members",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_members\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Points Expiration
     # Retrieve loyalty point expiration buckets for a given loyalty card. Expired point buckets are not returned in this endpoint. You can use the Exports API to retrieve a list of both ACTIVE and EXPIRED point buckets.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param member_id [String] Loyalty card code.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [LoyaltiesMembersPointsExpirationListResponseBody]
     def list_points_expiration(campaign_id, member_id, opts = {})
       data, _status_code, _headers = list_points_expiration_with_http_info(campaign_id, member_id, opts)
@@ -1466,33 +2149,13 @@ module VoucherifySdk
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param member_id [String] Loyalty card code.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @return [Array<(LoyaltiesMembersPointsExpirationListResponseBody, Integer, Hash)>] LoyaltiesMembersPointsExpirationListResponseBody data, response status code and response headers
     private def list_points_expiration_with_http_info(campaign_id, member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_points_expiration ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.list_points_expiration"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.list_points_expiration"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_points_expiration, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling LoyaltiesApi.list_points_expiration, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling LoyaltiesApi.list_points_expiration, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/points-expiration'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1535,6 +2198,142 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Reward Assignments
+    # Returns reward assignments from a given loyalty campaign.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to be more contextual to the type of data returned in the response.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [String] :assignment_id A unique reward assignment ID.
+    # @return [LoyaltiesRewardAssignmentsListResponseBody]
+    def list_reward_assignments1(campaign_id, opts = {})
+      data, _status_code, _headers = list_reward_assignments1_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # List Reward Assignments
+    # Returns reward assignments from a given loyalty campaign.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to be more contextual to the type of data returned in the response.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [String] :assignment_id A unique reward assignment ID.
+    # @return [Array<(LoyaltiesRewardAssignmentsListResponseBody, Integer, Hash)>] LoyaltiesRewardAssignmentsListResponseBody data, response status code and response headers
+    private def list_reward_assignments1_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_reward_assignments1 ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/reward-assignments'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'assignmentId'] = opts[:'assignment_id'] if !opts[:'assignment_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesRewardAssignmentsListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_reward_assignments1",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_reward_assignments1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List Reward Assignments
+    # Returns active rewards from a given loyalty campaign.
+    # @param campaign_id [String] Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [String] :assignment_id A unique reward assignment ID.
+    # @return [LoyaltiesRewardsListAssignmentsResponseBody]
+    def list_reward_assignments2(campaign_id, opts = {})
+      data, _status_code, _headers = list_reward_assignments2_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # List Reward Assignments
+    # Returns active rewards from a given loyalty campaign.
+    # @param campaign_id [String] Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [String] :assignment_id A unique reward assignment ID.
+    # @return [Array<(LoyaltiesRewardsListAssignmentsResponseBody, Integer, Hash)>] LoyaltiesRewardsListAssignmentsResponseBody data, response status code and response headers
+    private def list_reward_assignments2_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_reward_assignments2 ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/rewards'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'assignment_id'] = opts[:'assignment_id'] if !opts[:'assignment_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesRewardsListAssignmentsResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_reward_assignments2",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_reward_assignments2\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Redeem Reward
     #   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to redeem a reward without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
@@ -1555,10 +2354,6 @@ module VoucherifySdk
     private def redeem_reward_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.redeem_reward ...'
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.redeem_reward"
       end
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/redemption'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
@@ -1628,14 +2423,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.redeem_reward1 ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.redeem_reward1"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.redeem_reward1"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/redemption'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1704,14 +2491,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.transfer_points ...'
       end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.transfer_points"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.transfer_points"
-      end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/transfers'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
 
@@ -1757,8 +2536,76 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Update Earning Rule
+    # Update an earning rule definition.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param earning_rule_id [String] A unique earning rule ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesEarningRulesUpdateRequestBody] :loyalties_earning_rules_update_request_body Specify the parameters that you would like to update for the given earning rule.
+    # @return [LoyaltiesEarningRulesUpdateResponseBody]
+    def update_earning_rule(campaign_id, earning_rule_id, opts = {})
+      data, _status_code, _headers = update_earning_rule_with_http_info(campaign_id, earning_rule_id, opts)
+      data
+    end
+
+    # Update Earning Rule
+    # Update an earning rule definition.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param earning_rule_id [String] A unique earning rule ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesEarningRulesUpdateRequestBody] :loyalties_earning_rules_update_request_body Specify the parameters that you would like to update for the given earning rule.
+    # @return [Array<(LoyaltiesEarningRulesUpdateResponseBody, Integer, Hash)>] LoyaltiesEarningRulesUpdateResponseBody data, response status code and response headers
+    private def update_earning_rule_with_http_info(campaign_id, earning_rule_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.update_earning_rule ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/earning-rules/{earningRuleId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'earningRuleId' + '}', CGI.escape(earning_rule_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'loyalties_earning_rules_update_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesEarningRulesUpdateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.update_earning_rule",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#update_earning_rule\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Add or Remove Loyalty Card Balance
-    # This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
+    # This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesMembersBalanceUpdateRequestBody] :loyalties_members_balance_update_request_body Specify the point adjustment along with the expiration mechanism.
@@ -1769,7 +2616,7 @@ module VoucherifySdk
     end
 
     # Add or Remove Loyalty Card Balance
-    # This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
+    # This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   &gt;🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesMembersBalanceUpdateRequestBody] :loyalties_members_balance_update_request_body Specify the point adjustment along with the expiration mechanism.
@@ -1777,10 +2624,6 @@ module VoucherifySdk
     private def update_loyalty_card_balance_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.update_loyalty_card_balance ...'
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.update_loyalty_card_balance"
       end
       # resource path
       local_var_path = '/v1/loyalties/members/{memberId}/balance'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
@@ -1828,7 +2671,7 @@ module VoucherifySdk
     end
 
     # Add or Remove Loyalty Card Balance
-    # This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.
+    # This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] A code that identifies the loyalty card.
     # @param [Hash] opts the optional parameters
@@ -1840,7 +2683,7 @@ module VoucherifySdk
     end
 
     # Add or Remove Loyalty Card Balance
-    # This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.
+    # This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   &gt;🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] A code that identifies the loyalty card.
     # @param [Hash] opts the optional parameters
@@ -1849,14 +2692,6 @@ module VoucherifySdk
     private def update_loyalty_card_balance1_with_http_info(campaign_id, member_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: LoyaltiesApi.update_loyalty_card_balance1 ...'
-      end
-      # verify the required parameter 'campaign_id' is set
-      if @api_client.config.client_side_validation && campaign_id.nil?
-        fail ArgumentError, "Missing the required parameter 'campaign_id' when calling LoyaltiesApi.update_loyalty_card_balance1"
-      end
-      # verify the required parameter 'member_id' is set
-      if @api_client.config.client_side_validation && member_id.nil?
-        fail ArgumentError, "Missing the required parameter 'member_id' when calling LoyaltiesApi.update_loyalty_card_balance1"
       end
       # resource path
       local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/balance'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
@@ -1899,6 +2734,140 @@ module VoucherifySdk
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: LoyaltiesApi#update_loyalty_card_balance1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update Loyalty Campaign
+    # Updates a loyalty program.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the loyalty cards which have not been published or redeemed yet.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesUpdateCampaignRequestBody] :loyalties_update_campaign_request_body Specify the new values for the parameters that you would like to update for the given loyalty campaign.
+    # @return [LoyaltiesUpdateCampaignResponseBody]
+    def update_loyalty_program(campaign_id, opts = {})
+      data, _status_code, _headers = update_loyalty_program_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Update Loyalty Campaign
+    # Updates a loyalty program.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the loyalty cards which have not been published or redeemed yet.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesUpdateCampaignRequestBody] :loyalties_update_campaign_request_body Specify the new values for the parameters that you would like to update for the given loyalty campaign.
+    # @return [Array<(LoyaltiesUpdateCampaignResponseBody, Integer, Hash)>] LoyaltiesUpdateCampaignResponseBody data, response status code and response headers
+    private def update_loyalty_program_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.update_loyalty_program ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'loyalties_update_campaign_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesUpdateCampaignResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.update_loyalty_program",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#update_loyalty_program\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update Reward Assignment
+    # Updates rewards parameters, i.e. the points cost for the specific reward.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param assignment_id [String] A unique reward assignment ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesRewardsUpdateAssignmentRequestBody] :loyalties_rewards_update_assignment_request_body Update the points cost for the reward assignment.
+    # @return [LoyaltiesRewardsUpdateAssignmentResponseBody]
+    def update_reward_assignment1(campaign_id, assignment_id, opts = {})
+      data, _status_code, _headers = update_reward_assignment1_with_http_info(campaign_id, assignment_id, opts)
+      data
+    end
+
+    # Update Reward Assignment
+    # Updates rewards parameters, i.e. the points cost for the specific reward.
+    # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
+    # @param assignment_id [String] A unique reward assignment ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesRewardsUpdateAssignmentRequestBody] :loyalties_rewards_update_assignment_request_body Update the points cost for the reward assignment.
+    # @return [Array<(LoyaltiesRewardsUpdateAssignmentResponseBody, Integer, Hash)>] LoyaltiesRewardsUpdateAssignmentResponseBody data, response status code and response headers
+    private def update_reward_assignment1_with_http_info(campaign_id, assignment_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.update_reward_assignment1 ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/rewards/{assignmentId}'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'assignmentId' + '}', CGI.escape(assignment_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'loyalties_rewards_update_assignment_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesRewardsUpdateAssignmentResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.update_reward_assignment1",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#update_reward_assignment1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

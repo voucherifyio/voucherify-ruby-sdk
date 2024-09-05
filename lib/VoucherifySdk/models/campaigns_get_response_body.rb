@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `/campaigns/{campaignId}`.
+  # Response body schema for **GET** `v1/campaigns/{campaignId}`.
   class CampaignsGetResponseBody
     # Unique campaign ID, assigned by Voucherify.
     attr_accessor :id
@@ -44,10 +44,12 @@ module VoucherifySdk
 
     attr_accessor :validity_timeframe
 
-    # Integer array corresponding to the particular days of the week in which the campaign is valid.  - `0`  Sunday   - `1`  Monday   - `2`  Tuesday   - `3`  Wednesday   - `4`  Thursday   - `5`  Friday   - `6`  Saturday  
+    # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
     attr_accessor :validity_day_of_week
 
-    # Defines the amount of time the campaign will be active in ISO 8601 format after publishing. For example, a campaign with a `duration` of `P24D` will be valid for a duration of 24 days.
+    attr_accessor :validity_hours
+
+    # Defines the amount of time the vouchers will be active after publishing. The value is shown in the ISO 8601 format. For example, a voucher with the value of P24D will be valid for a duration of 24 days.
     attr_accessor :activity_duration_after_publishing
 
     # Total number of unique vouchers in campaign.
@@ -65,10 +67,10 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the campaign. A set of key/value pairs that you can attach to a campaign object. It can be useful for storing additional information about the campaign in a structured format.
     attr_accessor :metadata
 
-    # Timestamp representing the date and time when the campaign was created in ISO 8601 format.
+    # Timestamp representing the date and time when the campaign was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the voucher was updated in ISO 8601 format.
+    # Timestamp representing the date and time when the campaign was last updated in ISO 8601 format.
     attr_accessor :updated_at
 
     # Unique category name.
@@ -77,7 +79,7 @@ module VoucherifySdk
     # Indicates the status of the campaign creation.
     attr_accessor :creation_status
 
-    # Indicates the status of the campaign's vouchers.
+    # Indicates the status of the campaign's voucher generation.
     attr_accessor :vouchers_generation_status
 
     # Indicates whether the resource can be deleted.
@@ -89,7 +91,7 @@ module VoucherifySdk
     # Contains details about the category.
     attr_accessor :categories
 
-    # The type of object represented by JSON. This object stores information about the campaign.
+    # The type of the object represented by JSON. This object stores information about the campaign.
     attr_accessor :object
 
     attr_accessor :referral_program
@@ -99,6 +101,8 @@ module VoucherifySdk
     attr_accessor :promotion
 
     attr_accessor :validation_rules_assignments
+
+    attr_accessor :access_settings_assignments
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -136,6 +140,7 @@ module VoucherifySdk
         :'use_voucher_metadata_schema' => :'use_voucher_metadata_schema',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
+        :'validity_hours' => :'validity_hours',
         :'activity_duration_after_publishing' => :'activity_duration_after_publishing',
         :'vouchers_count' => :'vouchers_count',
         :'start_date' => :'start_date',
@@ -154,7 +159,8 @@ module VoucherifySdk
         :'referral_program' => :'referral_program',
         :'loyalty_tiers_expiration' => :'loyalty_tiers_expiration',
         :'promotion' => :'promotion',
-        :'validation_rules_assignments' => :'validation_rules_assignments'
+        :'validation_rules_assignments' => :'validation_rules_assignments',
+        :'access_settings_assignments' => :'access_settings_assignments'
       }
     end
 
@@ -175,8 +181,9 @@ module VoucherifySdk
         :'auto_join' => :'Boolean',
         :'join_once' => :'Boolean',
         :'use_voucher_metadata_schema' => :'Boolean',
-        :'validity_timeframe' => :'CampaignBaseValidityTimeframe',
+        :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
+        :'validity_hours' => :'ValidityHours',
         :'activity_duration_after_publishing' => :'String',
         :'vouchers_count' => :'Integer',
         :'start_date' => :'Time',
@@ -195,49 +202,54 @@ module VoucherifySdk
         :'referral_program' => :'ReferralProgram',
         :'loyalty_tiers_expiration' => :'LoyaltyTiersExpirationAll',
         :'promotion' => :'PromotionTiersList',
-        :'validation_rules_assignments' => :'ValidationRulesAssignmentsList'
+        :'validation_rules_assignments' => :'ValidationRulesAssignmentsList',
+        :'access_settings_assignments' => :'AccessSettingsCampaignAssignmentsList'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'name',
+        :'description',
+        :'campaign_type',
+        :'type',
+        :'auto_join',
+        :'join_once',
+        :'use_voucher_metadata_schema',
+        :'activity_duration_after_publishing',
+        :'vouchers_count',
+        :'start_date',
+        :'expiration_date',
+        :'active',
+        :'metadata',
+        :'created_at',
+        :'updated_at',
+        :'category',
+        :'creation_status',
+        :'vouchers_generation_status',
+        :'protected',
         :'category_id',
+        :'categories',
+        :'object',
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'Campaign'
-      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::CampaignsGetResponseBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::CampaignsGetResponseBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'description')
@@ -246,14 +258,10 @@ module VoucherifySdk
 
       if attributes.key?(:'campaign_type')
         self.campaign_type = attributes[:'campaign_type']
-      else
-        self.campaign_type = nil
       end
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = nil
       end
 
       if attributes.key?(:'voucher')
@@ -262,20 +270,14 @@ module VoucherifySdk
 
       if attributes.key?(:'auto_join')
         self.auto_join = attributes[:'auto_join']
-      else
-        self.auto_join = nil
       end
 
       if attributes.key?(:'join_once')
         self.join_once = attributes[:'join_once']
-      else
-        self.join_once = nil
       end
 
       if attributes.key?(:'use_voucher_metadata_schema')
         self.use_voucher_metadata_schema = attributes[:'use_voucher_metadata_schema']
-      else
-        self.use_voucher_metadata_schema = nil
       end
 
       if attributes.key?(:'validity_timeframe')
@@ -286,6 +288,10 @@ module VoucherifySdk
         if (value = attributes[:'validity_day_of_week']).is_a?(Array)
           self.validity_day_of_week = value
         end
+      end
+
+      if attributes.key?(:'validity_hours')
+        self.validity_hours = attributes[:'validity_hours']
       end
 
       if attributes.key?(:'activity_duration_after_publishing')
@@ -314,8 +320,6 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'updated_at')
@@ -328,34 +332,24 @@ module VoucherifySdk
 
       if attributes.key?(:'creation_status')
         self.creation_status = attributes[:'creation_status']
-      else
-        self.creation_status = nil
       end
 
       if attributes.key?(:'vouchers_generation_status')
         self.vouchers_generation_status = attributes[:'vouchers_generation_status']
-      else
-        self.vouchers_generation_status = nil
       end
 
       if attributes.key?(:'protected')
         self.protected = attributes[:'protected']
-      else
-        self.protected = nil
       end
 
       if attributes.key?(:'category_id')
         self.category_id = attributes[:'category_id']
-      else
-        self.category_id = nil
       end
 
       if attributes.key?(:'categories')
         if (value = attributes[:'categories']).is_a?(Array)
           self.categories = value
         end
-      else
-        self.categories = nil
       end
 
       if attributes.key?(:'object')
@@ -379,6 +373,10 @@ module VoucherifySdk
       if attributes.key?(:'validation_rules_assignments')
         self.validation_rules_assignments = attributes[:'validation_rules_assignments']
       end
+
+      if attributes.key?(:'access_settings_assignments')
+        self.access_settings_assignments = attributes[:'access_settings_assignments']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -386,58 +384,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @campaign_type.nil?
-        invalid_properties.push('invalid value for "campaign_type", campaign_type cannot be nil.')
-      end
-
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
-      if @auto_join.nil?
-        invalid_properties.push('invalid value for "auto_join", auto_join cannot be nil.')
-      end
-
-      if @join_once.nil?
-        invalid_properties.push('invalid value for "join_once", join_once cannot be nil.')
-      end
-
-      if @use_voucher_metadata_schema.nil?
-        invalid_properties.push('invalid value for "use_voucher_metadata_schema", use_voucher_metadata_schema cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @creation_status.nil?
-        invalid_properties.push('invalid value for "creation_status", creation_status cannot be nil.')
-      end
-
-      if @vouchers_generation_status.nil?
-        invalid_properties.push('invalid value for "vouchers_generation_status", vouchers_generation_status cannot be nil.')
-      end
-
-      if @protected.nil?
-        invalid_properties.push('invalid value for "protected", protected cannot be nil.')
-      end
-
-      if @categories.nil?
-        invalid_properties.push('invalid value for "categories", categories cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -445,68 +391,15 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @name.nil?
-      return false if @campaign_type.nil?
       campaign_type_validator = EnumAttributeValidator.new('String', ["LOYALTY_PROGRAM", "GIFT_VOUCHERS", "DISCOUNT_COUPONS", "PROMOTION", "REFERRAL_PROGRAM", "LUCKY_DRAW"])
       return false unless campaign_type_validator.valid?(@campaign_type)
-      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC"])
       return false unless type_validator.valid?(@type)
-      return false if @auto_join.nil?
-      return false if @join_once.nil?
-      return false if @use_voucher_metadata_schema.nil?
-      return false if @created_at.nil?
-      return false if @creation_status.nil?
       creation_status_validator = EnumAttributeValidator.new('String', ["DONE", "IN_PROGRESS", "FAILED", "DRAFT", "MODIFYING"])
       return false unless creation_status_validator.valid?(@creation_status)
-      return false if @vouchers_generation_status.nil?
       vouchers_generation_status_validator = EnumAttributeValidator.new('String', ["DONE", "IN_PROGRESS", "FAILED", "DRAFT", "MODIFYING"])
       return false unless vouchers_generation_status_validator.valid?(@vouchers_generation_status)
-      return false if @protected.nil?
-      return false if @categories.nil?
-      return false if @object.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] campaign_type Object to be assigned
-    def campaign_type=(campaign_type)
-      validator = EnumAttributeValidator.new('String', ["LOYALTY_PROGRAM", "GIFT_VOUCHERS", "DISCOUNT_COUPONS", "PROMOTION", "REFERRAL_PROGRAM", "LUCKY_DRAW"])
-      unless validator.valid?(campaign_type)
-        fail ArgumentError, "invalid value for \"campaign_type\", must be one of #{validator.allowable_values}."
-      end
-      @campaign_type = campaign_type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] creation_status Object to be assigned
-    def creation_status=(creation_status)
-      validator = EnumAttributeValidator.new('String', ["DONE", "IN_PROGRESS", "FAILED", "DRAFT", "MODIFYING"])
-      unless validator.valid?(creation_status)
-        fail ArgumentError, "invalid value for \"creation_status\", must be one of #{validator.allowable_values}."
-      end
-      @creation_status = creation_status
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] vouchers_generation_status Object to be assigned
-    def vouchers_generation_status=(vouchers_generation_status)
-      validator = EnumAttributeValidator.new('String', ["DONE", "IN_PROGRESS", "FAILED", "DRAFT", "MODIFYING"])
-      unless validator.valid?(vouchers_generation_status)
-        fail ArgumentError, "invalid value for \"vouchers_generation_status\", must be one of #{validator.allowable_values}."
-      end
-      @vouchers_generation_status = vouchers_generation_status
     end
 
     # Checks equality by comparing each attribute.
@@ -525,6 +418,7 @@ module VoucherifySdk
           use_voucher_metadata_schema == o.use_voucher_metadata_schema &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
+          validity_hours == o.validity_hours &&
           activity_duration_after_publishing == o.activity_duration_after_publishing &&
           vouchers_count == o.vouchers_count &&
           start_date == o.start_date &&
@@ -543,7 +437,8 @@ module VoucherifySdk
           referral_program == o.referral_program &&
           loyalty_tiers_expiration == o.loyalty_tiers_expiration &&
           promotion == o.promotion &&
-          validation_rules_assignments == o.validation_rules_assignments
+          validation_rules_assignments == o.validation_rules_assignments &&
+          access_settings_assignments == o.access_settings_assignments
     end
 
     # @see the `==` method
@@ -555,7 +450,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, description, campaign_type, type, voucher, auto_join, join_once, use_voucher_metadata_schema, validity_timeframe, validity_day_of_week, activity_duration_after_publishing, vouchers_count, start_date, expiration_date, active, metadata, created_at, updated_at, category, creation_status, vouchers_generation_status, protected, category_id, categories, object, referral_program, loyalty_tiers_expiration, promotion, validation_rules_assignments].hash
+      [id, name, description, campaign_type, type, voucher, auto_join, join_once, use_voucher_metadata_schema, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, vouchers_count, start_date, expiration_date, active, metadata, created_at, updated_at, category, creation_status, vouchers_generation_status, protected, category_id, categories, object, referral_program, loyalty_tiers_expiration, promotion, validation_rules_assignments, access_settings_assignments].hash
     end
 
     # Builds the object from hash

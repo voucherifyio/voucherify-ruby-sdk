@@ -1,0 +1,1 @@
+{:name=>"MkEByYoDCk", :rules=>{:"1"=>{:name=>"order.amount", :conditions=>{:$more_than=>[500000]}, :rules=>{}}, :logic=>"1"}, :applicable_to=>nil, :type=>"basic", :context_type=>"global", :id=>"val_4rLTA7TWP5qv", :created_at=>2024-07-23 10:56:50.122 UTC, :object=>"validation_rules"}

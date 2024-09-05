@@ -1,49 +1,11 @@
 # VoucherifySdk::ProductCollectionsCreateRequestBody
 
-## Class instance methods
+## Properties
 
-### `openapi_one_of`
-
-Returns the list of classes defined in oneOf.
-
-#### Example
-
-```ruby
-require 'VoucherifySdk'
-
-VoucherifySdk::ProductCollectionsCreateRequestBody.openapi_one_of
-# =>
-# [
-#   :'ProductCollectionsCreateDynamicRequestBody',
-#   :'ProductCollectionsCreateStaticRequestBody'
-# ]
-```
-
-### build
-
-Find the appropriate object from the `openapi_one_of` list and casts the data into it.
-
-#### Example
-
-```ruby
-require 'VoucherifySdk'
-
-VoucherifySdk::ProductCollectionsCreateRequestBody.build(data)
-# => #<ProductCollectionsCreateDynamicRequestBody:0x00007fdd4aab02a0>
-
-VoucherifySdk::ProductCollectionsCreateRequestBody.build(data_that_doesnt_match)
-# => nil
-```
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| **data** | **Mixed** | data to be matched against the list of oneOf items |
-
-#### Return type
-
-- `ProductCollectionsCreateDynamicRequestBody`
-- `ProductCollectionsCreateStaticRequestBody`
-- `nil` (if no type matches)
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **type** | **String** | Show that the product collection is static (manually selected products). | [optional][default to &#39;STATIC&#39;] |
+| **name** | **String** | Unique user-defined product collection name. | [optional] |
+| **products** | [**Array&lt;ProductCollectionsCreateRequestBodyProductsItem&gt;**](ProductCollectionsCreateRequestBodyProductsItem.md) | Defines a set of products for a &#x60;STATIC&#x60; product collection type. | [optional] |
+| **filter** | [**ProductCollectionsCreateRequestBodyFilter**](ProductCollectionsCreateRequestBodyFilter.md) |  | [optional] |
 

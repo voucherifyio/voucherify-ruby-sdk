@@ -19,16 +19,16 @@ module VoucherifySdk
     # The type of voucher whose balance is being adjusted due to the transaction.
     attr_accessor :type
 
-    # The available points prior to the transaction.
+    # The number of all points accumulated on the card as affected by add or subtract operations.
     attr_accessor :total
 
-    # The type of object represented by the JSON.
+    # The type of the object represented by the JSON.
     attr_accessor :object
 
-    # The amount of points being used up in the transaction.
+    # Points added or subtracted in the transaction.
     attr_accessor :points
 
-    # The points balance on the loyalty card after the points in the transaction are subtracted from the loyalty card.
+    # The available points on the card after the transaction as affected by redemption or rollback.
     attr_accessor :balance
 
     attr_accessor :related_object
@@ -87,21 +87,20 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'type',
+        :'total',
+        :'object',
+        :'points',
+        :'balance',
+        :'related_object'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::VoucherTransactionDetailsBalance` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::VoucherTransactionDetailsBalance`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
@@ -113,8 +112,6 @@ module VoucherifySdk
 
       if attributes.key?(:'total')
         self.total = attributes[:'total']
-      else
-        self.total = nil
       end
 
       if attributes.key?(:'object')
@@ -125,20 +122,14 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
-      else
-        self.points = nil
       end
 
       if attributes.key?(:'balance')
         self.balance = attributes[:'balance']
-      else
-        self.balance = nil
       end
 
       if attributes.key?(:'related_object')
         self.related_object = attributes[:'related_object']
-      else
-        self.related_object = nil
       end
     end
 
@@ -147,38 +138,14 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
       pattern = Regexp.new(/loyalty_card/)
-      if @type !~ pattern
+      if !@type.nil? && @type !~ pattern
         invalid_properties.push("invalid value for \"type\", must conform to the pattern #{pattern}.")
       end
 
-      if @total.nil?
-        invalid_properties.push('invalid value for "total", total cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
       pattern = Regexp.new(/balance/)
-      if @object !~ pattern
+      if !@object.nil? && @object !~ pattern
         invalid_properties.push("invalid value for \"object\", must conform to the pattern #{pattern}.")
-      end
-
-      if @points.nil?
-        invalid_properties.push('invalid value for "points", points cannot be nil.')
-      end
-
-      if @balance.nil?
-        invalid_properties.push('invalid value for "balance", balance cannot be nil.')
-      end
-
-      if @related_object.nil?
-        invalid_properties.push('invalid value for "related_object", related_object cannot be nil.')
       end
 
       invalid_properties
@@ -188,39 +155,13 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["loyalty_card"])
       return false unless type_validator.valid?(@type)
-      return false if @type !~ Regexp.new(/loyalty_card/)
-      return false if @total.nil?
-      return false if @object.nil?
+      return false if !@type.nil? && @type !~ Regexp.new(/loyalty_card/)
       object_validator = EnumAttributeValidator.new('String', ["balance"])
       return false unless object_validator.valid?(@object)
-      return false if @object !~ Regexp.new(/balance/)
-      return false if @points.nil?
-      return false if @balance.nil?
-      return false if @related_object.nil?
+      return false if !@object.nil? && @object !~ Regexp.new(/balance/)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["loyalty_card"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] object Object to be assigned
-    def object=(object)
-      validator = EnumAttributeValidator.new('String', ["balance"])
-      unless validator.valid?(object)
-        fail ArgumentError, "invalid value for \"object\", must be one of #{validator.allowable_values}."
-      end
-      @object = object
     end
 
     # Checks equality by comparing each attribute.

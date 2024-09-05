@@ -4,5 +4,5 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **parameters** | [**RewardAssignmentParametersParameters**](RewardAssignmentParametersParameters.md) |  | [optional] |
+| **loyalty** | [**RewardAssignmentParametersLoyalty**](RewardAssignmentParametersLoyalty.md) |  | [optional] |
 

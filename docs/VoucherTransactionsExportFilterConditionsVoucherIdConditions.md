@@ -4,5 +4,5 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **_in** | **Array&lt;String&gt;** |  |  |
+| **_in** | **Array&lt;String&gt;** |  | [optional] |
 

@@ -14,18 +14,18 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Data filters used to narrow the data records to be returned in the result.
+  # Data filters used to narrow down the data records to be returned in the result.
   class FilterConditionsString
-    # Array of resource values that should be included in the results. (multiple values)
+    # Array of resource values that should be included in the results (multiple values).
     attr_accessor :_in
 
-    # Array of resource values that should be included in the results. (multiple values)
+    # Array of resource values that should be included in the results (multiple values).
     attr_accessor :not_in
 
-    # Value is exactly this value. (single value)
+    # Value is exactly this value (single value).
     attr_accessor :is
 
-    # Results omit this value. (single value)
+    # Results omit this value (single value).
     attr_accessor :is_not
 
     # Value is NOT null. The value for this parameter is an empty string.
@@ -76,21 +76,22 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'_in',
+        :'not_in',
+        :'is',
+        :'is_not',
+        :'has_value',
+        :'is_unknown',
+        :'starts_with',
+        :'ends_with'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::FilterConditionsString` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::FilterConditionsString`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 

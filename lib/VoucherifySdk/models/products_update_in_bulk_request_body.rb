@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request schema for **POST** `/products/bulk/async`.
+  # Request schema for **POST** `v1/products/bulk/async`.
   class ProductsUpdateInBulkRequestBody
     # Unique product source ID from your inventory system.
     attr_accessor :source_id
@@ -66,28 +66,25 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'source_id',
+        :'name',
+        :'price',
+        :'attributes',
+        :'image_url',
+        :'metadata'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::ProductsUpdateInBulkRequestBody` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::ProductsUpdateInBulkRequestBody`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
       if attributes.key?(:'source_id')
         self.source_id = attributes[:'source_id']
-      else
-        self.source_id = nil
       end
 
       if attributes.key?(:'name')
@@ -118,10 +115,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @source_id.nil?
-        invalid_properties.push('invalid value for "source_id", source_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -129,7 +122,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @source_id.nil?
       true
     end
 

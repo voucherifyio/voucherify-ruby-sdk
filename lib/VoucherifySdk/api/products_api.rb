@@ -104,10 +104,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.create_sku ...'
       end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.create_sku"
-      end
       # resource path
       local_var_path = '/v1/products/{productId}/skus'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s))
 
@@ -154,10 +150,10 @@ module VoucherifySdk
     end
 
     # Delete Product
-    # This method deletes a product.
+    # Deletes a product and all related SKUs. This operation cannot be undone.  If the force parameter is set to false or not set at all, the product and all related SKUs will be moved to the bin.
     # @param product_id [String] A Voucherify product ID or source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the product will be removed permanently. Going forward, the user will be able to create another product with exactly the same source_id.
+    # @option opts [Boolean] :force If this flag is set to true, the product and all related SKUs will be removed permanently. If it is set to false or not set at all, the product and all related SKUs will be moved to the bin. Going forward, the user will be able to create another product with exactly the same source_id.
     # @return [nil]
     def delete_product(product_id, opts = {})
       delete_product_with_http_info(product_id, opts)
@@ -165,18 +161,14 @@ module VoucherifySdk
     end
 
     # Delete Product
-    # This method deletes a product.
+    # Deletes a product and all related SKUs. This operation cannot be undone.  If the force parameter is set to false or not set at all, the product and all related SKUs will be moved to the bin.
     # @param product_id [String] A Voucherify product ID or source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the product will be removed permanently. Going forward, the user will be able to create another product with exactly the same source_id.
+    # @option opts [Boolean] :force If this flag is set to true, the product and all related SKUs will be removed permanently. If it is set to false or not set at all, the product and all related SKUs will be moved to the bin. Going forward, the user will be able to create another product with exactly the same source_id.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     private def delete_product_with_http_info(product_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.delete_product ...'
-      end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.delete_product"
       end
       # resource path
       local_var_path = '/v1/products/{productId}'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s))
@@ -218,11 +210,11 @@ module VoucherifySdk
     end
 
     # Delete SKU
-    # This method deletes a product SKU.
+    # Deletes a product SKU. This operation cannot be undone.  If the force parameter is set to false or not set at all, the SKU will be moved to the bin.
     # @param product_id [String] A unique Voucherify product ID or product source ID.
     # @param sku_id [String] A Voucherify SKU ID or SKU source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the SKU will be removed permanently. Going forward, the user will be able to create another SKU with exactly the same source_id.
+    # @option opts [Boolean] :force If this flag is set to true, the SKU will be removed permanently. If it is set to false or not set at all, the SKU will be moved to the bin. Going forward, the user will be able to create another SKU with exactly the same source_id.
     # @return [nil]
     def delete_sku(product_id, sku_id, opts = {})
       delete_sku_with_http_info(product_id, sku_id, opts)
@@ -230,23 +222,15 @@ module VoucherifySdk
     end
 
     # Delete SKU
-    # This method deletes a product SKU.
+    # Deletes a product SKU. This operation cannot be undone.  If the force parameter is set to false or not set at all, the SKU will be moved to the bin.
     # @param product_id [String] A unique Voucherify product ID or product source ID.
     # @param sku_id [String] A Voucherify SKU ID or SKU source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :force If this flag is set to true, the SKU will be removed permanently. Going forward, the user will be able to create another SKU with exactly the same source_id.
+    # @option opts [Boolean] :force If this flag is set to true, the SKU will be removed permanently. If it is set to false or not set at all, the SKU will be moved to the bin. Going forward, the user will be able to create another SKU with exactly the same source_id.
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     private def delete_sku_with_http_info(product_id, sku_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.delete_sku ...'
-      end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.delete_sku"
-      end
-      # verify the required parameter 'sku_id' is set
-      if @api_client.config.client_side_validation && sku_id.nil?
-        fail ArgumentError, "Missing the required parameter 'sku_id' when calling ProductsApi.delete_sku"
       end
       # resource path
       local_var_path = '/v1/products/{productId}/skus/{skuId}'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s)).sub('{' + 'skuId' + '}', CGI.escape(sku_id.to_s))
@@ -305,10 +289,6 @@ module VoucherifySdk
     private def get_product_with_http_info(product_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.get_product ...'
-      end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.get_product"
       end
       # resource path
       local_var_path = '/v1/products/{productId}'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s))
@@ -369,10 +349,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.get_sku ...'
       end
-      # verify the required parameter 'sku_id' is set
-      if @api_client.config.client_side_validation && sku_id.nil?
-        fail ArgumentError, "Missing the required parameter 'sku_id' when calling ProductsApi.get_sku"
-      end
       # resource path
       local_var_path = '/v1/skus/{skuId}'.sub('{' + 'skuId' + '}', CGI.escape(sku_id.to_s))
 
@@ -415,26 +391,22 @@ module VoucherifySdk
 
     # Import Products using CSV
     # Import products into the repository using a CSV file.   This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
-    # @param file [File] File path.
     # @param [Hash] opts the optional parameters
+    # @option opts [File] :file File path.
     # @return [ProductsImportCsvCreateResponseBody]
-    def import_products_using_csv(file, opts = {})
-      data, _status_code, _headers = import_products_using_csv_with_http_info(file, opts)
+    def import_products_using_csv(opts = {})
+      data, _status_code, _headers = import_products_using_csv_with_http_info(opts)
       data
     end
 
     # Import Products using CSV
     # Import products into the repository using a CSV file.   This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
-    # @param file [File] File path.
     # @param [Hash] opts the optional parameters
+    # @option opts [File] :file File path.
     # @return [Array<(ProductsImportCsvCreateResponseBody, Integer, Hash)>] ProductsImportCsvCreateResponseBody data, response status code and response headers
-    private def import_products_using_csv_with_http_info(file, opts = {})
+    private def import_products_using_csv_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.import_products_using_csv ...'
-      end
-      # verify the required parameter 'file' is set
-      if @api_client.config.client_side_validation && file.nil?
-        fail ArgumentError, "Missing the required parameter 'file' when calling ProductsApi.import_products_using_csv"
       end
       # resource path
       local_var_path = '/v1/products/importCSV'
@@ -454,7 +426,7 @@ module VoucherifySdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['file'] = file
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]
@@ -484,26 +456,22 @@ module VoucherifySdk
 
     # Import SKUs using CSV
     # Import SKUs into the repository using a CSV file. The CSV file has to include headers in the first line. All properties which cannot be mapped to standard SKU fields will be added to the metadata object. You can find an example template [here](https://s3.amazonaws.com/helpscout.net/docs/assets/5902f1c12c7d3a057f88a36d/attachments/627b98d08c9b585083488a4c/Import_SKUS_template.csv).  This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
-    # @param file [File] File path.
     # @param [Hash] opts the optional parameters
+    # @option opts [File] :file File path.
     # @return [SkusImportCsvCreateResponseBody]
-    def import_skus_using_csv(file, opts = {})
-      data, _status_code, _headers = import_skus_using_csv_with_http_info(file, opts)
+    def import_skus_using_csv(opts = {})
+      data, _status_code, _headers = import_skus_using_csv_with_http_info(opts)
       data
     end
 
     # Import SKUs using CSV
     # Import SKUs into the repository using a CSV file. The CSV file has to include headers in the first line. All properties which cannot be mapped to standard SKU fields will be added to the metadata object. You can find an example template [here](https://s3.amazonaws.com/helpscout.net/docs/assets/5902f1c12c7d3a057f88a36d/attachments/627b98d08c9b585083488a4c/Import_SKUS_template.csv).  This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
-    # @param file [File] File path.
     # @param [Hash] opts the optional parameters
+    # @option opts [File] :file File path.
     # @return [Array<(SkusImportCsvCreateResponseBody, Integer, Hash)>] SkusImportCsvCreateResponseBody data, response status code and response headers
-    private def import_skus_using_csv_with_http_info(file, opts = {})
+    private def import_skus_using_csv_with_http_info(opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.import_skus_using_csv ...'
-      end
-      # verify the required parameter 'file' is set
-      if @api_client.config.client_side_validation && file.nil?
-        fail ArgumentError, "Missing the required parameter 'file' when calling ProductsApi.import_skus_using_csv"
       end
       # resource path
       local_var_path = '/v1/skus/importCSV'
@@ -523,7 +491,7 @@ module VoucherifySdk
 
       # form parameters
       form_params = opts[:form_params] || {}
-      form_params['file'] = file
+      form_params['file'] = opts[:'file'] if !opts[:'file'].nil?
 
       # http body (model)
       post_body = opts[:debug_body]
@@ -554,8 +522,8 @@ module VoucherifySdk
     # List Products
     # Retrieve a list of products.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -568,8 +536,8 @@ module VoucherifySdk
     # List Products
     # Retrieve a list of products.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -578,18 +546,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.list_products ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductsApi.list_products, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductsApi.list_products, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductsApi.list_products, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/products'
 
@@ -639,8 +595,8 @@ module VoucherifySdk
     # Retrieve all SKUs for a given product.
     # @param product_id [String] A Voucherify product ID or product source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -654,8 +610,8 @@ module VoucherifySdk
     # Retrieve all SKUs for a given product.
     # @param product_id [String] A Voucherify product ID or product source ID.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -664,22 +620,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.list_skus_in_product ...'
       end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.list_skus_in_product"
-      end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductsApi.list_skus_in_product, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling ProductsApi.list_skus_in_product, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling ProductsApi.list_skus_in_product, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/products/{productId}/skus'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s))
 
@@ -746,10 +686,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.update_product ...'
       end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.update_product"
-      end
       # resource path
       local_var_path = '/v1/products/{productId}'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s))
 
@@ -795,20 +731,20 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Update Products in bulk
-    # Update several products in one asynchronous operation.  In one request, it is possible to update a maximum of **100** records. In the response body, you get a unique async action identifier. If a requested product object is not found, then an **upsert** occurs. This is reflected in the Get Async Action endpoint as follows:    This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Update Products in Bulk
+    # Update products in one asynchronous operation. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a product object is not found, it is **upserted**. This is shown in the report file in the GET Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<ProductsUpdateInBulkRequestBody>] :products_update_in_bulk_request_body Create an array of product objects, each with the parameters which you want to update.
+    # @option opts [Array<ProductsUpdateInBulkRequestBody>] :products_update_in_bulk_request_body List the product fields to be updated in each customer object.
     # @return [ProductsUpdateInBulkResponseBody]
     def update_products_in_bulk(opts = {})
       data, _status_code, _headers = update_products_in_bulk_with_http_info(opts)
       data
     end
 
-    # Update Products in bulk
-    # Update several products in one asynchronous operation.  In one request, it is possible to update a maximum of **100** records. In the response body, you get a unique async action identifier. If a requested product object is not found, then an **upsert** occurs. This is reflected in the Get Async Action endpoint as follows:    This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Update Products in Bulk
+    # Update products in one asynchronous operation. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a product object is not found, it is **upserted**. This is shown in the report file in the GET Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<ProductsUpdateInBulkRequestBody>] :products_update_in_bulk_request_body Create an array of product objects, each with the parameters which you want to update.
+    # @option opts [Array<ProductsUpdateInBulkRequestBody>] :products_update_in_bulk_request_body List the product fields to be updated in each customer object.
     # @return [Array<(ProductsUpdateInBulkResponseBody, Integer, Hash)>] ProductsUpdateInBulkResponseBody data, response status code and response headers
     private def update_products_in_bulk_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -859,20 +795,20 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Update Products' Metadata in bulk
-    # Update several product metadata properties in one asynchronous operation.  In one request, it is possible to update a maximum of **100** records. In the response body, you get a unique async action identifier. If a requested product object is not found, then an **upsert** occurs. This is reflected in the Get Async Action endpoint as follows:    This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Update Products' Metadata in Bulk
+    # Updates metadata parameters for a list of products. Every resource in the list will receive the metadata defined in the request. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a product object is not found, it is **upserted**. This is shown in the report file in the GET Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
     # @param [Hash] opts the optional parameters
-    # @option opts [ProductsMetadataUpdateInBulkRequestBody] :products_metadata_update_in_bulk_request_body Specify the list of product source IDs and the metadata key value pairs to be udpated for these products.
+    # @option opts [ProductsMetadataUpdateInBulkRequestBody] :products_metadata_update_in_bulk_request_body List the source_ids of the products you would like to update with the metadata key/value pairs.
     # @return [ProductsMetadataUpdateInBulkResponseBody]
     def update_products_metadata_in_bulk(opts = {})
       data, _status_code, _headers = update_products_metadata_in_bulk_with_http_info(opts)
       data
     end
 
-    # Update Products&#39; Metadata in bulk
-    # Update several product metadata properties in one asynchronous operation.  In one request, it is possible to update a maximum of **100** records. In the response body, you get a unique async action identifier. If a requested product object is not found, then an **upsert** occurs. This is reflected in the Get Async Action endpoint as follows:    This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Update Products&#39; Metadata in Bulk
+    # Updates metadata parameters for a list of products. Every resource in the list will receive the metadata defined in the request. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a product object is not found, it is **upserted**. This is shown in the report file in the GET Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
     # @param [Hash] opts the optional parameters
-    # @option opts [ProductsMetadataUpdateInBulkRequestBody] :products_metadata_update_in_bulk_request_body Specify the list of product source IDs and the metadata key value pairs to be udpated for these products.
+    # @option opts [ProductsMetadataUpdateInBulkRequestBody] :products_metadata_update_in_bulk_request_body List the source_ids of the products you would like to update with the metadata key/value pairs.
     # @return [Array<(ProductsMetadataUpdateInBulkResponseBody, Integer, Hash)>] ProductsMetadataUpdateInBulkResponseBody data, response status code and response headers
     private def update_products_metadata_in_bulk_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -945,14 +881,6 @@ module VoucherifySdk
     private def update_sku_with_http_info(product_id, sku_id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ProductsApi.update_sku ...'
-      end
-      # verify the required parameter 'product_id' is set
-      if @api_client.config.client_side_validation && product_id.nil?
-        fail ArgumentError, "Missing the required parameter 'product_id' when calling ProductsApi.update_sku"
-      end
-      # verify the required parameter 'sku_id' is set
-      if @api_client.config.client_side_validation && sku_id.nil?
-        fail ArgumentError, "Missing the required parameter 'sku_id' when calling ProductsApi.update_sku"
       end
       # resource path
       local_var_path = '/v1/products/{productId}/skus/{skuId}'.sub('{' + 'productId' + '}', CGI.escape(product_id.to_s)).sub('{' + 'skuId' + '}', CGI.escape(sku_id.to_s))

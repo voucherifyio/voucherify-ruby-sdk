@@ -93,7 +93,7 @@ module VoucherifySdk
     # @option opts [Boolean] :join_once Through this flag, you can control if a particular person gets only one and always the same code even if the app sends multiple publication requests. It means that if you have a referral program, a referrer is assigned only to one code if an integration sends publication requests more than once for the same customer.
     # @option opts [String] :voucher Code of voucher being published.
     # @option opts [CreatePublicationCampaign] :campaign Create publication with campaign.
-    # @option opts [String] :source_id The merchant’s publication ID if it is different from the Voucherify publication ID. Its an optional tracking identifier of a publication. It is really useful in case of an integration between multiple systems. It can be a publication ID from a CRM system, database or 3rd-party service. If source_id is provided only 1 voucher can be published per request.
+    # @option opts [String] :source_id The merchants publication ID if it is different from the Voucherify publication ID. Its an optional tracking identifier of a publication. It is really useful in case of an integration between multiple systems. It can be a publication ID from a CRM system, database or 3rd-party service. If source_id is provided only 1 voucher can be published per request.
     # @option opts [Object] :metadata The metadata object stores all custom attributes assigned to the publication. A set of key/value pairs that you can attach to a publication object. It can be useful for storing additional information about the publication in a structured format.
     # @return [PublicationsCreateResponseBody]
     def create_publication1(customer, opts = {})
@@ -108,16 +108,12 @@ module VoucherifySdk
     # @option opts [Boolean] :join_once Through this flag, you can control if a particular person gets only one and always the same code even if the app sends multiple publication requests. It means that if you have a referral program, a referrer is assigned only to one code if an integration sends publication requests more than once for the same customer.
     # @option opts [String] :voucher Code of voucher being published.
     # @option opts [CreatePublicationCampaign] :campaign Create publication with campaign.
-    # @option opts [String] :source_id The merchant’s publication ID if it is different from the Voucherify publication ID. Its an optional tracking identifier of a publication. It is really useful in case of an integration between multiple systems. It can be a publication ID from a CRM system, database or 3rd-party service. If source_id is provided only 1 voucher can be published per request.
+    # @option opts [String] :source_id The merchants publication ID if it is different from the Voucherify publication ID. Its an optional tracking identifier of a publication. It is really useful in case of an integration between multiple systems. It can be a publication ID from a CRM system, database or 3rd-party service. If source_id is provided only 1 voucher can be published per request.
     # @option opts [Object] :metadata The metadata object stores all custom attributes assigned to the publication. A set of key/value pairs that you can attach to a publication object. It can be useful for storing additional information about the publication in a structured format.
     # @return [Array<(PublicationsCreateResponseBody, Integer, Hash)>] PublicationsCreateResponseBody data, response status code and response headers
     private def create_publication1_with_http_info(customer, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PublicationsApi.create_publication1 ...'
-      end
-      # verify the required parameter 'customer' is set
-      if @api_client.config.client_side_validation && customer.nil?
-        fail ArgumentError, "Missing the required parameter 'customer' when calling PublicationsApi.create_publication1"
       end
       # resource path
       local_var_path = '/v1/publications/create'
@@ -168,8 +164,8 @@ module VoucherifySdk
     # List Publications
     # Retrieve a list of publications. To return a **particular** publication, you can use the source_id query parameter and provide the source_id of the publication you are looking for specifically. # Pagination  🚧 Important!  If you want to scroll through a huge set of records, it is recommended to use the Exports API. This API will return an error page_over_limit if you reach a page above 1000. # Filter Query The filters query parameter allows for joining multiple parameters with logical operators. The syntax looks as follows:  ## Operators:  ## Examples  
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrderListPublications] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [String] :campaign Filters by a given campaign name.
     # @option opts [String] :customer Filters by a unique customer ID.
@@ -188,8 +184,8 @@ module VoucherifySdk
     # List Publications
     # Retrieve a list of publications. To return a **particular** publication, you can use the source_id query parameter and provide the source_id of the publication you are looking for specifically. # Pagination  🚧 Important!  If you want to scroll through a huge set of records, it is recommended to use the Exports API. This API will return an error page_over_limit if you reach a page above 1000. # Filter Query The filters query parameter allows for joining multiple parameters with logical operators. The syntax looks as follows:  ## Operators:  ## Examples  
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit A limit on the number of objects to be returned. Limit can range between 1 and 100 items.
-    # @option opts [Integer] :page Which page of results to return.
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterOrderListPublications] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [String] :campaign Filters by a given campaign name.
     # @option opts [String] :customer Filters by a unique customer ID.
@@ -204,18 +200,6 @@ module VoucherifySdk
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PublicationsApi.list_publications ...'
       end
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PublicationsApi.list_publications, must be smaller than or equal to 100.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'limit'].nil? && opts[:'limit'] < 1
-        fail ArgumentError, 'invalid value for "opts[:"limit"]" when calling PublicationsApi.list_publications, must be greater than or equal to 1.'
-      end
-
-      if @api_client.config.client_side_validation && !opts[:'page'].nil? && opts[:'page'] > 100
-        fail ArgumentError, 'invalid value for "opts[:"page"]" when calling PublicationsApi.list_publications, must be smaller than or equal to 100.'
-      end
-
       # resource path
       local_var_path = '/v1/publications'
 

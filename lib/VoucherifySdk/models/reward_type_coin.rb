@@ -14,13 +14,19 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Defines the ratio by mapping the number of loyalty points in points_ratio to a predefined cash amount in exchange_ratio.
   class RewardTypeCoin
-    attr_accessor :coin
+    # The cash equivalent of the points defined in the points_ratio property.
+    attr_accessor :exchange_ratio
+
+    # The number of loyalty points that will map to the predefined cash amount defined by the exchange_ratio property.
+    attr_accessor :points_ratio
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'coin' => :'coin'
+        :'exchange_ratio' => :'exchange_ratio',
+        :'points_ratio' => :'points_ratio'
       }
     end
 
@@ -32,35 +38,33 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'coin' => :'RewardTypeCoinCoin'
+        :'exchange_ratio' => :'Float',
+        :'points_ratio' => :'Integer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'exchange_ratio',
+        :'points_ratio'
       ])
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `VoucherifySdk::RewardTypeCoin` initialize method"
-      end
-
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
-        if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `VoucherifySdk::RewardTypeCoin`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
-        end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'coin')
-        self.coin = attributes[:'coin']
-      else
-        self.coin = nil
+      if attributes.key?(:'exchange_ratio')
+        self.exchange_ratio = attributes[:'exchange_ratio']
+      end
+
+      if attributes.key?(:'points_ratio')
+        self.points_ratio = attributes[:'points_ratio']
       end
     end
 
@@ -69,10 +73,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @coin.nil?
-        invalid_properties.push('invalid value for "coin", coin cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -80,7 +80,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @coin.nil?
       true
     end
 
@@ -89,7 +88,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          coin == o.coin
+          exchange_ratio == o.exchange_ratio &&
+          points_ratio == o.points_ratio
     end
 
     # @see the `==` method
@@ -101,7 +101,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [coin].hash
+      [exchange_ratio, points_ratio].hash
     end
 
     # Builds the object from hash
