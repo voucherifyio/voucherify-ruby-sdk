@@ -113,6 +113,12 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
 
 ## 📅 Changelog
 
+- **2024-10-02** - `7.0.0`
+  - Fix object parsing in query. For example `filters` while listing redemptions.
+  - !!! BREAKING CHANGES !!!
+    - Pagination changed on listing card transactions - NO `page` param is supported - use `starting_after_id` instead.  
+    - Pagination changed on listing voucher transactions - NO `page` param is supported - use `starting_after_id` instead.
+    - ApplicableToEffect - changed - `EVERY` -> `TO_EVERY`, `CHEAPEST` -> `TO_CHEAPEST`, `MOST_EXPENSIVE` -> `TO_MOST_EXPENSIVE`, 2 new values introduced.
 - **2024-09-05** - `6.0.0` - The new version of the SKD includes coverage for all the most commonly used Voucherify endpoints and supports typed models.
 
 *Previous versions of the SDK are no longer supported, and we highly recommend upgrading to version 6.0.0, which is now designated as Long-Term Support (LTS).*
