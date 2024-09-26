@@ -14,15 +14,12 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class ApplicableToEffect
-    TO_EVERY = "APPLY_TO_EVERY".freeze
-    TO_CHEAPEST = "APPLY_TO_CHEAPEST".freeze
-    FROM_CHEAPEST = "APPLY_FROM_CHEAPEST".freeze
-    TO_MOST_EXPENSIVE = "APPLY_TO_MOST_EXPENSIVE".freeze
-    FROM_MOST_EXPENSIVE = "APPLY_FROM_MOST_EXPENSIVE".freeze
+  class ParameterOrderListTransactions
+    ID = "id".freeze
+    ID2 = "-id".freeze
 
     def self.all_vars
-      @all_vars ||= [TO_EVERY, TO_CHEAPEST, FROM_CHEAPEST, TO_MOST_EXPENSIVE, FROM_MOST_EXPENSIVE].freeze
+      @all_vars ||= [ID, ID2].freeze
     end
 
     # Builds the enum from string
@@ -36,8 +33,8 @@ module VoucherifySdk
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      return value if ApplicableToEffect.all_vars.include?(value)
-      raise "Invalid ENUM value #{value} for class #ApplicableToEffect"
+      return value if ParameterOrderListTransactions.all_vars.include?(value)
+      raise "Invalid ENUM value #{value} for class #ParameterOrderListTransactions"
     end
   end
 end

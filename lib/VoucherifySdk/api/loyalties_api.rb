@@ -1406,6 +1406,8 @@ module VoucherifySdk
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [ParameterOrderListTransactions] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
     # @return [LoyaltiesMembersTransactionsListResponseBody]
     def list_loyalty_card_transactions(member_id, opts = {})
       data, _status_code, _headers = list_loyalty_card_transactions_with_http_info(member_id, opts)
@@ -1417,6 +1419,8 @@ module VoucherifySdk
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [ParameterOrderListTransactions] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
     # @return [Array<(LoyaltiesMembersTransactionsListResponseBody, Integer, Hash)>] LoyaltiesMembersTransactionsListResponseBody data, response status code and response headers
     private def list_loyalty_card_transactions_with_http_info(member_id, opts = {})
       if @api_client.config.debugging
@@ -1428,6 +1432,8 @@ module VoucherifySdk
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'starting_after_id'] = opts[:'starting_after_id'] if !opts[:'starting_after_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
@@ -1469,7 +1475,8 @@ module VoucherifySdk
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
-    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [ParameterOrderListTransactions] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
     # @return [LoyaltiesMembersTransactionsListResponseBody]
     def list_loyalty_card_transactions1(campaign_id, member_id, opts = {})
       data, _status_code, _headers = list_loyalty_card_transactions1_with_http_info(campaign_id, member_id, opts)
@@ -1482,7 +1489,8 @@ module VoucherifySdk
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
-    # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
+    # @option opts [ParameterOrderListTransactions] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
     # @return [Array<(LoyaltiesMembersTransactionsListResponseBody, Integer, Hash)>] LoyaltiesMembersTransactionsListResponseBody data, response status code and response headers
     private def list_loyalty_card_transactions1_with_http_info(campaign_id, member_id, opts = {})
       if @api_client.config.debugging
@@ -1494,7 +1502,8 @@ module VoucherifySdk
       # query parameters
       query_params = opts[:query_params] || {}
       query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
-      query_params[:'page'] = opts[:'page'] if !opts[:'page'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'starting_after_id'] = opts[:'starting_after_id'] if !opts[:'starting_after_id'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}
