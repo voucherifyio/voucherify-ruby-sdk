@@ -31,7 +31,11 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
 
-  s.files         = `find *`.split("\n").uniq.sort.select { |f| !f.empty? }
-  s.test_files    = `find __tests__/spec/*`.split("\n")
+  # Include all necessary files but exclude .gem
+  s.files = Dir.glob("{lib,__tests__}/**/*").select { |f| File.file?(f) } - Dir.glob("*.gem")
+
+  # Only include spec files
+  s.test_files = Dir.glob("__tests__/spec/*")
+
   s.require_paths = ["lib"]
 end
