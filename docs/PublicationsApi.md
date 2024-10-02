@@ -178,7 +178,7 @@ opts = {
   result: VoucherifySdk::ParameterResultListPublications::SUCCESS, # ParameterResultListPublications | Filters by a publication result.
   voucher_type: VoucherifySdk::ParameterVoucherTypeListPublications::DISCOUNT, # ParameterVoucherTypeListPublications | Filters by a voucher type.
   is_referral_code: true, # Boolean | This filter works only for the true option. If set to true, the query returns only publications of codes from referral campaigns. 
-  filters: VoucherifySdk::ParameterFiltersListPublications.new, # ParameterFiltersListPublications | Filter conditions.
+  filters: VoucherifySdk::ParameterFiltersListPublications.new, # ParameterFiltersListPublications | Filters for listing publications.
   source_id: 'source_id_example' # String | Using this endpoint with a particular publication source_id, which was sent with the original request to create a publication, returns in the response, exactly the same code published initially because the code was assigned to the given publication. As a result, you can use this endpoint as a reference and return a code that was assigned in a publication by using a particular source_id.
 }
 
@@ -204,7 +204,7 @@ end
 | **result** | [**ParameterResultListPublications**](.md) | Filters by a publication result. | [optional] |
 | **voucher_type** | [**ParameterVoucherTypeListPublications**](.md) | Filters by a voucher type. | [optional] |
 | **is_referral_code** | **Boolean** | This filter works only for the true option. If set to true, the query returns only publications of codes from referral campaigns.  | [optional] |
-| **filters** | [**ParameterFiltersListPublications**](.md) | Filter conditions. | [optional] |
+| **filters** | [**ParameterFiltersListPublications**](.md) | Filters for listing publications. | [optional] |
 | **source_id** | **String** | Using this endpoint with a particular publication source_id, which was sent with the original request to create a publication, returns in the response, exactly the same code published initially because the code was assigned to the given publication. As a result, you can use this endpoint as a reference and return a code that was assigned in a publication by using a particular source_id. | [optional] |
 
 ### Return type

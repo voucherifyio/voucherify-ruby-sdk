@@ -31,6 +31,28 @@ module VoucherifySdk
     # Returns an ID that can be used to return another page of results. Use the transaction ID in the `starting_after_id` query parameter to display another page of the results starting after the transaction with that ID.
     attr_accessor :more_starting_after
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -116,6 +138,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      object_validator = EnumAttributeValidator.new('String', ["list"])
+      return false unless object_validator.valid?(@object)
+      data_ref_validator = EnumAttributeValidator.new('String', ["data"])
+      return false unless data_ref_validator.valid?(@data_ref)
       true
     end
 

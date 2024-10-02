@@ -25,5 +25,4 @@
 | **voucher** | [**CampaignsCreateRequestBodyVoucher**](CampaignsCreateRequestBodyVoucher.md) |  | [optional] |
 | **referral_program** | [**ReferralProgram**](ReferralProgram.md) |  | [optional] |
 | **promotion** | [**CampaignsCreateRequestBodyPromotion**](CampaignsCreateRequestBodyPromotion.md) |  | [optional] |
-| **lucky_draw** | [**LuckyDraw**](LuckyDraw.md) |  | [optional] |
 

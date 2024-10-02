@@ -189,9 +189,9 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       holder_role_validator = EnumAttributeValidator.new('String', ["OWNER", "REFERRER", "REFEREE"])
       return false unless holder_role_validator.valid?(@holder_role)
-      campaign_type_validator = EnumAttributeValidator.new('String', ["LOYALTY_PROGRAM", "GIFT_VOUCHERS", "DISCOUNT_COUPONS", "PROMOTION", "REFERRAL_PROGRAM", "LUCKY_DRAW"])
+      campaign_type_validator = EnumAttributeValidator.new('String', ["LOYALTY_PROGRAM", "GIFT_VOUCHERS", "DISCOUNT_COUPONS", "PROMOTION", "REFERRAL_PROGRAM"])
       return false unless campaign_type_validator.valid?(@campaign_type)
-      voucher_type_validator = EnumAttributeValidator.new('String', ["GIFT_VOUCHER", "DISCOUNT_VOUCHER", "LOYALTY_CARD", "LUCKY_DRAW_CODE"])
+      voucher_type_validator = EnumAttributeValidator.new('String', ["GIFT_VOUCHER", "DISCOUNT_VOUCHER", "LOYALTY_CARD"])
       return false unless voucher_type_validator.valid?(@voucher_type)
       true
     end

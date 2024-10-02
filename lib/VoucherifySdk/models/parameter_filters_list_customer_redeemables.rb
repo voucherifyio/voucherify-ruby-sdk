@@ -15,8 +15,6 @@ require 'time'
 
 module VoucherifySdk
   class ParameterFiltersListCustomerRedeemables
-    attr_accessor :junction
-
     attr_accessor :id
 
     attr_accessor :created_at
@@ -32,6 +30,8 @@ module VoucherifySdk
     attr_accessor :campaign_type
 
     attr_accessor :voucher_type
+
+    attr_accessor :junction
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -58,7 +58,6 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'junction' => :'junction',
         :'id' => :'id',
         :'created_at' => :'created_at',
         :'redeemable_id' => :'redeemable_id',
@@ -66,7 +65,8 @@ module VoucherifySdk
         :'holder_role' => :'holder_role',
         :'campaign_id' => :'campaign_id',
         :'campaign_type' => :'campaign_type',
-        :'voucher_type' => :'voucher_type'
+        :'voucher_type' => :'voucher_type',
+        :'junction' => :'junction'
       }
     end
 
@@ -78,15 +78,15 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'junction' => :'Junction',
         :'id' => :'ParameterFiltersListCustomerRedeemablesId',
-        :'created_at' => :'FilterConditionsDateTime',
+        :'created_at' => :'ParameterFiltersListCustomerRedeemablesCreatedAt',
         :'redeemable_id' => :'ParameterFiltersListCustomerRedeemablesRedeemableId',
         :'redeemable_object' => :'ParameterFiltersListCustomerRedeemablesRedeemableObject',
         :'holder_role' => :'ParameterFiltersListCustomerRedeemablesHolderRole',
         :'campaign_id' => :'ParameterFiltersListCustomerRedeemablesCampaignId',
         :'campaign_type' => :'ParameterFiltersListCustomerRedeemablesCampaignType',
-        :'voucher_type' => :'ParameterFiltersListCustomerRedeemablesVoucherType'
+        :'voucher_type' => :'ParameterFiltersListCustomerRedeemablesVoucherType',
+        :'junction' => :'Junction'
       }
     end
 
@@ -94,12 +94,13 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'id',
+        :'created_at',
         :'redeemable_id',
         :'redeemable_object',
         :'holder_role',
         :'campaign_id',
         :'campaign_type',
-        :'voucher_type'
+        :'voucher_type',
       ])
     end
 
@@ -110,10 +111,6 @@ module VoucherifySdk
       attributes = attributes.each_with_object({}) { |(k, v), h|
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'junction')
-        self.junction = attributes[:'junction']
-      end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
@@ -146,6 +143,10 @@ module VoucherifySdk
       if attributes.key?(:'voucher_type')
         self.voucher_type = attributes[:'voucher_type']
       end
+
+      if attributes.key?(:'junction')
+        self.junction = attributes[:'junction']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -168,7 +169,6 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          junction == o.junction &&
           id == o.id &&
           created_at == o.created_at &&
           redeemable_id == o.redeemable_id &&
@@ -176,7 +176,8 @@ module VoucherifySdk
           holder_role == o.holder_role &&
           campaign_id == o.campaign_id &&
           campaign_type == o.campaign_type &&
-          voucher_type == o.voucher_type
+          voucher_type == o.voucher_type &&
+          junction == o.junction
     end
 
     # @see the `==` method
@@ -188,7 +189,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [junction, id, created_at, redeemable_id, redeemable_object, holder_role, campaign_id, campaign_type, voucher_type].hash
+      [id, created_at, redeemable_id, redeemable_object, holder_role, campaign_id, campaign_type, voucher_type, junction].hash
     end
 
     # Builds the object from hash

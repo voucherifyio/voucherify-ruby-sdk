@@ -16,12 +16,33 @@ require 'time'
 module VoucherifySdk
   # Data filters used to narrow down the data records to be returned in the result.
   class FilterConditionsDateTime
-    attr_accessor :conditions
+    # Value is after this date. The value for this parameter is shown in the ISO 8601 format.
+    attr_accessor :after
+
+    # Value is before this date. The value for this parameter is shown in the ISO 8601 format.
+    attr_accessor :before
+
+    # Value is NOT null. The value for this parameter is an empty string.
+    attr_accessor :has_value
+
+    # Value is null. The value for this parameter is an empty string.
+    attr_accessor :is_unknown
+
+    # Value is more days ago before the current date and time, e.g. more than `10` days ago.
+    attr_accessor :more_than
+
+    # Value is less days before the current date and time, e.g. less than `10` days ago.
+    attr_accessor :less_than
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'conditions' => :'conditions'
+        :'after' => :'$after',
+        :'before' => :'$before',
+        :'has_value' => :'$has_value',
+        :'is_unknown' => :'$is_unknown',
+        :'more_than' => :'more_than',
+        :'less_than' => :'less_than'
       }
     end
 
@@ -33,14 +54,24 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'conditions' => :'FilterConditionsDateTimeConditions'
+        :'after' => :'Time',
+        :'before' => :'Time',
+        :'has_value' => :'String',
+        :'is_unknown' => :'String',
+        :'more_than' => :'Integer',
+        :'less_than' => :'Integer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'conditions'
+        :'after',
+        :'before',
+        :'has_value',
+        :'is_unknown',
+        :'more_than',
+        :'less_than'
       ])
     end
 
@@ -52,8 +83,28 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'conditions')
-        self.conditions = attributes[:'conditions']
+      if attributes.key?(:'after')
+        self.after = attributes[:'after']
+      end
+
+      if attributes.key?(:'before')
+        self.before = attributes[:'before']
+      end
+
+      if attributes.key?(:'has_value')
+        self.has_value = attributes[:'has_value']
+      end
+
+      if attributes.key?(:'is_unknown')
+        self.is_unknown = attributes[:'is_unknown']
+      end
+
+      if attributes.key?(:'more_than')
+        self.more_than = attributes[:'more_than']
+      end
+
+      if attributes.key?(:'less_than')
+        self.less_than = attributes[:'less_than']
       end
     end
 
@@ -77,7 +128,12 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          conditions == o.conditions
+          after == o.after &&
+          before == o.before &&
+          has_value == o.has_value &&
+          is_unknown == o.is_unknown &&
+          more_than == o.more_than &&
+          less_than == o.less_than
     end
 
     # @see the `==` method
@@ -89,7 +145,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [conditions].hash
+      [after, before, has_value, is_unknown, more_than, less_than].hash
     end
 
     # Builds the object from hash

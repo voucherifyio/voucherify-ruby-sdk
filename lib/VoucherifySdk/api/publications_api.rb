@@ -173,7 +173,7 @@ module VoucherifySdk
     # @option opts [ParameterResultListPublications] :result Filters by a publication result.
     # @option opts [ParameterVoucherTypeListPublications] :voucher_type Filters by a voucher type.
     # @option opts [Boolean] :is_referral_code This filter works only for the true option. If set to true, the query returns only publications of codes from referral campaigns. 
-    # @option opts [ParameterFiltersListPublications] :filters Filter conditions.
+    # @option opts [ParameterFiltersListPublications] :filters Filters for listing publications.
     # @option opts [String] :source_id Using this endpoint with a particular publication source_id, which was sent with the original request to create a publication, returns in the response, exactly the same code published initially because the code was assigned to the given publication. As a result, you can use this endpoint as a reference and return a code that was assigned in a publication by using a particular source_id.
     # @return [PublicationsListResponseBody]
     def list_publications(opts = {})
@@ -193,7 +193,7 @@ module VoucherifySdk
     # @option opts [ParameterResultListPublications] :result Filters by a publication result.
     # @option opts [ParameterVoucherTypeListPublications] :voucher_type Filters by a voucher type.
     # @option opts [Boolean] :is_referral_code This filter works only for the true option. If set to true, the query returns only publications of codes from referral campaigns. 
-    # @option opts [ParameterFiltersListPublications] :filters Filter conditions.
+    # @option opts [ParameterFiltersListPublications] :filters Filters for listing publications.
     # @option opts [String] :source_id Using this endpoint with a particular publication source_id, which was sent with the original request to create a publication, returns in the response, exactly the same code published initially because the code was assigned to the given publication. As a result, you can use this endpoint as a reference and return a code that was assigned in a publication by using a particular source_id.
     # @return [Array<(PublicationsListResponseBody, Integer, Hash)>] PublicationsListResponseBody data, response status code and response headers
     private def list_publications_with_http_info(opts = {})

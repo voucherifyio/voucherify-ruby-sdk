@@ -82,6 +82,9 @@ module VoucherifySdk
     # Indicates the status of the campaign's voucher generation.
     attr_accessor :vouchers_generation_status
 
+    # Indicates whether the campaign can be only read by a restricted user in the Areas and Stores enterprise feature. It is returned only to restricted users; this field is not returned for users with other roles.
+    attr_accessor :readonly
+
     # Indicates whether the resource can be deleted.
     attr_accessor :protected
 
@@ -146,6 +149,7 @@ module VoucherifySdk
         :'category' => :'category',
         :'creation_status' => :'creation_status',
         :'vouchers_generation_status' => :'vouchers_generation_status',
+        :'readonly' => :'readonly',
         :'protected' => :'protected',
         :'category_id' => :'category_id',
         :'categories' => :'categories',
@@ -186,6 +190,7 @@ module VoucherifySdk
         :'category' => :'String',
         :'creation_status' => :'String',
         :'vouchers_generation_status' => :'String',
+        :'readonly' => :'Boolean',
         :'protected' => :'Boolean',
         :'category_id' => :'String',
         :'categories' => :'Array<Category>',
@@ -217,6 +222,7 @@ module VoucherifySdk
         :'category',
         :'creation_status',
         :'vouchers_generation_status',
+        :'readonly',
         :'protected',
         :'category_id',
         :'categories',
@@ -326,6 +332,10 @@ module VoucherifySdk
         self.vouchers_generation_status = attributes[:'vouchers_generation_status']
       end
 
+      if attributes.key?(:'readonly')
+        self.readonly = attributes[:'readonly']
+      end
+
       if attributes.key?(:'protected')
         self.protected = attributes[:'protected']
       end
@@ -367,7 +377,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      campaign_type_validator = EnumAttributeValidator.new('String', ["LOYALTY_PROGRAM", "GIFT_VOUCHERS", "DISCOUNT_COUPONS", "PROMOTION", "REFERRAL_PROGRAM", "LUCKY_DRAW"])
+      campaign_type_validator = EnumAttributeValidator.new('String', ["LOYALTY_PROGRAM", "GIFT_VOUCHERS", "DISCOUNT_COUPONS", "PROMOTION", "REFERRAL_PROGRAM"])
       return false unless campaign_type_validator.valid?(@campaign_type)
       type_validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC"])
       return false unless type_validator.valid?(@type)
@@ -406,6 +416,7 @@ module VoucherifySdk
           category == o.category &&
           creation_status == o.creation_status &&
           vouchers_generation_status == o.vouchers_generation_status &&
+          readonly == o.readonly &&
           protected == o.protected &&
           category_id == o.category_id &&
           categories == o.categories &&
@@ -423,7 +434,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, description, campaign_type, type, voucher, auto_join, join_once, use_voucher_metadata_schema, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, vouchers_count, start_date, expiration_date, active, metadata, created_at, updated_at, category, creation_status, vouchers_generation_status, protected, category_id, categories, object, referral_program, loyalty_tiers_expiration].hash
+      [id, name, description, campaign_type, type, voucher, auto_join, join_once, use_voucher_metadata_schema, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, vouchers_count, start_date, expiration_date, active, metadata, created_at, updated_at, category, creation_status, vouchers_generation_status, readonly, protected, category_id, categories, object, referral_program, loyalty_tiers_expiration].hash
     end
 
     # Builds the object from hash

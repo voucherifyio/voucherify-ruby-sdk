@@ -154,6 +154,8 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *VoucherifySdk::AsyncActionsApi* | [**get_async_action**](docs/AsyncActionsApi.md#get_async_action) | **GET** /v1/async-actions/{asyncActionId} | Get Async Action
 *VoucherifySdk::AsyncActionsApi* | [**list_async_actions**](docs/AsyncActionsApi.md#list_async_actions) | **GET** /v1/async-actions | List Async Actions
+*VoucherifySdk::BinApi* | [**delete_bin_entry**](docs/BinApi.md#delete_bin_entry) | **DELETE** /v1/trash-bin/{binEntryId} | Delete Bin Entry
+*VoucherifySdk::BinApi* | [**list_bin_entries**](docs/BinApi.md#list_bin_entries) | **GET** /v1/trash-bin | List Bin Entries
 *VoucherifySdk::CampaignsApi* | [**add_voucher_with_specific_code_to_campaign**](docs/CampaignsApi.md#add_voucher_with_specific_code_to_campaign) | **POST** /v1/campaigns/{campaignId}/vouchers/{code} | Add Voucher with Specific Code to Campaign
 *VoucherifySdk::CampaignsApi* | [**add_vouchers_to_campaign**](docs/CampaignsApi.md#add_vouchers_to_campaign) | **POST** /v1/campaigns/{campaignId}/vouchers | Add Vouchers to Campaign
 *VoucherifySdk::CampaignsApi* | [**create_campaign**](docs/CampaignsApi.md#create_campaign) | **POST** /v1/campaigns | Create Campaign
@@ -186,7 +188,6 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::CustomersApi* | [**list_customer_segments**](docs/CustomersApi.md#list_customer_segments) | **GET** /v1/customers/{customerId}/segments | List Customer's Segments
 *VoucherifySdk::CustomersApi* | [**list_customers**](docs/CustomersApi.md#list_customers) | **GET** /v1/customers | List Customers
 *VoucherifySdk::CustomersApi* | [**update_customer**](docs/CustomersApi.md#update_customer) | **PUT** /v1/customers/{customerId} | Update Customer
-*VoucherifySdk::CustomersApi* | [**update_customers_consents**](docs/CustomersApi.md#update_customers_consents) | **PUT** /v1/customers/{customerId}/consents | Update Customer's consents [Deprecated]
 *VoucherifySdk::CustomersApi* | [**update_customers_in_bulk**](docs/CustomersApi.md#update_customers_in_bulk) | **POST** /v1/customers/bulk/async | Update Customers in Bulk
 *VoucherifySdk::CustomersApi* | [**update_customers_metadata_in_bulk**](docs/CustomersApi.md#update_customers_metadata_in_bulk) | **POST** /v1/customers/metadata/async | Update Customers' Metadata in Bulk
 *VoucherifySdk::EventsApi* | [**track_custom_event**](docs/EventsApi.md#track_custom_event) | **POST** /v1/events | Track Custom Event
@@ -239,6 +240,42 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::LoyaltiesApi* | [**update_loyalty_card_balance1**](docs/LoyaltiesApi.md#update_loyalty_card_balance1) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/balance | Add or Remove Loyalty Card Balance
 *VoucherifySdk::LoyaltiesApi* | [**update_loyalty_program**](docs/LoyaltiesApi.md#update_loyalty_program) | **PUT** /v1/loyalties/{campaignId} | Update Loyalty Campaign
 *VoucherifySdk::LoyaltiesApi* | [**update_reward_assignment1**](docs/LoyaltiesApi.md#update_reward_assignment1) | **PUT** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Update Reward Assignment
+*VoucherifySdk::ManagementApi* | [**assign_user**](docs/ManagementApi.md#assign_user) | **POST** /management/v1/projects/{projectId}/users | Assign User
+*VoucherifySdk::ManagementApi* | [**create_brand**](docs/ManagementApi.md#create_brand) | **POST** /management/v1/projects/{projectId}/branding | Create Brand
+*VoucherifySdk::ManagementApi* | [**create_custom_event_schema**](docs/ManagementApi.md#create_custom_event_schema) | **POST** /management/v1/projects/{projectId}/custom-event-schemas | Create Custom Event Schema
+*VoucherifySdk::ManagementApi* | [**create_metadata_schema**](docs/ManagementApi.md#create_metadata_schema) | **POST** /management/v1/projects/{projectId}/metadata-schemas | Create Metadata Schema
+*VoucherifySdk::ManagementApi* | [**create_project**](docs/ManagementApi.md#create_project) | **POST** /management/v1/projects | Create Project
+*VoucherifySdk::ManagementApi* | [**create_stacking_rules**](docs/ManagementApi.md#create_stacking_rules) | **POST** /management/v1/projects/{projectId}/stacking-rules | Create Stacking Rules
+*VoucherifySdk::ManagementApi* | [**create_webhook**](docs/ManagementApi.md#create_webhook) | **POST** /management/v1/projects/{projectId}/webhooks | Create Webhook
+*VoucherifySdk::ManagementApi* | [**delete_brand**](docs/ManagementApi.md#delete_brand) | **DELETE** /management/v1/projects/{projectId}/branding/{brandingId} | Delete Brand
+*VoucherifySdk::ManagementApi* | [**delete_custom_event_schema**](docs/ManagementApi.md#delete_custom_event_schema) | **DELETE** /management/v1/projects/{projectId}/custom-event-schemas/{customEventSchemaId} | Delete Custom Event Schema
+*VoucherifySdk::ManagementApi* | [**delete_metadata_schema**](docs/ManagementApi.md#delete_metadata_schema) | **DELETE** /management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId} | Delete Metadata Schema
+*VoucherifySdk::ManagementApi* | [**delete_project**](docs/ManagementApi.md#delete_project) | **DELETE** /management/v1/projects/{projectId} | Delete Project
+*VoucherifySdk::ManagementApi* | [**delete_stacking_rules**](docs/ManagementApi.md#delete_stacking_rules) | **DELETE** /management/v1/projects/{projectId}/stacking-rules/{stackingRulesId} | Delete Stacking Rules
+*VoucherifySdk::ManagementApi* | [**delete_webhook**](docs/ManagementApi.md#delete_webhook) | **DELETE** /management/v1/projects/{projectId}/webhooks/{webhookId} | Delete Webhook
+*VoucherifySdk::ManagementApi* | [**get_brand**](docs/ManagementApi.md#get_brand) | **GET** /management/v1/projects/{projectId}/branding/{brandingId} | Get Brand
+*VoucherifySdk::ManagementApi* | [**get_custom_event_schema**](docs/ManagementApi.md#get_custom_event_schema) | **GET** /management/v1/projects/{projectId}/custom-event-schemas/{customEventSchemaId} | Get Custom Event Schema
+*VoucherifySdk::ManagementApi* | [**get_metadata_schema1**](docs/ManagementApi.md#get_metadata_schema1) | **GET** /management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId} | Get Metadata Schema
+*VoucherifySdk::ManagementApi* | [**get_project**](docs/ManagementApi.md#get_project) | **GET** /management/v1/projects/{projectId} | Get Project
+*VoucherifySdk::ManagementApi* | [**get_stacking_rules**](docs/ManagementApi.md#get_stacking_rules) | **GET** /management/v1/projects/{projectId}/stacking-rules/{stackingRulesId} | Get Stacking Rules
+*VoucherifySdk::ManagementApi* | [**get_user**](docs/ManagementApi.md#get_user) | **GET** /management/v1/projects/{projectId}/users/{userId} | Get User
+*VoucherifySdk::ManagementApi* | [**get_webhook**](docs/ManagementApi.md#get_webhook) | **GET** /management/v1/projects/{projectId}/webhooks/{webhookId} | Get Webhook
+*VoucherifySdk::ManagementApi* | [**invite_user**](docs/ManagementApi.md#invite_user) | **POST** /management/v1/projects/users/invite | Invite a New User
+*VoucherifySdk::ManagementApi* | [**list_brands**](docs/ManagementApi.md#list_brands) | **GET** /management/v1/projects/{projectId}/branding | List Brands
+*VoucherifySdk::ManagementApi* | [**list_custom_event_schemas**](docs/ManagementApi.md#list_custom_event_schemas) | **GET** /management/v1/projects/{projectId}/custom-event-schemas | List Custom Event Schemas
+*VoucherifySdk::ManagementApi* | [**list_metadata_schemas1**](docs/ManagementApi.md#list_metadata_schemas1) | **GET** /management/v1/projects/{projectId}/metadata-schemas | List Metadata Schemas
+*VoucherifySdk::ManagementApi* | [**list_projects**](docs/ManagementApi.md#list_projects) | **GET** /management/v1/projects | List Projects
+*VoucherifySdk::ManagementApi* | [**list_stacking_rules**](docs/ManagementApi.md#list_stacking_rules) | **GET** /management/v1/projects/{projectId}/stacking-rules | List Stacking Rules
+*VoucherifySdk::ManagementApi* | [**list_users**](docs/ManagementApi.md#list_users) | **GET** /management/v1/projects/{projectId}/users | List Users
+*VoucherifySdk::ManagementApi* | [**list_webhooks**](docs/ManagementApi.md#list_webhooks) | **GET** /management/v1/projects/{projectId}/webhooks | List Webhooks
+*VoucherifySdk::ManagementApi* | [**unassign_user**](docs/ManagementApi.md#unassign_user) | **DELETE** /management/v1/projects/{projectId}/users/{userId} | Unassign User
+*VoucherifySdk::ManagementApi* | [**update_brand**](docs/ManagementApi.md#update_brand) | **PUT** /management/v1/projects/{projectId}/branding/{brandingId} | Update Brand
+*VoucherifySdk::ManagementApi* | [**update_custom_event_schema**](docs/ManagementApi.md#update_custom_event_schema) | **PUT** /management/v1/projects/{projectId}/custom-event-schemas/{customEventSchemaId} | Update Custom Event Schema
+*VoucherifySdk::ManagementApi* | [**update_metadata_schema**](docs/ManagementApi.md#update_metadata_schema) | **PUT** /management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId} | Update Metadata Schema
+*VoucherifySdk::ManagementApi* | [**update_project**](docs/ManagementApi.md#update_project) | **PUT** /management/v1/projects/{projectId} | Update Project
+*VoucherifySdk::ManagementApi* | [**update_stacking_rules**](docs/ManagementApi.md#update_stacking_rules) | **PUT** /management/v1/projects/{projectId}/stacking-rules/{stackingRulesId} | Update Stacking Rules
+*VoucherifySdk::ManagementApi* | [**update_user**](docs/ManagementApi.md#update_user) | **PUT** /management/v1/projects/{projectId}/users/{userId} | Update User
+*VoucherifySdk::ManagementApi* | [**update_webhook**](docs/ManagementApi.md#update_webhook) | **PUT** /management/v1/projects/{projectId}/webhooks/{webhookId} | Update Webhook
 *VoucherifySdk::OrdersApi* | [**create_order**](docs/OrdersApi.md#create_order) | **POST** /v1/orders | Create Order
 *VoucherifySdk::OrdersApi* | [**create_order_export**](docs/OrdersApi.md#create_order_export) | **POST** /v1/orders/export | Create Orders Export
 *VoucherifySdk::OrdersApi* | [**get_order**](docs/OrdersApi.md#get_order) | **GET** /v1/orders/{orderId} | Get Order
@@ -502,7 +539,6 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ExportsListResponseBody](docs/ExportsListResponseBody.md)
  - [VoucherifySdk::FieldConditions](docs/FieldConditions.md)
  - [VoucherifySdk::FilterConditionsDateTime](docs/FilterConditionsDateTime.md)
- - [VoucherifySdk::FilterConditionsDateTimeConditions](docs/FilterConditionsDateTimeConditions.md)
  - [VoucherifySdk::FilterConditionsString](docs/FilterConditionsString.md)
  - [VoucherifySdk::FiltersCondition](docs/FiltersCondition.md)
  - [VoucherifySdk::Gift](docs/Gift.md)
@@ -768,7 +804,127 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltyTiersExpirationAllExpirationDate](docs/LoyaltyTiersExpirationAllExpirationDate.md)
  - [VoucherifySdk::LoyaltyTiersExpirationAllExpirationDateRounding](docs/LoyaltyTiersExpirationAllExpirationDateRounding.md)
  - [VoucherifySdk::LoyaltyTiersExpirationAllStartDate](docs/LoyaltyTiersExpirationAllStartDate.md)
- - [VoucherifySdk::LuckyDraw](docs/LuckyDraw.md)
+ - [VoucherifySdk::ManagementProject](docs/ManagementProject.md)
+ - [VoucherifySdk::ManagementProjectApiUsageNotifications](docs/ManagementProjectApiUsageNotifications.md)
+ - [VoucherifySdk::ManagementProjectDefaultCodeConfig](docs/ManagementProjectDefaultCodeConfig.md)
+ - [VoucherifySdk::ManagementProjectLimits](docs/ManagementProjectLimits.md)
+ - [VoucherifySdk::ManagementProjectLimitsApiCallsItem](docs/ManagementProjectLimitsApiCallsItem.md)
+ - [VoucherifySdk::ManagementProjectLimitsBulkApiCallsItem](docs/ManagementProjectLimitsBulkApiCallsItem.md)
+ - [VoucherifySdk::ManagementProjectWebhooksCalloutNotifications](docs/ManagementProjectWebhooksCalloutNotifications.md)
+ - [VoucherifySdk::ManagementProjectWebhooksCalloutNotificationsDistributions](docs/ManagementProjectWebhooksCalloutNotificationsDistributions.md)
+ - [VoucherifySdk::ManagementProjectWebhooksCalloutNotificationsWebhooks](docs/ManagementProjectWebhooksCalloutNotificationsWebhooks.md)
+ - [VoucherifySdk::ManagementProjectsBranding](docs/ManagementProjectsBranding.md)
+ - [VoucherifySdk::ManagementProjectsBrandingAddress](docs/ManagementProjectsBrandingAddress.md)
+ - [VoucherifySdk::ManagementProjectsBrandingBrand](docs/ManagementProjectsBrandingBrand.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCockpits](docs/ManagementProjectsBrandingCockpits.md)
+ - [VoucherifySdk::ManagementProjectsBrandingContact](docs/ManagementProjectsBrandingContact.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCreateRequestBody](docs/ManagementProjectsBrandingCreateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCreateRequestBodyAddress](docs/ManagementProjectsBrandingCreateRequestBodyAddress.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCreateRequestBodyBrand](docs/ManagementProjectsBrandingCreateRequestBodyBrand.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCreateRequestBodyCockpits](docs/ManagementProjectsBrandingCreateRequestBodyCockpits.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCreateRequestBodyContact](docs/ManagementProjectsBrandingCreateRequestBodyContact.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCreateResponseBody](docs/ManagementProjectsBrandingCreateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCreateResponseBodyAddress](docs/ManagementProjectsBrandingCreateResponseBodyAddress.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCreateResponseBodyBrand](docs/ManagementProjectsBrandingCreateResponseBodyBrand.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCreateResponseBodyCockpits](docs/ManagementProjectsBrandingCreateResponseBodyCockpits.md)
+ - [VoucherifySdk::ManagementProjectsBrandingCreateResponseBodyContact](docs/ManagementProjectsBrandingCreateResponseBodyContact.md)
+ - [VoucherifySdk::ManagementProjectsBrandingGetResponseBody](docs/ManagementProjectsBrandingGetResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsBrandingGetResponseBodyAddress](docs/ManagementProjectsBrandingGetResponseBodyAddress.md)
+ - [VoucherifySdk::ManagementProjectsBrandingGetResponseBodyBrand](docs/ManagementProjectsBrandingGetResponseBodyBrand.md)
+ - [VoucherifySdk::ManagementProjectsBrandingGetResponseBodyCockpits](docs/ManagementProjectsBrandingGetResponseBodyCockpits.md)
+ - [VoucherifySdk::ManagementProjectsBrandingGetResponseBodyContact](docs/ManagementProjectsBrandingGetResponseBodyContact.md)
+ - [VoucherifySdk::ManagementProjectsBrandingListResponseBody](docs/ManagementProjectsBrandingListResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsBrandingUpdateRequestBody](docs/ManagementProjectsBrandingUpdateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsBrandingUpdateRequestBodyAddress](docs/ManagementProjectsBrandingUpdateRequestBodyAddress.md)
+ - [VoucherifySdk::ManagementProjectsBrandingUpdateRequestBodyBrand](docs/ManagementProjectsBrandingUpdateRequestBodyBrand.md)
+ - [VoucherifySdk::ManagementProjectsBrandingUpdateRequestBodyCockpits](docs/ManagementProjectsBrandingUpdateRequestBodyCockpits.md)
+ - [VoucherifySdk::ManagementProjectsBrandingUpdateRequestBodyContact](docs/ManagementProjectsBrandingUpdateRequestBodyContact.md)
+ - [VoucherifySdk::ManagementProjectsBrandingUpdateResponseBody](docs/ManagementProjectsBrandingUpdateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsBrandingUpdateResponseBodyAddress](docs/ManagementProjectsBrandingUpdateResponseBodyAddress.md)
+ - [VoucherifySdk::ManagementProjectsBrandingUpdateResponseBodyBrand](docs/ManagementProjectsBrandingUpdateResponseBodyBrand.md)
+ - [VoucherifySdk::ManagementProjectsBrandingUpdateResponseBodyCockpits](docs/ManagementProjectsBrandingUpdateResponseBodyCockpits.md)
+ - [VoucherifySdk::ManagementProjectsBrandingUpdateResponseBodyContact](docs/ManagementProjectsBrandingUpdateResponseBodyContact.md)
+ - [VoucherifySdk::ManagementProjectsCreateRequestBody](docs/ManagementProjectsCreateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsCreateRequestBodyApiUsageNotifications](docs/ManagementProjectsCreateRequestBodyApiUsageNotifications.md)
+ - [VoucherifySdk::ManagementProjectsCreateRequestBodyUsersItem](docs/ManagementProjectsCreateRequestBodyUsersItem.md)
+ - [VoucherifySdk::ManagementProjectsCreateRequestBodyWebhooksCalloutNotifications](docs/ManagementProjectsCreateRequestBodyWebhooksCalloutNotifications.md)
+ - [VoucherifySdk::ManagementProjectsCreateRequestBodyWebhooksCalloutNotificationsDistributions](docs/ManagementProjectsCreateRequestBodyWebhooksCalloutNotificationsDistributions.md)
+ - [VoucherifySdk::ManagementProjectsCreateRequestBodyWebhooksCalloutNotificationsWebhooks](docs/ManagementProjectsCreateRequestBodyWebhooksCalloutNotificationsWebhooks.md)
+ - [VoucherifySdk::ManagementProjectsCreateResponseBody](docs/ManagementProjectsCreateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsCreateResponseBodyApiUsageNotifications](docs/ManagementProjectsCreateResponseBodyApiUsageNotifications.md)
+ - [VoucherifySdk::ManagementProjectsCreateResponseBodyClientSideKey](docs/ManagementProjectsCreateResponseBodyClientSideKey.md)
+ - [VoucherifySdk::ManagementProjectsCreateResponseBodyServerSideKey](docs/ManagementProjectsCreateResponseBodyServerSideKey.md)
+ - [VoucherifySdk::ManagementProjectsCreateResponseBodyWebhooksCalloutNotifications](docs/ManagementProjectsCreateResponseBodyWebhooksCalloutNotifications.md)
+ - [VoucherifySdk::ManagementProjectsCreateResponseBodyWebhooksCalloutNotificationsDistributions](docs/ManagementProjectsCreateResponseBodyWebhooksCalloutNotificationsDistributions.md)
+ - [VoucherifySdk::ManagementProjectsCreateResponseBodyWebhooksCalloutNotificationsWebhooks](docs/ManagementProjectsCreateResponseBodyWebhooksCalloutNotificationsWebhooks.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchema](docs/ManagementProjectsCustomEventSchema.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemaSchema](docs/ManagementProjectsCustomEventSchemaSchema.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasCreateRequestBody](docs/ManagementProjectsCustomEventSchemasCreateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasCreateRequestBodySchema](docs/ManagementProjectsCustomEventSchemasCreateRequestBodySchema.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasCreateRequestBodySchemaPropertiesEntry](docs/ManagementProjectsCustomEventSchemasCreateRequestBodySchemaPropertiesEntry.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasCreateResponseBody](docs/ManagementProjectsCustomEventSchemasCreateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasCreateResponseBodySchema](docs/ManagementProjectsCustomEventSchemasCreateResponseBodySchema.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasGetResponseBody](docs/ManagementProjectsCustomEventSchemasGetResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasGetResponseBodySchema](docs/ManagementProjectsCustomEventSchemasGetResponseBodySchema.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasListResponseBody](docs/ManagementProjectsCustomEventSchemasListResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasUpdateRequestBody](docs/ManagementProjectsCustomEventSchemasUpdateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasUpdateRequestBodySchema](docs/ManagementProjectsCustomEventSchemasUpdateRequestBodySchema.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasUpdateResponseBody](docs/ManagementProjectsCustomEventSchemasUpdateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsCustomEventSchemasUpdateResponseBodySchema](docs/ManagementProjectsCustomEventSchemasUpdateResponseBodySchema.md)
+ - [VoucherifySdk::ManagementProjectsGetResponseBody](docs/ManagementProjectsGetResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsGetResponseBodyApiUsageNotifications](docs/ManagementProjectsGetResponseBodyApiUsageNotifications.md)
+ - [VoucherifySdk::ManagementProjectsGetResponseBodyDefaultCodeConfig](docs/ManagementProjectsGetResponseBodyDefaultCodeConfig.md)
+ - [VoucherifySdk::ManagementProjectsGetResponseBodyLimits](docs/ManagementProjectsGetResponseBodyLimits.md)
+ - [VoucherifySdk::ManagementProjectsGetResponseBodyLimitsApiCallsItem](docs/ManagementProjectsGetResponseBodyLimitsApiCallsItem.md)
+ - [VoucherifySdk::ManagementProjectsGetResponseBodyLimitsBulkApiCallsItem](docs/ManagementProjectsGetResponseBodyLimitsBulkApiCallsItem.md)
+ - [VoucherifySdk::ManagementProjectsGetResponseBodyWebhooksCalloutNotifications](docs/ManagementProjectsGetResponseBodyWebhooksCalloutNotifications.md)
+ - [VoucherifySdk::ManagementProjectsGetResponseBodyWebhooksCalloutNotificationsDistributions](docs/ManagementProjectsGetResponseBodyWebhooksCalloutNotificationsDistributions.md)
+ - [VoucherifySdk::ManagementProjectsGetResponseBodyWebhooksCalloutNotificationsWebhooks](docs/ManagementProjectsGetResponseBodyWebhooksCalloutNotificationsWebhooks.md)
+ - [VoucherifySdk::ManagementProjectsListResponseBody](docs/ManagementProjectsListResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsMetadataSchema](docs/ManagementProjectsMetadataSchema.md)
+ - [VoucherifySdk::ManagementProjectsMetadataSchemaDefinition](docs/ManagementProjectsMetadataSchemaDefinition.md)
+ - [VoucherifySdk::ManagementProjectsMetadataSchemasCreateRequestBody](docs/ManagementProjectsMetadataSchemasCreateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsMetadataSchemasCreateResponseBody](docs/ManagementProjectsMetadataSchemasCreateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsMetadataSchemasGetResponseBody](docs/ManagementProjectsMetadataSchemasGetResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsMetadataSchemasListResponseBody](docs/ManagementProjectsMetadataSchemasListResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsMetadataSchemasUpdateRequestBody](docs/ManagementProjectsMetadataSchemasUpdateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsMetadataSchemasUpdateResponseBody](docs/ManagementProjectsMetadataSchemasUpdateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsStackingRules](docs/ManagementProjectsStackingRules.md)
+ - [VoucherifySdk::ManagementProjectsStackingRulesCreateRequestBody](docs/ManagementProjectsStackingRulesCreateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsStackingRulesCreateResponseBody](docs/ManagementProjectsStackingRulesCreateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsStackingRulesGetResponseBody](docs/ManagementProjectsStackingRulesGetResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsStackingRulesListResponseBody](docs/ManagementProjectsStackingRulesListResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsStackingRulesUpdateRequestBody](docs/ManagementProjectsStackingRulesUpdateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsStackingRulesUpdateResponseBody](docs/ManagementProjectsStackingRulesUpdateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsUpdateRequestBody](docs/ManagementProjectsUpdateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsUpdateRequestBodyApiUsageNotifications](docs/ManagementProjectsUpdateRequestBodyApiUsageNotifications.md)
+ - [VoucherifySdk::ManagementProjectsUpdateRequestBodyDefaultCodeConfig](docs/ManagementProjectsUpdateRequestBodyDefaultCodeConfig.md)
+ - [VoucherifySdk::ManagementProjectsUpdateRequestBodyWebhooksCalloutNotifications](docs/ManagementProjectsUpdateRequestBodyWebhooksCalloutNotifications.md)
+ - [VoucherifySdk::ManagementProjectsUpdateRequestBodyWebhooksCalloutNotificationsDistributions](docs/ManagementProjectsUpdateRequestBodyWebhooksCalloutNotificationsDistributions.md)
+ - [VoucherifySdk::ManagementProjectsUpdateRequestBodyWebhooksCalloutNotificationsWebhooks](docs/ManagementProjectsUpdateRequestBodyWebhooksCalloutNotificationsWebhooks.md)
+ - [VoucherifySdk::ManagementProjectsUpdateResponseBody](docs/ManagementProjectsUpdateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsUpdateResponseBodyApiUsageNotifications](docs/ManagementProjectsUpdateResponseBodyApiUsageNotifications.md)
+ - [VoucherifySdk::ManagementProjectsUpdateResponseBodyDefaultCodeConfig](docs/ManagementProjectsUpdateResponseBodyDefaultCodeConfig.md)
+ - [VoucherifySdk::ManagementProjectsUpdateResponseBodyLimits](docs/ManagementProjectsUpdateResponseBodyLimits.md)
+ - [VoucherifySdk::ManagementProjectsUpdateResponseBodyLimitsApiCallsItem](docs/ManagementProjectsUpdateResponseBodyLimitsApiCallsItem.md)
+ - [VoucherifySdk::ManagementProjectsUpdateResponseBodyLimitsBulkApiCallsItem](docs/ManagementProjectsUpdateResponseBodyLimitsBulkApiCallsItem.md)
+ - [VoucherifySdk::ManagementProjectsUpdateResponseBodyWebhooksCalloutNotifications](docs/ManagementProjectsUpdateResponseBodyWebhooksCalloutNotifications.md)
+ - [VoucherifySdk::ManagementProjectsUpdateResponseBodyWebhooksCalloutNotificationsDistributions](docs/ManagementProjectsUpdateResponseBodyWebhooksCalloutNotificationsDistributions.md)
+ - [VoucherifySdk::ManagementProjectsUpdateResponseBodyWebhooksCalloutNotificationsWebhooks](docs/ManagementProjectsUpdateResponseBodyWebhooksCalloutNotificationsWebhooks.md)
+ - [VoucherifySdk::ManagementProjectsUsersAssignRequestBody](docs/ManagementProjectsUsersAssignRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsUsersAssignResponseBody](docs/ManagementProjectsUsersAssignResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsUsersGetUserResponseBody](docs/ManagementProjectsUsersGetUserResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsUsersInviteCreateRequestBody](docs/ManagementProjectsUsersInviteCreateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsUsersListResponseBody](docs/ManagementProjectsUsersListResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsUsersUpdateRoleRequestBody](docs/ManagementProjectsUsersUpdateRoleRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsUsersUpdateRoleResponseBody](docs/ManagementProjectsUsersUpdateRoleResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsWebhook](docs/ManagementProjectsWebhook.md)
+ - [VoucherifySdk::ManagementProjectsWebhooksCreateRequestBody](docs/ManagementProjectsWebhooksCreateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsWebhooksCreateResponseBody](docs/ManagementProjectsWebhooksCreateResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsWebhooksGetResponseBody](docs/ManagementProjectsWebhooksGetResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsWebhooksListResponseBody](docs/ManagementProjectsWebhooksListResponseBody.md)
+ - [VoucherifySdk::ManagementProjectsWebhooksUpdateRequestBody](docs/ManagementProjectsWebhooksUpdateRequestBody.md)
+ - [VoucherifySdk::ManagementProjectsWebhooksUpdateResponseBody](docs/ManagementProjectsWebhooksUpdateResponseBody.md)
  - [VoucherifySdk::MappingPoints](docs/MappingPoints.md)
  - [VoucherifySdk::MemberActivity](docs/MemberActivity.md)
  - [VoucherifySdk::Order](docs/Order.md)
@@ -796,10 +952,25 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ParameterCampaignType](docs/ParameterCampaignType.md)
  - [VoucherifySdk::ParameterCreatedBeforeAfter](docs/ParameterCreatedBeforeAfter.md)
  - [VoucherifySdk::ParameterExpandListCampaigns](docs/ParameterExpandListCampaigns.md)
+ - [VoucherifySdk::ParameterFiltersListBin](docs/ParameterFiltersListBin.md)
+ - [VoucherifySdk::ParameterFiltersListBinId](docs/ParameterFiltersListBinId.md)
+ - [VoucherifySdk::ParameterFiltersListBinResourceId](docs/ParameterFiltersListBinResourceId.md)
+ - [VoucherifySdk::ParameterFiltersListBinResourceName](docs/ParameterFiltersListBinResourceName.md)
+ - [VoucherifySdk::ParameterFiltersListBinResourceType](docs/ParameterFiltersListBinResourceType.md)
+ - [VoucherifySdk::ParameterFiltersListBinResourceTypeConditions](docs/ParameterFiltersListBinResourceTypeConditions.md)
+ - [VoucherifySdk::ParameterFiltersListCampaigns](docs/ParameterFiltersListCampaigns.md)
+ - [VoucherifySdk::ParameterFiltersListCampaignsCampaignStatus](docs/ParameterFiltersListCampaignsCampaignStatus.md)
+ - [VoucherifySdk::ParameterFiltersListCampaignsCampaignStatusConditions](docs/ParameterFiltersListCampaignsCampaignStatusConditions.md)
+ - [VoucherifySdk::ParameterFiltersListCampaignsCategories](docs/ParameterFiltersListCampaignsCategories.md)
+ - [VoucherifySdk::ParameterFiltersListCampaignsCategoryIds](docs/ParameterFiltersListCampaignsCategoryIds.md)
+ - [VoucherifySdk::ParameterFiltersListCampaignsIsReferralCode](docs/ParameterFiltersListCampaignsIsReferralCode.md)
+ - [VoucherifySdk::ParameterFiltersListCampaignsValidityTimeframe](docs/ParameterFiltersListCampaignsValidityTimeframe.md)
+ - [VoucherifySdk::ParameterFiltersListCampaignsVoucherType](docs/ParameterFiltersListCampaignsVoucherType.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemables](docs/ParameterFiltersListCustomerRedeemables.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesCampaignId](docs/ParameterFiltersListCustomerRedeemablesCampaignId.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesCampaignType](docs/ParameterFiltersListCustomerRedeemablesCampaignType.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesCampaignTypeConditions](docs/ParameterFiltersListCustomerRedeemablesCampaignTypeConditions.md)
+ - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesCreatedAt](docs/ParameterFiltersListCustomerRedeemablesCreatedAt.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesHolderRole](docs/ParameterFiltersListCustomerRedeemablesHolderRole.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesHolderRoleConditions](docs/ParameterFiltersListCustomerRedeemablesHolderRoleConditions.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesId](docs/ParameterFiltersListCustomerRedeemablesId.md)
@@ -832,6 +1003,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ParameterOrder](docs/ParameterOrder.md)
  - [VoucherifySdk::ParameterOrderCreatedAt](docs/ParameterOrderCreatedAt.md)
  - [VoucherifySdk::ParameterOrderListAllPromotionStacks](docs/ParameterOrderListAllPromotionStacks.md)
+ - [VoucherifySdk::ParameterOrderListBin](docs/ParameterOrderListBin.md)
  - [VoucherifySdk::ParameterOrderListCampaigns](docs/ParameterOrderListCampaigns.md)
  - [VoucherifySdk::ParameterOrderListCustomers](docs/ParameterOrderListCustomers.md)
  - [VoucherifySdk::ParameterOrderListEarningRules](docs/ParameterOrderListEarningRules.md)
@@ -1147,6 +1319,10 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::SkusImportCsvCreateResponseBody](docs/SkusImportCsvCreateResponseBody.md)
  - [VoucherifySdk::SkusListForProduct](docs/SkusListForProduct.md)
  - [VoucherifySdk::StackingRules](docs/StackingRules.md)
+ - [VoucherifySdk::TrashBinItem](docs/TrashBinItem.md)
+ - [VoucherifySdk::TrashBinListResponseBody](docs/TrashBinListResponseBody.md)
+ - [VoucherifySdk::UsageNotifications](docs/UsageNotifications.md)
+ - [VoucherifySdk::User](docs/User.md)
  - [VoucherifySdk::ValidationRule](docs/ValidationRule.md)
  - [VoucherifySdk::ValidationRuleApplicableTo](docs/ValidationRuleApplicableTo.md)
  - [VoucherifySdk::ValidationRuleAssignment](docs/ValidationRuleAssignment.md)

@@ -15,8 +15,6 @@ require 'time'
 
 module VoucherifySdk
   class ParameterFiltersListRedemptions
-    attr_accessor :junction
-
     attr_accessor :voucher_code
 
     attr_accessor :related_object_id
@@ -36,6 +34,8 @@ module VoucherifySdk
     attr_accessor :campaign_name
 
     attr_accessor :user_login
+
+    attr_accessor :junction
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -62,7 +62,6 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'junction' => :'junction',
         :'voucher_code' => :'voucher_code',
         :'related_object_id' => :'related_object_id',
         :'related_object_parent_id' => :'related_object_parent_id',
@@ -72,7 +71,8 @@ module VoucherifySdk
         :'object' => :'object',
         :'customer_id' => :'customer_id',
         :'campaign_name' => :'campaign_name',
-        :'user_login' => :'user_login'
+        :'user_login' => :'user_login',
+        :'junction' => :'junction'
       }
     end
 
@@ -84,7 +84,6 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'junction' => :'Junction',
         :'voucher_code' => :'ParameterFiltersListRedemptionsVoucherCode',
         :'related_object_id' => :'ParameterFiltersListRedemptionsRelatedObjectId',
         :'related_object_parent_id' => :'ParameterFiltersListRedemptionsRelatedObjectParentId',
@@ -94,7 +93,8 @@ module VoucherifySdk
         :'object' => :'ParameterFiltersListRedemptionsObject',
         :'customer_id' => :'ParameterFiltersListRedemptionsCustomerId',
         :'campaign_name' => :'ParameterFiltersListRedemptionsCampaignName',
-        :'user_login' => :'ParameterFiltersListRedemptionsUserLogin'
+        :'user_login' => :'ParameterFiltersListRedemptionsUserLogin',
+        :'junction' => :'Junction'
       }
     end
 
@@ -110,7 +110,7 @@ module VoucherifySdk
         :'object',
         :'customer_id',
         :'campaign_name',
-        :'user_login'
+        :'user_login',
       ])
     end
 
@@ -121,10 +121,6 @@ module VoucherifySdk
       attributes = attributes.each_with_object({}) { |(k, v), h|
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'junction')
-        self.junction = attributes[:'junction']
-      end
 
       if attributes.key?(:'voucher_code')
         self.voucher_code = attributes[:'voucher_code']
@@ -165,6 +161,10 @@ module VoucherifySdk
       if attributes.key?(:'user_login')
         self.user_login = attributes[:'user_login']
       end
+
+      if attributes.key?(:'junction')
+        self.junction = attributes[:'junction']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -187,7 +187,6 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          junction == o.junction &&
           voucher_code == o.voucher_code &&
           related_object_id == o.related_object_id &&
           related_object_parent_id == o.related_object_parent_id &&
@@ -197,7 +196,8 @@ module VoucherifySdk
           object == o.object &&
           customer_id == o.customer_id &&
           campaign_name == o.campaign_name &&
-          user_login == o.user_login
+          user_login == o.user_login &&
+          junction == o.junction
     end
 
     # @see the `==` method
@@ -209,7 +209,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [junction, voucher_code, related_object_id, related_object_parent_id, parent_redemption_id, failure_code, result, object, customer_id, campaign_name, user_login].hash
+      [voucher_code, related_object_id, related_object_parent_id, parent_redemption_id, failure_code, result, object, customer_id, campaign_name, user_login, junction].hash
     end
 
     # Builds the object from hash
