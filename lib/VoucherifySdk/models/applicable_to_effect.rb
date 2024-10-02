@@ -15,12 +15,14 @@ require 'time'
 
 module VoucherifySdk
   class ApplicableToEffect
-    EVERY = "APPLY_TO_EVERY".freeze
-    CHEAPEST = "APPLY_TO_CHEAPEST".freeze
-    MOST_EXPENSIVE = "APPLY_TO_MOST_EXPENSIVE".freeze
+    TO_EVERY = "APPLY_TO_EVERY".freeze
+    TO_CHEAPEST = "APPLY_TO_CHEAPEST".freeze
+    FROM_CHEAPEST = "APPLY_FROM_CHEAPEST".freeze
+    TO_MOST_EXPENSIVE = "APPLY_TO_MOST_EXPENSIVE".freeze
+    FROM_MOST_EXPENSIVE = "APPLY_FROM_MOST_EXPENSIVE".freeze
 
     def self.all_vars
-      @all_vars ||= [EVERY, CHEAPEST, MOST_EXPENSIVE].freeze
+      @all_vars ||= [TO_EVERY, TO_CHEAPEST, FROM_CHEAPEST, TO_MOST_EXPENSIVE, FROM_MOST_EXPENSIVE].freeze
     end
 
     # Builds the enum from string

@@ -1417,7 +1417,9 @@ end
 api_instance = VoucherifySdk::LoyaltiesApi.new
 member_id = 'member_id_example' # String | A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
 opts = {
-  limit: 56 # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+  order: VoucherifySdk::ParameterOrderListTransactions::ID, # ParameterOrderListTransactions | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+  starting_after_id: 'starting_after_id_example' # String | A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
 }
 
 begin
@@ -1435,6 +1437,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **member_id** | **String** | A unique code identifying the loyalty card that you are looking to retrieve transaction data for. |  |
 | **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
+| **order** | [**ParameterOrderListTransactions**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID. | [optional] |
 
 ### Return type
 
@@ -1481,7 +1485,8 @@ campaign_id = 'campaign_id_example' # String | A unique identifier of the loyalt
 member_id = 'member_id_example' # String | A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
 opts = {
   limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
-  page: 56 # Integer | Which page of results to return. The lowest value is 1.
+  order: VoucherifySdk::ParameterOrderListTransactions::ID, # ParameterOrderListTransactions | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+  starting_after_id: 'starting_after_id_example' # String | A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
 }
 
 begin
@@ -1500,7 +1505,8 @@ end
 | **campaign_id** | **String** | A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return. |  |
 | **member_id** | **String** | A unique code identifying the loyalty card that you are looking to retrieve transaction data for. |  |
 | **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
+| **order** | [**ParameterOrderListTransactions**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID. | [optional] |
 
 ### Return type
 

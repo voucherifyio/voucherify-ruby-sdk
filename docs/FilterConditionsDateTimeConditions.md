@@ -1,4 +1,4 @@
-# VoucherifySdk::ParameterFiltersListCustomerRedeemablesCreatedAtConditions
+# VoucherifySdk::FilterConditionsDateTimeConditions
 
 ## Properties
 

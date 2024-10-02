@@ -113,6 +113,14 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
 
 ## 📅 Changelog
 
+- **2024-10-02** - `7.0.0`
+  - Fix object parsing in query. For example `filters` while listing redemptions.
+  - !!! BREAKING CHANGES !!!
+    - Pagination changed on listing card transactions - NO `page` param is supported - use `starting_after_id` instead.
+    - Pagination changed on listing voucher transactions - NO `page` param is supported - use `starting_after_id` instead.
+    - ApplicableToEffect - changed - `EVERY` -> `TO_EVERY`, `CHEAPEST` -> `TO_CHEAPEST`, `MOST_EXPENSIVE` -> `TO_MOST_EXPENSIVE`, 2 new values introduced.
+    - `list_publications` parameter `filters` have changed - now uses `ParameterFiltersListPublications` instead of `String`
+    - `ParameterFiltersListRedemptions` and `ParameterFiltersListCustomerRedeemables` have been updated
 - **2024-09-05** - `6.0.0` - The new version of the SKD includes coverage for all the most commonly used Voucherify endpoints and supports typed models.
 
 *Previous versions of the SDK are no longer supported, and we highly recommend upgrading to version 6.0.0, which is now designated as Long-Term Support (LTS).*
@@ -493,6 +501,8 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ExportsGetResponseBodyResult](docs/ExportsGetResponseBodyResult.md)
  - [VoucherifySdk::ExportsListResponseBody](docs/ExportsListResponseBody.md)
  - [VoucherifySdk::FieldConditions](docs/FieldConditions.md)
+ - [VoucherifySdk::FilterConditionsDateTime](docs/FilterConditionsDateTime.md)
+ - [VoucherifySdk::FilterConditionsDateTimeConditions](docs/FilterConditionsDateTimeConditions.md)
  - [VoucherifySdk::FilterConditionsString](docs/FilterConditionsString.md)
  - [VoucherifySdk::FiltersCondition](docs/FiltersCondition.md)
  - [VoucherifySdk::Gift](docs/Gift.md)
@@ -790,8 +800,6 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesCampaignId](docs/ParameterFiltersListCustomerRedeemablesCampaignId.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesCampaignType](docs/ParameterFiltersListCustomerRedeemablesCampaignType.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesCampaignTypeConditions](docs/ParameterFiltersListCustomerRedeemablesCampaignTypeConditions.md)
- - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesCreatedAt](docs/ParameterFiltersListCustomerRedeemablesCreatedAt.md)
- - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesCreatedAtConditions](docs/ParameterFiltersListCustomerRedeemablesCreatedAtConditions.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesHolderRole](docs/ParameterFiltersListCustomerRedeemablesHolderRole.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesHolderRoleConditions](docs/ParameterFiltersListCustomerRedeemablesHolderRoleConditions.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesId](docs/ParameterFiltersListCustomerRedeemablesId.md)
@@ -800,6 +808,16 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesRedeemableObjectConditions](docs/ParameterFiltersListCustomerRedeemablesRedeemableObjectConditions.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesVoucherType](docs/ParameterFiltersListCustomerRedeemablesVoucherType.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesVoucherTypeConditions](docs/ParameterFiltersListCustomerRedeemablesVoucherTypeConditions.md)
+ - [VoucherifySdk::ParameterFiltersListPublications](docs/ParameterFiltersListPublications.md)
+ - [VoucherifySdk::ParameterFiltersListPublicationsCampaignName](docs/ParameterFiltersListPublicationsCampaignName.md)
+ - [VoucherifySdk::ParameterFiltersListPublicationsCustomerId](docs/ParameterFiltersListPublicationsCustomerId.md)
+ - [VoucherifySdk::ParameterFiltersListPublicationsFailureCode](docs/ParameterFiltersListPublicationsFailureCode.md)
+ - [VoucherifySdk::ParameterFiltersListPublicationsIsReferralCode](docs/ParameterFiltersListPublicationsIsReferralCode.md)
+ - [VoucherifySdk::ParameterFiltersListPublicationsParentObjectId](docs/ParameterFiltersListPublicationsParentObjectId.md)
+ - [VoucherifySdk::ParameterFiltersListPublicationsRelatedObjectId](docs/ParameterFiltersListPublicationsRelatedObjectId.md)
+ - [VoucherifySdk::ParameterFiltersListPublicationsResult](docs/ParameterFiltersListPublicationsResult.md)
+ - [VoucherifySdk::ParameterFiltersListPublicationsSourceId](docs/ParameterFiltersListPublicationsSourceId.md)
+ - [VoucherifySdk::ParameterFiltersListPublicationsVoucherType](docs/ParameterFiltersListPublicationsVoucherType.md)
  - [VoucherifySdk::ParameterFiltersListRedemptions](docs/ParameterFiltersListRedemptions.md)
  - [VoucherifySdk::ParameterFiltersListRedemptionsCampaignName](docs/ParameterFiltersListRedemptionsCampaignName.md)
  - [VoucherifySdk::ParameterFiltersListRedemptionsCustomerId](docs/ParameterFiltersListRedemptionsCustomerId.md)
@@ -825,6 +843,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ParameterOrderListPublications](docs/ParameterOrderListPublications.md)
  - [VoucherifySdk::ParameterOrderListRedeemables](docs/ParameterOrderListRedeemables.md)
  - [VoucherifySdk::ParameterOrderListRedemptions](docs/ParameterOrderListRedemptions.md)
+ - [VoucherifySdk::ParameterOrderListTransactions](docs/ParameterOrderListTransactions.md)
  - [VoucherifySdk::ParameterOrderListValidationRuleAssignments](docs/ParameterOrderListValidationRuleAssignments.md)
  - [VoucherifySdk::ParameterOrderListValidationRules](docs/ParameterOrderListValidationRules.md)
  - [VoucherifySdk::ParameterOrderVouchers](docs/ParameterOrderVouchers.md)
