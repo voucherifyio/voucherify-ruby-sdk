@@ -121,6 +121,15 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
     - ApplicableToEffect - changed - `EVERY` -> `TO_EVERY`, `CHEAPEST` -> `TO_CHEAPEST`, `MOST_EXPENSIVE` -> `TO_MOST_EXPENSIVE`, 2 new values introduced.
     - `list_publications` parameter `filters` have changed - now uses `ParameterFiltersListPublications` instead of `String`
     - `ParameterFiltersListRedemptions` and `ParameterFiltersListCustomerRedeemables` have been updated
+    - `lucky_draw`, `lucky_draw_code` have been deleted from everywhere and no longer supported
+    - CampaignsUpdateRequestBody - properties `activity_duration_after_publishing`, `join_once`, `auto_join`, `type`, `winners_count`, `unique_winners_per_draw`, `unique_winners` have been deleted and no longer supported
+    - `update_customers_consents` is deleted and no longer supported
+    - `FilterConditionsDateTimeConditions` model has been renamed to `FilterConditionsDateTime`
+    - FilterConditionsDateTime - `conditions` property has been divided on `after`, `before`, `has_value`, `is_unknown`, `more_than`, `less_than` properties
+    ParamterFiltersListCustomerRedeemables - model name of `createdAt` has been renamed from `FilterConditionsDateTime` to `ParameterFiltersListCustomerRedeemablesCreatedAt`
+    - `junction` property is deleted is no longer supported in models: 
+        - `ParameterFiltersListCustomerRedeemables`
+        - `ParameterFiltersListRedemptions`
 - **2024-09-05** - `6.0.0` - The new version of the SKD includes coverage for all the most commonly used Voucherify endpoints and supports typed models.
 
 *Previous versions of the SDK are no longer supported, and we highly recommend upgrading to version 6.0.0, which is now designated as Long-Term Support (LTS).*
