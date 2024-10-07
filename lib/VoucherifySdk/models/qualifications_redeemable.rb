@@ -118,7 +118,7 @@ module VoucherifySdk
         :'applicable_to' => :'ApplicableToResultList',
         :'inapplicable_to' => :'InapplicableToResultList',
         :'metadata' => :'Object',
-        :'categories' => :'Array<Category>',
+        :'categories' => :'Array<CategoryWithStackingRulesType>',
         :'banner' => :'String',
         :'name' => :'String',
         :'campaign_name' => :'String',

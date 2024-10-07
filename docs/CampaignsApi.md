@@ -597,7 +597,8 @@ opts = {
   page: 56, # Integer | Which page of results to return. The lowest value is 1.
   campaign_type: VoucherifySdk::ParameterCampaignType::PROMOTION, # ParameterCampaignType | This attribute allows filtering by campaign type.
   expand: VoucherifySdk::ParameterExpandListCampaigns::CATEGORY, # ParameterExpandListCampaigns | Include an expanded categories object in the response.
-  order: VoucherifySdk::ParameterOrderListCampaigns::CREATED_AT # ParameterOrderListCampaigns | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+  order: VoucherifySdk::ParameterOrderListCampaigns::CREATED_AT, # ParameterOrderListCampaigns | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+  filters: VoucherifySdk::ParameterFiltersListCampaigns.new # ParameterFiltersListCampaigns | Filters the results by campaign status or whether the campaign is a referral campaign.
 }
 
 begin
@@ -618,6 +619,7 @@ end
 | **campaign_type** | [**ParameterCampaignType**](.md) | This attribute allows filtering by campaign type. | [optional] |
 | **expand** | [**ParameterExpandListCampaigns**](.md) | Include an expanded categories object in the response. | [optional][default to &#39;category&#39;] |
 | **order** | [**ParameterOrderListCampaigns**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **filters** | [**ParameterFiltersListCampaigns**](.md) | Filters the results by campaign status or whether the campaign is a referral campaign. | [optional] |
 
 ### Return type
 

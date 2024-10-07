@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `v1/rewards/{rewardId}/assignments/{assignmentId}`.
+  # Response body schema for **PUT** `v1/rewards/{rewardId}/assignments/{assignmentId}`.
   class RewardsAssignmentsUpdateResponseBody
     # Unique reward assignment ID, assigned by Voucherify.
     attr_accessor :id

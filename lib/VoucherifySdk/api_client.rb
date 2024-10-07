@@ -77,6 +77,27 @@ module VoucherifySdk
       return data, response.code, response.headers
     end
 
+
+    # Serializes the query parameters for the HTTP request
+    #
+    # This method transforms the given parameters, converting any objects
+    # that respond to `to_hash` into a hash representation. This is necessary
+    # to ensure that the query parameters are in the correct format expected
+    # by the API.
+    #
+    # @param [Hash] params A hash of query parameters to serialize
+    # @return [Hash] A new hash with serialized query parameters
+    def serialize_query_params(params)
+      params.transform_values do |value|
+        if value.respond_to?(:to_hash)
+          value.to_hash
+        else
+          value
+        end
+      end
+    end
+
+
     # Builds the HTTP request
     #
     # @param [String] http_method HTTP method/verb (e.g. POST)
@@ -103,7 +124,7 @@ module VoucherifySdk
       req_opts = {
         :method => http_method,
         :headers => header_params,
-        :params => query_params,
+        :params => serialize_query_params(query_params),
         :params_encoding => @config.params_encoding,
         :timeout => @config.timeout,
         :ssl_verifypeer => @config.verify_ssl,

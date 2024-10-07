@@ -17,7 +17,6 @@ module VoucherifySdk
   class RedemptionsListResponseBodyRedemptionsItemChannel
     attr_accessor :channel_id
 
-    # The source of the channel for the redemption. A `USER` corresponds to the Voucherify Dashboard and an `API` corresponds to the API.
     attr_accessor :channel_type
 
     class EnumAttributeValidator
@@ -66,7 +65,6 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'channel_type'
       ])
     end
 
@@ -99,7 +97,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      channel_type_validator = EnumAttributeValidator.new('String', ["USER", "API"])
+      channel_type_validator = EnumAttributeValidator.new('String', ["USER", "API", "AUTO_REDEEM"])
       return false unless channel_type_validator.valid?(@channel_type)
       true
     end

@@ -22,7 +22,7 @@ module VoucherifySdk
     # Category name.
     attr_accessor :name
 
-    # Category hierarchy.
+    # Category hierarchy. Categories with lower hierarchy are processed before categories with higher hierarchy value.
     attr_accessor :hierarchy
 
     attr_accessor :object
@@ -126,6 +126,10 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@hierarchy.nil? && @hierarchy < 0
+        invalid_properties.push('invalid value for "hierarchy", must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
@@ -133,6 +137,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@hierarchy.nil? && @hierarchy < 0
       object_validator = EnumAttributeValidator.new('String', ["category"])
       return false unless object_validator.valid?(@object)
       true

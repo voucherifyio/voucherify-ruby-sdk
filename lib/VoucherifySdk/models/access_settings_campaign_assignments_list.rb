@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Lists all assignments of the campaign to areas and stores if the Areas and Stores feature is enabled (Enterprise feature).
+  # Lists all assignments of the campaign to areas and stores.  **NOTE**: This object is returned only if the Areas and Stores enterprise feature is enabled. Contact [Voucherify Sales](https://www.voucherify.io/contact-sales) to learn more.
   class AccessSettingsCampaignAssignmentsList
     # The type of the object represented by JSON. Default is `list`. This object stores information about campaign assignments to areas and stores
     attr_accessor :object

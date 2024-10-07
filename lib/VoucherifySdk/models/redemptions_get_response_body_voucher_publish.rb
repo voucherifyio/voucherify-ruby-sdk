@@ -21,7 +21,7 @@ module VoucherifySdk
     # Publication events counter.
     attr_accessor :count
 
-    # The endpoint where this list of publications can be accessed using a GET method. `/v1/vouchers/{voucher_code}/publications`
+    # The endpoint where this list of publications can be accessed using a **GET** method. `/v1/vouchers/{voucher_code}/publications`
     attr_accessor :url
 
     # Attribute mapping from ruby-style variable name to JSON key.

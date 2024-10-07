@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for POST `/validations`.
+  # Response body schema for **POST** `v1/validations`.
   class ValidationsValidateResponseBody
     # The result of the validation. It takes all of the redeemables into account and returns a `false` if at least one redeemable is inapplicable. Returns `true` if all redeemables are applicable.
     attr_accessor :valid

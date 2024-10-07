@@ -31,6 +31,30 @@ module VoucherifySdk
 
     attr_accessor :voucher_type
 
+    attr_accessor :junction
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -41,7 +65,8 @@ module VoucherifySdk
         :'holder_role' => :'holder_role',
         :'campaign_id' => :'campaign_id',
         :'campaign_type' => :'campaign_type',
-        :'voucher_type' => :'voucher_type'
+        :'voucher_type' => :'voucher_type',
+        :'junction' => :'junction'
       }
     end
 
@@ -60,7 +85,8 @@ module VoucherifySdk
         :'holder_role' => :'ParameterFiltersListCustomerRedeemablesHolderRole',
         :'campaign_id' => :'ParameterFiltersListCustomerRedeemablesCampaignId',
         :'campaign_type' => :'ParameterFiltersListCustomerRedeemablesCampaignType',
-        :'voucher_type' => :'ParameterFiltersListCustomerRedeemablesVoucherType'
+        :'voucher_type' => :'ParameterFiltersListCustomerRedeemablesVoucherType',
+        :'junction' => :'Junction'
       }
     end
 
@@ -74,7 +100,7 @@ module VoucherifySdk
         :'holder_role',
         :'campaign_id',
         :'campaign_type',
-        :'voucher_type'
+        :'voucher_type',
       ])
     end
 
@@ -117,6 +143,10 @@ module VoucherifySdk
       if attributes.key?(:'voucher_type')
         self.voucher_type = attributes[:'voucher_type']
       end
+
+      if attributes.key?(:'junction')
+        self.junction = attributes[:'junction']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -146,7 +176,8 @@ module VoucherifySdk
           holder_role == o.holder_role &&
           campaign_id == o.campaign_id &&
           campaign_type == o.campaign_type &&
-          voucher_type == o.voucher_type
+          voucher_type == o.voucher_type &&
+          junction == o.junction
     end
 
     # @see the `==` method
@@ -158,7 +189,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, redeemable_id, redeemable_object, holder_role, campaign_id, campaign_type, voucher_type].hash
+      [id, created_at, redeemable_id, redeemable_object, holder_role, campaign_id, campaign_type, voucher_type, junction].hash
     end
 
     # Builds the object from hash

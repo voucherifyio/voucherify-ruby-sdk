@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for POST `/redemptions/{parentRedemptionID}/rollbacks`.
+  # Response body schema for **POST** `/redemptions/{parentRedemptionID}/rollbacks`.
   class RedemptionsRollbacksCreateResponseBody
     # Contains the rollback redemption objects of the particular incentives.
     attr_accessor :rollbacks

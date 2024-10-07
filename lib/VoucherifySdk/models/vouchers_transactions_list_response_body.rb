@@ -25,8 +25,33 @@ module VoucherifySdk
     # A dictionary that contains an array of transactions. Each entry in the array is a separate transaction object.
     attr_accessor :data
 
-    # As query results are always limited (by the limit parameter), the `has_more` flag indicates if there are more records for given filter parameters. This lets you know if you can run another request (with a different page or a different start date filter) to get more records returned in the results.
+    # As query results are always limited (by the limit parameter), the `has_more` flag indicates if there are more records for given filter parameters. This lets you know if you can run another request (with a different paging or a different start date filter) to get more records returned in the results.
     attr_accessor :has_more
+
+    # Returns an ID that can be used to return another page of results. Use the transaction ID in the `starting_after_id` query parameter to display another page of the results starting after the transaction with that ID.
+    attr_accessor :more_starting_after
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -34,7 +59,8 @@ module VoucherifySdk
         :'object' => :'object',
         :'data_ref' => :'data_ref',
         :'data' => :'data',
-        :'has_more' => :'has_more'
+        :'has_more' => :'has_more',
+        :'more_starting_after' => :'more_starting_after'
       }
     end
 
@@ -49,7 +75,8 @@ module VoucherifySdk
         :'object' => :'String',
         :'data_ref' => :'String',
         :'data' => :'Array<VoucherTransaction>',
-        :'has_more' => :'Boolean'
+        :'has_more' => :'Boolean',
+        :'more_starting_after' => :'String'
       }
     end
 
@@ -59,7 +86,8 @@ module VoucherifySdk
         :'object',
         :'data_ref',
         :'data',
-        :'has_more'
+        :'has_more',
+        :'more_starting_after'
       ])
     end
 
@@ -92,6 +120,10 @@ module VoucherifySdk
       if attributes.key?(:'has_more')
         self.has_more = attributes[:'has_more']
       end
+
+      if attributes.key?(:'more_starting_after')
+        self.more_starting_after = attributes[:'more_starting_after']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -106,6 +138,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      object_validator = EnumAttributeValidator.new('String', ["list"])
+      return false unless object_validator.valid?(@object)
+      data_ref_validator = EnumAttributeValidator.new('String', ["data"])
+      return false unless data_ref_validator.valid?(@data_ref)
       true
     end
 
@@ -117,7 +153,8 @@ module VoucherifySdk
           object == o.object &&
           data_ref == o.data_ref &&
           data == o.data &&
-          has_more == o.has_more
+          has_more == o.has_more &&
+          more_starting_after == o.more_starting_after
     end
 
     # @see the `==` method
@@ -129,7 +166,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [object, data_ref, data, has_more].hash
+      [object, data_ref, data, has_more, more_starting_after].hash
     end
 
     # Builds the object from hash

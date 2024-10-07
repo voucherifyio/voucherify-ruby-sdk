@@ -52,7 +52,7 @@ module VoucherifySdk
       {
         :'voucher' => :'String',
         :'source_id' => :'String',
-        :'customer' => :'PublicationsCreateRequestBodyCustomer',
+        :'customer' => :'Customer',
         :'metadata' => :'Object',
         :'channel' => :'String',
         :'campaign' => :'CreatePublicationCampaign'
@@ -64,7 +64,6 @@ module VoucherifySdk
       Set.new([
         :'voucher',
         :'source_id',
-        :'customer',
         :'metadata',
         :'channel',
       ])

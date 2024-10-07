@@ -589,7 +589,8 @@ api_instance = VoucherifySdk::VouchersApi.new
 code = 'code_example' # String | A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
 opts = {
   limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
-  page: 56 # Integer | Which page of results to return. The lowest value is 1.
+  order: VoucherifySdk::ParameterOrderListTransactions::ID, # ParameterOrderListTransactions | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+  starting_after_id: 'starting_after_id_example' # String | A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
 }
 
 begin
@@ -607,7 +608,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **code** | **String** | A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u. |  |
 | **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
-| **page** | **Integer** | Which page of results to return. The lowest value is 1. | [optional] |
+| **order** | [**ParameterOrderListTransactions**](.md) | Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID. | [optional] |
 
 ### Return type
 

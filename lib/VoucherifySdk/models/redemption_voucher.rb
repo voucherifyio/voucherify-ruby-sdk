@@ -189,7 +189,7 @@ module VoucherifySdk
         :'object' => :'String',
         :'publish' => :'RedemptionVoucherPublish',
         :'redemption' => :'RedemptionVoucherRedemption',
-        :'categories' => :'Array<Category>',
+        :'categories' => :'Array<CategoryWithStackingRulesType>',
         :'validation_rules_assignments' => :'ValidationRulesAssignmentsList',
         :'holder' => :'SimpleCustomer'
       }

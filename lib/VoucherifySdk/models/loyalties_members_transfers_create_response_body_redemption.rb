@@ -28,7 +28,7 @@ module VoucherifySdk
     # The type of the object represented is by default list. To get this list, you need to make a call to the endpoint returned in the url attribute.
     attr_accessor :object
 
-    # The endpoint where this list of redemptions can be accessed using a GET method. /v1/vouchers/{voucher_code}/redemptions
+    # The endpoint where this list of redemptions can be accessed using a **GET** method. /v1/vouchers/{voucher_code}/redemptions
     attr_accessor :url
 
     class EnumAttributeValidator

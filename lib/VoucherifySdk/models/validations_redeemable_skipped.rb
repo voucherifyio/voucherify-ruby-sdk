@@ -78,7 +78,7 @@ module VoucherifySdk
         :'object' => :'String',
         :'result' => :'ValidationsRedeemableSkippedResult',
         :'metadata' => :'Object',
-        :'categories' => :'Array<Category>'
+        :'categories' => :'Array<CategoryWithStackingRulesType>'
       }
     end
 

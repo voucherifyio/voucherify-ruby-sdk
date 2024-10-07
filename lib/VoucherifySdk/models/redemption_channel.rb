@@ -16,10 +16,10 @@ require 'time'
 module VoucherifySdk
   # Defines the details of the channel through which the redemption was issued.
   class RedemptionChannel
-    # Unique channel ID of the user performing the redemption. This is either a user ID from a user using the Voucherify Dashboard or an X-APP-Id of a user using the API.
+    # Unique channel ID of the user performing the redemption. This is either a user ID from a user using the Voucherify Dashboard or an X-APP-Id of a user using the API. For `AUTO_REDEEM`, it is the reward assignment ID.
     attr_accessor :channel_id
 
-    # The source of the channel for the redemption. A `USER` corresponds to the Voucherify Dashboard and an `API` corresponds to the API.
+    # The source of the channel for the redemption. A `USER` corresponds to the Voucherify Dashboard, `API` corresponds to the API, and `AUTO_REDEEM` corresponds to a loyalty campaign reward that has been redeemed automatically.
     attr_accessor :channel_type
 
     class EnumAttributeValidator
@@ -102,7 +102,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      channel_type_validator = EnumAttributeValidator.new('String', ["USER", "API"])
+      channel_type_validator = EnumAttributeValidator.new('String', ["USER", "API", "AUTO_REDEEM"])
       return false unless channel_type_validator.valid?(@channel_type)
       true
     end

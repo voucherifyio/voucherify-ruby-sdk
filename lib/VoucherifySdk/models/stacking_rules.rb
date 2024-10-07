@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Defines stacking rules for redeemables. Read more in the [Help Center](https://support.voucherify.io/article/604-stacking-rules)
+  # Defines stacking rules for redeemables. Read more in the [Stacking Rule Documentation](https://support.voucherify.io/article/604-stacking-rules).
   class StackingRules
     # Defines how many redeemables can be sent in one stacking request (note: more redeemables means more processing time!).
     attr_accessor :redeemables_limit
