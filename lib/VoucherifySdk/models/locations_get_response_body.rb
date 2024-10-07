@@ -14,39 +14,56 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId}`.
-  class ManagementProjectsMetadataSchemasGetResponseBody
-    # Unique identifier of the metadata schema.
+  # Response schema for listing locations using **GET** `/v1/locations/{locationId}`.
+  class LocationsGetResponseBody
+    # Unique location ID, assigned by the Voucherify API.
     attr_accessor :id
 
-    # The resource type. You can define custom metadata schemas, which have a custom `\"related_object\"` resource type. The standard metadata schemas are: `\"campaign\"`, `\"customer\"`, `\"earning_rule\"`, `\"loyalty_tier\"`, `\"order\"`, `\"order_item\"`, `\"product\"`, `\"promotion_tier\"`, `\"publication\"`, `\"redemption\"`, `\"reward\"`, `\"voucher\"`.
-    attr_accessor :related_object
+    # The type of the object represented by JSON. This object stores information about a `location`.
+    attr_accessor :object
 
-    # Contains metadata definitions.
-    attr_accessor :properties
+    # Location name.
+    attr_accessor :name
 
-    # Restricts the creation of metadata fields when set to `true`. It indicates whether or not you can create new metadata definitions, e.g. in the campaign or publication manager. If set to `true`, then only the defined fields are available for assigning values.
-    attr_accessor :allow_defined_only
+    attr_accessor :shape
 
-    # Timestamp representing the date and time when the metadata schema was created. The value for this parameter is shown in the ISO 8601 format.
+    # Timestamp representing the date and time when the location was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Timestamp representing the date and time when the metadata schema was updated. The value for this parameter is shown in the ISO 8601 format.
+    # Timestamp representing the date and time when the location was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
 
-    # The type of the object represented by the JSON. This object stores information about the metadata schema.
-    attr_accessor :object
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'related_object' => :'related_object',
-        :'properties' => :'properties',
-        :'allow_defined_only' => :'allow_defined_only',
+        :'object' => :'object',
+        :'name' => :'name',
+        :'shape' => :'shape',
         :'created_at' => :'created_at',
-        :'updated_at' => :'updated_at',
-        :'object' => :'object'
+        :'updated_at' => :'updated_at'
       }
     end
 
@@ -59,12 +76,11 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'id' => :'String',
-        :'related_object' => :'String',
-        :'properties' => :'Hash<String, ManagementProjectsMetadataSchemaDefinition>',
-        :'allow_defined_only' => :'Boolean',
+        :'object' => :'String',
+        :'name' => :'String',
+        :'shape' => :'LocationsGetResponseBodyShape',
         :'created_at' => :'Time',
-        :'updated_at' => :'Time',
-        :'object' => :'String'
+        :'updated_at' => :'Time'
       }
     end
 
@@ -72,12 +88,11 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'id',
-        :'related_object',
-        :'properties',
-        :'allow_defined_only',
+        :'object',
+        :'name',
+        :'shape',
         :'created_at',
-        :'updated_at',
-        :'object'
+        :'updated_at'
       ])
     end
 
@@ -93,18 +108,18 @@ module VoucherifySdk
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'related_object')
-        self.related_object = attributes[:'related_object']
+      if attributes.key?(:'object')
+        self.object = attributes[:'object']
+      else
+        self.object = 'location'
       end
 
-      if attributes.key?(:'properties')
-        if (value = attributes[:'properties']).is_a?(Hash)
-          self.properties = value
-        end
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'allow_defined_only')
-        self.allow_defined_only = attributes[:'allow_defined_only']
+      if attributes.key?(:'shape')
+        self.shape = attributes[:'shape']
       end
 
       if attributes.key?(:'created_at')
@@ -113,12 +128,6 @@ module VoucherifySdk
 
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
-      end
-
-      if attributes.key?(:'object')
-        self.object = attributes[:'object']
-      else
-        self.object = 'metadata_schema'
       end
     end
 
@@ -134,6 +143,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      object_validator = EnumAttributeValidator.new('String', ["location"])
+      return false unless object_validator.valid?(@object)
       true
     end
 
@@ -143,12 +154,11 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          related_object == o.related_object &&
-          properties == o.properties &&
-          allow_defined_only == o.allow_defined_only &&
+          object == o.object &&
+          name == o.name &&
+          shape == o.shape &&
           created_at == o.created_at &&
-          updated_at == o.updated_at &&
-          object == o.object
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -160,7 +170,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, related_object, properties, allow_defined_only, created_at, updated_at, object].hash
+      [id, object, name, shape, created_at, updated_at].hash
     end
 
     # Builds the object from hash

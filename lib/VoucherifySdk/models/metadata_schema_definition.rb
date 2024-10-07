@@ -14,39 +14,88 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId}`.
-  class ManagementProjectsMetadataSchemasGetResponseBody
-    # Unique identifier of the metadata schema.
-    attr_accessor :id
+  # Custom definition name. This is also shown in **Project Settings** > **Metadata Schema** in the Voucherify Dashboard.
+  class MetadataSchemaDefinition
+    # Indicates the type of metadata. Note that `\"geopoint\"` type is a paid feature.
+    attr_accessor :type
 
-    # The resource type. You can define custom metadata schemas, which have a custom `\"related_object\"` resource type. The standard metadata schemas are: `\"campaign\"`, `\"customer\"`, `\"earning_rule\"`, `\"loyalty_tier\"`, `\"order\"`, `\"order_item\"`, `\"product\"`, `\"promotion_tier\"`, `\"publication\"`, `\"redemption\"`, `\"reward\"`, `\"voucher\"`.
-    attr_accessor :related_object
+    # Indicates if this definition is optional or not for the resource.
+    attr_accessor :optional
 
-    # Contains metadata definitions.
-    attr_accessor :properties
+    # Indicates if the definition is an array.
+    attr_accessor :array
 
-    # Restricts the creation of metadata fields when set to `true`. It indicates whether or not you can create new metadata definitions, e.g. in the campaign or publication manager. If set to `true`, then only the defined fields are available for assigning values.
-    attr_accessor :allow_defined_only
+    # Indicates if the definition has been deleted from the schema.
+    attr_accessor :deleted
 
-    # Timestamp representing the date and time when the metadata schema was created. The value for this parameter is shown in the ISO 8601 format.
-    attr_accessor :created_at
+    # The name of the custom resource (i.e. a nested object) if the resource has been previously defined. Otherwise, it is `null` for other types.
+    attr_accessor :object_type
 
-    # Timestamp representing the date and time when the metadata schema was updated. The value for this parameter is shown in the ISO 8601 format.
-    attr_accessor :updated_at
+    # Value indicating the minimum length. Available only for the `string` type.
+    attr_accessor :min_length
 
-    # The type of the object represented by the JSON. This object stores information about the metadata schema.
-    attr_accessor :object
+    # Value indicating the maximum length. Available only for the `string` type.
+    attr_accessor :max_length
+
+    # Value indicating the exact length. Available only for the `string` type.
+    attr_accessor :exact_length
+
+    attr_accessor :eq
+
+    # Array of values that are not allowed. Available only for the `number` type.
+    attr_accessor :ne
+
+    # A property of the `number` type must have `less than` this value. The value should be up to two decimal places.
+    attr_accessor :lt
+
+    # A property of the `number` type must be `less than or equal` to this value. The value should be up to two decimal places.
+    attr_accessor :lte
+
+    # A property of `number` type must be `greater than` this value. The value should be up to two decimal places.
+    attr_accessor :gt
+
+    # A property of `number` type must be `greater than or equal` to this value. The value should be up to two decimal places.
+    attr_accessor :gte
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'related_object' => :'related_object',
-        :'properties' => :'properties',
-        :'allow_defined_only' => :'allow_defined_only',
-        :'created_at' => :'created_at',
-        :'updated_at' => :'updated_at',
-        :'object' => :'object'
+        :'type' => :'type',
+        :'optional' => :'optional',
+        :'array' => :'array',
+        :'deleted' => :'deleted',
+        :'object_type' => :'object_type',
+        :'min_length' => :'min_length',
+        :'max_length' => :'max_length',
+        :'exact_length' => :'exact_length',
+        :'eq' => :'eq',
+        :'ne' => :'ne',
+        :'lt' => :'lt',
+        :'lte' => :'lte',
+        :'gt' => :'gt',
+        :'gte' => :'gte'
       }
     end
 
@@ -58,26 +107,40 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'related_object' => :'String',
-        :'properties' => :'Hash<String, ManagementProjectsMetadataSchemaDefinition>',
-        :'allow_defined_only' => :'Boolean',
-        :'created_at' => :'Time',
-        :'updated_at' => :'Time',
-        :'object' => :'String'
+        :'type' => :'String',
+        :'optional' => :'Boolean',
+        :'array' => :'Boolean',
+        :'deleted' => :'Boolean',
+        :'object_type' => :'String',
+        :'min_length' => :'Integer',
+        :'max_length' => :'Integer',
+        :'exact_length' => :'Integer',
+        :'eq' => :'Array<Object>',
+        :'ne' => :'Array<Float>',
+        :'lt' => :'Float',
+        :'lte' => :'Float',
+        :'gt' => :'Float',
+        :'gte' => :'Float'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'id',
-        :'related_object',
-        :'properties',
-        :'allow_defined_only',
-        :'created_at',
-        :'updated_at',
-        :'object'
+        :'type',
+        :'optional',
+        :'array',
+        :'deleted',
+        :'object_type',
+        :'min_length',
+        :'max_length',
+        :'exact_length',
+        :'eq',
+        :'ne',
+        :'lt',
+        :'lte',
+        :'gt',
+        :'gte'
       ])
     end
 
@@ -89,36 +152,64 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'related_object')
-        self.related_object = attributes[:'related_object']
+      if attributes.key?(:'optional')
+        self.optional = attributes[:'optional']
       end
 
-      if attributes.key?(:'properties')
-        if (value = attributes[:'properties']).is_a?(Hash)
-          self.properties = value
+      if attributes.key?(:'array')
+        self.array = attributes[:'array']
+      end
+
+      if attributes.key?(:'deleted')
+        self.deleted = attributes[:'deleted']
+      end
+
+      if attributes.key?(:'object_type')
+        self.object_type = attributes[:'object_type']
+      end
+
+      if attributes.key?(:'min_length')
+        self.min_length = attributes[:'min_length']
+      end
+
+      if attributes.key?(:'max_length')
+        self.max_length = attributes[:'max_length']
+      end
+
+      if attributes.key?(:'exact_length')
+        self.exact_length = attributes[:'exact_length']
+      end
+
+      if attributes.key?(:'eq')
+        if (value = attributes[:'eq']).is_a?(Array)
+          self.eq = value
         end
       end
 
-      if attributes.key?(:'allow_defined_only')
-        self.allow_defined_only = attributes[:'allow_defined_only']
+      if attributes.key?(:'ne')
+        if (value = attributes[:'ne']).is_a?(Array)
+          self.ne = value
+        end
       end
 
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
+      if attributes.key?(:'lt')
+        self.lt = attributes[:'lt']
       end
 
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
+      if attributes.key?(:'lte')
+        self.lte = attributes[:'lte']
       end
 
-      if attributes.key?(:'object')
-        self.object = attributes[:'object']
-      else
-        self.object = 'metadata_schema'
+      if attributes.key?(:'gt')
+        self.gt = attributes[:'gt']
+      end
+
+      if attributes.key?(:'gte')
+        self.gte = attributes[:'gte']
       end
     end
 
@@ -134,6 +225,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      type_validator = EnumAttributeValidator.new('String', ["string", "number", "object", "date", "datetime", "geopoint", "boolean", "image_url"])
+      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -142,13 +235,20 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          related_object == o.related_object &&
-          properties == o.properties &&
-          allow_defined_only == o.allow_defined_only &&
-          created_at == o.created_at &&
-          updated_at == o.updated_at &&
-          object == o.object
+          type == o.type &&
+          optional == o.optional &&
+          array == o.array &&
+          deleted == o.deleted &&
+          object_type == o.object_type &&
+          min_length == o.min_length &&
+          max_length == o.max_length &&
+          exact_length == o.exact_length &&
+          eq == o.eq &&
+          ne == o.ne &&
+          lt == o.lt &&
+          lte == o.lte &&
+          gt == o.gt &&
+          gte == o.gte
     end
 
     # @see the `==` method
@@ -160,7 +260,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, related_object, properties, allow_defined_only, created_at, updated_at, object].hash
+      [type, optional, array, deleted, object_type, min_length, max_length, exact_length, eq, ne, lt, lte, gt, gte].hash
     end
 
     # Builds the object from hash

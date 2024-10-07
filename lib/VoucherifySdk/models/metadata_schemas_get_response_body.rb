@@ -14,8 +14,8 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId}`.
-  class ManagementProjectsMetadataSchemasGetResponseBody
+  # Response body schema for **GET** `/v1/metadata-schemas/{resource}`.
+  class MetadataSchemasGetResponseBody
     # Unique identifier of the metadata schema.
     attr_accessor :id
 
@@ -60,7 +60,7 @@ module VoucherifySdk
       {
         :'id' => :'String',
         :'related_object' => :'String',
-        :'properties' => :'Hash<String, ManagementProjectsMetadataSchemaDefinition>',
+        :'properties' => :'Hash<String, MetadataSchemaDefinition>',
         :'allow_defined_only' => :'Boolean',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',

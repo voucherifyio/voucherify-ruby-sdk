@@ -115,6 +115,42 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
 
 - **2024-10-02** - `7.0.0`
   - Fix object parsing in query. For example `filters` while listing redemptions.
+  - Added support:
+    - /v1/locations - List Locations
+    - /v1/locations/{locationId} - Get Location
+    - /v1/metadata-schemas - List Metadata Schemas
+    - /v1/metadata-schemas/{resource} - Get Metadata Schema
+    - /management/v1/projects/users/invite, post - Invite Users
+    - /management/v1/projects/{projectId}/users, get - Get Project
+    - /management/v1/projects/{projectId}/users, post - Create Project
+    - /management/v1/projects/{projectId}/users/{userId}, get - Get User
+    - /management/v1/projects/{projectId}/users/{userId}, put - Update User
+    - /management/v1/projects/{projectId}/users/{userId}, delete - Unassign User
+    - /management/v1/projects/{projectId}/metadata-schemas, post - Create Metadata Schema
+    - /management/v1/projects/{projectId}/metadata-schemas, get - List Metadata Schemas
+    - /management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId}, get - Get Metadata Schema
+    - /management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId}, put - Update Metadata Schema
+    - /management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId}, delete - Delete Metadata Schema
+    - /management/v1/projects/{projectId}/custom-event-schemas, post - Create Custom Event Schema
+    - /management/v1/projects/{projectId}/custom-event-schemas, get - List Custom Event Schema
+    - /management/v1/projects/{projectId}/custom-event-schemas/{customEventSchemaId}, get - Get Custom Event Schema
+    - /management/v1/projects/{projectId}/custom-event-schemas/{customEventSchemaId}, put - Update Custom Event Schema
+    - /management/v1/projects/{projectId}/custom-event-schemas/{customEventSchemaId}, delete - Delete Custom Event Schema
+    - /management/v1/projects/{projectId}/stacking-rules, post - Create Stacking Rules
+    - /management/v1/projects/{projectId}/stacking-rules, get - List Stacking Rules
+    - /management/v1/projects/{projectId}/stacking-rules/{stackingRulesId}, get - Get Stacking Rules
+    - /management/v1/projects/{projectId}/stacking-rules/{stackingRulesId}, put - Update Stacking Rules
+    - /management/v1/projects/{projectId}/stacking-rules/{stackingRulesId}, delete - Delete Stacking Rules
+    - /management/v1/projects/{projectId}/webhooks, post - Create Webhook
+    - /management/v1/projects/{projectId}/webhooks, get - List Webhooks
+    - /management/v1/projects/{projectId}/webhooks/{webhookId}, get - Get Webhook
+    - /management/v1/projects/{projectId}/webhooks/{webhookId}, put - Update Webhook
+    - /management/v1/projects/{projectId}/webhooks/{webhookId}, delete - Delete Webhook
+    - /management/v1/projects/{projectId}/branding, post - Create Brand
+    - /management/v1/projects/{projectId}/branding, get - List Brands
+    - /management/v1/projects/{projectId}/branding/{brandingId}, get - Get Brand
+    - /management/v1/projects/{projectId}/branding/{brandingId}, put - Update Brand
+    - /management/v1/projects/{projectId}/branding/{brandingId}, delete - Delete Brand
   - !!! BREAKING CHANGES !!!
     - Pagination changed on listing card transactions - NO `page` param is supported - use `starting_after_id` instead.
     - Pagination changed on listing voucher transactions - NO `page` param is supported - use `starting_after_id` instead.
@@ -127,9 +163,9 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
     - `FilterConditionsDateTimeConditions` model has been renamed to `FilterConditionsDateTime`
     - FilterConditionsDateTime - `conditions` property has been divided on `after`, `before`, `has_value`, `is_unknown`, `more_than`, `less_than` properties
     ParamterFiltersListCustomerRedeemables - model name of `createdAt` has been renamed from `FilterConditionsDateTime` to `ParameterFiltersListCustomerRedeemablesCreatedAt`
-    - `junction` property is deleted is no longer supported in models: 
-        - `ParameterFiltersListCustomerRedeemables`
-        - `ParameterFiltersListRedemptions`
+    - `junction` property is deleted is no longer supported in models:
+    - `ParameterFiltersListCustomerRedeemables`
+    - `ParameterFiltersListRedemptions`
 - **2024-09-05** - `6.0.0` - The new version of the SKD includes coverage for all the most commonly used Voucherify endpoints and supports typed models.
 
 *Previous versions of the SDK are no longer supported, and we highly recommend upgrading to version 6.0.0, which is now designated as Long-Term Support (LTS).*
@@ -205,6 +241,8 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::ExportsApi* | [**download_export**](docs/ExportsApi.md#download_export) | **GET** /v1/exports/{export_Id} | Download Export
 *VoucherifySdk::ExportsApi* | [**get_export**](docs/ExportsApi.md#get_export) | **GET** /v1/exports/{exportId} | Get Export
 *VoucherifySdk::ExportsApi* | [**list_exports**](docs/ExportsApi.md#list_exports) | **GET** /v1/exports | List Exports
+*VoucherifySdk::LocationsApi* | [**get_location**](docs/LocationsApi.md#get_location) | **GET** /v1/locations/{locationId} | Get Location
+*VoucherifySdk::LocationsApi* | [**list_locations**](docs/LocationsApi.md#list_locations) | **GET** /v1/locations | List Locations
 *VoucherifySdk::LoyaltiesApi* | [**add_member**](docs/LoyaltiesApi.md#add_member) | **POST** /v1/loyalties/{campaignId}/members | Add Member
 *VoucherifySdk::LoyaltiesApi* | [**create_earning_rule**](docs/LoyaltiesApi.md#create_earning_rule) | **POST** /v1/loyalties/{campaignId}/earning-rules | Create Earning Rule
 *VoucherifySdk::LoyaltiesApi* | [**create_in_bulk_loyalty_tiers**](docs/LoyaltiesApi.md#create_in_bulk_loyalty_tiers) | **POST** /v1/loyalties/{campaignId}/tiers | Create loyalty tiers
@@ -285,6 +323,8 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::ManagementApi* | [**update_stacking_rules**](docs/ManagementApi.md#update_stacking_rules) | **PUT** /management/v1/projects/{projectId}/stacking-rules/{stackingRulesId} | Update Stacking Rules
 *VoucherifySdk::ManagementApi* | [**update_user**](docs/ManagementApi.md#update_user) | **PUT** /management/v1/projects/{projectId}/users/{userId} | Update User
 *VoucherifySdk::ManagementApi* | [**update_webhook**](docs/ManagementApi.md#update_webhook) | **PUT** /management/v1/projects/{projectId}/webhooks/{webhookId} | Update Webhook
+*VoucherifySdk::MetadataSchemasApi* | [**get_metadata_schema**](docs/MetadataSchemasApi.md#get_metadata_schema) | **GET** /v1/metadata-schemas/{resource} | Get Metadata Schema
+*VoucherifySdk::MetadataSchemasApi* | [**list_metadata_schemas**](docs/MetadataSchemasApi.md#list_metadata_schemas) | **GET** /v1/metadata-schemas | List Metadata Schemas
 *VoucherifySdk::OrdersApi* | [**create_order**](docs/OrdersApi.md#create_order) | **POST** /v1/orders | Create Order
 *VoucherifySdk::OrdersApi* | [**create_order_export**](docs/OrdersApi.md#create_order_export) | **POST** /v1/orders/export | Create Orders Export
 *VoucherifySdk::OrdersApi* | [**get_order**](docs/OrdersApi.md#get_order) | **GET** /v1/orders/{orderId} | Get Order
@@ -555,6 +595,15 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::InapplicableToResultList](docs/InapplicableToResultList.md)
  - [VoucherifySdk::Junction](docs/Junction.md)
  - [VoucherifySdk::ListPublicationsItemVoucher](docs/ListPublicationsItemVoucher.md)
+ - [VoucherifySdk::Location](docs/Location.md)
+ - [VoucherifySdk::LocationShape](docs/LocationShape.md)
+ - [VoucherifySdk::LocationShapeDistance](docs/LocationShapeDistance.md)
+ - [VoucherifySdk::LocationShapeGeojson](docs/LocationShapeGeojson.md)
+ - [VoucherifySdk::LocationsGetResponseBody](docs/LocationsGetResponseBody.md)
+ - [VoucherifySdk::LocationsGetResponseBodyShape](docs/LocationsGetResponseBodyShape.md)
+ - [VoucherifySdk::LocationsGetResponseBodyShapeDistance](docs/LocationsGetResponseBodyShapeDistance.md)
+ - [VoucherifySdk::LocationsGetResponseBodyShapeGeojson](docs/LocationsGetResponseBodyShapeGeojson.md)
+ - [VoucherifySdk::LocationsListResponseBody](docs/LocationsListResponseBody.md)
  - [VoucherifySdk::LoyaltiesCreateCampaignRequestBody](docs/LoyaltiesCreateCampaignRequestBody.md)
  - [VoucherifySdk::LoyaltiesCreateCampaignResponseBody](docs/LoyaltiesCreateCampaignResponseBody.md)
  - [VoucherifySdk::LoyaltiesDeleteResponseBody](docs/LoyaltiesDeleteResponseBody.md)
@@ -936,6 +985,10 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ManagementProjectsWebhooksUpdateResponseBody](docs/ManagementProjectsWebhooksUpdateResponseBody.md)
  - [VoucherifySdk::MappingPoints](docs/MappingPoints.md)
  - [VoucherifySdk::MemberActivity](docs/MemberActivity.md)
+ - [VoucherifySdk::MetadataSchema](docs/MetadataSchema.md)
+ - [VoucherifySdk::MetadataSchemaDefinition](docs/MetadataSchemaDefinition.md)
+ - [VoucherifySdk::MetadataSchemasGetResponseBody](docs/MetadataSchemasGetResponseBody.md)
+ - [VoucherifySdk::MetadataSchemasListResponseBody](docs/MetadataSchemasListResponseBody.md)
  - [VoucherifySdk::Order](docs/Order.md)
  - [VoucherifySdk::OrderCalculated](docs/OrderCalculated.md)
  - [VoucherifySdk::OrderCalculatedItem](docs/OrderCalculatedItem.md)
@@ -988,6 +1041,8 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesRedeemableObjectConditions](docs/ParameterFiltersListCustomerRedeemablesRedeemableObjectConditions.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesVoucherType](docs/ParameterFiltersListCustomerRedeemablesVoucherType.md)
  - [VoucherifySdk::ParameterFiltersListCustomerRedeemablesVoucherTypeConditions](docs/ParameterFiltersListCustomerRedeemablesVoucherTypeConditions.md)
+ - [VoucherifySdk::ParameterFiltersListLocations](docs/ParameterFiltersListLocations.md)
+ - [VoucherifySdk::ParameterFiltersListLocationsName](docs/ParameterFiltersListLocationsName.md)
  - [VoucherifySdk::ParameterFiltersListPublications](docs/ParameterFiltersListPublications.md)
  - [VoucherifySdk::ParameterFiltersListPublicationsCampaignName](docs/ParameterFiltersListPublicationsCampaignName.md)
  - [VoucherifySdk::ParameterFiltersListPublicationsCustomerId](docs/ParameterFiltersListPublicationsCustomerId.md)
@@ -1017,6 +1072,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ParameterOrderListCustomers](docs/ParameterOrderListCustomers.md)
  - [VoucherifySdk::ParameterOrderListEarningRules](docs/ParameterOrderListEarningRules.md)
  - [VoucherifySdk::ParameterOrderListExports](docs/ParameterOrderListExports.md)
+ - [VoucherifySdk::ParameterOrderListLocations](docs/ParameterOrderListLocations.md)
  - [VoucherifySdk::ParameterOrderListLoyaltyTiers](docs/ParameterOrderListLoyaltyTiers.md)
  - [VoucherifySdk::ParameterOrderListOrders](docs/ParameterOrderListOrders.md)
  - [VoucherifySdk::ParameterOrderListPromotionTiers](docs/ParameterOrderListPromotionTiers.md)

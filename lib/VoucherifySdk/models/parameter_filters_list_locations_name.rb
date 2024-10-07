@@ -14,39 +14,13 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId}`.
-  class ManagementProjectsMetadataSchemasGetResponseBody
-    # Unique identifier of the metadata schema.
-    attr_accessor :id
-
-    # The resource type. You can define custom metadata schemas, which have a custom `\"related_object\"` resource type. The standard metadata schemas are: `\"campaign\"`, `\"customer\"`, `\"earning_rule\"`, `\"loyalty_tier\"`, `\"order\"`, `\"order_item\"`, `\"product\"`, `\"promotion_tier\"`, `\"publication\"`, `\"redemption\"`, `\"reward\"`, `\"voucher\"`.
-    attr_accessor :related_object
-
-    # Contains metadata definitions.
-    attr_accessor :properties
-
-    # Restricts the creation of metadata fields when set to `true`. It indicates whether or not you can create new metadata definitions, e.g. in the campaign or publication manager. If set to `true`, then only the defined fields are available for assigning values.
-    attr_accessor :allow_defined_only
-
-    # Timestamp representing the date and time when the metadata schema was created. The value for this parameter is shown in the ISO 8601 format.
-    attr_accessor :created_at
-
-    # Timestamp representing the date and time when the metadata schema was updated. The value for this parameter is shown in the ISO 8601 format.
-    attr_accessor :updated_at
-
-    # The type of the object represented by the JSON. This object stores information about the metadata schema.
-    attr_accessor :object
+  class ParameterFiltersListLocationsName
+    attr_accessor :conditions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'related_object' => :'related_object',
-        :'properties' => :'properties',
-        :'allow_defined_only' => :'allow_defined_only',
-        :'created_at' => :'created_at',
-        :'updated_at' => :'updated_at',
-        :'object' => :'object'
+        :'conditions' => :'conditions'
       }
     end
 
@@ -58,26 +32,13 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'related_object' => :'String',
-        :'properties' => :'Hash<String, ManagementProjectsMetadataSchemaDefinition>',
-        :'allow_defined_only' => :'Boolean',
-        :'created_at' => :'Time',
-        :'updated_at' => :'Time',
-        :'object' => :'String'
+        :'conditions' => :'FilterConditionsString'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'id',
-        :'related_object',
-        :'properties',
-        :'allow_defined_only',
-        :'created_at',
-        :'updated_at',
-        :'object'
       ])
     end
 
@@ -89,36 +50,8 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'related_object')
-        self.related_object = attributes[:'related_object']
-      end
-
-      if attributes.key?(:'properties')
-        if (value = attributes[:'properties']).is_a?(Hash)
-          self.properties = value
-        end
-      end
-
-      if attributes.key?(:'allow_defined_only')
-        self.allow_defined_only = attributes[:'allow_defined_only']
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
-      end
-
-      if attributes.key?(:'object')
-        self.object = attributes[:'object']
-      else
-        self.object = 'metadata_schema'
+      if attributes.key?(:'conditions')
+        self.conditions = attributes[:'conditions']
       end
     end
 
@@ -142,13 +75,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          related_object == o.related_object &&
-          properties == o.properties &&
-          allow_defined_only == o.allow_defined_only &&
-          created_at == o.created_at &&
-          updated_at == o.updated_at &&
-          object == o.object
+          conditions == o.conditions
     end
 
     # @see the `==` method
@@ -160,7 +87,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, related_object, properties, allow_defined_only, created_at, updated_at, object].hash
+      [conditions].hash
     end
 
     # Builds the object from hash

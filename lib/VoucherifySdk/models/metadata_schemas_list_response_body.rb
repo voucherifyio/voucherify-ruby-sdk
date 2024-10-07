@@ -14,39 +14,49 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `management/v1/projects/{projectId}/metadata-schemas/{metadataSchemaId}`.
-  class ManagementProjectsMetadataSchemasGetResponseBody
-    # Unique identifier of the metadata schema.
-    attr_accessor :id
-
-    # The resource type. You can define custom metadata schemas, which have a custom `\"related_object\"` resource type. The standard metadata schemas are: `\"campaign\"`, `\"customer\"`, `\"earning_rule\"`, `\"loyalty_tier\"`, `\"order\"`, `\"order_item\"`, `\"product\"`, `\"promotion_tier\"`, `\"publication\"`, `\"redemption\"`, `\"reward\"`, `\"voucher\"`.
-    attr_accessor :related_object
-
-    # Contains metadata definitions.
-    attr_accessor :properties
-
-    # Restricts the creation of metadata fields when set to `true`. It indicates whether or not you can create new metadata definitions, e.g. in the campaign or publication manager. If set to `true`, then only the defined fields are available for assigning values.
-    attr_accessor :allow_defined_only
-
-    # Timestamp representing the date and time when the metadata schema was created. The value for this parameter is shown in the ISO 8601 format.
-    attr_accessor :created_at
-
-    # Timestamp representing the date and time when the metadata schema was updated. The value for this parameter is shown in the ISO 8601 format.
-    attr_accessor :updated_at
-
-    # The type of the object represented by the JSON. This object stores information about the metadata schema.
+  # Object containing a list of metadata schemas.
+  class MetadataSchemasListResponseBody
+    # The type of the object represented by JSON. This object stores information about the metadata schemas in a dictionary.
     attr_accessor :object
+
+    # Identifies the name of the attribute that contains the array of metadata schema objects.
+    attr_accessor :data_ref
+
+    # Array of metadata schema objects. The metadata schemas are listed by related object properties.
+    attr_accessor :schemas
+
+    # The total number of metadata schema objects.
+    attr_accessor :total
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'related_object' => :'related_object',
-        :'properties' => :'properties',
-        :'allow_defined_only' => :'allow_defined_only',
-        :'created_at' => :'created_at',
-        :'updated_at' => :'updated_at',
-        :'object' => :'object'
+        :'object' => :'object',
+        :'data_ref' => :'data_ref',
+        :'schemas' => :'schemas',
+        :'total' => :'total'
       }
     end
 
@@ -58,26 +68,20 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'related_object' => :'String',
-        :'properties' => :'Hash<String, ManagementProjectsMetadataSchemaDefinition>',
-        :'allow_defined_only' => :'Boolean',
-        :'created_at' => :'Time',
-        :'updated_at' => :'Time',
-        :'object' => :'String'
+        :'object' => :'String',
+        :'data_ref' => :'String',
+        :'schemas' => :'Array<MetadataSchema>',
+        :'total' => :'Integer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'id',
-        :'related_object',
-        :'properties',
-        :'allow_defined_only',
-        :'created_at',
-        :'updated_at',
-        :'object'
+        :'object',
+        :'data_ref',
+        :'schemas',
+        :'total'
       ])
     end
 
@@ -89,36 +93,26 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'related_object')
-        self.related_object = attributes[:'related_object']
-      end
-
-      if attributes.key?(:'properties')
-        if (value = attributes[:'properties']).is_a?(Hash)
-          self.properties = value
-        end
-      end
-
-      if attributes.key?(:'allow_defined_only')
-        self.allow_defined_only = attributes[:'allow_defined_only']
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
-      end
-
       if attributes.key?(:'object')
         self.object = attributes[:'object']
       else
-        self.object = 'metadata_schema'
+        self.object = 'list'
+      end
+
+      if attributes.key?(:'data_ref')
+        self.data_ref = attributes[:'data_ref']
+      else
+        self.data_ref = 'schemas'
+      end
+
+      if attributes.key?(:'schemas')
+        if (value = attributes[:'schemas']).is_a?(Array)
+          self.schemas = value
+        end
+      end
+
+      if attributes.key?(:'total')
+        self.total = attributes[:'total']
       end
     end
 
@@ -134,6 +128,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      object_validator = EnumAttributeValidator.new('String', ["list"])
+      return false unless object_validator.valid?(@object)
+      data_ref_validator = EnumAttributeValidator.new('String', ["schemas"])
+      return false unless data_ref_validator.valid?(@data_ref)
       true
     end
 
@@ -142,13 +140,10 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          related_object == o.related_object &&
-          properties == o.properties &&
-          allow_defined_only == o.allow_defined_only &&
-          created_at == o.created_at &&
-          updated_at == o.updated_at &&
-          object == o.object
+          object == o.object &&
+          data_ref == o.data_ref &&
+          schemas == o.schemas &&
+          total == o.total
     end
 
     # @see the `==` method
@@ -160,7 +155,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, related_object, properties, allow_defined_only, created_at, updated_at, object].hash
+      [object, data_ref, schemas, total].hash
     end
 
     # Builds the object from hash
