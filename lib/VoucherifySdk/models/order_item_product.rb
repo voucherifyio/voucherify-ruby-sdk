@@ -22,7 +22,7 @@ module VoucherifySdk
     # The merchant's product ID (if it is different than Voucherify's product ID). It is really useful in case of integration between multiple systems. It can be an ID from an eCommerce site, a database or a 3rd party service.
     attr_accessor :source_id
 
-    # The override set to `true` is used to store the product information in the system. If the product does not exist, it will be created with a source_id; if it does exist, the provided values for the name, price, and metadata will replace those already stored in the system.
+    # The override set to `true` is used to store the product information in the system. If the product does not exist, it will be created with a source_id; if it does exist, the provided values for the name, price, and metadata will replace those already stored in the system. Override works only for endpoints that create an order in the database.
     attr_accessor :override
 
     # Product name.

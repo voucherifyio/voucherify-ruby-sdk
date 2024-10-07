@@ -17,10 +17,9 @@ module VoucherifySdk
   class ParameterVoucherTypeListPublications
     DISCOUNT = "discount".freeze
     LOYALTY = "loyalty".freeze
-    LUCKY_DRAW = "lucky_draw".freeze
 
     def self.all_vars
-      @all_vars ||= [DISCOUNT, LOYALTY, LUCKY_DRAW].freeze
+      @all_vars ||= [DISCOUNT, LOYALTY].freeze
     end
 
     # Builds the enum from string

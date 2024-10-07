@@ -15,13 +15,13 @@ require 'time'
 
 module VoucherifySdk
   class InapplicableTo
-    # This object stores information about the product collection.
+    # This object stores information about the resource to which the discount is applicable.
     attr_accessor :object
 
-    # Unique product collection ID assigned by Voucherify.
+    # Unique product collection, product, or SKU identifier assigned by Voucherify.
     attr_accessor :id
 
-    # The source ID from your inventory system.
+    # The source identifier from your inventory system.
     attr_accessor :source_id
 
     # Parent product's unique ID assigned by Voucherify.
@@ -52,12 +52,16 @@ module VoucherifySdk
     # Maximum discount amount per order. Value is multiplied by 100 to precisely represent 2 decimal places. For example, a $6 maximum discount on the entire order is written as 600. This value is definable for the following discount effects: - `APPLY_TO_ITEMS` (each item subtotal is discounted equally) - `APPLY_TO_ITEMS_BY_QUANTITY` (each unit of matched products has the same discount value)
     attr_accessor :aggregated_amount_limit
 
+    # Determines the order in which the discount is applied to the products or SKUs sent in the `order` object in the request. The counting begins from `0`.
     attr_accessor :order_item_indices
 
+    # Determines the recurrence of the discount, e.g. `\"repeat\": 3` means that the discount is applied to every third item.
     attr_accessor :repeat
 
+    # Determines how many items are skipped before the discount is applied.
     attr_accessor :skip_initially
 
+    # Determines to which kinds of objects the discount is applicable. `\"ITEM\"` includes products and SKUs.
     attr_accessor :target
 
     class EnumAttributeValidator

@@ -27,6 +27,7 @@
 | **category** | **String** | Unique category name. | [optional] |
 | **creation_status** | **String** | Indicates the status of the campaign creation. | [optional] |
 | **vouchers_generation_status** | **String** | Indicates the status of the campaign&#39;s voucher generation. | [optional] |
+| **readonly** | **Boolean** | Indicates whether the campaign can be only read by a restricted user in the Areas and Stores enterprise feature. It is returned only to restricted users; this field is not returned for users with other roles. | [optional] |
 | **protected** | **Boolean** | Indicates whether the resource can be deleted. | [optional] |
 | **category_id** | **String** | Unique category ID that this campaign belongs to. | [optional] |
 | **categories** | [**Array&lt;Category&gt;**](Category.md) | Contains details about the category. | [optional] |

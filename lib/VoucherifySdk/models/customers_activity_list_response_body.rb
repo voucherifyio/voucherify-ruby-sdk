@@ -28,7 +28,7 @@ module VoucherifySdk
     # As query results are always limited (by the limit parameter), the `has_more` flag indicates if there are more records for given filter parameters. This lets you know if you can run another request with a `starting_after_id` query or a different limit to get more records returned in the results.
     attr_accessor :has_more
 
-    # Returns an ID that can be used to return another page of results. Use the event id in the `starting_after_id` query parameter to display another page of the results starting after the event with that ID.
+    # Returns an ID that can be used to return another page of results. Use the event ID in the `starting_after_id` query parameter to display another page of the results starting after the event with that ID.
     attr_accessor :more_starting_after
 
     class EnumAttributeValidator
