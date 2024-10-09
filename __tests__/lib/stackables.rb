@@ -63,3 +63,21 @@ def redeem_stacked_discounts(redemptions_api_instance, voucher_ids)
     return nil;
   end
 end
+
+def list_redemptions(redemptions_api_instance)
+  begin
+    redemptions = @redemptions_api_instance.list_redemptions({
+      filters: VoucherifySdk::ParameterFiltersListRedemptions.new({
+        voucher_code: VoucherifySdk::ParameterFiltersListRedemptionsVoucherCode.new({
+          conditions: VoucherifySdk::FilterConditionsString.new({
+            not_in: ["123"]
+          })
+        })
+      })
+    })
+    
+    expect(redemptions).not_to be_nil
+  rescue VoucherifySdk::ApiError => e
+   return nil
+  end
+end

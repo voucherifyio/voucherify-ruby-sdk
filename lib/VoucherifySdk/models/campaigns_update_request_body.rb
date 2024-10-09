@@ -15,6 +15,16 @@ require 'time'
 
 module VoucherifySdk
   class CampaignsUpdateRequestBody
+    attr_accessor :discount
+
+    attr_accessor :referral_program
+
+    attr_accessor :gift
+
+    attr_accessor :loyalty_tiers_expiration
+
+    attr_accessor :options
+
     # Activation timestamp defines when the campaign starts to be active in ISO 8601 format. Campaign is *inactive before* this date. 
     attr_accessor :start_date
 
@@ -34,6 +44,7 @@ module VoucherifySdk
     # The category assigned to the campaign. Either pass this parameter OR the `category_id`.
     attr_accessor :category
 
+    # The metadata object stores all custom attributes assigned to the campaign. A set of key/value pairs that you can attach to a campaign object. It can be useful for storing additional information about the campaign in a structured format.
     attr_accessor :metadata
 
     # Determine which metadata should be removed from campaign.
@@ -41,37 +52,6 @@ module VoucherifySdk
 
     # Unique category ID that this campaign belongs to. Either pass this parameter OR the `category`.
     attr_accessor :category_id
-
-    # Defines the amount of time the vouchers will be active after publishing. The value is shown in the ISO 8601 format. For example, a voucher with the value of P24D will be valid for a duration of 24 days.
-    attr_accessor :activity_duration_after_publishing
-
-    # If this value is set to `true`, customers will be able to join the campaign only once.
-    attr_accessor :join_once
-
-    # Indicates whether customers will be able to auto-join a loyalty campaign if any earning rule is fulfilled.
-    attr_accessor :auto_join
-
-    # Defines whether the campaign can be updated with new vouchers after campaign creation.      - `AUTO_UPDATE`: By choosing the auto update option you will create a campaign that can be enhanced by new vouchers after the time of creation (e.g. by publish vouchers method).     -  `STATIC`: vouchers need to be manually published.
-    attr_accessor :type
-
-    attr_accessor :discount
-
-    attr_accessor :referral_program
-
-    attr_accessor :gift
-
-    attr_accessor :loyalty_tiers_expiration
-
-    attr_accessor :options
-
-    # It represents the total number of winners in a lucky draw.
-    attr_accessor :winners_count
-
-    # It indicates whether each winner in a draw is unique or not.
-    attr_accessor :unique_winners_per_draw
-
-    # Specifies whether each participant can win only once across multiple draws.
-    attr_accessor :unique_winners
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -98,6 +78,11 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'discount' => :'discount',
+        :'referral_program' => :'referral_program',
+        :'gift' => :'gift',
+        :'loyalty_tiers_expiration' => :'loyalty_tiers_expiration',
+        :'options' => :'options',
         :'start_date' => :'start_date',
         :'expiration_date' => :'expiration_date',
         :'validity_timeframe' => :'validity_timeframe',
@@ -107,19 +92,7 @@ module VoucherifySdk
         :'category' => :'category',
         :'metadata' => :'metadata',
         :'unset_metadata_fields' => :'unset_metadata_fields',
-        :'category_id' => :'category_id',
-        :'activity_duration_after_publishing' => :'activity_duration_after_publishing',
-        :'join_once' => :'join_once',
-        :'auto_join' => :'auto_join',
-        :'type' => :'type',
-        :'discount' => :'discount',
-        :'referral_program' => :'referral_program',
-        :'gift' => :'gift',
-        :'loyalty_tiers_expiration' => :'loyalty_tiers_expiration',
-        :'options' => :'options',
-        :'winners_count' => :'winners_count',
-        :'unique_winners_per_draw' => :'unique_winners_per_draw',
-        :'unique_winners' => :'unique_winners'
+        :'category_id' => :'category_id'
       }
     end
 
@@ -131,6 +104,11 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'discount' => :'Object',
+        :'referral_program' => :'ReferralProgram',
+        :'gift' => :'Gift',
+        :'loyalty_tiers_expiration' => :'LoyaltyTiersExpirationAll',
+        :'options' => :'CampaignsUpdateRequestBodyOptions',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',
         :'validity_timeframe' => :'ValidityTimeframe',
@@ -140,41 +118,22 @@ module VoucherifySdk
         :'category' => :'String',
         :'metadata' => :'Object',
         :'unset_metadata_fields' => :'Array<String>',
-        :'category_id' => :'String',
-        :'activity_duration_after_publishing' => :'String',
-        :'join_once' => :'Boolean',
-        :'auto_join' => :'Boolean',
-        :'type' => :'String',
-        :'discount' => :'Object',
-        :'referral_program' => :'ReferralProgram',
-        :'gift' => :'Gift',
-        :'loyalty_tiers_expiration' => :'LoyaltyTiersExpirationAll',
-        :'options' => :'CampaignsUpdateRequestBodyOptions',
-        :'winners_count' => :'String',
-        :'unique_winners_per_draw' => :'String',
-        :'unique_winners' => :'String'
+        :'category_id' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'discount',
+        :'options',
         :'start_date',
         :'expiration_date',
         :'description',
         :'category',
         :'metadata',
         :'unset_metadata_fields',
-        :'category_id',
-        :'activity_duration_after_publishing',
-        :'join_once',
-        :'auto_join',
-        :'type',
-        :'discount',
-        :'options',
-        :'winners_count',
-        :'unique_winners_per_draw',
-        :'unique_winners'
+        :'category_id'
       ])
     end
 
@@ -185,6 +144,26 @@ module VoucherifySdk
       attributes = attributes.each_with_object({}) { |(k, v), h|
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'discount')
+        self.discount = attributes[:'discount']
+      end
+
+      if attributes.key?(:'referral_program')
+        self.referral_program = attributes[:'referral_program']
+      end
+
+      if attributes.key?(:'gift')
+        self.gift = attributes[:'gift']
+      end
+
+      if attributes.key?(:'loyalty_tiers_expiration')
+        self.loyalty_tiers_expiration = attributes[:'loyalty_tiers_expiration']
+      end
+
+      if attributes.key?(:'options')
+        self.options = attributes[:'options']
+      end
 
       if attributes.key?(:'start_date')
         self.start_date = attributes[:'start_date']
@@ -229,54 +208,6 @@ module VoucherifySdk
       if attributes.key?(:'category_id')
         self.category_id = attributes[:'category_id']
       end
-
-      if attributes.key?(:'activity_duration_after_publishing')
-        self.activity_duration_after_publishing = attributes[:'activity_duration_after_publishing']
-      end
-
-      if attributes.key?(:'join_once')
-        self.join_once = attributes[:'join_once']
-      end
-
-      if attributes.key?(:'auto_join')
-        self.auto_join = attributes[:'auto_join']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'discount')
-        self.discount = attributes[:'discount']
-      end
-
-      if attributes.key?(:'referral_program')
-        self.referral_program = attributes[:'referral_program']
-      end
-
-      if attributes.key?(:'gift')
-        self.gift = attributes[:'gift']
-      end
-
-      if attributes.key?(:'loyalty_tiers_expiration')
-        self.loyalty_tiers_expiration = attributes[:'loyalty_tiers_expiration']
-      end
-
-      if attributes.key?(:'options')
-        self.options = attributes[:'options']
-      end
-
-      if attributes.key?(:'winners_count')
-        self.winners_count = attributes[:'winners_count']
-      end
-
-      if attributes.key?(:'unique_winners_per_draw')
-        self.unique_winners_per_draw = attributes[:'unique_winners_per_draw']
-      end
-
-      if attributes.key?(:'unique_winners')
-        self.unique_winners = attributes[:'unique_winners']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -291,8 +222,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC"])
-      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -301,6 +230,11 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          discount == o.discount &&
+          referral_program == o.referral_program &&
+          gift == o.gift &&
+          loyalty_tiers_expiration == o.loyalty_tiers_expiration &&
+          options == o.options &&
           start_date == o.start_date &&
           expiration_date == o.expiration_date &&
           validity_timeframe == o.validity_timeframe &&
@@ -310,19 +244,7 @@ module VoucherifySdk
           category == o.category &&
           metadata == o.metadata &&
           unset_metadata_fields == o.unset_metadata_fields &&
-          category_id == o.category_id &&
-          activity_duration_after_publishing == o.activity_duration_after_publishing &&
-          join_once == o.join_once &&
-          auto_join == o.auto_join &&
-          type == o.type &&
-          discount == o.discount &&
-          referral_program == o.referral_program &&
-          gift == o.gift &&
-          loyalty_tiers_expiration == o.loyalty_tiers_expiration &&
-          options == o.options &&
-          winners_count == o.winners_count &&
-          unique_winners_per_draw == o.unique_winners_per_draw &&
-          unique_winners == o.unique_winners
+          category_id == o.category_id
     end
 
     # @see the `==` method
@@ -334,7 +256,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, description, category, metadata, unset_metadata_fields, category_id, activity_duration_after_publishing, join_once, auto_join, type, discount, referral_program, gift, loyalty_tiers_expiration, options, winners_count, unique_winners_per_draw, unique_winners].hash
+      [discount, referral_program, gift, loyalty_tiers_expiration, options, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, description, category, metadata, unset_metadata_fields, category_id].hash
     end
 
     # Builds the object from hash

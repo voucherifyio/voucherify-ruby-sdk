@@ -24,6 +24,7 @@ module VoucherifySdk
     # Defines a set of products for a `STATIC` product collection type.
     attr_accessor :products
 
+    # Defines a set of criteria and boundary conditions for an `AUTO_UPDATE` product collection type.
     attr_accessor :filter
 
     class EnumAttributeValidator
@@ -69,7 +70,7 @@ module VoucherifySdk
         :'type' => :'String',
         :'name' => :'String',
         :'products' => :'Array<ProductCollectionsCreateRequestBodyProductsItem>',
-        :'filter' => :'ProductCollectionsCreateRequestBodyFilter'
+        :'filter' => :'Object'
       }
     end
 

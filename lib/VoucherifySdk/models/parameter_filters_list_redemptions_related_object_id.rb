@@ -18,35 +18,10 @@ module VoucherifySdk
   class ParameterFiltersListRedemptionsRelatedObjectId
     attr_accessor :conditions
 
-    attr_accessor :junction
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'conditions' => :'conditions',
-        :'junction' => :'junction'
+        :'conditions' => :'conditions'
       }
     end
 
@@ -58,8 +33,7 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'conditions' => :'FilterConditionsString',
-        :'junction' => :'Junction'
+        :'conditions' => :'FilterConditionsString'
       }
     end
 
@@ -79,10 +53,6 @@ module VoucherifySdk
 
       if attributes.key?(:'conditions')
         self.conditions = attributes[:'conditions']
-      end
-
-      if attributes.key?(:'junction')
-        self.junction = attributes[:'junction']
       end
     end
 
@@ -106,8 +76,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          conditions == o.conditions &&
-          junction == o.junction
+          conditions == o.conditions
     end
 
     # @see the `==` method
@@ -119,7 +88,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [conditions, junction].hash
+      [conditions].hash
     end
 
     # Builds the object from hash

@@ -15,7 +15,6 @@ All URIs are relative to *https://api.voucherify.io*
 | [**list_customer_segments**](CustomersApi.md#list_customer_segments) | **GET** /v1/customers/{customerId}/segments | List Customer&#39;s Segments |
 | [**list_customers**](CustomersApi.md#list_customers) | **GET** /v1/customers | List Customers |
 | [**update_customer**](CustomersApi.md#update_customer) | **PUT** /v1/customers/{customerId} | Update Customer |
-| [**update_customers_consents**](CustomersApi.md#update_customers_consents) | **PUT** /v1/customers/{customerId}/consents | Update Customer&#39;s consents [Deprecated] |
 | [**update_customers_in_bulk**](CustomersApi.md#update_customers_in_bulk) | **POST** /v1/customers/bulk/async | Update Customers in Bulk |
 | [**update_customers_metadata_in_bulk**](CustomersApi.md#update_customers_metadata_in_bulk) | **POST** /v1/customers/metadata/async | Update Customers&#39; Metadata in Bulk |
 
@@ -737,67 +736,6 @@ end
 
 - **Content-Type**: application/json
 - **Accept**: application/json
-
-
-## update_customers_consents
-
-> update_customers_consents(customer_id, opts)
-
-Update Customer's consents [Deprecated]
-
-Update marketing permissions for the specified customer. ❗️ Deprecated  This endpoint is deprecated. The feature of managing consents will be soon removed from Voucherify, including this endpoint.
-
-### Examples
-
-```ruby
-require 'time'
-require 'VoucherifySdk'
-# setup authorization
-VoucherifySdk.configure do |config|
-  # Configure API key authorization: X-App-Id
-  config.api_key['X-App-Id'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['X-App-Id'] = 'Bearer'
-
-  # Configure API key authorization: X-App-Token
-  config.api_key['X-App-Token'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['X-App-Token'] = 'Bearer'
-end
-
-api_instance = VoucherifySdk::CustomersApi.new
-customer_id = 'customer_id_example' # String | A Voucherify unique customer identifier or source ID.
-opts = {
-  body: { ... } # Object | Key-value pairs where the key is the consent identifier and value is a boolean that identifies if a customer has given the consent or not. To deny all consents use unsubscribed as a consent identifier and true as its value.   ## Examples  Opt-out from all communication: 
-}
-
-begin
-  # Update Customer's consents [Deprecated]
-  api_instance.update_customers_consents(customer_id, opts)
-rescue VoucherifySdk::ApiError => e
-  puts "Error when calling CustomersApi->update_customers_consents: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **customer_id** | **String** | A Voucherify unique customer identifier or source ID. |  |
-| **body** | **Object** | Key-value pairs where the key is the consent identifier and value is a boolean that identifies if a customer has given the consent or not. To deny all consents use unsubscribed as a consent identifier and true as its value.   ## Examples  Opt-out from all communication:  | [optional] |
-
-### Return type
-
-nil (empty response body)
-
-### Authorization
-
-[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: Not defined
 
 
 ## update_customers_in_bulk

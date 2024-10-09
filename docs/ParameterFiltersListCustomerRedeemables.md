@@ -12,4 +12,5 @@
 | **campaign_id** | [**ParameterFiltersListCustomerRedeemablesCampaignId**](ParameterFiltersListCustomerRedeemablesCampaignId.md) |  | [optional] |
 | **campaign_type** | [**ParameterFiltersListCustomerRedeemablesCampaignType**](ParameterFiltersListCustomerRedeemablesCampaignType.md) |  | [optional] |
 | **voucher_type** | [**ParameterFiltersListCustomerRedeemablesVoucherType**](ParameterFiltersListCustomerRedeemablesVoucherType.md) |  | [optional] |
+| **junction** | [**Junction**](Junction.md) |  | [optional] |
 

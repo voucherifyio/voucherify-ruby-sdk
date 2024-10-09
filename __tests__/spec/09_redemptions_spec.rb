@@ -38,5 +38,10 @@ RSpec.describe 'Redemptions API', :order => :defined do
 #     expect(validate_deep_match(filtered_snapshot, result)).to be true
   end
 
+  it 'should list redemptions', :order => :third do
+    redemptions = list_redemptions(@redemptions_api_instance)
+
+    expect(redemptions).not_to be_nil
+  end
 
 end

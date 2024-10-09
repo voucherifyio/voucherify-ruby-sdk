@@ -14,4 +14,5 @@
 | **customer_id** | [**ParameterFiltersListRedemptionsCustomerId**](ParameterFiltersListRedemptionsCustomerId.md) |  | [optional] |
 | **campaign_name** | [**ParameterFiltersListRedemptionsCampaignName**](ParameterFiltersListRedemptionsCampaignName.md) |  | [optional] |
 | **user_login** | [**ParameterFiltersListRedemptionsUserLogin**](ParameterFiltersListRedemptionsUserLogin.md) |  | [optional] |
+| **junction** | [**Junction**](Junction.md) |  | [optional] |
 
