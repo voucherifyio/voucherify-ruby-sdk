@@ -151,6 +151,12 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
     - /management/v1/projects/{projectId}/branding/{brandingId}, get - Get Brand
     - /management/v1/projects/{projectId}/branding/{brandingId}, put - Update Brand
     - /management/v1/projects/{projectId}/branding/{brandingId}, delete - Delete Brand
+    - /v1/referrals/{campaignId}/members/{memberId}/holders, get - List Referral Code Holders
+    - /v1/referrals/members/{memberId}/holders, get - List Referral Code Holders
+    - /v1/referrals/{campaignId}/members/{memberId}/holders, post - Add Referral Code Holders
+    - /v1/referrals/members/{memberId}/holders, post - Add Referral Code Holders
+    - /v1/referrals/{campaignId}/members/{memberId}/holders/{holderId}, delete - Remove Referral Code Holder
+    - /v1/referrals/members/{memberId}/holders/{holderId}, delete - Remove Referral Code Holder
   - !!! BREAKING CHANGES !!!
     - Pagination changed on listing card transactions - NO `page` param is supported - use `starting_after_id` instead.
     - Pagination changed on listing voucher transactions - NO `page` param is supported - use `starting_after_id` instead.
@@ -375,6 +381,12 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::RedemptionsApi* | [**redeem_stacked_discounts**](docs/RedemptionsApi.md#redeem_stacked_discounts) | **POST** /v1/redemptions | Redeem Stackable Discounts
 *VoucherifySdk::RedemptionsApi* | [**rollback_redemption**](docs/RedemptionsApi.md#rollback_redemption) | **POST** /v1/redemptions/{redemptionId}/rollback | Rollback Redemption
 *VoucherifySdk::RedemptionsApi* | [**rollback_stacked_redemptions**](docs/RedemptionsApi.md#rollback_stacked_redemptions) | **POST** /v1/redemptions/{parentRedemptionId}/rollbacks | Rollback Stackable Redemptions
+*VoucherifySdk::ReferralsApi* | [**referrals_add_holders**](docs/ReferralsApi.md#referrals_add_holders) | **POST** /v1/referrals/members/{memberId}/holders | Add Referral Code Holders
+*VoucherifySdk::ReferralsApi* | [**referrals_add_holders1**](docs/ReferralsApi.md#referrals_add_holders1) | **POST** /v1/referrals/{campaignId}/members/{memberId}/holders | Add Referral Code Holders
+*VoucherifySdk::ReferralsApi* | [**referrals_code_holders**](docs/ReferralsApi.md#referrals_code_holders) | **GET** /v1/referrals/{campaignId}/members/{memberId}/holders | List Referral Code Holders
+*VoucherifySdk::ReferralsApi* | [**referrals_code_holders1**](docs/ReferralsApi.md#referrals_code_holders1) | **GET** /v1/referrals/members/{memberId}/holders | List Referral Code Holders
+*VoucherifySdk::ReferralsApi* | [**referrals_remove_holder**](docs/ReferralsApi.md#referrals_remove_holder) | **DELETE** /v1/referrals/members/{memberId}/holders/{holderId} | Remove Referral Card Holder
+*VoucherifySdk::ReferralsApi* | [**referrals_remove_holder1**](docs/ReferralsApi.md#referrals_remove_holder1) | **DELETE** /v1/referrals/{campaignId}/members/{memberId}/holders/{holderId} | Remove Referral Card Holder
 *VoucherifySdk::RewardsApi* | [**create_reward**](docs/RewardsApi.md#create_reward) | **POST** /v1/rewards | Create Reward
 *VoucherifySdk::RewardsApi* | [**create_reward_assignment**](docs/RewardsApi.md#create_reward_assignment) | **POST** /v1/rewards/{rewardId}/assignments | Create Reward Assignment
 *VoucherifySdk::RewardsApi* | [**delete_reward**](docs/RewardsApi.md#delete_reward) | **DELETE** /v1/rewards/{rewardId} | Delete Reward
@@ -1065,6 +1077,16 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ParameterFiltersListRedemptionsResult](docs/ParameterFiltersListRedemptionsResult.md)
  - [VoucherifySdk::ParameterFiltersListRedemptionsUserLogin](docs/ParameterFiltersListRedemptionsUserLogin.md)
  - [VoucherifySdk::ParameterFiltersListRedemptionsVoucherCode](docs/ParameterFiltersListRedemptionsVoucherCode.md)
+ - [VoucherifySdk::ParameterFiltersListReferralsRedeemableHolders](docs/ParameterFiltersListReferralsRedeemableHolders.md)
+ - [VoucherifySdk::ParameterFiltersListReferralsRedeemableHoldersCampaignId](docs/ParameterFiltersListReferralsRedeemableHoldersCampaignId.md)
+ - [VoucherifySdk::ParameterFiltersListReferralsRedeemableHoldersCampaignType](docs/ParameterFiltersListReferralsRedeemableHoldersCampaignType.md)
+ - [VoucherifySdk::ParameterFiltersListReferralsRedeemableHoldersCustomerId](docs/ParameterFiltersListReferralsRedeemableHoldersCustomerId.md)
+ - [VoucherifySdk::ParameterFiltersListReferralsRedeemableHoldersHolderRole](docs/ParameterFiltersListReferralsRedeemableHoldersHolderRole.md)
+ - [VoucherifySdk::ParameterFiltersListReferralsRedeemableHoldersHolderRoleConditions](docs/ParameterFiltersListReferralsRedeemableHoldersHolderRoleConditions.md)
+ - [VoucherifySdk::ParameterFiltersListReferralsRedeemableHoldersId](docs/ParameterFiltersListReferralsRedeemableHoldersId.md)
+ - [VoucherifySdk::ParameterFiltersListReferralsRedeemableHoldersRedeemableId](docs/ParameterFiltersListReferralsRedeemableHoldersRedeemableId.md)
+ - [VoucherifySdk::ParameterFiltersListReferralsRedeemableHoldersRedeemableObject](docs/ParameterFiltersListReferralsRedeemableHoldersRedeemableObject.md)
+ - [VoucherifySdk::ParameterFiltersListReferralsRedeemableHoldersVoucherType](docs/ParameterFiltersListReferralsRedeemableHoldersVoucherType.md)
  - [VoucherifySdk::ParameterOrder](docs/ParameterOrder.md)
  - [VoucherifySdk::ParameterOrderCreatedAt](docs/ParameterOrderCreatedAt.md)
  - [VoucherifySdk::ParameterOrderListAllPromotionStacks](docs/ParameterOrderListAllPromotionStacks.md)
@@ -1200,6 +1222,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::QualificationsRedeemableBase](docs/QualificationsRedeemableBase.md)
  - [VoucherifySdk::QualificationsRedeemables](docs/QualificationsRedeemables.md)
  - [VoucherifySdk::RedeemableGift](docs/RedeemableGift.md)
+ - [VoucherifySdk::RedeemableHolder](docs/RedeemableHolder.md)
  - [VoucherifySdk::RedeemableLoyaltyCard](docs/RedeemableLoyaltyCard.md)
  - [VoucherifySdk::RedeemableResult](docs/RedeemableResult.md)
  - [VoucherifySdk::RedeemableVoucher](docs/RedeemableVoucher.md)
@@ -1318,6 +1341,9 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ReferralProgramCustomEvent](docs/ReferralProgramCustomEvent.md)
  - [VoucherifySdk::ReferralProgramRefereeReward](docs/ReferralProgramRefereeReward.md)
  - [VoucherifySdk::ReferralProgramRefereeRewardRelatedObjectParent](docs/ReferralProgramRefereeRewardRelatedObjectParent.md)
+ - [VoucherifySdk::ReferralsMembersHoldersCreateInBulkRequestBody](docs/ReferralsMembersHoldersCreateInBulkRequestBody.md)
+ - [VoucherifySdk::ReferralsMembersHoldersCreateInBulkResponseBody](docs/ReferralsMembersHoldersCreateInBulkResponseBody.md)
+ - [VoucherifySdk::ReferralsMembersHoldersListResponseBody](docs/ReferralsMembersHoldersListResponseBody.md)
  - [VoucherifySdk::Referrer](docs/Referrer.md)
  - [VoucherifySdk::ReferrerAddress](docs/ReferrerAddress.md)
  - [VoucherifySdk::ReferrerId](docs/ReferrerId.md)
