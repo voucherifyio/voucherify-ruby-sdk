@@ -166,6 +166,7 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
     - `junction` property is deleted is no longer supported in models:
     - `ParameterFiltersListCustomerRedeemables`
     - `ParameterFiltersListRedemptions`
+    - `filter` property in schemas ProductCollectionsCreateRequestBody, ProductCollectionsCreateResponseBody, ProductCollectionsItem and ProductCollectionsGetResponseBody has changed. Uses plain `object`.
 - **2024-09-05** - `6.0.0` - The new version of the SKD includes coverage for all the most commonly used Voucherify endpoints and supports typed models.
 
 *Previous versions of the SDK are no longer supported, and we highly recommend upgrading to version 6.0.0, which is now designated as Long-Term Support (LTS).*
@@ -1090,16 +1091,12 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::PointsExpirationTypes](docs/PointsExpirationTypes.md)
  - [VoucherifySdk::Product](docs/Product.md)
  - [VoucherifySdk::ProductCollectionsCreateRequestBody](docs/ProductCollectionsCreateRequestBody.md)
- - [VoucherifySdk::ProductCollectionsCreateRequestBodyFilter](docs/ProductCollectionsCreateRequestBodyFilter.md)
  - [VoucherifySdk::ProductCollectionsCreateRequestBodyProductsItem](docs/ProductCollectionsCreateRequestBodyProductsItem.md)
  - [VoucherifySdk::ProductCollectionsCreateResponseBody](docs/ProductCollectionsCreateResponseBody.md)
- - [VoucherifySdk::ProductCollectionsCreateResponseBodyFilter](docs/ProductCollectionsCreateResponseBodyFilter.md)
  - [VoucherifySdk::ProductCollectionsCreateResponseBodyProductsItem](docs/ProductCollectionsCreateResponseBodyProductsItem.md)
  - [VoucherifySdk::ProductCollectionsGetResponseBody](docs/ProductCollectionsGetResponseBody.md)
- - [VoucherifySdk::ProductCollectionsGetResponseBodyFilter](docs/ProductCollectionsGetResponseBodyFilter.md)
  - [VoucherifySdk::ProductCollectionsGetResponseBodyProductsItem](docs/ProductCollectionsGetResponseBodyProductsItem.md)
  - [VoucherifySdk::ProductCollectionsItem](docs/ProductCollectionsItem.md)
- - [VoucherifySdk::ProductCollectionsItemFilter](docs/ProductCollectionsItemFilter.md)
  - [VoucherifySdk::ProductCollectionsItemProductsItem](docs/ProductCollectionsItemProductsItem.md)
  - [VoucherifySdk::ProductCollectionsListResponseBody](docs/ProductCollectionsListResponseBody.md)
  - [VoucherifySdk::ProductCollectionsProductsListResponseBody](docs/ProductCollectionsProductsListResponseBody.md)

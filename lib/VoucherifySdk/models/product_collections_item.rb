@@ -25,6 +25,7 @@ module VoucherifySdk
     # Describes whether the product collection is dynamic (products come in and leave based on set criteria) or static (manually selected products).
     attr_accessor :type
 
+    # Defines a set of criteria and boundary conditions for an `AUTO_UPDATE` product collection type.
     attr_accessor :filter
 
     # Defines a set of products for a `STATIC` product collection type.
@@ -82,7 +83,7 @@ module VoucherifySdk
         :'id' => :'String',
         :'name' => :'String',
         :'type' => :'String',
-        :'filter' => :'ProductCollectionsItemFilter',
+        :'filter' => :'Object',
         :'products' => :'Array<ProductCollectionsItemProductsItem>',
         :'created_at' => :'Time',
         :'object' => :'String'
