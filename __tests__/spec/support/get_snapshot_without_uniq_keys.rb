@@ -2,7 +2,7 @@
 require_relative 'snapshot_helper'
 
 def get_snapshot_without_uniq_keys(snapshot_name, keys_to_remove = nil)
-  keys_to_remove ||= ['id', 'created_at', 'updated_at', 'name', 'rule_id', 'customer_id', 'related_object_id', 'source_id', 'product_id', 'promotion_id', 'campaign_id', 'banner', 'code', 'date', 'voucher_id', 'rule_id', 'related_object_id', 'url', 'tracking_id', 'vouchers_id', 'holder_id']
+  keys_to_remove ||= ['id', 'created_at', 'updated_at', 'name', 'rule_id', 'customer_id', 'related_object_id', 'source_id', 'product_id', 'promotion_id', 'campaign_id', 'banner', 'code', 'date', 'voucher_id', 'rule_id', 'related_object_id', 'url', 'tracking_id', 'vouchers_id', 'holder_id', 'total_amount']
 
   # Load snapshot
   snapshot = load_snapshot(snapshot_name)
