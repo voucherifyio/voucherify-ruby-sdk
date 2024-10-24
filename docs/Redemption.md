@@ -22,9 +22,9 @@
 | **customer** | [**SimpleCustomer**](SimpleCustomer.md) |  | [optional] |
 | **related_object_type** | **String** | Defines the related object. | [optional] |
 | **related_object_id** | **String** | Unique related object ID assigned by Voucherify, i.e. v_lfZi4rcEGe0sN9gmnj40bzwK2FH6QUno for a voucher. | [optional] |
-| **voucher** | [**RedemptionVoucher**](RedemptionVoucher.md) |  | [optional] |
 | **promotion_tier** | [**PromotionTier**](PromotionTier.md) |  | [optional] |
 | **reward** | [**RedemptionRewardResult**](RedemptionRewardResult.md) |  | [optional] |
 | **gift** | [**RedemptionGift**](RedemptionGift.md) |  | [optional] |
 | **loyalty_card** | [**RedemptionLoyaltyCard**](RedemptionLoyaltyCard.md) |  | [optional] |
+| **voucher** | [**RedemptionVoucher**](RedemptionVoucher.md) |  | [optional] |
 

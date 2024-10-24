@@ -19,10 +19,14 @@ module VoucherifySdk
     # Number of points that will be subtracted from the loyalty card points balance if the reward is redeemed. Must be positive integer.
     attr_accessor :points
 
+    # Determines if the reward is redeemed automatically when the customer reaches the sufficient number of points to redeem it. Value `true` means that the automatic reward redemption is active. Only one reward can be set to be redeemed automatically in a loyalty campaign, i.e. only one can have the value `true`.
+    attr_accessor :auto_redeem
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'points' => :'points'
+        :'points' => :'points',
+        :'auto_redeem' => :'auto_redeem'
       }
     end
 
@@ -34,14 +38,16 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'points' => :'Integer'
+        :'points' => :'Integer',
+        :'auto_redeem' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'points'
+        :'points',
+        :'auto_redeem'
       ])
     end
 
@@ -55,6 +61,10 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
+      end
+
+      if attributes.key?(:'auto_redeem')
+        self.auto_redeem = attributes[:'auto_redeem']
       end
     end
 
@@ -83,7 +93,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          points == o.points
+          points == o.points &&
+          auto_redeem == o.auto_redeem
     end
 
     # @see the `==` method
@@ -95,7 +106,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [points].hash
+      [points, auto_redeem].hash
     end
 
     # Builds the object from hash

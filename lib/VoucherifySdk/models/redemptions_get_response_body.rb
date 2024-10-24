@@ -60,8 +60,6 @@ module VoucherifySdk
 
     attr_accessor :related_object_id
 
-    attr_accessor :voucher
-
     attr_accessor :promotion_tier
 
     attr_accessor :reward
@@ -69,6 +67,8 @@ module VoucherifySdk
     attr_accessor :gift
 
     attr_accessor :loyalty_card
+
+    attr_accessor :voucher
 
     # System generated cause for the redemption being invalid in the context of the provided parameters.
     attr_accessor :reason
@@ -116,11 +116,11 @@ module VoucherifySdk
         :'customer' => :'customer',
         :'related_object_type' => :'related_object_type',
         :'related_object_id' => :'related_object_id',
-        :'voucher' => :'voucher',
         :'promotion_tier' => :'promotion_tier',
         :'reward' => :'reward',
         :'gift' => :'gift',
         :'loyalty_card' => :'loyalty_card',
+        :'voucher' => :'voucher',
         :'reason' => :'reason'
       }
     end
@@ -151,11 +151,11 @@ module VoucherifySdk
         :'customer' => :'RedemptionsGetResponseBodyCustomer',
         :'related_object_type' => :'String',
         :'related_object_id' => :'String',
-        :'voucher' => :'RedemptionsGetResponseBodyVoucher',
         :'promotion_tier' => :'RedemptionsGetResponseBodyPromotionTier',
         :'reward' => :'RedemptionRewardResult',
         :'gift' => :'RedemptionsGetResponseBodyGift',
         :'loyalty_card' => :'RedemptionsGetResponseBodyLoyaltyCard',
+        :'voucher' => :'RedemptionsGetResponseBodyVoucher',
         :'reason' => :'String'
       }
     end
@@ -181,10 +181,10 @@ module VoucherifySdk
         :'customer',
         :'related_object_type',
         :'related_object_id',
-        :'voucher',
         :'promotion_tier',
         :'gift',
         :'loyalty_card',
+        :'voucher',
         :'reason'
       ])
     end
@@ -269,10 +269,6 @@ module VoucherifySdk
         self.related_object_id = attributes[:'related_object_id']
       end
 
-      if attributes.key?(:'voucher')
-        self.voucher = attributes[:'voucher']
-      end
-
       if attributes.key?(:'promotion_tier')
         self.promotion_tier = attributes[:'promotion_tier']
       end
@@ -287,6 +283,10 @@ module VoucherifySdk
 
       if attributes.key?(:'loyalty_card')
         self.loyalty_card = attributes[:'loyalty_card']
+      end
+
+      if attributes.key?(:'voucher')
+        self.voucher = attributes[:'voucher']
       end
 
       if attributes.key?(:'reason')
@@ -340,11 +340,11 @@ module VoucherifySdk
           customer == o.customer &&
           related_object_type == o.related_object_type &&
           related_object_id == o.related_object_id &&
-          voucher == o.voucher &&
           promotion_tier == o.promotion_tier &&
           reward == o.reward &&
           gift == o.gift &&
           loyalty_card == o.loyalty_card &&
+          voucher == o.voucher &&
           reason == o.reason
     end
 
@@ -357,7 +357,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, object, date, customer_id, tracking_id, metadata, amount, redemption, result, status, related_redemptions, failure_code, failure_message, order, channel, customer, related_object_type, related_object_id, voucher, promotion_tier, reward, gift, loyalty_card, reason].hash
+      [id, object, date, customer_id, tracking_id, metadata, amount, redemption, result, status, related_redemptions, failure_code, failure_message, order, channel, customer, related_object_type, related_object_id, promotion_tier, reward, gift, loyalty_card, voucher, reason].hash
     end
 
     # Builds the object from hash

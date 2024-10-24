@@ -24,7 +24,7 @@ module VoucherifySdk
 
     attr_accessor :filters
 
-    # The expand array lets you configure the parameters included in the response. Depending on the strings included in the array, the response will contain different details.   | **Expand Option** | **Response Body** | |:---|:---| | [\"redeemable\"] | - Returns the redeemables' metadata. | | [\"category\"] | - Returns an expanded `categories` object, showing details about the category. | | [\"validation_rules\"] | - Returns an expanded `validation_rules` object, showing details about the validation rules. |
+    # The expand array lets you configure the parameters included in the response. Depending on the strings included in the array, the response will contain different details.   | **Expand Option** | **Response Body** | |:---|:---| | [`\"redeemable\"`] | Returns the redeemables':<br>- metadata<br>- redeemable name,<br>- campaign name,<br>- campaign ID| | [`\"category\"`] | - Returns an expanded `categories` object, showing details about the category. | | [`\"validation_rules\"`] | - Returns an expanded `validation_rules` object, showing details about the validation rules. |
     attr_accessor :expand
 
     # Is used to determine the order in which data is displayed in the result array.    - `DEFAULT` - Sorting descending by `created_at`   - `BEST_DEAL` - Sorting descending by `total_applied_discount_amount`   - `LEAST_DEAL` - Sorting ascending by `total_applied_discount_amount`

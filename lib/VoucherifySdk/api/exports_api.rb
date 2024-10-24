@@ -183,7 +183,7 @@ module VoucherifySdk
       return_type = opts[:debug_return_type] || 'String'
 
       # auth_names
-      auth_names = opts[:debug_auth_names] || []
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
 
       new_options = opts.merge(
         :operation => :"ExportsApi.download_export",

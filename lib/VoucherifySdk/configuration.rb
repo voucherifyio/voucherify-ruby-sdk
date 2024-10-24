@@ -262,6 +262,20 @@ module VoucherifySdk
             key: 'X-Client-Application-Id',
             value: api_key_with_prefix('X-Client-Application-Id')
           },
+        'X-Management-Id' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'X-Management-Id',
+            value: api_key_with_prefix('X-Management-Id')
+          },
+        'X-Management-Token' =>
+          {
+            type: 'api_key',
+            in: 'header',
+            key: 'X-Management-Token',
+            value: api_key_with_prefix('X-Management-Token')
+          },
       }
     end
 

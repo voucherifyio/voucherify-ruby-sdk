@@ -28,7 +28,7 @@ module VoucherifySdk
     # Total number of promotion tiers.
     attr_accessor :total
 
-    # As query results are always limited (by the limit parameter), the `has_more` flag indicates if there are more records for given filter parameters. This lets you know if you can run another request (with a different page or a different start date filter) to get more records returned in the results.
+    # As query results are always limited (by the limit parameter), the `has_more` flag indicates if there are more records for given filter parameters. This lets you know if you can run another request to get more records returned in the results.
     attr_accessor :has_more
 
     # Attribute mapping from ruby-style variable name to JSON key.

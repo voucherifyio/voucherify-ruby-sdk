@@ -600,6 +600,7 @@ module VoucherifySdk
     # @option opts [ParameterCampaignType] :campaign_type This attribute allows filtering by campaign type.
     # @option opts [ParameterExpandListCampaigns] :expand Include an expanded categories object in the response. (default to 'category')
     # @option opts [ParameterOrderListCampaigns] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [ParameterFiltersListCampaigns] :filters Filters the results by campaign status or whether the campaign is a referral campaign.
     # @return [CampaignsListResponseBody]
     def list_campaigns(opts = {})
       data, _status_code, _headers = list_campaigns_with_http_info(opts)
@@ -614,6 +615,7 @@ module VoucherifySdk
     # @option opts [ParameterCampaignType] :campaign_type This attribute allows filtering by campaign type.
     # @option opts [ParameterExpandListCampaigns] :expand Include an expanded categories object in the response. (default to 'category')
     # @option opts [ParameterOrderListCampaigns] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [ParameterFiltersListCampaigns] :filters Filters the results by campaign status or whether the campaign is a referral campaign.
     # @return [Array<(CampaignsListResponseBody, Integer, Hash)>] CampaignsListResponseBody data, response status code and response headers
     private def list_campaigns_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -629,6 +631,7 @@ module VoucherifySdk
       query_params[:'campaign_type'] = opts[:'campaign_type'] if !opts[:'campaign_type'].nil?
       query_params[:'expand'] = opts[:'expand'] if !opts[:'expand'].nil?
       query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'filters'] = opts[:'filters'] if !opts[:'filters'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

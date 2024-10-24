@@ -4,6 +4,5 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **conditions** | [**ParameterFiltersListCustomerRedeemablesCreatedAtConditions**](ParameterFiltersListCustomerRedeemablesCreatedAtConditions.md) |  | [optional] |
-| **junction** | [**Junction**](Junction.md) |  | [optional] |
+| **conditions** | [**FilterConditionsDateTime**](FilterConditionsDateTime.md) |  | [optional] |
 

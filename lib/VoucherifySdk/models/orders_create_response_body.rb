@@ -52,7 +52,7 @@ module VoucherifySdk
     # Sum of all order-level AND all product-specific discounts applied in a particular request.   `total_applied_discount_amount` = `applied_discount_amount` + `items_applied_discount_amount`
     attr_accessor :total_applied_discount_amount
 
-    # Array of items applied to the order.
+    # Array of items applied to the order. It can include up 500 items.
     attr_accessor :items
 
     # A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format.

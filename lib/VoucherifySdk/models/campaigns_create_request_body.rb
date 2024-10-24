@@ -52,9 +52,6 @@ module VoucherifySdk
     # Defines the amount of time the vouchers will be active after publishing. The value is shown in the ISO 8601 format. For example, a voucher with the value of P24D will be valid for a duration of 24 days.
     attr_accessor :activity_duration_after_publishing
 
-    # Array containing the ID of the validation rule associated with the promotion tier.
-    attr_accessor :validation_rules
-
     # Unique category ID that this campaign belongs to. Either pass this parameter OR the `category`.
     attr_accessor :category_id
 
@@ -63,6 +60,9 @@ module VoucherifySdk
 
     attr_accessor :metadata
 
+    # Array containing the ID of the validation rule associated with the promotion tier.
+    attr_accessor :validation_rules
+
     attr_accessor :campaign_type
 
     attr_accessor :voucher
@@ -70,8 +70,6 @@ module VoucherifySdk
     attr_accessor :referral_program
 
     attr_accessor :promotion
-
-    attr_accessor :lucky_draw
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -111,15 +109,14 @@ module VoucherifySdk
         :'validity_day_of_week' => :'validity_day_of_week',
         :'validity_hours' => :'validity_hours',
         :'activity_duration_after_publishing' => :'activity_duration_after_publishing',
-        :'validation_rules' => :'validation_rules',
         :'category_id' => :'category_id',
         :'category' => :'category',
         :'metadata' => :'metadata',
+        :'validation_rules' => :'validation_rules',
         :'campaign_type' => :'campaign_type',
         :'voucher' => :'voucher',
         :'referral_program' => :'referral_program',
-        :'promotion' => :'promotion',
-        :'lucky_draw' => :'lucky_draw'
+        :'promotion' => :'promotion'
       }
     end
 
@@ -144,15 +141,14 @@ module VoucherifySdk
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
         :'activity_duration_after_publishing' => :'String',
-        :'validation_rules' => :'Array<String>',
         :'category_id' => :'String',
         :'category' => :'String',
         :'metadata' => :'Object',
+        :'validation_rules' => :'Array<String>',
         :'campaign_type' => :'String',
         :'voucher' => :'CampaignsCreateRequestBodyVoucher',
         :'referral_program' => :'ReferralProgram',
-        :'promotion' => :'CampaignsCreateRequestBodyPromotion',
-        :'lucky_draw' => :'LuckyDraw'
+        :'promotion' => :'CampaignsCreateRequestBodyPromotion'
       }
     end
 
@@ -169,13 +165,13 @@ module VoucherifySdk
         :'start_date',
         :'expiration_date',
         :'activity_duration_after_publishing',
-        :'validation_rules',
         :'category_id',
         :'category',
         :'metadata',
+        :'validation_rules',
         :'campaign_type',
         :'voucher',
-        :'promotion',
+        :'promotion'
       ])
     end
 
@@ -241,12 +237,6 @@ module VoucherifySdk
         self.activity_duration_after_publishing = attributes[:'activity_duration_after_publishing']
       end
 
-      if attributes.key?(:'validation_rules')
-        if (value = attributes[:'validation_rules']).is_a?(Array)
-          self.validation_rules = value
-        end
-      end
-
       if attributes.key?(:'category_id')
         self.category_id = attributes[:'category_id']
       end
@@ -257,6 +247,12 @@ module VoucherifySdk
 
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.key?(:'validation_rules')
+        if (value = attributes[:'validation_rules']).is_a?(Array)
+          self.validation_rules = value
+        end
       end
 
       if attributes.key?(:'campaign_type')
@@ -273,10 +269,6 @@ module VoucherifySdk
 
       if attributes.key?(:'promotion')
         self.promotion = attributes[:'promotion']
-      end
-
-      if attributes.key?(:'lucky_draw')
-        self.lucky_draw = attributes[:'lucky_draw']
       end
     end
 
@@ -299,7 +291,7 @@ module VoucherifySdk
       type_validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC"])
       return false unless type_validator.valid?(@type)
       return false if !@validation_rules.nil? && @validation_rules.length > 1
-      campaign_type_validator = EnumAttributeValidator.new('String', ["DISCOUNT_COUPONS", "REFERRAL_PROGRAM", "GIFT_VOUCHERS", "LOYALTY_PROGRAM", "PROMOTION", "LUCKY_DRAW"])
+      campaign_type_validator = EnumAttributeValidator.new('String', ["DISCOUNT_COUPONS", "REFERRAL_PROGRAM", "GIFT_VOUCHERS", "LOYALTY_PROGRAM", "PROMOTION"])
       return false unless campaign_type_validator.valid?(@campaign_type)
       true
     end
@@ -322,15 +314,14 @@ module VoucherifySdk
           validity_day_of_week == o.validity_day_of_week &&
           validity_hours == o.validity_hours &&
           activity_duration_after_publishing == o.activity_duration_after_publishing &&
-          validation_rules == o.validation_rules &&
           category_id == o.category_id &&
           category == o.category &&
           metadata == o.metadata &&
+          validation_rules == o.validation_rules &&
           campaign_type == o.campaign_type &&
           voucher == o.voucher &&
           referral_program == o.referral_program &&
-          promotion == o.promotion &&
-          lucky_draw == o.lucky_draw
+          promotion == o.promotion
     end
 
     # @see the `==` method
@@ -342,7 +333,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, type, join_once, auto_join, use_voucher_metadata_schema, vouchers_count, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, validation_rules, category_id, category, metadata, campaign_type, voucher, referral_program, promotion, lucky_draw].hash
+      [name, description, type, join_once, auto_join, use_voucher_metadata_schema, vouchers_count, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, category_id, category, metadata, validation_rules, campaign_type, voucher, referral_program, promotion].hash
     end
 
     # Builds the object from hash

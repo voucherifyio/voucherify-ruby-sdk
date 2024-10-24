@@ -19,7 +19,7 @@ module VoucherifySdk
     # Contains the list of tiers in a pre-defined sequence.
     attr_accessor :ids
 
-    # Category hierarchy.
+    # Category hierarchy. Categories with lower hierarchy are processed before categories with higher hierarchy value.
     attr_accessor :hierarchy_mode
 
     class EnumAttributeValidator

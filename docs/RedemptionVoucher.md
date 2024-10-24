@@ -31,7 +31,7 @@
 | **object** | **String** | The type of the object represented by JSON. Default is &#x60;voucher&#x60;. | [optional][default to &#39;voucher&#39;] |
 | **publish** | [**RedemptionVoucherPublish**](RedemptionVoucherPublish.md) |  | [optional] |
 | **redemption** | [**RedemptionVoucherRedemption**](RedemptionVoucherRedemption.md) |  | [optional] |
-| **categories** | [**Array&lt;Category&gt;**](Category.md) | Contains details about the category. | [optional] |
+| **categories** | [**Array&lt;CategoryWithStackingRulesType&gt;**](CategoryWithStackingRulesType.md) | Contains details about the category. | [optional] |
 | **validation_rules_assignments** | [**ValidationRulesAssignmentsList**](ValidationRulesAssignmentsList.md) |  | [optional] |
 | **holder** | [**SimpleCustomer**](SimpleCustomer.md) |  | [optional] |
 

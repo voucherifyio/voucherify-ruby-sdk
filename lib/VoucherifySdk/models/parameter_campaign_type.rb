@@ -20,10 +20,9 @@ module VoucherifySdk
     REFERRAL_PROGRAM = "REFERRAL_PROGRAM".freeze
     DISCOUNT_COUPONS = "DISCOUNT_COUPONS".freeze
     LOYALTY_PROGRAM = "LOYALTY_PROGRAM".freeze
-    LUCKY_DRAW = "LUCKY_DRAW".freeze
 
     def self.all_vars
-      @all_vars ||= [PROMOTION, GIFT_VOUCHERS, REFERRAL_PROGRAM, DISCOUNT_COUPONS, LOYALTY_PROGRAM, LUCKY_DRAW].freeze
+      @all_vars ||= [PROMOTION, GIFT_VOUCHERS, REFERRAL_PROGRAM, DISCOUNT_COUPONS, LOYALTY_PROGRAM].freeze
     end
 
     # Builds the enum from string

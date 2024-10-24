@@ -22,7 +22,7 @@ module VoucherifySdk
     # Short string describing the kind of error which occurred.
     attr_accessor :key
 
-    # A human-readable message providing a short description about the error.
+    # A human-readable message providing a short description of the error.
     attr_accessor :message
 
     # A human-readable message providing more details about the error.

@@ -111,7 +111,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["DISCOUNT_VOUCHER", "LOYALTY_CARD", "GIFT_VOUCHER", "LUCKY_DRAW_CODE"])
+      type_validator = EnumAttributeValidator.new('String', ["LOYALTY_CARD", "GIFT_VOUCHER"])
       return false unless type_validator.valid?(@type)
       true
     end

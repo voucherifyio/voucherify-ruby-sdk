@@ -64,15 +64,6 @@ module VoucherifySdk
 
     attr_accessor :options
 
-    # It represents the total number of winners in a lucky draw.
-    attr_accessor :winners_count
-
-    # It indicates whether each winner in a draw is unique or not.
-    attr_accessor :unique_winners_per_draw
-
-    # Specifies whether each participant can win only once across multiple draws.
-    attr_accessor :unique_winners
-
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -116,10 +107,7 @@ module VoucherifySdk
         :'referral_program' => :'referral_program',
         :'gift' => :'gift',
         :'loyalty_tiers_expiration' => :'loyalty_tiers_expiration',
-        :'options' => :'options',
-        :'winners_count' => :'winners_count',
-        :'unique_winners_per_draw' => :'unique_winners_per_draw',
-        :'unique_winners' => :'unique_winners'
+        :'options' => :'options'
       }
     end
 
@@ -145,14 +133,11 @@ module VoucherifySdk
         :'join_once' => :'Boolean',
         :'auto_join' => :'Boolean',
         :'type' => :'String',
-        :'discount' => :'Object',
+        :'discount' => :'Discount',
         :'referral_program' => :'ReferralProgram',
         :'gift' => :'Gift',
         :'loyalty_tiers_expiration' => :'LoyaltyTiersExpirationAll',
-        :'options' => :'CampaignsUpdateRequestBodyOptions',
-        :'winners_count' => :'String',
-        :'unique_winners_per_draw' => :'String',
-        :'unique_winners' => :'String'
+        :'options' => :'CampaignsUpdateRequestBodyOptions'
       }
     end
 
@@ -170,11 +155,7 @@ module VoucherifySdk
         :'join_once',
         :'auto_join',
         :'type',
-        :'discount',
-        :'options',
-        :'winners_count',
-        :'unique_winners_per_draw',
-        :'unique_winners'
+        :'options'
       ])
     end
 
@@ -265,18 +246,6 @@ module VoucherifySdk
       if attributes.key?(:'options')
         self.options = attributes[:'options']
       end
-
-      if attributes.key?(:'winners_count')
-        self.winners_count = attributes[:'winners_count']
-      end
-
-      if attributes.key?(:'unique_winners_per_draw')
-        self.unique_winners_per_draw = attributes[:'unique_winners_per_draw']
-      end
-
-      if attributes.key?(:'unique_winners')
-        self.unique_winners = attributes[:'unique_winners']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -319,10 +288,7 @@ module VoucherifySdk
           referral_program == o.referral_program &&
           gift == o.gift &&
           loyalty_tiers_expiration == o.loyalty_tiers_expiration &&
-          options == o.options &&
-          winners_count == o.winners_count &&
-          unique_winners_per_draw == o.unique_winners_per_draw &&
-          unique_winners == o.unique_winners
+          options == o.options
     end
 
     # @see the `==` method
@@ -334,7 +300,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, description, category, metadata, unset_metadata_fields, category_id, activity_duration_after_publishing, join_once, auto_join, type, discount, referral_program, gift, loyalty_tiers_expiration, options, winners_count, unique_winners_per_draw, unique_winners].hash
+      [start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, description, category, metadata, unset_metadata_fields, category_id, activity_duration_after_publishing, join_once, auto_join, type, discount, referral_program, gift, loyalty_tiers_expiration, options].hash
     end
 
     # Builds the object from hash

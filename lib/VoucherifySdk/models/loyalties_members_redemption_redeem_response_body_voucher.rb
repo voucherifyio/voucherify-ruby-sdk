@@ -89,7 +89,7 @@ module VoucherifySdk
 
     attr_accessor :redemption
 
-    # Contains details about the category.
+    # Always returns an empty array.
     attr_accessor :categories
 
     attr_accessor :validation_rules_assignments
@@ -189,7 +189,7 @@ module VoucherifySdk
         :'object' => :'String',
         :'publish' => :'LoyaltiesMembersRedemptionRedeemResponseBodyVoucherPublish',
         :'redemption' => :'LoyaltiesMembersRedemptionRedeemResponseBodyVoucherRedemption',
-        :'categories' => :'Array<Category>',
+        :'categories' => :'Array<Object>',
         :'validation_rules_assignments' => :'ValidationRulesAssignmentsList',
         :'holder' => :'SimpleCustomer'
       }

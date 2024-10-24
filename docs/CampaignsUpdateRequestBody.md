@@ -18,12 +18,9 @@
 | **join_once** | **Boolean** | If this value is set to &#x60;true&#x60;, customers will be able to join the campaign only once. | [optional] |
 | **auto_join** | **Boolean** | Indicates whether customers will be able to auto-join a loyalty campaign if any earning rule is fulfilled. | [optional] |
 | **type** | **String** | Defines whether the campaign can be updated with new vouchers after campaign creation.      - &#x60;AUTO_UPDATE&#x60;: By choosing the auto update option you will create a campaign that can be enhanced by new vouchers after the time of creation (e.g. by publish vouchers method).     -  &#x60;STATIC&#x60;: vouchers need to be manually published. | [optional] |
-| **discount** | **Object** |  | [optional] |
+| **discount** | [**Discount**](Discount.md) |  | [optional] |
 | **referral_program** | [**ReferralProgram**](ReferralProgram.md) |  | [optional] |
 | **gift** | [**Gift**](Gift.md) |  | [optional] |
 | **loyalty_tiers_expiration** | [**LoyaltyTiersExpirationAll**](LoyaltyTiersExpirationAll.md) |  | [optional] |
 | **options** | [**CampaignsUpdateRequestBodyOptions**](CampaignsUpdateRequestBodyOptions.md) |  | [optional] |
-| **winners_count** | **String** | It represents the total number of winners in a lucky draw. | [optional] |
-| **unique_winners_per_draw** | **String** | It indicates whether each winner in a draw is unique or not. | [optional] |
-| **unique_winners** | **String** | Specifies whether each participant can win only once across multiple draws. | [optional] |
 

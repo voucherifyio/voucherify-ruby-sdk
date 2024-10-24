@@ -22,8 +22,6 @@ module VoucherifySdk
     # Text to be displayed to your customers on your website.
     attr_accessor :banner
 
-    attr_accessor :action
-
     # The metadata object stores all custom attributes assigned to the promotion tier. A set of key/value pairs that you can attach to a promotion tier object. It can be useful for storing additional information about the promotion tier in a structured format.
     attr_accessor :metadata
 
@@ -46,13 +44,15 @@ module VoucherifySdk
 
     attr_accessor :validity_hours
 
-    attr_accessor :validation_rule_assignments
-
     # Assign a new or update the promotion tier's category using name.
     attr_accessor :category
 
     # Assign a new or update the promotion tier's category using id
     attr_accessor :category_id
+
+    attr_accessor :action
+
+    attr_accessor :validation_rule_assignments
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -81,7 +81,6 @@ module VoucherifySdk
       {
         :'name' => :'name',
         :'banner' => :'banner',
-        :'action' => :'action',
         :'metadata' => :'metadata',
         :'hierarchy' => :'hierarchy',
         :'active' => :'active',
@@ -90,9 +89,10 @@ module VoucherifySdk
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
         :'validity_hours' => :'validity_hours',
-        :'validation_rule_assignments' => :'validation_rule_assignments',
         :'category' => :'category',
-        :'category_id' => :'category_id'
+        :'category_id' => :'category_id',
+        :'action' => :'action',
+        :'validation_rule_assignments' => :'validation_rule_assignments'
       }
     end
 
@@ -106,7 +106,6 @@ module VoucherifySdk
       {
         :'name' => :'String',
         :'banner' => :'String',
-        :'action' => :'PromotionsTiersCreateRequestBodyAction',
         :'metadata' => :'Object',
         :'hierarchy' => :'Integer',
         :'active' => :'Boolean',
@@ -115,9 +114,10 @@ module VoucherifySdk
         :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
-        :'validation_rule_assignments' => :'ValidationRuleAssignmentsList',
         :'category' => :'String',
-        :'category_id' => :'String'
+        :'category_id' => :'String',
+        :'action' => :'PromotionsTiersCreateRequestBodyAction',
+        :'validation_rule_assignments' => :'ValidationRuleAssignmentsList'
       }
     end
 
@@ -126,14 +126,14 @@ module VoucherifySdk
       Set.new([
         :'name',
         :'banner',
-        :'action',
         :'metadata',
         :'hierarchy',
         :'active',
         :'start_date',
         :'expiration_date',
         :'category',
-        :'category_id'
+        :'category_id',
+        :'action',
       ])
     end
 
@@ -151,10 +151,6 @@ module VoucherifySdk
 
       if attributes.key?(:'banner')
         self.banner = attributes[:'banner']
-      end
-
-      if attributes.key?(:'action')
-        self.action = attributes[:'action']
       end
 
       if attributes.key?(:'metadata')
@@ -191,16 +187,20 @@ module VoucherifySdk
         self.validity_hours = attributes[:'validity_hours']
       end
 
-      if attributes.key?(:'validation_rule_assignments')
-        self.validation_rule_assignments = attributes[:'validation_rule_assignments']
-      end
-
       if attributes.key?(:'category')
         self.category = attributes[:'category']
       end
 
       if attributes.key?(:'category_id')
         self.category_id = attributes[:'category_id']
+      end
+
+      if attributes.key?(:'action')
+        self.action = attributes[:'action']
+      end
+
+      if attributes.key?(:'validation_rule_assignments')
+        self.validation_rule_assignments = attributes[:'validation_rule_assignments']
       end
     end
 
@@ -226,7 +226,6 @@ module VoucherifySdk
       self.class == o.class &&
           name == o.name &&
           banner == o.banner &&
-          action == o.action &&
           metadata == o.metadata &&
           hierarchy == o.hierarchy &&
           active == o.active &&
@@ -235,9 +234,10 @@ module VoucherifySdk
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
           validity_hours == o.validity_hours &&
-          validation_rule_assignments == o.validation_rule_assignments &&
           category == o.category &&
-          category_id == o.category_id
+          category_id == o.category_id &&
+          action == o.action &&
+          validation_rule_assignments == o.validation_rule_assignments
     end
 
     # @see the `==` method
@@ -249,7 +249,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, banner, action, metadata, hierarchy, active, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, validation_rule_assignments, category, category_id].hash
+      [name, banner, metadata, hierarchy, active, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, category, category_id, action, validation_rule_assignments].hash
     end
 
     # Builds the object from hash

@@ -22,7 +22,7 @@ module VoucherifySdk
     # Category name.
     attr_accessor :name
 
-    # Category hierarchy.
+    # Category hierarchy. Categories with lower hierarchy are processed before categories with higher hierarchy value.
     attr_accessor :hierarchy
 
     # The type of the object represented by the JSON. This object stores information about the category.
@@ -33,9 +33,6 @@ module VoucherifySdk
 
     # Timestamp representing the date and time when the category was updated. The value is shown in the ISO 8601 format.
     attr_accessor :updated_at
-
-    # The type of the stacking rule eligibility.
-    attr_accessor :stacking_rules_type
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -67,8 +64,7 @@ module VoucherifySdk
         :'hierarchy' => :'hierarchy',
         :'object' => :'object',
         :'created_at' => :'created_at',
-        :'updated_at' => :'updated_at',
-        :'stacking_rules_type' => :'stacking_rules_type'
+        :'updated_at' => :'updated_at'
       }
     end
 
@@ -85,8 +81,7 @@ module VoucherifySdk
         :'hierarchy' => :'Integer',
         :'object' => :'String',
         :'created_at' => :'Time',
-        :'updated_at' => :'Time',
-        :'stacking_rules_type' => :'String'
+        :'updated_at' => :'Time'
       }
     end
 
@@ -98,8 +93,7 @@ module VoucherifySdk
         :'hierarchy',
         :'object',
         :'created_at',
-        :'updated_at',
-        :'stacking_rules_type'
+        :'updated_at'
       ])
     end
 
@@ -136,10 +130,6 @@ module VoucherifySdk
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
       end
-
-      if attributes.key?(:'stacking_rules_type')
-        self.stacking_rules_type = attributes[:'stacking_rules_type']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -147,6 +137,10 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@hierarchy.nil? && @hierarchy < 0
+        invalid_properties.push('invalid value for "hierarchy", must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
@@ -154,10 +148,9 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@hierarchy.nil? && @hierarchy < 0
       object_validator = EnumAttributeValidator.new('String', ["category"])
       return false unless object_validator.valid?(@object)
-      stacking_rules_type_validator = EnumAttributeValidator.new('String', ["JOINT", "EXCLUSIVE"])
-      return false unless stacking_rules_type_validator.valid?(@stacking_rules_type)
       true
     end
 
@@ -171,8 +164,7 @@ module VoucherifySdk
           hierarchy == o.hierarchy &&
           object == o.object &&
           created_at == o.created_at &&
-          updated_at == o.updated_at &&
-          stacking_rules_type == o.stacking_rules_type
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -184,7 +176,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, hierarchy, object, created_at, updated_at, stacking_rules_type].hash
+      [id, name, hierarchy, object, created_at, updated_at].hash
     end
 
     # Builds the object from hash

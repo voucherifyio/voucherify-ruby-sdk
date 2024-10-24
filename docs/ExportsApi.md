@@ -141,6 +141,18 @@ Download the contents of the exported CSV file.   📘 Important notes  **Base U
 ```ruby
 require 'time'
 require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
 
 api_instance = VoucherifySdk::ExportsApi.new
 export_id = 'exp_ex6zq0x0EEa9S0N68QcqhxcQ' # String | Unique export object ID.
@@ -170,7 +182,7 @@ end
 
 ### Authorization
 
-No authorization required
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
 
 ### HTTP request headers
 

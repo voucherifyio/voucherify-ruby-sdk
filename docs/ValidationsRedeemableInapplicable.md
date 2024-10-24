@@ -9,5 +9,5 @@
 | **object** | **String** | Redeemable&#39;s object type. | [optional] |
 | **result** | [**ValidationsRedeemableInapplicableResult**](ValidationsRedeemableInapplicableResult.md) |  | [optional] |
 | **metadata** | **Object** | The metadata object stores all custom attributes in the form of key/value pairs assigned to the redeemable. | [optional] |
-| **categories** | [**Array&lt;Category&gt;**](Category.md) |  | [optional] |
+| **categories** | [**Array&lt;CategoryWithStackingRulesType&gt;**](CategoryWithStackingRulesType.md) |  | [optional] |
 

@@ -22,10 +22,10 @@
 | **customer** | [**RedemptionsListResponseBodyRedemptionsItemCustomer**](RedemptionsListResponseBodyRedemptionsItemCustomer.md) |  | [optional] |
 | **related_object_type** | **String** | Defines the related object. | [optional] |
 | **related_object_id** | **String** |  | [optional] |
-| **voucher** | [**RedemptionsListResponseBodyRedemptionsItemVoucher**](RedemptionsListResponseBodyRedemptionsItemVoucher.md) |  | [optional] |
 | **promotion_tier** | [**RedemptionsListResponseBodyRedemptionsItemPromotionTier**](RedemptionsListResponseBodyRedemptionsItemPromotionTier.md) |  | [optional] |
 | **reward** | [**RedemptionRewardResult**](RedemptionRewardResult.md) |  | [optional] |
 | **gift** | [**RedemptionsListResponseBodyRedemptionsItemGift**](RedemptionsListResponseBodyRedemptionsItemGift.md) |  | [optional] |
 | **loyalty_card** | [**RedemptionsListResponseBodyRedemptionsItemLoyaltyCard**](RedemptionsListResponseBodyRedemptionsItemLoyaltyCard.md) |  | [optional] |
+| **voucher** | [**RedemptionsListResponseBodyRedemptionsItemVoucher**](RedemptionsListResponseBodyRedemptionsItemVoucher.md) |  | [optional] |
 | **reason** | **String** | System generated cause for the redemption being invalid in the context of the provided parameters. | [optional] |
 
