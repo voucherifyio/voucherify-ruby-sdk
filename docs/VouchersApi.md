@@ -351,7 +351,7 @@ end
 
 api_instance = VoucherifySdk::VouchersApi.new
 opts = {
-  body: { ... } # Object | Specify the details of the voucher that you would like to create.
+  vouchers_create_request_body: VoucherifySdk::VouchersCreateRequestBody.new # VouchersCreateRequestBody | Specify the details of the voucher that you would like to create.
 }
 
 begin
@@ -367,7 +367,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **body** | **Object** | Specify the details of the voucher that you would like to create. | [optional] |
+| **vouchers_create_request_body** | [**VouchersCreateRequestBody**](VouchersCreateRequestBody.md) | Specify the details of the voucher that you would like to create. | [optional] |
 
 ### Return type
 

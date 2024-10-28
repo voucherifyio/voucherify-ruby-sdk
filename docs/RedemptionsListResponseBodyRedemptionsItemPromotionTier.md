@@ -10,7 +10,7 @@
 | **name** | **String** | Name of the promotion tier. | [optional] |
 | **banner** | **String** | Text to be displayed to your customers on your website. | [optional] |
 | **action** | [**RedemptionsListResponseBodyRedemptionsItemPromotionTierAction**](RedemptionsListResponseBodyRedemptionsItemPromotionTierAction.md) |  | [optional] |
-| **metadata** | **Object** |  | [optional] |
+| **metadata** | **Object** | The metadata object stores all custom attributes assigned to the promotion tier. A set of key/value pairs that you can attach to a promotion tier object. It can be useful for storing additional information about the promotion tier in a structured format. | [optional] |
 | **hierarchy** | **Integer** | The promotions hierarchy defines the order in which the discounts from different tiers will be applied to a customer&#39;s order. If a customer qualifies for discounts from more than one tier, discounts will be applied in the order defined in the hierarchy. | [optional] |
 | **promotion_id** | **String** | Promotion unique ID. | [optional] |
 | **campaign** | [**RedemptionsListResponseBodyRedemptionsItemPromotionTierCampaign**](RedemptionsListResponseBodyRedemptionsItemPromotionTierCampaign.md) |  | [optional] |

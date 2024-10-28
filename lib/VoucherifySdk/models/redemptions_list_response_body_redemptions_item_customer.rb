@@ -27,6 +27,7 @@ module VoucherifySdk
     # A unique identifier of the customer. It can be a customer ID or email from a CRM system, database, or a third-party service.
     attr_accessor :source_id
 
+    # A set of custom key/value pairs that are attached to the customer. It stores all custom attributes assigned to the customer.
     attr_accessor :metadata
 
     # The type of the object represented by JSON.
@@ -90,6 +91,7 @@ module VoucherifySdk
         :'name',
         :'email',
         :'source_id',
+        :'metadata',
         :'object'
       ])
     end

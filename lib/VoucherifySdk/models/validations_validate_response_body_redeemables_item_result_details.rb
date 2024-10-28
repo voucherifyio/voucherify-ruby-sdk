@@ -15,15 +15,15 @@ require 'time'
 
 module VoucherifySdk
   class ValidationsValidateResponseBodyRedeemablesItemResultDetails
-    attr_accessor :key
-
     attr_accessor :message
+
+    attr_accessor :key
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'key' => :'key',
-        :'message' => :'message'
+        :'message' => :'message',
+        :'key' => :'key'
       }
     end
 
@@ -35,8 +35,8 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'key' => :'String',
-        :'message' => :'String'
+        :'message' => :'String',
+        :'key' => :'String'
       }
     end
 
@@ -54,12 +54,12 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'key')
-        self.key = attributes[:'key']
-      end
-
       if attributes.key?(:'message')
         self.message = attributes[:'message']
+      end
+
+      if attributes.key?(:'key')
+        self.key = attributes[:'key']
       end
     end
 
@@ -83,8 +83,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          key == o.key &&
-          message == o.message
+          message == o.message &&
+          key == o.key
     end
 
     # @see the `==` method
@@ -96,7 +96,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [key, message].hash
+      [message, key].hash
     end
 
     # Builds the object from hash

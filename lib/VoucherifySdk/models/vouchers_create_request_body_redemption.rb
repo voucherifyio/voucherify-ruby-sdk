@@ -14,44 +14,14 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class ExportParametersFilters
-    attr_accessor :junction
-
-    attr_accessor :campaign_id
-
-    attr_accessor :voucher_id
-
-    attr_accessor :created_at
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+  class VouchersCreateRequestBodyRedemption
+    # How many times a voucher can be redeemed. A `null` value means unlimited.
+    attr_accessor :quantity
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'junction' => :'junction',
-        :'campaign_id' => :'campaign_id',
-        :'voucher_id' => :'voucher_id',
-        :'created_at' => :'created_at'
+        :'quantity' => :'quantity'
       }
     end
 
@@ -63,16 +33,14 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'junction' => :'Junction',
-        :'campaign_id' => :'FieldConditions',
-        :'voucher_id' => :'FieldConditions',
-        :'created_at' => :'FieldConditions'
+        :'quantity' => :'Integer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'quantity'
       ])
     end
 
@@ -84,20 +52,8 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'junction')
-        self.junction = attributes[:'junction']
-      end
-
-      if attributes.key?(:'campaign_id')
-        self.campaign_id = attributes[:'campaign_id']
-      end
-
-      if attributes.key?(:'voucher_id')
-        self.voucher_id = attributes[:'voucher_id']
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
+      if attributes.key?(:'quantity')
+        self.quantity = attributes[:'quantity']
       end
     end
 
@@ -121,10 +77,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          junction == o.junction &&
-          campaign_id == o.campaign_id &&
-          voucher_id == o.voucher_id &&
-          created_at == o.created_at
+          quantity == o.quantity
     end
 
     # @see the `==` method
@@ -136,7 +89,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [junction, campaign_id, voucher_id, created_at].hash
+      [quantity].hash
     end
 
     # Builds the object from hash

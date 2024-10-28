@@ -23,6 +23,7 @@ module VoucherifySdk
 
     attr_accessor :customer
 
+    # The metadata object stores all custom attributes assigned to the publication. A set of key/value pairs that you can attach to a publication object. It can be useful for storing additional information about the publication in a structured format.
     attr_accessor :metadata
 
     # Specify the distribution channel.

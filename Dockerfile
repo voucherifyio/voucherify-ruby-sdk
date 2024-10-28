@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 RUN gem build VoucherifySdk.gemspec
-RUN gem install voucherify-7.0.0.gem
+RUN gem install voucherify-8.0.0.gem
 RUN gem install dotenv
 RUN gem install rspec
 
