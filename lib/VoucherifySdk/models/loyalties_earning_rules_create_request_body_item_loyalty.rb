@@ -22,13 +22,13 @@ module VoucherifySdk
 
     attr_accessor :calculation_type
 
-    attr_accessor :custom_event
+    attr_accessor :order
 
     attr_accessor :order_items
 
-    attr_accessor :order
-
     attr_accessor :customer
+
+    attr_accessor :custom_event
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -58,10 +58,10 @@ module VoucherifySdk
         :'type' => :'type',
         :'points' => :'points',
         :'calculation_type' => :'calculation_type',
-        :'custom_event' => :'custom_event',
-        :'order_items' => :'order_items',
         :'order' => :'order',
-        :'customer' => :'customer'
+        :'order_items' => :'order_items',
+        :'customer' => :'customer',
+        :'custom_event' => :'custom_event'
       }
     end
 
@@ -76,10 +76,10 @@ module VoucherifySdk
         :'type' => :'String',
         :'points' => :'Integer',
         :'calculation_type' => :'String',
-        :'custom_event' => :'LoyaltiesEarningRulesCreateRequestBodyItemLoyaltyCustomEvent',
-        :'order_items' => :'LoyaltiesEarningRulesCreateRequestBodyItemLoyaltyOrderItems',
         :'order' => :'LoyaltiesEarningRulesCreateRequestBodyItemLoyaltyOrder',
-        :'customer' => :'LoyaltiesEarningRulesCreateRequestBodyItemLoyaltyCustomer'
+        :'order_items' => :'LoyaltiesEarningRulesCreateRequestBodyItemLoyaltyOrderItems',
+        :'customer' => :'LoyaltiesEarningRulesCreateRequestBodyItemLoyaltyCustomer',
+        :'custom_event' => :'LoyaltiesEarningRulesCreateRequestBodyItemLoyaltyCustomEvent'
       }
     end
 
@@ -87,8 +87,8 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'points',
-        :'custom_event',
-        :'customer'
+        :'customer',
+        :'custom_event'
       ])
     end
 
@@ -112,20 +112,20 @@ module VoucherifySdk
         self.calculation_type = attributes[:'calculation_type']
       end
 
-      if attributes.key?(:'custom_event')
-        self.custom_event = attributes[:'custom_event']
+      if attributes.key?(:'order')
+        self.order = attributes[:'order']
       end
 
       if attributes.key?(:'order_items')
         self.order_items = attributes[:'order_items']
       end
 
-      if attributes.key?(:'order')
-        self.order = attributes[:'order']
-      end
-
       if attributes.key?(:'customer')
         self.customer = attributes[:'customer']
+      end
+
+      if attributes.key?(:'custom_event')
+        self.custom_event = attributes[:'custom_event']
       end
     end
 
@@ -143,7 +143,7 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["FIXED", "PROPORTIONAL"])
       return false unless type_validator.valid?(@type)
-      calculation_type_validator = EnumAttributeValidator.new('String', ["CUSTOM_EVENT_METADATA", "ORDER_ITEMS_QUANTITY", "ORDER_ITEMS_AMOUNT", "ORDER_ITEMS_SUBTOTAL_AMOUNT", "ORDER_AMOUNT", "ORDER_TOTAL_AMOUNT", "ORDER_METADATA", "CUSTOMER_METADATA"])
+      calculation_type_validator = EnumAttributeValidator.new('String', ["ORDER_AMOUNT", "ORDER_TOTAL_AMOUNT", "ORDER_METADATA", "ORDER_ITEMS_QUANTITY", "ORDER_ITEMS_AMOUNT", "ORDER_ITEMS_SUBTOTAL_AMOUNT", "CUSTOMER_METADATA", "CUSTOM_EVENT_METADATA"])
       return false unless calculation_type_validator.valid?(@calculation_type)
       true
     end
@@ -156,10 +156,10 @@ module VoucherifySdk
           type == o.type &&
           points == o.points &&
           calculation_type == o.calculation_type &&
-          custom_event == o.custom_event &&
-          order_items == o.order_items &&
           order == o.order &&
-          customer == o.customer
+          order_items == o.order_items &&
+          customer == o.customer &&
+          custom_event == o.custom_event
     end
 
     # @see the `==` method
@@ -171,7 +171,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, points, calculation_type, custom_event, order_items, order, customer].hash
+      [type, points, calculation_type, order, order_items, customer, custom_event].hash
     end
 
     # Builds the object from hash

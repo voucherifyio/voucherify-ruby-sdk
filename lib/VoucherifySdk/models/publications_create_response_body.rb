@@ -30,6 +30,7 @@ module VoucherifySdk
     # Customer's `source_id`.
     attr_accessor :tracking_id
 
+    # The metadata object stores all custom attributes assigned to the publication. A set of key/value pairs that you can attach to a publication object. It can be useful for storing additional information about the publication in a structured format.
     attr_accessor :metadata
 
     # How the publication was originated. It can be your own custom channel or an example value provided here.

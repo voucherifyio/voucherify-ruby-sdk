@@ -67,15 +67,15 @@ gem build VoucherifySdk.gemspec
 Then either install the gem locally:
 
 ```shell
-gem install ./VoucherifySdk-7.0.0.gem
+gem install ./VoucherifySdk-8.0.0.gem
 ```
 
-(for development, run `gem install --dev ./VoucherifySdk-7.0.0.gem` to install the development dependencies)
+(for development, run `gem install --dev ./VoucherifySdk-8.0.0.gem` to install the development dependencies)
 
 Add this to the Gemfile:
 
 ```shell
-gem 'VoucherifySdk', '~> 7.0.0'
+gem 'VoucherifySdk', '~> 8.0.0'
 ```
 
 Then install dependencies with bundler

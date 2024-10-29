@@ -113,7 +113,13 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
 
 ## 📅 Changelog
 
-- **2024-10-28** - `7.0.0`
+- **2024-10-28** - `8.0.0`
+  - Added missing `enums` in few filters models
+  - !!! BREAKING CHANGES !!!
+    - VouchersApi.generateRandomCode now requires `VouchersCreateResponseBody` instead of plain `object`
+    - property `product` in model `Discount` now uses `DiscountProduct` instead of `SimpleProductDiscountUnit`
+    - property `filters` of model `ExportsCreateRequestBodyParameters` now uses plain `object` instead of `ExportsCreateRequestBodyParametersFilters`
+- **2024-10-25** - `7.0.0`
   - Fix object parsing in query. For example `filters` while listing redemptions.
   - !!! BREAKING CHANGES !!!
     - Remove support for `/v1/customers/{customerId}/consents` - put `Update Customer's consents [Deprecated]`
@@ -589,6 +595,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::CustomersUpdateResponseBodyAddress](docs/CustomersUpdateResponseBodyAddress.md)
  - [VoucherifySdk::CustomersUpdateResponseBodyAssets](docs/CustomersUpdateResponseBodyAssets.md)
  - [VoucherifySdk::Discount](docs/Discount.md)
+ - [VoucherifySdk::DiscountProduct](docs/DiscountProduct.md)
  - [VoucherifySdk::DiscountUnitMultipleOneUnit](docs/DiscountUnitMultipleOneUnit.md)
  - [VoucherifySdk::EarningRule](docs/EarningRule.md)
  - [VoucherifySdk::EarningRuleCustomEvent](docs/EarningRuleCustomEvent.md)
@@ -617,20 +624,16 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ExportOrderFields](docs/ExportOrderFields.md)
  - [VoucherifySdk::ExportOrderOrder](docs/ExportOrderOrder.md)
  - [VoucherifySdk::ExportParameters](docs/ExportParameters.md)
- - [VoucherifySdk::ExportParametersFilters](docs/ExportParametersFilters.md)
  - [VoucherifySdk::ExportResult](docs/ExportResult.md)
  - [VoucherifySdk::ExportVoucherTransactionsFields](docs/ExportVoucherTransactionsFields.md)
  - [VoucherifySdk::ExportVoucherTransactionsFilters](docs/ExportVoucherTransactionsFilters.md)
  - [VoucherifySdk::ExportVoucherTransactionsOrder](docs/ExportVoucherTransactionsOrder.md)
  - [VoucherifySdk::ExportsCreateRequestBody](docs/ExportsCreateRequestBody.md)
  - [VoucherifySdk::ExportsCreateRequestBodyParameters](docs/ExportsCreateRequestBodyParameters.md)
- - [VoucherifySdk::ExportsCreateRequestBodyParametersFilters](docs/ExportsCreateRequestBodyParametersFilters.md)
  - [VoucherifySdk::ExportsCreateResponseBody](docs/ExportsCreateResponseBody.md)
  - [VoucherifySdk::ExportsCreateResponseBodyParameters](docs/ExportsCreateResponseBodyParameters.md)
- - [VoucherifySdk::ExportsCreateResponseBodyParametersFilters](docs/ExportsCreateResponseBodyParametersFilters.md)
  - [VoucherifySdk::ExportsGetResponseBody](docs/ExportsGetResponseBody.md)
  - [VoucherifySdk::ExportsGetResponseBodyParameters](docs/ExportsGetResponseBodyParameters.md)
- - [VoucherifySdk::ExportsGetResponseBodyParametersFilters](docs/ExportsGetResponseBodyParametersFilters.md)
  - [VoucherifySdk::ExportsGetResponseBodyResult](docs/ExportsGetResponseBodyResult.md)
  - [VoucherifySdk::ExportsListResponseBody](docs/ExportsListResponseBody.md)
  - [VoucherifySdk::FieldConditions](docs/FieldConditions.md)
@@ -1547,6 +1550,8 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::VouchersBalanceUpdateRequestBody](docs/VouchersBalanceUpdateRequestBody.md)
  - [VoucherifySdk::VouchersBalanceUpdateResponseBody](docs/VouchersBalanceUpdateResponseBody.md)
  - [VoucherifySdk::VouchersBalanceUpdateResponseBodyRelatedObject](docs/VouchersBalanceUpdateResponseBodyRelatedObject.md)
+ - [VoucherifySdk::VouchersCreateRequestBody](docs/VouchersCreateRequestBody.md)
+ - [VoucherifySdk::VouchersCreateRequestBodyRedemption](docs/VouchersCreateRequestBodyRedemption.md)
  - [VoucherifySdk::VouchersCreateResponseBody](docs/VouchersCreateResponseBody.md)
  - [VoucherifySdk::VouchersCreateResponseBodyGift](docs/VouchersCreateResponseBodyGift.md)
  - [VoucherifySdk::VouchersCreateResponseBodyLoyaltyCard](docs/VouchersCreateResponseBodyLoyaltyCard.md)

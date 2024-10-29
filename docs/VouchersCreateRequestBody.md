@@ -1,9 +1,10 @@
-# VoucherifySdk::VouchersCreateWithSpecificCodeRequestBody
+# VoucherifySdk::VouchersCreateRequestBody
 
 ## Properties
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **code** | **String** | Code that identifies a voucher. The pattern can use all the letters of the English alphabet, Arabic numerals, and special characters. Pass this attribute in the request body to create a distinct code. Otherwise, either use the &#x60;code_config&#x60; object to set the rules that the Voucherify API will use to create a random code, or don&#39;t pass any code and Voucherify will generate a random code. | [optional] |
 | **campaign** | **String** | Identifies the voucher&#39;s parent campaign using a unique campaign name. | [optional] |
 | **campaign_id** | **String** | Identifies the voucher&#39;s parent campaign using a unique campaign ID assigned by the Voucherify API. | [optional] |
 | **category** | **String** | The name of the category that this voucher belongs to. Useful when listing vouchers with the [List Vouchers](ref:list-vouchers) endpoint. | [optional] |
@@ -17,9 +18,10 @@
 | **additional_info** | **String** | An optional field to keep any extra textual information about the code such as a code description and details. | [optional] |
 | **metadata** | **Object** | The metadata object stores all custom attributes assigned to the code. A set of key/value pairs that you can attach to a voucher object. It can be useful for storing additional information about the voucher in a structured format. | [optional] |
 | **validation_rules** | **Array&lt;String&gt;** | Array containing the ID of the validation rule associated with the voucher. | [optional] |
-| **redemption** | [**VouchersCreateWithSpecificCodeRequestBodyRedemption**](VouchersCreateWithSpecificCodeRequestBodyRedemption.md) |  | [optional] |
+| **redemption** | [**VouchersCreateRequestBodyRedemption**](VouchersCreateRequestBodyRedemption.md) |  | [optional] |
 | **type** | **String** |  | [optional] |
 | **loyalty_card** | [**SimpleLoyaltyCard**](SimpleLoyaltyCard.md) |  | [optional] |
+| **code_config** | [**CodeConfig**](CodeConfig.md) |  | [optional] |
 | **gift** | [**Gift**](Gift.md) |  | [optional] |
 | **discount** | [**Discount**](Discount.md) |  | [optional] |
 

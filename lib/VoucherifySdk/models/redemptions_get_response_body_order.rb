@@ -54,6 +54,7 @@ module VoucherifySdk
     # Array of items applied to the order. It can include up 500 items.
     attr_accessor :items
 
+    # A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format.
     attr_accessor :metadata
 
     # The type of the object represented by JSON.
@@ -156,7 +157,7 @@ module VoucherifySdk
         :'referrer_id' => :'String',
         :'customer' => :'RedemptionsGetResponseBodyOrderCustomer',
         :'referrer' => :'RedemptionsGetResponseBodyOrderReferrer',
-        :'redemptions' => :'Object'
+        :'redemptions' => :'Hash<String, OrderRedemptionsEntry>'
       }
     end
 
@@ -285,7 +286,9 @@ module VoucherifySdk
       end
 
       if attributes.key?(:'redemptions')
-        self.redemptions = attributes[:'redemptions']
+        if (value = attributes[:'redemptions']).is_a?(Hash)
+          self.redemptions = value
+        end
       end
     end
 

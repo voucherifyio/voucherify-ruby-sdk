@@ -4,6 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **key** | **String** |  | [optional] |
 | **message** | **String** |  | [optional] |
+| **key** | **String** |  | [optional] |
 

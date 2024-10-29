@@ -31,6 +31,7 @@ module VoucherifySdk
 
     attr_accessor :result
 
+    # The metadata object stores all custom attributes in the form of key/value pairs assigned to the redeemable.
     attr_accessor :metadata
 
     attr_accessor :categories
@@ -97,6 +98,7 @@ module VoucherifySdk
       Set.new([
         :'id',
         :'object',
+        :'metadata',
         :'categories'
       ])
     end

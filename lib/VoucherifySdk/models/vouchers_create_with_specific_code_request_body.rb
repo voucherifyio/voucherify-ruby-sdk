@@ -46,6 +46,7 @@ module VoucherifySdk
     # An optional field to keep any extra textual information about the code such as a code description and details.
     attr_accessor :additional_info
 
+    # The metadata object stores all custom attributes assigned to the code. A set of key/value pairs that you can attach to a voucher object. It can be useful for storing additional information about the voucher in a structured format.
     attr_accessor :metadata
 
     # Array containing the ID of the validation rule associated with the voucher.

@@ -34,6 +34,7 @@ module VoucherifySdk
     # The category assigned to the campaign. Either pass this parameter OR the `category_id`.
     attr_accessor :category
 
+    # The metadata object stores all custom attributes assigned to the campaign. A set of key/value pairs that you can attach to a campaign object. It can be useful for storing additional information about the campaign in a structured format.
     attr_accessor :metadata
 
     # Determine which metadata should be removed from campaign.

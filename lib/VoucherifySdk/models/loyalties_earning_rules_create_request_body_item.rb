@@ -40,6 +40,7 @@ module VoucherifySdk
 
     attr_accessor :validity_hours
 
+    # The metadata object stores all custom attributes assigned to the earning rule. A set of key/value pairs that you can attach to an earning rule object. It can be useful for storing additional information about the earning rule in a structured format.
     attr_accessor :metadata
 
     attr_accessor :segment
@@ -122,6 +123,7 @@ module VoucherifySdk
         :'active',
         :'start_date',
         :'expiration_date',
+        :'metadata',
         :'segment',
         :'custom_event',
         :'loyalty_tier'

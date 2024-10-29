@@ -20,6 +20,7 @@ module VoucherifySdk
     # Array of strings containing the data in the export. These fields define the headers in the CSV file.
     attr_accessor :fields
 
+    # Allowed additional properties must start with \"metadata.\" or \"redemption.\" and Allowed additional properties must start with \"metadata.\" and Allowed additional properties must start with \"metadata.\" or \"address.\" or \"summary.\" or \"loyalty.\" or \"loyalty_tier.\" or \"loyalty_points.\" or \"system_metadata.\"
     attr_accessor :filters
 
     class EnumAttributeValidator
@@ -63,7 +64,7 @@ module VoucherifySdk
       {
         :'order' => :'String',
         :'fields' => :'Array<String>',
-        :'filters' => :'ExportParametersFilters'
+        :'filters' => :'Object'
       }
     end
 
@@ -111,7 +112,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      order_validator = EnumAttributeValidator.new('String', ["-created_at", "created_at", "-updated_at", "updated_at", "-code", "code", "-id", "id", "-voucher_code", "voucher_code", "-tracking_id", "tracking_id", "-customer_id", "customer_id"])
+      order_validator = EnumAttributeValidator.new('String', ["-created_at", "created_at", "-updated_at", "updated_at", "-code", "code", "-id", "id", "-voucher_code", "voucher_code", "-tracking_id", "tracking_id", "-customer_id", "customer_id", "-name", "name", "-email", "email", "-source_id", "source_id", "-channel", "channel", "-status", "status", "-expires_at", "expires_at"])
       return false unless order_validator.valid?(@order)
       true
     end
