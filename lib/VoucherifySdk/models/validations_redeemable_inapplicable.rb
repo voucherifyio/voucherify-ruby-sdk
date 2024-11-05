@@ -31,6 +31,12 @@ module VoucherifySdk
 
     attr_accessor :categories
 
+    # Campaign name
+    attr_accessor :campaign_name
+
+    # Unique campaign ID assigned by Voucherify.
+    attr_accessor :campaign_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -61,7 +67,9 @@ module VoucherifySdk
         :'object' => :'object',
         :'result' => :'result',
         :'metadata' => :'metadata',
-        :'categories' => :'categories'
+        :'categories' => :'categories',
+        :'campaign_name' => :'campaign_name',
+        :'campaign_id' => :'campaign_id'
       }
     end
 
@@ -78,7 +86,9 @@ module VoucherifySdk
         :'object' => :'String',
         :'result' => :'ValidationsRedeemableInapplicableResult',
         :'metadata' => :'Object',
-        :'categories' => :'Array<CategoryWithStackingRulesType>'
+        :'categories' => :'Array<CategoryWithStackingRulesType>',
+        :'campaign_name' => :'String',
+        :'campaign_id' => :'String'
       }
     end
 
@@ -90,7 +100,9 @@ module VoucherifySdk
         :'object',
         :'result',
         :'metadata',
-        :'categories'
+        :'categories',
+        :'campaign_name',
+        :'campaign_id'
       ])
     end
 
@@ -129,6 +141,14 @@ module VoucherifySdk
           self.categories = value
         end
       end
+
+      if attributes.key?(:'campaign_name')
+        self.campaign_name = attributes[:'campaign_name']
+      end
+
+      if attributes.key?(:'campaign_id')
+        self.campaign_id = attributes[:'campaign_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -160,7 +180,9 @@ module VoucherifySdk
           object == o.object &&
           result == o.result &&
           metadata == o.metadata &&
-          categories == o.categories
+          categories == o.categories &&
+          campaign_name == o.campaign_name &&
+          campaign_id == o.campaign_id
     end
 
     # @see the `==` method
@@ -172,7 +194,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, id, object, result, metadata, categories].hash
+      [status, id, object, result, metadata, categories, campaign_name, campaign_id].hash
     end
 
     # Builds the object from hash
