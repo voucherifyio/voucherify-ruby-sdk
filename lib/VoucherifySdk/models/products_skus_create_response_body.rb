@@ -40,7 +40,7 @@ module VoucherifySdk
     # The HTTPS URL pointing to the .png or .jpg file that will be used to render the SKU image.
     attr_accessor :image_url
 
-    # The metadata object stores all custom attributes assigned to the SKU. A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format.
+    # The metadata object stores all custom attributes assigned to the SKU. A set of key/value pairs that you can attach to a SKU object. It can be useful for storing additional information about the SKU in a structured format. It can be used to create product collections.
     attr_accessor :metadata
 
     # Timestamp representing the date and time when the SKU was created. The value is shown in the ISO 8601 format.

@@ -37,6 +37,8 @@ module VoucherifySdk
     # The resource type.
     attr_accessor :resource_type
 
+    attr_accessor :error
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -46,7 +48,8 @@ module VoucherifySdk
         :'details' => :'details',
         :'request_id' => :'request_id',
         :'resource_id' => :'resource_id',
-        :'resource_type' => :'resource_type'
+        :'resource_type' => :'resource_type',
+        :'error' => :'error'
       }
     end
 
@@ -64,7 +67,8 @@ module VoucherifySdk
         :'details' => :'String',
         :'request_id' => :'String',
         :'resource_id' => :'String',
-        :'resource_type' => :'String'
+        :'resource_type' => :'String',
+        :'error' => :'ErrorError'
       }
     end
 
@@ -77,7 +81,8 @@ module VoucherifySdk
         :'details',
         :'request_id',
         :'resource_id',
-        :'resource_type'
+        :'resource_type',
+        :'error'
       ])
     end
 
@@ -116,6 +121,10 @@ module VoucherifySdk
       if attributes.key?(:'resource_type')
         self.resource_type = attributes[:'resource_type']
       end
+
+      if attributes.key?(:'error')
+        self.error = attributes[:'error']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -144,7 +153,8 @@ module VoucherifySdk
           details == o.details &&
           request_id == o.request_id &&
           resource_id == o.resource_id &&
-          resource_type == o.resource_type
+          resource_type == o.resource_type &&
+          error == o.error
     end
 
     # @see the `==` method
@@ -156,7 +166,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [code, key, message, details, request_id, resource_id, resource_type].hash
+      [code, key, message, details, request_id, resource_id, resource_type, error].hash
     end
 
     # Builds the object from hash

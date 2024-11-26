@@ -31,6 +31,9 @@ module VoucherifySdk
     # SKU price. A positive integer in the smallest currency unit (e.g. 100 cents for $1.00).
     attr_accessor :price
 
+    # A set of custom key/value pairs that you can attach to an order item. It can be useful for storing additional information about the order item in a structured format. It can be used to create product collections.
+    attr_accessor :metadata
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -38,7 +41,8 @@ module VoucherifySdk
         :'source_id' => :'source_id',
         :'override' => :'override',
         :'sku' => :'sku',
-        :'price' => :'price'
+        :'price' => :'price',
+        :'metadata' => :'metadata'
       }
     end
 
@@ -54,7 +58,8 @@ module VoucherifySdk
         :'source_id' => :'String',
         :'override' => :'Boolean',
         :'sku' => :'String',
-        :'price' => :'Float'
+        :'price' => :'Float',
+        :'metadata' => :'Object'
       }
     end
 
@@ -65,7 +70,8 @@ module VoucherifySdk
         :'source_id',
         :'override',
         :'sku',
-        :'price'
+        :'price',
+        :'metadata'
       ])
     end
 
@@ -96,6 +102,10 @@ module VoucherifySdk
       if attributes.key?(:'price')
         self.price = attributes[:'price']
       end
+
+      if attributes.key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -122,7 +132,8 @@ module VoucherifySdk
           source_id == o.source_id &&
           override == o.override &&
           sku == o.sku &&
-          price == o.price
+          price == o.price &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -134,7 +145,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, source_id, override, sku, price].hash
+      [id, source_id, override, sku, price, metadata].hash
     end
 
     # Builds the object from hash

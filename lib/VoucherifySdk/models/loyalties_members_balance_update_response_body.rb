@@ -33,6 +33,7 @@ module VoucherifySdk
 
     attr_accessor :related_object
 
+    # The type of operation being performed.
     attr_accessor :operation_type
 
     class EnumAttributeValidator

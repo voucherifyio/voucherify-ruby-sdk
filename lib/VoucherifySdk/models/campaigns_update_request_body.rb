@@ -46,13 +46,13 @@ module VoucherifySdk
     # Defines the amount of time the vouchers will be active after publishing. The value is shown in the ISO 8601 format. For example, a voucher with the value of P24D will be valid for a duration of 24 days.
     attr_accessor :activity_duration_after_publishing
 
-    # If this value is set to `true`, customers will be able to join the campaign only once.
+    # If this value is set to `true`, customers will be able to join the campaign only once. It is always `false` for standalone voucher campaigns and it cannot be changed in them.
     attr_accessor :join_once
 
     # Indicates whether customers will be able to auto-join a loyalty campaign if any earning rule is fulfilled.
     attr_accessor :auto_join
 
-    # Defines whether the campaign can be updated with new vouchers after campaign creation.      - `AUTO_UPDATE`: By choosing the auto update option you will create a campaign that can be enhanced by new vouchers after the time of creation (e.g. by publish vouchers method).     -  `STATIC`: vouchers need to be manually published.
+    # Defines whether the campaign can be updated with new vouchers after campaign creation.  - `AUTO_UPDATE`: By choosing the auto update option you will create a campaign that can be enhanced by new vouchers after the time of creation (e.g. by publish vouchers method). -  `STATIC`: vouchers need to be manually published.  If the `type` of the campaign is `STANDALONE`, the type cannot be changed. Also, the `type` cannot be changed to `STANDALONE`.
     attr_accessor :type
 
     attr_accessor :discount
