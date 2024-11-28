@@ -34,7 +34,7 @@ module VoucherifySdk
     # Array of items applied to the order. It can include up 500 items.
     attr_accessor :items
 
-    # A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format.
+    # A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format. It can be used to define business validation rules or discount formulas.
     attr_accessor :metadata
 
     # Timestamp representing the date and time when the order was created. The value is shown in the ISO 8601 format.

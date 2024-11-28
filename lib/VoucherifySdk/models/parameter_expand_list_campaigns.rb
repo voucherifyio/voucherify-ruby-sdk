@@ -16,9 +16,10 @@ require 'time'
 module VoucherifySdk
   class ParameterExpandListCampaigns
     CATEGORY = "category".freeze
+    ACCESS_SETTINGS_ASSIGNMENTS = "access_settings_assignments".freeze
 
     def self.all_vars
-      @all_vars ||= [CATEGORY].freeze
+      @all_vars ||= [CATEGORY, ACCESS_SETTINGS_ASSIGNMENTS].freeze
     end
 
     # Builds the enum from string

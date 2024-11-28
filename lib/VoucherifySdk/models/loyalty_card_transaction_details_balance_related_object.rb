@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Defines the resource that is being modified with the values that are returned in the balance object.
   class LoyaltyCardTransactionDetailsBalanceRelatedObject
-    # Identifies the voucher that is being modified, this is the ID that was assigned by the Voucherify API.
+    # Identifies the voucher that is being modified. The ID is assigned by the Voucherify API.
     attr_accessor :id
 
     # The object being modified, i.e. voucher.
@@ -97,11 +97,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      pattern = Regexp.new(/voucher/)
-      if !@type.nil? && @type !~ pattern
-        invalid_properties.push("invalid value for \"type\", must conform to the pattern #{pattern}.")
-      end
-
       invalid_properties
     end
 
@@ -111,7 +106,6 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["voucher"])
       return false unless type_validator.valid?(@type)
-      return false if !@type.nil? && @type !~ Regexp.new(/voucher/)
       true
     end
 

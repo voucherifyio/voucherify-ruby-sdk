@@ -4,13 +4,13 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique loyalty points bucket ID. |  |
-| **voucher_id** | **String** | Unique parent loyalty card ID. |  |
-| **campaign_id** | **String** |  Unique parent campaign ID. |  |
-| **bucket** | [**LoyaltiesMembersPointsExpirationListResponseBodyDataItemBucket**](LoyaltiesMembersPointsExpirationListResponseBodyDataItemBucket.md) |  |  |
-| **created_at** | **Time** | Timestamp representing the date and time when the loyalty points bucket object was created. The value is shown in the ISO 8601 format. |  |
-| **status** | **String** | Loyalty points bucket point status. |  |
-| **expires_at** | **Time** | Date when the number of points defined in the bucket object are due to expire. |  |
-| **updated_at** | **Time** | Timestamp representing the date and time when the loyalty points bucket object was updated. The value is shown in the ISO 8601 format. | [optional] |
-| **object** | **String** | The type of the object represented by JSON. This object stores information about the loyalty points bucket. | [default to &#39;loyalty_points_bucket&#39;] |
+| **id** | **String** | Unique identifier of the loyalty points bucket. | [optional] |
+| **voucher_id** | **String** | Unique identifier of the parent loyalty card. | [optional] |
+| **campaign_id** | **String** | Unique identifier of the parent campaign. | [optional] |
+| **bucket** | [**LoyaltiesMembersPointsExpirationListResponseBodyDataItemBucket**](LoyaltiesMembersPointsExpirationListResponseBodyDataItemBucket.md) |  | [optional] |
+| **status** | **String** | Loyalty point point bucket status. | [optional] |
+| **expires_at** | **Time** | Date when the number of points defined in the bucket object are due to expire. | [optional] |
+| **created_at** | **Time** | Timestamp representing the date and time when the loyalty point bucket object was created in ISO 8601 format. | [optional] |
+| **updated_at** | **Time** | Timestamp representing the date and time when the loyalty point bucket object was updated in ISO 8601 format. | [optional] |
+| **object** | **String** | The type of the object represented by JSON. This object stores information about the loyalty point bucket. | [optional][default to &#39;loyalty_points_bucket&#39;] |
 

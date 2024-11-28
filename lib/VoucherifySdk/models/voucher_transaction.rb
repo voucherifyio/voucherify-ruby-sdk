@@ -33,15 +33,15 @@ module VoucherifySdk
     # Reason why the transaction occurred. In case of a redemption, this value is null.
     attr_accessor :reason
 
-    attr_accessor :type
-
-    attr_accessor :details
-
     # The related transaction ID on the receiving card.
     attr_accessor :related_transaction_id
 
     # Timestamp representing the date and time when the transaction was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
+
+    attr_accessor :details
+
+    attr_accessor :type
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -74,10 +74,10 @@ module VoucherifySdk
         :'campaign_id' => :'campaign_id',
         :'source' => :'source',
         :'reason' => :'reason',
-        :'type' => :'type',
-        :'details' => :'details',
         :'related_transaction_id' => :'related_transaction_id',
-        :'created_at' => :'created_at'
+        :'created_at' => :'created_at',
+        :'details' => :'details',
+        :'type' => :'type'
       }
     end
 
@@ -95,10 +95,10 @@ module VoucherifySdk
         :'campaign_id' => :'String',
         :'source' => :'String',
         :'reason' => :'String',
-        :'type' => :'LoyaltyCardTransactionsType',
-        :'details' => :'VoucherTransactionDetails',
         :'related_transaction_id' => :'String',
-        :'created_at' => :'Time'
+        :'created_at' => :'Time',
+        :'details' => :'VoucherTransactionDetails',
+        :'type' => :'String'
       }
     end
 
@@ -111,9 +111,10 @@ module VoucherifySdk
         :'campaign_id',
         :'source',
         :'reason',
-        :'details',
         :'related_transaction_id',
-        :'created_at'
+        :'created_at',
+        :'details',
+        :'type'
       ])
     end
 
@@ -149,22 +150,20 @@ module VoucherifySdk
         self.reason = attributes[:'reason']
       end
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      else
-        self.type = nil
-      end
-
-      if attributes.key?(:'details')
-        self.details = attributes[:'details']
-      end
-
       if attributes.key?(:'related_transaction_id')
         self.related_transaction_id = attributes[:'related_transaction_id']
       end
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'details')
+        self.details = attributes[:'details']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
     end
 
@@ -173,10 +172,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -184,7 +179,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["CREDITS_REDEMPTION", "CREDITS_REFUND", "CREDITS_ADDITION", "CREDITS_REMOVAL", "POINTS_ACCRUAL", "POINTS_REDEMPTION", "POINTS_REFUND", "POINTS_ADDITION", "POINTS_REMOVAL", "POINTS_EXPIRATION", "POINTS_TRANSFER_IN", "POINTS_TRANSFER_OUT"])
+      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -199,10 +195,10 @@ module VoucherifySdk
           campaign_id == o.campaign_id &&
           source == o.source &&
           reason == o.reason &&
-          type == o.type &&
-          details == o.details &&
           related_transaction_id == o.related_transaction_id &&
-          created_at == o.created_at
+          created_at == o.created_at &&
+          details == o.details &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -214,7 +210,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, source_id, voucher_id, campaign_id, source, reason, type, details, related_transaction_id, created_at].hash
+      [id, source_id, voucher_id, campaign_id, source, reason, related_transaction_id, created_at, details, type].hash
     end
 
     # Builds the object from hash

@@ -28,7 +28,7 @@ module VoucherifySdk
     # Product name.
     attr_accessor :name
 
-    # A set of custom key/value pairs that you can attach to a product. It can be useful for storing additional information about the product in a structured format.
+    # A set of custom key/value pairs that you can attach to a product. It can be useful for storing additional information about the product in a structured format. It can be used to create product collections.
     attr_accessor :metadata
 
     # Product price. A positive integer in the smallest currency unit (e.g. 100 cents for $1.00).

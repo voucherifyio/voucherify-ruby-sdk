@@ -28,7 +28,7 @@ module VoucherifySdk
     # Type of campaign.
     attr_accessor :campaign_type
 
-    # Defines whether the campaign can be updated with new vouchers after campaign creation.      - `AUTO_UPDATE`: the campaign is dynamic, i.e. vouchers will generate based on set criteria     -  `STATIC`: vouchers need to be manually published
+    # Defines whether the campaign can be updated with new vouchers after campaign creation or if the campaign consists of standalone vouchers.  - `AUTO_UPDATE`: the campaign is dynamic, i.e. vouchers will generate based on set criteria -  `STATIC`: vouchers need to be manually published - `STANDALONE`: campaign for single vouchers
     attr_accessor :type
 
     attr_accessor :voucher
@@ -36,7 +36,7 @@ module VoucherifySdk
     # Indicates whether customers will be able to auto-join a loyalty campaign if any earning rule is fulfilled.
     attr_accessor :auto_join
 
-    # If this value is set to `true`, customers will be able to join the campaign only once.
+    # If this value is set to `true`, customers will be able to join the campaign only once. It is always `false` for standalone voucher campaigns and it cannot be changed in them.
     attr_accessor :join_once
 
     # Flag indicating whether the campaign is to use the voucher's metadata schema instead of the campaign metadata schema.
@@ -379,7 +379,7 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       campaign_type_validator = EnumAttributeValidator.new('String', ["LOYALTY_PROGRAM", "GIFT_VOUCHERS", "DISCOUNT_COUPONS", "PROMOTION", "REFERRAL_PROGRAM"])
       return false unless campaign_type_validator.valid?(@campaign_type)
-      type_validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC"])
+      type_validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC", "STANDALONE"])
       return false unless type_validator.valid?(@type)
       creation_status_validator = EnumAttributeValidator.new('String', ["DONE", "IN_PROGRESS", "FAILED", "DRAFT", "MODIFYING"])
       return false unless creation_status_validator.valid?(@creation_status)

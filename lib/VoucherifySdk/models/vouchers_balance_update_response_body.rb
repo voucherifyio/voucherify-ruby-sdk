@@ -28,6 +28,7 @@ module VoucherifySdk
     # The type of voucher being modified.
     attr_accessor :type
 
+    # The type of the operation being performed.
     attr_accessor :operation_type
 
     # The type of the object represented by JSON. Default is `balance`.

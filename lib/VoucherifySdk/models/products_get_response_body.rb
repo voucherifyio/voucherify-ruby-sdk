@@ -31,7 +31,7 @@ module VoucherifySdk
     # A list of product attributes whose values you can customize for given SKUs: `[\"color\",\"size\",\"ranking\"]`. Each child SKU can have a unique value for a given attribute.
     attr_accessor :attributes
 
-    # The metadata object stores all custom attributes assigned to the product. A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.
+    # The metadata object stores all custom attributes assigned to the product. A set of key/value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format. It can be used to create product collections.
     attr_accessor :metadata
 
     # The HTTPS URL pointing to the .png or .jpg file that will be used to render the product image.

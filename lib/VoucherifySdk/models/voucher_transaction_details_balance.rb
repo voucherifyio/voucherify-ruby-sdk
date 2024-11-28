@@ -19,17 +19,20 @@ module VoucherifySdk
     # The type of voucher whose balance is being adjusted due to the transaction.
     attr_accessor :type
 
-    # The number of all points accumulated on the card as affected by add or subtract operations.
+    # The number of all points or credits accumulated on the card as affected by add or subtract operations.
     attr_accessor :total
 
     # The type of the object represented by the JSON.
     attr_accessor :object
 
-    # Points added or subtracted in the transaction.
+    # Points added or subtracted in the transaction of a loyalty card.
     attr_accessor :points
 
-    # The available points on the card after the transaction as affected by redemption or rollback.
+    # The available points or credits on the card after the transaction as affected by redemption or rollback.
     attr_accessor :balance
+
+    # The type of the operation being performed. The operation type is `AUTOMATIC` if it is an automatic redemption.
+    attr_accessor :operation_type
 
     attr_accessor :related_object
 
@@ -63,6 +66,7 @@ module VoucherifySdk
         :'object' => :'object',
         :'points' => :'points',
         :'balance' => :'balance',
+        :'operation_type' => :'operation_type',
         :'related_object' => :'related_object'
       }
     end
@@ -80,6 +84,7 @@ module VoucherifySdk
         :'object' => :'String',
         :'points' => :'Integer',
         :'balance' => :'Integer',
+        :'operation_type' => :'String',
         :'related_object' => :'VoucherTransactionDetailsBalanceRelatedObject'
       }
     end
@@ -92,6 +97,7 @@ module VoucherifySdk
         :'object',
         :'points',
         :'balance',
+        :'operation_type',
         :'related_object'
       ])
     end
@@ -106,8 +112,6 @@ module VoucherifySdk
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = 'loyalty_card'
       end
 
       if attributes.key?(:'total')
@@ -128,6 +132,10 @@ module VoucherifySdk
         self.balance = attributes[:'balance']
       end
 
+      if attributes.key?(:'operation_type')
+        self.operation_type = attributes[:'operation_type']
+      end
+
       if attributes.key?(:'related_object')
         self.related_object = attributes[:'related_object']
       end
@@ -138,16 +146,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      pattern = Regexp.new(/loyalty_card/)
-      if !@type.nil? && @type !~ pattern
-        invalid_properties.push("invalid value for \"type\", must conform to the pattern #{pattern}.")
-      end
-
-      pattern = Regexp.new(/balance/)
-      if !@object.nil? && @object !~ pattern
-        invalid_properties.push("invalid value for \"object\", must conform to the pattern #{pattern}.")
-      end
-
       invalid_properties
     end
 
@@ -155,12 +153,12 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["loyalty_card"])
+      type_validator = EnumAttributeValidator.new('String', ["loyalty_card", "gift_voucher"])
       return false unless type_validator.valid?(@type)
-      return false if !@type.nil? && @type !~ Regexp.new(/loyalty_card/)
       object_validator = EnumAttributeValidator.new('String', ["balance"])
       return false unless object_validator.valid?(@object)
-      return false if !@object.nil? && @object !~ Regexp.new(/balance/)
+      operation_type_validator = EnumAttributeValidator.new('String', ["MANUAL", "AUTOMATIC"])
+      return false unless operation_type_validator.valid?(@operation_type)
       true
     end
 
@@ -174,6 +172,7 @@ module VoucherifySdk
           object == o.object &&
           points == o.points &&
           balance == o.balance &&
+          operation_type == o.operation_type &&
           related_object == o.related_object
     end
 
@@ -186,7 +185,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, total, object, points, balance, related_object].hash
+      [type, total, object, points, balance, operation_type, related_object].hash
     end
 
     # Builds the object from hash

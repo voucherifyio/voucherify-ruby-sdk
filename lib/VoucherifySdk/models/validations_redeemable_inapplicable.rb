@@ -31,11 +31,14 @@ module VoucherifySdk
 
     attr_accessor :categories
 
-    # Campaign name
+    # Campaign name. Displayed only if the `options.expand` is passed with a `redeemable` value in the validation request body.
     attr_accessor :campaign_name
 
-    # Unique campaign ID assigned by Voucherify.
+    # Unique campaign ID assigned by Voucherify. Displayed only if the `options.expand` is passed with a `redeemable` value in the validation request body.
     attr_accessor :campaign_id
+
+    # Name of the promotion tier. Displayed only if the `options.expand` is passed with a `redeemable` value in the validation request body.
+    attr_accessor :name
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -69,7 +72,8 @@ module VoucherifySdk
         :'metadata' => :'metadata',
         :'categories' => :'categories',
         :'campaign_name' => :'campaign_name',
-        :'campaign_id' => :'campaign_id'
+        :'campaign_id' => :'campaign_id',
+        :'name' => :'name'
       }
     end
 
@@ -88,7 +92,8 @@ module VoucherifySdk
         :'metadata' => :'Object',
         :'categories' => :'Array<CategoryWithStackingRulesType>',
         :'campaign_name' => :'String',
-        :'campaign_id' => :'String'
+        :'campaign_id' => :'String',
+        :'name' => :'String'
       }
     end
 
@@ -102,7 +107,8 @@ module VoucherifySdk
         :'metadata',
         :'categories',
         :'campaign_name',
-        :'campaign_id'
+        :'campaign_id',
+        :'name'
       ])
     end
 
@@ -149,6 +155,10 @@ module VoucherifySdk
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
       end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -182,7 +192,8 @@ module VoucherifySdk
           metadata == o.metadata &&
           categories == o.categories &&
           campaign_name == o.campaign_name &&
-          campaign_id == o.campaign_id
+          campaign_id == o.campaign_id &&
+          name == o.name
     end
 
     # @see the `==` method
@@ -194,7 +205,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, id, object, result, metadata, categories, campaign_name, campaign_id].hash
+      [status, id, object, result, metadata, categories, campaign_name, campaign_id, name].hash
     end
 
     # Builds the object from hash

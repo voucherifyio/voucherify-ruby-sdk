@@ -113,6 +113,12 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
 
 ## 📅 Changelog
 
+- **2024-11-26** - `8.0.2`
+  - Added support for `STANDALONE` campaign type.
+  - Added optional `metadata` in `OrderCalculatedItemSku`
+  - New possible value of `ParameterExpandListCampaigns`
+  - New optional `error` parameter in `Error`
+  - Updated `LoyaltyCardTransactionDetailsBalance`
 - **2024-11-04** - `8.0.1`
   - Added support for returning `campaign_id` and `campaign_name` in stackable validation endpoint, when `redeemable` option is expanded
 - **2024-10-28** - `8.0.0`
@@ -618,6 +624,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::EarningRuleSegment](docs/EarningRuleSegment.md)
  - [VoucherifySdk::EarningRuleSource](docs/EarningRuleSource.md)
  - [VoucherifySdk::Error](docs/Error.md)
+ - [VoucherifySdk::ErrorError](docs/ErrorError.md)
  - [VoucherifySdk::EventsCreateRequestBody](docs/EventsCreateRequestBody.md)
  - [VoucherifySdk::EventsCreateRequestBodyLoyalty](docs/EventsCreateRequestBodyLoyalty.md)
  - [VoucherifySdk::EventsCreateRequestBodyReferral](docs/EventsCreateRequestBodyReferral.md)
@@ -903,6 +910,8 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltyMemberLoyaltyCard](docs/LoyaltyMemberLoyaltyCard.md)
  - [VoucherifySdk::LoyaltyMemberPublish](docs/LoyaltyMemberPublish.md)
  - [VoucherifySdk::LoyaltyMemberRedemption](docs/LoyaltyMemberRedemption.md)
+ - [VoucherifySdk::LoyaltyPointsBucket](docs/LoyaltyPointsBucket.md)
+ - [VoucherifySdk::LoyaltyPointsBucketBucket](docs/LoyaltyPointsBucketBucket.md)
  - [VoucherifySdk::LoyaltyTier](docs/LoyaltyTier.md)
  - [VoucherifySdk::LoyaltyTierBase](docs/LoyaltyTierBase.md)
  - [VoucherifySdk::LoyaltyTierBasePoints](docs/LoyaltyTierBasePoints.md)
@@ -1520,6 +1529,8 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::VoucherAssets](docs/VoucherAssets.md)
  - [VoucherifySdk::VoucherAssetsBarcode](docs/VoucherAssetsBarcode.md)
  - [VoucherifySdk::VoucherAssetsQr](docs/VoucherAssetsQr.md)
+ - [VoucherifySdk::VoucherBalance](docs/VoucherBalance.md)
+ - [VoucherifySdk::VoucherBalanceRelatedObject](docs/VoucherBalanceRelatedObject.md)
  - [VoucherifySdk::VoucherGift](docs/VoucherGift.md)
  - [VoucherifySdk::VoucherLoyaltyCard](docs/VoucherLoyaltyCard.md)
  - [VoucherifySdk::VoucherPublish](docs/VoucherPublish.md)

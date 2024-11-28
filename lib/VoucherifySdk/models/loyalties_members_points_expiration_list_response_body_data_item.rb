@@ -14,31 +14,32 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Contains the details about expiring loyalty points.
   class LoyaltiesMembersPointsExpirationListResponseBodyDataItem
-    # Unique loyalty points bucket ID.
+    # Unique identifier of the loyalty points bucket.
     attr_accessor :id
 
-    # Unique parent loyalty card ID.
+    # Unique identifier of the parent loyalty card.
     attr_accessor :voucher_id
 
-    #  Unique parent campaign ID.
+    # Unique identifier of the parent campaign.
     attr_accessor :campaign_id
 
     attr_accessor :bucket
 
-    # Timestamp representing the date and time when the loyalty points bucket object was created. The value is shown in the ISO 8601 format.
-    attr_accessor :created_at
-
-    # Loyalty points bucket point status.
+    # Loyalty point point bucket status.
     attr_accessor :status
 
     # Date when the number of points defined in the bucket object are due to expire.
     attr_accessor :expires_at
 
-    # Timestamp representing the date and time when the loyalty points bucket object was updated. The value is shown in the ISO 8601 format.
+    # Timestamp representing the date and time when the loyalty point bucket object was created in ISO 8601 format.
+    attr_accessor :created_at
+
+    # Timestamp representing the date and time when the loyalty point bucket object was updated in ISO 8601 format.
     attr_accessor :updated_at
 
-    # The type of the object represented by JSON. This object stores information about the loyalty points bucket.
+    # The type of the object represented by JSON. This object stores information about the loyalty point bucket.
     attr_accessor :object
 
     class EnumAttributeValidator
@@ -70,9 +71,9 @@ module VoucherifySdk
         :'voucher_id' => :'voucher_id',
         :'campaign_id' => :'campaign_id',
         :'bucket' => :'bucket',
-        :'created_at' => :'created_at',
         :'status' => :'status',
         :'expires_at' => :'expires_at',
+        :'created_at' => :'created_at',
         :'updated_at' => :'updated_at',
         :'object' => :'object'
       }
@@ -90,9 +91,9 @@ module VoucherifySdk
         :'voucher_id' => :'String',
         :'campaign_id' => :'String',
         :'bucket' => :'LoyaltiesMembersPointsExpirationListResponseBodyDataItemBucket',
-        :'created_at' => :'Time',
         :'status' => :'String',
         :'expires_at' => :'Time',
+        :'created_at' => :'Time',
         :'updated_at' => :'Time',
         :'object' => :'String'
       }
@@ -101,6 +102,15 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
+        :'voucher_id',
+        :'campaign_id',
+        :'bucket',
+        :'status',
+        :'expires_at',
+        :'created_at',
+        :'updated_at',
+        :'object'
       ])
     end
 
@@ -114,44 +124,30 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      else
-        self.id = nil
       end
 
       if attributes.key?(:'voucher_id')
         self.voucher_id = attributes[:'voucher_id']
-      else
-        self.voucher_id = nil
       end
 
       if attributes.key?(:'campaign_id')
         self.campaign_id = attributes[:'campaign_id']
-      else
-        self.campaign_id = nil
       end
 
       if attributes.key?(:'bucket')
         self.bucket = attributes[:'bucket']
-      else
-        self.bucket = nil
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      else
-        self.created_at = nil
       end
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
-      else
-        self.status = nil
       end
 
       if attributes.key?(:'expires_at')
         self.expires_at = attributes[:'expires_at']
-      else
-        self.expires_at = nil
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
       if attributes.key?(:'updated_at')
@@ -170,43 +166,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @voucher_id.nil?
-        invalid_properties.push('invalid value for "voucher_id", voucher_id cannot be nil.')
-      end
-
-      if @campaign_id.nil?
-        invalid_properties.push('invalid value for "campaign_id", campaign_id cannot be nil.')
-      end
-
-      if @bucket.nil?
-        invalid_properties.push('invalid value for "bucket", bucket cannot be nil.')
-      end
-
-      if @created_at.nil?
-        invalid_properties.push('invalid value for "created_at", created_at cannot be nil.')
-      end
-
-      if @status.nil?
-        invalid_properties.push('invalid value for "status", status cannot be nil.')
-      end
-
-      if @expires_at.nil?
-        invalid_properties.push('invalid value for "expires_at", expires_at cannot be nil.')
-      end
-
-      if @object.nil?
-        invalid_properties.push('invalid value for "object", object cannot be nil.')
-      end
-
-      pattern = Regexp.new(/loyalty_points_bucket/)
-      if @object !~ pattern
-        invalid_properties.push("invalid value for \"object\", must conform to the pattern #{pattern}.")
-      end
-
       invalid_properties
     end
 
@@ -214,17 +173,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if @id.nil?
-      return false if @voucher_id.nil?
-      return false if @campaign_id.nil?
-      return false if @bucket.nil?
-      return false if @created_at.nil?
-      return false if @status.nil?
-      return false if @expires_at.nil?
-      return false if @object.nil?
       object_validator = EnumAttributeValidator.new('String', ["loyalty_points_bucket"])
       return false unless object_validator.valid?(@object)
-      return false if @object !~ Regexp.new(/loyalty_points_bucket/)
       true
     end
 
@@ -237,9 +187,9 @@ module VoucherifySdk
           voucher_id == o.voucher_id &&
           campaign_id == o.campaign_id &&
           bucket == o.bucket &&
-          created_at == o.created_at &&
           status == o.status &&
           expires_at == o.expires_at &&
+          created_at == o.created_at &&
           updated_at == o.updated_at &&
           object == o.object
     end
@@ -253,7 +203,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, voucher_id, campaign_id, bucket, created_at, status, expires_at, updated_at, object].hash
+      [id, voucher_id, campaign_id, bucket, status, expires_at, created_at, updated_at, object].hash
     end
 
     # Builds the object from hash
