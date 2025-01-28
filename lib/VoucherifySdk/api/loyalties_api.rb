@@ -19,6 +19,67 @@ module VoucherifySdk
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Activate Member Pending Points
+    # >🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Activate manually the pending points and add them to the loyalty card. The pending points are determined by the pending point ID. Once activated, the pending point entry with that ID is not listed by the endpoints: List member (with campaign ID, without campaign ID), List campaign pending points. This **POST** method does not require a request body.
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param pending_points_id [String] Unique pending point identifier, assigned by Voucherify.
+    # @param [Hash] opts the optional parameters
+    # @return [LoyaltiesMembersPendingPointsActivateResponseBody]
+    def activate_member_pending_points(member_id, pending_points_id, opts = {})
+      data, _status_code, _headers = activate_member_pending_points_with_http_info(member_id, pending_points_id, opts)
+      data
+    end
+
+    # Activate Member Pending Points
+    # &gt;🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Activate manually the pending points and add them to the loyalty card. The pending points are determined by the pending point ID. Once activated, the pending point entry with that ID is not listed by the endpoints: List member (with campaign ID, without campaign ID), List campaign pending points. This **POST** method does not require a request body.
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param pending_points_id [String] Unique pending point identifier, assigned by Voucherify.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(LoyaltiesMembersPendingPointsActivateResponseBody, Integer, Hash)>] LoyaltiesMembersPendingPointsActivateResponseBody data, response status code and response headers
+    private def activate_member_pending_points_with_http_info(member_id, pending_points_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.activate_member_pending_points ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/members/{memberId}/pending-points/{pendingPointsId}/activate'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s)).sub('{' + 'pendingPointsId' + '}', CGI.escape(pending_points_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesMembersPendingPointsActivateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.activate_member_pending_points",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#activate_member_pending_points\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Add Member
     # This method assigns a loyalty card to a customer. It selects a loyalty card suitable for publication, adds a publish entry, and returns the published voucher.   A voucher is suitable for publication when its active and hasnt been published yet.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use **auto-update** campaign.
     # @param campaign_id [String] Unique campaign ID of the loyalty program.
@@ -81,6 +142,65 @@ module VoucherifySdk
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: LoyaltiesApi#add_member\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Cancel Member Pending Points
+    # >🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Cancel manually the pending points for the loyalty card. The pending points are determined by the pending point ID. Once canceled, the pending point entry with that ID is not listed by the endpoints: List member (with campaign ID, without campaign ID), List campaign pending points. This **POST** method does not require a request body and it returns an empty, 204, response.
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param pending_points_id [String] Unique pending point identifier, assigned by Voucherify.
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def cancel_member_pending_points(member_id, pending_points_id, opts = {})
+      cancel_member_pending_points_with_http_info(member_id, pending_points_id, opts)
+      nil
+    end
+
+    # Cancel Member Pending Points
+    # &gt;🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Cancel manually the pending points for the loyalty card. The pending points are determined by the pending point ID. Once canceled, the pending point entry with that ID is not listed by the endpoints: List member (with campaign ID, without campaign ID), List campaign pending points. This **POST** method does not require a request body and it returns an empty, 204, response.
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param pending_points_id [String] Unique pending point identifier, assigned by Voucherify.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    private def cancel_member_pending_points_with_http_info(member_id, pending_points_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.cancel_member_pending_points ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/members/{memberId}/pending-points/{pendingPointsId}/cancel'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s)).sub('{' + 'pendingPointsId' + '}', CGI.escape(pending_points_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.cancel_member_pending_points",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#cancel_member_pending_points\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -281,7 +401,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Create Points Expiration Export
+    # Export Loyalty Campaign Point Expiration
     # Schedule the generation of a points expiration CSV file for a particular campaign.
     # @param campaign_id [String] Unique campaign ID or name.
     # @param [Hash] opts the optional parameters
@@ -292,7 +412,7 @@ module VoucherifySdk
       data
     end
 
-    # Create Points Expiration Export
+    # Export Loyalty Campaign Point Expiration
     # Schedule the generation of a points expiration CSV file for a particular campaign.
     # @param campaign_id [String] Unique campaign ID or name.
     # @param [Hash] opts the optional parameters
@@ -596,7 +716,7 @@ module VoucherifySdk
     # Disable Earning Rule
     # Disable an earning rule.
     # @param campaign_id [String] Unique campaign ID or name.
-    # @param earning_rule_id [String] Unique earning rule ID.
+    # @param earning_rule_id [String] Unique identifier of an earning rule, assigned by Voucherify.
     # @param [Hash] opts the optional parameters
     # @return [LoyaltiesEarningRulesDisableResponseBody]
     def disable_earning_rule(campaign_id, earning_rule_id, opts = {})
@@ -607,7 +727,7 @@ module VoucherifySdk
     # Disable Earning Rule
     # Disable an earning rule.
     # @param campaign_id [String] Unique campaign ID or name.
-    # @param earning_rule_id [String] Unique earning rule ID.
+    # @param earning_rule_id [String] Unique identifier of an earning rule, assigned by Voucherify.
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltiesEarningRulesDisableResponseBody, Integer, Hash)>] LoyaltiesEarningRulesDisableResponseBody data, response status code and response headers
     private def disable_earning_rule_with_http_info(campaign_id, earning_rule_id, opts = {})
@@ -657,7 +777,7 @@ module VoucherifySdk
     # Enable Earning Rule
     # Enable an earning rule.
     # @param campaign_id [String] Unique campaign ID or name.
-    # @param earning_rule_id [String] Unique earning rule ID.
+    # @param earning_rule_id [String] Unique identifier of an earning rule, assigned by Voucherify.
     # @param [Hash] opts the optional parameters
     # @return [LoyaltiesEarningRulesEnableResponseBody]
     def enable_earning_rule(campaign_id, earning_rule_id, opts = {})
@@ -668,7 +788,7 @@ module VoucherifySdk
     # Enable Earning Rule
     # Enable an earning rule.
     # @param campaign_id [String] Unique campaign ID or name.
-    # @param earning_rule_id [String] Unique earning rule ID.
+    # @param earning_rule_id [String] Unique identifier of an earning rule, assigned by Voucherify.
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltiesEarningRulesEnableResponseBody, Integer, Hash)>] LoyaltiesEarningRulesEnableResponseBody data, response status code and response headers
     private def enable_earning_rule_with_http_info(campaign_id, earning_rule_id, opts = {})
@@ -1329,6 +1449,74 @@ module VoucherifySdk
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: LoyaltiesApi#get_reward_details\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List Campaign Pending Points
+    # >🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Lists all pending points that are currently assigned to all loyalty cards in a campaign. Once the points are added to the card, the entry is no longer returned.
+    # @param campaign_id [String] Unique campaign ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limit the number of the pending point entries that the API returns in the response.
+    # @option opts [ParameterOrderListPendingPoints] :order Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the results starting after a result with the given ID.
+    # @return [LoyaltiesPendingPointsListResponseBody]
+    def list_campaign_pending_points(campaign_id, opts = {})
+      data, _status_code, _headers = list_campaign_pending_points_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # List Campaign Pending Points
+    # &gt;🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Lists all pending points that are currently assigned to all loyalty cards in a campaign. Once the points are added to the card, the entry is no longer returned.
+    # @param campaign_id [String] Unique campaign ID.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limit the number of the pending point entries that the API returns in the response.
+    # @option opts [ParameterOrderListPendingPoints] :order Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the results starting after a result with the given ID.
+    # @return [Array<(LoyaltiesPendingPointsListResponseBody, Integer, Hash)>] LoyaltiesPendingPointsListResponseBody data, response status code and response headers
+    private def list_campaign_pending_points_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_campaign_pending_points ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/pending-points'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'starting_after_id'] = opts[:'starting_after_id'] if !opts[:'starting_after_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesPendingPointsListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_campaign_pending_points",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_campaign_pending_points\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1995,6 +2183,144 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Member Pending Points
+    # >🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to list member pending points without having to provide the campaignId as a path parameter. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned.
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limit the number of the pending point entries that the API returns in the response.
+    # @option opts [ParameterOrderListPendingPoints] :order Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the results starting after a result with the given ID.
+    # @return [LoyaltiesMembersPendingPointsListResponseBody]
+    def list_member_pending_points(member_id, opts = {})
+      data, _status_code, _headers = list_member_pending_points_with_http_info(member_id, opts)
+      data
+    end
+
+    # List Member Pending Points
+    # &gt;🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to list member pending points without having to provide the campaignId as a path parameter. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned.
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limit the number of the pending point entries that the API returns in the response.
+    # @option opts [ParameterOrderListPendingPoints] :order Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the results starting after a result with the given ID.
+    # @return [Array<(LoyaltiesMembersPendingPointsListResponseBody, Integer, Hash)>] LoyaltiesMembersPendingPointsListResponseBody data, response status code and response headers
+    private def list_member_pending_points_with_http_info(member_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_member_pending_points ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/members/{memberId}/pending-points'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'starting_after_id'] = opts[:'starting_after_id'] if !opts[:'starting_after_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesMembersPendingPointsListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_member_pending_points",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_member_pending_points\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # List Member Pending Points
+    # >🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned.
+    # @param campaign_id [String] Unique campaign ID.
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limit the number of the pending point entries that the API returns in the response.
+    # @option opts [ParameterOrderListPendingPoints] :order Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the results starting after a result with the given ID.
+    # @return [LoyaltiesMembersPendingPointsListResponseBody]
+    def list_member_pending_points1(campaign_id, member_id, opts = {})
+      data, _status_code, _headers = list_member_pending_points1_with_http_info(campaign_id, member_id, opts)
+      data
+    end
+
+    # List Member Pending Points
+    # &gt;🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned.
+    # @param campaign_id [String] Unique campaign ID.
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limit the number of the pending point entries that the API returns in the response.
+    # @option opts [ParameterOrderListPendingPoints] :order Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the results starting after a result with the given ID.
+    # @return [Array<(LoyaltiesMembersPendingPointsListResponseBody, Integer, Hash)>] LoyaltiesMembersPendingPointsListResponseBody data, response status code and response headers
+    private def list_member_pending_points1_with_http_info(campaign_id, member_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_member_pending_points1 ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/members/{memberId}/pending-points'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s)).sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'starting_after_id'] = opts[:'starting_after_id'] if !opts[:'starting_after_id'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesMembersPendingPointsListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_member_pending_points1",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_member_pending_points1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List Member Rewards
     # Retrieves the list of rewards that the given customer (identified by member_id, which is a loyalty card assigned to a particular customer) **can get in exchange for loyalty points**.   You can use the affordable_only parameter to limit the results to rewards that the customer can actually afford (only rewards whose price in points is not higher than the loyalty points balance on a loyalty card).   Please note that rewards that are disabled (i.e. set to Not Available in the Dashboard) for a given loyalty tier reward mapping will not be returned in this endpoint.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
@@ -2140,7 +2466,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Get Points Expiration
+    # List Loyalty Card Point Expiration
     # Retrieve loyalty point expiration buckets for a given loyalty card. Expired point buckets are not returned in this endpoint. You can use the Exports API to retrieve a list of both ACTIVE and EXPIRED point buckets.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param member_id [String] Loyalty card code.
@@ -2153,7 +2479,7 @@ module VoucherifySdk
       data
     end
 
-    # Get Points Expiration
+    # List Loyalty Card Point Expiration
     # Retrieve loyalty point expiration buckets for a given loyalty card. Expired point buckets are not returned in this endpoint. You can use the Exports API to retrieve a list of both ACTIVE and EXPIRED point buckets.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param member_id [String] Loyalty card code.

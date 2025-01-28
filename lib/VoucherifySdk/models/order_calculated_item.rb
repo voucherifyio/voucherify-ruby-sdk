@@ -76,6 +76,9 @@ module VoucherifySdk
     # A set of custom key/value pairs that you can attach to an item object. It can be useful for storing additional information about the item in a structured format. It can be used to define business validation rules or discount formulas.
     attr_accessor :metadata
 
+    # Array containing details about the items that are replaced and the items that are replacements for discounts with the `REPLACE_ITEMS` effect.
+    attr_accessor :application_details
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -121,7 +124,8 @@ module VoucherifySdk
         :'product' => :'product',
         :'sku' => :'sku',
         :'object' => :'object',
-        :'metadata' => :'metadata'
+        :'metadata' => :'metadata',
+        :'application_details' => :'application_details'
       }
     end
 
@@ -153,7 +157,8 @@ module VoucherifySdk
         :'product' => :'OrderCalculatedItemProduct',
         :'sku' => :'OrderCalculatedItemSku',
         :'object' => :'String',
-        :'metadata' => :'Object'
+        :'metadata' => :'Object',
+        :'application_details' => :'Array<ApplicationDetailsItem>'
       }
     end
 
@@ -180,7 +185,7 @@ module VoucherifySdk
         :'product',
         :'sku',
         :'object',
-        :'metadata'
+        :'metadata',
       ])
     end
 
@@ -277,6 +282,12 @@ module VoucherifySdk
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
       end
+
+      if attributes.key?(:'application_details')
+        if (value = attributes[:'application_details']).is_a?(Array)
+          self.application_details = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -323,7 +334,8 @@ module VoucherifySdk
           product == o.product &&
           sku == o.sku &&
           object == o.object &&
-          metadata == o.metadata
+          metadata == o.metadata &&
+          application_details == o.application_details
     end
 
     # @see the `==` method
@@ -335,7 +347,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, sku_id, product_id, related_object, source_id, quantity, discount_quantity, initial_quantity, amount, discount_amount, applied_discount_amount, applied_discount_quantity, applied_quantity, applied_quantity_amount, initial_amount, price, subtotal_amount, product, sku, object, metadata].hash
+      [id, sku_id, product_id, related_object, source_id, quantity, discount_quantity, initial_quantity, amount, discount_amount, applied_discount_amount, applied_discount_quantity, applied_quantity, applied_quantity_amount, initial_amount, price, subtotal_amount, product, sku, object, metadata, application_details].hash
     end
 
     # Builds the object from hash

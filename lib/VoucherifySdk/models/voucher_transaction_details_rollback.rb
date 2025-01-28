@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Contains information about the redemption rollback.
   class VoucherTransactionDetailsRollback
-    # Unique redemption rollback ID.
+    # Unique identifier of the redemption rollback.
     attr_accessor :id
 
     # Attribute mapping from ruby-style variable name to JSON key.

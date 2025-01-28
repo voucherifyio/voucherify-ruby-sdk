@@ -31,10 +31,10 @@ module VoucherifySdk
     # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.
     attr_accessor :initial_amount
 
-    # Sum of all order-level discounts applied to the order.
+    # Sum of all order-level discounts applied to the order. It is expressed as an integer in the smallest currency unit (e.g. 100 cents for $1.00).
     attr_accessor :discount_amount
 
-    # Array of items applied to the order. It can include up 500 items.
+    # Array of items applied to the order. It can include up to 500 items.
     attr_accessor :items
 
     # A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format. It can be used to define business validation rules or discount formulas.

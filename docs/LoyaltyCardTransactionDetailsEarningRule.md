@@ -4,6 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique earning rule ID. | [optional] |
+| **id** | **String** | Unique identifier of an earning rule, assigned by Voucherify. | [optional] |
 | **source** | [**LoyaltyCardTransactionDetailsEarningRuleSource**](LoyaltyCardTransactionDetailsEarningRuleSource.md) |  | [optional] |
 

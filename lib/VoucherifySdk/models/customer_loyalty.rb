@@ -15,7 +15,7 @@ require 'time'
 
 module VoucherifySdk
   class CustomerLoyalty
-    # Customer's loyalty points.
+    # Customer's loyalty points minus expired for all loyalty cards which the customer has.
     attr_accessor :points
 
     # Total number of customers referred by the customer.

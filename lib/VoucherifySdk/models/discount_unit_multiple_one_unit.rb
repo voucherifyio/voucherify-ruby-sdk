@@ -18,6 +18,7 @@ module VoucherifySdk
     # Number of units to be granted a full value discount.
     attr_accessor :unit_off
 
+    # Formula used to calculate the number of units.
     attr_accessor :unit_off_formula
 
     # Defines how the unit is added to the customer's order.  

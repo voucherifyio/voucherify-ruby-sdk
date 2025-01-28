@@ -16,10 +16,10 @@ require 'time'
 module VoucherifySdk
   # Contains information about the custom event that triggers the point accrual.
   class VoucherTransactionDetailsCustomEvent
-    # Unique event ID.
+    # Unique identifier of the event.
     attr_accessor :id
 
-    # Type of custom event.
+    # Type of the custom event.
     attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.

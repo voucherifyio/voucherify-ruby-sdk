@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Defines loyalty tier expiration date.
   class LoyaltyTierExpiration
-    # Unique customer ID of the customer making the purchase.
+    # Unique customer identifier of the customer making the purchase. The ID is assigned by Voucherify.
     attr_accessor :customer_id
 
     # Unique campaign ID, assigned by Voucherify.

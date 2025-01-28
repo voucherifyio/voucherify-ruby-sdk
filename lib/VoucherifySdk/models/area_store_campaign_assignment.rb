@@ -22,6 +22,9 @@ module VoucherifySdk
     # Unique identifier of the area to which the campaign is assigned.
     attr_accessor :area_id
 
+    # Determines if the campaign is assigned to all of the stores in the area, i.e. if an area ID is passed in the `access_settings.assign.area_all_stores_ids` in the request.
+    attr_accessor :all_stores
+
     # Unique identifier of the store to which the campaign is assigned.
     attr_accessor :area_store_id
 
@@ -58,6 +61,7 @@ module VoucherifySdk
       {
         :'id' => :'id',
         :'area_id' => :'area_id',
+        :'all_stores' => :'all_stores',
         :'area_store_id' => :'area_store_id',
         :'created_at' => :'created_at',
         :'object' => :'object'
@@ -74,6 +78,7 @@ module VoucherifySdk
       {
         :'id' => :'String',
         :'area_id' => :'String',
+        :'all_stores' => :'Boolean',
         :'area_store_id' => :'String',
         :'created_at' => :'Time',
         :'object' => :'String'
@@ -85,6 +90,7 @@ module VoucherifySdk
       Set.new([
         :'id',
         :'area_id',
+        :'all_stores',
         :'area_store_id',
         :'created_at',
         :'object'
@@ -105,6 +111,10 @@ module VoucherifySdk
 
       if attributes.key?(:'area_id')
         self.area_id = attributes[:'area_id']
+      end
+
+      if attributes.key?(:'all_stores')
+        self.all_stores = attributes[:'all_stores']
       end
 
       if attributes.key?(:'area_store_id')
@@ -146,6 +156,7 @@ module VoucherifySdk
       self.class == o.class &&
           id == o.id &&
           area_id == o.area_id &&
+          all_stores == o.all_stores &&
           area_store_id == o.area_store_id &&
           created_at == o.created_at &&
           object == o.object
@@ -160,7 +171,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, area_id, area_store_id, created_at, object].hash
+      [id, area_id, all_stores, area_store_id, created_at, object].hash
     end
 
     # Builds the object from hash

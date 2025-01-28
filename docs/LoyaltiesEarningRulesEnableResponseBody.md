@@ -11,6 +11,7 @@
 | **custom_event** | [**LoyaltiesEarningRulesEnableResponseBodyCustomEvent**](LoyaltiesEarningRulesEnableResponseBodyCustomEvent.md) |  | [optional] |
 | **segment** | [**LoyaltiesEarningRulesEnableResponseBodySegment**](LoyaltiesEarningRulesEnableResponseBodySegment.md) |  | [optional] |
 | **loyalty_tier** | [**LoyaltiesEarningRulesEnableResponseBodyLoyaltyTier**](LoyaltiesEarningRulesEnableResponseBodyLoyaltyTier.md) |  | [optional] |
+| **pending_points** | [**LoyaltiesEarningRulesEnableResponseBodyPendingPoints**](LoyaltiesEarningRulesEnableResponseBodyPendingPoints.md) |  | [optional] |
 | **source** | [**LoyaltiesEarningRulesEnableResponseBodySource**](LoyaltiesEarningRulesEnableResponseBodySource.md) |  | [optional] |
 | **object** | **String** | The type of the object represented by JSON. Default is earning_rule. | [optional][default to &#39;earning_rule&#39;] |
 | **automation_id** | **String** | For internal use by Voucherify. | [optional] |

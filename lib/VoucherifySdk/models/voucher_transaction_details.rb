@@ -36,6 +36,10 @@ module VoucherifySdk
 
     attr_accessor :event_schema
 
+    attr_accessor :holder_loyalty_tier
+
+    attr_accessor :pending_points
+
     attr_accessor :reward
 
     attr_accessor :source_voucher
@@ -55,6 +59,8 @@ module VoucherifySdk
         :'rollback' => :'rollback',
         :'custom_event' => :'custom_event',
         :'event_schema' => :'event_schema',
+        :'holder_loyalty_tier' => :'holder_loyalty_tier',
+        :'pending_points' => :'pending_points',
         :'reward' => :'reward',
         :'source_voucher' => :'source_voucher',
         :'destination_voucher' => :'destination_voucher'
@@ -79,6 +85,8 @@ module VoucherifySdk
         :'rollback' => :'VoucherTransactionDetailsRollback',
         :'custom_event' => :'VoucherTransactionDetailsCustomEvent',
         :'event_schema' => :'VoucherTransactionDetailsEventSchema',
+        :'holder_loyalty_tier' => :'VoucherTransactionDetailsHolderLoyaltyTier',
+        :'pending_points' => :'LoyaltyPendingPoints',
         :'reward' => :'VoucherTransactionDetailsReward',
         :'source_voucher' => :'SimpleVoucher',
         :'destination_voucher' => :'SimpleVoucher'
@@ -97,6 +105,7 @@ module VoucherifySdk
         :'rollback',
         :'custom_event',
         :'event_schema',
+        :'holder_loyalty_tier',
         :'reward',
       ])
     end
@@ -149,6 +158,14 @@ module VoucherifySdk
         self.event_schema = attributes[:'event_schema']
       end
 
+      if attributes.key?(:'holder_loyalty_tier')
+        self.holder_loyalty_tier = attributes[:'holder_loyalty_tier']
+      end
+
+      if attributes.key?(:'pending_points')
+        self.pending_points = attributes[:'pending_points']
+      end
+
       if attributes.key?(:'reward')
         self.reward = attributes[:'reward']
       end
@@ -192,6 +209,8 @@ module VoucherifySdk
           rollback == o.rollback &&
           custom_event == o.custom_event &&
           event_schema == o.event_schema &&
+          holder_loyalty_tier == o.holder_loyalty_tier &&
+          pending_points == o.pending_points &&
           reward == o.reward &&
           source_voucher == o.source_voucher &&
           destination_voucher == o.destination_voucher
@@ -206,7 +225,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [balance, order, event, earning_rule, segment, loyalty_tier, redemption, rollback, custom_event, event_schema, reward, source_voucher, destination_voucher].hash
+      [balance, order, event, earning_rule, segment, loyalty_tier, redemption, rollback, custom_event, event_schema, holder_loyalty_tier, pending_points, reward, source_voucher, destination_voucher].hash
     end
 
     # Builds the object from hash

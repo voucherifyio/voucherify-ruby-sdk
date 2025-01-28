@@ -32,6 +32,8 @@ module VoucherifySdk
 
     attr_accessor :loyalty_tier
 
+    attr_accessor :pending_points
+
     attr_accessor :source
 
     # The type of the object represented by JSON. Default is earning_rule.
@@ -97,6 +99,7 @@ module VoucherifySdk
         :'custom_event' => :'custom_event',
         :'segment' => :'segment',
         :'loyalty_tier' => :'loyalty_tier',
+        :'pending_points' => :'pending_points',
         :'source' => :'source',
         :'object' => :'object',
         :'automation_id' => :'automation_id',
@@ -127,6 +130,7 @@ module VoucherifySdk
         :'custom_event' => :'LoyaltiesEarningRulesUpdateResponseBodyCustomEvent',
         :'segment' => :'LoyaltiesEarningRulesUpdateResponseBodySegment',
         :'loyalty_tier' => :'LoyaltiesEarningRulesUpdateResponseBodyLoyaltyTier',
+        :'pending_points' => :'LoyaltiesEarningRulesUpdateResponseBodyPendingPoints',
         :'source' => :'LoyaltiesEarningRulesUpdateResponseBodySource',
         :'object' => :'String',
         :'automation_id' => :'String',
@@ -151,6 +155,7 @@ module VoucherifySdk
         :'custom_event',
         :'segment',
         :'loyalty_tier',
+        :'pending_points',
         :'source',
         :'object',
         :'automation_id',
@@ -197,6 +202,10 @@ module VoucherifySdk
 
       if attributes.key?(:'loyalty_tier')
         self.loyalty_tier = attributes[:'loyalty_tier']
+      end
+
+      if attributes.key?(:'pending_points')
+        self.pending_points = attributes[:'pending_points']
       end
 
       if attributes.key?(:'source')
@@ -281,6 +290,7 @@ module VoucherifySdk
           custom_event == o.custom_event &&
           segment == o.segment &&
           loyalty_tier == o.loyalty_tier &&
+          pending_points == o.pending_points &&
           source == o.source &&
           object == o.object &&
           automation_id == o.automation_id &&
@@ -304,7 +314,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, loyalty, event, custom_event, segment, loyalty_tier, source, object, automation_id, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, metadata, validation_rule_id, updated_at, active].hash
+      [id, created_at, loyalty, event, custom_event, segment, loyalty_tier, pending_points, source, object, automation_id, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, metadata, validation_rule_id, updated_at, active].hash
     end
 
     # Builds the object from hash

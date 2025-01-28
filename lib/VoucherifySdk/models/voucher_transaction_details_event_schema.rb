@@ -16,10 +16,10 @@ require 'time'
 module VoucherifySdk
   # Contains information about the custom event metadata schema.
   class VoucherTransactionDetailsEventSchema
-    # Unique metadata schema ID.
+    # Unique identifier of the metadata schema.
     attr_accessor :id
 
-    # Type of custom event.
+    # Type of the custom event.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

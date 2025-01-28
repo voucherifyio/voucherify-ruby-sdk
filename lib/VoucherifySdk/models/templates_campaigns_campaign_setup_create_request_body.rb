@@ -62,6 +62,8 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the campaign. A set of key/value pairs that you can attach to a campaign object. It can be useful for storing additional information about the campaign in a structured format.
     attr_accessor :metadata
 
+    attr_accessor :access_settings
+
     attr_accessor :voucher
 
     class EnumAttributeValidator
@@ -105,6 +107,7 @@ module VoucherifySdk
         :'category_id' => :'category_id',
         :'category' => :'category',
         :'metadata' => :'metadata',
+        :'access_settings' => :'access_settings',
         :'voucher' => :'voucher'
       }
     end
@@ -133,6 +136,7 @@ module VoucherifySdk
         :'category_id' => :'String',
         :'category' => :'String',
         :'metadata' => :'Object',
+        :'access_settings' => :'AccessSettings',
         :'voucher' => :'TemplatesCampaignsCampaignSetupCreateRequestBodyVoucher'
       }
     end
@@ -231,6 +235,10 @@ module VoucherifySdk
         self.metadata = attributes[:'metadata']
       end
 
+      if attributes.key?(:'access_settings')
+        self.access_settings = attributes[:'access_settings']
+      end
+
       if attributes.key?(:'voucher')
         self.voucher = attributes[:'voucher']
       end
@@ -274,6 +282,7 @@ module VoucherifySdk
           category_id == o.category_id &&
           category == o.category &&
           metadata == o.metadata &&
+          access_settings == o.access_settings &&
           voucher == o.voucher
     end
 
@@ -286,7 +295,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, type, join_once, auto_join, use_voucher_metadata_schema, vouchers_count, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, category_id, category, metadata, voucher].hash
+      [name, description, type, join_once, auto_join, use_voucher_metadata_schema, vouchers_count, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, category_id, category, metadata, access_settings, voucher].hash
     end
 
     # Builds the object from hash

@@ -16,8 +16,10 @@ require 'time'
 module VoucherifySdk
   # Contains information about the segment.
   class VoucherTransactionDetailsSegment
+    # Unique identifier of the segment.
     attr_accessor :id
 
+    # Name of the segment.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

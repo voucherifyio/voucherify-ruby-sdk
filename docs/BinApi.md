@@ -94,8 +94,8 @@ end
 api_instance = VoucherifySdk::BinApi.new
 opts = {
   limit: 56, # Integer | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
-  order: VoucherifySdk::ParameterOrderListBin::ID, # ParameterOrderListBin | Orders the bin entries according the date and time when they were moved to the bin or according to the bin entry ID. The dash - preceding a sorting option means sorting in a descending order.
-  starting_after_id: 'starting_after_id_example', # String | A cursor for pagination. It retrieves the events starting after an event with the given ID.
+  order: VoucherifySdk::ParameterOrderListBin::ID, # ParameterOrderListBin | Orders the bin entries according to the bin entry ID. The dash - preceding a sorting option means sorting in a descending order.
+  starting_after_id: 'starting_after_id_example', # String | A cursor for pagination. It retrieves the results starting after a result with the given ID.
   filters: VoucherifySdk::ParameterFiltersListBin.new # ParameterFiltersListBin | Filters for listing bin entries.
 }
 
@@ -113,8 +113,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **limit** | **Integer** | Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items. | [optional] |
-| **order** | [**ParameterOrderListBin**](.md) | Orders the bin entries according the date and time when they were moved to the bin or according to the bin entry ID. The dash - preceding a sorting option means sorting in a descending order. | [optional] |
-| **starting_after_id** | **String** | A cursor for pagination. It retrieves the events starting after an event with the given ID. | [optional] |
+| **order** | [**ParameterOrderListBin**](.md) | Orders the bin entries according to the bin entry ID. The dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the results starting after a result with the given ID. | [optional] |
 | **filters** | [**ParameterFiltersListBin**](.md) | Filters for listing bin entries. | [optional] |
 
 ### Return type

@@ -4,6 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** |  | [optional] |
-| **name** | **String** |  | [optional] |
+| **id** | **String** | Unique identifier of the segment. | [optional] |
+| **name** | **String** | Name of the segment. | [optional] |
 

@@ -113,6 +113,13 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
 
 ## 📅 Changelog
 
+- **2024-01-29** - `8.0.3`
+  - Added support for **GET** /v1/loyalties/{campaignId}/pending-points
+  - Added support for **GET** /v1/loyalties/members/{memberId}/pending-points
+  - Added support for **GET** /v1/loyalties/{campaignId}/members/{memberId}/pending-points
+  - Added support for **POST** /v1/loyalties/members/{memberId}/pending-points/{pendingPointsId}/activate
+  - Added support for **POST** /v1/loyalties/members/{memberId}/pending-points/{pendingPointsId}/cancel
+  - Added types for pending points (loyalties) and access settings (areas and stores)
 - **2024-11-26** - `8.0.2`
   - Added support for `STANDALONE` campaign type.
   - Added optional `metadata` in `OrderCalculatedItemSku`
@@ -286,11 +293,13 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::ExportsApi* | [**list_exports**](docs/ExportsApi.md#list_exports) | **GET** /v1/exports | List Exports
 *VoucherifySdk::LocationsApi* | [**get_location**](docs/LocationsApi.md#get_location) | **GET** /v1/locations/{locationId} | Get Location
 *VoucherifySdk::LocationsApi* | [**list_locations**](docs/LocationsApi.md#list_locations) | **GET** /v1/locations | List Locations
+*VoucherifySdk::LoyaltiesApi* | [**activate_member_pending_points**](docs/LoyaltiesApi.md#activate_member_pending_points) | **POST** /v1/loyalties/members/{memberId}/pending-points/{pendingPointsId}/activate | Activate Member Pending Points
 *VoucherifySdk::LoyaltiesApi* | [**add_member**](docs/LoyaltiesApi.md#add_member) | **POST** /v1/loyalties/{campaignId}/members | Add Member
+*VoucherifySdk::LoyaltiesApi* | [**cancel_member_pending_points**](docs/LoyaltiesApi.md#cancel_member_pending_points) | **POST** /v1/loyalties/members/{memberId}/pending-points/{pendingPointsId}/cancel | Cancel Member Pending Points
 *VoucherifySdk::LoyaltiesApi* | [**create_earning_rule**](docs/LoyaltiesApi.md#create_earning_rule) | **POST** /v1/loyalties/{campaignId}/earning-rules | Create Earning Rule
 *VoucherifySdk::LoyaltiesApi* | [**create_in_bulk_loyalty_tiers**](docs/LoyaltiesApi.md#create_in_bulk_loyalty_tiers) | **POST** /v1/loyalties/{campaignId}/tiers | Create loyalty tiers
 *VoucherifySdk::LoyaltiesApi* | [**create_loyalty_program**](docs/LoyaltiesApi.md#create_loyalty_program) | **POST** /v1/loyalties | Create Loyalty Campaign
-*VoucherifySdk::LoyaltiesApi* | [**create_points_expiration_export**](docs/LoyaltiesApi.md#create_points_expiration_export) | **POST** /v1/loyalties/{campaignId}/points-expiration/export | Create Points Expiration Export
+*VoucherifySdk::LoyaltiesApi* | [**create_points_expiration_export**](docs/LoyaltiesApi.md#create_points_expiration_export) | **POST** /v1/loyalties/{campaignId}/points-expiration/export | Export Loyalty Campaign Point Expiration
 *VoucherifySdk::LoyaltiesApi* | [**create_reward_assignment1**](docs/LoyaltiesApi.md#create_reward_assignment1) | **POST** /v1/loyalties/{campaignId}/rewards | Create Reward Assignment
 *VoucherifySdk::LoyaltiesApi* | [**delete_earning_rule**](docs/LoyaltiesApi.md#delete_earning_rule) | **DELETE** /v1/loyalties/{campaignId}/earning-rules/{earningRuleId} | Delete Earning Rule
 *VoucherifySdk::LoyaltiesApi* | [**delete_loyalty_program**](docs/LoyaltiesApi.md#delete_loyalty_program) | **DELETE** /v1/loyalties/{campaignId} | Delete Loyalty Campaign
@@ -307,6 +316,7 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::LoyaltiesApi* | [**get_reward_assignment1**](docs/LoyaltiesApi.md#get_reward_assignment1) | **GET** /v1/loyalties/{campaignId}/reward-assignments/{assignmentId} | Get Reward Assignment
 *VoucherifySdk::LoyaltiesApi* | [**get_reward_assignment2**](docs/LoyaltiesApi.md#get_reward_assignment2) | **GET** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Get Reward Assignment
 *VoucherifySdk::LoyaltiesApi* | [**get_reward_details**](docs/LoyaltiesApi.md#get_reward_details) | **GET** /v1/loyalties/{campaignId}/reward-assignments/{assignmentId}/reward | Get Reward Details
+*VoucherifySdk::LoyaltiesApi* | [**list_campaign_pending_points**](docs/LoyaltiesApi.md#list_campaign_pending_points) | **GET** /v1/loyalties/{campaignId}/pending-points | List Campaign Pending Points
 *VoucherifySdk::LoyaltiesApi* | [**list_earning_rules**](docs/LoyaltiesApi.md#list_earning_rules) | **GET** /v1/loyalties/{campaignId}/earning-rules | List Earning Rules
 *VoucherifySdk::LoyaltiesApi* | [**list_loyalty_card_transactions**](docs/LoyaltiesApi.md#list_loyalty_card_transactions) | **GET** /v1/loyalties/members/{memberId}/transactions | List Loyalty Card Transactions
 *VoucherifySdk::LoyaltiesApi* | [**list_loyalty_card_transactions1**](docs/LoyaltiesApi.md#list_loyalty_card_transactions1) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/transactions | List Loyalty Card Transactions
@@ -317,9 +327,11 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::LoyaltiesApi* | [**list_member_activity**](docs/LoyaltiesApi.md#list_member_activity) | **GET** /v1/loyalties/members/{memberId}/activity | List Member Activity
 *VoucherifySdk::LoyaltiesApi* | [**list_member_activity1**](docs/LoyaltiesApi.md#list_member_activity1) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/activity | List Member Activity
 *VoucherifySdk::LoyaltiesApi* | [**list_member_loyalty_tier**](docs/LoyaltiesApi.md#list_member_loyalty_tier) | **GET** /v1/loyalties/members/{memberId}/tiers | List Member's Loyalty Tiers
+*VoucherifySdk::LoyaltiesApi* | [**list_member_pending_points**](docs/LoyaltiesApi.md#list_member_pending_points) | **GET** /v1/loyalties/members/{memberId}/pending-points | List Member Pending Points
+*VoucherifySdk::LoyaltiesApi* | [**list_member_pending_points1**](docs/LoyaltiesApi.md#list_member_pending_points1) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/pending-points | List Member Pending Points
 *VoucherifySdk::LoyaltiesApi* | [**list_member_rewards**](docs/LoyaltiesApi.md#list_member_rewards) | **GET** /v1/loyalties/members/{memberId}/rewards | List Member Rewards
 *VoucherifySdk::LoyaltiesApi* | [**list_members**](docs/LoyaltiesApi.md#list_members) | **GET** /v1/loyalties/{campaignId}/members | List Members
-*VoucherifySdk::LoyaltiesApi* | [**list_points_expiration**](docs/LoyaltiesApi.md#list_points_expiration) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/points-expiration | Get Points Expiration
+*VoucherifySdk::LoyaltiesApi* | [**list_points_expiration**](docs/LoyaltiesApi.md#list_points_expiration) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/points-expiration | List Loyalty Card Point Expiration
 *VoucherifySdk::LoyaltiesApi* | [**list_reward_assignments1**](docs/LoyaltiesApi.md#list_reward_assignments1) | **GET** /v1/loyalties/{campaignId}/reward-assignments | List Reward Assignments
 *VoucherifySdk::LoyaltiesApi* | [**list_reward_assignments2**](docs/LoyaltiesApi.md#list_reward_assignments2) | **GET** /v1/loyalties/{campaignId}/rewards | List Reward Assignments
 *VoucherifySdk::LoyaltiesApi* | [**redeem_reward**](docs/LoyaltiesApi.md#redeem_reward) | **POST** /v1/loyalties/members/{memberId}/redemption | Redeem Reward
@@ -475,10 +487,15 @@ Class | Method | HTTP request | Description
 
 ## 📚 Documentation for Models
 
+ - [VoucherifySdk::AccessSettings](docs/AccessSettings.md)
+ - [VoucherifySdk::AccessSettingsAssign](docs/AccessSettingsAssign.md)
  - [VoucherifySdk::AccessSettingsCampaignAssignmentsList](docs/AccessSettingsCampaignAssignmentsList.md)
+ - [VoucherifySdk::AccessSettingsUnassign](docs/AccessSettingsUnassign.md)
  - [VoucherifySdk::ApplicableTo](docs/ApplicableTo.md)
  - [VoucherifySdk::ApplicableToEffect](docs/ApplicableToEffect.md)
+ - [VoucherifySdk::ApplicableToOrderItemUnitsItem](docs/ApplicableToOrderItemUnitsItem.md)
  - [VoucherifySdk::ApplicableToResultList](docs/ApplicableToResultList.md)
+ - [VoucherifySdk::ApplicationDetailsItem](docs/ApplicationDetailsItem.md)
  - [VoucherifySdk::AreaStoreCampaignAssignment](docs/AreaStoreCampaignAssignment.md)
  - [VoucherifySdk::AsyncActionBase](docs/AsyncActionBase.md)
  - [VoucherifySdk::AsyncActionGetResponseBody](docs/AsyncActionGetResponseBody.md)
@@ -621,10 +638,14 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::EarningRuleLoyaltyOrderMetadata](docs/EarningRuleLoyaltyOrderMetadata.md)
  - [VoucherifySdk::EarningRuleLoyaltyOrderTotalAmount](docs/EarningRuleLoyaltyOrderTotalAmount.md)
  - [VoucherifySdk::EarningRuleLoyaltyTier](docs/EarningRuleLoyaltyTier.md)
+ - [VoucherifySdk::EarningRulePendingPoints](docs/EarningRulePendingPoints.md)
  - [VoucherifySdk::EarningRuleSegment](docs/EarningRuleSegment.md)
  - [VoucherifySdk::EarningRuleSource](docs/EarningRuleSource.md)
  - [VoucherifySdk::Error](docs/Error.md)
  - [VoucherifySdk::ErrorError](docs/ErrorError.md)
+ - [VoucherifySdk::EventSource](docs/EventSource.md)
+ - [VoucherifySdk::EventSourceApiKey](docs/EventSourceApiKey.md)
+ - [VoucherifySdk::EventSourceUser](docs/EventSourceUser.md)
  - [VoucherifySdk::EventsCreateRequestBody](docs/EventsCreateRequestBody.md)
  - [VoucherifySdk::EventsCreateRequestBodyLoyalty](docs/EventsCreateRequestBodyLoyalty.md)
  - [VoucherifySdk::EventsCreateRequestBodyReferral](docs/EventsCreateRequestBodyReferral.md)
@@ -651,6 +672,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::FiltersCondition](docs/FiltersCondition.md)
  - [VoucherifySdk::Gift](docs/Gift.md)
  - [VoucherifySdk::InapplicableTo](docs/InapplicableTo.md)
+ - [VoucherifySdk::InapplicableToOrderItemUnitsItem](docs/InapplicableToOrderItemUnitsItem.md)
  - [VoucherifySdk::InapplicableToResultList](docs/InapplicableToResultList.md)
  - [VoucherifySdk::Junction](docs/Junction.md)
  - [VoucherifySdk::ListPublicationsItemVoucher](docs/ListPublicationsItemVoucher.md)
@@ -700,6 +722,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltiesEarningRulesCreateResponseBodyLoyaltyOrderMetadata](docs/LoyaltiesEarningRulesCreateResponseBodyLoyaltyOrderMetadata.md)
  - [VoucherifySdk::LoyaltiesEarningRulesCreateResponseBodyLoyaltyOrderTotalAmount](docs/LoyaltiesEarningRulesCreateResponseBodyLoyaltyOrderTotalAmount.md)
  - [VoucherifySdk::LoyaltiesEarningRulesCreateResponseBodyLoyaltyTier](docs/LoyaltiesEarningRulesCreateResponseBodyLoyaltyTier.md)
+ - [VoucherifySdk::LoyaltiesEarningRulesCreateResponseBodyPendingPoints](docs/LoyaltiesEarningRulesCreateResponseBodyPendingPoints.md)
  - [VoucherifySdk::LoyaltiesEarningRulesCreateResponseBodySegment](docs/LoyaltiesEarningRulesCreateResponseBodySegment.md)
  - [VoucherifySdk::LoyaltiesEarningRulesCreateResponseBodySource](docs/LoyaltiesEarningRulesCreateResponseBodySource.md)
  - [VoucherifySdk::LoyaltiesEarningRulesDisableResponseBody](docs/LoyaltiesEarningRulesDisableResponseBody.md)
@@ -718,6 +741,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltiesEarningRulesDisableResponseBodyLoyaltyOrderMetadata](docs/LoyaltiesEarningRulesDisableResponseBodyLoyaltyOrderMetadata.md)
  - [VoucherifySdk::LoyaltiesEarningRulesDisableResponseBodyLoyaltyOrderTotalAmount](docs/LoyaltiesEarningRulesDisableResponseBodyLoyaltyOrderTotalAmount.md)
  - [VoucherifySdk::LoyaltiesEarningRulesDisableResponseBodyLoyaltyTier](docs/LoyaltiesEarningRulesDisableResponseBodyLoyaltyTier.md)
+ - [VoucherifySdk::LoyaltiesEarningRulesDisableResponseBodyPendingPoints](docs/LoyaltiesEarningRulesDisableResponseBodyPendingPoints.md)
  - [VoucherifySdk::LoyaltiesEarningRulesDisableResponseBodySegment](docs/LoyaltiesEarningRulesDisableResponseBodySegment.md)
  - [VoucherifySdk::LoyaltiesEarningRulesDisableResponseBodySource](docs/LoyaltiesEarningRulesDisableResponseBodySource.md)
  - [VoucherifySdk::LoyaltiesEarningRulesEnableResponseBody](docs/LoyaltiesEarningRulesEnableResponseBody.md)
@@ -736,6 +760,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltiesEarningRulesEnableResponseBodyLoyaltyOrderMetadata](docs/LoyaltiesEarningRulesEnableResponseBodyLoyaltyOrderMetadata.md)
  - [VoucherifySdk::LoyaltiesEarningRulesEnableResponseBodyLoyaltyOrderTotalAmount](docs/LoyaltiesEarningRulesEnableResponseBodyLoyaltyOrderTotalAmount.md)
  - [VoucherifySdk::LoyaltiesEarningRulesEnableResponseBodyLoyaltyTier](docs/LoyaltiesEarningRulesEnableResponseBodyLoyaltyTier.md)
+ - [VoucherifySdk::LoyaltiesEarningRulesEnableResponseBodyPendingPoints](docs/LoyaltiesEarningRulesEnableResponseBodyPendingPoints.md)
  - [VoucherifySdk::LoyaltiesEarningRulesEnableResponseBodySegment](docs/LoyaltiesEarningRulesEnableResponseBodySegment.md)
  - [VoucherifySdk::LoyaltiesEarningRulesEnableResponseBodySource](docs/LoyaltiesEarningRulesEnableResponseBodySource.md)
  - [VoucherifySdk::LoyaltiesEarningRulesGetResponseBody](docs/LoyaltiesEarningRulesGetResponseBody.md)
@@ -754,6 +779,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltiesEarningRulesGetResponseBodyLoyaltyOrderMetadata](docs/LoyaltiesEarningRulesGetResponseBodyLoyaltyOrderMetadata.md)
  - [VoucherifySdk::LoyaltiesEarningRulesGetResponseBodyLoyaltyOrderTotalAmount](docs/LoyaltiesEarningRulesGetResponseBodyLoyaltyOrderTotalAmount.md)
  - [VoucherifySdk::LoyaltiesEarningRulesGetResponseBodyLoyaltyTier](docs/LoyaltiesEarningRulesGetResponseBodyLoyaltyTier.md)
+ - [VoucherifySdk::LoyaltiesEarningRulesGetResponseBodyPendingPoints](docs/LoyaltiesEarningRulesGetResponseBodyPendingPoints.md)
  - [VoucherifySdk::LoyaltiesEarningRulesGetResponseBodySegment](docs/LoyaltiesEarningRulesGetResponseBodySegment.md)
  - [VoucherifySdk::LoyaltiesEarningRulesGetResponseBodySource](docs/LoyaltiesEarningRulesGetResponseBodySource.md)
  - [VoucherifySdk::LoyaltiesEarningRulesListResponseBody](docs/LoyaltiesEarningRulesListResponseBody.md)
@@ -788,6 +814,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltiesEarningRulesUpdateResponseBodyLoyaltyOrderMetadata](docs/LoyaltiesEarningRulesUpdateResponseBodyLoyaltyOrderMetadata.md)
  - [VoucherifySdk::LoyaltiesEarningRulesUpdateResponseBodyLoyaltyOrderTotalAmount](docs/LoyaltiesEarningRulesUpdateResponseBodyLoyaltyOrderTotalAmount.md)
  - [VoucherifySdk::LoyaltiesEarningRulesUpdateResponseBodyLoyaltyTier](docs/LoyaltiesEarningRulesUpdateResponseBodyLoyaltyTier.md)
+ - [VoucherifySdk::LoyaltiesEarningRulesUpdateResponseBodyPendingPoints](docs/LoyaltiesEarningRulesUpdateResponseBodyPendingPoints.md)
  - [VoucherifySdk::LoyaltiesEarningRulesUpdateResponseBodySegment](docs/LoyaltiesEarningRulesUpdateResponseBodySegment.md)
  - [VoucherifySdk::LoyaltiesEarningRulesUpdateResponseBodySource](docs/LoyaltiesEarningRulesUpdateResponseBodySource.md)
  - [VoucherifySdk::LoyaltiesGetCampaignResponseBody](docs/LoyaltiesGetCampaignResponseBody.md)
@@ -807,6 +834,9 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltiesMembersGetResponseBodyLoyaltyCard](docs/LoyaltiesMembersGetResponseBodyLoyaltyCard.md)
  - [VoucherifySdk::LoyaltiesMembersGetResponseBodyPublish](docs/LoyaltiesMembersGetResponseBodyPublish.md)
  - [VoucherifySdk::LoyaltiesMembersGetResponseBodyRedemption](docs/LoyaltiesMembersGetResponseBodyRedemption.md)
+ - [VoucherifySdk::LoyaltiesMembersPendingPointsActivateResponseBody](docs/LoyaltiesMembersPendingPointsActivateResponseBody.md)
+ - [VoucherifySdk::LoyaltiesMembersPendingPointsActivateResponseBodyRelatedObject](docs/LoyaltiesMembersPendingPointsActivateResponseBodyRelatedObject.md)
+ - [VoucherifySdk::LoyaltiesMembersPendingPointsListResponseBody](docs/LoyaltiesMembersPendingPointsListResponseBody.md)
  - [VoucherifySdk::LoyaltiesMembersPointsExpirationListResponseBody](docs/LoyaltiesMembersPointsExpirationListResponseBody.md)
  - [VoucherifySdk::LoyaltiesMembersPointsExpirationListResponseBodyDataItem](docs/LoyaltiesMembersPointsExpirationListResponseBodyDataItem.md)
  - [VoucherifySdk::LoyaltiesMembersPointsExpirationListResponseBodyDataItemBucket](docs/LoyaltiesMembersPointsExpirationListResponseBodyDataItemBucket.md)
@@ -839,6 +869,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltiesMembersTransfersCreateResponseBodyLoyaltyCard](docs/LoyaltiesMembersTransfersCreateResponseBodyLoyaltyCard.md)
  - [VoucherifySdk::LoyaltiesMembersTransfersCreateResponseBodyPublish](docs/LoyaltiesMembersTransfersCreateResponseBodyPublish.md)
  - [VoucherifySdk::LoyaltiesMembersTransfersCreateResponseBodyRedemption](docs/LoyaltiesMembersTransfersCreateResponseBodyRedemption.md)
+ - [VoucherifySdk::LoyaltiesPendingPointsListResponseBody](docs/LoyaltiesPendingPointsListResponseBody.md)
  - [VoucherifySdk::LoyaltiesPointsExpirationExportCreateRequestBody](docs/LoyaltiesPointsExpirationExportCreateRequestBody.md)
  - [VoucherifySdk::LoyaltiesPointsExpirationExportCreateRequestBodyParameters](docs/LoyaltiesPointsExpirationExportCreateRequestBodyParameters.md)
  - [VoucherifySdk::LoyaltiesPointsExpirationExportCreateRequestBodyParametersFilters](docs/LoyaltiesPointsExpirationExportCreateRequestBodyParametersFilters.md)
@@ -899,6 +930,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltyCardTransactionDetailsEarningRuleSource](docs/LoyaltyCardTransactionDetailsEarningRuleSource.md)
  - [VoucherifySdk::LoyaltyCardTransactionDetailsEvent](docs/LoyaltyCardTransactionDetailsEvent.md)
  - [VoucherifySdk::LoyaltyCardTransactionDetailsEventSchema](docs/LoyaltyCardTransactionDetailsEventSchema.md)
+ - [VoucherifySdk::LoyaltyCardTransactionDetailsHolderLoyaltyTier](docs/LoyaltyCardTransactionDetailsHolderLoyaltyTier.md)
  - [VoucherifySdk::LoyaltyCardTransactionDetailsLoyaltyTier](docs/LoyaltyCardTransactionDetailsLoyaltyTier.md)
  - [VoucherifySdk::LoyaltyCardTransactionDetailsOrder](docs/LoyaltyCardTransactionDetailsOrder.md)
  - [VoucherifySdk::LoyaltyCardTransactionDetailsRedemption](docs/LoyaltyCardTransactionDetailsRedemption.md)
@@ -910,6 +942,14 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltyMemberLoyaltyCard](docs/LoyaltyMemberLoyaltyCard.md)
  - [VoucherifySdk::LoyaltyMemberPublish](docs/LoyaltyMemberPublish.md)
  - [VoucherifySdk::LoyaltyMemberRedemption](docs/LoyaltyMemberRedemption.md)
+ - [VoucherifySdk::LoyaltyPendingPoints](docs/LoyaltyPendingPoints.md)
+ - [VoucherifySdk::LoyaltyPendingPointsDetails](docs/LoyaltyPendingPointsDetails.md)
+ - [VoucherifySdk::LoyaltyPendingPointsDetailsEarningRule](docs/LoyaltyPendingPointsDetailsEarningRule.md)
+ - [VoucherifySdk::LoyaltyPendingPointsDetailsEarningRuleSource](docs/LoyaltyPendingPointsDetailsEarningRuleSource.md)
+ - [VoucherifySdk::LoyaltyPendingPointsDetailsEvent](docs/LoyaltyPendingPointsDetailsEvent.md)
+ - [VoucherifySdk::LoyaltyPendingPointsDetailsHolderLoyaltyTier](docs/LoyaltyPendingPointsDetailsHolderLoyaltyTier.md)
+ - [VoucherifySdk::LoyaltyPendingPointsDetailsLoyaltyTier](docs/LoyaltyPendingPointsDetailsLoyaltyTier.md)
+ - [VoucherifySdk::LoyaltyPendingPointsDetailsOrder](docs/LoyaltyPendingPointsDetailsOrder.md)
  - [VoucherifySdk::LoyaltyPointsBucket](docs/LoyaltyPointsBucket.md)
  - [VoucherifySdk::LoyaltyPointsBucketBucket](docs/LoyaltyPointsBucketBucket.md)
  - [VoucherifySdk::LoyaltyTier](docs/LoyaltyTier.md)
@@ -1152,6 +1192,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ParameterOrderListLocations](docs/ParameterOrderListLocations.md)
  - [VoucherifySdk::ParameterOrderListLoyaltyTiers](docs/ParameterOrderListLoyaltyTiers.md)
  - [VoucherifySdk::ParameterOrderListOrders](docs/ParameterOrderListOrders.md)
+ - [VoucherifySdk::ParameterOrderListPendingPoints](docs/ParameterOrderListPendingPoints.md)
  - [VoucherifySdk::ParameterOrderListPromotionTiers](docs/ParameterOrderListPromotionTiers.md)
  - [VoucherifySdk::ParameterOrderListPromotionTiersClientSide](docs/ParameterOrderListPromotionTiersClientSide.md)
  - [VoucherifySdk::ParameterOrderListPublications](docs/ParameterOrderListPublications.md)
@@ -1544,6 +1585,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::VoucherTransactionDetailsEarningRuleSource](docs/VoucherTransactionDetailsEarningRuleSource.md)
  - [VoucherifySdk::VoucherTransactionDetailsEvent](docs/VoucherTransactionDetailsEvent.md)
  - [VoucherifySdk::VoucherTransactionDetailsEventSchema](docs/VoucherTransactionDetailsEventSchema.md)
+ - [VoucherifySdk::VoucherTransactionDetailsHolderLoyaltyTier](docs/VoucherTransactionDetailsHolderLoyaltyTier.md)
  - [VoucherifySdk::VoucherTransactionDetailsLoyaltyTier](docs/VoucherTransactionDetailsLoyaltyTier.md)
  - [VoucherifySdk::VoucherTransactionDetailsOrder](docs/VoucherTransactionDetailsOrder.md)
  - [VoucherifySdk::VoucherTransactionDetailsRedemption](docs/VoucherTransactionDetailsRedemption.md)

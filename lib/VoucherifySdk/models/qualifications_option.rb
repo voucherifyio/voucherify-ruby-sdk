@@ -126,8 +126,8 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@limit.nil? && @limit > 100
-        invalid_properties.push('invalid value for "limit", must be smaller than or equal to 100.')
+      if !@limit.nil? && @limit > 50
+        invalid_properties.push('invalid value for "limit", must be smaller than or equal to 50.')
       end
 
       invalid_properties
@@ -137,7 +137,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if !@limit.nil? && @limit > 100
+      return false if !@limit.nil? && @limit > 50
       sorting_rule_validator = EnumAttributeValidator.new('String', ["BEST_DEAL", "LEAST_DEAL", "DEFAULT"])
       return false unless sorting_rule_validator.valid?(@sorting_rule)
       true

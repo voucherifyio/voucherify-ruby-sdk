@@ -14,6 +14,8 @@
 | **rollback** | [**LoyaltyCardTransactionDetailsRollback**](LoyaltyCardTransactionDetailsRollback.md) |  | [optional] |
 | **custom_event** | [**LoyaltyCardTransactionDetailsCustomEvent**](LoyaltyCardTransactionDetailsCustomEvent.md) |  | [optional] |
 | **event_schema** | [**LoyaltyCardTransactionDetailsEventSchema**](LoyaltyCardTransactionDetailsEventSchema.md) |  | [optional] |
+| **holder_loyalty_tier** | [**LoyaltyCardTransactionDetailsHolderLoyaltyTier**](LoyaltyCardTransactionDetailsHolderLoyaltyTier.md) |  | [optional] |
+| **pending_points** | [**LoyaltyPendingPoints**](LoyaltyPendingPoints.md) |  | [optional] |
 | **reward** | [**LoyaltyCardTransactionDetailsReward**](LoyaltyCardTransactionDetailsReward.md) |  | [optional] |
 | **source_voucher** | [**SimpleVoucher**](SimpleVoucher.md) |  | [optional] |
 | **destination_voucher** | [**SimpleVoucher**](SimpleVoucher.md) |  | [optional] |

@@ -4,6 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique event ID. | [optional] |
-| **type** | **String** | Type of custom event. | [optional] |
+| **id** | **String** | Unique identifier of the event. | [optional] |
+| **type** | **String** | Type of the custom event. | [optional] |
 
