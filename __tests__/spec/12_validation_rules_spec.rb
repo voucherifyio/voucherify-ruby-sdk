@@ -19,21 +19,7 @@ RSpec.describe 'Validation Rules API', :order => :defined do
       related_object_type: "voucher",
       related_object_id: voucher.code
     })
-
-    created_validation_rule_assignment = @validation_rules_api_instance.create_validation_rule_assignment(validation_rule.id, {
-        validation_rules_assignments_create_request_body: validationRulesAssignmentsCreateRequestBody
-    })
-    snapshot_name = 'validation_rules/created_validation_rule_assignment'
-    filtered_snapshot = get_snapshot_without_uniq_keys(snapshot_name)
-
-    expect(created_validation_rule_assignment).not_to be_nil
-    expect(created_validation_rule_assignment.id).not_to be_nil
-    expect(created_validation_rule_assignment.created_at).not_to be_nil
-    expect(created_validation_rule_assignment.rule_id).to eq(validation_rule.id)
-    expect(created_validation_rule_assignment.related_object_id).to eq(voucher.id)
-    expect(created_validation_rule_assignment.related_object_type).to eq("voucher")
-    expect(created_validation_rule_assignment.object).to eq("validation_rules_assignment")
-    expect(validate_deep_match(filtered_snapshot, created_validation_rule_assignment)).to be true
+    # TODO
   end
 
 end

@@ -25,35 +25,32 @@ module VoucherifySdk
     # The order status.
     attr_accessor :status
 
-    # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.
+    # This is the sum of the order items' amounts. It is expressed as an integer in the smallest currency unit (e.g. 100 cents for $1.00).
     attr_accessor :amount
 
-    # A positive integer in the smallest currency unit (e.g. 100 cents for $1.00) representing the total amount of the order. This is the sum of the order items' amounts.
+    # This is the sum of the order items' amounts before any discount or other effect (e.g. add missing units) is applied. It is expressed as an integer in the smallest currency unit (e.g. 100 cents for $1.00).
     attr_accessor :initial_amount
 
-    # Sum of all order-level discounts applied to the order.
+    # Sum of all order-level discounts applied to the order. It is expressed as an integer in the smallest currency unit (e.g. 100 cents for $1.00).
     attr_accessor :discount_amount
 
-    # Sum of all product-specific discounts applied to the order.
+    # Sum of all product-specific discounts applied to the order. It is expressed as an integer in the smallest currency unit (e.g. 100 cents for $1.00).
     attr_accessor :items_discount_amount
 
-    # Sum of all order-level AND all product-specific discounts applied to the order.
+    # Sum of all order-level AND all product-specific discounts applied to the order. It is expressed as an integer in the smallest currency unit (e.g. 100 cents for $1.00).
     attr_accessor :total_discount_amount
 
-    # Order amount after undoing all the discounts through the rollback redemption.
+    # Order amount after undoing all the discounts through the rollback redemption. It is expressed as an integer in the smallest currency unit (e.g. 100 cents for $1.00).
     attr_accessor :total_amount
 
-    # This field shows the order-level discount applied.
+    # This field shows the order-level discount applied. It is expressed as an integer in the smallest currency unit (e.g. 100 cents for $1.00).
     attr_accessor :applied_discount_amount
 
-    # Sum of all product-specific discounts applied in a particular request.   `sum(items, i => i.applied_discount_amount)`
+    # Sum of all product-specific discounts applied in a particular request. It is expressed as an integer in the smallest currency unit (e.g. 100 cents for $1.00).   `sum(items, i => i.applied_discount_amount)`
     attr_accessor :items_applied_discount_amount
 
-    # Sum of all order-level AND all product-specific discounts applied in a particular request.   `total_applied_discount_amount` = `applied_discount_amount` + `items_applied_discount_amount`
+    # Sum of all order-level AND all product-specific discounts applied in a particular request. It is expressed as an integer in the smallest currency unit (e.g. 100 cents for $1.00).   `total_applied_discount_amount` = `applied_discount_amount` + `items_applied_discount_amount`
     attr_accessor :total_applied_discount_amount
-
-    # Array of items applied to the order. It can include up 500 items.
-    attr_accessor :items
 
     # A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format. It can be used to define business validation rules or discount formulas.
     attr_accessor :metadata
@@ -67,7 +64,7 @@ module VoucherifySdk
     # Timestamp representing the date and time when the order was last updated in ISO 8601 format.
     attr_accessor :updated_at
 
-    # Unique customer ID of the customer making the purchase.
+    # Unique customer identifier of the customer making the purchase. The ID is assigned by Voucherify.
     attr_accessor :customer_id
 
     # Unique referrer ID.
@@ -78,6 +75,9 @@ module VoucherifySdk
     attr_accessor :referrer
 
     attr_accessor :redemptions
+
+    # Array of items applied to the order. It can include up to 500 items.
+    attr_accessor :items
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -116,7 +116,6 @@ module VoucherifySdk
         :'applied_discount_amount' => :'applied_discount_amount',
         :'items_applied_discount_amount' => :'items_applied_discount_amount',
         :'total_applied_discount_amount' => :'total_applied_discount_amount',
-        :'items' => :'items',
         :'metadata' => :'metadata',
         :'object' => :'object',
         :'created_at' => :'created_at',
@@ -125,7 +124,8 @@ module VoucherifySdk
         :'referrer_id' => :'referrer_id',
         :'customer' => :'customer',
         :'referrer' => :'referrer',
-        :'redemptions' => :'redemptions'
+        :'redemptions' => :'redemptions',
+        :'items' => :'items'
       }
     end
 
@@ -149,7 +149,6 @@ module VoucherifySdk
         :'applied_discount_amount' => :'Integer',
         :'items_applied_discount_amount' => :'Integer',
         :'total_applied_discount_amount' => :'Integer',
-        :'items' => :'Array<OrderCalculatedItem>',
         :'metadata' => :'Object',
         :'object' => :'String',
         :'created_at' => :'Time',
@@ -158,7 +157,8 @@ module VoucherifySdk
         :'referrer_id' => :'String',
         :'customer' => :'CustomerId',
         :'referrer' => :'ReferrerId',
-        :'redemptions' => :'Hash<String, OrderRedemptionsEntry>'
+        :'redemptions' => :'Hash<String, OrderRedemptionsEntry>',
+        :'items' => :'Array<OrderCalculatedItem>'
       }
     end
 
@@ -177,14 +177,14 @@ module VoucherifySdk
         :'applied_discount_amount',
         :'items_applied_discount_amount',
         :'total_applied_discount_amount',
-        :'items',
         :'metadata',
         :'object',
         :'created_at',
         :'updated_at',
         :'customer_id',
         :'referrer_id',
-        :'redemptions'
+        :'redemptions',
+        :'items'
       ])
     end
 
@@ -244,12 +244,6 @@ module VoucherifySdk
         self.total_applied_discount_amount = attributes[:'total_applied_discount_amount']
       end
 
-      if attributes.key?(:'items')
-        if (value = attributes[:'items']).is_a?(Array)
-          self.items = value
-        end
-      end
-
       if attributes.key?(:'metadata')
         self.metadata = attributes[:'metadata']
       end
@@ -287,6 +281,12 @@ module VoucherifySdk
       if attributes.key?(:'redemptions')
         if (value = attributes[:'redemptions']).is_a?(Hash)
           self.redemptions = value
+        end
+      end
+
+      if attributes.key?(:'items')
+        if (value = attributes[:'items']).is_a?(Array)
+          self.items = value
         end
       end
     end
@@ -327,7 +327,6 @@ module VoucherifySdk
           applied_discount_amount == o.applied_discount_amount &&
           items_applied_discount_amount == o.items_applied_discount_amount &&
           total_applied_discount_amount == o.total_applied_discount_amount &&
-          items == o.items &&
           metadata == o.metadata &&
           object == o.object &&
           created_at == o.created_at &&
@@ -336,7 +335,8 @@ module VoucherifySdk
           referrer_id == o.referrer_id &&
           customer == o.customer &&
           referrer == o.referrer &&
-          redemptions == o.redemptions
+          redemptions == o.redemptions &&
+          items == o.items
     end
 
     # @see the `==` method
@@ -348,7 +348,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, source_id, status, amount, initial_amount, discount_amount, items_discount_amount, total_discount_amount, total_amount, applied_discount_amount, items_applied_discount_amount, total_applied_discount_amount, items, metadata, object, created_at, updated_at, customer_id, referrer_id, customer, referrer, redemptions].hash
+      [id, source_id, status, amount, initial_amount, discount_amount, items_discount_amount, total_discount_amount, total_amount, applied_discount_amount, items_applied_discount_amount, total_applied_discount_amount, metadata, object, created_at, updated_at, customer_id, referrer_id, customer, referrer, redemptions, items].hash
     end
 
     # Builds the object from hash

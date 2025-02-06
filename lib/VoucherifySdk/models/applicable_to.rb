@@ -52,8 +52,11 @@ module VoucherifySdk
     # Maximum discount amount per order. Value is multiplied by 100 to precisely represent 2 decimal places. For example, a $6 maximum discount on the entire order is written as 600. This value is definable for the following discount effects: - `APPLY_TO_ITEMS` (each item subtotal is discounted equally) - `APPLY_TO_ITEMS_BY_QUANTITY` (each unit of matched products has the same discount value)
     attr_accessor :aggregated_amount_limit
 
-    # Determines the order in which the discount is applied to the products or SKUs sent in the `order` object in the request. The counting begins from `0`.
+    # Lists which order lines are (not) covered by the discount. The order in the array is determined by the sequence of applied discounts, while the numbers correspond to the order lines sent in the `order` object in the request. The first order line is assigned `0`, the second order line is assigned `1`, and so on.
     attr_accessor :order_item_indices
+
+    # Lists which units within order lines are covered by the discount. The order line items are listed according to sequence of applied discounts while the `index` corresponds to the order line sent in the `order` object in the request.
+    attr_accessor :order_item_units
 
     # Determines the recurrence of the discount, e.g. `\"repeat\": 3` means that the discount is applied to every third item.
     attr_accessor :repeat
@@ -61,7 +64,7 @@ module VoucherifySdk
     # Determines how many items are skipped before the discount is applied.
     attr_accessor :skip_initially
 
-    # Determines to which kinds of objects the discount is applicable. `\"ITEM\"` includes products and SKUs.
+    # Determines to which kinds of objects the discount is applicable. `ITEM` includes products and SKUs. `UNIT` means particular units within an order line.
     attr_accessor :target
 
     class EnumAttributeValidator
@@ -103,6 +106,7 @@ module VoucherifySdk
         :'amount_limit' => :'amount_limit',
         :'aggregated_amount_limit' => :'aggregated_amount_limit',
         :'order_item_indices' => :'order_item_indices',
+        :'order_item_units' => :'order_item_units',
         :'repeat' => :'repeat',
         :'skip_initially' => :'skip_initially',
         :'target' => :'target'
@@ -131,6 +135,7 @@ module VoucherifySdk
         :'amount_limit' => :'Integer',
         :'aggregated_amount_limit' => :'Integer',
         :'order_item_indices' => :'Array<Integer>',
+        :'order_item_units' => :'Array<ApplicableToOrderItemUnitsItem>',
         :'repeat' => :'Integer',
         :'skip_initially' => :'Integer',
         :'target' => :'String'
@@ -153,6 +158,7 @@ module VoucherifySdk
         :'amount_limit',
         :'aggregated_amount_limit',
         :'order_item_indices',
+        :'order_item_units',
         :'repeat',
         :'skip_initially',
         :'target'
@@ -227,6 +233,12 @@ module VoucherifySdk
         end
       end
 
+      if attributes.key?(:'order_item_units')
+        if (value = attributes[:'order_item_units']).is_a?(Array)
+          self.order_item_units = value
+        end
+      end
+
       if attributes.key?(:'repeat')
         self.repeat = attributes[:'repeat']
       end
@@ -281,6 +293,7 @@ module VoucherifySdk
           amount_limit == o.amount_limit &&
           aggregated_amount_limit == o.aggregated_amount_limit &&
           order_item_indices == o.order_item_indices &&
+          order_item_units == o.order_item_units &&
           repeat == o.repeat &&
           skip_initially == o.skip_initially &&
           target == o.target
@@ -295,7 +308,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [object, id, source_id, product_id, product_source_id, strict, price, price_formula, effect, quantity_limit, aggregated_quantity_limit, amount_limit, aggregated_amount_limit, order_item_indices, repeat, skip_initially, target].hash
+      [object, id, source_id, product_id, product_source_id, strict, price, price_formula, effect, quantity_limit, aggregated_quantity_limit, amount_limit, aggregated_amount_limit, order_item_indices, order_item_units, repeat, skip_initially, target].hash
     end
 
     # Builds the object from hash

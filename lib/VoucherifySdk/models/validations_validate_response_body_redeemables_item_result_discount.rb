@@ -33,6 +33,7 @@ module VoucherifySdk
     # Number of units to be granted a full value discount.
     attr_accessor :unit_off
 
+    # Formula used to calculate the number of units.
     attr_accessor :unit_off_formula
 
     # The product deemed as free, chosen from product inventory (e.g. time, items).

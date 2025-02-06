@@ -15,7 +15,7 @@ require 'time'
 
 module VoucherifySdk
   class RedemptionsGetResponseBodyVoucherLoyaltyCard
-    # Total points incurred over the lifespan of the loyalty card.
+    # Total points incurred over the lifespan of the loyalty card, minus the expired points.
     attr_accessor :points
 
     # Points available for reward redemption.
@@ -27,13 +27,17 @@ module VoucherifySdk
     # The amount of points that are set to expire next.
     attr_accessor :next_expiration_points
 
+    # Determines the number of pending points that will be added to the loyalty card after the predefined time.
+    attr_accessor :pending_points
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'points' => :'points',
         :'balance' => :'balance',
         :'next_expiration_date' => :'next_expiration_date',
-        :'next_expiration_points' => :'next_expiration_points'
+        :'next_expiration_points' => :'next_expiration_points',
+        :'pending_points' => :'pending_points'
       }
     end
 
@@ -48,7 +52,8 @@ module VoucherifySdk
         :'points' => :'Integer',
         :'balance' => :'Integer',
         :'next_expiration_date' => :'Date',
-        :'next_expiration_points' => :'Integer'
+        :'next_expiration_points' => :'Integer',
+        :'pending_points' => :'Integer'
       }
     end
 
@@ -58,7 +63,8 @@ module VoucherifySdk
         :'points',
         :'balance',
         :'next_expiration_date',
-        :'next_expiration_points'
+        :'next_expiration_points',
+        :'pending_points'
       ])
     end
 
@@ -85,6 +91,10 @@ module VoucherifySdk
       if attributes.key?(:'next_expiration_points')
         self.next_expiration_points = attributes[:'next_expiration_points']
       end
+
+      if attributes.key?(:'pending_points')
+        self.pending_points = attributes[:'pending_points']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -110,7 +120,8 @@ module VoucherifySdk
           points == o.points &&
           balance == o.balance &&
           next_expiration_date == o.next_expiration_date &&
-          next_expiration_points == o.next_expiration_points
+          next_expiration_points == o.next_expiration_points &&
+          pending_points == o.pending_points
     end
 
     # @see the `==` method
@@ -122,7 +133,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [points, balance, next_expiration_date, next_expiration_points].hash
+      [points, balance, next_expiration_date, next_expiration_points, pending_points].hash
     end
 
     # Builds the object from hash

@@ -4,5 +4,5 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique redemption rollback ID. | [optional] |
+| **id** | **String** | Unique identifier of the redemption rollback. | [optional] |
 

@@ -62,6 +62,8 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the campaign. A set of key/value pairs that you can attach to a campaign object. It can be useful for storing additional information about the campaign in a structured format.
     attr_accessor :metadata
 
+    attr_accessor :access_settings
+
     # Array containing the ID of the validation rule associated with the promotion tier.
     attr_accessor :validation_rules
 
@@ -111,6 +113,7 @@ module VoucherifySdk
         :'category_id' => :'category_id',
         :'category' => :'category',
         :'metadata' => :'metadata',
+        :'access_settings' => :'access_settings',
         :'validation_rules' => :'validation_rules',
         :'campaign_type' => :'campaign_type',
         :'voucher' => :'voucher'
@@ -141,6 +144,7 @@ module VoucherifySdk
         :'category_id' => :'String',
         :'category' => :'String',
         :'metadata' => :'Object',
+        :'access_settings' => :'AccessSettings',
         :'validation_rules' => :'Array<String>',
         :'campaign_type' => :'String',
         :'voucher' => :'CampaignLoyaltyVoucher'
@@ -242,6 +246,10 @@ module VoucherifySdk
         self.metadata = attributes[:'metadata']
       end
 
+      if attributes.key?(:'access_settings')
+        self.access_settings = attributes[:'access_settings']
+      end
+
       if attributes.key?(:'validation_rules')
         if (value = attributes[:'validation_rules']).is_a?(Array)
           self.validation_rules = value
@@ -304,6 +312,7 @@ module VoucherifySdk
           category_id == o.category_id &&
           category == o.category &&
           metadata == o.metadata &&
+          access_settings == o.access_settings &&
           validation_rules == o.validation_rules &&
           campaign_type == o.campaign_type &&
           voucher == o.voucher
@@ -318,7 +327,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, description, type, join_once, auto_join, use_voucher_metadata_schema, vouchers_count, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, category_id, category, metadata, validation_rules, campaign_type, voucher].hash
+      [name, description, type, join_once, auto_join, use_voucher_metadata_schema, vouchers_count, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, category_id, category, metadata, access_settings, validation_rules, campaign_type, voucher].hash
     end
 
     # Builds the object from hash

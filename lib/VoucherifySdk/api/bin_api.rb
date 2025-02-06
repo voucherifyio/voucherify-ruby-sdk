@@ -80,8 +80,8 @@ module VoucherifySdk
     # Retrieves a list of resources moved to the bin. The following resources can be moved to the bin: - campaigns - vouchers - products - SKUs To use this endpoint, you must have the following permissions: - vouchers.read - campaigns.read - products.read
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
-    # @option opts [ParameterOrderListBin] :order Orders the bin entries according the date and time when they were moved to the bin or according to the bin entry ID. The dash - preceding a sorting option means sorting in a descending order.
-    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the events starting after an event with the given ID.
+    # @option opts [ParameterOrderListBin] :order Orders the bin entries according to the bin entry ID. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the results starting after a result with the given ID.
     # @option opts [ParameterFiltersListBin] :filters Filters for listing bin entries.
     # @return [TrashBinListResponseBody]
     def list_bin_entries(opts = {})
@@ -93,8 +93,8 @@ module VoucherifySdk
     # Retrieves a list of resources moved to the bin. The following resources can be moved to the bin: - campaigns - vouchers - products - SKUs To use this endpoint, you must have the following permissions: - vouchers.read - campaigns.read - products.read
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
-    # @option opts [ParameterOrderListBin] :order Orders the bin entries according the date and time when they were moved to the bin or according to the bin entry ID. The dash - preceding a sorting option means sorting in a descending order.
-    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the events starting after an event with the given ID.
+    # @option opts [ParameterOrderListBin] :order Orders the bin entries according to the bin entry ID. The dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the results starting after a result with the given ID.
     # @option opts [ParameterFiltersListBin] :filters Filters for listing bin entries.
     # @return [Array<(TrashBinListResponseBody, Integer, Hash)>] TrashBinListResponseBody data, response status code and response headers
     private def list_bin_entries_with_http_info(opts = {})

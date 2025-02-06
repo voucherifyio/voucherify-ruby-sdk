@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Redeemable loyalty card object response
   class RedeemableLoyaltyCard
-    # Total points incurred over the lifespan of the loyalty card.
+    # Total points incurred over the lifespan of the loyalty card, minus the expired points.
     attr_accessor :points
 
     # Points available for reward redemption.

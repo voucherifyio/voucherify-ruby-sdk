@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Contains information about the earning rule.
   class VoucherTransactionDetailsEarningRule
-    # Unique earning rule ID.
+    # Unique identifier of an earning rule, assigned by Voucherify.
     attr_accessor :id
 
     attr_accessor :source

@@ -4,11 +4,13 @@ All URIs are relative to *https://api.voucherify.io*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**activate_member_pending_points**](LoyaltiesApi.md#activate_member_pending_points) | **POST** /v1/loyalties/members/{memberId}/pending-points/{pendingPointsId}/activate | Activate Member Pending Points |
 | [**add_member**](LoyaltiesApi.md#add_member) | **POST** /v1/loyalties/{campaignId}/members | Add Member |
+| [**cancel_member_pending_points**](LoyaltiesApi.md#cancel_member_pending_points) | **POST** /v1/loyalties/members/{memberId}/pending-points/{pendingPointsId}/cancel | Cancel Member Pending Points |
 | [**create_earning_rule**](LoyaltiesApi.md#create_earning_rule) | **POST** /v1/loyalties/{campaignId}/earning-rules | Create Earning Rule |
 | [**create_in_bulk_loyalty_tiers**](LoyaltiesApi.md#create_in_bulk_loyalty_tiers) | **POST** /v1/loyalties/{campaignId}/tiers | Create loyalty tiers |
 | [**create_loyalty_program**](LoyaltiesApi.md#create_loyalty_program) | **POST** /v1/loyalties | Create Loyalty Campaign |
-| [**create_points_expiration_export**](LoyaltiesApi.md#create_points_expiration_export) | **POST** /v1/loyalties/{campaignId}/points-expiration/export | Create Points Expiration Export |
+| [**create_points_expiration_export**](LoyaltiesApi.md#create_points_expiration_export) | **POST** /v1/loyalties/{campaignId}/points-expiration/export | Export Loyalty Campaign Point Expiration |
 | [**create_reward_assignment1**](LoyaltiesApi.md#create_reward_assignment1) | **POST** /v1/loyalties/{campaignId}/rewards | Create Reward Assignment |
 | [**delete_earning_rule**](LoyaltiesApi.md#delete_earning_rule) | **DELETE** /v1/loyalties/{campaignId}/earning-rules/{earningRuleId} | Delete Earning Rule |
 | [**delete_loyalty_program**](LoyaltiesApi.md#delete_loyalty_program) | **DELETE** /v1/loyalties/{campaignId} | Delete Loyalty Campaign |
@@ -25,6 +27,7 @@ All URIs are relative to *https://api.voucherify.io*
 | [**get_reward_assignment1**](LoyaltiesApi.md#get_reward_assignment1) | **GET** /v1/loyalties/{campaignId}/reward-assignments/{assignmentId} | Get Reward Assignment |
 | [**get_reward_assignment2**](LoyaltiesApi.md#get_reward_assignment2) | **GET** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Get Reward Assignment |
 | [**get_reward_details**](LoyaltiesApi.md#get_reward_details) | **GET** /v1/loyalties/{campaignId}/reward-assignments/{assignmentId}/reward | Get Reward Details |
+| [**list_campaign_pending_points**](LoyaltiesApi.md#list_campaign_pending_points) | **GET** /v1/loyalties/{campaignId}/pending-points | List Campaign Pending Points |
 | [**list_earning_rules**](LoyaltiesApi.md#list_earning_rules) | **GET** /v1/loyalties/{campaignId}/earning-rules | List Earning Rules |
 | [**list_loyalty_card_transactions**](LoyaltiesApi.md#list_loyalty_card_transactions) | **GET** /v1/loyalties/members/{memberId}/transactions | List Loyalty Card Transactions |
 | [**list_loyalty_card_transactions1**](LoyaltiesApi.md#list_loyalty_card_transactions1) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/transactions | List Loyalty Card Transactions |
@@ -35,9 +38,11 @@ All URIs are relative to *https://api.voucherify.io*
 | [**list_member_activity**](LoyaltiesApi.md#list_member_activity) | **GET** /v1/loyalties/members/{memberId}/activity | List Member Activity |
 | [**list_member_activity1**](LoyaltiesApi.md#list_member_activity1) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/activity | List Member Activity |
 | [**list_member_loyalty_tier**](LoyaltiesApi.md#list_member_loyalty_tier) | **GET** /v1/loyalties/members/{memberId}/tiers | List Member&#39;s Loyalty Tiers |
+| [**list_member_pending_points**](LoyaltiesApi.md#list_member_pending_points) | **GET** /v1/loyalties/members/{memberId}/pending-points | List Member Pending Points |
+| [**list_member_pending_points1**](LoyaltiesApi.md#list_member_pending_points1) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/pending-points | List Member Pending Points |
 | [**list_member_rewards**](LoyaltiesApi.md#list_member_rewards) | **GET** /v1/loyalties/members/{memberId}/rewards | List Member Rewards |
 | [**list_members**](LoyaltiesApi.md#list_members) | **GET** /v1/loyalties/{campaignId}/members | List Members |
-| [**list_points_expiration**](LoyaltiesApi.md#list_points_expiration) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/points-expiration | Get Points Expiration |
+| [**list_points_expiration**](LoyaltiesApi.md#list_points_expiration) | **GET** /v1/loyalties/{campaignId}/members/{memberId}/points-expiration | List Loyalty Card Point Expiration |
 | [**list_reward_assignments1**](LoyaltiesApi.md#list_reward_assignments1) | **GET** /v1/loyalties/{campaignId}/reward-assignments | List Reward Assignments |
 | [**list_reward_assignments2**](LoyaltiesApi.md#list_reward_assignments2) | **GET** /v1/loyalties/{campaignId}/rewards | List Reward Assignments |
 | [**redeem_reward**](LoyaltiesApi.md#redeem_reward) | **POST** /v1/loyalties/members/{memberId}/redemption | Redeem Reward |
@@ -48,6 +53,66 @@ All URIs are relative to *https://api.voucherify.io*
 | [**update_loyalty_card_balance1**](LoyaltiesApi.md#update_loyalty_card_balance1) | **POST** /v1/loyalties/{campaignId}/members/{memberId}/balance | Add or Remove Loyalty Card Balance |
 | [**update_loyalty_program**](LoyaltiesApi.md#update_loyalty_program) | **PUT** /v1/loyalties/{campaignId} | Update Loyalty Campaign |
 | [**update_reward_assignment1**](LoyaltiesApi.md#update_reward_assignment1) | **PUT** /v1/loyalties/{campaignId}/rewards/{assignmentId} | Update Reward Assignment |
+
+
+## activate_member_pending_points
+
+> <LoyaltiesMembersPendingPointsActivateResponseBody> activate_member_pending_points(member_id, pending_points_id)
+
+Activate Member Pending Points
+
+>🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Activate manually the pending points and add them to the loyalty card. The pending points are determined by the pending point ID. Once activated, the pending point entry with that ID is not listed by the endpoints: List member (with campaign ID, without campaign ID), List campaign pending points. This **POST** method does not require a request body.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+member_id = 'member_id_example' # String | Unique loyalty card code assigned to a particular customer.
+pending_points_id = 'pending_points_id_example' # String | Unique pending point identifier, assigned by Voucherify.
+
+begin
+  # Activate Member Pending Points
+  result = api_instance.activate_member_pending_points(member_id, pending_points_id)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->activate_member_pending_points: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **member_id** | **String** | Unique loyalty card code assigned to a particular customer. |  |
+| **pending_points_id** | **String** | Unique pending point identifier, assigned by Voucherify. |  |
+
+### Return type
+
+[**LoyaltiesMembersPendingPointsActivateResponseBody**](LoyaltiesMembersPendingPointsActivateResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 
 ## add_member
@@ -110,6 +175,65 @@ end
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
+
+## cancel_member_pending_points
+
+> cancel_member_pending_points(member_id, pending_points_id)
+
+Cancel Member Pending Points
+
+>🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Cancel manually the pending points for the loyalty card. The pending points are determined by the pending point ID. Once canceled, the pending point entry with that ID is not listed by the endpoints: List member (with campaign ID, without campaign ID), List campaign pending points. This **POST** method does not require a request body and it returns an empty, 204, response.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+member_id = 'member_id_example' # String | Unique loyalty card code assigned to a particular customer.
+pending_points_id = 'pending_points_id_example' # String | Unique pending point identifier, assigned by Voucherify.
+
+begin
+  # Cancel Member Pending Points
+  api_instance.cancel_member_pending_points(member_id, pending_points_id)
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->cancel_member_pending_points: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **member_id** | **String** | Unique loyalty card code assigned to a particular customer. |  |
+| **pending_points_id** | **String** | Unique pending point identifier, assigned by Voucherify. |  |
+
+### Return type
+
+nil (empty response body)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
 ## create_earning_rule
@@ -300,7 +424,7 @@ end
 
 > <LoyaltiesPointsExpirationExportCreateResponseBody> create_points_expiration_export(campaign_id, opts)
 
-Create Points Expiration Export
+Export Loyalty Campaign Point Expiration
 
 Schedule the generation of a points expiration CSV file for a particular campaign.
 
@@ -329,7 +453,7 @@ opts = {
 }
 
 begin
-  # Create Points Expiration Export
+  # Export Loyalty Campaign Point Expiration
   result = api_instance.create_points_expiration_export(campaign_id, opts)
   p result
 rescue VoucherifySdk::ApiError => e
@@ -628,7 +752,7 @@ end
 
 api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique campaign ID or name.
-earning_rule_id = 'earning_rule_id_example' # String | Unique earning rule ID.
+earning_rule_id = 'earning_rule_id_example' # String | Unique identifier of an earning rule, assigned by Voucherify.
 
 begin
   # Disable Earning Rule
@@ -644,7 +768,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Unique campaign ID or name. |  |
-| **earning_rule_id** | **String** | Unique earning rule ID. |  |
+| **earning_rule_id** | **String** | Unique identifier of an earning rule, assigned by Voucherify. |  |
 
 ### Return type
 
@@ -688,7 +812,7 @@ end
 
 api_instance = VoucherifySdk::LoyaltiesApi.new
 campaign_id = 'campaign_id_example' # String | Unique campaign ID or name.
-earning_rule_id = 'earning_rule_id_example' # String | Unique earning rule ID.
+earning_rule_id = 'earning_rule_id_example' # String | Unique identifier of an earning rule, assigned by Voucherify.
 
 begin
   # Enable Earning Rule
@@ -704,7 +828,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **campaign_id** | **String** | Unique campaign ID or name. |  |
-| **earning_rule_id** | **String** | Unique earning rule ID. |  |
+| **earning_rule_id** | **String** | Unique identifier of an earning rule, assigned by Voucherify. |  |
 
 ### Return type
 
@@ -1311,6 +1435,72 @@ end
 ### Return type
 
 [**LoyaltiesRewardAssignmentsRewardGetResponseBody**](LoyaltiesRewardAssignmentsRewardGetResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_campaign_pending_points
+
+> <LoyaltiesPendingPointsListResponseBody> list_campaign_pending_points(campaign_id, opts)
+
+List Campaign Pending Points
+
+>🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Lists all pending points that are currently assigned to all loyalty cards in a campaign. Once the points are added to the card, the entry is no longer returned.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | Unique campaign ID.
+opts = {
+  limit: 56, # Integer | Limit the number of the pending point entries that the API returns in the response.
+  order: VoucherifySdk::ParameterOrderListPendingPoints::ID, # ParameterOrderListPendingPoints | Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order.
+  starting_after_id: 'starting_after_id_example' # String | A cursor for pagination. It retrieves the results starting after a result with the given ID.
+}
+
+begin
+  # List Campaign Pending Points
+  result = api_instance.list_campaign_pending_points(campaign_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_campaign_pending_points: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Unique campaign ID. |  |
+| **limit** | **Integer** | Limit the number of the pending point entries that the API returns in the response. | [optional] |
+| **order** | [**ParameterOrderListPendingPoints**](.md) | Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the results starting after a result with the given ID. | [optional] |
+
+### Return type
+
+[**LoyaltiesPendingPointsListResponseBody**](LoyaltiesPendingPointsListResponseBody.md)
 
 ### Authorization
 
@@ -1968,6 +2158,140 @@ end
 - **Accept**: application/json
 
 
+## list_member_pending_points
+
+> <LoyaltiesMembersPendingPointsListResponseBody> list_member_pending_points(member_id, opts)
+
+List Member Pending Points
+
+>🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to list member pending points without having to provide the campaignId as a path parameter. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+member_id = 'member_id_example' # String | Unique loyalty card code assigned to a particular customer.
+opts = {
+  limit: 56, # Integer | Limit the number of the pending point entries that the API returns in the response.
+  order: VoucherifySdk::ParameterOrderListPendingPoints::ID, # ParameterOrderListPendingPoints | Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order.
+  starting_after_id: 'starting_after_id_example' # String | A cursor for pagination. It retrieves the results starting after a result with the given ID.
+}
+
+begin
+  # List Member Pending Points
+  result = api_instance.list_member_pending_points(member_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_member_pending_points: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **member_id** | **String** | Unique loyalty card code assigned to a particular customer. |  |
+| **limit** | **Integer** | Limit the number of the pending point entries that the API returns in the response. | [optional] |
+| **order** | [**ParameterOrderListPendingPoints**](.md) | Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the results starting after a result with the given ID. | [optional] |
+
+### Return type
+
+[**LoyaltiesMembersPendingPointsListResponseBody**](LoyaltiesMembersPendingPointsListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## list_member_pending_points1
+
+> <LoyaltiesMembersPendingPointsListResponseBody> list_member_pending_points1(campaign_id, member_id, opts)
+
+List Member Pending Points
+
+>🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned.
+
+### Examples
+
+```ruby
+require 'time'
+require 'VoucherifySdk'
+# setup authorization
+VoucherifySdk.configure do |config|
+  # Configure API key authorization: X-App-Id
+  config.api_key['X-App-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Id'] = 'Bearer'
+
+  # Configure API key authorization: X-App-Token
+  config.api_key['X-App-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['X-App-Token'] = 'Bearer'
+end
+
+api_instance = VoucherifySdk::LoyaltiesApi.new
+campaign_id = 'campaign_id_example' # String | Unique campaign ID.
+member_id = 'member_id_example' # String | Unique loyalty card code assigned to a particular customer.
+opts = {
+  limit: 56, # Integer | Limit the number of the pending point entries that the API returns in the response.
+  order: VoucherifySdk::ParameterOrderListPendingPoints::ID, # ParameterOrderListPendingPoints | Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order.
+  starting_after_id: 'starting_after_id_example' # String | A cursor for pagination. It retrieves the results starting after a result with the given ID.
+}
+
+begin
+  # List Member Pending Points
+  result = api_instance.list_member_pending_points1(campaign_id, member_id, opts)
+  p result
+rescue VoucherifySdk::ApiError => e
+  puts "Error when calling LoyaltiesApi->list_member_pending_points1: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **campaign_id** | **String** | Unique campaign ID. |  |
+| **member_id** | **String** | Unique loyalty card code assigned to a particular customer. |  |
+| **limit** | **Integer** | Limit the number of the pending point entries that the API returns in the response. | [optional] |
+| **order** | [**ParameterOrderListPendingPoints**](.md) | Orders the pending point entries according the pending point entry ID. The dash - preceding a sorting option means sorting in a descending order. | [optional] |
+| **starting_after_id** | **String** | A cursor for pagination. It retrieves the results starting after a result with the given ID. | [optional] |
+
+### Return type
+
+[**LoyaltiesMembersPendingPointsListResponseBody**](LoyaltiesMembersPendingPointsListResponseBody.md)
+
+### Authorization
+
+[X-App-Id](../README.md#X-App-Id), [X-App-Token](../README.md#X-App-Token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## list_member_rewards
 
 > <LoyaltiesMembersRewardsListResponseBody> list_member_rewards(member_id, opts)
@@ -2110,7 +2434,7 @@ end
 
 > <LoyaltiesMembersPointsExpirationListResponseBody> list_points_expiration(campaign_id, member_id, opts)
 
-Get Points Expiration
+List Loyalty Card Point Expiration
 
 Retrieve loyalty point expiration buckets for a given loyalty card. Expired point buckets are not returned in this endpoint. You can use the Exports API to retrieve a list of both ACTIVE and EXPIRED point buckets.
 
@@ -2141,7 +2465,7 @@ opts = {
 }
 
 begin
-  # Get Points Expiration
+  # List Loyalty Card Point Expiration
   result = api_instance.list_points_expiration(campaign_id, member_id, opts)
   p result
 rescue VoucherifySdk::ApiError => e

@@ -101,6 +101,8 @@ module VoucherifySdk
 
     attr_accessor :loyalty_tiers_expiration
 
+    attr_accessor :access_settings_assignments
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -155,7 +157,8 @@ module VoucherifySdk
         :'categories' => :'categories',
         :'object' => :'object',
         :'referral_program' => :'referral_program',
-        :'loyalty_tiers_expiration' => :'loyalty_tiers_expiration'
+        :'loyalty_tiers_expiration' => :'loyalty_tiers_expiration',
+        :'access_settings_assignments' => :'access_settings_assignments'
       }
     end
 
@@ -196,7 +199,8 @@ module VoucherifySdk
         :'categories' => :'Array<Category>',
         :'object' => :'String',
         :'referral_program' => :'ReferralProgram',
-        :'loyalty_tiers_expiration' => :'LoyaltyTiersExpirationAll'
+        :'loyalty_tiers_expiration' => :'LoyaltyTiersExpirationAll',
+        :'access_settings_assignments' => :'AccessSettingsCampaignAssignmentsList'
       }
     end
 
@@ -363,6 +367,10 @@ module VoucherifySdk
       if attributes.key?(:'loyalty_tiers_expiration')
         self.loyalty_tiers_expiration = attributes[:'loyalty_tiers_expiration']
       end
+
+      if attributes.key?(:'access_settings_assignments')
+        self.access_settings_assignments = attributes[:'access_settings_assignments']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -422,7 +430,8 @@ module VoucherifySdk
           categories == o.categories &&
           object == o.object &&
           referral_program == o.referral_program &&
-          loyalty_tiers_expiration == o.loyalty_tiers_expiration
+          loyalty_tiers_expiration == o.loyalty_tiers_expiration &&
+          access_settings_assignments == o.access_settings_assignments
     end
 
     # @see the `==` method
@@ -434,7 +443,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, description, campaign_type, type, voucher, auto_join, join_once, use_voucher_metadata_schema, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, vouchers_count, start_date, expiration_date, active, metadata, created_at, updated_at, category, creation_status, vouchers_generation_status, readonly, protected, category_id, categories, object, referral_program, loyalty_tiers_expiration].hash
+      [id, name, description, campaign_type, type, voucher, auto_join, join_once, use_voucher_metadata_schema, validity_timeframe, validity_day_of_week, validity_hours, activity_duration_after_publishing, vouchers_count, start_date, expiration_date, active, metadata, created_at, updated_at, category, creation_status, vouchers_generation_status, readonly, protected, category_id, categories, object, referral_program, loyalty_tiers_expiration, access_settings_assignments].hash
     end
 
     # Builds the object from hash

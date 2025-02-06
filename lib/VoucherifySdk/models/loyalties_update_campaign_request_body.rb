@@ -44,6 +44,8 @@ module VoucherifySdk
     # Unique category ID that this campaign belongs to. Either pass this parameter OR the `category`.
     attr_accessor :category_id
 
+    attr_accessor :access_settings
+
     # Defines the amount of time the vouchers will be active after publishing. The value is shown in the ISO 8601 format. For example, a voucher with the value of P24D will be valid for a duration of 24 days.
     attr_accessor :activity_duration_after_publishing
 
@@ -95,6 +97,7 @@ module VoucherifySdk
         :'metadata' => :'metadata',
         :'unset_metadata_fields' => :'unset_metadata_fields',
         :'category_id' => :'category_id',
+        :'access_settings' => :'access_settings',
         :'activity_duration_after_publishing' => :'activity_duration_after_publishing',
         :'join_once' => :'join_once',
         :'auto_join' => :'auto_join',
@@ -122,6 +125,7 @@ module VoucherifySdk
         :'metadata' => :'Object',
         :'unset_metadata_fields' => :'Array<String>',
         :'category_id' => :'String',
+        :'access_settings' => :'AccessSettings',
         :'activity_duration_after_publishing' => :'String',
         :'join_once' => :'Boolean',
         :'auto_join' => :'Boolean',
@@ -201,6 +205,10 @@ module VoucherifySdk
         self.category_id = attributes[:'category_id']
       end
 
+      if attributes.key?(:'access_settings')
+        self.access_settings = attributes[:'access_settings']
+      end
+
       if attributes.key?(:'activity_duration_after_publishing')
         self.activity_duration_after_publishing = attributes[:'activity_duration_after_publishing']
       end
@@ -258,6 +266,7 @@ module VoucherifySdk
           metadata == o.metadata &&
           unset_metadata_fields == o.unset_metadata_fields &&
           category_id == o.category_id &&
+          access_settings == o.access_settings &&
           activity_duration_after_publishing == o.activity_duration_after_publishing &&
           join_once == o.join_once &&
           auto_join == o.auto_join &&
@@ -275,7 +284,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, description, category, metadata, unset_metadata_fields, category_id, activity_duration_after_publishing, join_once, auto_join, type, loyalty_tiers_expiration, options].hash
+      [start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, description, category, metadata, unset_metadata_fields, category_id, access_settings, activity_duration_after_publishing, join_once, auto_join, type, loyalty_tiers_expiration, options].hash
     end
 
     # Builds the object from hash
