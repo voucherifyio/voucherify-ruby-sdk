@@ -15,16 +15,16 @@ require 'time'
 
 module VoucherifySdk
   class CustomerSummaryOrders
-    # The total amount spent by the customer. Value is multiplied by 100 to precisely represent 2 decimal places. For example `10000 cents` for `$100.00`.
+    # The total amount spent by the customer. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :total_amount
 
     # Total number of orders made by the customer.
     attr_accessor :total_count
 
-    # Average amount spent on orders. `total_amount` &divide; `total_count`. Value is multiplied by 100 to precisely represent 2 decimal places. For example `10000 cents` for `$100.00`.
+    # Average amount spent on orders. `total_amount` &divide; `total_count`. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :average_amount
 
-    # Amount spent on last order. Value is multiplied by 100 to precisely represent 2 decimal places. For example `10000 cents` for `$100.00`.
+    # Amount spent on last order. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :last_order_amount
 
     # Timestamp representing the date and time of the customer's last order in ISO 8601 format.

@@ -21,11 +21,37 @@ module VoucherifySdk
     # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :date
 
+    # Defines the rollback mode for the order. `WITH_ORDER` is a default setting. The redemption is rolled back together with the data about the order, including related discount values. `WITHOUT_ORDER` allows rolling the redemption back without affecting order data, including the applied discount values. This is returned only in GET `v1/redemptions/` and GET `v1/redemptions/{redemptionId}` endpoints.
+    attr_accessor :rollback_order_mode
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'date' => :'date'
+        :'date' => :'date',
+        :'rollback_order_mode' => :'rollback_order_mode'
       }
     end
 
@@ -38,7 +64,8 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'id' => :'String',
-        :'date' => :'Time'
+        :'date' => :'Time',
+        :'rollback_order_mode' => :'String'
       }
     end
 
@@ -63,6 +90,10 @@ module VoucherifySdk
       if attributes.key?(:'date')
         self.date = attributes[:'date']
       end
+
+      if attributes.key?(:'rollback_order_mode')
+        self.rollback_order_mode = attributes[:'rollback_order_mode']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -77,6 +108,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      rollback_order_mode_validator = EnumAttributeValidator.new('String', ["WITH_ORDER", "WITHOUT_ORDER"])
+      return false unless rollback_order_mode_validator.valid?(@rollback_order_mode)
       true
     end
 
@@ -86,7 +119,8 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          date == o.date
+          date == o.date &&
+          rollback_order_mode == o.rollback_order_mode
     end
 
     # @see the `==` method
@@ -98,7 +132,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, date].hash
+      [id, date, rollback_order_mode].hash
     end
 
     # Builds the object from hash

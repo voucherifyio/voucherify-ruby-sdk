@@ -19,7 +19,7 @@ module VoucherifySdk
     # Campaign unique ID.
     attr_accessor :id
 
-    # Points available for reward redemption.
+    # Points available for reward redemption. This is calculated as follows: `balance` = `points` - `expired_points` - `subtracted_points` - `redemption.redeemed_points`.
     attr_accessor :balance
 
     # Defines the type of the campaign.

@@ -16,6 +16,9 @@ require 'time'
 module VoucherifySdk
   # Response body schema for **POST** `v1/validations`.
   class ValidationsValidateResponseBody
+    # Unique identifier of the validation, assigned by Voucherify.
+    attr_accessor :id
+
     # The result of the validation. It takes all of the redeemables into account and returns a `false` if at least one redeemable is inapplicable. Returns `true` if all redeemables are applicable.
     attr_accessor :valid
 
@@ -39,6 +42,7 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
         :'valid' => :'valid',
         :'redeemables' => :'redeemables',
         :'skipped_redeemables' => :'skipped_redeemables',
@@ -58,6 +62,7 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
         :'valid' => :'Boolean',
         :'redeemables' => :'Array<ValidationsValidateResponseBodyRedeemablesItem>',
         :'skipped_redeemables' => :'Array<ValidationsRedeemableSkipped>',
@@ -72,6 +77,7 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'id',
         :'valid',
         :'redeemables',
         :'skipped_redeemables',
@@ -87,6 +93,10 @@ module VoucherifySdk
       attributes = attributes.each_with_object({}) { |(k, v), h|
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
 
       if attributes.key?(:'valid')
         self.valid = attributes[:'valid']
@@ -154,6 +164,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
           valid == o.valid &&
           redeemables == o.redeemables &&
           skipped_redeemables == o.skipped_redeemables &&
@@ -173,7 +184,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [valid, redeemables, skipped_redeemables, inapplicable_redeemables, order, tracking_id, session, stacking_rules].hash
+      [id, valid, redeemables, skipped_redeemables, inapplicable_redeemables, order, tracking_id, session, stacking_rules].hash
     end
 
     # Builds the object from hash

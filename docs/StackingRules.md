@@ -15,4 +15,5 @@
 | **redeemables_sorting_rule** | **String** | Defines redeemables sorting rule. | [optional][default to &#39;REQUESTED_ORDER&#39;] |
 | **redeemables_products_application_mode** | **String** | Defines redeemables products application mode. | [optional] |
 | **redeemables_no_effect_rule** | **String** | Defines redeemables no effect rule. | [optional] |
+| **redeemables_rollback_order_mode** | **String** | Defines the rollback mode for the order. &#x60;WITH_ORDER&#x60; is a default setting. The redemption is rolled back together with the data about the order, including related discount values. &#x60;WITHOUT_ORDER&#x60; allows rolling the redemption back without affecting order data. | [optional] |
 

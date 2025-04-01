@@ -15,7 +15,6 @@
 | **reason** | **String** | System generated cause for the redemption being invalid in the context of the provided parameters. | [optional] |
 | **result** | **String** | Redemption result. | [optional] |
 | **status** | **String** | Redemption status. | [optional] |
-| **related_redemptions** | [**RedemptionsRollbackCreateResponseBodyRelatedRedemptions**](RedemptionsRollbackCreateResponseBodyRelatedRedemptions.md) |  | [optional] |
 | **failure_code** | **String** | If the result is &#x60;FAILURE&#x60;, this parameter will provide a generic reason as to why the redemption failed. | [optional] |
 | **failure_message** | **String** | If the result is &#x60;FAILURE&#x60;, this parameter will provide a more expanded reason as to why the redemption failed. | [optional] |
 | **order** | [**OrderCalculated**](OrderCalculated.md) |  | [optional] |
@@ -28,4 +27,5 @@
 | **reward** | [**RedemptionRewardResult**](RedemptionRewardResult.md) |  | [optional] |
 | **gift** | [**RedemptionsRollbackCreateResponseBodyGift**](RedemptionsRollbackCreateResponseBodyGift.md) |  | [optional] |
 | **loyalty_card** | [**RedemptionsRollbackCreateResponseBodyLoyaltyCard**](RedemptionsRollbackCreateResponseBodyLoyaltyCard.md) |  | [optional] |
+| **related_redemptions** | [**RedemptionsRollbackCreateResponseBodyRelatedRedemptions**](RedemptionsRollbackCreateResponseBodyRelatedRedemptions.md) |  | [optional] |
 

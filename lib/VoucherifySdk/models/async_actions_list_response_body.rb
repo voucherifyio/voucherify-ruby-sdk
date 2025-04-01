@@ -24,6 +24,9 @@ module VoucherifySdk
 
     attr_accessor :async_actions
 
+    # As query results are always limited by parameters, the `has_more` flag indicates if there are more records available. This lets you know if you can run another request to get more records returned in the results.
+    attr_accessor :has_more
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -51,7 +54,8 @@ module VoucherifySdk
       {
         :'object' => :'object',
         :'data_ref' => :'data_ref',
-        :'async_actions' => :'async_actions'
+        :'async_actions' => :'async_actions',
+        :'has_more' => :'has_more'
       }
     end
 
@@ -65,7 +69,8 @@ module VoucherifySdk
       {
         :'object' => :'String',
         :'data_ref' => :'String',
-        :'async_actions' => :'Array<AsyncActionBase>'
+        :'async_actions' => :'Array<AsyncActionBase>',
+        :'has_more' => :'Boolean'
       }
     end
 
@@ -74,7 +79,8 @@ module VoucherifySdk
       Set.new([
         :'object',
         :'data_ref',
-        :'async_actions'
+        :'async_actions',
+        :'has_more'
       ])
     end
 
@@ -102,6 +108,10 @@ module VoucherifySdk
         if (value = attributes[:'async_actions']).is_a?(Array)
           self.async_actions = value
         end
+      end
+
+      if attributes.key?(:'has_more')
+        self.has_more = attributes[:'has_more']
       end
     end
 
@@ -131,7 +141,8 @@ module VoucherifySdk
       self.class == o.class &&
           object == o.object &&
           data_ref == o.data_ref &&
-          async_actions == o.async_actions
+          async_actions == o.async_actions &&
+          has_more == o.has_more
     end
 
     # @see the `==` method
@@ -143,7 +154,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [object, data_ref, async_actions].hash
+      [object, data_ref, async_actions, has_more].hash
     end
 
     # Builds the object from hash

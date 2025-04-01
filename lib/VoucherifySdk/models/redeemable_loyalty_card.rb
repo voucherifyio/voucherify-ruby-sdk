@@ -16,10 +16,10 @@ require 'time'
 module VoucherifySdk
   # Redeemable loyalty card object response
   class RedeemableLoyaltyCard
-    # Total points incurred over the lifespan of the loyalty card, minus the expired points.
+    # Total number of points added to the loyalty card over its lifespan.
     attr_accessor :points
 
-    # Points available for reward redemption.
+    # Points available for reward redemption. This is calculated as follows: `balance` = `points` - `expired_points` - `subtracted_points` - `redemption.redeemed_points`.
     attr_accessor :balance
 
     # The cash equivalent of the points defined in the points_ratio property.

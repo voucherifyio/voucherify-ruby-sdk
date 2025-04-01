@@ -14,39 +14,41 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Object representing loyalty card parameters. Child attributes are present only if `type` is `LOYALTY_CARD`. Defaults to `null`.
-  class LoyaltiesMembersCreateResponseBodyLoyaltyCard
-    # Total number of points added to the loyalty card over its lifespan.
-    attr_accessor :points
+  # Defines the configuration for pending points. Pending points can be used only with the `order.paid` event.
+  class LoyaltiesEarningRulesCreateRequestBodyItemPendingPoints
+    # Defines the type of the period during which the points are in the pending state. Currently, only `DAY` value is accepted.
+    attr_accessor :period_type
 
-    # Points available for reward redemption. This is calculated as follows: `balance` = `points` - `expired_points` - `subtracted_points` - `redemption.redeemed_points`.
-    attr_accessor :balance
+    # Defines for how long the points are in the pending state. The minimum value is 1, maximum is 90.
+    attr_accessor :period_value
 
-    # The next closest date when the next set of points are due to expire.
-    attr_accessor :next_expiration_date
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # The amount of points that are set to expire next.
-    attr_accessor :next_expiration_points
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # Shows the number of pending points that will be added to the loyalty card when they are activated automatically or manually.
-    attr_accessor :pending_points
-
-    # Shows the total number of expired points over the lifetime of the loyalty card.
-    attr_accessor :expired_points
-
-    # Shows the total number of subtracted points over the lifetime of the loyalty card.
-    attr_accessor :subtracted_points
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'points' => :'points',
-        :'balance' => :'balance',
-        :'next_expiration_date' => :'next_expiration_date',
-        :'next_expiration_points' => :'next_expiration_points',
-        :'pending_points' => :'pending_points',
-        :'expired_points' => :'expired_points',
-        :'subtracted_points' => :'subtracted_points'
+        :'period_type' => :'period_type',
+        :'period_value' => :'period_value'
       }
     end
 
@@ -58,26 +60,16 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'points' => :'Integer',
-        :'balance' => :'Integer',
-        :'next_expiration_date' => :'Date',
-        :'next_expiration_points' => :'Integer',
-        :'pending_points' => :'Integer',
-        :'expired_points' => :'Integer',
-        :'subtracted_points' => :'Integer'
+        :'period_type' => :'String',
+        :'period_value' => :'Integer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'points',
-        :'balance',
-        :'next_expiration_date',
-        :'next_expiration_points',
-        :'pending_points',
-        :'expired_points',
-        :'subtracted_points'
+        :'period_type',
+        :'period_value'
       ])
     end
 
@@ -89,32 +81,14 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'points')
-        self.points = attributes[:'points']
+      if attributes.key?(:'period_type')
+        self.period_type = attributes[:'period_type']
+      else
+        self.period_type = 'DAY'
       end
 
-      if attributes.key?(:'balance')
-        self.balance = attributes[:'balance']
-      end
-
-      if attributes.key?(:'next_expiration_date')
-        self.next_expiration_date = attributes[:'next_expiration_date']
-      end
-
-      if attributes.key?(:'next_expiration_points')
-        self.next_expiration_points = attributes[:'next_expiration_points']
-      end
-
-      if attributes.key?(:'pending_points')
-        self.pending_points = attributes[:'pending_points']
-      end
-
-      if attributes.key?(:'expired_points')
-        self.expired_points = attributes[:'expired_points']
-      end
-
-      if attributes.key?(:'subtracted_points')
-        self.subtracted_points = attributes[:'subtracted_points']
+      if attributes.key?(:'period_value')
+        self.period_value = attributes[:'period_value']
       end
     end
 
@@ -123,6 +97,14 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@period_value.nil? && @period_value > 90
+        invalid_properties.push('invalid value for "period_value", must be smaller than or equal to 90.')
+      end
+
+      if !@period_value.nil? && @period_value < 1
+        invalid_properties.push('invalid value for "period_value", must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -130,6 +112,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      period_type_validator = EnumAttributeValidator.new('String', ["DAY"])
+      return false unless period_type_validator.valid?(@period_type)
+      return false if !@period_value.nil? && @period_value > 90
+      return false if !@period_value.nil? && @period_value < 1
       true
     end
 
@@ -138,13 +124,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          points == o.points &&
-          balance == o.balance &&
-          next_expiration_date == o.next_expiration_date &&
-          next_expiration_points == o.next_expiration_points &&
-          pending_points == o.pending_points &&
-          expired_points == o.expired_points &&
-          subtracted_points == o.subtracted_points
+          period_type == o.period_type &&
+          period_value == o.period_value
     end
 
     # @see the `==` method
@@ -156,7 +137,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [points, balance, next_expiration_date, next_expiration_points, pending_points, expired_points, subtracted_points].hash
+      [period_type, period_value].hash
     end
 
     # Builds the object from hash

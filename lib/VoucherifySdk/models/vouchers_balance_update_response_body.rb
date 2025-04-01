@@ -16,13 +16,13 @@ require 'time'
 module VoucherifySdk
   # Response body schema for `vouchers/{code}/balance.`
   class VouchersBalanceUpdateResponseBody
-    # The incremental amount added (positive integer) or subtracted (negative integer) to the current balance on the gift card or loyalty card. Value is multiplied by 100 to precisely represent 2 decimal places. For example, $100 amount is written as 10000.
+    # The incremental amount added (positive integer) or subtracted (negative integer) to the current balance on the gift card or loyalty card. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :amount
 
     # Total income incurred over the lifespan of the gift card or loyalty card.
     attr_accessor :total
 
-    # The balance after adding or subtracting a specified amount. Value is multiplied by 100 to precisely represent 2 decimal places. For example, $100 amount is written as 10000.
+    # The balance after adding or subtracting a specified amount. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :balance
 
     # The type of voucher being modified.

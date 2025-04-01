@@ -52,6 +52,9 @@ module VoucherifySdk
     # Defines the sorting rule for redeemables. `\"CATEGORY_HIERARCHY\"` means that redeemables are applied with the order established by the hierarchy of the categories. `\"REQUESTED_ORDER\"` means that redeemables are applied with the order established in the request.
     attr_accessor :redeemables_sorting_rule
 
+    # Defines the rollback mode for the order. `WITH_ORDER` is a default setting. The redemption is rolled back together with the data about the order, including related discount values. `WITHOUT_ORDER` allows rolling the redemption back without affecting order data, including the applied discount values.
+    attr_accessor :redeemables_rollback_order_mode
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -88,7 +91,8 @@ module VoucherifySdk
         :'initial_amount_mode_categories' => :'initial_amount_mode_categories',
         :'discounted_amount_mode_categories' => :'discounted_amount_mode_categories',
         :'redeemables_application_mode' => :'redeemables_application_mode',
-        :'redeemables_sorting_rule' => :'redeemables_sorting_rule'
+        :'redeemables_sorting_rule' => :'redeemables_sorting_rule',
+        :'redeemables_rollback_order_mode' => :'redeemables_rollback_order_mode'
       }
     end
 
@@ -111,7 +115,8 @@ module VoucherifySdk
         :'initial_amount_mode_categories' => :'Array<String>',
         :'discounted_amount_mode_categories' => :'Array<String>',
         :'redeemables_application_mode' => :'String',
-        :'redeemables_sorting_rule' => :'String'
+        :'redeemables_sorting_rule' => :'String',
+        :'redeemables_rollback_order_mode' => :'String'
       }
     end
 
@@ -129,7 +134,8 @@ module VoucherifySdk
         :'initial_amount_mode_categories',
         :'discounted_amount_mode_categories',
         :'redeemables_application_mode',
-        :'redeemables_sorting_rule'
+        :'redeemables_sorting_rule',
+        :'redeemables_rollback_order_mode'
       ])
     end
 
@@ -196,6 +202,10 @@ module VoucherifySdk
       if attributes.key?(:'redeemables_sorting_rule')
         self.redeemables_sorting_rule = attributes[:'redeemables_sorting_rule']
       end
+
+      if attributes.key?(:'redeemables_rollback_order_mode')
+        self.redeemables_rollback_order_mode = attributes[:'redeemables_rollback_order_mode']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -241,6 +251,8 @@ module VoucherifySdk
       return false unless redeemables_application_mode_validator.valid?(@redeemables_application_mode)
       redeemables_sorting_rule_validator = EnumAttributeValidator.new('String', ["CATEGORY_HIERARCHY", "REQUESTED_ORDER"])
       return false unless redeemables_sorting_rule_validator.valid?(@redeemables_sorting_rule)
+      redeemables_rollback_order_mode_validator = EnumAttributeValidator.new('String', ["WITH_ORDER", "WITHOUT_ORDER"])
+      return false unless redeemables_rollback_order_mode_validator.valid?(@redeemables_rollback_order_mode)
       true
     end
 
@@ -260,7 +272,8 @@ module VoucherifySdk
           initial_amount_mode_categories == o.initial_amount_mode_categories &&
           discounted_amount_mode_categories == o.discounted_amount_mode_categories &&
           redeemables_application_mode == o.redeemables_application_mode &&
-          redeemables_sorting_rule == o.redeemables_sorting_rule
+          redeemables_sorting_rule == o.redeemables_sorting_rule &&
+          redeemables_rollback_order_mode == o.redeemables_rollback_order_mode
     end
 
     # @see the `==` method
@@ -272,7 +285,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [exclusive_categories, joint_categories, redeemables_limit, applicable_redeemables_limit, applicable_redeemables_per_category_limit, applicable_exclusive_redeemables_limit, applicable_exclusive_redeemables_per_category_limit, discount_calculation_mode, initial_amount_mode_categories, discounted_amount_mode_categories, redeemables_application_mode, redeemables_sorting_rule].hash
+      [exclusive_categories, joint_categories, redeemables_limit, applicable_redeemables_limit, applicable_redeemables_per_category_limit, applicable_exclusive_redeemables_limit, applicable_exclusive_redeemables_per_category_limit, discount_calculation_mode, initial_amount_mode_categories, discounted_amount_mode_categories, redeemables_application_mode, redeemables_sorting_rule, redeemables_rollback_order_mode].hash
     end
 
     # Builds the object from hash

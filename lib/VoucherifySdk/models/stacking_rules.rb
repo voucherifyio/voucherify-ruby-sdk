@@ -49,6 +49,9 @@ module VoucherifySdk
     # Defines redeemables no effect rule.
     attr_accessor :redeemables_no_effect_rule
 
+    # Defines the rollback mode for the order. `WITH_ORDER` is a default setting. The redemption is rolled back together with the data about the order, including related discount values. `WITHOUT_ORDER` allows rolling the redemption back without affecting order data.
+    attr_accessor :redeemables_rollback_order_mode
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -84,7 +87,8 @@ module VoucherifySdk
         :'redeemables_application_mode' => :'redeemables_application_mode',
         :'redeemables_sorting_rule' => :'redeemables_sorting_rule',
         :'redeemables_products_application_mode' => :'redeemables_products_application_mode',
-        :'redeemables_no_effect_rule' => :'redeemables_no_effect_rule'
+        :'redeemables_no_effect_rule' => :'redeemables_no_effect_rule',
+        :'redeemables_rollback_order_mode' => :'redeemables_rollback_order_mode'
       }
     end
 
@@ -106,7 +110,8 @@ module VoucherifySdk
         :'redeemables_application_mode' => :'String',
         :'redeemables_sorting_rule' => :'String',
         :'redeemables_products_application_mode' => :'String',
-        :'redeemables_no_effect_rule' => :'String'
+        :'redeemables_no_effect_rule' => :'String',
+        :'redeemables_rollback_order_mode' => :'String'
       }
     end
 
@@ -123,7 +128,8 @@ module VoucherifySdk
         :'redeemables_application_mode',
         :'redeemables_sorting_rule',
         :'redeemables_products_application_mode',
-        :'redeemables_no_effect_rule'
+        :'redeemables_no_effect_rule',
+        :'redeemables_rollback_order_mode'
       ])
     end
 
@@ -193,6 +199,10 @@ module VoucherifySdk
 
       if attributes.key?(:'redeemables_no_effect_rule')
         self.redeemables_no_effect_rule = attributes[:'redeemables_no_effect_rule']
+      end
+
+      if attributes.key?(:'redeemables_rollback_order_mode')
+        self.redeemables_rollback_order_mode = attributes[:'redeemables_rollback_order_mode']
       end
     end
 
@@ -266,6 +276,8 @@ module VoucherifySdk
       return false unless redeemables_products_application_mode_validator.valid?(@redeemables_products_application_mode)
       redeemables_no_effect_rule_validator = EnumAttributeValidator.new('String', ["REDEEM_ANYWAY", "SKIP"])
       return false unless redeemables_no_effect_rule_validator.valid?(@redeemables_no_effect_rule)
+      redeemables_rollback_order_mode_validator = EnumAttributeValidator.new('String', ["WITH_ORDER", "WITHOUT_ORDER"])
+      return false unless redeemables_rollback_order_mode_validator.valid?(@redeemables_rollback_order_mode)
       true
     end
 
@@ -284,7 +296,8 @@ module VoucherifySdk
           redeemables_application_mode == o.redeemables_application_mode &&
           redeemables_sorting_rule == o.redeemables_sorting_rule &&
           redeemables_products_application_mode == o.redeemables_products_application_mode &&
-          redeemables_no_effect_rule == o.redeemables_no_effect_rule
+          redeemables_no_effect_rule == o.redeemables_no_effect_rule &&
+          redeemables_rollback_order_mode == o.redeemables_rollback_order_mode
     end
 
     # @see the `==` method
@@ -296,7 +309,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [redeemables_limit, applicable_redeemables_limit, applicable_redeemables_per_category_limit, applicable_exclusive_redeemables_limit, applicable_exclusive_redeemables_per_category_limit, exclusive_categories, joint_categories, redeemables_application_mode, redeemables_sorting_rule, redeemables_products_application_mode, redeemables_no_effect_rule].hash
+      [redeemables_limit, applicable_redeemables_limit, applicable_redeemables_per_category_limit, applicable_exclusive_redeemables_limit, applicable_exclusive_redeemables_per_category_limit, exclusive_categories, joint_categories, redeemables_application_mode, redeemables_sorting_rule, redeemables_products_application_mode, redeemables_no_effect_rule, redeemables_rollback_order_mode].hash
     end
 
     # Builds the object from hash

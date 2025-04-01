@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Filter by categories ids
+  # Filter by categories IDs
   class ParameterFiltersListCampaignsCategoryIds
     attr_accessor :conditions
 

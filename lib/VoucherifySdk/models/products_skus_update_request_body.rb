@@ -19,7 +19,7 @@ module VoucherifySdk
     # Unique user-defined SKU name.
     attr_accessor :sku
 
-    # SKU unit price. Value is multiplied by 100 to precisely represent 2 decimal places. For example `10000 cents` for `$100.00`.
+    # SKU unit price. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :price
 
     # SKU price currency.

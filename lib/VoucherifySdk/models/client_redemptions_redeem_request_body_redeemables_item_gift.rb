@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Contains information on the number of gift card credits that the customer wants to apply to the order.
   class ClientRedemptionsRedeemRequestBodyRedeemablesItemGift
-    # The number of credits that the user wants to use from the gift card to fulfill the order. The value of credits cannot be higher than the current balance on the gift card. Value is multiplied by 100 to precisely represent 2 decimal places. For example `10000 cents` for `$100.00`.
+    # The number of credits that the user wants to use from the gift card to fulfill the order. The value of credits cannot be higher than the current balance on the gift card. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :credits
 
     # Attribute mapping from ruby-style variable name to JSON key.

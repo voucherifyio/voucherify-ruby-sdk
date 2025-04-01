@@ -31,6 +31,8 @@ module VoucherifySdk
     # Expiration date defines when the earning rule expires. Expiration timestamp is presented in the ISO 8601 format.  Earning rule is *inactive after* this date.If you don't define the expiration date for an earning rule, it'll inherit the campaign expiration date by default.
     attr_accessor :expiration_date
 
+    attr_accessor :pending_points
+
     attr_accessor :validity_timeframe
 
     # Integer array corresponding to the particular days of the week in which the voucher is valid.  - `0` Sunday - `1` Monday - `2` Tuesday - `3` Wednesday - `4` Thursday - `5` Friday - `6` Saturday
@@ -72,6 +74,7 @@ module VoucherifySdk
         :'active' => :'active',
         :'start_date' => :'start_date',
         :'expiration_date' => :'expiration_date',
+        :'pending_points' => :'pending_points',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
         :'validity_hours' => :'validity_hours',
@@ -93,6 +96,7 @@ module VoucherifySdk
         :'active' => :'Boolean',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',
+        :'pending_points' => :'LoyaltiesEarningRulesUpdateRequestBodyPendingPoints',
         :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
@@ -109,6 +113,7 @@ module VoucherifySdk
         :'active',
         :'start_date',
         :'expiration_date',
+        :'pending_points',
         :'metadata'
       ])
     end
@@ -143,6 +148,10 @@ module VoucherifySdk
 
       if attributes.key?(:'expiration_date')
         self.expiration_date = attributes[:'expiration_date']
+      end
+
+      if attributes.key?(:'pending_points')
+        self.pending_points = attributes[:'pending_points']
       end
 
       if attributes.key?(:'validity_timeframe')
@@ -190,6 +199,7 @@ module VoucherifySdk
           active == o.active &&
           start_date == o.start_date &&
           expiration_date == o.expiration_date &&
+          pending_points == o.pending_points &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
           validity_hours == o.validity_hours &&
@@ -205,7 +215,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [validation_rule_id, loyalty, source, active, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, metadata].hash
+      [validation_rule_id, loyalty, source, active, start_date, expiration_date, pending_points, validity_timeframe, validity_day_of_week, validity_hours, metadata].hash
     end
 
     # Builds the object from hash

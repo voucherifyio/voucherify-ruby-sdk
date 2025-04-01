@@ -16,10 +16,10 @@ require 'time'
 module VoucherifySdk
   # Summary of gift card credits.
   class CustomerSummaryRedemptionsGift
-    # Total amount of gift card credits redeemed by customer. Value is multiplied by 100 to precisely represent 2 decimal places. For example `10000 cents` for `$100.00`.
+    # Total amount of gift card credits redeemed by customer. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :redeemed_amount
 
-    # Remaining gift card balance across all gift cards. Value is multiplied by 100 to precisely represent 2 decimal places. For example `10000 cents` for `$100.00`.
+    # Remaining gift card balance across all gift cards. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :amount_to_go
 
     # Attribute mapping from ruby-style variable name to JSON key.
