@@ -61,9 +61,19 @@ Optionally, run:
 gem install voucherify
 ```
 
+## 🔒 Get your keys and address
+
+Get your Voucherify keys for valid authorization and setting the basePath (cluster) to match your server URL:
+1. In Voucherify dashboard, go to **Project settings**.
+2. In **Application information**, find your basePath (cluster) address. For shared clusters:
+   - Europe (default): `https://api.voucherify.io`
+   - United States: `https://us1.api.voucherify.io`
+   - Asia (Singapore): `https://as1.api.voucherify.io`
+3. Scroll down to **Application Keys** to grab your Application ID and Secret key.
+
 ## 🚀 Run code
 
-When You have Voucherify gem installed You could use pre-created [example.rb](./example.rb) with example code for testing purpose.
+Once installed, you can use pre-created [example.rb](./example.rb) with code for testing.
 
 ```ruby example.rb
 # Load the gem
@@ -93,35 +103,101 @@ rescue VoucherifySdk::ApiError => e
 end
 ```
 
-Code could be run from the directory where the file is placed (root for this repository), by using:
+You can run the code from the directory where the file is placed (root for this repository):
 
 ```shell
 ruby example.rb
 ```
 
-Or, if You're using bundler:
+Optionally, if you're using bundler, run:
 
 ```shell
 bundle exec ruby example.rb
 ```
 
-🛡️ This code does simple campaign list, so it won't affect Your Voucherify data.
+> [!NOTE]
+>
+> This code just lists campaigns, so it won't affect your Voucherify data.
 
-🔒 Remember to fill Your Voucherify keys for the valid authorization.
+Once set up, check the following methods to give Voucherify a more interesting spin:
+- [Validations](docs/ValidationsApi.md#validateStackedDiscounts)
+- [Redemptions](docs/RedemptionsApi.md#redeemStackedDiscounts)
+- [Publications](docs/PublicationsApi.md#createPublication)
 
-💅 More examples and good practices You could find in the [EXAMPLES.md](./EXAMPLES.md) document.
+> [!TIP]
+> 
+> Check the test implementation in the [Test folder](./__tests__/) and the [Examples file](./EXAMPLES.md).
 
-## 🐳 Running local tests with docker
+## 🐳 Run local tests with docker
 
 1. Copy `.env.example` to `.env` and fill in the values.
 2. Run `docker build -t ruby .` to build the image.
 3. Run `docker run --rm ruby` to run the tests and delete container immediately after.
 
-## 🛠️ Contributing
+## 🛠️ Contribute
 
-Read more about how to Contribute to Voucherify Ruby SDK by visiting main repo [GENERATING-SDKS.md](https://github.com/voucherifyio/voucherify-openapi/blob/master/GENERATING-SDKS.md)
+Do you want to contribute?
 
-Remember that this SDK is auto generated (except of the tests) so changes made here will be overwritten by generator.
+Read more about how to contribute to this Voucherify SDK by reading the [Contributing guide](https://github.com/voucherifyio/voucherify-openapi/blob/master/GENERATING-SDKS.md) the main repo.
+
+This SDK is auto-generated (except for tests), so changes made here will be overwritten by the generator.
+
+## 🔐 Authorization
+
+Authorization schemes defined for the API.
+
+```ruby
+# Setup authorization
+VoucherifySdk.configure do |config|
+    # Application Keys
+    config.api_key['X-App-Id'] = 'YOUR API ID'
+    config.api_key['X-App-Token'] = 'YOUR API TOKEN'
+
+    # Client-side Keys
+    config.api_key['X-Client-Application-Id'] = 'YOUR CLIENT API ID'
+    config.api_key['X-Client-Token'] = 'YOUR CLIENT API TOKEN'
+
+    # Cluster (Optional)
+    # default is https://api.voucherify.io
+    config.host = 'https://us1.api.voucherify.io'
+end
+```
+
+### X-App-Id
+
+- **Type**: API key
+- **API key parameter name**: X-App-Id
+- **Location**: HTTP header
+
+### X-App-Token
+
+- **Type**: API key
+- **API key parameter name**: X-App-Token
+- **Location**: HTTP header
+
+### X-Client-Token
+
+- **Type**: API key
+- **API key parameter name**: X-Client-Token
+- **Location**: HTTP header
+
+### X-Client-Application-Id
+
+- **Type**: API key
+- **API key parameter name**: X-Client-Application-Id
+- **Location**: HTTP header
+
+### X-Management-Id
+
+- **Type**: API key
+- **API key parameter name**: X-Management-Id
+- **Location**: HTTP header
+
+### X-Management-Token
+
+- **Type**: API key
+- **API key parameter name**: X-Management-Token
+- **Location**: HTTP header
 
 ## 📅 Changelog
 
@@ -230,32 +306,13 @@ Remember that this SDK is auto generated (except of the tests) so changes made h
     - /management/v1/projects/{projectId}/branding/{brandingId} - delete `Delete Brand`
 - **2024-09-05** - `6.0.0` - The new version of the SKD includes coverage for all the most commonly used Voucherify endpoints and supports typed models.
 
-*Previous versions of the SDK are no longer supported, and we highly recommend upgrading to version 6.0.0, which is now designated as Long-Term Support (LTS).*
+*Previous versions of the SDK are no longer supported. We highly recommend upgrading to version 6.0.0 or newer, as it is now designated as Long-Term Support (LTS).*
 
-*Changelog for previous versions could be found in the [DEPRECATED_CHANGELOG.md file](./DEPRECATED_CHANGELOG.md)*
+*Changelog for previous versions is in the [DEPRECATED_CHANGELOG.md file](./DEPRECATED_CHANGELOG.md).*
 
-## 🔐 Documentation for Authorization
+## 🌐 Documentation of API endpoints
 
-```ruby
-# Setup authorization
-VoucherifySdk.configure do |config|
-    # Application Keys
-    config.api_key['X-App-Id'] = 'YOUR API ID'
-    config.api_key['X-App-Token'] = 'YOUR API TOKEN'
-
-    # Client-side Keys
-    config.api_key['X-Client-Application-Id'] = 'YOUR CLIENT API ID'
-    config.api_key['X-Client-Token'] = 'YOUR CLIENT API TOKEN'
-
-    # Cluster (Optional)
-    # default is https://api.voucherify.io
-    config.host = 'https://us1.api.voucherify.io'
-end
-```
-
-## 🌐 Documentation for API Endpoints
-
-All URIs are relative to *https://api.voucherify.io*
+All URIs are relative to `https://api.voucherify.io`.
 
 | Class                                  | Method                                                                                                            | HTTP request                                                                               | Description                                |
 | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------ |
@@ -497,7 +554,7 @@ All URIs are relative to *https://api.voucherify.io*
 | *VoucherifySdk::VouchersApi*           | [**update_vouchers_metadata_in_bulk**](docs/VouchersApi.md#update_vouchers_metadata_in_bulk)                      | **POST** /v1/vouchers/metadata/async                                                       | Update Vouchers' Metadata in Bulk          |
 
 
-## 📚 Documentation for Models
+## 📚 Documentation of models
 
  - [VoucherifySdk::AccessSettings](docs/AccessSettings.md)
  - [VoucherifySdk::AccessSettingsAssign](docs/AccessSettingsAssign.md)
@@ -1661,4 +1718,3 @@ All URIs are relative to *https://api.voucherify.io*
  - [VoucherifySdk::VouchersUpdateResponseBodyLoyaltyCard](docs/VouchersUpdateResponseBodyLoyaltyCard.md)
  - [VoucherifySdk::VouchersUpdateResponseBodyPublish](docs/VouchersUpdateResponseBodyPublish.md)
  - [VoucherifySdk::VouchersUpdateResponseBodyRedemption](docs/VouchersUpdateResponseBodyRedemption.md)
-
