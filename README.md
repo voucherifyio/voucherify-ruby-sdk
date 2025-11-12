@@ -138,7 +138,7 @@ Once set up, check the following methods to give Voucherify a more interesting s
 
 Do you want to contribute?
 
-Read more about how to contribute to this Voucherify SDK by reading the [Contributing guide](https://github.com/voucherifyio/voucherify-openapi/blob/master/GENERATING-SDKS.md) the main repo.
+Read more about how to contribute to this SDK in the [Contributing guide](https://github.com/voucherifyio/voucherify-openapi/blob/master/GENERATING-SDKS.md) in the main repo.
 
 This SDK is auto-generated (except for tests), so changes made here will be overwritten by the generator.
 
