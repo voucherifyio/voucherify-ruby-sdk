@@ -4,8 +4,8 @@
 
 [![Gem Version](https://img.shields.io/gem/v/voucherify.svg)](https://rubygems.org/gems/voucherify)
 [![Gem Downloads](https://img.shields.io/gem/dt/voucherify.svg)](https://rubygems.org/gems/voucherify)
-[![License](https://img.shields.io/github/license/voucherifyio/sdk-ruby-openapi-based.svg)](https://opensource.org/licenses/MIT)
-[![GitHub issues](https://img.shields.io/github/issues/voucherifyio/sdk-ruby-openapi-based.svg)](https://github.com/voucherifyio/voucherify-ruby-sdk/issues)
+[![License](https://img.shields.io/github/license/voucherifyio/voucherify-ruby-sdk.svg)](https://opensource.org/licenses/MIT)
+[![GitHub issues](https://img.shields.io/github/issues/voucherifyio/voucherify-ruby-sdk.svg)](https://github.com/voucherifyio/voucherify-ruby-sdk/issues)
 
 ## 👋 Intro
 
