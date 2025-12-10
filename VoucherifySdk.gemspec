@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.email       = ['pawel.rychlik@rspective.pl']
 
   s.summary       = %q{Ruby SDK for Voucherify. More info on http://www.voucherify.io}
-  s.homepage      = 'https://github.com/voucherifyio/sdk-ruby-openapi-based'
+  s.homepage      = 'https://github.com/voucherifyio/voucherify-ruby-sdk'
   s.license       = 'MIT'
   s.required_ruby_version = ">= 2.7"
 
