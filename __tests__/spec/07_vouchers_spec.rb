@@ -8,6 +8,7 @@ require_relative 'support/validate_deep_match'
 RSpec.describe 'Vouchers API', :order => :defined do
   before(:each) do
     @vouchers_api_instance = Config.vouchers_api_instance()
+    @publications_api_instance = Config.publications_api_instance()
     @voucherify_data = VoucherifyData.instance()
   end
 
@@ -41,14 +42,32 @@ RSpec.describe 'Vouchers API', :order => :defined do
     expect(validate_deep_match(filtered_snapshot, voucher)).to be true
   end
 
-  it 'update loyalty card balance', :order => :fourth do
+  it 'publish loyalty card', :order => :fourth do
+    loyalty_card = @voucherify_data.get_loyalty_card()
+    customer = @voucherify_data.get_customer()
+
+    publication = @publications_api_instance.create_publication({
+      publications_create_request_body: VoucherifySdk::PublicationsCreateRequestBody.new({
+        voucher: loyalty_card.code,
+        customer: VoucherifySdk::Customer.new({
+          id: customer.id
+        })
+      })
+    })
+
+    expect(publication).not_to be_nil
+  end
+
+  it 'update loyalty card balance', :order => :fifth do
+    loyalty_card = @voucherify_data.get_loyalty_card()
+
     vouchers_balance_update_request_body = VoucherifySdk::VouchersBalanceUpdateRequestBody.new({
         source_id: generate_random_string(),
         amount: 10000,
         reason: "Regular customer"
       })
 
-    response = @vouchers_api_instance.update_voucher_balance(@voucherify_data.get_loyalty_card().code, vouchers_balance_update_request_body)
+    response = @vouchers_api_instance.update_voucher_balance(loyalty_card.code, vouchers_balance_update_request_body)
 
     snapshot_name = 'vouchers/updated_loyalty_card_balance'
     filtered_snapshot = get_snapshot_without_uniq_keys(snapshot_name)
