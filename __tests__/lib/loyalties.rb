@@ -28,5 +28,5 @@ def list_loyalty_card_transactions(loyalties_api_instance, memberId)
 
   rescue VoucherifySdk::ApiError => e
     return nil
-  end 
+  end
 end

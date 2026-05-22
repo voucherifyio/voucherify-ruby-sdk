@@ -9,6 +9,7 @@ RSpec.describe 'Campaigns API', :order => :defined do
   before(:each) do
     @campaigns_api_instance = Config.campaigns_api_instance()
     @validation_rules_api_instance = Config.validation_rules_api_instance()
+    @async_actions_api_instance = Config.async_actions_api_instance()
     @voucherify_data = VoucherifyData.instance()
   end
 
@@ -44,7 +45,7 @@ RSpec.describe 'Campaigns API', :order => :defined do
     @voucherify_data.set_discount_campaign(created_discount_campaign)
   end
 
-  it 'create a promotion campaign', :order => :thrid do
+  it 'create a promotion campaign', :order => :third do
     created_promotion_campaign = create_promotion_campaign(@campaigns_api_instance)
 
     snapshot_name = 'campaigns/created_promotion_campaign'
@@ -125,9 +126,39 @@ RSpec.describe 'Campaigns API', :order => :defined do
     expect(validate_deep_match(filtered_validation_rule_snapshot, validation_rule)).to be true
 
     voucher = @campaigns_api_instance.add_vouchers_to_campaign(campaign.id, {
-        vouchers_count: 1,
+      vouchers_count: 1,
     })
 
     @voucherify_data.set_voucher_with_more_than_validation_rule(voucher)
+  end
+
+  it 'import vouchers to campaign using csv', :order => :tenth do
+    voucher_codes = Array.new(3) { generate_random_string(8) }
+    imported_vouchers = import_vouchers_to_campaign_using_csv(@campaigns_api_instance, $created_discount_campaign.id, voucher_codes)
+
+    expect(imported_vouchers).not_to be_nil
+    expect(imported_vouchers.async_action_id).not_to be_nil
+
+    finished_action = wait_for_async_action(@async_actions_api_instance, imported_vouchers.async_action_id)
+
+    expect(finished_action).not_to be_nil
+    expect(finished_action.id).to eq(imported_vouchers.async_action_id)
+  end
+
+  it 'update campaign expiration_date to null', :order => :eleventh do
+    expiration_date = Time.now.utc + 86400
+    created_campaign = create_discount_campaign_with_expiration(@campaigns_api_instance, expiration_date)
+
+    expect(created_campaign).not_to be_nil
+    expect(created_campaign.expiration_date).not_to be_nil
+
+    updated_to_null = update_campaign_expiration_to_null(@campaigns_api_instance, created_campaign.id)
+
+    expect(updated_to_null).to be true
+
+    campaign_after_update = @campaigns_api_instance.get_campaign(created_campaign.id)
+
+    expect(campaign_after_update).not_to be_nil
+    expect(campaign_after_update.expiration_date).to be_nil
   end
 end

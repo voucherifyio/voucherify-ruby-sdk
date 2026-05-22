@@ -20,4 +20,6 @@ jobs:
             -e VOUCHERIFY_HOST=${{ vars.VOUCHERIFY_HOST }} \
             -e X_APP_ID=${{ secrets.X_APP_ID }} \
             -e X_APP_TOKEN=${{ secrets.X_APP_TOKEN }} \
+            -e X_MANAGEMENT_ID=${{ secrets.X_MANAGEMENT_ID }} \
+            -e X_MANAGEMENT_TOKEN=${{ secrets.X_MANAGEMENT_TOKEN }} \
             ruby

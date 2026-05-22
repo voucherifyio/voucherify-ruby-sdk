@@ -130,9 +130,16 @@ Once set up, check the following methods to give Voucherify a more interesting s
 
 ## 🐳 Run local tests with docker
 
-1. Copy `.env.example` to `.env` and fill in the values.
+1. Copy `.env.example` to `.env` and fill in:
+   - `VOUCHERIFY_HOST`
+   - `X_APP_ID`
+   - `X_APP_TOKEN`
+   - `X_MANAGEMENT_ID`
+   - `X_MANAGEMENT_TOKEN`
 2. Run `docker build -t ruby .` to build the image.
 3. Run `docker run --rm ruby` to run the tests and delete container immediately after.
+
+You can also run tests from monorepo root with `npm run test-ruby-sdk`.
 
 ## 🛠️ Contribute
 
@@ -201,6 +208,13 @@ end
 
 ## 📅 Changelog
 
+- **2026-05-19** - `8.0.4`
+  - Added test coverage for campaign CSV voucher import, including polling the async action until it reaches a terminal state.
+  - Added test coverage for campaign `expiration_date` update to `null`.
+  - Added management test coverage: list projects, list metadata schemas, update metadata schema (auto-provisions a test schema when none with properties exists).
+  - Added a dedicated model test for objects combining regular fields and dynamic properties.
+  - Updated test setup docs and `sdks/ruby/.env.example` with management credentials.
+  - Minor cleanups: fixed typos.
 - **2024-01-29** - `8.0.3`
   - Added support for **GET** /v1/loyalties/{campaignId}/pending-points
   - Added support for **GET** /v1/loyalties/members/{memberId}/pending-points
