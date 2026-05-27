@@ -209,9 +209,9 @@ end
 ## 📅 Changelog
 
 - **2026-05-19** - `8.0.4`
-  - Added test coverage for campaign CSV voucher import, including polling the async action until it reaches a terminal state.
+  - Added test coverage for campaign CSV voucher import.
   - Added test coverage for campaign `expiration_date` update to `null`.
-  - Added management test coverage: list projects, list metadata schemas, update metadata schema (auto-provisions a test schema when none with properties exists).
+  - Added management test coverage: list projects, list metadata schemas, update metadata schema.
   - Added a dedicated model test for objects combining regular fields and dynamic properties.
   - Updated test setup docs and `sdks/ruby/.env.example` with management credentials.
   - Minor cleanups: fixed typos.
