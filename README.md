@@ -136,11 +136,7 @@ Once set up, check the following methods to give Voucherify a more interesting s
 
 ## 🛠️ Contribute
 
-Do you want to contribute?
-
-Read more about how to contribute to this SDK in the [Contributing guide](https://github.com/voucherifyio/voucherify-openapi/blob/master/GENERATING-SDKS.md) in the main repo.
-
-This SDK is auto-generated (except for tests), so changes made here will be overwritten by the generator.
+This SDK is generated automatically from our [OpenAPI specification](https://github.com/voucherifyio/voucherify-openapi). To contribute, submit an issue rather than creating a pull request. Voucherify developers will review your issue and reply as soon as possible.
 
 ## 🔐 Authorization
 
