@@ -107,6 +107,8 @@ module VoucherifySdk
 
       if attributes.key?(:'period_type')
         self.period_type = attributes[:'period_type']
+      else
+        self.period_type = 'MONTH'
       end
 
       if attributes.key?(:'period_value')

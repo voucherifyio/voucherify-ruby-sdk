@@ -197,8 +197,7 @@ end
 - **Location**: HTTP header
 
 ## 📅 Changelog
-
-- **2026-07-30** - `8.0.4`
+- **2026-07-30** - `8.1.0`
   - Added support for **GET** /v1/campaigns/{campaignId}/summary
   - Added support for **GET** /v1/campaigns/{campaignId}/transactions
   - Added support for **POST** /v1/campaigns/{campaignId}/transactions/export
