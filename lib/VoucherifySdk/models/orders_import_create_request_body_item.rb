@@ -18,7 +18,7 @@ module VoucherifySdk
     # Unique ID assigned by Voucherify of an existing order that will be linked to the redemption of this request.
     attr_accessor :id
 
-    # Unique source ID of an existing order that will be linked to the redemption of this request.
+    # Unique source ID of an existing order that will be linked to the redemption of this request.  For validation and redemption, if `source_id` is used with an existing order, the original order data will be used, like `items`, `amount`, and so on, not the one sent in the new request.
     attr_accessor :source_id
 
     # The order status.
@@ -39,15 +39,15 @@ module VoucherifySdk
     # A set of custom key/value pairs that you can attach to an order. It can be useful for storing additional information about the order in a structured format. It can be used to define business validation rules or discount formulas.
     attr_accessor :metadata
 
-    # Timestamp representing the date and time when the order was created. The value is shown in the ISO 8601 format.
-    attr_accessor :created_at
-
     # Unique referrer ID.
     attr_accessor :referrer_id
 
     attr_accessor :customer
 
     attr_accessor :referrer
+
+    # Timestamp representing the date and time when the order was created. The value is shown in the ISO 8601 format.
+    attr_accessor :created_at
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -82,10 +82,10 @@ module VoucherifySdk
         :'discount_amount' => :'discount_amount',
         :'items' => :'items',
         :'metadata' => :'metadata',
-        :'created_at' => :'created_at',
         :'referrer_id' => :'referrer_id',
         :'customer' => :'customer',
-        :'referrer' => :'referrer'
+        :'referrer' => :'referrer',
+        :'created_at' => :'created_at'
       }
     end
 
@@ -105,10 +105,10 @@ module VoucherifySdk
         :'discount_amount' => :'Integer',
         :'items' => :'Array<OrderItem>',
         :'metadata' => :'Object',
-        :'created_at' => :'Time',
         :'referrer_id' => :'String',
         :'customer' => :'Customer',
-        :'referrer' => :'Referrer'
+        :'referrer' => :'Referrer',
+        :'created_at' => :'Time'
       }
     end
 
@@ -176,10 +176,6 @@ module VoucherifySdk
         self.metadata = attributes[:'metadata']
       end
 
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
       if attributes.key?(:'referrer_id')
         self.referrer_id = attributes[:'referrer_id']
       end
@@ -190,6 +186,10 @@ module VoucherifySdk
 
       if attributes.key?(:'referrer')
         self.referrer = attributes[:'referrer']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
     end
 
@@ -223,10 +223,10 @@ module VoucherifySdk
           discount_amount == o.discount_amount &&
           items == o.items &&
           metadata == o.metadata &&
-          created_at == o.created_at &&
           referrer_id == o.referrer_id &&
           customer == o.customer &&
-          referrer == o.referrer
+          referrer == o.referrer &&
+          created_at == o.created_at
     end
 
     # @see the `==` method
@@ -238,7 +238,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, source_id, status, amount, initial_amount, discount_amount, items, metadata, created_at, referrer_id, customer, referrer].hash
+      [id, source_id, status, amount, initial_amount, discount_amount, items, metadata, referrer_id, customer, referrer, created_at].hash
     end
 
     # Builds the object from hash

@@ -23,7 +23,7 @@ module VoucherifySdk
     # Array of customer IDs.
     attr_accessor :customers
 
-    # Defines a set of criteria for an `auto-update` segment type.
+    # Defines a set of criteria for an `auto-update` or `passive` segment type.
     attr_accessor :filter
 
     class EnumAttributeValidator
@@ -122,7 +122,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["static", "auto-update"])
+      type_validator = EnumAttributeValidator.new('String', ["static", "auto-update", "passive"])
       return false unless type_validator.valid?(@type)
       true
     end

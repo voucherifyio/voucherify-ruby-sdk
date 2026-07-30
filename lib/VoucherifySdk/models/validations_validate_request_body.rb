@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **POST** `v1/validations`.
+  # Request body schema for **POST** `v1/validations`.
   class ValidationsValidateRequestBody
     attr_accessor :options
 

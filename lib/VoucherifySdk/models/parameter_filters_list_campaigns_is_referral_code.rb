@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # 
+  # Determines if the campaign is or is not a referral campaign.
   class ParameterFiltersListCampaignsIsReferralCode
     # Value is exactly this value (single value).
     attr_accessor :is

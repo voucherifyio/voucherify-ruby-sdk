@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Contains the URL of the CSV file.
   class VouchersTransactionsExportCreateResponseBodyResult
-    # URL of the CSV file location. It contains the `token` used for authorization in the <!-- [Download export](OpenAPI.json/paths/~1exports~1{export_Id}/get) -->[Download export](ref:download-export) method.
+    # URL of the CSV file location. It contains the `token` used for authorization in the [Download export](/api-reference/exports/download-export) method.
     attr_accessor :url
 
     # Attribute mapping from ruby-style variable name to JSON key.

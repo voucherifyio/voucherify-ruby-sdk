@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Activate Member Pending Points
-    # >🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Activate manually the pending points and add them to the loyalty card. The pending points are determined by the pending point ID. Once activated, the pending point entry with that ID is not listed by the endpoints: List member (with campaign ID, without campaign ID), List campaign pending points. This **POST** method does not require a request body.
+    # Activate manually the pending points and add them to the loyalty card. The pending points are determined by the pending point ID. Once activated, the pending point entry with that ID is not listed by the endpoints: List member ([with campaign ID](/api-reference/loyalties/list-member-pending-points-with-campaign-id), [without campaign ID](/api-reference/loyalties/list-member-pending-points)), [List campaign pending points](/api-reference/loyalties/list-campaign-pending-points). This **POST** method does not require a request body. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
     # @param member_id [String] Unique loyalty card code assigned to a particular customer.
     # @param pending_points_id [String] Unique pending point identifier, assigned by Voucherify.
     # @param [Hash] opts the optional parameters
@@ -31,7 +31,7 @@ module VoucherifySdk
     end
 
     # Activate Member Pending Points
-    # &gt;🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Activate manually the pending points and add them to the loyalty card. The pending points are determined by the pending point ID. Once activated, the pending point entry with that ID is not listed by the endpoints: List member (with campaign ID, without campaign ID), List campaign pending points. This **POST** method does not require a request body.
+    # Activate manually the pending points and add them to the loyalty card. The pending points are determined by the pending point ID. Once activated, the pending point entry with that ID is not listed by the endpoints: List member ([with campaign ID](/api-reference/loyalties/list-member-pending-points-with-campaign-id), [without campaign ID](/api-reference/loyalties/list-member-pending-points)), [List campaign pending points](/api-reference/loyalties/list-campaign-pending-points). This **POST** method does not require a request body. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
     # @param member_id [String] Unique loyalty card code assigned to a particular customer.
     # @param pending_points_id [String] Unique pending point identifier, assigned by Voucherify.
     # @param [Hash] opts the optional parameters
@@ -81,10 +81,10 @@ module VoucherifySdk
     end
 
     # Add Member
-    # This method assigns a loyalty card to a customer. It selects a loyalty card suitable for publication, adds a publish entry, and returns the published voucher.   A voucher is suitable for publication when its active and hasnt been published yet.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use **auto-update** campaign.
+    # This method assigns a loyalty card to a customer. It selects a [loyalty card](/api-reference/vouchers/get-voucher) suitable for publication, adds a publish entry, and returns the published voucher.   A voucher is suitable for publication when its active and hasnt been published yet.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use **auto-update** campaign.
     # @param campaign_id [String] Unique campaign ID of the loyalty program.
     # @param [Hash] opts the optional parameters
-    # @option opts [LoyaltiesMembersCreateRequestBody] :loyalties_members_create_request_body Provide details to whom the loyalty card should be assigned.     You can choose to either specify the exact loyalty card code that you want to publish from existin (non-assigned) codes, or choose not to specify a voucher code. If you choose not to specify a code in the request paylaod, then the system will choose the next available voucher code available to be assigned to a customer.   You can also include metadata in the request payload. This metadata will be assigned to the publication object, but will not be returned in the response to this endpoint. To see of publications (assignments of particular codes to customers) and publication metadata, use the List Publications endpoint.
+    # @option opts [LoyaltiesMembersCreateRequestBody] :loyalties_members_create_request_body Provide details to whom the loyalty card should be assigned.     You can choose to either specify the exact loyalty card code that you want to publish from existin (non-assigned) codes, or choose not to specify a voucher code. If you choose not to specify a code in the request paylaod, then the system will choose the next available voucher code available to be assigned to a customer.   You can also include metadata in the request payload. This metadata will be assigned to the publication object, but will not be returned in the response to this endpoint. To see of publications (assignments of particular codes to customers) and publication metadata, use the [List Publications](/api-reference/publications/list-publications) endpoint.
     # @return [LoyaltiesMembersCreateResponseBody]
     def add_member(campaign_id, opts = {})
       data, _status_code, _headers = add_member_with_http_info(campaign_id, opts)
@@ -92,10 +92,10 @@ module VoucherifySdk
     end
 
     # Add Member
-    # This method assigns a loyalty card to a customer. It selects a loyalty card suitable for publication, adds a publish entry, and returns the published voucher.   A voucher is suitable for publication when its active and hasnt been published yet.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use **auto-update** campaign.
+    # This method assigns a loyalty card to a customer. It selects a [loyalty card](/api-reference/vouchers/get-voucher) suitable for publication, adds a publish entry, and returns the published voucher.   A voucher is suitable for publication when its active and hasnt been published yet.    📘 Auto-update campaign  In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use **auto-update** campaign.
     # @param campaign_id [String] Unique campaign ID of the loyalty program.
     # @param [Hash] opts the optional parameters
-    # @option opts [LoyaltiesMembersCreateRequestBody] :loyalties_members_create_request_body Provide details to whom the loyalty card should be assigned.     You can choose to either specify the exact loyalty card code that you want to publish from existin (non-assigned) codes, or choose not to specify a voucher code. If you choose not to specify a code in the request paylaod, then the system will choose the next available voucher code available to be assigned to a customer.   You can also include metadata in the request payload. This metadata will be assigned to the publication object, but will not be returned in the response to this endpoint. To see of publications (assignments of particular codes to customers) and publication metadata, use the List Publications endpoint.
+    # @option opts [LoyaltiesMembersCreateRequestBody] :loyalties_members_create_request_body Provide details to whom the loyalty card should be assigned.     You can choose to either specify the exact loyalty card code that you want to publish from existin (non-assigned) codes, or choose not to specify a voucher code. If you choose not to specify a code in the request paylaod, then the system will choose the next available voucher code available to be assigned to a customer.   You can also include metadata in the request payload. This metadata will be assigned to the publication object, but will not be returned in the response to this endpoint. To see of publications (assignments of particular codes to customers) and publication metadata, use the [List Publications](/api-reference/publications/list-publications) endpoint.
     # @return [Array<(LoyaltiesMembersCreateResponseBody, Integer, Hash)>] LoyaltiesMembersCreateResponseBody data, response status code and response headers
     private def add_member_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
@@ -146,8 +146,76 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Adjust Member Pending Points
+    # Adjusts the pending points with a given ID. You can add or subtract the number of points. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param pending_points_id [String] Unique pending point identifier, assigned by Voucherify.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesMembersPendingPointsBalanceRequestBody] :loyalties_members_pending_points_balance_request_body Define the number of pending points to be added or subtracted.
+    # @return [LoyaltiesMembersPendingPointsBalanceResponseBody]
+    def adjust_member_pending_points(member_id, pending_points_id, opts = {})
+      data, _status_code, _headers = adjust_member_pending_points_with_http_info(member_id, pending_points_id, opts)
+      data
+    end
+
+    # Adjust Member Pending Points
+    # Adjusts the pending points with a given ID. You can add or subtract the number of points. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
+    # @param member_id [String] Unique loyalty card code assigned to a particular customer.
+    # @param pending_points_id [String] Unique pending point identifier, assigned by Voucherify.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesMembersPendingPointsBalanceRequestBody] :loyalties_members_pending_points_balance_request_body Define the number of pending points to be added or subtracted.
+    # @return [Array<(LoyaltiesMembersPendingPointsBalanceResponseBody, Integer, Hash)>] LoyaltiesMembersPendingPointsBalanceResponseBody data, response status code and response headers
+    private def adjust_member_pending_points_with_http_info(member_id, pending_points_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.adjust_member_pending_points ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/members/{memberId}/pending-points/{pendingPointsId}/balance'.sub('{' + 'memberId' + '}', CGI.escape(member_id.to_s)).sub('{' + 'pendingPointsId' + '}', CGI.escape(pending_points_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'loyalties_members_pending_points_balance_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesMembersPendingPointsBalanceResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.adjust_member_pending_points",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#adjust_member_pending_points\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Cancel Member Pending Points
-    # >🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Cancel manually the pending points for the loyalty card. The pending points are determined by the pending point ID. Once canceled, the pending point entry with that ID is not listed by the endpoints: List member (with campaign ID, without campaign ID), List campaign pending points. This **POST** method does not require a request body and it returns an empty, 204, response.
+    # Cancel manually the pending points for the loyalty card. The pending points are determined by the pending point ID. Once canceled, the pending point entry with that ID is not listed by the endpoints: List member ([with campaign ID](/api-reference/loyalties/list-member-pending-points-with-campaign-id), [without campaign ID](/api-reference/loyalties/list-member-pending-points)), [List campaign pending points](/api-reference/loyalties/list-campaign-pending-points). This **POST** method does not require a request body and it returns an empty, 204, response. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
     # @param member_id [String] Unique loyalty card code assigned to a particular customer.
     # @param pending_points_id [String] Unique pending point identifier, assigned by Voucherify.
     # @param [Hash] opts the optional parameters
@@ -158,7 +226,7 @@ module VoucherifySdk
     end
 
     # Cancel Member Pending Points
-    # &gt;🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Cancel manually the pending points for the loyalty card. The pending points are determined by the pending point ID. Once canceled, the pending point entry with that ID is not listed by the endpoints: List member (with campaign ID, without campaign ID), List campaign pending points. This **POST** method does not require a request body and it returns an empty, 204, response.
+    # Cancel manually the pending points for the loyalty card. The pending points are determined by the pending point ID. Once canceled, the pending point entry with that ID is not listed by the endpoints: List member ([with campaign ID](/api-reference/loyalties/list-member-pending-points-with-campaign-id), [without campaign ID](/api-reference/loyalties/list-member-pending-points)), [List campaign pending points](/api-reference/loyalties/list-campaign-pending-points). This **POST** method does not require a request body and it returns an empty, 204, response. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
     # @param member_id [String] Unique loyalty card code assigned to a particular customer.
     # @param pending_points_id [String] Unique pending point identifier, assigned by Voucherify.
     # @param [Hash] opts the optional parameters
@@ -206,7 +274,7 @@ module VoucherifySdk
     end
 
     # Create Earning Rule
-    # Create earning rules for a loyalty campaign.
+    # Create earning rules for a loyalty campaign.  🚧 Maximum number of earning rules  You can create up to 100 earning rules per project. The limit can be customized for clients with a single-tenant setup.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<LoyaltiesEarningRulesCreateRequestBodyItem>] :loyalties_earning_rules_create_request_body_item Customize the request body based on the type of earning rules you would like to create. The request body is an array of objects. The required minimum properties to include in the payload for each object are event and loyalty. Additionally, if you choose to add a validity_timeframe, you must include a start_date. Furthermore, an earning rule event type:   - customer.segment.entered requires a segment object - a custom event requires a custom_event object - a customer.loyalty.tier.joined, customer.loyalty.tier.left, customer.loyalty.tier.upgraded, customer.loyalty.tier.downgraded, customer.loyalty.tier.prolonged requires a loyalty_tier object
@@ -217,7 +285,7 @@ module VoucherifySdk
     end
 
     # Create Earning Rule
-    # Create earning rules for a loyalty campaign.
+    # Create earning rules for a loyalty campaign.  🚧 Maximum number of earning rules  You can create up to 100 earning rules per project. The limit can be customized for clients with a single-tenant setup.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<LoyaltiesEarningRulesCreateRequestBodyItem>] :loyalties_earning_rules_create_request_body_item Customize the request body based on the type of earning rules you would like to create. The request body is an array of objects. The required minimum properties to include in the payload for each object are event and loyalty. Additionally, if you choose to add a validity_timeframe, you must include a start_date. Furthermore, an earning rule event type:   - customer.segment.entered requires a segment object - a custom event requires a custom_event object - a customer.loyalty.tier.joined, customer.loyalty.tier.left, customer.loyalty.tier.upgraded, customer.loyalty.tier.downgraded, customer.loyalty.tier.prolonged requires a loyalty_tier object
@@ -338,7 +406,7 @@ module VoucherifySdk
     end
 
     # Create Loyalty Campaign
-    # Creates a batch of loyalty cards aggregated in a single loyalty campaign. It also allows you to define a custom codes pattern.    📘 Global uniqueness  All codes are unique across the whole project. Voucherify wont allow to generate the same codes in any of your campaigns.  🚧 Asyncronous action!  This is an asynchronous action, you cant read or modify a newly created campaign until the code generation is completed. See creation_status field in the loyalty campaign object description.
+    # Creates a batch of [loyalty cards](/api-reference/loyalties/get-member) aggregated in a single loyalty campaign. It also allows you to define a custom codes pattern.    📘 Global uniqueness  All codes are unique across the whole project. Voucherify wont allow to generate the same codes in any of your campaigns.  🚧 Asynchronous action!  This is an asynchronous action, you cant read or modify a newly created campaign until the code generation is completed. See creation_status field in the [loyalty campaign object](/api-reference/loyalties/loyalty-campaign-object) description.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesCreateCampaignRequestBody] :loyalties_create_campaign_request_body Specify the loyalty campaign details.
     # @return [LoyaltiesCreateCampaignResponseBody]
@@ -348,7 +416,7 @@ module VoucherifySdk
     end
 
     # Create Loyalty Campaign
-    # Creates a batch of loyalty cards aggregated in a single loyalty campaign. It also allows you to define a custom codes pattern.    📘 Global uniqueness  All codes are unique across the whole project. Voucherify wont allow to generate the same codes in any of your campaigns.  🚧 Asyncronous action!  This is an asynchronous action, you cant read or modify a newly created campaign until the code generation is completed. See creation_status field in the loyalty campaign object description.
+    # Creates a batch of [loyalty cards](/api-reference/loyalties/get-member) aggregated in a single loyalty campaign. It also allows you to define a custom codes pattern.    📘 Global uniqueness  All codes are unique across the whole project. Voucherify wont allow to generate the same codes in any of your campaigns.  🚧 Asynchronous action!  This is an asynchronous action, you cant read or modify a newly created campaign until the code generation is completed. See creation_status field in the [loyalty campaign object](/api-reference/loyalties/loyalty-campaign-object) description.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesCreateCampaignRequestBody] :loyalties_create_campaign_request_body Specify the loyalty campaign details.
     # @return [Array<(LoyaltiesCreateCampaignResponseBody, Integer, Hash)>] LoyaltiesCreateCampaignResponseBody data, response status code and response headers
@@ -402,7 +470,7 @@ module VoucherifySdk
     end
 
     # Export Loyalty Campaign Point Expiration
-    # Schedule the generation of a points expiration CSV file for a particular campaign.
+    # Schedule the generation of a point expiration CSV file for a particular campaign. It can list point buckets, which can have an ACTIVE or EXPIRED status.
     # @param campaign_id [String] Unique campaign ID or name.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesPointsExpirationExportCreateRequestBody] :loyalties_points_expiration_export_create_request_body Specify the data filters, types of data to return and order in which the results should be returned.
@@ -413,7 +481,7 @@ module VoucherifySdk
     end
 
     # Export Loyalty Campaign Point Expiration
-    # Schedule the generation of a points expiration CSV file for a particular campaign.
+    # Schedule the generation of a point expiration CSV file for a particular campaign. It can list point buckets, which can have an ACTIVE or EXPIRED status.
     # @param campaign_id [String] Unique campaign ID or name.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesPointsExpirationExportCreateRequestBody] :loyalties_points_expiration_export_create_request_body Specify the data filters, types of data to return and order in which the results should be returned.
@@ -467,7 +535,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Create Reward Assignment
+    # Create Loyalty Campaign Reward Assignment
     # Add rewards to a loyalty campaign.
     # @param campaign_id [String] Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
@@ -478,7 +546,7 @@ module VoucherifySdk
       data
     end
 
-    # Create Reward Assignment
+    # Create Loyalty Campaign Reward Assignment
     # Add rewards to a loyalty campaign.
     # @param campaign_id [String] Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
@@ -593,7 +661,7 @@ module VoucherifySdk
     end
 
     # Delete Loyalty Campaign
-    # Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards. If the force parameter is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin.
+    # Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards. If the force parameter is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to [the bin](/api-reference/bin/list-bin-entries).
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name.
@@ -604,7 +672,7 @@ module VoucherifySdk
     end
 
     # Delete Loyalty Campaign
-    # Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards. If the force parameter is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin.
+    # Deletes a loyalty campaign and all related loyalty cards. This action cannot be undone. Also, it immediately removes any redemptions on loyalty cards. If the force parameter is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to [the bin](/api-reference/bin/list-bin-entries).
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the loyalty campaign and all related loyalty cards will be moved to the bin. Going forward, the user will be able to create the next campaign with the same name.
@@ -654,7 +722,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Delete Reward Assignment
+    # Delete Campaign Reward Assignment
     # This method deletes a reward assignment for a particular loyalty campaign.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param assignment_id [String] A unique reward assignment ID.
@@ -665,7 +733,7 @@ module VoucherifySdk
       nil
     end
 
-    # Delete Reward Assignment
+    # Delete Campaign Reward Assignment
     # This method deletes a reward assignment for a particular loyalty campaign.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param assignment_id [String] A unique reward assignment ID.
@@ -835,6 +903,72 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Export Loyalty Campaign Transactions
+    # Export transactions is an asynchronous process that generates a CSV file with the data about or point movements on all loyalty cards in a given campaign. To export transactions: 1. In the export request, use parameters to select which fields will be exported, in what order, and which data will be filtered. 2. Use the returned id to track the export status with the [GET Export](/api-reference/exports/get-export) method. 3. In the GET Export method, when the returned status field has the DONE value, the export file has been generated. 4. Use the URL in the result property to download the file. You must be logged to your Voucherify account on a given cluster in the browser to be able to download the file. An export request will almost always result in a single file being generated by the system. However, when the data volume is large, the system may split the results into multiple files. An example export file can look as follows:    👍 Export Campaign Transactions  This method works in the same way the [POST Export Campaign Transactions](/api-reference/campaigns/export-campaign-transactions) does, but it is limited to loyalty campaigns only. The POST Export Campaign Transactions method can also export gift card campaign transactions.
+    # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesTransactionsExportCreateRequestBody] :loyalties_transactions_export_create_request_body Specify the parameters for the transaction export.
+    # @return [CampaignsTransactionsExportCreateResponseBody]
+    def export_loyalty_campaign_transactions(campaign_id, opts = {})
+      data, _status_code, _headers = export_loyalty_campaign_transactions_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Export Loyalty Campaign Transactions
+    # Export transactions is an asynchronous process that generates a CSV file with the data about or point movements on all loyalty cards in a given campaign. To export transactions: 1. In the export request, use parameters to select which fields will be exported, in what order, and which data will be filtered. 2. Use the returned id to track the export status with the [GET Export](/api-reference/exports/get-export) method. 3. In the GET Export method, when the returned status field has the DONE value, the export file has been generated. 4. Use the URL in the result property to download the file. You must be logged to your Voucherify account on a given cluster in the browser to be able to download the file. An export request will almost always result in a single file being generated by the system. However, when the data volume is large, the system may split the results into multiple files. An example export file can look as follows:    👍 Export Campaign Transactions  This method works in the same way the [POST Export Campaign Transactions](/api-reference/campaigns/export-campaign-transactions) does, but it is limited to loyalty campaigns only. The POST Export Campaign Transactions method can also export gift card campaign transactions.
+    # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
+    # @param [Hash] opts the optional parameters
+    # @option opts [LoyaltiesTransactionsExportCreateRequestBody] :loyalties_transactions_export_create_request_body Specify the parameters for the transaction export.
+    # @return [Array<(CampaignsTransactionsExportCreateResponseBody, Integer, Hash)>] CampaignsTransactionsExportCreateResponseBody data, response status code and response headers
+    private def export_loyalty_campaign_transactions_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.export_loyalty_campaign_transactions ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/transactions/export'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'loyalties_transactions_export_create_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CampaignsTransactionsExportCreateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.export_loyalty_campaign_transactions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#export_loyalty_campaign_transactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Export Loyalty Card Transactions
     # Export transactions that are associated with point movements on a loyalty card.   
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to export transaction data for.
@@ -901,7 +1035,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Export Loyalty Card Transactions
+    # Export Loyalty Card Transactions with campaign ID
     # Export transactions that are associated with point movements on a loyalty card.   
     # @param campaign_id [String] A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to export.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to export transaction data for.
@@ -913,7 +1047,7 @@ module VoucherifySdk
       data
     end
 
-    # Export Loyalty Card Transactions
+    # Export Loyalty Card Transactions with campaign ID
     # Export transactions that are associated with point movements on a loyalty card.   
     # @param campaign_id [String] A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to export.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to export transaction data for.
@@ -1151,7 +1285,7 @@ module VoucherifySdk
     end
 
     # Get Member
-    # Retrieve loyalty card with the given member ID (i.e. voucher code).      📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to retrieve loyalty card details without having to provide the campaignId as a path parameter.
+    # Retrieve loyalty card with the given member ID (i.e. voucher code).      📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/get-member-with-campaign-id). The URL was re-designed to allow you to retrieve loyalty card details without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card code assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @return [LoyaltiesMembersGetResponseBody]
@@ -1161,7 +1295,7 @@ module VoucherifySdk
     end
 
     # Get Member
-    # Retrieve loyalty card with the given member ID (i.e. voucher code).      📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to retrieve loyalty card details without having to provide the campaignId as a path parameter.
+    # Retrieve loyalty card with the given member ID (i.e. voucher code).      📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/get-member-with-campaign-id). The URL was re-designed to allow you to retrieve loyalty card details without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card code assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltiesMembersGetResponseBody, Integer, Hash)>] LoyaltiesMembersGetResponseBody data, response status code and response headers
@@ -1209,7 +1343,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Get Member
+    # Get Member with campaign ID
     # Retrieves the loyalty card with the given member ID (i.e. voucher code).
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] Unique code that identifies the loyalty card.
@@ -1220,7 +1354,7 @@ module VoucherifySdk
       data
     end
 
-    # Get Member
+    # Get Member with campaign ID
     # Retrieves the loyalty card with the given member ID (i.e. voucher code).
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] Unique code that identifies the loyalty card.
@@ -1270,7 +1404,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Get Reward Assignment
+    # Get Campaign Reward Assignments
     # Retrieve specific reward assignment.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param assignment_id [String] Unique reward assignment ID.
@@ -1281,7 +1415,7 @@ module VoucherifySdk
       data
     end
 
-    # Get Reward Assignment
+    # Get Campaign Reward Assignments
     # Retrieve specific reward assignment.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param assignment_id [String] Unique reward assignment ID.
@@ -1331,8 +1465,8 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Get Reward Assignment
-    # Retrieve specific reward assignment.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. 
+    # Get Campaign Reward Assignment
+    # Retrieve specific reward assignment.  📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/get-campaign-reward-assignments). 
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param assignment_id [String] A unique reward assignment ID.
     # @param [Hash] opts the optional parameters
@@ -1342,8 +1476,8 @@ module VoucherifySdk
       data
     end
 
-    # Get Reward Assignment
-    # Retrieve specific reward assignment.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. 
+    # Get Campaign Reward Assignment
+    # Retrieve specific reward assignment.  📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/get-campaign-reward-assignments). 
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param assignment_id [String] A unique reward assignment ID.
     # @param [Hash] opts the optional parameters
@@ -1454,7 +1588,7 @@ module VoucherifySdk
     end
 
     # List Campaign Pending Points
-    # >🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Lists all pending points that are currently assigned to all loyalty cards in a campaign. Once the points are added to the card, the entry is no longer returned.
+    # Lists all pending points that are currently assigned to all loyalty cards in a campaign. Once the points are added to the card, the entry is no longer returned. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
     # @param campaign_id [String] Unique campaign ID.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limit the number of the pending point entries that the API returns in the response.
@@ -1467,7 +1601,7 @@ module VoucherifySdk
     end
 
     # List Campaign Pending Points
-    # &gt;🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Lists all pending points that are currently assigned to all loyalty cards in a campaign. Once the points are added to the card, the entry is no longer returned.
+    # Lists all pending points that are currently assigned to all loyalty cards in a campaign. Once the points are added to the card, the entry is no longer returned. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
     # @param campaign_id [String] Unique campaign ID.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limit the number of the pending point entries that the API returns in the response.
@@ -1589,6 +1723,77 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Loyalty Campaign Transactions
+    # Retrieves all transactions for the campaign with the given campaign ID or campaign name.
+    # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [ParameterOrderListTransactions] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
+    # @option opts [ParametersFiltersListCampaignTransactions] :filters Filters for listing responses. The id filter denotes the unique transaction identifier.
+    # @return [LoyaltiesTransactionsListResponseBody]
+    def list_loyalty_campaign_transactions(campaign_id, opts = {})
+      data, _status_code, _headers = list_loyalty_campaign_transactions_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # List Loyalty Campaign Transactions
+    # Retrieves all transactions for the campaign with the given campaign ID or campaign name.
+    # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [ParameterOrderListTransactions] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
+    # @option opts [ParametersFiltersListCampaignTransactions] :filters Filters for listing responses. The id filter denotes the unique transaction identifier.
+    # @return [Array<(LoyaltiesTransactionsListResponseBody, Integer, Hash)>] LoyaltiesTransactionsListResponseBody data, response status code and response headers
+    private def list_loyalty_campaign_transactions_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: LoyaltiesApi.list_loyalty_campaign_transactions ...'
+      end
+      # resource path
+      local_var_path = '/v1/loyalties/{campaignId}/transactions'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'starting_after_id'] = opts[:'starting_after_id'] if !opts[:'starting_after_id'].nil?
+      query_params[:'filters'] = opts[:'filters'] if !opts[:'filters'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'LoyaltiesTransactionsListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"LoyaltiesApi.list_loyalty_campaign_transactions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: LoyaltiesApi#list_loyalty_campaign_transactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List Loyalty Card Transactions
     # Retrieve transaction data related to point movements for a specific loyalty card.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
@@ -1657,7 +1862,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # List Loyalty Card Transactions
+    # List Loyalty Card Transactions with campaign ID
     # Retrieve transaction data related to point movements for a specific loyalty card.
     # @param campaign_id [String] A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
@@ -1671,7 +1876,7 @@ module VoucherifySdk
       data
     end
 
-    # List Loyalty Card Transactions
+    # List Loyalty Card Transactions with campaign ID
     # Retrieve transaction data related to point movements for a specific loyalty card.
     # @param campaign_id [String] A unique identifier of the loyalty campaign containing the voucher whose transactions you would like to return.
     # @param member_id [String] A unique code identifying the loyalty card that you are looking to retrieve transaction data for.
@@ -1987,7 +2192,7 @@ module VoucherifySdk
     end
 
     # List Member Activity
-    #   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to get member activities without having to provide the campaignId as a path parameter. Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
+    #   📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/list-member-activity-with-campaign-id). The URL was re-designed to allow you to get member activities without having to provide the campaignId as a path parameter. Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
@@ -2000,7 +2205,7 @@ module VoucherifySdk
     end
 
     # List Member Activity
-    #   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to get member activities without having to provide the campaignId as a path parameter. Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
+    #   📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/list-member-activity-with-campaign-id). The URL was re-designed to allow you to get member activities without having to provide the campaignId as a path parameter. Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
@@ -2054,7 +2259,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # List Member Activity
+    # List Member Activity with campaign ID
     # Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] A code that identifies the loyalty card.
@@ -2068,7 +2273,7 @@ module VoucherifySdk
       data
     end
 
-    # List Member Activity
+    # List Member Activity with campaign ID
     # Retrieves the list of activities for the given member ID related to a voucher and customer who is the holder of the voucher.
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] A code that identifies the loyalty card.
@@ -2184,7 +2389,7 @@ module VoucherifySdk
     end
 
     # List Member Pending Points
-    # >🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to list member pending points without having to provide the campaignId as a path parameter. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned.
+    #   📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/list-member-pending-points-with-campaign-id). The URL was re-designed to list member pending points without having to provide the campaignId as a path parameter. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
     # @param member_id [String] Unique loyalty card code assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limit the number of the pending point entries that the API returns in the response.
@@ -2197,7 +2402,7 @@ module VoucherifySdk
     end
 
     # List Member Pending Points
-    # &gt;🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to list member pending points without having to provide the campaignId as a path parameter. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned.
+    #   📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/list-member-pending-points-with-campaign-id). The URL was re-designed to list member pending points without having to provide the campaignId as a path parameter. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
     # @param member_id [String] Unique loyalty card code assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limit the number of the pending point entries that the API returns in the response.
@@ -2251,8 +2456,8 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # List Member Pending Points
-    # >🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned.
+    # List Member Pending Points with campaign ID
+    # Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] Unique loyalty card code assigned to a particular customer.
     # @param [Hash] opts the optional parameters
@@ -2265,8 +2470,8 @@ module VoucherifySdk
       data
     end
 
-    # List Member Pending Points
-    # &gt;🚧 Beta endpoint The endpoint is behind a feature flag as it is still in development. Contact [Voucherify support](https://www.voucherify.io/contact-support) to unlock the feature for your organization. All current parameters and fields are listed and described. Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned.
+    # List Member Pending Points with campaign ID
+    # Lists all pending points that are currently assigned to the loyalty card. Once the points are added to the card, the entry is no longer returned. 👍 Configuring pending points Pending points are configured as part of an earning rule with [POST Create earning rule](/api-reference/loyalties/create-earning-rule) or [PUT Update earning rule](/api-reference/loyalties/update-earning-rule).
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] Unique loyalty card code assigned to a particular customer.
     # @param [Hash] opts the optional parameters
@@ -2467,7 +2672,7 @@ module VoucherifySdk
     end
 
     # List Loyalty Card Point Expiration
-    # Retrieve loyalty point expiration buckets for a given loyalty card. Expired point buckets are not returned in this endpoint. You can use the Exports API to retrieve a list of both ACTIVE and EXPIRED point buckets.
+    # Retrieve loyalty point expiration buckets for a given loyalty card. Expired point buckets are not returned in this endpoint. You can use the [Exports API](/api-reference/exports/create-export) to retrieve a list of both ACTIVE and EXPIRED point buckets.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param member_id [String] Loyalty card code.
     # @param [Hash] opts the optional parameters
@@ -2480,7 +2685,7 @@ module VoucherifySdk
     end
 
     # List Loyalty Card Point Expiration
-    # Retrieve loyalty point expiration buckets for a given loyalty card. Expired point buckets are not returned in this endpoint. You can use the Exports API to retrieve a list of both ACTIVE and EXPIRED point buckets.
+    # Retrieve loyalty point expiration buckets for a given loyalty card. Expired point buckets are not returned in this endpoint. You can use the [Exports API](/api-reference/exports/create-export) to retrieve a list of both ACTIVE and EXPIRED point buckets.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param member_id [String] Loyalty card code.
     # @param [Hash] opts the optional parameters
@@ -2533,8 +2738,8 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # List Reward Assignments
-    # Returns reward assignments from a given loyalty campaign.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to be more contextual to the type of data returned in the response.
+    # List Reward Assignments with campaign ID
+    # Returns reward assignments from a given loyalty campaign.  📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/list-campaign-rewards). The URL was re-designed to be more contextual to the type of data returned in the response.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
@@ -2546,8 +2751,8 @@ module VoucherifySdk
       data
     end
 
-    # List Reward Assignments
-    # Returns reward assignments from a given loyalty campaign.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to be more contextual to the type of data returned in the response.
+    # List Reward Assignments with campaign ID
+    # Returns reward assignments from a given loyalty campaign.  📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/list-campaign-rewards). The URL was re-designed to be more contextual to the type of data returned in the response.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
@@ -2601,7 +2806,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # List Reward Assignments
+    # List Campaign Rewards
     # Returns active rewards from a given loyalty campaign.
     # @param campaign_id [String] Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
@@ -2614,7 +2819,7 @@ module VoucherifySdk
       data
     end
 
-    # List Reward Assignments
+    # List Campaign Rewards
     # Returns active rewards from a given loyalty campaign.
     # @param campaign_id [String] Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
@@ -2670,7 +2875,7 @@ module VoucherifySdk
     end
 
     # Redeem Reward
-    #   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to redeem a reward without having to provide the campaignId as a path parameter.
+    #   📘 Alternative endpoint This endpoint is an alternative to this [endpoint](/api-reference/loyalties/redeem-reward-with-campaign-id). The URL was re-designed to allow you to redeem a reward without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesMembersRedemptionRedeemRequestBody] :loyalties_members_redemption_redeem_request_body Specify the reward to be redeemed. In case of a pay with points reward, specify the order and the number of points to be applied to the order. Please note that if you do not specify the amount of points, the application will default to applying the number of points to pay for the remainder of the order. If the limit of available points on the card is reached, then only the available points on the card will be applied to the order.
@@ -2681,7 +2886,7 @@ module VoucherifySdk
     end
 
     # Redeem Reward
-    #   📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to redeem a reward without having to provide the campaignId as a path parameter.
+    #   📘 Alternative endpoint This endpoint is an alternative to this [endpoint](/api-reference/loyalties/redeem-reward-with-campaign-id). The URL was re-designed to allow you to redeem a reward without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesMembersRedemptionRedeemRequestBody] :loyalties_members_redemption_redeem_request_body Specify the reward to be redeemed. In case of a pay with points reward, specify the order and the number of points to be applied to the order. Please note that if you do not specify the amount of points, the application will default to applying the number of points to pay for the remainder of the order. If the limit of available points on the card is reached, then only the available points on the card will be applied to the order.
@@ -2735,7 +2940,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Redeem Reward
+    # Redeem Reward with campaign ID
     # Exchange points from a loyalty card for a specified reward. This API method returns an assigned award in the response. It means that if a requesting customer gets a coupon code with a discount for the next order, that discount code will be visible in response as part of the reward object definition.
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] A code that identifies the loyalty card.
@@ -2747,7 +2952,7 @@ module VoucherifySdk
       data
     end
 
-    # Redeem Reward
+    # Redeem Reward with campaign ID
     # Exchange points from a loyalty card for a specified reward. This API method returns an assigned award in the response. It means that if a requesting customer gets a coupon code with a discount for the next order, that discount code will be visible in response as part of the reward object definition.
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] A code that identifies the loyalty card.
@@ -2804,7 +3009,7 @@ module VoucherifySdk
     end
 
     # Transfer Loyalty Points
-    # Transfer points between different loyalty cards. You need to provide the campaign ID and the loyalty card ID you want the points to be transferred to as path parameters in the URL. In the request body, you provide the loyalty cards you want the points to be transferred from and the number of points to transfer from each card.
+    # Transfer points between different loyalty cards which have holders. Provide the campaign ID and the loyalty card ID you want the points to be transferred to as path parameters. In the request body, provide the loyalty cards you want the points to be transferred from and the number of points to transfer from each card. Transfer works only for loyalty cards that have holders, meaning the cards were published to customers. The transferred points expire according to the target program expiration rules.
     # @param campaign_id [String] A unique identifier of the loyalty campaign containing the voucher to which the loyalty points will be sent (destination).
     # @param member_id [String] A unique code identifying the loyalty card to which the user wants to transfer loyalty points (destination).
     # @param [Hash] opts the optional parameters
@@ -2816,7 +3021,7 @@ module VoucherifySdk
     end
 
     # Transfer Loyalty Points
-    # Transfer points between different loyalty cards. You need to provide the campaign ID and the loyalty card ID you want the points to be transferred to as path parameters in the URL. In the request body, you provide the loyalty cards you want the points to be transferred from and the number of points to transfer from each card.
+    # Transfer points between different loyalty cards which have holders. Provide the campaign ID and the loyalty card ID you want the points to be transferred to as path parameters. In the request body, provide the loyalty cards you want the points to be transferred from and the number of points to transfer from each card. Transfer works only for loyalty cards that have holders, meaning the cards were published to customers. The transferred points expire according to the target program expiration rules.
     # @param campaign_id [String] A unique identifier of the loyalty campaign containing the voucher to which the loyalty points will be sent (destination).
     # @param member_id [String] A unique code identifying the loyalty card to which the user wants to transfer loyalty points (destination).
     # @param [Hash] opts the optional parameters
@@ -2939,8 +3144,8 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Add or Remove Loyalty Card Balance
-    # This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
+    # Adjust Loyalty Card Balance
+    # This method gives adds or removes balance to an existing loyalty card that is assigned to a holder. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.  📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/adjust-loyalty-card-balance-with-campaign-id). The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesMembersBalanceUpdateRequestBody] :loyalties_members_balance_update_request_body Specify the point adjustment along with the expiration mechanism.
@@ -2950,8 +3155,8 @@ module VoucherifySdk
       data
     end
 
-    # Add or Remove Loyalty Card Balance
-    # This method gives adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   &gt;🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.  📘 Alternative endpoint  This endpoint is an alternative to this endpoint. The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
+    # Adjust Loyalty Card Balance
+    # This method gives adds or removes balance to an existing loyalty card that is assigned to a holder. The removal of points will consume the points that expire the soonest.   &gt;🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.  📘 Alternative endpoint  This endpoint is an alternative to this [endpoint](/api-reference/loyalties/adjust-loyalty-card-balance-with-campaign-id). The URL was re-designed to allow you to add or remove loyalty card balance without having to provide the campaignId as a path parameter.
     # @param member_id [String] Unique loyalty card assigned to a particular customer.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesMembersBalanceUpdateRequestBody] :loyalties_members_balance_update_request_body Specify the point adjustment along with the expiration mechanism.
@@ -3005,8 +3210,8 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Add or Remove Loyalty Card Balance
-    # This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
+    # Adjust Loyalty Card Balance with campaign ID
+    # This method adds or removes balance to an existing loyalty card that is assigned to a holder. The removal of points will consume the points that expire the soonest.   >🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] A code that identifies the loyalty card.
     # @param [Hash] opts the optional parameters
@@ -3017,8 +3222,8 @@ module VoucherifySdk
       data
     end
 
-    # Add or Remove Loyalty Card Balance
-    # This method adds or removes balance to an existing loyalty card. The removal of points will consume the points that expire the soonest.   &gt;🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
+    # Adjust Loyalty Card Balance with campaign ID
+    # This method adds or removes balance to an existing loyalty card that is assigned to a holder. The removal of points will consume the points that expire the soonest.   &gt;🚧 Async Action    This is an async action. If you want to perform several add or remove loyalty card balance actions in a short time and their order matters, set up sufficient time-out between the calls.
     # @param campaign_id [String] Unique campaign ID.
     # @param member_id [String] A code that identifies the loyalty card.
     # @param [Hash] opts the optional parameters
@@ -3074,7 +3279,7 @@ module VoucherifySdk
     end
 
     # Update Loyalty Campaign
-    # Updates a loyalty program.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the loyalty cards which have not been published or redeemed yet.
+    # Updates a loyalty program.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the [loyalty cards](/api-reference/loyalties/get-member) which have not been published or redeemed yet.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesUpdateCampaignRequestBody] :loyalties_update_campaign_request_body Specify the new values for the parameters that you would like to update for the given loyalty campaign.
@@ -3085,7 +3290,7 @@ module VoucherifySdk
     end
 
     # Update Loyalty Campaign
-    # Updates a loyalty program.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the loyalty cards which have not been published or redeemed yet.
+    # Updates a loyalty program.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the [loyalty cards](/api-reference/loyalties/get-member) which have not been published or redeemed yet.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesUpdateCampaignRequestBody] :loyalties_update_campaign_request_body Specify the new values for the parameters that you would like to update for the given loyalty campaign.
@@ -3139,7 +3344,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Update Reward Assignment
+    # Update Campaign Reward Assignment
     # Updates rewards parameters, i.e. the points cost for the specific reward.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param assignment_id [String] A unique reward assignment ID.
@@ -3151,7 +3356,7 @@ module VoucherifySdk
       data
     end
 
-    # Update Reward Assignment
+    # Update Campaign Reward Assignment
     # Updates rewards parameters, i.e. the points cost for the specific reward.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param assignment_id [String] A unique reward assignment ID.

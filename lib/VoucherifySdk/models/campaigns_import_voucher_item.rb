@@ -26,7 +26,7 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the code. A set of key/value pairs that you can attach to a voucher object. It can be useful for storing additional information about the voucher in a structured format.
     attr_accessor :metadata
 
-    # Tag defining the category that this voucher belongs to. Useful when listing vouchers using the [List Vouchers](ref:list-vouchers) endpoint.
+    # Tag defining the category that this voucher belongs to. Useful when listing vouchers using the [List Vouchers](/api-reference/vouchers/list-vouchers) endpoint.
     attr_accessor :category
 
     # Activation timestamp presented in the ISO 8601 format. Voucher is *inactive before* this date. Start date defines when the code starts to be active. Allowed date formats are: - YYYY-MM-DD - YYYY-MM-DDTHH - YYYY-MM-DDTHH:mm - YYYY-MM-DDTHH:mm:ss - YYYY-MM-DDTHH:mm:ssZ - YYYY-MM-DDTHH:mm:ss.SSSZ

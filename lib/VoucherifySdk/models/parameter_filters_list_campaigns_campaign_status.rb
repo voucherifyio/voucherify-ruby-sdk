@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Type of the campaign. Allowed values: `DONE`, `IN_PROGRESS`, `DRAFT`, `FAILED` `MODIFYING`
+  # Status of the campaign. Allowed values: `DONE`, `IN_PROGRESS`, `DRAFT`, `FAILED` `MODIFYING`
   class ParameterFiltersListCampaignsCampaignStatus
     attr_accessor :conditions
 
@@ -40,6 +40,7 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'conditions'
       ])
     end
 

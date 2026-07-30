@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Determines the hours of validity, e.g. to create a happy hours scenario.
   class ValidityHours
-    # Defines the reccuring period(s) when the resource is active. The periods should not overlap.
+    # Defines the recurring period(s) when the resource is active. The periods should not overlap.
     attr_accessor :daily
 
     # Attribute mapping from ruby-style variable name to JSON key.

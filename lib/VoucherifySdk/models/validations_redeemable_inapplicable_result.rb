@@ -20,11 +20,14 @@ module VoucherifySdk
 
     attr_accessor :details
 
+    attr_accessor :bundle
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'error' => :'error',
-        :'details' => :'details'
+        :'details' => :'details',
+        :'bundle' => :'bundle'
       }
     end
 
@@ -37,14 +40,15 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'error' => :'Error',
-        :'details' => :'ValidationsRedeemableInapplicableResultDetails'
+        :'details' => :'ValidationsRedeemableInapplicableResultDetails',
+        :'bundle' => :'Bundle'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'details'
+        :'details',
       ])
     end
 
@@ -62,6 +66,10 @@ module VoucherifySdk
 
       if attributes.key?(:'details')
         self.details = attributes[:'details']
+      end
+
+      if attributes.key?(:'bundle')
+        self.bundle = attributes[:'bundle']
       end
     end
 
@@ -86,7 +94,8 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           error == o.error &&
-          details == o.details
+          details == o.details &&
+          bundle == o.bundle
     end
 
     # @see the `==` method
@@ -98,7 +107,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [error, details].hash
+      [error, details, bundle].hash
     end
 
     # Builds the object from hash

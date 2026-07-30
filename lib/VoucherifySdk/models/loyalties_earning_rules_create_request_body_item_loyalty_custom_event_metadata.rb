@@ -22,6 +22,9 @@ module VoucherifySdk
     # Number of points to be awarded, i.e. how many points to be added to the loyalty card.
     attr_accessor :points
 
+    # Formula used to dynamically calculate the rewarded points.
+    attr_accessor :points_formula
+
     #  Custom event metadata property.
     attr_accessor :property
 
@@ -30,6 +33,7 @@ module VoucherifySdk
       {
         :'every' => :'every',
         :'points' => :'points',
+        :'points_formula' => :'points_formula',
         :'property' => :'property'
       }
     end
@@ -44,6 +48,7 @@ module VoucherifySdk
       {
         :'every' => :'Integer',
         :'points' => :'Integer',
+        :'points_formula' => :'String',
         :'property' => :'String'
       }
     end
@@ -53,6 +58,7 @@ module VoucherifySdk
       Set.new([
         :'every',
         :'points',
+        :'points_formula',
         :'property'
       ])
     end
@@ -71,6 +77,10 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
+      end
+
+      if attributes.key?(:'points_formula')
+        self.points_formula = attributes[:'points_formula']
       end
 
       if attributes.key?(:'property')
@@ -100,6 +110,7 @@ module VoucherifySdk
       self.class == o.class &&
           every == o.every &&
           points == o.points &&
+          points_formula == o.points_formula &&
           property == o.property
     end
 
@@ -112,7 +123,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [every, points, property].hash
+      [every, points, points_formula, property].hash
     end
 
     # Builds the object from hash

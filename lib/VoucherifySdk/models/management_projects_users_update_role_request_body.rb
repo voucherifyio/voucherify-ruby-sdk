@@ -15,7 +15,7 @@ require 'time'
 
 module VoucherifySdk
   class ManagementProjectsUsersUpdateRoleRequestBody
-    # The role of the user to be added. It can be a custom role or one of following predefined roles: `ADMIN`, `USER`, `VIEWER`, `MERCHANT` or an ID of a custom role..
+    # The role of the user to be added. It can be a custom role or one of following predefined roles: - `ADMIN`, `USER`, `VIEWER`, `MERCHANT` - or an ID of a custom role.
     attr_accessor :role
 
     # Attribute mapping from ruby-style variable name to JSON key.

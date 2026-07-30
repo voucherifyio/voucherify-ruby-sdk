@@ -41,8 +41,8 @@ module VoucherifySdk
         :'before' => :'$before',
         :'has_value' => :'$has_value',
         :'is_unknown' => :'$is_unknown',
-        :'more_than' => :'more_than',
-        :'less_than' => :'less_than'
+        :'more_than' => :'$more_than',
+        :'less_than' => :'$less_than'
       }
     end
 

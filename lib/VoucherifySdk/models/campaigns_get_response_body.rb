@@ -28,7 +28,7 @@ module VoucherifySdk
     # Type of campaign.
     attr_accessor :campaign_type
 
-    # Defines whether the campaign can be updated with new vouchers after campaign creation or if the campaign consists of standalone vouchers.  - `AUTO_UPDATE`: the campaign is dynamic, i.e. vouchers will generate based on set criteria -  `STATIC`: vouchers need to be manually published - `STANDALONE`: campaign for single vouchers
+    # Defines whether the campaign can be updated with new vouchers after campaign creation or if the campaign consists of generic (standalone) vouchers.  - `AUTO_UPDATE`: the campaign is dynamic, i.e. vouchers will generate based on set criteria -  `STATIC`: vouchers need to be manually published - `STANDALONE`: campaign for single vouchers
     attr_accessor :type
 
     attr_accessor :voucher
@@ -36,7 +36,7 @@ module VoucherifySdk
     # Indicates whether customers will be able to auto-join a loyalty campaign if any earning rule is fulfilled.
     attr_accessor :auto_join
 
-    # If this value is set to `true`, customers will be able to join the campaign only once. It is always `false` for standalone voucher campaigns and it cannot be changed in them.
+    # If this value is set to `true`, customers will be able to join the campaign only once. It is always `false` for generic (standalone) vouchers campaigns and it cannot be changed in them. It is always `true` for loyalty campaigns and it cannot be changed in them.
     attr_accessor :join_once
 
     # Flag indicating whether the campaign is to use the voucher's metadata schema instead of the campaign metadata schema.
@@ -82,7 +82,7 @@ module VoucherifySdk
     # Indicates the status of the campaign's voucher generation.
     attr_accessor :vouchers_generation_status
 
-    # Indicates whether the campaign can be only read by a restricted user in the Areas and Stores enterprise feature. It is returned only to restricted users; this field is not returned for users with other roles.
+    # Indicates whether the campaign can be only read by a restricted user in the Areas and Stores enterprise feature. It is returned only to restricted users; this field is not returned for users with other roles. It is also not returned for restricted users who use the [GET Campaign summary](/api-reference/campaigns/get-campaign-summary) endpoint.
     attr_accessor :readonly
 
     # Indicates whether the resource can be deleted.
@@ -91,7 +91,7 @@ module VoucherifySdk
     # Unique category ID that this campaign belongs to.
     attr_accessor :category_id
 
-    # Contains details about the category.
+    # Contains details about the campaign category. For the GET [List campaigns](/api-reference/campaigns/list-campaigns) endpoint, this is returned only if the `expand=category` query parameter is passed in the request. Otherwise, it is returned as an empty array. For GET [Campaign summary](/api-reference/campaigns/get-campaign-summary) endpoint, it is always returned as an empty array.
     attr_accessor :categories
 
     # The type of the object represented by JSON. This object stores information about the campaign.

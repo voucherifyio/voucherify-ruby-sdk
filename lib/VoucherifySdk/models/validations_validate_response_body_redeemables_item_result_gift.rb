@@ -14,14 +14,18 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Stores the amount of gift card credits to be applied in the redemption.
+  # Stores the amount of gift card credits to be applied.
   class ValidationsValidateResponseBodyRedeemablesItemResultGift
-    # Total number of gift card credits to be applied in the redemption expressed as the smallest currency unit (e.g. 100 cents for $1.00).
+    # Available funds at the moment of validation. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
+    attr_accessor :balance
+
+    # Total number of gift card credits to be applied. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :credits
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'balance' => :'balance',
         :'credits' => :'credits'
       }
     end
@@ -34,6 +38,7 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'balance' => :'Integer',
         :'credits' => :'Integer'
       }
     end
@@ -41,6 +46,7 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'balance',
         :'credits'
       ])
     end
@@ -52,6 +58,10 @@ module VoucherifySdk
       attributes = attributes.each_with_object({}) { |(k, v), h|
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'balance')
+        self.balance = attributes[:'balance']
+      end
 
       if attributes.key?(:'credits')
         self.credits = attributes[:'credits']
@@ -78,6 +88,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          balance == o.balance &&
           credits == o.credits
     end
 
@@ -90,7 +101,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [credits].hash
+      [balance, credits].hash
     end
 
     # Builds the object from hash

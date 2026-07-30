@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Data conditions used to narrow down the data records to be returned in the result.
   class ParameterFiltersListCampaignsCampaignStatusConditions
     # Array of resource values that should be included in the results (multiple values).
     attr_accessor :_in

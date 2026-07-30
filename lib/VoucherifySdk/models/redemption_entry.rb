@@ -42,6 +42,8 @@ module VoucherifySdk
 
     attr_accessor :status
 
+    attr_accessor :session
+
     attr_accessor :related_redemptions
 
     # If the result is `FAILURE`, this parameter will provide a generic reason as to why the redemption failed.
@@ -109,6 +111,7 @@ module VoucherifySdk
         :'redemption' => :'redemption',
         :'result' => :'result',
         :'status' => :'status',
+        :'session' => :'session',
         :'related_redemptions' => :'related_redemptions',
         :'failure_code' => :'failure_code',
         :'failure_message' => :'failure_message',
@@ -144,6 +147,7 @@ module VoucherifySdk
         :'redemption' => :'String',
         :'result' => :'String',
         :'status' => :'String',
+        :'session' => :'RedemptionEntrySession',
         :'related_redemptions' => :'RedemptionEntryRelatedRedemptions',
         :'failure_code' => :'String',
         :'failure_message' => :'String',
@@ -174,6 +178,7 @@ module VoucherifySdk
         :'redemption',
         :'result',
         :'status',
+        :'session',
         :'related_redemptions',
         :'failure_code',
         :'failure_message',
@@ -236,6 +241,10 @@ module VoucherifySdk
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'session')
+        self.session = attributes[:'session']
       end
 
       if attributes.key?(:'related_redemptions')
@@ -333,6 +342,7 @@ module VoucherifySdk
           redemption == o.redemption &&
           result == o.result &&
           status == o.status &&
+          session == o.session &&
           related_redemptions == o.related_redemptions &&
           failure_code == o.failure_code &&
           failure_message == o.failure_message &&
@@ -358,7 +368,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, object, date, customer_id, tracking_id, metadata, amount, redemption, result, status, related_redemptions, failure_code, failure_message, order, channel, customer, related_object_type, related_object_id, promotion_tier, reward, gift, loyalty_card, voucher, reason].hash
+      [id, object, date, customer_id, tracking_id, metadata, amount, redemption, result, status, session, related_redemptions, failure_code, failure_message, order, channel, customer, related_object_type, related_object_id, promotion_tier, reward, gift, loyalty_card, voucher, reason].hash
     end
 
     # Builds the object from hash

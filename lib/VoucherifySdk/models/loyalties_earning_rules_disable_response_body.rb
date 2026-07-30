@@ -58,6 +58,8 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the earning rule. A set of key/value pairs that you can attach to an earning rule object. It can be useful for storing additional information about the earning rule in a structured format.
     attr_accessor :metadata
 
+    attr_accessor :expiration_rules
+
     # Timestamp representing the date and time when the earning rule was last updated in ISO 8601 format.
     attr_accessor :updated_at
 
@@ -106,6 +108,7 @@ module VoucherifySdk
         :'validity_day_of_week' => :'validity_day_of_week',
         :'validity_hours' => :'validity_hours',
         :'metadata' => :'metadata',
+        :'expiration_rules' => :'expiration_rules',
         :'updated_at' => :'updated_at',
         :'active' => :'active'
       }
@@ -136,6 +139,7 @@ module VoucherifySdk
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
         :'metadata' => :'Object',
+        :'expiration_rules' => :'EarningRuleExpirationRules',
         :'updated_at' => :'Time',
         :'active' => :'Boolean'
       }
@@ -242,6 +246,10 @@ module VoucherifySdk
         self.metadata = attributes[:'metadata']
       end
 
+      if attributes.key?(:'expiration_rules')
+        self.expiration_rules = attributes[:'expiration_rules']
+      end
+
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
       end
@@ -292,6 +300,7 @@ module VoucherifySdk
           validity_day_of_week == o.validity_day_of_week &&
           validity_hours == o.validity_hours &&
           metadata == o.metadata &&
+          expiration_rules == o.expiration_rules &&
           updated_at == o.updated_at &&
           active == o.active
     end
@@ -305,7 +314,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, loyalty, event, custom_event, segment, loyalty_tier, pending_points, source, object, automation_id, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, metadata, updated_at, active].hash
+      [id, created_at, loyalty, event, custom_event, segment, loyalty_tier, pending_points, source, object, automation_id, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, metadata, expiration_rules, updated_at, active].hash
     end
 
     # Builds the object from hash

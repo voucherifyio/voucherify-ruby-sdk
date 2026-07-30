@@ -49,8 +49,6 @@ module VoucherifySdk
     # Redemption status.
     attr_accessor :status
 
-    attr_accessor :related_redemptions
-
     # If the result is `FAILURE`, this parameter will provide a generic reason as to why the redemption failed.
     attr_accessor :failure_code
 
@@ -78,6 +76,8 @@ module VoucherifySdk
     attr_accessor :gift
 
     attr_accessor :loyalty_card
+
+    attr_accessor :related_redemptions
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -115,7 +115,6 @@ module VoucherifySdk
         :'reason' => :'reason',
         :'result' => :'result',
         :'status' => :'status',
-        :'related_redemptions' => :'related_redemptions',
         :'failure_code' => :'failure_code',
         :'failure_message' => :'failure_message',
         :'order' => :'order',
@@ -127,7 +126,8 @@ module VoucherifySdk
         :'promotion_tier' => :'promotion_tier',
         :'reward' => :'reward',
         :'gift' => :'gift',
-        :'loyalty_card' => :'loyalty_card'
+        :'loyalty_card' => :'loyalty_card',
+        :'related_redemptions' => :'related_redemptions'
       }
     end
 
@@ -150,7 +150,6 @@ module VoucherifySdk
         :'reason' => :'String',
         :'result' => :'String',
         :'status' => :'String',
-        :'related_redemptions' => :'RedemptionsRollbackCreateResponseBodyRelatedRedemptions',
         :'failure_code' => :'String',
         :'failure_message' => :'String',
         :'order' => :'OrderCalculated',
@@ -162,7 +161,8 @@ module VoucherifySdk
         :'promotion_tier' => :'PromotionTier',
         :'reward' => :'RedemptionRewardResult',
         :'gift' => :'RedemptionsRollbackCreateResponseBodyGift',
-        :'loyalty_card' => :'RedemptionsRollbackCreateResponseBodyLoyaltyCard'
+        :'loyalty_card' => :'RedemptionsRollbackCreateResponseBodyLoyaltyCard',
+        :'related_redemptions' => :'RedemptionsRollbackCreateResponseBodyRelatedRedemptions'
       }
     end
 
@@ -180,14 +180,14 @@ module VoucherifySdk
         :'reason',
         :'result',
         :'status',
-        :'related_redemptions',
         :'failure_code',
         :'failure_message',
         :'channel',
         :'related_object_type',
         :'related_object_id',
         :'gift',
-        :'loyalty_card'
+        :'loyalty_card',
+        :'related_redemptions'
       ])
     end
 
@@ -245,10 +245,6 @@ module VoucherifySdk
         self.status = attributes[:'status']
       end
 
-      if attributes.key?(:'related_redemptions')
-        self.related_redemptions = attributes[:'related_redemptions']
-      end
-
       if attributes.key?(:'failure_code')
         self.failure_code = attributes[:'failure_code']
       end
@@ -296,6 +292,10 @@ module VoucherifySdk
       if attributes.key?(:'loyalty_card')
         self.loyalty_card = attributes[:'loyalty_card']
       end
+
+      if attributes.key?(:'related_redemptions')
+        self.related_redemptions = attributes[:'related_redemptions']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -337,7 +337,6 @@ module VoucherifySdk
           reason == o.reason &&
           result == o.result &&
           status == o.status &&
-          related_redemptions == o.related_redemptions &&
           failure_code == o.failure_code &&
           failure_message == o.failure_message &&
           order == o.order &&
@@ -349,7 +348,8 @@ module VoucherifySdk
           promotion_tier == o.promotion_tier &&
           reward == o.reward &&
           gift == o.gift &&
-          loyalty_card == o.loyalty_card
+          loyalty_card == o.loyalty_card &&
+          related_redemptions == o.related_redemptions
     end
 
     # @see the `==` method
@@ -361,7 +361,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, object, date, customer_id, tracking_id, metadata, amount, redemption, reason, result, status, related_redemptions, failure_code, failure_message, order, channel, customer, related_object_type, related_object_id, voucher, promotion_tier, reward, gift, loyalty_card].hash
+      [id, object, date, customer_id, tracking_id, metadata, amount, redemption, reason, result, status, failure_code, failure_message, order, channel, customer, related_object_type, related_object_id, voucher, promotion_tier, reward, gift, loyalty_card, related_redemptions].hash
     end
 
     # Builds the object from hash

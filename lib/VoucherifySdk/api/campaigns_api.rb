@@ -88,7 +88,7 @@ module VoucherifySdk
     end
 
     # Add Vouchers to Campaign
-    # This method gives the possibility to push new vouchers to an existing campaign. New vouchers will inherit properties from the campaign profile. However, it is possible to overwrite some of them in the request body. If you provide an optional code_config parameter with a voucher code configuration, then it will be used to generate new voucher codes. Otherwise, the voucher code configuration from the campaign will be used. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # This method gives the possibility to push new vouchers to an existing campaign. New vouchers will inherit properties from the campaign profile. However, it is possible to overwrite some of them in the request body. If you provide an optional code_config parameter with a voucher code configuration, then it will be used to generate new voucher codes. Otherwise, the voucher code configuration from the campaign will be used. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this [API request](/api-reference/async-actions/get-async-action).
     # @param campaign_id [String] The campaign ID or name of the campaign to which voucher(s) will be added. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :vouchers_count Number of vouchers that should be added.
@@ -100,7 +100,7 @@ module VoucherifySdk
     end
 
     # Add Vouchers to Campaign
-    # This method gives the possibility to push new vouchers to an existing campaign. New vouchers will inherit properties from the campaign profile. However, it is possible to overwrite some of them in the request body. If you provide an optional code_config parameter with a voucher code configuration, then it will be used to generate new voucher codes. Otherwise, the voucher code configuration from the campaign will be used. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # This method gives the possibility to push new vouchers to an existing campaign. New vouchers will inherit properties from the campaign profile. However, it is possible to overwrite some of them in the request body. If you provide an optional code_config parameter with a voucher code configuration, then it will be used to generate new voucher codes. Otherwise, the voucher code configuration from the campaign will be used. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this [API request](/api-reference/async-actions/get-async-action).
     # @param campaign_id [String] The campaign ID or name of the campaign to which voucher(s) will be added. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :vouchers_count Number of vouchers that should be added.
@@ -157,7 +157,7 @@ module VoucherifySdk
     end
 
     # Create Campaign
-    # Method to create a batch of vouchers aggregated in one campaign. You can choose a variety of voucher types and define a unique pattern for generating codes.    📘 Global uniqueness  All campaign codes are unique across the whole project. Voucherify will not allow you to generate 2 campaigns with the same coupon code.    🚧 Code generation status  This is an asynchronous action; you cant read or modify a newly created campaign until the code generation is completed. See the creation_status field in the campaign object description. 🚧 Standalone Vouchers and Campaigns In version [v20241004](https://support.voucherify.io/article/23-whats-new-in-voucherify#v20241004), standalone vouchers created through the Voucherify dashboard create a campaign for that voucher. However, you cannot create a standalone discount or gift voucher campaign with the type: STANDALONE through the API. Voucherify developers work on adding that feature. Follow the [Voucherify Release Notes](https://support.voucherify.io/article/23-whats-new-in-voucherify#v20241004) for more details about released features.
+    # Method to create a batch of vouchers aggregated in one campaign. You can choose a variety of voucher types and define a unique pattern for generating codes.    📘 Global uniqueness  All campaign codes are unique across the whole project. Voucherify will not allow you to generate 2 campaigns with the same coupon code.    🚧 Code generation status  This is an asynchronous action; you cant read or modify a newly created campaign until the code generation is completed. See the creation_status field in the [campaign object](/api-reference/campaigns/campaign-object) description.
     # @param [Hash] opts the optional parameters
     # @option opts [CampaignsCreateRequestBody] :campaigns_create_request_body Specify the details of the campaign that you would like to create.
     # @return [CampaignsCreateResponseBody]
@@ -167,7 +167,7 @@ module VoucherifySdk
     end
 
     # Create Campaign
-    # Method to create a batch of vouchers aggregated in one campaign. You can choose a variety of voucher types and define a unique pattern for generating codes.    📘 Global uniqueness  All campaign codes are unique across the whole project. Voucherify will not allow you to generate 2 campaigns with the same coupon code.    🚧 Code generation status  This is an asynchronous action; you cant read or modify a newly created campaign until the code generation is completed. See the creation_status field in the campaign object description. 🚧 Standalone Vouchers and Campaigns In version [v20241004](https://support.voucherify.io/article/23-whats-new-in-voucherify#v20241004), standalone vouchers created through the Voucherify dashboard create a campaign for that voucher. However, you cannot create a standalone discount or gift voucher campaign with the type: STANDALONE through the API. Voucherify developers work on adding that feature. Follow the [Voucherify Release Notes](https://support.voucherify.io/article/23-whats-new-in-voucherify#v20241004) for more details about released features.
+    # Method to create a batch of vouchers aggregated in one campaign. You can choose a variety of voucher types and define a unique pattern for generating codes.    📘 Global uniqueness  All campaign codes are unique across the whole project. Voucherify will not allow you to generate 2 campaigns with the same coupon code.    🚧 Code generation status  This is an asynchronous action; you cant read or modify a newly created campaign until the code generation is completed. See the creation_status field in the [campaign object](/api-reference/campaigns/campaign-object) description.
     # @param [Hash] opts the optional parameters
     # @option opts [CampaignsCreateRequestBody] :campaigns_create_request_body Specify the details of the campaign that you would like to create.
     # @return [Array<(CampaignsCreateResponseBody, Integer, Hash)>] CampaignsCreateResponseBody data, response status code and response headers
@@ -221,7 +221,7 @@ module VoucherifySdk
     end
 
     # Delete Campaign
-    # Deletes a campaign and all related vouchers. This action cannot be undone. Also, this method immediately removes any redemptions on the voucher. If the force parameter is set to false or not set at all, the campaign and all related vouchers will be moved to the bin. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Deletes a campaign and all related vouchers. This action cannot be undone. Also, this method immediately removes any redemptions on the voucher. If the force parameter is set to false or not set at all, the campaign and all related vouchers will be moved to [the bin](/api-reference/bin/list-bin-entries). This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this [API request](/api-reference/async-actions/get-async-action).
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the campaign and related vouchers will be moved to the bin. Going forward, the user will be able to create the next campaign with exactly the same name.
@@ -232,7 +232,7 @@ module VoucherifySdk
     end
 
     # Delete Campaign
-    # Deletes a campaign and all related vouchers. This action cannot be undone. Also, this method immediately removes any redemptions on the voucher. If the force parameter is set to false or not set at all, the campaign and all related vouchers will be moved to the bin. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Deletes a campaign and all related vouchers. This action cannot be undone. Also, this method immediately removes any redemptions on the voucher. If the force parameter is set to false or not set at all, the campaign and all related vouchers will be moved to [the bin](/api-reference/bin/list-bin-entries). This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this [API request](/api-reference/async-actions/get-async-action).
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :force If this flag is set to true, the campaign and related vouchers will be removed permanently. If it is set to false or not set at all, the campaign and related vouchers will be moved to the bin. Going forward, the user will be able to create the next campaign with exactly the same name.
@@ -400,6 +400,72 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Export Campaign Transactions
+    # Export transactions is an asynchronous process that generates a CSV file with the data about credit movements on all gift cards or point movements on all loyalty cards in a given campaign. To export transactions: 1. In the export request, use parameters to select which fields will be exported, in what order, and which data will be filtered. 2. Use the returned id to track the export status with the [GET Export](/api-reference/exports/get-export) method. 3. In the GET Export method, when the returned status field has the DONE value, the export file has been generated. 4. Use the URL in the result property to download the file. You must be logged to your Voucherify account on a given cluster in the browser to be able to download the file. An export request will almost always result in a single file being generated by the system. However, when the data volume is large, the system may split the results into multiple files. An example export file can look as follows:    👍 Export Loyalty Campaign Transactions  For loyalty campaigns, this method works in the same way the [POST Export Loyalty Campaign Transactions](/api-reference/loyalties/export-loyalty-campaign-transactions) does.
+    # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
+    # @param [Hash] opts the optional parameters
+    # @option opts [CampaignsTransactionsExportCreateRequestBody] :campaigns_transactions_export_create_request_body Specify the parameters for the transaction export.
+    # @return [CampaignsTransactionsExportCreateResponseBody]
+    def export_campaign_transactions(campaign_id, opts = {})
+      data, _status_code, _headers = export_campaign_transactions_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Export Campaign Transactions
+    # Export transactions is an asynchronous process that generates a CSV file with the data about credit movements on all gift cards or point movements on all loyalty cards in a given campaign. To export transactions: 1. In the export request, use parameters to select which fields will be exported, in what order, and which data will be filtered. 2. Use the returned id to track the export status with the [GET Export](/api-reference/exports/get-export) method. 3. In the GET Export method, when the returned status field has the DONE value, the export file has been generated. 4. Use the URL in the result property to download the file. You must be logged to your Voucherify account on a given cluster in the browser to be able to download the file. An export request will almost always result in a single file being generated by the system. However, when the data volume is large, the system may split the results into multiple files. An example export file can look as follows:    👍 Export Loyalty Campaign Transactions  For loyalty campaigns, this method works in the same way the [POST Export Loyalty Campaign Transactions](/api-reference/loyalties/export-loyalty-campaign-transactions) does.
+    # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
+    # @param [Hash] opts the optional parameters
+    # @option opts [CampaignsTransactionsExportCreateRequestBody] :campaigns_transactions_export_create_request_body Specify the parameters for the transaction export.
+    # @return [Array<(CampaignsTransactionsExportCreateResponseBody, Integer, Hash)>] CampaignsTransactionsExportCreateResponseBody data, response status code and response headers
+    private def export_campaign_transactions_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CampaignsApi.export_campaign_transactions ...'
+      end
+      # resource path
+      local_var_path = '/v1/campaigns/{campaignId}/transactions/export'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(opts[:'campaigns_transactions_export_create_request_body'])
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CampaignsTransactionsExportCreateResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"CampaignsApi.export_campaign_transactions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CampaignsApi#export_campaign_transactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get Campaign
     # Retrieves the campaign with the given campaign ID or campaign name.
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
@@ -459,11 +525,76 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # Get Campaign Summary
+    # Returns data for campaign analytics, covering validations, redemptions, publications, and other details specific to a given campaign type. Use start_date and end_date to narrow down the data to specific periods. 🚧 Campaigns created before 17 June 2025 This endpoint returns analytics data for campaigns that were created after 17 June 2025. Older campaigns return empty data.
+    # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :start_date Timestamp representing the date which results must begin on. Represented in ISO 8601 format.
+    # @option opts [Date] :end_date Timestamp representing the date which results must end on. Represented in ISO 8601 format.
+    # @return [CampaignsSummaryGetResponseBody]
+    def get_campaign_summary(campaign_id, opts = {})
+      data, _status_code, _headers = get_campaign_summary_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # Get Campaign Summary
+    # Returns data for campaign analytics, covering validations, redemptions, publications, and other details specific to a given campaign type. Use start_date and end_date to narrow down the data to specific periods. 🚧 Campaigns created before 17 June 2025 This endpoint returns analytics data for campaigns that were created after 17 June 2025. Older campaigns return empty data.
+    # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Date] :start_date Timestamp representing the date which results must begin on. Represented in ISO 8601 format.
+    # @option opts [Date] :end_date Timestamp representing the date which results must end on. Represented in ISO 8601 format.
+    # @return [Array<(CampaignsSummaryGetResponseBody, Integer, Hash)>] CampaignsSummaryGetResponseBody data, response status code and response headers
+    private def get_campaign_summary_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CampaignsApi.get_campaign_summary ...'
+      end
+      # resource path
+      local_var_path = '/v1/campaigns/{campaignId}/summary'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'start_date'] = opts[:'start_date'] if !opts[:'start_date'].nil?
+      query_params[:'end_date'] = opts[:'end_date'] if !opts[:'end_date'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CampaignsSummaryGetResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"CampaignsApi.get_campaign_summary",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CampaignsApi#get_campaign_summary\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Import Vouchers to Campaign
-    # Imports vouchers to an **existing** campaign. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Imports vouchers to an **existing** campaign. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this [API request](/api-reference/async-actions/get-async-action).
     # @param campaign_id [String] The ID of an existing campaign to which youre importing the codes. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<CampaignsImportVoucherItem>] :campaigns_import_voucher_item Discount type, expiration date and the remaining attributes will be taken from the Campaign settings.
+    # @option opts [Array<CampaignsImportVoucherItem>] :campaigns_import_voucher_item Discount type, expiration date and the remaining attributes will be taken from the [Campaign](/api-reference/campaigns/get-campaign) settings.
     # @return [CampaignsImportCreateResponseBody]
     def import_vouchers_to_campaign(campaign_id, opts = {})
       data, _status_code, _headers = import_vouchers_to_campaign_with_http_info(campaign_id, opts)
@@ -471,10 +602,10 @@ module VoucherifySdk
     end
 
     # Import Vouchers to Campaign
-    # Imports vouchers to an **existing** campaign. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Imports vouchers to an **existing** campaign. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this [API request](/api-reference/async-actions/get-async-action).
     # @param campaign_id [String] The ID of an existing campaign to which youre importing the codes. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
-    # @option opts [Array<CampaignsImportVoucherItem>] :campaigns_import_voucher_item Discount type, expiration date and the remaining attributes will be taken from the Campaign settings.
+    # @option opts [Array<CampaignsImportVoucherItem>] :campaigns_import_voucher_item Discount type, expiration date and the remaining attributes will be taken from the [Campaign](/api-reference/campaigns/get-campaign) settings.
     # @return [Array<(CampaignsImportCreateResponseBody, Integer, Hash)>] CampaignsImportCreateResponseBody data, response status code and response headers
     private def import_vouchers_to_campaign_with_http_info(campaign_id, opts = {})
       if @api_client.config.debugging
@@ -526,7 +657,7 @@ module VoucherifySdk
     end
 
     # Import Vouchers to Campaign by CSV
-    # Imports vouchers to an **existing** campaign.   The CSV file has to include headers in the first line.  This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Imports vouchers to an **existing** campaign.   The CSV file has to include headers in the first line.  This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this [API request](/api-reference/async-actions/get-async-action).
     # @param campaign_id [String] The campaign ID or name of the campaign being enabled. You can either pass the campaign ID, which was assigned by Voucherify or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [File] :file File path.
@@ -537,7 +668,7 @@ module VoucherifySdk
     end
 
     # Import Vouchers to Campaign by CSV
-    # Imports vouchers to an **existing** campaign.   The CSV file has to include headers in the first line.  This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+    # Imports vouchers to an **existing** campaign.   The CSV file has to include headers in the first line.  This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this [API request](/api-reference/async-actions/get-async-action).
     # @param campaign_id [String] The campaign ID or name of the campaign being enabled. You can either pass the campaign ID, which was assigned by Voucherify or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [File] :file File path.
@@ -592,15 +723,86 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
+    # List Campaign Transactions
+    # Retrieves all transactions for the campaign with the given campaign ID or campaign name. The id filter denotes the unique transaction identifier.  🚧  The endpoint works only for gift card and loyalty campaigns.
+    # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [ParameterOrderListTransactions] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
+    # @option opts [ParametersFiltersListCampaignTransactions] :filters Filters for listing responses.
+    # @return [CampaignsTransactionsListResponseBody]
+    def list_campaign_transactions(campaign_id, opts = {})
+      data, _status_code, _headers = list_campaign_transactions_with_http_info(campaign_id, opts)
+      data
+    end
+
+    # List Campaign Transactions
+    # Retrieves all transactions for the campaign with the given campaign ID or campaign name. The id filter denotes the unique transaction identifier.  🚧  The endpoint works only for gift card and loyalty campaigns.
+    # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
+    # @param [Hash] opts the optional parameters
+    # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
+    # @option opts [ParameterOrderListTransactions] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
+    # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the transactions starting after a transaction with the given ID.
+    # @option opts [ParametersFiltersListCampaignTransactions] :filters Filters for listing responses.
+    # @return [Array<(CampaignsTransactionsListResponseBody, Integer, Hash)>] CampaignsTransactionsListResponseBody data, response status code and response headers
+    private def list_campaign_transactions_with_http_info(campaign_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CampaignsApi.list_campaign_transactions ...'
+      end
+      # resource path
+      local_var_path = '/v1/campaigns/{campaignId}/transactions'.sub('{' + 'campaignId' + '}', CGI.escape(campaign_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'limit'] = opts[:'limit'] if !opts[:'limit'].nil?
+      query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
+      query_params[:'starting_after_id'] = opts[:'starting_after_id'] if !opts[:'starting_after_id'].nil?
+      query_params[:'filters'] = opts[:'filters'] if !opts[:'filters'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CampaignsTransactionsListResponseBody'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['X-App-Id', 'X-App-Token']
+
+      new_options = opts.merge(
+        :operation => :"CampaignsApi.list_campaign_transactions",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CampaignsApi#list_campaign_transactions\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List Campaigns
     # Retrieve a list of campaigns in a project.  The campaigns are returned sorted by creation date, with the most recent campaigns appearing first.   When you get a list of campaigns, you can optionally specify query parameters to customize the amount of campaigns returned per call using limit, which page of campaigns to return using page, sort the campaigns using the order query parameter and filter the results by the campaign_type. This method will return an error when trying to return a limit of more than 100 campaigns.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterCampaignType] :campaign_type This attribute allows filtering by campaign type.
-    # @option opts [ParameterExpandListCampaigns] :expand Includes an expanded categories object in the response. If the [Areas and Stores](https://support.voucherify.io/article/623-areas-and-stores) Enterprise feature is enabled, add access_settings_assignments to return assigned areas and stores.
+    # @option opts [ParameterExpandListCampaigns] :expand Includes an expanded categories object in the response. If the [Areas and Stores](/orchestrate/areas-and-stores) Enterprise feature is enabled, add access_settings_assignments to return assigned areas and stores.
     # @option opts [ParameterOrderListCampaigns] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-    # @option opts [ParameterFiltersListCampaigns] :filters Filters the results by campaign status or whether the campaign is a referral campaign.
+    # @option opts [ParameterFiltersListCampaigns] :filters Filters the results by various campaign properties.
     # @return [CampaignsListResponseBody]
     def list_campaigns(opts = {})
       data, _status_code, _headers = list_campaigns_with_http_info(opts)
@@ -613,9 +815,9 @@ module VoucherifySdk
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
     # @option opts [ParameterCampaignType] :campaign_type This attribute allows filtering by campaign type.
-    # @option opts [ParameterExpandListCampaigns] :expand Includes an expanded categories object in the response. If the [Areas and Stores](https://support.voucherify.io/article/623-areas-and-stores) Enterprise feature is enabled, add access_settings_assignments to return assigned areas and stores.
+    # @option opts [ParameterExpandListCampaigns] :expand Includes an expanded categories object in the response. If the [Areas and Stores](/orchestrate/areas-and-stores) Enterprise feature is enabled, add access_settings_assignments to return assigned areas and stores.
     # @option opts [ParameterOrderListCampaigns] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
-    # @option opts [ParameterFiltersListCampaigns] :filters Filters the results by campaign status or whether the campaign is a referral campaign.
+    # @option opts [ParameterFiltersListCampaigns] :filters Filters the results by various campaign properties.
     # @return [Array<(CampaignsListResponseBody, Integer, Hash)>] CampaignsListResponseBody data, response status code and response headers
     private def list_campaigns_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -668,7 +870,7 @@ module VoucherifySdk
     end
 
     # Update Campaign
-    # Updates the specified campaign by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged.  Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped.     ## Vouchers will be affected  This method will update vouchers aggregated in the campaign. It will affect all vouchers that are not published or redeemed yet.
+    # Updates the specified campaign by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged.  Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped.     🚧 Vouchers will be affected  This method will update vouchers aggregated in the campaign. It will affect all vouchers that are not published or redeemed yet.
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [CampaignsUpdateRequestBody] :campaigns_update_request_body Specify the campaign parameters to be updated.
@@ -679,7 +881,7 @@ module VoucherifySdk
     end
 
     # Update Campaign
-    # Updates the specified campaign by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged.  Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped.     ## Vouchers will be affected  This method will update vouchers aggregated in the campaign. It will affect all vouchers that are not published or redeemed yet.
+    # Updates the specified campaign by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged.  Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped.     🚧 Vouchers will be affected  This method will update vouchers aggregated in the campaign. It will affect all vouchers that are not published or redeemed yet.
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [CampaignsUpdateRequestBody] :campaigns_update_request_body Specify the campaign parameters to be updated.

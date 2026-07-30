@@ -30,12 +30,10 @@ module VoucherifySdk
     # Parent product's source ID from your inventory system.
     attr_accessor :product_source_id
 
-    attr_accessor :strict
-
     # New fixed price of an item. Value is multiplied by 100 to precisely represent 2 decimal places. For example, a $10 price is written as 1000. In case of the fixed price being calculated by the formula, i.e. the price_formula parameter is present in the fixed price definition, this value becomes the fallback value. Such that in a case where the formula cannot be calculated due to missing metadata, for example, this value will be used as the fixed price.
     attr_accessor :price
 
-    # Formula used to calculate the discounted price of an item.
+    # Formula used to dynamically calculate the discounted price of an item.
     attr_accessor :price_formula
 
     attr_accessor :effect
@@ -52,6 +50,54 @@ module VoucherifySdk
     # Maximum discount amount per order. Value is multiplied by 100 to precisely represent 2 decimal places. For example, a $6 maximum discount on the entire order is written as 600. This value is definable for the following discount effects: - `APPLY_TO_ITEMS` (each item subtotal is discounted equally) - `APPLY_TO_ITEMS_BY_QUANTITY` (each unit of matched products has the same discount value)
     attr_accessor :aggregated_amount_limit
 
+    # Limits the number of discounted item units (product, SKU, collection) that all customers can receive in a given campaign. If a product is selected, the limit covers all discounts across all SKUs belonging to that product. If a product collection is selected, the limit covers all products/SKUs within the collection.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_campaign_quantity_limit
+
+    # Formula used to dynamically calculate the maximum units per campaign.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_campaign_quantity_limit_formula
+
+    # Limits the number of discounted item units (product, SKU, collection) that one customer can receive in a given campaign.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_customer_campaign_quantity_limit
+
+    # Formula used to dynamically calculate the maximum units per customer in a campaign.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_customer_campaign_quantity_limit_formula
+
+    # Limits the number of discounted item units of a given product in a collection that all customers can receive in a given campaign.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_in_collection_campaign_quantity_limit
+
+    # Formula used to dynamically calculate the maximum units per campaign for a product in a collection.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_in_collection_campaign_quantity_limit_formula
+
+    # Limits the number of discounted item units of a given product in a collection that one customer can receive in a campaign.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_in_collection_customer_campaign_quantity_limit
+
+    # Formula used to dynamically calculate the maximum units per customer for a product in a collection.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_in_collection_customer_campaign_quantity_limit_formula
+
+    # Limits the number of discounted item units that all customers can receive in a promotion tier.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_promotion_tier_quantity_limit
+
+    # Formula used to dynamically calculate the maximum units per promotion tier.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_promotion_tier_quantity_limit_formula
+
+    # Limits the number of discounted item units that one customer can receive in a given promotion tier.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_customer_promotion_tier_quantity_limit
+
+    # Formula used to dynamically calculate the maximum units per customer in a promotion tier.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_customer_promotion_tier_quantity_limit_formula
+
+    # Limits the number of discounted item units of a given product in a collection that all customers can receive in a given promotion tier.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_in_collection_promotion_tier_quantity_limit
+
+    # Formula used to dynamically calculate the maximum units per promotion tier for a product in a collection.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_in_collection_promotion_tier_quantity_limit_formula
+
+    # Limits the number of discounted item units of a given product in a collection that one customer can receive in a promotion tier.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_in_collection_customer_promotion_tier_quantity_limit
+
+    # Formula used to dynamically calculate the maximum units per customer in a promotion tier for a product in a collection.  This limit is available on demand as part of campaign budget limits. Contact [Voucherify support](https://www.voucherify.io/contact-support) or your account manager to learn more.
+    attr_accessor :product_in_collection_customer_promotion_tier_quantity_limit_formula
+
     # Lists which order lines are (not) covered by the discount. The order in the array is determined by the sequence of applied discounts, while the numbers correspond to the order lines sent in the `order` object in the request. The first order line is assigned `0`, the second order line is assigned `1`, and so on.
     attr_accessor :order_item_indices
 
@@ -66,6 +112,8 @@ module VoucherifySdk
 
     # Determines to which kinds of objects the discount is applicable. `ITEM` includes products and SKUs. `UNIT` means particular units within an order line.
     attr_accessor :target
+
+    attr_accessor :strict
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -97,7 +145,6 @@ module VoucherifySdk
         :'source_id' => :'source_id',
         :'product_id' => :'product_id',
         :'product_source_id' => :'product_source_id',
-        :'strict' => :'strict',
         :'price' => :'price',
         :'price_formula' => :'price_formula',
         :'effect' => :'effect',
@@ -105,11 +152,28 @@ module VoucherifySdk
         :'aggregated_quantity_limit' => :'aggregated_quantity_limit',
         :'amount_limit' => :'amount_limit',
         :'aggregated_amount_limit' => :'aggregated_amount_limit',
+        :'product_campaign_quantity_limit' => :'product_campaign_quantity_limit',
+        :'product_campaign_quantity_limit_formula' => :'product_campaign_quantity_limit_formula',
+        :'product_customer_campaign_quantity_limit' => :'product_customer_campaign_quantity_limit',
+        :'product_customer_campaign_quantity_limit_formula' => :'product_customer_campaign_quantity_limit_formula',
+        :'product_in_collection_campaign_quantity_limit' => :'product_in_collection_campaign_quantity_limit',
+        :'product_in_collection_campaign_quantity_limit_formula' => :'product_in_collection_campaign_quantity_limit_formula',
+        :'product_in_collection_customer_campaign_quantity_limit' => :'product_in_collection_customer_campaign_quantity_limit',
+        :'product_in_collection_customer_campaign_quantity_limit_formula' => :'product_in_collection_customer_campaign_quantity_limit_formula',
+        :'product_promotion_tier_quantity_limit' => :'product_promotion_tier_quantity_limit',
+        :'product_promotion_tier_quantity_limit_formula' => :'product_promotion_tier_quantity_limit_formula',
+        :'product_customer_promotion_tier_quantity_limit' => :'product_customer_promotion_tier_quantity_limit',
+        :'product_customer_promotion_tier_quantity_limit_formula' => :'product_customer_promotion_tier_quantity_limit_formula',
+        :'product_in_collection_promotion_tier_quantity_limit' => :'product_in_collection_promotion_tier_quantity_limit',
+        :'product_in_collection_promotion_tier_quantity_limit_formula' => :'product_in_collection_promotion_tier_quantity_limit_formula',
+        :'product_in_collection_customer_promotion_tier_quantity_limit' => :'product_in_collection_customer_promotion_tier_quantity_limit',
+        :'product_in_collection_customer_promotion_tier_quantity_limit_formula' => :'product_in_collection_customer_promotion_tier_quantity_limit_formula',
         :'order_item_indices' => :'order_item_indices',
         :'order_item_units' => :'order_item_units',
         :'repeat' => :'repeat',
         :'skip_initially' => :'skip_initially',
-        :'target' => :'target'
+        :'target' => :'target',
+        :'strict' => :'strict'
       }
     end
 
@@ -126,7 +190,6 @@ module VoucherifySdk
         :'source_id' => :'String',
         :'product_id' => :'String',
         :'product_source_id' => :'String',
-        :'strict' => :'Boolean',
         :'price' => :'Float',
         :'price_formula' => :'Float',
         :'effect' => :'ApplicableToEffect',
@@ -134,11 +197,28 @@ module VoucherifySdk
         :'aggregated_quantity_limit' => :'Integer',
         :'amount_limit' => :'Integer',
         :'aggregated_amount_limit' => :'Integer',
+        :'product_campaign_quantity_limit' => :'Integer',
+        :'product_campaign_quantity_limit_formula' => :'String',
+        :'product_customer_campaign_quantity_limit' => :'Integer',
+        :'product_customer_campaign_quantity_limit_formula' => :'String',
+        :'product_in_collection_campaign_quantity_limit' => :'Integer',
+        :'product_in_collection_campaign_quantity_limit_formula' => :'String',
+        :'product_in_collection_customer_campaign_quantity_limit' => :'Integer',
+        :'product_in_collection_customer_campaign_quantity_limit_formula' => :'String',
+        :'product_promotion_tier_quantity_limit' => :'Integer',
+        :'product_promotion_tier_quantity_limit_formula' => :'String',
+        :'product_customer_promotion_tier_quantity_limit' => :'Integer',
+        :'product_customer_promotion_tier_quantity_limit_formula' => :'String',
+        :'product_in_collection_promotion_tier_quantity_limit' => :'Integer',
+        :'product_in_collection_promotion_tier_quantity_limit_formula' => :'String',
+        :'product_in_collection_customer_promotion_tier_quantity_limit' => :'Integer',
+        :'product_in_collection_customer_promotion_tier_quantity_limit_formula' => :'String',
         :'order_item_indices' => :'Array<Integer>',
         :'order_item_units' => :'Array<InapplicableToOrderItemUnitsItem>',
         :'repeat' => :'Integer',
         :'skip_initially' => :'Integer',
-        :'target' => :'String'
+        :'target' => :'String',
+        :'strict' => :'Boolean'
       }
     end
 
@@ -150,18 +230,34 @@ module VoucherifySdk
         :'source_id',
         :'product_id',
         :'product_source_id',
-        :'strict',
         :'price',
         :'price_formula',
         :'quantity_limit',
         :'aggregated_quantity_limit',
         :'amount_limit',
         :'aggregated_amount_limit',
+        :'product_campaign_quantity_limit',
+        :'product_campaign_quantity_limit_formula',
+        :'product_customer_campaign_quantity_limit',
+        :'product_customer_campaign_quantity_limit_formula',
+        :'product_in_collection_campaign_quantity_limit',
+        :'product_in_collection_campaign_quantity_limit_formula',
+        :'product_in_collection_customer_campaign_quantity_limit',
+        :'product_in_collection_customer_campaign_quantity_limit_formula',
+        :'product_promotion_tier_quantity_limit',
+        :'product_promotion_tier_quantity_limit_formula',
+        :'product_customer_promotion_tier_quantity_limit',
+        :'product_customer_promotion_tier_quantity_limit_formula',
+        :'product_in_collection_promotion_tier_quantity_limit',
+        :'product_in_collection_promotion_tier_quantity_limit_formula',
+        :'product_in_collection_customer_promotion_tier_quantity_limit',
+        :'product_in_collection_customer_promotion_tier_quantity_limit_formula',
         :'order_item_indices',
         :'order_item_units',
         :'repeat',
         :'skip_initially',
-        :'target'
+        :'target',
+        :'strict'
       ])
     end
 
@@ -191,10 +287,6 @@ module VoucherifySdk
 
       if attributes.key?(:'product_source_id')
         self.product_source_id = attributes[:'product_source_id']
-      end
-
-      if attributes.key?(:'strict')
-        self.strict = attributes[:'strict']
       end
 
       if attributes.key?(:'price')
@@ -227,6 +319,70 @@ module VoucherifySdk
         self.aggregated_amount_limit = attributes[:'aggregated_amount_limit']
       end
 
+      if attributes.key?(:'product_campaign_quantity_limit')
+        self.product_campaign_quantity_limit = attributes[:'product_campaign_quantity_limit']
+      end
+
+      if attributes.key?(:'product_campaign_quantity_limit_formula')
+        self.product_campaign_quantity_limit_formula = attributes[:'product_campaign_quantity_limit_formula']
+      end
+
+      if attributes.key?(:'product_customer_campaign_quantity_limit')
+        self.product_customer_campaign_quantity_limit = attributes[:'product_customer_campaign_quantity_limit']
+      end
+
+      if attributes.key?(:'product_customer_campaign_quantity_limit_formula')
+        self.product_customer_campaign_quantity_limit_formula = attributes[:'product_customer_campaign_quantity_limit_formula']
+      end
+
+      if attributes.key?(:'product_in_collection_campaign_quantity_limit')
+        self.product_in_collection_campaign_quantity_limit = attributes[:'product_in_collection_campaign_quantity_limit']
+      end
+
+      if attributes.key?(:'product_in_collection_campaign_quantity_limit_formula')
+        self.product_in_collection_campaign_quantity_limit_formula = attributes[:'product_in_collection_campaign_quantity_limit_formula']
+      end
+
+      if attributes.key?(:'product_in_collection_customer_campaign_quantity_limit')
+        self.product_in_collection_customer_campaign_quantity_limit = attributes[:'product_in_collection_customer_campaign_quantity_limit']
+      end
+
+      if attributes.key?(:'product_in_collection_customer_campaign_quantity_limit_formula')
+        self.product_in_collection_customer_campaign_quantity_limit_formula = attributes[:'product_in_collection_customer_campaign_quantity_limit_formula']
+      end
+
+      if attributes.key?(:'product_promotion_tier_quantity_limit')
+        self.product_promotion_tier_quantity_limit = attributes[:'product_promotion_tier_quantity_limit']
+      end
+
+      if attributes.key?(:'product_promotion_tier_quantity_limit_formula')
+        self.product_promotion_tier_quantity_limit_formula = attributes[:'product_promotion_tier_quantity_limit_formula']
+      end
+
+      if attributes.key?(:'product_customer_promotion_tier_quantity_limit')
+        self.product_customer_promotion_tier_quantity_limit = attributes[:'product_customer_promotion_tier_quantity_limit']
+      end
+
+      if attributes.key?(:'product_customer_promotion_tier_quantity_limit_formula')
+        self.product_customer_promotion_tier_quantity_limit_formula = attributes[:'product_customer_promotion_tier_quantity_limit_formula']
+      end
+
+      if attributes.key?(:'product_in_collection_promotion_tier_quantity_limit')
+        self.product_in_collection_promotion_tier_quantity_limit = attributes[:'product_in_collection_promotion_tier_quantity_limit']
+      end
+
+      if attributes.key?(:'product_in_collection_promotion_tier_quantity_limit_formula')
+        self.product_in_collection_promotion_tier_quantity_limit_formula = attributes[:'product_in_collection_promotion_tier_quantity_limit_formula']
+      end
+
+      if attributes.key?(:'product_in_collection_customer_promotion_tier_quantity_limit')
+        self.product_in_collection_customer_promotion_tier_quantity_limit = attributes[:'product_in_collection_customer_promotion_tier_quantity_limit']
+      end
+
+      if attributes.key?(:'product_in_collection_customer_promotion_tier_quantity_limit_formula')
+        self.product_in_collection_customer_promotion_tier_quantity_limit_formula = attributes[:'product_in_collection_customer_promotion_tier_quantity_limit_formula']
+      end
+
       if attributes.key?(:'order_item_indices')
         if (value = attributes[:'order_item_indices']).is_a?(Array)
           self.order_item_indices = value
@@ -249,6 +405,10 @@ module VoucherifySdk
 
       if attributes.key?(:'target')
         self.target = attributes[:'target']
+      end
+
+      if attributes.key?(:'strict')
+        self.strict = attributes[:'strict']
       end
     end
 
@@ -284,7 +444,6 @@ module VoucherifySdk
           source_id == o.source_id &&
           product_id == o.product_id &&
           product_source_id == o.product_source_id &&
-          strict == o.strict &&
           price == o.price &&
           price_formula == o.price_formula &&
           effect == o.effect &&
@@ -292,11 +451,28 @@ module VoucherifySdk
           aggregated_quantity_limit == o.aggregated_quantity_limit &&
           amount_limit == o.amount_limit &&
           aggregated_amount_limit == o.aggregated_amount_limit &&
+          product_campaign_quantity_limit == o.product_campaign_quantity_limit &&
+          product_campaign_quantity_limit_formula == o.product_campaign_quantity_limit_formula &&
+          product_customer_campaign_quantity_limit == o.product_customer_campaign_quantity_limit &&
+          product_customer_campaign_quantity_limit_formula == o.product_customer_campaign_quantity_limit_formula &&
+          product_in_collection_campaign_quantity_limit == o.product_in_collection_campaign_quantity_limit &&
+          product_in_collection_campaign_quantity_limit_formula == o.product_in_collection_campaign_quantity_limit_formula &&
+          product_in_collection_customer_campaign_quantity_limit == o.product_in_collection_customer_campaign_quantity_limit &&
+          product_in_collection_customer_campaign_quantity_limit_formula == o.product_in_collection_customer_campaign_quantity_limit_formula &&
+          product_promotion_tier_quantity_limit == o.product_promotion_tier_quantity_limit &&
+          product_promotion_tier_quantity_limit_formula == o.product_promotion_tier_quantity_limit_formula &&
+          product_customer_promotion_tier_quantity_limit == o.product_customer_promotion_tier_quantity_limit &&
+          product_customer_promotion_tier_quantity_limit_formula == o.product_customer_promotion_tier_quantity_limit_formula &&
+          product_in_collection_promotion_tier_quantity_limit == o.product_in_collection_promotion_tier_quantity_limit &&
+          product_in_collection_promotion_tier_quantity_limit_formula == o.product_in_collection_promotion_tier_quantity_limit_formula &&
+          product_in_collection_customer_promotion_tier_quantity_limit == o.product_in_collection_customer_promotion_tier_quantity_limit &&
+          product_in_collection_customer_promotion_tier_quantity_limit_formula == o.product_in_collection_customer_promotion_tier_quantity_limit_formula &&
           order_item_indices == o.order_item_indices &&
           order_item_units == o.order_item_units &&
           repeat == o.repeat &&
           skip_initially == o.skip_initially &&
-          target == o.target
+          target == o.target &&
+          strict == o.strict
     end
 
     # @see the `==` method
@@ -308,7 +484,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [object, id, source_id, product_id, product_source_id, strict, price, price_formula, effect, quantity_limit, aggregated_quantity_limit, amount_limit, aggregated_amount_limit, order_item_indices, order_item_units, repeat, skip_initially, target].hash
+      [object, id, source_id, product_id, product_source_id, price, price_formula, effect, quantity_limit, aggregated_quantity_limit, amount_limit, aggregated_amount_limit, product_campaign_quantity_limit, product_campaign_quantity_limit_formula, product_customer_campaign_quantity_limit, product_customer_campaign_quantity_limit_formula, product_in_collection_campaign_quantity_limit, product_in_collection_campaign_quantity_limit_formula, product_in_collection_customer_campaign_quantity_limit, product_in_collection_customer_campaign_quantity_limit_formula, product_promotion_tier_quantity_limit, product_promotion_tier_quantity_limit_formula, product_customer_promotion_tier_quantity_limit, product_customer_promotion_tier_quantity_limit_formula, product_in_collection_promotion_tier_quantity_limit, product_in_collection_promotion_tier_quantity_limit_formula, product_in_collection_customer_promotion_tier_quantity_limit, product_in_collection_customer_promotion_tier_quantity_limit_formula, order_item_indices, order_item_units, repeat, skip_initially, target, strict].hash
     end
 
     # Builds the object from hash

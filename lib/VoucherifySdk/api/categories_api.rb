@@ -257,7 +257,7 @@ module VoucherifySdk
     end
 
     # Update Category
-    # Update category using the category ID.
+    # Update a category using the category ID.
     # @param category_id [String] Unique category ID assigned by Voucherify.
     # @param [Hash] opts the optional parameters
     # @option opts [CategoriesUpdateRequestBody] :categories_update_request_body Specify the details of the category that you would like to update.
@@ -268,7 +268,7 @@ module VoucherifySdk
     end
 
     # Update Category
-    # Update category using the category ID.
+    # Update a category using the category ID.
     # @param category_id [String] Unique category ID assigned by Voucherify.
     # @param [Hash] opts the optional parameters
     # @option opts [CategoriesUpdateRequestBody] :categories_update_request_body Specify the details of the category that you would like to update.

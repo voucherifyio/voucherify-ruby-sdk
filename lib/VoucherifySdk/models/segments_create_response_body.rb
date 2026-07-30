@@ -25,16 +25,19 @@ module VoucherifySdk
     # Timestamp representing the date and time when the segment was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
-    # Describes whether the segment is dynamic (customers come in and leave based on set criteria) or static (manually selected customers).
+    # Timestamp in ISO 8601 format indicating when the segment was updated.
+    attr_accessor :updated_at
+
+    # Defines whether the segment is: - Active (`auto-update`): customers enter and leave the segment based on the defined filters and the `customer.segment.entered` and `customer.segment.left` events are triggered, - Passive (`passive`): customers enter and leave the segment based on the defined filters, but the `customer.segment.entered` and `customer.segment.left` events are not triggered, - Static (`static`): manually selected customers.
     attr_accessor :type
 
-    # Defines a set of criteria for an `auto-update` segment type.  
+    # Defines a set of criteria for an `auto-update` or `passive` segment type.
     attr_accessor :filter
-
-    attr_accessor :initial_sync_status
 
     # The type of the object represented by JSON. This object stores information about the customer segment.
     attr_accessor :object
+
+    attr_accessor :initial_sync_status
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -64,10 +67,11 @@ module VoucherifySdk
         :'id' => :'id',
         :'name' => :'name',
         :'created_at' => :'created_at',
+        :'updated_at' => :'updated_at',
         :'type' => :'type',
         :'filter' => :'filter',
-        :'initial_sync_status' => :'initial_sync_status',
-        :'object' => :'object'
+        :'object' => :'object',
+        :'initial_sync_status' => :'initial_sync_status'
       }
     end
 
@@ -82,10 +86,11 @@ module VoucherifySdk
         :'id' => :'String',
         :'name' => :'String',
         :'created_at' => :'Time',
+        :'updated_at' => :'Time',
         :'type' => :'String',
         :'filter' => :'Object',
-        :'initial_sync_status' => :'String',
-        :'object' => :'String'
+        :'object' => :'String',
+        :'initial_sync_status' => :'String'
       }
     end
 
@@ -95,10 +100,11 @@ module VoucherifySdk
         :'id',
         :'name',
         :'created_at',
+        :'updated_at',
         :'type',
         :'filter',
-        :'initial_sync_status',
-        :'object'
+        :'object',
+        :'initial_sync_status'
       ])
     end
 
@@ -122,6 +128,10 @@ module VoucherifySdk
         self.created_at = attributes[:'created_at']
       end
 
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
+
       if attributes.key?(:'type')
         self.type = attributes[:'type']
       end
@@ -130,14 +140,14 @@ module VoucherifySdk
         self.filter = attributes[:'filter']
       end
 
-      if attributes.key?(:'initial_sync_status')
-        self.initial_sync_status = attributes[:'initial_sync_status']
-      end
-
       if attributes.key?(:'object')
         self.object = attributes[:'object']
       else
         self.object = 'segment'
+      end
+
+      if attributes.key?(:'initial_sync_status')
+        self.initial_sync_status = attributes[:'initial_sync_status']
       end
     end
 
@@ -153,12 +163,12 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["auto-update", "static"])
+      type_validator = EnumAttributeValidator.new('String', ["auto-update", "passive", "static"])
       return false unless type_validator.valid?(@type)
-      initial_sync_status_validator = EnumAttributeValidator.new('String', ["IN_PROGRESS", "DONE"])
-      return false unless initial_sync_status_validator.valid?(@initial_sync_status)
       object_validator = EnumAttributeValidator.new('String', ["segment"])
       return false unless object_validator.valid?(@object)
+      initial_sync_status_validator = EnumAttributeValidator.new('String', ["IN_PROGRESS", "DONE"])
+      return false unless initial_sync_status_validator.valid?(@initial_sync_status)
       true
     end
 
@@ -170,10 +180,11 @@ module VoucherifySdk
           id == o.id &&
           name == o.name &&
           created_at == o.created_at &&
+          updated_at == o.updated_at &&
           type == o.type &&
           filter == o.filter &&
-          initial_sync_status == o.initial_sync_status &&
-          object == o.object
+          object == o.object &&
+          initial_sync_status == o.initial_sync_status
     end
 
     # @see the `==` method
@@ -185,7 +196,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, created_at, type, filter, initial_sync_status, object].hash
+      [id, name, created_at, updated_at, type, filter, object, initial_sync_status].hash
     end
 
     # Builds the object from hash

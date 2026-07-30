@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Stores the amount of loyalty card points to be applied in the redemption.
   class ClientValidationsValidateResponseBodyRedeemablesItemResultLoyaltyCard
     # Total number of loyalty points to be applied in the redemption.
     attr_accessor :points

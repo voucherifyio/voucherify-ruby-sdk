@@ -16,25 +16,28 @@ require 'time'
 module VoucherifySdk
   # Request body schema for **PUT** `/management/v1/projects/{projectId}/stacking-rules/{stackingRulesId}`.
   class ManagementProjectsStackingRulesUpdateRequestBody
-    # Lists the IDs of the categories that are exclusive.
+    # Lists the IDs of exclusive categories. A redeemable from a campaign with an exclusive category is the only redeemable to be redeemed when applied with redeemables from other campaigns unless these campaigns are exclusive or joint.
     attr_accessor :exclusive_categories
 
-    # Lists the IDs of the categories that are joint.
+    # Lists the IDs of the joint categories. A campaign with a joint category is always applied regardless of the exclusivity of other campaigns.
     attr_accessor :joint_categories
 
-    # Defines how many redeemables can be sent to Voucherify for validation at the same time.
+    # Defines how many redeemables can be sent in one request. Note: more redeemables means more processing time.
     attr_accessor :redeemables_limit
 
-    # Defines how many redeemables can be applied at the same time. The number must be less than or equal to `\"redeemables_limit\"`.
+    # Defines how many redeemables can be applied in one request. The number must be less than or equal to `redeemables_limit`. For example, a user can select 30 discounts but only 5 will be applied to the order and the remaining will be `SKIPPED` according to the `redeemables_sorting_rule`.
     attr_accessor :applicable_redeemables_limit
 
-    # Defines how many redeemables with the same category can be applied at the same time. The number must be less than or equal to `\"applicable_redeemables_limit\"`.
+    # Defines how many redeemables with the same category can be applied in one request. The number must be less than or equal to `applicable_redeemables_limit`. The ones above the limit will be `SKIPPED` according to the `redeemables_sorting_rule`.
     attr_accessor :applicable_redeemables_per_category_limit
 
-    # Defines how many redeemables with an assigned exclusive category can be applied at the same time.
+    # Lists categories by category IDs (keys) and defines their limits (values) of applicable redeemables that belong to campaigns with that category.
+    attr_accessor :applicable_redeemables_category_limits
+
+    # Defines how many redeemables with an assigned exclusive category can be applied in one request. The ones above the limit will be `SKIPPED` according to the `redeemables_sorting_rule`.
     attr_accessor :applicable_exclusive_redeemables_limit
 
-    # Defines how many exclusive redeemables with the same category can be applied at the same time. The number must be less than or equal to `\"applicable_exclusive_redeemables_limit\"`.
+    # Defines how many redeemables with an assigned exclusive category can be applied in one request. The ones above the limit will be `SKIPPED` according to the `redeemables_sorting_rule`. The number must be less than or equal to `applicable_exclusive_redeemables_limit`.
     attr_accessor :applicable_exclusive_redeemables_per_category_limit
 
     # Defines if the discounts are applied by taking into account the initial order amount or the discounted order amount.
@@ -49,8 +52,23 @@ module VoucherifySdk
     # Defines the application mode for redeemables. `\"ALL\"` means that all redeemables must be validated for the redemption to be successful. `\"PARTIAL\"` means that only those redeemables that can be validated will be redeemed. The redeemables that fail validaton will be skipped.
     attr_accessor :redeemables_application_mode
 
-    # Defines the sorting rule for redeemables. `\"CATEGORY_HIERARCHY\"` means that redeemables are applied with the order established by the hierarchy of the categories. `\"REQUESTED_ORDER\"` means that redeemables are applied with the order established in the request.
+    # Defines redeemables sorting rule. `CATEGORY_HIERARCHY` means that redeemables are applied oaccording to the category priority. `REQUESTED_ORDER` means that redeemables are applied in the sequence provided in the request.
     attr_accessor :redeemables_sorting_rule
+
+    # Defines redeemables products application mode. `STACK` means that multiple discounts can be applied to a product. `ONCE` means that only one discount can be applied to the same product.
+    attr_accessor :redeemables_products_application_mode
+
+    # Defines redeemables no effect rule. `REDEEM_ANYWAY` means that the redeemable will be redeemed regardless of any restrictions or conditions in place. `SKIP` means that the redeemable will be processed only when an applicable effect is calculated.
+    attr_accessor :redeemables_no_effect_rule
+
+    # Lists category IDs. Redeemables with a given category are skipped even if the `redeemables_no_effect_rule` is set to `REDEEM_ANYWAY`. Category IDs can't overlap with the IDs in `no_effect_redeem_anyway_categories`.
+    attr_accessor :no_effect_skip_categories
+
+    # Lists category IDs. Redeemables with a given category are redeemed anyway even if the `redeemables_no_effect_rule` is set to `SKIP`. Category IDs can't overlap with the IDs in `no_effect_skip_categories`.
+    attr_accessor :no_effect_redeem_anyway_categories
+
+    # Defines the rollback mode for the order. `WITH_ORDER` is a default setting. The redemption is rolled back together with the data about the order, including related discount values. `WITHOUT_ORDER` allows rolling the redemption back without affecting order data, including the applied discount values.
+    attr_accessor :redeemables_rollback_order_mode
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -82,13 +100,19 @@ module VoucherifySdk
         :'redeemables_limit' => :'redeemables_limit',
         :'applicable_redeemables_limit' => :'applicable_redeemables_limit',
         :'applicable_redeemables_per_category_limit' => :'applicable_redeemables_per_category_limit',
+        :'applicable_redeemables_category_limits' => :'applicable_redeemables_category_limits',
         :'applicable_exclusive_redeemables_limit' => :'applicable_exclusive_redeemables_limit',
         :'applicable_exclusive_redeemables_per_category_limit' => :'applicable_exclusive_redeemables_per_category_limit',
         :'discount_calculation_mode' => :'discount_calculation_mode',
         :'initial_amount_mode_categories' => :'initial_amount_mode_categories',
         :'discounted_amount_mode_categories' => :'discounted_amount_mode_categories',
         :'redeemables_application_mode' => :'redeemables_application_mode',
-        :'redeemables_sorting_rule' => :'redeemables_sorting_rule'
+        :'redeemables_sorting_rule' => :'redeemables_sorting_rule',
+        :'redeemables_products_application_mode' => :'redeemables_products_application_mode',
+        :'redeemables_no_effect_rule' => :'redeemables_no_effect_rule',
+        :'no_effect_skip_categories' => :'no_effect_skip_categories',
+        :'no_effect_redeem_anyway_categories' => :'no_effect_redeem_anyway_categories',
+        :'redeemables_rollback_order_mode' => :'redeemables_rollback_order_mode'
       }
     end
 
@@ -105,13 +129,19 @@ module VoucherifySdk
         :'redeemables_limit' => :'Integer',
         :'applicable_redeemables_limit' => :'Integer',
         :'applicable_redeemables_per_category_limit' => :'Integer',
+        :'applicable_redeemables_category_limits' => :'Hash<String, Integer>',
         :'applicable_exclusive_redeemables_limit' => :'Integer',
         :'applicable_exclusive_redeemables_per_category_limit' => :'Integer',
         :'discount_calculation_mode' => :'String',
         :'initial_amount_mode_categories' => :'Array<String>',
         :'discounted_amount_mode_categories' => :'Array<String>',
         :'redeemables_application_mode' => :'String',
-        :'redeemables_sorting_rule' => :'String'
+        :'redeemables_sorting_rule' => :'String',
+        :'redeemables_products_application_mode' => :'String',
+        :'redeemables_no_effect_rule' => :'String',
+        :'no_effect_skip_categories' => :'Array<String>',
+        :'no_effect_redeem_anyway_categories' => :'Array<String>',
+        :'redeemables_rollback_order_mode' => :'String'
       }
     end
 
@@ -123,13 +153,19 @@ module VoucherifySdk
         :'redeemables_limit',
         :'applicable_redeemables_limit',
         :'applicable_redeemables_per_category_limit',
+        :'applicable_redeemables_category_limits',
         :'applicable_exclusive_redeemables_limit',
         :'applicable_exclusive_redeemables_per_category_limit',
         :'discount_calculation_mode',
         :'initial_amount_mode_categories',
         :'discounted_amount_mode_categories',
         :'redeemables_application_mode',
-        :'redeemables_sorting_rule'
+        :'redeemables_sorting_rule',
+        :'redeemables_products_application_mode',
+        :'redeemables_no_effect_rule',
+        :'no_effect_skip_categories',
+        :'no_effect_redeem_anyway_categories',
+        :'redeemables_rollback_order_mode'
       ])
     end
 
@@ -165,6 +201,12 @@ module VoucherifySdk
         self.applicable_redeemables_per_category_limit = attributes[:'applicable_redeemables_per_category_limit']
       end
 
+      if attributes.key?(:'applicable_redeemables_category_limits')
+        if (value = attributes[:'applicable_redeemables_category_limits']).is_a?(Hash)
+          self.applicable_redeemables_category_limits = value
+        end
+      end
+
       if attributes.key?(:'applicable_exclusive_redeemables_limit')
         self.applicable_exclusive_redeemables_limit = attributes[:'applicable_exclusive_redeemables_limit']
       end
@@ -196,6 +238,30 @@ module VoucherifySdk
       if attributes.key?(:'redeemables_sorting_rule')
         self.redeemables_sorting_rule = attributes[:'redeemables_sorting_rule']
       end
+
+      if attributes.key?(:'redeemables_products_application_mode')
+        self.redeemables_products_application_mode = attributes[:'redeemables_products_application_mode']
+      end
+
+      if attributes.key?(:'redeemables_no_effect_rule')
+        self.redeemables_no_effect_rule = attributes[:'redeemables_no_effect_rule']
+      end
+
+      if attributes.key?(:'no_effect_skip_categories')
+        if (value = attributes[:'no_effect_skip_categories']).is_a?(Array)
+          self.no_effect_skip_categories = value
+        end
+      end
+
+      if attributes.key?(:'no_effect_redeem_anyway_categories')
+        if (value = attributes[:'no_effect_redeem_anyway_categories']).is_a?(Array)
+          self.no_effect_redeem_anyway_categories = value
+        end
+      end
+
+      if attributes.key?(:'redeemables_rollback_order_mode')
+        self.redeemables_rollback_order_mode = attributes[:'redeemables_rollback_order_mode']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -211,8 +277,20 @@ module VoucherifySdk
         invalid_properties.push('invalid value for "redeemables_limit", must be greater than or equal to 1.')
       end
 
+      if !@applicable_redeemables_limit.nil? && @applicable_redeemables_limit > 30
+        invalid_properties.push('invalid value for "applicable_redeemables_limit", must be smaller than or equal to 30.')
+      end
+
       if !@applicable_redeemables_limit.nil? && @applicable_redeemables_limit < 1
         invalid_properties.push('invalid value for "applicable_redeemables_limit", must be greater than or equal to 1.')
+      end
+
+      if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit > 30
+        invalid_properties.push('invalid value for "applicable_redeemables_per_category_limit", must be smaller than or equal to 30.')
+      end
+
+      if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit < 1
+        invalid_properties.push('invalid value for "applicable_redeemables_per_category_limit", must be greater than or equal to 1.')
       end
 
       if !@applicable_exclusive_redeemables_limit.nil? && @applicable_exclusive_redeemables_limit > 5
@@ -221,6 +299,14 @@ module VoucherifySdk
 
       if !@applicable_exclusive_redeemables_limit.nil? && @applicable_exclusive_redeemables_limit < 1
         invalid_properties.push('invalid value for "applicable_exclusive_redeemables_limit", must be greater than or equal to 1.')
+      end
+
+      if !@applicable_exclusive_redeemables_per_category_limit.nil? && @applicable_exclusive_redeemables_per_category_limit > 30
+        invalid_properties.push('invalid value for "applicable_exclusive_redeemables_per_category_limit", must be smaller than or equal to 30.')
+      end
+
+      if !@applicable_exclusive_redeemables_per_category_limit.nil? && @applicable_exclusive_redeemables_per_category_limit < 1
+        invalid_properties.push('invalid value for "applicable_exclusive_redeemables_per_category_limit", must be greater than or equal to 1.')
       end
 
       invalid_properties
@@ -232,15 +318,26 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@redeemables_limit.nil? && @redeemables_limit > 30
       return false if !@redeemables_limit.nil? && @redeemables_limit < 1
+      return false if !@applicable_redeemables_limit.nil? && @applicable_redeemables_limit > 30
       return false if !@applicable_redeemables_limit.nil? && @applicable_redeemables_limit < 1
+      return false if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit > 30
+      return false if !@applicable_redeemables_per_category_limit.nil? && @applicable_redeemables_per_category_limit < 1
       return false if !@applicable_exclusive_redeemables_limit.nil? && @applicable_exclusive_redeemables_limit > 5
       return false if !@applicable_exclusive_redeemables_limit.nil? && @applicable_exclusive_redeemables_limit < 1
+      return false if !@applicable_exclusive_redeemables_per_category_limit.nil? && @applicable_exclusive_redeemables_per_category_limit > 30
+      return false if !@applicable_exclusive_redeemables_per_category_limit.nil? && @applicable_exclusive_redeemables_per_category_limit < 1
       discount_calculation_mode_validator = EnumAttributeValidator.new('String', ["INITIAL_AMOUNT", "DISCOUNTED_AMOUNT"])
       return false unless discount_calculation_mode_validator.valid?(@discount_calculation_mode)
       redeemables_application_mode_validator = EnumAttributeValidator.new('String', ["ALL", "PARTIAL"])
       return false unless redeemables_application_mode_validator.valid?(@redeemables_application_mode)
       redeemables_sorting_rule_validator = EnumAttributeValidator.new('String', ["CATEGORY_HIERARCHY", "REQUESTED_ORDER"])
       return false unless redeemables_sorting_rule_validator.valid?(@redeemables_sorting_rule)
+      redeemables_products_application_mode_validator = EnumAttributeValidator.new('String', ["STACK", "ONCE"])
+      return false unless redeemables_products_application_mode_validator.valid?(@redeemables_products_application_mode)
+      redeemables_no_effect_rule_validator = EnumAttributeValidator.new('String', ["REDEEM_ANYWAY", "SKIP"])
+      return false unless redeemables_no_effect_rule_validator.valid?(@redeemables_no_effect_rule)
+      redeemables_rollback_order_mode_validator = EnumAttributeValidator.new('String', ["WITH_ORDER", "WITHOUT_ORDER"])
+      return false unless redeemables_rollback_order_mode_validator.valid?(@redeemables_rollback_order_mode)
       true
     end
 
@@ -254,13 +351,19 @@ module VoucherifySdk
           redeemables_limit == o.redeemables_limit &&
           applicable_redeemables_limit == o.applicable_redeemables_limit &&
           applicable_redeemables_per_category_limit == o.applicable_redeemables_per_category_limit &&
+          applicable_redeemables_category_limits == o.applicable_redeemables_category_limits &&
           applicable_exclusive_redeemables_limit == o.applicable_exclusive_redeemables_limit &&
           applicable_exclusive_redeemables_per_category_limit == o.applicable_exclusive_redeemables_per_category_limit &&
           discount_calculation_mode == o.discount_calculation_mode &&
           initial_amount_mode_categories == o.initial_amount_mode_categories &&
           discounted_amount_mode_categories == o.discounted_amount_mode_categories &&
           redeemables_application_mode == o.redeemables_application_mode &&
-          redeemables_sorting_rule == o.redeemables_sorting_rule
+          redeemables_sorting_rule == o.redeemables_sorting_rule &&
+          redeemables_products_application_mode == o.redeemables_products_application_mode &&
+          redeemables_no_effect_rule == o.redeemables_no_effect_rule &&
+          no_effect_skip_categories == o.no_effect_skip_categories &&
+          no_effect_redeem_anyway_categories == o.no_effect_redeem_anyway_categories &&
+          redeemables_rollback_order_mode == o.redeemables_rollback_order_mode
     end
 
     # @see the `==` method
@@ -272,7 +375,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [exclusive_categories, joint_categories, redeemables_limit, applicable_redeemables_limit, applicable_redeemables_per_category_limit, applicable_exclusive_redeemables_limit, applicable_exclusive_redeemables_per_category_limit, discount_calculation_mode, initial_amount_mode_categories, discounted_amount_mode_categories, redeemables_application_mode, redeemables_sorting_rule].hash
+      [exclusive_categories, joint_categories, redeemables_limit, applicable_redeemables_limit, applicable_redeemables_per_category_limit, applicable_redeemables_category_limits, applicable_exclusive_redeemables_limit, applicable_exclusive_redeemables_per_category_limit, discount_calculation_mode, initial_amount_mode_categories, discounted_amount_mode_categories, redeemables_application_mode, redeemables_sorting_rule, redeemables_products_application_mode, redeemables_no_effect_rule, no_effect_skip_categories, no_effect_redeem_anyway_categories, redeemables_rollback_order_mode].hash
     end
 
     # Builds the object from hash

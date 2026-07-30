@@ -28,7 +28,9 @@ module VoucherifySdk
 
     attr_accessor :options
 
-    # A set of key/value pairs that you can send in the request body to check against redeemables requiring **redemption** metadata validation rules to be satisfied. The validation runs against rules that are defined through the <!-- [Create Validation Rules](https://docs.voucherify.io/reference/create-validation-rules) -->[Create Validation Rules](ref:create-validation-rules) endpoint or via the Dashboard; in the _Advanced Rule Builder_ &rarr; _Advanced_ &rarr; _Redemption metadata satisfy_ or _Basic Builder_ &rarr; _Attributes match_ &rarr; _REDEMPTION METADATA_. [Read more](https://support.voucherify.io/article/148-how-to-build-a-rule).
+    attr_accessor :session
+
+    # A set of key/value pairs that you can send in the request body to check against redeemables requiring **redemption** metadata validation rules to be satisfied. The validation runs against rules that are defined through the [Create Validation Rules](/api-reference/validation-rules/create-validation-rules) endpoint or with the [Validation Rule Builder](/personalize/create-validation-rules) in the the Dashboard.
     attr_accessor :metadata
 
     class EnumAttributeValidator
@@ -61,6 +63,7 @@ module VoucherifySdk
         :'tracking_id' => :'tracking_id',
         :'scenario' => :'scenario',
         :'options' => :'options',
+        :'session' => :'session',
         :'metadata' => :'metadata'
       }
     end
@@ -78,6 +81,7 @@ module VoucherifySdk
         :'tracking_id' => :'String',
         :'scenario' => :'String',
         :'options' => :'QualificationsOption',
+        :'session' => :'QualificationsCheckEligibilityRequestBodySession',
         :'metadata' => :'Object'
       }
     end
@@ -87,6 +91,7 @@ module VoucherifySdk
       Set.new([
         :'tracking_id',
         :'scenario',
+        :'session',
         :'metadata'
       ])
     end
@@ -117,6 +122,10 @@ module VoucherifySdk
 
       if attributes.key?(:'options')
         self.options = attributes[:'options']
+      end
+
+      if attributes.key?(:'session')
+        self.session = attributes[:'session']
       end
 
       if attributes.key?(:'metadata')
@@ -151,6 +160,7 @@ module VoucherifySdk
           tracking_id == o.tracking_id &&
           scenario == o.scenario &&
           options == o.options &&
+          session == o.session &&
           metadata == o.metadata
     end
 
@@ -163,7 +173,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [customer, order, tracking_id, scenario, options, metadata].hash
+      [customer, order, tracking_id, scenario, options, session, metadata].hash
     end
 
     # Builds the object from hash

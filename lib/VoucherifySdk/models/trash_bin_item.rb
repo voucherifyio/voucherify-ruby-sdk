@@ -34,7 +34,7 @@ module VoucherifySdk
     # Name of the resouce moved to the bin. It is the name of the campaign, product or SKU, or the voucher code.
     attr_accessor :resource_name
 
-    # Unique identifier of the parent resource. For a voucher, it is a campaign ID, except for standalone vouchers. For an SKU, it is the product ID. It returns `null` for campaigns and base products.
+    # Unique identifier of the parent resource. For a voucher, it is a campaign ID, except for generic (standalone) vouchers. For an SKU, it is the product ID. It returns `null` for campaigns and base products.
     attr_accessor :resource_parent_id
 
     # The type of the object represented by JSON. It is equal to the `resource_type`.

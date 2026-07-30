@@ -25,6 +25,9 @@ module VoucherifySdk
     # The type of the object represented by the JSON.
     attr_accessor :object
 
+    # Credits added or subtracted on a gift card.
+    attr_accessor :amount
+
     # Points added or subtracted in the transaction of a loyalty card.
     attr_accessor :points
 
@@ -64,6 +67,7 @@ module VoucherifySdk
         :'type' => :'type',
         :'total' => :'total',
         :'object' => :'object',
+        :'amount' => :'amount',
         :'points' => :'points',
         :'balance' => :'balance',
         :'operation_type' => :'operation_type',
@@ -82,6 +86,7 @@ module VoucherifySdk
         :'type' => :'String',
         :'total' => :'Integer',
         :'object' => :'String',
+        :'amount' => :'Integer',
         :'points' => :'Integer',
         :'balance' => :'Integer',
         :'operation_type' => :'String',
@@ -95,6 +100,7 @@ module VoucherifySdk
         :'type',
         :'total',
         :'object',
+        :'amount',
         :'points',
         :'balance',
         :'operation_type',
@@ -122,6 +128,10 @@ module VoucherifySdk
         self.object = attributes[:'object']
       else
         self.object = 'balance'
+      end
+
+      if attributes.key?(:'amount')
+        self.amount = attributes[:'amount']
       end
 
       if attributes.key?(:'points')
@@ -170,6 +180,7 @@ module VoucherifySdk
           type == o.type &&
           total == o.total &&
           object == o.object &&
+          amount == o.amount &&
           points == o.points &&
           balance == o.balance &&
           operation_type == o.operation_type &&
@@ -185,7 +196,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, total, object, points, balance, operation_type, related_object].hash
+      [type, total, object, amount, points, balance, operation_type, related_object].hash
     end
 
     # Builds the object from hash

@@ -16,10 +16,10 @@ require 'time'
 module VoucherifySdk
   # Object representing loyalty card parameters. Child attributes are present only if `type` is `LOYALTY_CARD`. Defaults to `null`.
   class VouchersUpdateResponseBodyLoyaltyCard
-    # Total points incurred over the lifespan of the loyalty card, minus the expired points.
+    # Total number of points added to the loyalty card over its lifespan.
     attr_accessor :points
 
-    # Points available for reward redemption.
+    # Points available for reward redemption. This is calculated as follows: `balance` = `points` - `expired_points` - `subtracted_points` - `redemption.redeemed_points`.
     attr_accessor :balance
 
     # The next closest date when the next set of points are due to expire.
@@ -28,8 +28,14 @@ module VoucherifySdk
     # The amount of points that are set to expire next.
     attr_accessor :next_expiration_points
 
-    # Determines the number of pending points that will be added to the loyalty card after the predefined time.
+    # Shows the number of pending points that will be added to the loyalty card when they are activated automatically or manually.
     attr_accessor :pending_points
+
+    # Shows the total number of expired points over the lifetime of the loyalty card.
+    attr_accessor :expired_points
+
+    # Shows the total number of subtracted points over the lifetime of the loyalty card.
+    attr_accessor :subtracted_points
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -38,7 +44,9 @@ module VoucherifySdk
         :'balance' => :'balance',
         :'next_expiration_date' => :'next_expiration_date',
         :'next_expiration_points' => :'next_expiration_points',
-        :'pending_points' => :'pending_points'
+        :'pending_points' => :'pending_points',
+        :'expired_points' => :'expired_points',
+        :'subtracted_points' => :'subtracted_points'
       }
     end
 
@@ -54,7 +62,9 @@ module VoucherifySdk
         :'balance' => :'Integer',
         :'next_expiration_date' => :'Date',
         :'next_expiration_points' => :'Integer',
-        :'pending_points' => :'Integer'
+        :'pending_points' => :'Integer',
+        :'expired_points' => :'Integer',
+        :'subtracted_points' => :'Integer'
       }
     end
 
@@ -65,7 +75,9 @@ module VoucherifySdk
         :'balance',
         :'next_expiration_date',
         :'next_expiration_points',
-        :'pending_points'
+        :'pending_points',
+        :'expired_points',
+        :'subtracted_points'
       ])
     end
 
@@ -96,6 +108,14 @@ module VoucherifySdk
       if attributes.key?(:'pending_points')
         self.pending_points = attributes[:'pending_points']
       end
+
+      if attributes.key?(:'expired_points')
+        self.expired_points = attributes[:'expired_points']
+      end
+
+      if attributes.key?(:'subtracted_points')
+        self.subtracted_points = attributes[:'subtracted_points']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -122,7 +142,9 @@ module VoucherifySdk
           balance == o.balance &&
           next_expiration_date == o.next_expiration_date &&
           next_expiration_points == o.next_expiration_points &&
-          pending_points == o.pending_points
+          pending_points == o.pending_points &&
+          expired_points == o.expired_points &&
+          subtracted_points == o.subtracted_points
     end
 
     # @see the `==` method
@@ -134,7 +156,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [points, balance, next_expiration_date, next_expiration_points, pending_points].hash
+      [points, balance, next_expiration_date, next_expiration_points, pending_points, expired_points, subtracted_points].hash
     end
 
     # Builds the object from hash

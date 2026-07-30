@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Validate Stackable Discounts
-    # Verify redeemables provided in the request. This method is designed for server side integration which means that it is accessible only through private keys.
+    # Verify redeemables provided in the request. This method is designed for server side integration which means that it is accessible only through private keys. API keys with a Merchant role cant use this endpoint.
     # @param [Hash] opts the optional parameters
     # @option opts [ValidationsValidateRequestBody] :validations_validate_request_body 
     # @return [ValidationsValidateResponseBody]
@@ -30,7 +30,7 @@ module VoucherifySdk
     end
 
     # Validate Stackable Discounts
-    # Verify redeemables provided in the request. This method is designed for server side integration which means that it is accessible only through private keys.
+    # Verify redeemables provided in the request. This method is designed for server side integration which means that it is accessible only through private keys. API keys with a Merchant role cant use this endpoint.
     # @param [Hash] opts the optional parameters
     # @option opts [ValidationsValidateRequestBody] :validations_validate_request_body 
     # @return [Array<(ValidationsValidateResponseBody, Integer, Hash)>] ValidationsValidateResponseBody data, response status code and response headers

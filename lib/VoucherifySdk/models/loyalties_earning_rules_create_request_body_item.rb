@@ -27,11 +27,15 @@ module VoucherifySdk
     # A flag to toggle the earning rule on or off. You can disable an earning rule even though it's within the active period defined by the `start_date` and `expiration_date` of the campaign or the earning rule's own `start_date` and `expiration_date`.    - `true` indicates an *active* earning rule - `false` indicates an *inactive* earning rule
     attr_accessor :active
 
-    # Start date defines when the earning rule starts to be active. Activation timestamp is presented in the ISO 8601 format. Earning rule is *inactive before* this date. If you don't define the start date for an earning rule, it'll inherit the campaign start date by default. 
+    # Start date defines when the earning rule starts to be active. Activation timestamp is presented in the ISO 8601 format. Earning rule is *inactive before* this date. If you don't define the start date for an earning rule, it will inherit the campaign start date by default. 
     attr_accessor :start_date
 
-    # Expiration date defines when the earning rule expires. Expiration timestamp is presented in the ISO 8601 format.  Earning rule is *inactive after* this date.If you don't define the expiration date for an earning rule, it'll inherit the campaign expiration date by default.
+    # Expiration date defines when the earning rule expires. Expiration timestamp is presented in the ISO 8601 format.  Earning rule is *inactive after* this date.If you don't define the expiration date for an earning rule, it will inherit the campaign expiration date by default.
     attr_accessor :expiration_date
+
+    attr_accessor :pending_points
+
+    attr_accessor :expiration_rules
 
     attr_accessor :validity_timeframe
 
@@ -81,6 +85,8 @@ module VoucherifySdk
         :'active' => :'active',
         :'start_date' => :'start_date',
         :'expiration_date' => :'expiration_date',
+        :'pending_points' => :'pending_points',
+        :'expiration_rules' => :'expiration_rules',
         :'validity_timeframe' => :'validity_timeframe',
         :'validity_day_of_week' => :'validity_day_of_week',
         :'validity_hours' => :'validity_hours',
@@ -106,6 +112,8 @@ module VoucherifySdk
         :'active' => :'Boolean',
         :'start_date' => :'Time',
         :'expiration_date' => :'Time',
+        :'pending_points' => :'LoyaltiesEarningRulesCreateRequestBodyItemPendingPoints',
+        :'expiration_rules' => :'EarningRuleExpirationRules',
         :'validity_timeframe' => :'ValidityTimeframe',
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
@@ -123,6 +131,7 @@ module VoucherifySdk
         :'active',
         :'start_date',
         :'expiration_date',
+        :'pending_points',
         :'metadata',
         :'segment',
         :'custom_event',
@@ -164,6 +173,14 @@ module VoucherifySdk
 
       if attributes.key?(:'expiration_date')
         self.expiration_date = attributes[:'expiration_date']
+      end
+
+      if attributes.key?(:'pending_points')
+        self.pending_points = attributes[:'pending_points']
+      end
+
+      if attributes.key?(:'expiration_rules')
+        self.expiration_rules = attributes[:'expiration_rules']
       end
 
       if attributes.key?(:'validity_timeframe')
@@ -224,6 +241,8 @@ module VoucherifySdk
           active == o.active &&
           start_date == o.start_date &&
           expiration_date == o.expiration_date &&
+          pending_points == o.pending_points &&
+          expiration_rules == o.expiration_rules &&
           validity_timeframe == o.validity_timeframe &&
           validity_day_of_week == o.validity_day_of_week &&
           validity_hours == o.validity_hours &&
@@ -242,7 +261,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [validation_rule_id, loyalty, event, source, active, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, metadata, segment, custom_event, loyalty_tier].hash
+      [validation_rule_id, loyalty, event, source, active, start_date, expiration_date, pending_points, expiration_rules, validity_timeframe, validity_day_of_week, validity_hours, metadata, segment, custom_event, loyalty_tier].hash
     end
 
     # Builds the object from hash

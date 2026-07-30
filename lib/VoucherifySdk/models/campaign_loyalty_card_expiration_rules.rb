@@ -14,18 +14,25 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Defines the loyalty point expiration rule. This expiration rule applies when there are no `expiration_rules` defined for an earning rule.
   class CampaignLoyaltyCardExpirationRules
-    # Type of period
+    # Type of period. Can be set for `MONTH` or `FIXED_DAY_OF_YEAR`. `MONTH` requires the `period_value` field. `FIXED_DAY_OF_YEAR` requires the `fixed_month` and `fixed_day` fields.
     attr_accessor :period_type
 
-    # Value of the period
+    # Value of the period. Required for the `period_type: MONTH`.
     attr_accessor :period_value
 
-    # Type of rounding
+    # Type of rounding of the expiration period. Optional for the `period_type: MONTH`.
     attr_accessor :rounding_type
 
-    # Value of rounding
+    # Value of rounding of the expiration period. Required for the `rounding_type`.
     attr_accessor :rounding_value
+
+    # Determines the month when the points expire; `1` is January, `2` is February, and so on. Required for the `period_type: FIXED_DAY_OF_YEAR`.
+    attr_accessor :fixed_month
+
+    # Determines the day of the month when the points expire. Required for the `period_type: FIXED_DAY_OF_YEAR`.
+    attr_accessor :fixed_day
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -55,7 +62,9 @@ module VoucherifySdk
         :'period_type' => :'period_type',
         :'period_value' => :'period_value',
         :'rounding_type' => :'rounding_type',
-        :'rounding_value' => :'rounding_value'
+        :'rounding_value' => :'rounding_value',
+        :'fixed_month' => :'fixed_month',
+        :'fixed_day' => :'fixed_day'
       }
     end
 
@@ -70,7 +79,9 @@ module VoucherifySdk
         :'period_type' => :'String',
         :'period_value' => :'Integer',
         :'rounding_type' => :'String',
-        :'rounding_value' => :'Integer'
+        :'rounding_value' => :'Integer',
+        :'fixed_month' => :'Integer',
+        :'fixed_day' => :'Integer'
       }
     end
 
@@ -80,7 +91,9 @@ module VoucherifySdk
         :'period_type',
         :'period_value',
         :'rounding_type',
-        :'rounding_value'
+        :'rounding_value',
+        :'fixed_month',
+        :'fixed_day'
       ])
     end
 
@@ -94,8 +107,6 @@ module VoucherifySdk
 
       if attributes.key?(:'period_type')
         self.period_type = attributes[:'period_type']
-      else
-        self.period_type = 'MONTH'
       end
 
       if attributes.key?(:'period_value')
@@ -109,6 +120,14 @@ module VoucherifySdk
       if attributes.key?(:'rounding_value')
         self.rounding_value = attributes[:'rounding_value']
       end
+
+      if attributes.key?(:'fixed_month')
+        self.fixed_month = attributes[:'fixed_month']
+      end
+
+      if attributes.key?(:'fixed_day')
+        self.fixed_day = attributes[:'fixed_day']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -116,6 +135,22 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@fixed_month.nil? && @fixed_month > 12
+        invalid_properties.push('invalid value for "fixed_month", must be smaller than or equal to 12.')
+      end
+
+      if !@fixed_month.nil? && @fixed_month < 1
+        invalid_properties.push('invalid value for "fixed_month", must be greater than or equal to 1.')
+      end
+
+      if !@fixed_day.nil? && @fixed_day > 31
+        invalid_properties.push('invalid value for "fixed_day", must be smaller than or equal to 31.')
+      end
+
+      if !@fixed_day.nil? && @fixed_day < 1
+        invalid_properties.push('invalid value for "fixed_day", must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -123,10 +158,14 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      period_type_validator = EnumAttributeValidator.new('String', ["MONTH"])
+      period_type_validator = EnumAttributeValidator.new('String', ["FIXED_DAY_OF_YEAR", "MONTH"])
       return false unless period_type_validator.valid?(@period_type)
       rounding_type_validator = EnumAttributeValidator.new('String', ["END_OF_MONTH", "END_OF_QUARTER", "END_OF_HALF_YEAR", "END_OF_YEAR", "PARTICULAR_MONTH"])
       return false unless rounding_type_validator.valid?(@rounding_type)
+      return false if !@fixed_month.nil? && @fixed_month > 12
+      return false if !@fixed_month.nil? && @fixed_month < 1
+      return false if !@fixed_day.nil? && @fixed_day > 31
+      return false if !@fixed_day.nil? && @fixed_day < 1
       true
     end
 
@@ -138,7 +177,9 @@ module VoucherifySdk
           period_type == o.period_type &&
           period_value == o.period_value &&
           rounding_type == o.rounding_type &&
-          rounding_value == o.rounding_value
+          rounding_value == o.rounding_value &&
+          fixed_month == o.fixed_month &&
+          fixed_day == o.fixed_day
     end
 
     # @see the `==` method
@@ -150,7 +191,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [period_type, period_value, rounding_type, rounding_value].hash
+      [period_type, period_value, rounding_type, rounding_value, fixed_month, fixed_day].hash
     end
 
     # Builds the object from hash

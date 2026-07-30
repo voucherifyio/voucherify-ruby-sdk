@@ -14,7 +14,6 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `v1/exports/{exportId}`.
   class ExportsGetResponseBody
     # Unique export ID.
     attr_accessor :id

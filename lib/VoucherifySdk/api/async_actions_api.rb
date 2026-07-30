@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Get Async Action
-    # Check the result of a scheduled asynchronous operation.   The table below lists the possible types of async actions. The types are different for each endpoint generating the async action. If you would like to learn more about importing data into Voucherify, read more [here](https://support.voucherify.io/article/574-data-import).       
+    # Check the result of a scheduled asynchronous operation.   The table below lists the possible types of async actions. The types are different for each endpoint generating the async action.        
     # @param async_action_id [String] Unique ID of the asynchronous operation.
     # @param [Hash] opts the optional parameters
     # @return [AsyncActionGetResponseBody]
@@ -30,7 +30,7 @@ module VoucherifySdk
     end
 
     # Get Async Action
-    # Check the result of a scheduled asynchronous operation.   The table below lists the possible types of async actions. The types are different for each endpoint generating the async action. If you would like to learn more about importing data into Voucherify, read more [here](https://support.voucherify.io/article/574-data-import).       
+    # Check the result of a scheduled asynchronous operation.   The table below lists the possible types of async actions. The types are different for each endpoint generating the async action.        
     # @param async_action_id [String] Unique ID of the asynchronous operation.
     # @param [Hash] opts the optional parameters
     # @return [Array<(AsyncActionGetResponseBody, Integer, Hash)>] AsyncActionGetResponseBody data, response status code and response headers
@@ -79,7 +79,7 @@ module VoucherifySdk
     end
 
     # List Async Actions
-    # Track asynchronous operations scheduled in your project.   The table below lists the possible types of async actions. The types are different for each endpoint generating the async action. If you would like to learn more about importing data into Voucherify, read more [here](https://support.voucherify.io/article/574-data-import).       
+    # Track asynchronous operations scheduled in your project.   The table below lists the possible types of async actions. The types are different for each endpoint generating the async action.       
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limit the number of asynchronous actions that the API returns in the response.
     # @option opts [Time] :end_date Limits results to actions scheduled before the end_date. The date format needs to be consistent with ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). 
@@ -90,7 +90,7 @@ module VoucherifySdk
     end
 
     # List Async Actions
-    # Track asynchronous operations scheduled in your project.   The table below lists the possible types of async actions. The types are different for each endpoint generating the async action. If you would like to learn more about importing data into Voucherify, read more [here](https://support.voucherify.io/article/574-data-import).       
+    # Track asynchronous operations scheduled in your project.   The table below lists the possible types of async actions. The types are different for each endpoint generating the async action.       
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limit the number of asynchronous actions that the API returns in the response.
     # @option opts [Time] :end_date Limits results to actions scheduled before the end_date. The date format needs to be consistent with ISO 8601 format (2016-11-16T14:14:31Z or 2016-11-16). 

@@ -18,6 +18,8 @@ module VoucherifySdk
   class RedeemableResult
     attr_accessor :discount
 
+    attr_accessor :bundle
+
     attr_accessor :gift
 
     attr_accessor :loyalty_card
@@ -28,6 +30,7 @@ module VoucherifySdk
     def self.attribute_map
       {
         :'discount' => :'discount',
+        :'bundle' => :'bundle',
         :'gift' => :'gift',
         :'loyalty_card' => :'loyalty_card',
         :'error' => :'error'
@@ -43,6 +46,7 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'discount' => :'Discount',
+        :'bundle' => :'Bundle',
         :'gift' => :'RedeemableGift',
         :'loyalty_card' => :'RedeemableLoyaltyCard',
         :'error' => :'Error'
@@ -65,6 +69,10 @@ module VoucherifySdk
 
       if attributes.key?(:'discount')
         self.discount = attributes[:'discount']
+      end
+
+      if attributes.key?(:'bundle')
+        self.bundle = attributes[:'bundle']
       end
 
       if attributes.key?(:'gift')
@@ -101,6 +109,7 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           discount == o.discount &&
+          bundle == o.bundle &&
           gift == o.gift &&
           loyalty_card == o.loyalty_card &&
           error == o.error
@@ -115,7 +124,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [discount, gift, loyalty_card, error].hash
+      [discount, bundle, gift, loyalty_card, error].hash
     end
 
     # Builds the object from hash

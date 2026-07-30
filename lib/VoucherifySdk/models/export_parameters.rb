@@ -23,6 +23,9 @@ module VoucherifySdk
     # Allowed additional properties must start with \"metadata.\" or \"redemption.\" and Allowed additional properties must start with \"metadata.\" and Allowed additional properties must start with \"metadata.\" or \"address.\" or \"summary.\" or \"loyalty.\" or \"loyalty_tier.\" or \"loyalty_points.\" or \"system_metadata.\"
     attr_accessor :filters
 
+    # Unique identifier of the campaign. It is assigned by Voucherify. The campaign ID defines the campaign for which the voucher export will be triggered.
+    attr_accessor :campaign_id
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -50,7 +53,8 @@ module VoucherifySdk
       {
         :'order' => :'order',
         :'fields' => :'fields',
-        :'filters' => :'filters'
+        :'filters' => :'filters',
+        :'campaign_id' => :'campaign_id'
       }
     end
 
@@ -64,7 +68,8 @@ module VoucherifySdk
       {
         :'order' => :'String',
         :'fields' => :'Array<String>',
-        :'filters' => :'Object'
+        :'filters' => :'Object',
+        :'campaign_id' => :'String'
       }
     end
 
@@ -73,7 +78,8 @@ module VoucherifySdk
       Set.new([
         :'order',
         :'fields',
-        :'filters'
+        :'filters',
+        :'campaign_id'
       ])
     end
 
@@ -97,6 +103,10 @@ module VoucherifySdk
 
       if attributes.key?(:'filters')
         self.filters = attributes[:'filters']
+      end
+
+      if attributes.key?(:'campaign_id')
+        self.campaign_id = attributes[:'campaign_id']
       end
     end
 
@@ -124,7 +134,8 @@ module VoucherifySdk
       self.class == o.class &&
           order == o.order &&
           fields == o.fields &&
-          filters == o.filters
+          filters == o.filters &&
+          campaign_id == o.campaign_id
     end
 
     # @see the `==` method
@@ -136,7 +147,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [order, fields, filters].hash
+      [order, fields, filters, campaign_id].hash
     end
 
     # Builds the object from hash

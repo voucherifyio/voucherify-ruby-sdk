@@ -6,4 +6,5 @@
 | ---- | ---- | ----------- | ----- |
 | **error** | [**Error**](Error.md) |  | [optional] |
 | **details** | [**ValidationsRedeemableInapplicableResultDetails**](ValidationsRedeemableInapplicableResultDetails.md) |  | [optional] |
+| **bundle** | [**Bundle**](Bundle.md) |  | [optional] |
 

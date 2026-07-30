@@ -20,6 +20,7 @@ module VoucherifySdk
     # Amount taken off the subtotal of a price. Value is multiplied by 100 to precisely represent 2 decimal places. For example, a $10 discount is written as 1000.
     attr_accessor :amount_off
 
+    # Formula used to dynamically calculate the discount.
     attr_accessor :amount_off_formula
 
     # Maximum discount amount per order.
@@ -33,7 +34,7 @@ module VoucherifySdk
     # Number of units to be granted a full value discount.
     attr_accessor :unit_off
 
-    # Formula used to calculate the number of units.
+    # Formula used to dynamically calculate the number of units.
     attr_accessor :unit_off_formula
 
     # The product deemed as free, chosen from product inventory (e.g. time, items).
@@ -48,6 +49,7 @@ module VoucherifySdk
     # The percent discount that the customer will receive.
     attr_accessor :percent_off
 
+    # Formula used to dynamically calculate the discount.
     attr_accessor :percent_off_formula
 
     # Upper limit allowed to be applied as a discount. Value is multiplied by 100 to precisely represent 2 decimal places. For example, a $6 maximum discount is written as 600.
@@ -56,6 +58,7 @@ module VoucherifySdk
     # Sets a fixed value for an order total or the item price. The value is multiplied by 100 to precisely represent 2 decimal places. For example, a $10 discount is written as 1000. If the fixed amount is calculated by the formula, i.e. the `fixed_amount_formula` parameter is present in the fixed amount definition, this value becomes the **fallback value**. As a result, if the formula cannot be calculated due to missing metadata, for example, this value will be used as the fixed value.
     attr_accessor :fixed_amount
 
+    # Formula used to dynamically calculate the discount.
     attr_accessor :fixed_amount_formula
 
     class EnumAttributeValidator
@@ -243,7 +246,7 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["AMOUNT", "UNIT", "PERCENT", "FIXED"])
       return false unless type_validator.valid?(@type)
-      effect_validator = EnumAttributeValidator.new('String', ["APPLY_TO_ORDER", "APPLY_TO_ITEMS", "APPLY_TO_ITEMS_PROPORTIONALLY", "APPLY_TO_ITEMS_PROPORTIONALLY_BY_QUANTITY", "APPLY_TO_ITEMS_BY_QUANTITY", "ADD_MISSING_ITEMS", "ADD_NEW_ITEMS", "ADD_MANY_ITEMS"])
+      effect_validator = EnumAttributeValidator.new('String', ["APPLY_TO_ORDER", "APPLY_TO_ITEMS", "APPLY_TO_ITEMS_PROPORTIONALLY", "APPLY_TO_ITEMS_PROPORTIONALLY_BY_QUANTITY", "APPLY_TO_ITEMS_BY_QUANTITY", "ADD_MISSING_ITEMS", "ADD_NEW_ITEMS", "ADD_MANY_ITEMS", "ADD_SAME_ITEMS"])
       return false unless effect_validator.valid?(@effect)
       true
     end

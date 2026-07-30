@@ -57,6 +57,8 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the earning rule. A set of key/value pairs that you can attach to an earning rule object. It can be useful for storing additional information about the earning rule in a structured format.
     attr_accessor :metadata
 
+    attr_accessor :expiration_rules
+
     # A unique validation rule identifier assigned by the Voucherify API. The validation rule is verified before points are added to the balance.
     attr_accessor :validation_rule_id
 
@@ -108,6 +110,7 @@ module VoucherifySdk
         :'validity_day_of_week' => :'validity_day_of_week',
         :'validity_hours' => :'validity_hours',
         :'metadata' => :'metadata',
+        :'expiration_rules' => :'expiration_rules',
         :'validation_rule_id' => :'validation_rule_id',
         :'updated_at' => :'updated_at',
         :'active' => :'active'
@@ -139,6 +142,7 @@ module VoucherifySdk
         :'validity_day_of_week' => :'Array<Integer>',
         :'validity_hours' => :'ValidityHours',
         :'metadata' => :'Object',
+        :'expiration_rules' => :'EarningRuleExpirationRules',
         :'validation_rule_id' => :'String',
         :'updated_at' => :'Time',
         :'active' => :'Boolean'
@@ -247,6 +251,10 @@ module VoucherifySdk
         self.metadata = attributes[:'metadata']
       end
 
+      if attributes.key?(:'expiration_rules')
+        self.expiration_rules = attributes[:'expiration_rules']
+      end
+
       if attributes.key?(:'validation_rule_id')
         self.validation_rule_id = attributes[:'validation_rule_id']
       end
@@ -299,6 +307,7 @@ module VoucherifySdk
           validity_day_of_week == o.validity_day_of_week &&
           validity_hours == o.validity_hours &&
           metadata == o.metadata &&
+          expiration_rules == o.expiration_rules &&
           validation_rule_id == o.validation_rule_id &&
           updated_at == o.updated_at &&
           active == o.active
@@ -313,7 +322,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, loyalty, event, custom_event, segment, loyalty_tier, pending_points, source, object, automation_id, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, metadata, validation_rule_id, updated_at, active].hash
+      [id, created_at, loyalty, event, custom_event, segment, loyalty_tier, pending_points, source, object, automation_id, start_date, expiration_date, validity_timeframe, validity_day_of_week, validity_hours, metadata, expiration_rules, validation_rule_id, updated_at, active].hash
     end
 
     # Builds the object from hash

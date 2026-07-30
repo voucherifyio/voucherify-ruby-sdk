@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Add Referral Code Holders
-    # Adds new holders to a referral code as **referees**. The data sent in the request is upserted into the customer data. If the request returns an error even for one customer, you have to resend the whole request. Customer data is upserted if the data for all customers is correct. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  👍 To add a holder as a referer, use the Create Publication endpoint.  📘 Alternative endpoint This endpoint is an alternative to the Add Referral Code Holders endpoint. The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
+    # Adds new holders to a referral code as **referees**. The data sent in the request is upserted into the customer data. If the request returns an error even for one customer, you have to resend the whole request. Customer data is upserted if the data for all customers is correct. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  👍 To add a holder as a referrer, use the [Create Publication](/api-reference/publications/create-publication) endpoint.  📘 Alternative endpoint This endpoint is an alternative to the [Add Referral Code Holders endpoint](/api-reference/referrals/add-referral-code-holders-with-campaign-id). The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
     # @param member_id [String] Unique referral code or its identifier.
     # @param [Hash] opts the optional parameters
     # @option opts [ReferralsMembersHoldersCreateInBulkRequestBody] :referrals_members_holders_create_in_bulk_request_body Specify the customer data to be upserted as redeemable holders.
@@ -31,7 +31,7 @@ module VoucherifySdk
     end
 
     # Add Referral Code Holders
-    # Adds new holders to a referral code as **referees**. The data sent in the request is upserted into the customer data. If the request returns an error even for one customer, you have to resend the whole request. Customer data is upserted if the data for all customers is correct. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  👍 To add a holder as a referer, use the Create Publication endpoint.  📘 Alternative endpoint This endpoint is an alternative to the Add Referral Code Holders endpoint. The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
+    # Adds new holders to a referral code as **referees**. The data sent in the request is upserted into the customer data. If the request returns an error even for one customer, you have to resend the whole request. Customer data is upserted if the data for all customers is correct. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  👍 To add a holder as a referrer, use the [Create Publication](/api-reference/publications/create-publication) endpoint.  📘 Alternative endpoint This endpoint is an alternative to the [Add Referral Code Holders endpoint](/api-reference/referrals/add-referral-code-holders-with-campaign-id). The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
     # @param member_id [String] Unique referral code or its identifier.
     # @param [Hash] opts the optional parameters
     # @option opts [ReferralsMembersHoldersCreateInBulkRequestBody] :referrals_members_holders_create_in_bulk_request_body Specify the customer data to be upserted as redeemable holders.
@@ -85,8 +85,8 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Add Referral Code Holders
-    # Adds new holders to a referral code as **referees**. The data sent in the request is upserted into the customer data. If the request returns an error even for one customer, you have to resend the whole request. Customer data is upserted if the data for all customers is correct. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  👍 To add a holder as a referer, use the Create Publication endpoint.
+    # Add Referral Code Holders with Campaign ID
+    # Adds new holders to a referral code as **referees**. The data sent in the request is upserted into the customer data. If the request returns an error even for one customer, you have to resend the whole request. Customer data is upserted if the data for all customers is correct. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  👍 To add a holder as a referrer, use the [Create Publication](/api-reference/publications/create-publication) endpoint.
     # @param campaign_id [String] Unique identifier of a referral program campaign.
     # @param member_id [String] Unique referral code or its identifier.
     # @param [Hash] opts the optional parameters
@@ -97,8 +97,8 @@ module VoucherifySdk
       data
     end
 
-    # Add Referral Code Holders
-    # Adds new holders to a referral code as **referees**. The data sent in the request is upserted into the customer data. If the request returns an error even for one customer, you have to resend the whole request. Customer data is upserted if the data for all customers is correct. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  👍 To add a holder as a referer, use the Create Publication endpoint.
+    # Add Referral Code Holders with Campaign ID
+    # Adds new holders to a referral code as **referees**. The data sent in the request is upserted into the customer data. If the request returns an error even for one customer, you have to resend the whole request. Customer data is upserted if the data for all customers is correct. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  👍 To add a holder as a referrer, use the [Create Publication](/api-reference/publications/create-publication) endpoint.
     # @param campaign_id [String] Unique identifier of a referral program campaign.
     # @param member_id [String] Unique referral code or its identifier.
     # @param [Hash] opts the optional parameters
@@ -153,7 +153,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # List Referral Code Holders
+    # List Referral Code Holders with campaign ID
     # Retrieves all the redeemables that have been assigned to the customer. To use this endpoint, you must have the following permissions: - Read Customers (customers.details.read)
     # @param campaign_id [String] Unique identifier of a referral program campaign.
     # @param member_id [String] Unique referral code or its identifier.
@@ -168,7 +168,7 @@ module VoucherifySdk
       data
     end
 
-    # List Referral Code Holders
+    # List Referral Code Holders with campaign ID
     # Retrieves all the redeemables that have been assigned to the customer. To use this endpoint, you must have the following permissions: - Read Customers (customers.details.read)
     # @param campaign_id [String] Unique identifier of a referral program campaign.
     # @param member_id [String] Unique referral code or its identifier.
@@ -227,7 +227,7 @@ module VoucherifySdk
     end
 
     # List Referral Code Holders
-    # Retrieves the holders of the referral code from a referral campaign. To use this endpoint, you must have the following permissions: - Read Customers (customers.details.read)  📘 Alternative endpoint This endpoint is an alternative to the List Member Holders endpoint. The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
+    # Retrieves the holders of the referral code from a referral campaign. To use this endpoint, you must have the following permissions: - Read Customers (customers.details.read)  📘 Alternative endpoint This endpoint is an alternative to the [List Member Holders endpoint](/api-reference/referrals/list-referral-code-holders-with-campaign-id). The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
     # @param member_id [String] Unique referral code or its identifier.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
@@ -241,7 +241,7 @@ module VoucherifySdk
     end
 
     # List Referral Code Holders
-    # Retrieves the holders of the referral code from a referral campaign. To use this endpoint, you must have the following permissions: - Read Customers (customers.details.read)  📘 Alternative endpoint This endpoint is an alternative to the List Member Holders endpoint. The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
+    # Retrieves the holders of the referral code from a referral campaign. To use this endpoint, you must have the following permissions: - Read Customers (customers.details.read)  📘 Alternative endpoint This endpoint is an alternative to the [List Member Holders endpoint](/api-reference/referrals/list-referral-code-holders-with-campaign-id). The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
     # @param member_id [String] Unique referral code or its identifier.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
@@ -298,7 +298,7 @@ module VoucherifySdk
     end
 
     # Remove Referral Card Holder
-    # Removes the holder from a referral card. You can remove a referee only. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  📘 Alternative endpoint This endpoint is an alternative to the Remove Referral Card Holder endpoint. The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
+    # Removes the holder from a referral card. You can remove a referee only. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  📘 Alternative endpoint This endpoint is an alternative to the [Remove Referral Card Holder endpoint](/api-reference/referrals/remove-referral-card-holder-with-campaign-id). The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
     # @param member_id [String] Unique referral code or its identifier.
     # @param holder_id [String] Unique identifier of a redeemable holder.
     # @param [Hash] opts the optional parameters
@@ -309,7 +309,7 @@ module VoucherifySdk
     end
 
     # Remove Referral Card Holder
-    # Removes the holder from a referral card. You can remove a referee only. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  📘 Alternative endpoint This endpoint is an alternative to the Remove Referral Card Holder endpoint. The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
+    # Removes the holder from a referral card. You can remove a referee only. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)  📘 Alternative endpoint This endpoint is an alternative to the [Remove Referral Card Holder endpoint](/api-reference/referrals/remove-referral-card-holder-with-campaign-id). The URL was re-designed to retrieve the referral member holders without providing the campaignId as a path paremeter.
     # @param member_id [String] Unique referral code or its identifier.
     # @param holder_id [String] Unique identifier of a redeemable holder.
     # @param [Hash] opts the optional parameters
@@ -356,7 +356,7 @@ module VoucherifySdk
       return data, status_code, headers
     end
 
-    # Remove Referral Card Holder
+    # Remove Referral Card Holder with campaign ID
     # Removes the holder from a referral card. You can remove a referee only. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)
     # @param campaign_id [String] Unique identifier of a referral program campaign.
     # @param member_id [String] Unique referral code or its identifier.
@@ -368,7 +368,7 @@ module VoucherifySdk
       nil
     end
 
-    # Remove Referral Card Holder
+    # Remove Referral Card Holder with campaign ID
     # Removes the holder from a referral card. You can remove a referee only. To use this endpoint, you must have the following permissions: - Create and modify Customers and Segments (customers.modify) - Publish Voucher (vouchers.publish)
     # @param campaign_id [String] Unique identifier of a referral program campaign.
     # @param member_id [String] Unique referral code or its identifier.
