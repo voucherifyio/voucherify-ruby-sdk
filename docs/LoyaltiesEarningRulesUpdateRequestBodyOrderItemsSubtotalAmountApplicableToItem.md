@@ -1,4 +1,4 @@
-# VoucherifySdk::LoyaltiesEarningRulesUpdateRequestBodyLoyaltyOrderItemsSubtotalAmountApplicableToItem
+# VoucherifySdk::LoyaltiesEarningRulesUpdateRequestBodyOrderItemsSubtotalAmountApplicableToItem
 
 ## Properties
 

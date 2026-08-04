@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesEarningRulesCreateResponseBodyLoyaltyOrderItemsSubtotalAmountApplicableToItem
+  class LoyaltiesEarningRulesUpdateResponseBodyOrderItemsSubtotalAmountApplicableToItem
     # Type of object which will be covered by the earning rule.
     attr_accessor :object
 

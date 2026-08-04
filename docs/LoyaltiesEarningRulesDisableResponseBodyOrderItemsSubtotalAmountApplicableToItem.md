@@ -1,4 +1,4 @@
-# VoucherifySdk::LoyaltiesEarningRulesCreateRequestBodyItemLoyaltyOrderItemsSubtotalAmountApplicableToItem
+# VoucherifySdk::LoyaltiesEarningRulesDisableResponseBodyOrderItemsSubtotalAmountApplicableToItem
 
 ## Properties
 

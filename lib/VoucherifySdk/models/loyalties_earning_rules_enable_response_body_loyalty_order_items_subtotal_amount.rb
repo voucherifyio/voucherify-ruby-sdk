@@ -81,7 +81,7 @@ module VoucherifySdk
         :'points_formula' => :'String',
         :'object' => :'String',
         :'id' => :'String',
-        :'applicable_to' => :'Array<LoyaltiesEarningRulesEnableResponseBodyLoyaltyOrderItemsSubtotalAmountApplicableToItem>'
+        :'applicable_to' => :'Array<LoyaltiesEarningRulesEnableResponseBodyOrderItemsSubtotalAmountApplicableToItem>'
       }
     end
 
