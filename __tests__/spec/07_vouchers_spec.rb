@@ -32,7 +32,7 @@ RSpec.describe 'Vouchers API', :order => :defined do
     expect(validate_deep_match(filtered_snapshot, voucher)).to be true
   end
 
-  it 'enable voucher previously created', :order => :thrird do
+  it 'enable voucher previously created', :order => :third do
     voucher = @vouchers_api_instance.enable_voucher(@voucherify_data.get_voucher().code)
 
     snapshot_name = 'vouchers/enabled_previously_created_voucher'

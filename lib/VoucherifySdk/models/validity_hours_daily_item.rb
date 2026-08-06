@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Defines the reccuring period(s) when the resource will be active.
+  # Defines the recurring period(s) when the resource will be active.
   class ValidityHoursDailyItem
     # Defines the starting hour of validity in the HH:mm format. The resource is *inactive before* this time.
     attr_accessor :start_time

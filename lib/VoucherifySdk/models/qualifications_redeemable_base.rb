@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Data of single redeemable which was properly qualified.
   class QualificationsRedeemableBase
-    # Id of the redeemable.
+    # ID of the redeemable. For a voucher, it's its `code` value.
     attr_accessor :id
 
     # Object type of the redeemable.

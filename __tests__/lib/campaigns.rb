@@ -1,6 +1,7 @@
 require_relative 'utils.rb'
 require 'VoucherifySdk'
 require 'json'
+require 'tempfile'
 
 def create_validation_rule_applicable_to(validation_rules_api_instance, product_id)
     begin
@@ -144,5 +145,56 @@ def add_vouchers_to_campaign(campaigns_api_instance, campaign_id, voucher_count)
     rescue VoucherifySdk::ApiError => e
       return nil
     end
-  end
+end
+
+def create_discount_campaign_with_expiration(campaigns_api_instance, expiration_date)
+    expiration_value = expiration_date.respond_to?(:utc) ? expiration_date.utc.iso8601 : expiration_date
+
+    campaigns_api_instance.create_campaign({
+        campaigns_create_request_body: VoucherifySdk::CampaignsCreateRequestBody.new({
+            campaign_type: "DISCOUNT_COUPONS",
+            name: generate_random_string(),
+            type: "AUTO_UPDATE",
+            expiration_date: expiration_value,
+            voucher: VoucherifySdk::CampaignsCreateRequestBodyVoucher.new({
+                type: 'DISCOUNT_VOUCHER',
+                discount: VoucherifySdk::Discount.new({
+                    type: 'AMOUNT',
+                    amount_off: 1000
+                })
+            })
+        })
+    })
+end
+
+def update_campaign_expiration_to_null(campaigns_api_instance, campaign_id)
+    campaigns_api_instance.update_campaign(campaign_id, {
+        campaigns_update_request_body: {
+            expiration_date: nil
+        }
+    })
+    true
+end
+
+def import_vouchers_to_campaign_using_csv(campaigns_api_instance, campaign_id, voucher_codes)
+    file = Tempfile.new(['vouchers_import', '.csv'])
+
+    begin
+        file.write("code\n")
+        voucher_codes.each do |code|
+            file.write("#{code}\n")
+        end
+        file.rewind
+
+        csv_file = File.new(file.path)
+        result = campaigns_api_instance.import_vouchers_to_campaign_using_csv(campaign_id, {
+            file: csv_file
+        })
+        csv_file.close
+        result
+    ensure
+        file.close
+        file.unlink
+    end
+end
 

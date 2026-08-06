@@ -22,7 +22,7 @@ module VoucherifySdk
     # Total number of points incurred over the lifespan of the loyalty card, minus the expired points.
     attr_accessor :total
 
-    # The current number of loyalty points after the pendint points have been added.
+    # The current number of loyalty points after the pending points have been added.
     attr_accessor :balance
 
     # The type of the voucher being modified. For pending points, it is always `loyalty_card`.

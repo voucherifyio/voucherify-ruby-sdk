@@ -21,10 +21,10 @@ module VoucherifySdk
     # An optional field to keep any extra textual information about the campaign such as a campaign description and details.
     attr_accessor :description
 
-    # Defines whether the campaign can be updated with new vouchers after campaign creation or if the campaign consists of standalone vouchers.  - `AUTO_UPDATE`: the campaign is dynamic, i.e. vouchers will generate based on set criteria -  `STATIC`: vouchers need to be manually published
+    # Defines whether the campaign can be updated with new vouchers after campaign creation or if the campaign consists of generic (standalone) vouchers.  - `AUTO_UPDATE`: the campaign is dynamic, i.e. vouchers will generate based on set criteria -  `STATIC`: vouchers need to be manually published - `STANDALONE`: the campaign is a generic (standalone) one with a single voucher for public use (only for discount and gift card campaigns)
     attr_accessor :type
 
-    # If this value is set to `true`, customers will be able to join the campaign only once.
+    # If this value is set to `true`, customers will be able to join the campaign only once. For loyalty campaigns, it's forced to `true`, even if `join_once: false` is passed in the request.
     attr_accessor :join_once
 
     # Indicates whether customers will be able to auto-join a loyalty campaign if any earning rule is fulfilled.
@@ -297,7 +297,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC"])
+      type_validator = EnumAttributeValidator.new('String', ["AUTO_UPDATE", "STATIC", "STANDALONE"])
       return false unless type_validator.valid?(@type)
       return false if !@validation_rules.nil? && @validation_rules.length > 1
       campaign_type_validator = EnumAttributeValidator.new('String', ["DISCOUNT_COUPONS", "REFERRAL_PROGRAM", "GIFT_VOUCHERS", "LOYALTY_PROGRAM", "PROMOTION"])

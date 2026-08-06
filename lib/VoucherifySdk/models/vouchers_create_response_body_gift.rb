@@ -16,10 +16,13 @@ require 'time'
 module VoucherifySdk
   # Object representing gift parameters. Child attributes are present only if `type` is `GIFT_VOUCHER`. Defaults to `null`.
   class VouchersCreateResponseBodyGift
-    # Total gift card income over the lifetime of the card. Value is multiplied by 100 to precisely represent 2 decimal places. For example, $100 amount is written as 10000.
+    # Total gift card income over the lifetime of the card. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :amount
 
-    # Available funds. Value is multiplied by 100 to precisely represent 2 decimal places. For example, $100 amount is written as 10000.
+    # Total amount of subtracted credits over the gift card lifetime. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
+    attr_accessor :subtracted_amount
+
+    # Available funds. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :balance
 
     # Defines how the credits are applied to the customer's order.
@@ -51,6 +54,7 @@ module VoucherifySdk
     def self.attribute_map
       {
         :'amount' => :'amount',
+        :'subtracted_amount' => :'subtracted_amount',
         :'balance' => :'balance',
         :'effect' => :'effect'
       }
@@ -65,6 +69,7 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'amount' => :'Integer',
+        :'subtracted_amount' => :'Integer',
         :'balance' => :'Integer',
         :'effect' => :'String'
       }
@@ -74,6 +79,7 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'amount',
+        :'subtracted_amount',
         :'balance',
         :'effect'
       ])
@@ -89,6 +95,10 @@ module VoucherifySdk
 
       if attributes.key?(:'amount')
         self.amount = attributes[:'amount']
+      end
+
+      if attributes.key?(:'subtracted_amount')
+        self.subtracted_amount = attributes[:'subtracted_amount']
       end
 
       if attributes.key?(:'balance')
@@ -123,6 +133,7 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           amount == o.amount &&
+          subtracted_amount == o.subtracted_amount &&
           balance == o.balance &&
           effect == o.effect
     end
@@ -136,7 +147,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [amount, balance, effect].hash
+      [amount, subtracted_amount, balance, effect].hash
     end
 
     # Builds the object from hash

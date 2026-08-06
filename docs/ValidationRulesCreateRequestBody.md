@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **name** | **String** | Custom, unique name for set of validation rules. | [optional] |
 | **rules** | **Object** | Contains all the rule definitions for the validation rule. It is a set of key value pairs representing the rules and logic between the rules. The keys are numbered consecutively beginning from &#x60;1&#x60;. The values are objects containing the rule conditions. | [optional] |
+| **bundle_rules** | **Object** | Contains all the definitions for the bundle rules. It is a set of key value pairs representing the rules and logic between them. The keys are numbered consecutively beginning from &#x60;1&#x60;. The values are objects containing the rule conditions.  While updating with the PUT method, you can pass &#x60;\&quot;bundle_rules\&quot;: null&#x60; to delete the configuration; in the response, an empty object is then returned. | [optional] |
 | **error** | [**ValidationRulesCreateRequestBodyError**](ValidationRulesCreateRequestBodyError.md) |  | [optional] |
 | **applicable_to** | [**ValidationRulesCreateRequestBodyApplicableTo**](ValidationRulesCreateRequestBodyApplicableTo.md) |  | [optional] |
 | **type** | **String** | Type of validation rule. | [optional][default to &#39;expression&#39;] |

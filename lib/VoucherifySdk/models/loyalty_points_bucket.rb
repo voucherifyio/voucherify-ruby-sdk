@@ -27,7 +27,7 @@ module VoucherifySdk
 
     attr_accessor :bucket
 
-    # Loyalty point point bucket status.
+    # Loyalty point bucket status.
     attr_accessor :status
 
     # Date when the number of points defined in the bucket object are due to expire.

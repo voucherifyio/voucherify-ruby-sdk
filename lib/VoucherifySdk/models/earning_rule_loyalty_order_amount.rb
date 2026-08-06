@@ -22,11 +22,15 @@ module VoucherifySdk
     # Number of points to be awarded, i.e. how many points to be added to the loyalty card.
     attr_accessor :points
 
+    # Formula used to dynamically calculate the rewarded points.
+    attr_accessor :points_formula
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'every' => :'every',
-        :'points' => :'points'
+        :'points' => :'points',
+        :'points_formula' => :'points_formula'
       }
     end
 
@@ -39,7 +43,8 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'every' => :'Integer',
-        :'points' => :'Integer'
+        :'points' => :'Integer',
+        :'points_formula' => :'String'
       }
     end
 
@@ -47,7 +52,8 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'every',
-        :'points'
+        :'points',
+        :'points_formula'
       ])
     end
 
@@ -65,6 +71,10 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
+      end
+
+      if attributes.key?(:'points_formula')
+        self.points_formula = attributes[:'points_formula']
       end
     end
 
@@ -89,7 +99,8 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           every == o.every &&
-          points == o.points
+          points == o.points &&
+          points_formula == o.points_formula
     end
 
     # @see the `==` method
@@ -101,7 +112,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [every, points].hash
+      [every, points, points_formula].hash
     end
 
     # Builds the object from hash

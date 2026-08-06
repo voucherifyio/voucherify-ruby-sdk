@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Create Segment
-    # Create a customer segment.  🚧 Limit on Static Segments  There is a cap on the number of customers that you can assign to a static segment: **20,000**. If you would like to create a bigger segment, then you can use the unlimited auto-update segment instead and use some customer metadata to build this segment.
+    # Create a customer segment.  🚧 Limit on static segments  There is a cap on the number of customers that you can assign to a static segment: **20,000**. If you would like to create a bigger segment, then you can use the unlimited auto-update or passive segment instead and use some customer metadata to build this segment.  🚧 Limit on Active and Passive segments  You can create a maximum of 100 passive and active segments.
     # @param [Hash] opts the optional parameters
     # @option opts [SegmentsCreateRequestBody] :segments_create_request_body Specify the boundary conditions for the customer segment.
     # @return [SegmentsCreateResponseBody]
@@ -30,7 +30,7 @@ module VoucherifySdk
     end
 
     # Create Segment
-    # Create a customer segment.  🚧 Limit on Static Segments  There is a cap on the number of customers that you can assign to a static segment: **20,000**. If you would like to create a bigger segment, then you can use the unlimited auto-update segment instead and use some customer metadata to build this segment.
+    # Create a customer segment.  🚧 Limit on static segments  There is a cap on the number of customers that you can assign to a static segment: **20,000**. If you would like to create a bigger segment, then you can use the unlimited auto-update or passive segment instead and use some customer metadata to build this segment.  🚧 Limit on Active and Passive segments  You can create a maximum of 100 passive and active segments.
     # @param [Hash] opts the optional parameters
     # @option opts [SegmentsCreateRequestBody] :segments_create_request_body Specify the boundary conditions for the customer segment.
     # @return [Array<(SegmentsCreateResponseBody, Integer, Hash)>] SegmentsCreateResponseBody data, response status code and response headers
@@ -141,7 +141,7 @@ module VoucherifySdk
     end
 
     # Get Segment
-    # Retrieves the segment with given segment ID.
+    # Retrieves the segment with a given segment ID. This method doesnt return the customers that belong to the segment. To return a list of customers who belong to a segment, use [GET List customers](/api-reference/customers/list-customers) endpoint with the segment_id query parameter.
     # @param segment_id [String] A unique customer segment ID.
     # @param [Hash] opts the optional parameters
     # @return [SegmentsGetResponseBody]
@@ -151,7 +151,7 @@ module VoucherifySdk
     end
 
     # Get Segment
-    # Retrieves the segment with given segment ID.
+    # Retrieves the segment with a given segment ID. This method doesnt return the customers that belong to the segment. To return a list of customers who belong to a segment, use [GET List customers](/api-reference/customers/list-customers) endpoint with the segment_id query parameter.
     # @param segment_id [String] A unique customer segment ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(SegmentsGetResponseBody, Integer, Hash)>] SegmentsGetResponseBody data, response status code and response headers

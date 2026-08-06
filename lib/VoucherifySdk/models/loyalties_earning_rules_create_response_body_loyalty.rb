@@ -20,6 +20,9 @@ module VoucherifySdk
     # Defines how the points will be added to the loyalty card. FIXED adds a fixed number of points.
     attr_accessor :points
 
+    # Formula used to dynamically calculate the rewarded points.
+    attr_accessor :points_formula
+
     attr_accessor :calculation_type
 
     attr_accessor :order
@@ -57,6 +60,7 @@ module VoucherifySdk
       {
         :'type' => :'type',
         :'points' => :'points',
+        :'points_formula' => :'points_formula',
         :'calculation_type' => :'calculation_type',
         :'order' => :'order',
         :'order_items' => :'order_items',
@@ -75,6 +79,7 @@ module VoucherifySdk
       {
         :'type' => :'String',
         :'points' => :'Integer',
+        :'points_formula' => :'String',
         :'calculation_type' => :'String',
         :'order' => :'LoyaltiesEarningRulesCreateResponseBodyLoyaltyOrder',
         :'order_items' => :'LoyaltiesEarningRulesCreateResponseBodyLoyaltyOrderItems',
@@ -88,6 +93,7 @@ module VoucherifySdk
       Set.new([
         :'type',
         :'points',
+        :'points_formula',
         :'calculation_type',
         :'order',
         :'order_items',
@@ -110,6 +116,10 @@ module VoucherifySdk
 
       if attributes.key?(:'points')
         self.points = attributes[:'points']
+      end
+
+      if attributes.key?(:'points_formula')
+        self.points_formula = attributes[:'points_formula']
       end
 
       if attributes.key?(:'calculation_type')
@@ -159,6 +169,7 @@ module VoucherifySdk
       self.class == o.class &&
           type == o.type &&
           points == o.points &&
+          points_formula == o.points_formula &&
           calculation_type == o.calculation_type &&
           order == o.order &&
           order_items == o.order_items &&
@@ -175,7 +186,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, points, calculation_type, order, order_items, customer, custom_event].hash
+      [type, points, points_formula, calculation_type, order, order_items, customer, custom_event].hash
     end
 
     # Builds the object from hash

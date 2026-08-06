@@ -22,11 +22,15 @@ module VoucherifySdk
     # How many times a voucher has already been redeemed.
     attr_accessor :redeemed_quantity
 
+    # Total loyalty points redeemed.
+    attr_accessor :redeemed_points
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'quantity' => :'quantity',
-        :'redeemed_quantity' => :'redeemed_quantity'
+        :'redeemed_quantity' => :'redeemed_quantity',
+        :'redeemed_points' => :'redeemed_points'
       }
     end
 
@@ -39,7 +43,8 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'quantity' => :'Integer',
-        :'redeemed_quantity' => :'Integer'
+        :'redeemed_quantity' => :'Integer',
+        :'redeemed_points' => :'Integer'
       }
     end
 
@@ -47,7 +52,8 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'quantity',
-        :'redeemed_quantity'
+        :'redeemed_quantity',
+        :'redeemed_points'
       ])
     end
 
@@ -65,6 +71,10 @@ module VoucherifySdk
 
       if attributes.key?(:'redeemed_quantity')
         self.redeemed_quantity = attributes[:'redeemed_quantity']
+      end
+
+      if attributes.key?(:'redeemed_points')
+        self.redeemed_points = attributes[:'redeemed_points']
       end
     end
 
@@ -89,7 +99,8 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           quantity == o.quantity &&
-          redeemed_quantity == o.redeemed_quantity
+          redeemed_quantity == o.redeemed_quantity &&
+          redeemed_points == o.redeemed_points
     end
 
     # @see the `==` method
@@ -101,7 +112,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [quantity, redeemed_quantity].hash
+      [quantity, redeemed_quantity, redeemed_points].hash
     end
 
     # Builds the object from hash

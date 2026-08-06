@@ -60,6 +60,10 @@ module Config
       return VoucherifySdk::EventsApi.new()
     end
 
+    def self.async_actions_api_instance
+      return VoucherifySdk::AsyncActionsApi.new()
+    end
+
     def self.order_api_instance
       return VoucherifySdk::OrdersApi.new()
     end
@@ -70,6 +74,23 @@ module Config
 
     def self.vouchers_api_instance
       return VoucherifySdk::VouchersApi.new()
+    end
+
+    def self.management_api_instance
+      management_config = VoucherifySdk::Configuration.new
+      management_config.api_key['X-Management-Id'] = ENV['X_MANAGEMENT_ID']
+      management_config.api_key['X-Management-Token'] = ENV['X_MANAGEMENT_TOKEN']
+      management_config.host = ENV['VOUCHERIFY_HOST'] || 'https://api.voucherify.io'
+
+      return VoucherifySdk::ManagementApi.new(VoucherifySdk::ApiClient.new(management_config))
+    end
+
+    def self.management_credentials_configured?
+      return !ENV['X_MANAGEMENT_ID'].to_s.empty? && !ENV['X_MANAGEMENT_TOKEN'].to_s.empty?
+    end
+
+    def self.management_project_id
+      return ENV['PROJECT_ID']
     end
 end
 

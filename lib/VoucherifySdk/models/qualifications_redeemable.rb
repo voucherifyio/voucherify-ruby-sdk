@@ -15,7 +15,7 @@ require 'time'
 
 module VoucherifySdk
   class QualificationsRedeemable
-    # Id of the redeemable.
+    # ID of the redeemable. For a voucher, it's its `code` value.
     attr_accessor :id
 
     # Object type of the redeemable.

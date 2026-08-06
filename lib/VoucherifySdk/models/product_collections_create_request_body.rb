@@ -15,7 +15,6 @@ require 'time'
 
 module VoucherifySdk
   class ProductCollectionsCreateRequestBody
-    # Show that the product collection is static (manually selected products).
     attr_accessor :type
 
     # Unique user-defined product collection name.
@@ -77,6 +76,7 @@ module VoucherifySdk
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'type',
         :'name',
         :'products',
         :'filter'
@@ -93,8 +93,6 @@ module VoucherifySdk
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      else
-        self.type = 'STATIC'
       end
 
       if attributes.key?(:'name')
@@ -124,7 +122,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["STATIC"])
+      type_validator = EnumAttributeValidator.new('String', ["STATIC", "AUTO_UPDATE"])
       return false unless type_validator.valid?(@type)
       true
     end

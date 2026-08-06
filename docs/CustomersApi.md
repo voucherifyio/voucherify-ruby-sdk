@@ -9,7 +9,7 @@ All URIs are relative to *https://api.voucherify.io*
 | [**delete_customer**](CustomersApi.md#delete_customer) | **DELETE** /v1/customers/{customerId} | Delete Customer |
 | [**get_customer**](CustomersApi.md#get_customer) | **GET** /v1/customers/{customerId} | Get Customer |
 | [**import_customers_using_csv**](CustomersApi.md#import_customers_using_csv) | **POST** /v1/customers/importCSV | Import and Update Customers using CSV |
-| [**list_customer_activities**](CustomersApi.md#list_customer_activities) | **GET** /v1/customers/{customerId}/activities | List Customer Activities [Deprecated] |
+| [**list_customer_activities**](CustomersApi.md#list_customer_activities) | **GET** /v1/customers/{customerId}/activities | List Customer Activities |
 | [**list_customer_activity**](CustomersApi.md#list_customer_activity) | **GET** /v1/customers/{customerId}/activity | List Customer Activity |
 | [**list_customer_redeemables**](CustomersApi.md#list_customer_redeemables) | **GET** /v1/customers/{customerId}/redeemables | List Customer&#39;s Redeemables |
 | [**list_customer_segments**](CustomersApi.md#list_customer_segments) | **GET** /v1/customers/{customerId}/segments | List Customer&#39;s Segments |
@@ -200,7 +200,7 @@ nil (empty response body)
 
 Get Customer
 
-Retrieve customer details.
+Retrieves details of a given customer by customers id or source_id.
 
 ### Examples
 
@@ -258,7 +258,7 @@ end
 
 Import and Update Customers using CSV
 
-This API method lets you import or update customer data. To get a proper and valid response, please send a CSV file with data separated by commas.   # Request Example # CSV File Format The CSV file has to include headers in the first line. All properties which cannot be mapped to standard customer fields will be added to the metadata object.  📘 Standard customer fields mapping  **No spaces allowed in field names**    Id, Name, Email, Phone, Birthdate, Source_id, Address_line_1, Address_line_2, Address_Postal_Code, Address_City, Address_State, Address_Country, Description, Metadata_name_1, Metadata_name_2 # Update Customers using CSV If you would like to update customers data, you can do it using the CSV file with new data. However, remember to include a source_id in your CSV file to manage the update successfully. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this API request.
+This API method lets you import or update customer data. To get a proper and valid response, please send a CSV file with data separated by commas.   # Request Example # CSV File Format The CSV file has to include headers in the first line. All properties which cannot be mapped to standard customer fields will be added to the metadata object.  📘 Standard customer fields mapping  **No spaces allowed in field names**    Id, Name, Email, Phone, Birthdate, Source_id, Address_line_1, Address_line_2, Address_Postal_Code, Address_City, Address_State, Address_Country, Description, Metadata_name_1, Metadata_name_2 # Update Customers using CSV If you would like to update customers data, you can do it using the CSV file with new data. However, remember to include a source_id in your CSV file to manage the update successfully. This API request starts a process that affects Voucherify data in bulk.  In case of small jobs (like bulk update) the request is put into a queue and processed once every other bulk request placed in the queue prior to this request is finished. However, when the job takes a longer time (like vouchers generation) then it is processed in small portions in a round-robin fashion. When there is a list of vouchers generation scheduled, then they will all have the IN_PROGRESS status shortly. This way, small jobs added just after scheduling big jobs of the same type will be processed in a short time window.  The result will return the async ID. You can verify the status of your request via this [API request](/api-reference/async-actions/get-async-action).
 
 ### Examples
 
@@ -316,7 +316,7 @@ end
 
 > <CustomersActivitiesListResponseBody> list_customer_activities(customer_id, opts)
 
-List Customer Activities [Deprecated]
+List Customer Activities
 
 > ❗️ Deprecated    This endpoint represents the deprecated version of the API responsible for listing customer activities and we do not recommend using it. Developers are encouraged to migrate to the latest version to take advantage of the latest enhancements and bug fixes. No updates will be provided to the deprecated endpoint. Retrieve customer activities.
 
@@ -353,7 +353,7 @@ opts = {
 }
 
 begin
-  # List Customer Activities [Deprecated]
+  # List Customer Activities
   result = api_instance.list_customer_activities(customer_id, opts)
   p result
 rescue VoucherifySdk::ApiError => e
@@ -396,7 +396,7 @@ end
 
 List Customer Activity
 
-Retrieve customer activities.
+Retrieves activity details of a given customer by customers id or source_id.
 
 ### Examples
 
@@ -627,7 +627,7 @@ opts = {
   email: 'email_example', # String | Limit the customers to the ones that have this specific email address.
   city: 'city_example', # String | Limit the customers to the ones that are located in the specified city.
   name: 'name_example', # String | Filter customers by the name property.
-  segment_id: 'segment_id_example', # String | Filter customers by the segment id.
+  segment_id: 'segment_id_example', # String | Filter customers by the segment ID. Warning: Passing additional query parameter filters that are in conflict with the segment filters may return unexpected results.
   created_at_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Filter customers by date customer was created.
   created_at_after: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Filter customers by date customer was created.
   updated_at_before: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Filter customers by date customer was updated last time.
@@ -654,7 +654,7 @@ end
 | **email** | **String** | Limit the customers to the ones that have this specific email address. | [optional] |
 | **city** | **String** | Limit the customers to the ones that are located in the specified city. | [optional] |
 | **name** | **String** | Filter customers by the name property. | [optional] |
-| **segment_id** | **String** | Filter customers by the segment id. | [optional] |
+| **segment_id** | **String** | Filter customers by the segment ID. Warning: Passing additional query parameter filters that are in conflict with the segment filters may return unexpected results. | [optional] |
 | **created_at_before** | **Time** | Filter customers by date customer was created. | [optional] |
 | **created_at_after** | **Time** | Filter customers by date customer was created. | [optional] |
 | **updated_at_before** | **Time** | Filter customers by date customer was updated last time. | [optional] |
@@ -744,7 +744,7 @@ end
 
 Update Customers in Bulk
 
-Updates customers in one asynchronous operation. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a customer object is not found, it is **upserted**. This is shown in the report file in the **GET** Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
+Updates customers in one asynchronous operation. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the [GET Async Action](/api-reference/async-actions/get-async-action) endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a customer object is not found, it is **upserted**. This is shown in the report file in the **GET** Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
 
 ### Examples
 
@@ -804,7 +804,7 @@ end
 
 Update Customers' Metadata in Bulk
 
-Updates metadata parameters for a list of customers. Every resource in the list will receive the metadata defined in the request. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the GET Async Action endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a product object is not found, it is **upserted**. This is shown in the report file in the **GET** Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
+Updates metadata parameters for a list of customers. Every resource in the list will receive the metadata defined in the request. The request can include up to **10 MB** of data. The response returns a unique asynchronous action ID. Use this ID in the query paramater of the [GET Async Action](/api-reference/async-actions/get-async-action) endpoint to check, e.g.: - The status of your request (in queue, in progress, done, or failed) - Resources that failed to be updated - The report file with details about the update If a customer object is not found, it is **upserted**. This is shown in the report file in the **GET** Async Action endpoint. The upserted resources have value false in the found column and true in the updated column. This API request starts a process that affects Voucherify data in bulk. In the case of small jobs (like bulk update), the request is put into a queue and processed when every other bulk request placed in the queue prior to this request is finished.
 
 ### Examples
 

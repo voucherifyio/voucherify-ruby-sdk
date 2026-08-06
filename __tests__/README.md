@@ -9,6 +9,16 @@ The primary reason for this approach is to ensure that the most critical aspects
 We strongly recommend running the tests using the Dockerfile provided in the root directory. 
 If you prefer to run tests locally, here are the steps you need to follow.
 
+### Environment variables
+
+Create `sdks/ruby/.env` (you can copy `sdks/ruby/.env.example`) and set:
+
+- `VOUCHERIFY_HOST`
+- `X_APP_ID`
+- `X_APP_TOKEN`
+- `X_MANAGEMENT_ID`
+- `X_MANAGEMENT_TOKEN`
+
 ### Requirements 
 
 - all elements described in [main README.md](../README.md) like Ruby and Gem manager
@@ -22,6 +32,14 @@ If you prefer to run tests locally, here are the steps you need to follow.
 3. Run `gem install rspec` command
 4. Go into `__tests__` directory
 5. Run `rspec ./spec` command
+
+### Running with Docker (recommended)
+
+1. Go into `sdks/ruby` directory
+2. Build image: `docker build -t ruby .`
+3. Run tests: `docker run --rm ruby`
+
+From repo root, you can also run: `npm run test-ruby-sdk`.
 
 **Note that running tests will affect your Voucherify project data. Run tests only on development projects.**
 

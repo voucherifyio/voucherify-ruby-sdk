@@ -22,11 +22,17 @@ module VoucherifySdk
     # Number of points to be awarded, i.e. how many points to be added to the loyalty card.
     attr_accessor :points
 
-    # Type of object taken under consideration.
+    # Formula used to dynamically calculate the rewarded points.
+    attr_accessor :points_formula
+
+    # Type of object which will be covered by the earning rule. This is required together with `id`. Can be replaced by the `applicable_to` array. In response, the value of the first object is returned even if `applicable_to` array was used.
     attr_accessor :object
 
-    # Unique ID of the resource, i.e. pc_75U0dHlr7u75BJodrW1AE3t6, prod_0bae32322150fd0546, or sku_0b7d7dfb090be5c619.
+    # Unique ID of the resource assigned by Voucherify. This is required together with `object`. Can be replaced by the `applicable_to` array. In response, the value of the first object is returned even if `applicable_to` array was used. Values are, for example, `pc_75U0dHlr7u75BJodrW1AE3t6` for product collection, `prod_0bae32322150fd0546` for a product, or `sku_0b7d7dfb090be5c619` for a SKU.
     attr_accessor :id
+
+    # Defines products, SKUs, or product collections covered by the earning rule. Can be replaced by `object` and `id` to define only one object.
+    attr_accessor :applicable_to
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -55,8 +61,10 @@ module VoucherifySdk
       {
         :'every' => :'every',
         :'points' => :'points',
+        :'points_formula' => :'points_formula',
         :'object' => :'object',
-        :'id' => :'id'
+        :'id' => :'id',
+        :'applicable_to' => :'applicable_to'
       }
     end
 
@@ -70,8 +78,10 @@ module VoucherifySdk
       {
         :'every' => :'Integer',
         :'points' => :'Integer',
+        :'points_formula' => :'String',
         :'object' => :'String',
-        :'id' => :'String'
+        :'id' => :'String',
+        :'applicable_to' => :'Array<LoyaltiesEarningRulesEnableResponseBodyLoyaltyOrderItemsQuantityApplicableToItem>'
       }
     end
 
@@ -80,8 +90,10 @@ module VoucherifySdk
       Set.new([
         :'every',
         :'points',
+        :'points_formula',
         :'object',
-        :'id'
+        :'id',
+        :'applicable_to'
       ])
     end
 
@@ -101,12 +113,22 @@ module VoucherifySdk
         self.points = attributes[:'points']
       end
 
+      if attributes.key?(:'points_formula')
+        self.points_formula = attributes[:'points_formula']
+      end
+
       if attributes.key?(:'object')
         self.object = attributes[:'object']
       end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'applicable_to')
+        if (value = attributes[:'applicable_to']).is_a?(Array)
+          self.applicable_to = value
+        end
       end
     end
 
@@ -134,8 +156,10 @@ module VoucherifySdk
       self.class == o.class &&
           every == o.every &&
           points == o.points &&
+          points_formula == o.points_formula &&
           object == o.object &&
-          id == o.id
+          id == o.id &&
+          applicable_to == o.applicable_to
     end
 
     # @see the `==` method
@@ -147,7 +171,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [every, points, object, id].hash
+      [every, points, points_formula, object, id, applicable_to].hash
     end
 
     # Builds the object from hash

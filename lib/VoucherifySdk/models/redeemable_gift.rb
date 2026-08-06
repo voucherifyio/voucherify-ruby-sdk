@@ -16,17 +16,21 @@ require 'time'
 module VoucherifySdk
   # Contains current gift card balance information.
   class RedeemableGift
-    # Available funds. Value is multiplied by 100 to precisely represent 2 decimal places. For example, $100 amount is written as 10000.
+    # Available funds. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :balance
 
-    # The number of credits that the user wants to use from the gift card to fulfil the order. The value of credits cannot be higher than the current balance on the gift card. If the user gives more points than he has on the gift card, the application will return an error code in response. Value is multiplied by 100 to precisely represent 2 decimal places. For example `10000 cents` for `$100.00`.
+    # The number of credits that the user wants to use from the gift card to fulfil the order. The value of credits cannot be higher than the current balance on the gift card. If the user gives more points than he has on the gift card, the application will return an error code in response. The value is multiplied by 100 to represent 2 decimal places. For example `10000 cents` for `$100.00`.
     attr_accessor :credits
+
+    # The number of credits that are locked under a validation session. This is returned if the qualification request includes `session.type: LOCK` parameter in the body. The value is multiplied by 100 to represent 2 decimal places. For example `10000` for `$100.00`. Returns `0` if there aren't any active validation sessions for the gift card.
+    attr_accessor :locked_credits
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'balance' => :'balance',
-        :'credits' => :'credits'
+        :'credits' => :'credits',
+        :'locked_credits' => :'locked_credits'
       }
     end
 
@@ -39,7 +43,8 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'balance' => :'Float',
-        :'credits' => :'Float'
+        :'credits' => :'Float',
+        :'locked_credits' => :'Float'
       }
     end
 
@@ -47,7 +52,8 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'balance',
-        :'credits'
+        :'credits',
+        :'locked_credits'
       ])
     end
 
@@ -65,6 +71,10 @@ module VoucherifySdk
 
       if attributes.key?(:'credits')
         self.credits = attributes[:'credits']
+      end
+
+      if attributes.key?(:'locked_credits')
+        self.locked_credits = attributes[:'locked_credits']
       end
     end
 
@@ -89,7 +99,8 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           balance == o.balance &&
-          credits == o.credits
+          credits == o.credits &&
+          locked_credits == o.locked_credits
     end
 
     # @see the `==` method
@@ -101,7 +112,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [balance, credits].hash
+      [balance, credits, locked_credits].hash
     end
 
     # Builds the object from hash

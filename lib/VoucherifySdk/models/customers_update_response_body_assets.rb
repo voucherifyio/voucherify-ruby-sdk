@@ -14,15 +14,19 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Contains information about the customer's cockpit.
+  # Contains information about the customer's cockpit.  ⚠️ Warning: Customer cockpits were removed. The customer cockpit URLs redirect to customer preference center.
   class CustomersUpdateResponseBodyAssets
-    # Customer's cockpit URL address.
+    # URL address to customer preference center. Previously, a customer's cockpit URL address.
     attr_accessor :cockpit_url
+
+    # URL address to customer preference center.
+    attr_accessor :cockpit_preference_center_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'cockpit_url' => :'cockpit_url'
+        :'cockpit_url' => :'cockpit_url',
+        :'cockpit_preference_center_url' => :'cockpit_preference_center_url'
       }
     end
 
@@ -34,14 +38,16 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'cockpit_url' => :'String'
+        :'cockpit_url' => :'String',
+        :'cockpit_preference_center_url' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'cockpit_url'
+        :'cockpit_url',
+        :'cockpit_preference_center_url'
       ])
     end
 
@@ -55,6 +61,10 @@ module VoucherifySdk
 
       if attributes.key?(:'cockpit_url')
         self.cockpit_url = attributes[:'cockpit_url']
+      end
+
+      if attributes.key?(:'cockpit_preference_center_url')
+        self.cockpit_preference_center_url = attributes[:'cockpit_preference_center_url']
       end
     end
 
@@ -78,7 +88,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          cockpit_url == o.cockpit_url
+          cockpit_url == o.cockpit_url &&
+          cockpit_preference_center_url == o.cockpit_preference_center_url
     end
 
     # @see the `==` method
@@ -90,7 +101,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [cockpit_url].hash
+      [cockpit_url, cockpit_preference_center_url].hash
     end
 
     # Builds the object from hash

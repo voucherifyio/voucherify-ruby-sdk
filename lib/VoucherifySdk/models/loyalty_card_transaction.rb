@@ -27,7 +27,7 @@ module VoucherifySdk
     # Unqiue campaign ID of the voucher's parent campaign if it is part of campaign that generates bulk codes.
     attr_accessor :campaign_id
 
-    # The channel through which the transaction took place, whether through the API or the the Dashboard. In case of a redemption, this value is null.
+    # The channel through which the transaction took place, whether through the API or the Dashboard. In case of a redemption, this value is null.
     attr_accessor :source
 
     # Reason why the transaction occurred. In case of a redemption, this value is null.

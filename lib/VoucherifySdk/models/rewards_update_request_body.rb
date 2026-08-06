@@ -23,7 +23,7 @@ module VoucherifySdk
     # The metadata object stores all custom attributes assigned to the reward. A set of key/value pairs that you can attach to a reward object. It can be useful for storing additional information about the reward in a structured format.
     attr_accessor :metadata
 
-    # The number of units of the product that you want to share as a reward.
+    # The number of units of the product that you want to share as a reward.  Use this parameter to code a stock-taking logic.
     attr_accessor :stock
 
     attr_accessor :attributes

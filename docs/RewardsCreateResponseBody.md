@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Unique reward ID, assigned by Voucherify. | [optional] |
 | **name** | **String** | Reward name. | [optional] |
-| **stock** | **Integer** | Configurable for **material rewards**. The number of units of the product that you want to share as reward. | [optional] |
+| **stock** | **Integer** | Configurable for **material rewards**. The number of units of the product that you want to share as a reward. Use this parameter to code a stock-taking logic. | [optional] |
 | **redeemed** | **Integer** | Defines the number of already invoked (successful) reward redemptions.  | [optional] |
 | **attributes** | [**RewardsCreateResponseBodyAttributes**](RewardsCreateResponseBodyAttributes.md) |  | [optional] |
 | **metadata** | **Object** | The metadata object stores all custom attributes assigned to the reward. A set of key/value pairs that you can attach to a reward object. It can be useful for storing additional information about the reward in a structured format. | [optional] |

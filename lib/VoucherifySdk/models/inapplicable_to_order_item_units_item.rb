@@ -18,14 +18,18 @@ module VoucherifySdk
     # Number assigned to the order line item in accordance with the order sent in the request.
     attr_accessor :index
 
-    # Numbers of units in the order line covered by the discount; e.g. `2, 5, 8` for 10 units with the setting `\"skip_initially\": 1`, `\"repeat\": 3`. The counting of units starts from `1`.
+    # Numbers of units in the order line covered by the discount; e.g. `2, 5, 8` for 10 units with the setting `\"skip_initially\": 1`, `\"repeat\": 3`. The counting of units starts from `1`. The maximum quantity of all handled units is 1000. If the quantity of all order items exceeds 1000, this array is not returned, but `units_limit_exceeded: true`. However, the discount is calculated properly for all relevant units.
     attr_accessor :units
+
+    # Returned as `true` only when the sum total of `quantity` of all order items exceeds 1000.
+    attr_accessor :units_limit_exceeded
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'index' => :'index',
-        :'units' => :'units'
+        :'units' => :'units',
+        :'units_limit_exceeded' => :'units_limit_exceeded'
       }
     end
 
@@ -38,7 +42,8 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'index' => :'Integer',
-        :'units' => :'Array<Integer>'
+        :'units' => :'Array<Integer>',
+        :'units_limit_exceeded' => :'Boolean'
       }
     end
 
@@ -65,6 +70,10 @@ module VoucherifySdk
           self.units = value
         end
       end
+
+      if attributes.key?(:'units_limit_exceeded')
+        self.units_limit_exceeded = attributes[:'units_limit_exceeded']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -72,6 +81,10 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@index.nil? && @index < 0
+        invalid_properties.push('invalid value for "index", must be greater than or equal to 0.')
+      end
+
       invalid_properties
     end
 
@@ -79,6 +92,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@index.nil? && @index < 0
       true
     end
 
@@ -88,7 +102,8 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           index == o.index &&
-          units == o.units
+          units == o.units &&
+          units_limit_exceeded == o.units_limit_exceeded
     end
 
     # @see the `==` method
@@ -100,7 +115,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [index, units].hash
+      [index, units, units_limit_exceeded].hash
     end
 
     # Builds the object from hash

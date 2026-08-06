@@ -21,6 +21,9 @@ module VoucherifySdk
     # Contains all the rule definitions for the validation rule. It is a set of key value pairs representing the rules and logic between the rules. The keys are numbered consecutively beginning from `1`. The values are objects containing the rule conditions.
     attr_accessor :rules
 
+    # Contains all the definitions for the bundle rules. It is a set of key value pairs representing the rules and logic between them. The keys are numbered consecutively beginning from `1`. The values are objects containing the rule conditions.  While updating with the PUT method, you can pass `\"bundle_rules\": null` to delete the configuration; in the response, an empty object is then returned.
+    attr_accessor :bundle_rules
+
     attr_accessor :error
 
     attr_accessor :applicable_to
@@ -73,6 +76,7 @@ module VoucherifySdk
       {
         :'name' => :'name',
         :'rules' => :'rules',
+        :'bundle_rules' => :'bundle_rules',
         :'error' => :'error',
         :'applicable_to' => :'applicable_to',
         :'type' => :'type',
@@ -95,6 +99,7 @@ module VoucherifySdk
       {
         :'name' => :'String',
         :'rules' => :'Object',
+        :'bundle_rules' => :'Object',
         :'error' => :'ValidationRuleError',
         :'applicable_to' => :'ValidationRuleApplicableTo',
         :'type' => :'String',
@@ -137,6 +142,10 @@ module VoucherifySdk
 
       if attributes.key?(:'rules')
         self.rules = attributes[:'rules']
+      end
+
+      if attributes.key?(:'bundle_rules')
+        self.bundle_rules = attributes[:'bundle_rules']
       end
 
       if attributes.key?(:'error')
@@ -208,6 +217,7 @@ module VoucherifySdk
       self.class == o.class &&
           name == o.name &&
           rules == o.rules &&
+          bundle_rules == o.bundle_rules &&
           error == o.error &&
           applicable_to == o.applicable_to &&
           type == o.type &&
@@ -228,7 +238,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, rules, error, applicable_to, type, context_type, id, created_at, updated_at, assignments_count, object].hash
+      [name, rules, bundle_rules, error, applicable_to, type, context_type, id, created_at, updated_at, assignments_count, object].hash
     end
 
     # Builds the object from hash

@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **GET** `v1/products/{productId}/skus`.
+  # Response body schema for **GET** `v1/products/{productId}/SKUs`.
   class ProductsSkusListResponseBody
     # The type of the object represented by JSON. This object stores information about SKUs.
     attr_accessor :object

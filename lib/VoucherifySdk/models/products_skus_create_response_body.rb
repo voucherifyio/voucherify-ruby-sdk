@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **PUT** `v1/products/{productId}/skus`.
+  # Response body schema for **PUT** `v1/products/{productId}/SKUs`.
   class ProductsSkusCreateResponseBody
     # A unique identifier that represents the SKU and is assigned by Voucherify.
     attr_accessor :id

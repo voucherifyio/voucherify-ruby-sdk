@@ -21,7 +21,7 @@ module VoucherifySdk
     # Reward name.
     attr_accessor :name
 
-    # Configurable for **material rewards**. The number of units of the product that you want to share as reward.
+    # Configurable for **material rewards**. The number of units of the product that you want to share as a reward. Use this parameter to code a stock-taking logic.
     attr_accessor :stock
 
     # Defines the number of already invoked (successful) reward redemptions. 
