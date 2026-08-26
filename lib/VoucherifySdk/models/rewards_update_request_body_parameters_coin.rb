@@ -38,7 +38,7 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'exchange_ratio' => :'String',
+        :'exchange_ratio' => :'Float',
         :'points_ratio' => :'String'
       }
     end

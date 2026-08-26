@@ -157,7 +157,7 @@ module VoucherifySdk
     end
 
     # Create Campaign
-    # Method to create a batch of vouchers aggregated in one campaign. You can choose a variety of voucher types and define a unique pattern for generating codes.    📘 Global uniqueness  All campaign codes are unique across the whole project. Voucherify will not allow you to generate 2 campaigns with the same coupon code.    🚧 Code generation status  This is an asynchronous action; you cant read or modify a newly created campaign until the code generation is completed. See the creation_status field in the [campaign object](/api-reference/campaigns/campaign-object) description.
+    # Method to create a batch of vouchers aggregated in one campaign. You can choose a variety of voucher types and define a unique pattern for generating codes.   <Note> <Badge color blue>Global uniqueness</Badge> All campaign codes are unique across the whole project. Voucherify will not allow you to generate 2 campaigns with the same coupon code. </Note> <Warning> <Badge color yellow>Code generation status</Badge> This is an asynchronous action; you cant read or modify a newly created campaign until the code generation is completed. See the creation_status field in the [campaign object](/api-reference/campaigns/campaign-object) description. </Warning>
     # @param [Hash] opts the optional parameters
     # @option opts [CampaignsCreateRequestBody] :campaigns_create_request_body Specify the details of the campaign that you would like to create.
     # @return [CampaignsCreateResponseBody]
@@ -167,7 +167,7 @@ module VoucherifySdk
     end
 
     # Create Campaign
-    # Method to create a batch of vouchers aggregated in one campaign. You can choose a variety of voucher types and define a unique pattern for generating codes.    📘 Global uniqueness  All campaign codes are unique across the whole project. Voucherify will not allow you to generate 2 campaigns with the same coupon code.    🚧 Code generation status  This is an asynchronous action; you cant read or modify a newly created campaign until the code generation is completed. See the creation_status field in the [campaign object](/api-reference/campaigns/campaign-object) description.
+    # Method to create a batch of vouchers aggregated in one campaign. You can choose a variety of voucher types and define a unique pattern for generating codes.   &lt;Note&gt; &lt;Badge color blue&gt;Global uniqueness&lt;/Badge&gt; All campaign codes are unique across the whole project. Voucherify will not allow you to generate 2 campaigns with the same coupon code. &lt;/Note&gt; &lt;Warning&gt; &lt;Badge color yellow&gt;Code generation status&lt;/Badge&gt; This is an asynchronous action; you cant read or modify a newly created campaign until the code generation is completed. See the creation_status field in the [campaign object](/api-reference/campaigns/campaign-object) description. &lt;/Warning&gt;
     # @param [Hash] opts the optional parameters
     # @option opts [CampaignsCreateRequestBody] :campaigns_create_request_body Specify the details of the campaign that you would like to create.
     # @return [Array<(CampaignsCreateResponseBody, Integer, Hash)>] CampaignsCreateResponseBody data, response status code and response headers
@@ -283,7 +283,7 @@ module VoucherifySdk
     end
 
     # Disable Campaign
-    # There are various times when youll want to manage a campaigns accessibility. This can be done by two API methods for managing the campaign state - *enable* and *disable*.   Sets campaign state to **inactive**. The vouchers in this campaign can no longer be redeemed.
+    # Sets campaign state to **inactive**. The vouchers in this campaign can no longer be redeemed.
     # @param campaign_id [String] The campaign ID or name of the campaign being disabled. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @return [Object]
@@ -293,7 +293,7 @@ module VoucherifySdk
     end
 
     # Disable Campaign
-    # There are various times when youll want to manage a campaigns accessibility. This can be done by two API methods for managing the campaign state - *enable* and *disable*.   Sets campaign state to **inactive**. The vouchers in this campaign can no longer be redeemed.
+    # Sets campaign state to **inactive**. The vouchers in this campaign can no longer be redeemed.
     # @param campaign_id [String] The campaign ID or name of the campaign being disabled. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
@@ -342,7 +342,7 @@ module VoucherifySdk
     end
 
     # Enable Campaign
-    # There are various times when youll want to manage a campaigns accessibility. This can be done by two API methods for managing the campaign state - *enable* and *disable*.   Sets campaign state to **active**. The vouchers in this campaign can be redeemed - only if the redemption occurs after the start date of the campaign and voucher and the voucher and campaign are not expired.
+    # Sets campaign state to **active**. The vouchers in this campaign can be redeemed - only if the redemption occurs after the start date of the campaign and voucher and the voucher and campaign are not expired.
     # @param campaign_id [String] The campaign ID or name of the campaign being enabled. You can either pass the campaign ID, which was assigned by Voucherify or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @return [Object]
@@ -352,7 +352,7 @@ module VoucherifySdk
     end
 
     # Enable Campaign
-    # There are various times when youll want to manage a campaigns accessibility. This can be done by two API methods for managing the campaign state - *enable* and *disable*.   Sets campaign state to **active**. The vouchers in this campaign can be redeemed - only if the redemption occurs after the start date of the campaign and voucher and the voucher and campaign are not expired.
+    # Sets campaign state to **active**. The vouchers in this campaign can be redeemed - only if the redemption occurs after the start date of the campaign and voucher and the voucher and campaign are not expired.
     # @param campaign_id [String] The campaign ID or name of the campaign being enabled. You can either pass the campaign ID, which was assigned by Voucherify or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
@@ -401,7 +401,7 @@ module VoucherifySdk
     end
 
     # Export Campaign Transactions
-    # Export transactions is an asynchronous process that generates a CSV file with the data about credit movements on all gift cards or point movements on all loyalty cards in a given campaign. To export transactions: 1. In the export request, use parameters to select which fields will be exported, in what order, and which data will be filtered. 2. Use the returned id to track the export status with the [GET Export](/api-reference/exports/get-export) method. 3. In the GET Export method, when the returned status field has the DONE value, the export file has been generated. 4. Use the URL in the result property to download the file. You must be logged to your Voucherify account on a given cluster in the browser to be able to download the file. An export request will almost always result in a single file being generated by the system. However, when the data volume is large, the system may split the results into multiple files. An example export file can look as follows:    👍 Export Loyalty Campaign Transactions  For loyalty campaigns, this method works in the same way the [POST Export Loyalty Campaign Transactions](/api-reference/loyalties/export-loyalty-campaign-transactions) does.
+    # Export transactions is an asynchronous process that generates a CSV file with the data about credit movements on all gift cards or point movements on all loyalty cards in a given campaign. To export transactions: 1. In the export request, use parameters to select which fields will be exported, in what order, and which data will be filtered. 2. Use the returned id to track the export status with the [GET Export](/api-reference/exports/get-export) method. 3. In the GET Export method, when the returned status field has the DONE value, the export file has been generated. 4. Use the URL in the result property to download the file. You must be logged to your Voucherify account on a given cluster in the browser to be able to download the file. An export request will almost always result in a single file being generated by the system. However, when the data volume is large, the system may split the results into multiple files. An example export file can look as follows:   <Tip> <Badge color green>Export Loyalty Campaign Transactions</Badge> For loyalty campaigns, this method works in the same way the [POST Export Loyalty Campaign Transactions](/api-reference/loyalties/export-loyalty-campaign-transactions) does. </Tip>
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [CampaignsTransactionsExportCreateRequestBody] :campaigns_transactions_export_create_request_body Specify the parameters for the transaction export.
@@ -412,7 +412,7 @@ module VoucherifySdk
     end
 
     # Export Campaign Transactions
-    # Export transactions is an asynchronous process that generates a CSV file with the data about credit movements on all gift cards or point movements on all loyalty cards in a given campaign. To export transactions: 1. In the export request, use parameters to select which fields will be exported, in what order, and which data will be filtered. 2. Use the returned id to track the export status with the [GET Export](/api-reference/exports/get-export) method. 3. In the GET Export method, when the returned status field has the DONE value, the export file has been generated. 4. Use the URL in the result property to download the file. You must be logged to your Voucherify account on a given cluster in the browser to be able to download the file. An export request will almost always result in a single file being generated by the system. However, when the data volume is large, the system may split the results into multiple files. An example export file can look as follows:    👍 Export Loyalty Campaign Transactions  For loyalty campaigns, this method works in the same way the [POST Export Loyalty Campaign Transactions](/api-reference/loyalties/export-loyalty-campaign-transactions) does.
+    # Export transactions is an asynchronous process that generates a CSV file with the data about credit movements on all gift cards or point movements on all loyalty cards in a given campaign. To export transactions: 1. In the export request, use parameters to select which fields will be exported, in what order, and which data will be filtered. 2. Use the returned id to track the export status with the [GET Export](/api-reference/exports/get-export) method. 3. In the GET Export method, when the returned status field has the DONE value, the export file has been generated. 4. Use the URL in the result property to download the file. You must be logged to your Voucherify account on a given cluster in the browser to be able to download the file. An export request will almost always result in a single file being generated by the system. However, when the data volume is large, the system may split the results into multiple files. An example export file can look as follows:   &lt;Tip&gt; &lt;Badge color green&gt;Export Loyalty Campaign Transactions&lt;/Badge&gt; For loyalty campaigns, this method works in the same way the [POST Export Loyalty Campaign Transactions](/api-reference/loyalties/export-loyalty-campaign-transactions) does. &lt;/Tip&gt;
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [CampaignsTransactionsExportCreateRequestBody] :campaigns_transactions_export_create_request_body Specify the parameters for the transaction export.
@@ -526,7 +526,7 @@ module VoucherifySdk
     end
 
     # Get Campaign Summary
-    # Returns data for campaign analytics, covering validations, redemptions, publications, and other details specific to a given campaign type. Use start_date and end_date to narrow down the data to specific periods. 🚧 Campaigns created before 17 June 2025 This endpoint returns analytics data for campaigns that were created after 17 June 2025. Older campaigns return empty data.
+    # Returns data for campaign analytics, covering validations, redemptions, publications, and other details specific to a given campaign type. Use start_date and end_date to narrow down the data to specific periods. <Warning> <Badge color yellow>Campaigns created before 17 June 2025</Badge> This endpoint returns analytics data for campaigns that were created after 17 June 2025. Older campaigns return empty data. </Warning>
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [Date] :start_date Timestamp representing the date which results must begin on. Represented in ISO 8601 format.
@@ -538,7 +538,7 @@ module VoucherifySdk
     end
 
     # Get Campaign Summary
-    # Returns data for campaign analytics, covering validations, redemptions, publications, and other details specific to a given campaign type. Use start_date and end_date to narrow down the data to specific periods. 🚧 Campaigns created before 17 June 2025 This endpoint returns analytics data for campaigns that were created after 17 June 2025. Older campaigns return empty data.
+    # Returns data for campaign analytics, covering validations, redemptions, publications, and other details specific to a given campaign type. Use start_date and end_date to narrow down the data to specific periods. &lt;Warning&gt; &lt;Badge color yellow&gt;Campaigns created before 17 June 2025&lt;/Badge&gt; This endpoint returns analytics data for campaigns that were created after 17 June 2025. Older campaigns return empty data. &lt;/Warning&gt;
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [Date] :start_date Timestamp representing the date which results must begin on. Represented in ISO 8601 format.
@@ -724,7 +724,7 @@ module VoucherifySdk
     end
 
     # List Campaign Transactions
-    # Retrieves all transactions for the campaign with the given campaign ID or campaign name. The id filter denotes the unique transaction identifier.  🚧  The endpoint works only for gift card and loyalty campaigns.
+    # Retrieves all transactions for the campaign with the given campaign ID or campaign name. The id filter denotes the unique transaction identifier. <Warning> The endpoint works only for gift card and loyalty campaigns. </Warning>
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
@@ -738,7 +738,7 @@ module VoucherifySdk
     end
 
     # List Campaign Transactions
-    # Retrieves all transactions for the campaign with the given campaign ID or campaign name. The id filter denotes the unique transaction identifier.  🚧  The endpoint works only for gift card and loyalty campaigns.
+    # Retrieves all transactions for the campaign with the given campaign ID or campaign name. The id filter denotes the unique transaction identifier. &lt;Warning&gt; The endpoint works only for gift card and loyalty campaigns. &lt;/Warning&gt;
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
@@ -870,7 +870,7 @@ module VoucherifySdk
     end
 
     # Update Campaign
-    # Updates the specified campaign by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged.  Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped.     🚧 Vouchers will be affected  This method will update vouchers aggregated in the campaign. It will affect all vouchers that are not published or redeemed yet.
+    # Updates the specified campaign by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged.  Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped.    <Warning> <Badge color yellow>Vouchers will be affected</Badge> This method will update vouchers aggregated in the campaign. It will affect all vouchers that are not published or redeemed yet. </Warning>
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [CampaignsUpdateRequestBody] :campaigns_update_request_body Specify the campaign parameters to be updated.
@@ -881,7 +881,7 @@ module VoucherifySdk
     end
 
     # Update Campaign
-    # Updates the specified campaign by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged.  Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped.     🚧 Vouchers will be affected  This method will update vouchers aggregated in the campaign. It will affect all vouchers that are not published or redeemed yet.
+    # Updates the specified campaign by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged.  Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped.    &lt;Warning&gt; &lt;Badge color yellow&gt;Vouchers will be affected&lt;/Badge&gt; This method will update vouchers aggregated in the campaign. It will affect all vouchers that are not published or redeemed yet. &lt;/Warning&gt;
     # @param campaign_id [String] You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value.
     # @param [Hash] opts the optional parameters
     # @option opts [CampaignsUpdateRequestBody] :campaigns_update_request_body Specify the campaign parameters to be updated.
