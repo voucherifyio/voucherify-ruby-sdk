@@ -89,7 +89,7 @@ module VoucherifySdk
     end
 
     # Create Validation Rules
-    # Create a validation rule.  🚧 Managing validation rules  It is recommended to [create or update validation rules](/personalize/create-validation-rules) in the Voucherify dashboard. The rule builder in the dashboard helps configuring the desired conditions in a convenient way. The API should not be used as a preferable way to create and manage validation rules.
+    # Create a validation rule. <Warning> <Badge color yellow>Managing validation rules</Badge> It is recommended to [create or update validation rules](/personalize/create-validation-rules) in the Voucherify dashboard. The rule builder in the dashboard helps configuring the desired conditions in a convenient way. The API should not be used as a preferable way to create and manage validation rules. </Warning>
     # @param [Hash] opts the optional parameters
     # @option opts [ValidationRulesCreateRequestBody] :validation_rules_create_request_body Specify the validation rules parameters.
     # @return [ValidationRulesCreateResponseBody]
@@ -99,7 +99,7 @@ module VoucherifySdk
     end
 
     # Create Validation Rules
-    # Create a validation rule.  🚧 Managing validation rules  It is recommended to [create or update validation rules](/personalize/create-validation-rules) in the Voucherify dashboard. The rule builder in the dashboard helps configuring the desired conditions in a convenient way. The API should not be used as a preferable way to create and manage validation rules.
+    # Create a validation rule. &lt;Warning&gt; &lt;Badge color yellow&gt;Managing validation rules&lt;/Badge&gt; It is recommended to [create or update validation rules](/personalize/create-validation-rules) in the Voucherify dashboard. The rule builder in the dashboard helps configuring the desired conditions in a convenient way. The API should not be used as a preferable way to create and manage validation rules. &lt;/Warning&gt;
     # @param [Hash] opts the optional parameters
     # @option opts [ValidationRulesCreateRequestBody] :validation_rules_create_request_body Specify the validation rules parameters.
     # @return [Array<(ValidationRulesCreateResponseBody, Integer, Hash)>] ValidationRulesCreateResponseBody data, response status code and response headers
@@ -540,7 +540,7 @@ module VoucherifySdk
     end
 
     # Update Validation Rule
-    # Update validation rule parameters.  🚧 Managing validation rules  It is recommended to [create or update validation rules](/personalize/create-validation-rules) in the Voucherify dashboard. The rule builder in the dashboard helps configuring the desired conditions in a convenient way. The API should not be used as a preferable way to create and manage validation rules.
+    # Update validation rule parameters. <Warning> <Badge color yellow>Managing validation rules</Badge> It is recommended to [create or update validation rules](/personalize/create-validation-rules) in the Voucherify dashboard. The rule builder in the dashboard helps configuring the desired conditions in a convenient way. The API should not be used as a preferable way to create and manage validation rules. </Warning>
     # @param validation_rule_id [String] A unique validation rule ID.
     # @param [Hash] opts the optional parameters
     # @option opts [ValidationRulesUpdateRequestBody] :validation_rules_update_request_body Specify the parameters to be updated.
@@ -551,7 +551,7 @@ module VoucherifySdk
     end
 
     # Update Validation Rule
-    # Update validation rule parameters.  🚧 Managing validation rules  It is recommended to [create or update validation rules](/personalize/create-validation-rules) in the Voucherify dashboard. The rule builder in the dashboard helps configuring the desired conditions in a convenient way. The API should not be used as a preferable way to create and manage validation rules.
+    # Update validation rule parameters. &lt;Warning&gt; &lt;Badge color yellow&gt;Managing validation rules&lt;/Badge&gt; It is recommended to [create or update validation rules](/personalize/create-validation-rules) in the Voucherify dashboard. The rule builder in the dashboard helps configuring the desired conditions in a convenient way. The API should not be used as a preferable way to create and manage validation rules. &lt;/Warning&gt;
     # @param validation_rule_id [String] A unique validation rule ID.
     # @param [Hash] opts the optional parameters
     # @option opts [ValidationRulesUpdateRequestBody] :validation_rules_update_request_body Specify the parameters to be updated.
