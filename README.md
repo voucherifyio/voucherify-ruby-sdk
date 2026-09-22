@@ -197,6 +197,8 @@ end
 - **Location**: HTTP header
 
 ## 📅 Changelog
+- **2026-08-26** - `8.1.1`
+  - Fixed: `exchange_ratio` in COIN reward schemas typed as `Float` (was `integer`/`string` in OpenAPI). The API returns fractional values (e.g. `0.01` for pay-with-points). Fixes parsing errors on `list_redemptions` and related endpoints.
 - **2026-07-30** - `8.1.0`
   - Added support for **GET** /v1/campaigns/{campaignId}/summary
   - Added support for **GET** /v1/campaigns/{campaignId}/transactions

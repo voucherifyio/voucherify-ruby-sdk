@@ -99,7 +99,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      key_validator = EnumAttributeValidator.new('String', ["applicable_redeemables_limit_exceeded", "applicable_redeemables_per_category_limit_exceeded", "applicable_exclusive_redeemables_limit_exceeded", "applicable_exclusive_redeemables_per_category_limit_exceeded", "exclusion_rules_not_met", "preceding_validation_failed"])
+      key_validator = EnumAttributeValidator.new('String', ["applicable_redeemables_limit_exceeded", "applicable_redeemables_per_category_limit_exceeded", "applicable_exclusive_redeemables_limit_exceeded", "applicable_exclusive_redeemables_per_category_limit_exceeded", "exclusion_rules_not_met", "preceding_validation_failed", "no_effect"])
       return false unless key_validator.valid?(@key)
       true
     end
