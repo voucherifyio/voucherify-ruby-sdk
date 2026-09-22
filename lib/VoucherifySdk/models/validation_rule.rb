@@ -116,6 +116,7 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'name',
+        :'error',
         :'applicable_to',
         :'type',
         :'context_type',

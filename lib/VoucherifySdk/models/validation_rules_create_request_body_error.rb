@@ -14,15 +14,15 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # References an Error Message Library entry. Required when `mode` is `LIBRARY`. Must be omitted or `null` when `mode` is `MESSAGES`.
-  class ValidationRuleErrorLibrary
-    # Identifies the library message. Use a validation-rule name such as `order.amount`, or a custom attribute key such as `order.metadata.location`.
-    attr_accessor :key
+  # Contains the error message returned from API when validation / redemption fails to meet requirements of defined rules.
+  class ValidationRulesCreateRequestBodyError
+    # The error message returned from API when validation / redemption fails to meet requirements of defined rules.
+    attr_accessor :message
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'key' => :'key'
+        :'message' => :'message'
       }
     end
 
@@ -34,14 +34,14 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'key' => :'String'
+        :'message' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'key'
+        :'message'
       ])
     end
 
@@ -53,8 +53,8 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'key')
-        self.key = attributes[:'key']
+      if attributes.key?(:'message')
+        self.message = attributes[:'message']
       end
     end
 
@@ -63,10 +63,6 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if !@key.nil? && @key.to_s.length > 100
-        invalid_properties.push('invalid value for "key", the character length must be smaller than or equal to 100.')
-      end
-
       invalid_properties
     end
 
@@ -74,7 +70,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      return false if !@key.nil? && @key.to_s.length > 100
       true
     end
 
@@ -83,7 +78,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          key == o.key
+          message == o.message
     end
 
     # @see the `==` method
@@ -95,7 +90,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [key].hash
+      [message].hash
     end
 
     # Builds the object from hash

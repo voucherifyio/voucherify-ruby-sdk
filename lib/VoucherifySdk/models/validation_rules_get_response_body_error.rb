@@ -15,7 +15,7 @@ require 'time'
 
 module VoucherifySdk
   # Contains the error message returned from API when validation / redemption fails to meet requirements of defined rules.
-  class ValidationRuleError
+  class ValidationRulesGetResponseBodyError
     # The error message returned from API when validation / redemption fails to meet requirements of defined rules.
     attr_accessor :message
 

@@ -101,7 +101,7 @@ module VoucherifySdk
         :'name' => :'String',
         :'rules' => :'Object',
         :'bundle_rules' => :'Object',
-        :'error' => :'ValidationRuleError',
+        :'error' => :'ValidationRulesGetResponseBodyError',
         :'applicable_to' => :'ValidationRulesGetResponseBodyApplicableTo',
         :'type' => :'String',
         :'context_type' => :'String',
@@ -117,6 +117,7 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'name',
+        :'error',
         :'applicable_to',
         :'type',
         :'context_type',

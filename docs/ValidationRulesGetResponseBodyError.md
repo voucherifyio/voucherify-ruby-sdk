@@ -1,4 +1,4 @@
-# VoucherifySdk::ValidationRuleError
+# VoucherifySdk::ValidationRulesGetResponseBodyError
 
 ## Properties
 
