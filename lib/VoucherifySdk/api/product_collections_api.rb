@@ -84,7 +84,7 @@ module VoucherifySdk
     end
 
     # Delete Product Collection
-    # This method deletes a product collection.
+    # Deletes a product collection. <Warning>This endpoint performs database-heavy operations. It is not designed for highly frequent use.</Warning>
     # @param product_collection_id [String] A unique product collection ID.
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -94,7 +94,7 @@ module VoucherifySdk
     end
 
     # Delete Product Collection
-    # This method deletes a product collection.
+    # Deletes a product collection. &lt;Warning&gt;This endpoint performs database-heavy operations. It is not designed for highly frequent use.&lt;/Warning&gt;
     # @param product_collection_id [String] A unique product collection ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers

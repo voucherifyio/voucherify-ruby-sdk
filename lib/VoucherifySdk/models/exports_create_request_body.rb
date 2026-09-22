@@ -99,7 +99,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      exported_object_validator = EnumAttributeValidator.new('String', ["voucher", "redemption", "customer", "publication", "order", "points_expiration", "voucher_transactions"])
+      exported_object_validator = EnumAttributeValidator.new('String', ["voucher", "redemption", "customer", "publication", "order", "points_expiration", "voucher_transactions", "product", "sku"])
       return false unless exported_object_validator.valid?(@exported_object)
       true
     end
