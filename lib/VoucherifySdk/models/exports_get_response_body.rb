@@ -174,7 +174,7 @@ module VoucherifySdk
       return false unless object_validator.valid?(@object)
       status_validator = EnumAttributeValidator.new('String', ["SCHEDULED", "IN_PROGRESS", "DONE", "ERROR"])
       return false unless status_validator.valid?(@status)
-      exported_object_validator = EnumAttributeValidator.new('String', ["voucher", "redemption", "customer", "publication", "order", "points_expiration", "voucher_transactions"])
+      exported_object_validator = EnumAttributeValidator.new('String', ["voucher", "redemption", "customer", "publication", "order", "points_expiration", "voucher_transactions", "product", "sku"])
       return false unless exported_object_validator.valid?(@exported_object)
       true
     end

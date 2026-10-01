@@ -14,10 +14,13 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Configure parameters returned in the response.
+  # Configure response expansion and the language of custom validation-rule error messages.
   class RedemptionsRedeemRequestBodyOptions
     # Expand array lets you configure params included in the response. Depending on the strings included in the array, the response will contain different details.   | **Expand Option** | **Response Body** | |:---|:---| | [\"order\"] | - Same response as fallback response (without an options object).<br />- Order data with calculated discounts are listed in each child redeemable object.<br />- Metadata not included for each discount type. | | [\"redeemable\"] | Expands redeemable objects by including `metadata` for each discount type. | | [\"order\", \"redeemable\"] | - Order data with calculated discounts are listed in each child redeemable object.<br />- Includes `metadata` for each discount type. | | [\"redeemable\", \"redemption\", \"category\"] | - Returns each discount type's `metadata` in each child redemption object.<br />- Returns redemption object `metadata`.<br />- Returns an expanded `categories` object, showing details about the category. |
     attr_accessor :expand
+
+    # Selects the language for the custom validation-rule error message. Returns the message in this language when a validation rule fails. Falls back to the Error Message Library default language when omitted or when the requested language has no message. Omits the custom error when no message can be resolved.
+    attr_accessor :language
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -44,7 +47,8 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'expand' => :'expand'
+        :'expand' => :'expand',
+        :'language' => :'language'
       }
     end
 
@@ -56,14 +60,16 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'expand' => :'Array<String>'
+        :'expand' => :'Array<String>',
+        :'language' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'expand'
+        :'expand',
+        :'language'
       ])
     end
 
@@ -80,6 +86,10 @@ module VoucherifySdk
           self.expand = value
         end
       end
+
+      if attributes.key?(:'language')
+        self.language = attributes[:'language']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -87,6 +97,15 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@language.nil? && @language.to_s.length > 100
+        invalid_properties.push('invalid value for "language", the character length must be smaller than or equal to 100.')
+      end
+
+      pattern = Regexp.new(/^[a-zA-Z]{2,3}(-[a-zA-Z]{2,4})?$/)
+      if !@language.nil? && @language !~ pattern
+        invalid_properties.push("invalid value for \"language\", must conform to the pattern #{pattern}.")
+      end
+
       invalid_properties
     end
 
@@ -94,6 +113,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@language.nil? && @language.to_s.length > 100
+      return false if !@language.nil? && @language !~ Regexp.new(/^[a-zA-Z]{2,3}(-[a-zA-Z]{2,4})?$/)
       true
     end
 
@@ -102,7 +123,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          expand == o.expand
+          expand == o.expand &&
+          language == o.language
     end
 
     # @see the `==` method
@@ -114,7 +136,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [expand].hash
+      [expand, language].hash
     end
 
     # Builds the object from hash

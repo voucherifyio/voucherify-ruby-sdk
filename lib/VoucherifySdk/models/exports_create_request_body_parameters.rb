@@ -17,10 +17,10 @@ module VoucherifySdk
   class ExportsCreateRequestBodyParameters
     attr_accessor :order
 
-    # Array of strings containing the data in the export. These fields define the headers in the CSV file.
+    # Array of strings containing the data in the export. These fields define the headers in the CSV file. and Array of strings containing the data in the export. These fields define the headers in the CSV file. The `metadata` field expands into one CSV column per metadata property. You can also pass specific properties as `metadata.<property_name>`.
     attr_accessor :fields
 
-    # Allowed additional properties must start with \"metadata.\" or \"redemption.\" and Allowed additional properties must start with \"metadata.\" and Allowed additional properties must start with \"metadata.\" or \"address.\" or \"summary.\" or \"loyalty.\" or \"loyalty_tier.\" or \"loyalty_points.\" or \"system_metadata.\"
+    # Allowed additional properties must start with \"metadata.\" or \"redemption.\" and Allowed additional properties must start with \"metadata.\" and Allowed additional properties must start with \"metadata.\" or \"address.\" or \"summary.\" or \"loyalty.\" or \"loyalty_tier.\" or \"loyalty_points.\" or \"system_metadata.\" and Allowed additional properties must start with \"metadata.\" or \"attributes.\"
     attr_accessor :filters
 
     # Unique identifier of the campaign. It is assigned by Voucherify. The campaign ID defines the campaign for which the voucher export will be triggered.
@@ -122,7 +122,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      order_validator = EnumAttributeValidator.new('String', ["-created_at", "created_at", "-updated_at", "updated_at", "-code", "code", "-id", "id", "-voucher_code", "voucher_code", "-tracking_id", "tracking_id", "-customer_id", "customer_id", "-name", "name", "-email", "email", "-source_id", "source_id", "-channel", "channel", "-status", "status", "-expires_at", "expires_at"])
+      order_validator = EnumAttributeValidator.new('String', ["-created_at", "created_at", "-updated_at", "updated_at", "-code", "code", "-id", "id", "-voucher_code", "voucher_code", "-tracking_id", "tracking_id", "-customer_id", "customer_id", "-name", "name", "-email", "email", "-source_id", "source_id", "-channel", "channel", "-status", "status", "-expires_at", "expires_at", "-product_id", "product_id", "-sku", "sku"])
       return false unless order_validator.valid?(@order)
       true
     end

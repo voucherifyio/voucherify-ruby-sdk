@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Create Export
-    # Create export object. The export can be any of the following types: voucher, redemption, publication, customer, order, points_expiration, voucher_transactions, product, or sku.   # Defaults If you only specify the object type in the request body without specifying the fields, the API will return the following fields per export object:    📘 Date and time in the export API  The exported date and times are always provided in the UTC time zone. # Fetching particular data sets Using the parameters body parameter, you can narrow down which fields to export and how to filter the results. The fields are an array of strings containing the data that you would like to export. These fields define the headers in the CSV file. The array can be a combination of any of the following available fields: # Orders     # Vouchers        # Publications   # Redemptions    # Customers       # Points Expirations    # Gift Card Transactions    # Loyalty Card Transactions   
+    # Create export object. The export can be any of the following types: voucher, redemption, publication, customer, order, points_expiration, voucher_transactions, product, or sku.   # Defaults If you only specify the object type in the request body without specifying the fields, the API will return the following fields per export object:   <Note> <Badge color blue>Date and time in the export API</Badge> The exported date and times are always provided in the UTC time zone. </Note> # Fetching particular data sets Using the parameters body parameter, you can narrow down which fields to export and how to filter the results. The fields are an array of strings containing the data that you would like to export. These fields define the headers in the CSV file. The array can be a combination of any of the following available fields: # Orders     # Vouchers        # Publications   # Redemptions    # Customers       # Points Expirations    # Gift Card Transactions    # Loyalty Card Transactions    # Products   # SKUs   
     # @param [Hash] opts the optional parameters
     # @option opts [ExportsCreateRequestBody] :exports_create_request_body Specify the details of the export that you would like to create.
     # @return [ExportsCreateResponseBody]
@@ -30,7 +30,7 @@ module VoucherifySdk
     end
 
     # Create Export
-    # Create export object. The export can be any of the following types: voucher, redemption, publication, customer, order, points_expiration, voucher_transactions, product, or sku.   # Defaults If you only specify the object type in the request body without specifying the fields, the API will return the following fields per export object:    📘 Date and time in the export API  The exported date and times are always provided in the UTC time zone. # Fetching particular data sets Using the parameters body parameter, you can narrow down which fields to export and how to filter the results. The fields are an array of strings containing the data that you would like to export. These fields define the headers in the CSV file. The array can be a combination of any of the following available fields: # Orders     # Vouchers        # Publications   # Redemptions    # Customers       # Points Expirations    # Gift Card Transactions    # Loyalty Card Transactions   
+    # Create export object. The export can be any of the following types: voucher, redemption, publication, customer, order, points_expiration, voucher_transactions, product, or sku.   # Defaults If you only specify the object type in the request body without specifying the fields, the API will return the following fields per export object:   &lt;Note&gt; &lt;Badge color blue&gt;Date and time in the export API&lt;/Badge&gt; The exported date and times are always provided in the UTC time zone. &lt;/Note&gt; # Fetching particular data sets Using the parameters body parameter, you can narrow down which fields to export and how to filter the results. The fields are an array of strings containing the data that you would like to export. These fields define the headers in the CSV file. The array can be a combination of any of the following available fields: # Orders     # Vouchers        # Publications   # Redemptions    # Customers       # Points Expirations    # Gift Card Transactions    # Loyalty Card Transactions    # Products   # SKUs   
     # @param [Hash] opts the optional parameters
     # @option opts [ExportsCreateRequestBody] :exports_create_request_body Specify the details of the export that you would like to create.
     # @return [Array<(ExportsCreateResponseBody, Integer, Hash)>] ExportsCreateResponseBody data, response status code and response headers
@@ -85,7 +85,7 @@ module VoucherifySdk
 
     # Delete Export
     # This method deletes a previously created export object.
-    # @param export_id [String] Unique export object ID of previously created export. This object can be a: voucher, redemption, publication, customer, order, points_expiration, or voucher_transactions.
+    # @param export_id [String] Unique export object ID of previously created export. This object can be a: voucher, redemption, publication, customer, order, points_expiration, voucher_transactions, product, or sku.
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def delete_export(export_id, opts = {})
@@ -95,7 +95,7 @@ module VoucherifySdk
 
     # Delete Export
     # This method deletes a previously created export object.
-    # @param export_id [String] Unique export object ID of previously created export. This object can be a: voucher, redemption, publication, customer, order, points_expiration, or voucher_transactions.
+    # @param export_id [String] Unique export object ID of previously created export. This object can be a: voucher, redemption, publication, customer, order, points_expiration, voucher_transactions, product, or sku.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     private def delete_export_with_http_info(export_id, opts = {})
@@ -141,7 +141,7 @@ module VoucherifySdk
     end
 
     # Download Export
-    # Download the contents of the exported CSV file.   📘 Important notes  **Base URL:**   - https://download.voucherify.io (Europe)   - https://us1.download.voucherify.io (US)   - https://as1.download.voucherify.io (Asia)   **Token:** Can be found within the result parameter of the [Get Export](/api-reference/exports/get-export) method response.
+    # Download the contents of the exported CSV file.  <Note> <Badge color blue>Important notes</Badge> **Base URL:** - https://download.voucherify.io (Europe) - https://us1.download.voucherify.io (US) - https://as1.download.voucherify.io (Asia) **Token:** Can be found within the result parameter of the [Get Export](/api-reference/exports/get-export) method response. </Note>
     # @param export_id [String] Unique export object ID.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :token Token that was issued to the export, to get this token, get the export first
@@ -152,7 +152,7 @@ module VoucherifySdk
     end
 
     # Download Export
-    # Download the contents of the exported CSV file.   📘 Important notes  **Base URL:**   - https://download.voucherify.io (Europe)   - https://us1.download.voucherify.io (US)   - https://as1.download.voucherify.io (Asia)   **Token:** Can be found within the result parameter of the [Get Export](/api-reference/exports/get-export) method response.
+    # Download the contents of the exported CSV file.  &lt;Note&gt; &lt;Badge color blue&gt;Important notes&lt;/Badge&gt; **Base URL:** - https://download.voucherify.io (Europe) - https://us1.download.voucherify.io (US) - https://as1.download.voucherify.io (Asia) **Token:** Can be found within the result parameter of the [Get Export](/api-reference/exports/get-export) method response. &lt;/Note&gt;
     # @param export_id [String] Unique export object ID.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :token Token that was issued to the export, to get this token, get the export first
@@ -204,7 +204,7 @@ module VoucherifySdk
 
     # Get Export
     # Retrieves the URL of the downloadable file, which was generated via the [Create Export](/api-reference/exports/create-export) method.
-    # @param export_id [String] Unique export object ID of previously created export. This object can be a: voucher, redemption, publication, customer, order, points_expiration, or voucher_transactions.
+    # @param export_id [String] Unique export object ID of previously created export. This object can be a: voucher, redemption, publication, customer, order, points_expiration, voucher_transactions, product, or sku.
     # @param [Hash] opts the optional parameters
     # @return [ExportsGetResponseBody]
     def get_export(export_id, opts = {})
@@ -214,7 +214,7 @@ module VoucherifySdk
 
     # Get Export
     # Retrieves the URL of the downloadable file, which was generated via the [Create Export](/api-reference/exports/create-export) method.
-    # @param export_id [String] Unique export object ID of previously created export. This object can be a: voucher, redemption, publication, customer, order, points_expiration, or voucher_transactions.
+    # @param export_id [String] Unique export object ID of previously created export. This object can be a: voucher, redemption, publication, customer, order, points_expiration, voucher_transactions, product, or sku.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ExportsGetResponseBody, Integer, Hash)>] ExportsGetResponseBody data, response status code and response headers
     private def get_export_with_http_info(export_id, opts = {})

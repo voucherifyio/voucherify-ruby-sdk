@@ -197,6 +197,11 @@ end
 - **Location**: HTTP header
 
 ## 📅 Changelog
+- **2026-08-26** - `8.1.1`
+  - Fixed: `exchange_ratio` is `Float` on COIN reward models (create/update were `String`, `RedemptionRewardResultParametersCoin` was `Integer`). The API returns fractional values such as `0.01`.
+  - Added: `language` on `RedemptionsRedeemRequestBodyOptions` and `ValidationsValidateRequestBodyOptions`.
+  - Added: product/sku export order and field values (`product_id`, `sku`, `price`, `image_url`, `attributes`, `currency`).
+  - Note: `ErrorError.message` is the resolved custom validation-rule error for `options.language`, falling back to the Error Message Library default language.
 - **2026-07-30** - `8.1.0`
   - Added support for **GET** /v1/campaigns/{campaignId}/summary
   - Added support for **GET** /v1/campaigns/{campaignId}/transactions

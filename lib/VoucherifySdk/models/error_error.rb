@@ -14,9 +14,9 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Includes additional information about the error.
+  # Includes the resolved custom validation-rule error message when one is configured.
   class ErrorError
-    # The message configured by the user in a validation rule.
+    # Resolved custom validation-rule error message for `options.language`, falling back to the Error Message Library default language. Present only when a custom message can be resolved.
     attr_accessor :message
 
     # Attribute mapping from ruby-style variable name to JSON key.
