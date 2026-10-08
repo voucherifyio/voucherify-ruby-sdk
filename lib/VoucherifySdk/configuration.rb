@@ -276,6 +276,14 @@ module VoucherifySdk
             key: 'X-Management-Token',
             value: api_key_with_prefix('X-Management-Token')
           },
+        'bearerAuth' =>
+          {
+            type: 'bearer',
+            in: 'header',
+            format: 'JWT',
+            key: 'Authorization',
+            value: "Bearer #{access_token_with_refresh}"
+          },
       }
     end
 

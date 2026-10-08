@@ -197,6 +197,19 @@ end
 - **Location**: HTTP header
 
 ## 📅 Changelog
+- **2026-10-08** - `8.2.0`
+  - Added support for **POST** /v2/loyalties/programs/{programId}/members
+  - Added support for **POST** /v2/loyalties/programs/{programId}/members/batch
+  - Added support for **GET** /v2/loyalties/programs/{programId}/memberships/{customerId}
+  - Added support for **GET** /v2/loyalties/programs/{programId}/members/{memberId}
+  - Added support for **GET** /v2/loyalties/programs/{programId}/members/{memberId}/cards/{cardId}/transactions
+  - Added support for **GET** /v2/loyalties/programs/{programId}/members/{memberId}/rewards/purchases
+  - Added support for **POST** /v2/loyalties/programs/{programId}/members/{memberId}/rewards/purchases
+  - Added support for **GET** /v2/loyalties/programs/{programId}/members/{memberId}/orders/payments
+  - Added support for **POST** /v2/loyalties/programs/{programId}/members/{memberId}/orders/payments
+  - Added support for **POST** /v2/loyalties/examine/earning-rules
+  - Added support for **POST** /v2/loyalties/examine/rewards
+  - Added optional `mode`, `messages`, and `library` on validation-rule error models (`ValidationRuleError` and the `ValidationRules*Error` models). Existing `message` is unchanged.
 - **2026-08-26** - `8.1.1`
   - Fixed: `exchange_ratio` is `Float` on COIN reward models (create/update were `String`, `RedemptionRewardResultParametersCoin` was `Integer`). The API returns fractional values such as `0.01`.
   - Added: `language` on `RedemptionsRedeemRequestBodyOptions` and `ValidationsValidateRequestBodyOptions`.
@@ -381,6 +394,17 @@ Class | Method | HTTP request | Description
 *VoucherifySdk::ExportsApi* | [**download_export**](docs/ExportsApi.md#download_export) | **GET** /v1/exports/{export_Id} | Download Export
 *VoucherifySdk::ExportsApi* | [**get_export**](docs/ExportsApi.md#get_export) | **GET** /v1/exports/{exportId} | Get Export
 *VoucherifySdk::ExportsApi* | [**list_exports**](docs/ExportsApi.md#list_exports) | **GET** /v1/exports | List Exports
+*VoucherifySdk::LV2ExamineApi* | [**examine_earning_rules**](docs/LV2ExamineApi.md#examine_earning_rules) | **POST** /v2/loyalties/examine/earning-rules | Examine earning rules
+*VoucherifySdk::LV2ExamineApi* | [**examine_rewards**](docs/LV2ExamineApi.md#examine_rewards) | **POST** /v2/loyalties/examine/rewards | Examine rewards
+*VoucherifySdk::LV2ProgramsApi* | [**batch_create_program_members**](docs/LV2ProgramsApi.md#batch_create_program_members) | **POST** /v2/loyalties/programs/{programId}/members/batch | Batch create program members
+*VoucherifySdk::LV2ProgramsApi* | [**create_member_order_payment**](docs/LV2ProgramsApi.md#create_member_order_payment) | **POST** /v2/loyalties/programs/{programId}/members/{memberId}/orders/payments | Pay for order with points
+*VoucherifySdk::LV2ProgramsApi* | [**create_program_member**](docs/LV2ProgramsApi.md#create_program_member) | **POST** /v2/loyalties/programs/{programId}/members | Create program member
+*VoucherifySdk::LV2ProgramsApi* | [**get_program_member**](docs/LV2ProgramsApi.md#get_program_member) | **GET** /v2/loyalties/programs/{programId}/members/{memberId} | Get program member
+*VoucherifySdk::LV2ProgramsApi* | [**get_program_membership**](docs/LV2ProgramsApi.md#get_program_membership) | **GET** /v2/loyalties/programs/{programId}/memberships/{customerId} | Get program membership
+*VoucherifySdk::LV2ProgramsApi* | [**list_card_transactions**](docs/LV2ProgramsApi.md#list_card_transactions) | **GET** /v2/loyalties/programs/{programId}/members/{memberId}/cards/{cardId}/transactions | List card transactions
+*VoucherifySdk::LV2ProgramsApi* | [**list_member_order_payments**](docs/LV2ProgramsApi.md#list_member_order_payments) | **GET** /v2/loyalties/programs/{programId}/members/{memberId}/orders/payments | List member order payments
+*VoucherifySdk::LV2ProgramsApi* | [**list_member_reward_purchases**](docs/LV2ProgramsApi.md#list_member_reward_purchases) | **GET** /v2/loyalties/programs/{programId}/members/{memberId}/rewards/purchases | List member reward purchases
+*VoucherifySdk::LV2ProgramsApi* | [**purchase_member_reward**](docs/LV2ProgramsApi.md#purchase_member_reward) | **POST** /v2/loyalties/programs/{programId}/members/{memberId}/rewards/purchases | Purchase reward with points
 *VoucherifySdk::LocationsApi* | [**get_location**](docs/LocationsApi.md#get_location) | **GET** /v1/locations/{locationId} | Get Location
 *VoucherifySdk::LocationsApi* | [**list_locations**](docs/LocationsApi.md#list_locations) | **GET** /v1/locations | List Locations
 *VoucherifySdk::LoyaltiesApi* | [**activate_member_pending_points**](docs/LoyaltiesApi.md#activate_member_pending_points) | **POST** /v1/loyalties/members/{memberId}/pending-points/{pendingPointsId}/activate | Activate Member Pending Points
@@ -645,6 +669,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::CampaignsVouchersCreateResponseBodyLoyaltyCard](docs/CampaignsVouchersCreateResponseBodyLoyaltyCard.md)
  - [VoucherifySdk::CampaignsVouchersCreateResponseBodyPublish](docs/CampaignsVouchersCreateResponseBodyPublish.md)
  - [VoucherifySdk::CampaignsVouchersCreateResponseBodyRedemption](docs/CampaignsVouchersCreateResponseBodyRedemption.md)
+ - [VoucherifySdk::CardTransaction](docs/CardTransaction.md)
  - [VoucherifySdk::CategoriesCreateRequestBody](docs/CategoriesCreateRequestBody.md)
  - [VoucherifySdk::CategoriesCreateResponseBody](docs/CategoriesCreateResponseBody.md)
  - [VoucherifySdk::CategoriesGetResponseBody](docs/CategoriesGetResponseBody.md)
@@ -761,6 +786,11 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::EventsCreateRequestBodyLoyalty](docs/EventsCreateRequestBodyLoyalty.md)
  - [VoucherifySdk::EventsCreateRequestBodyReferral](docs/EventsCreateRequestBodyReferral.md)
  - [VoucherifySdk::EventsCreateResponseBody](docs/EventsCreateResponseBody.md)
+ - [VoucherifySdk::ExamineCardReference](docs/ExamineCardReference.md)
+ - [VoucherifySdk::ExamineCustomerIdentification](docs/ExamineCustomerIdentification.md)
+ - [VoucherifySdk::ExamineCustomerReference](docs/ExamineCustomerReference.md)
+ - [VoucherifySdk::ExamineMemberReference](docs/ExamineMemberReference.md)
+ - [VoucherifySdk::ExamineProgramReference](docs/ExamineProgramReference.md)
  - [VoucherifySdk::Export](docs/Export.md)
  - [VoucherifySdk::ExportCampaignTransactionsFilters](docs/ExportCampaignTransactionsFilters.md)
  - [VoucherifySdk::ExportOrderFields](docs/ExportOrderFields.md)
@@ -787,6 +817,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::InapplicableToOrderItemUnitsItem](docs/InapplicableToOrderItemUnitsItem.md)
  - [VoucherifySdk::InapplicableToResultList](docs/InapplicableToResultList.md)
  - [VoucherifySdk::Junction](docs/Junction.md)
+ - [VoucherifySdk::ListCardTransactionsOrderParameter](docs/ListCardTransactionsOrderParameter.md)
  - [VoucherifySdk::ListPublicationsItemVoucher](docs/ListPublicationsItemVoucher.md)
  - [VoucherifySdk::Location](docs/Location.md)
  - [VoucherifySdk::LocationShape](docs/LocationShape.md)
@@ -952,6 +983,40 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltiesEarningRulesUpdateResponseBodyPendingPoints](docs/LoyaltiesEarningRulesUpdateResponseBodyPendingPoints.md)
  - [VoucherifySdk::LoyaltiesEarningRulesUpdateResponseBodySegment](docs/LoyaltiesEarningRulesUpdateResponseBodySegment.md)
  - [VoucherifySdk::LoyaltiesEarningRulesUpdateResponseBodySource](docs/LoyaltiesEarningRulesUpdateResponseBodySource.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBody](docs/LoyaltiesExamineEarningRulesExamineRequestBody.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyCustomEventAll](docs/LoyaltiesExamineEarningRulesExamineRequestBodyCustomEventAll.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyCustomEventSpecific](docs/LoyaltiesExamineEarningRulesExamineRequestBodyCustomEventSpecific.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyCustomer](docs/LoyaltiesExamineEarningRulesExamineRequestBodyCustomer.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyCustomerCustomEvent](docs/LoyaltiesExamineEarningRulesExamineRequestBodyCustomerCustomEvent.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyCustomerCustomEventAll](docs/LoyaltiesExamineEarningRulesExamineRequestBodyCustomerCustomEventAll.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyCustomerCustomEventSpecific](docs/LoyaltiesExamineEarningRulesExamineRequestBodyCustomerCustomEventSpecific.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyCustomerOrderPaid](docs/LoyaltiesExamineEarningRulesExamineRequestBodyCustomerOrderPaid.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyCustomerSegmentEntered](docs/LoyaltiesExamineEarningRulesExamineRequestBodyCustomerSegmentEntered.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyMember](docs/LoyaltiesExamineEarningRulesExamineRequestBodyMember.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyOrder](docs/LoyaltiesExamineEarningRulesExamineRequestBodyOrder.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyOrderItem](docs/LoyaltiesExamineEarningRulesExamineRequestBodyOrderItem.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyTrigger](docs/LoyaltiesExamineEarningRulesExamineRequestBodyTrigger.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBodyTriggerSpecific](docs/LoyaltiesExamineEarningRulesExamineRequestBodyTriggerSpecific.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineResponseBody](docs/LoyaltiesExamineEarningRulesExamineResponseBody.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineResponseBodyBenefitEarningRuleEstimation](docs/LoyaltiesExamineEarningRulesExamineResponseBodyBenefitEarningRuleEstimation.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineResponseBodyBenefitEstimation](docs/LoyaltiesExamineEarningRulesExamineResponseBodyBenefitEstimation.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineResponseBodyBenefitReference](docs/LoyaltiesExamineEarningRulesExamineResponseBodyBenefitReference.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineResponseBodyCardEarningRuleEstimation](docs/LoyaltiesExamineEarningRulesExamineResponseBodyCardEarningRuleEstimation.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineResponseBodyCardEstimation](docs/LoyaltiesExamineEarningRulesExamineResponseBodyCardEstimation.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineResponseBodyEarningRuleDetail](docs/LoyaltiesExamineEarningRulesExamineResponseBodyEarningRuleDetail.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineResponseBodyEarningRuleReference](docs/LoyaltiesExamineEarningRulesExamineResponseBodyEarningRuleReference.md)
+ - [VoucherifySdk::LoyaltiesExamineEarningRulesExamineResponseBodyMembership](docs/LoyaltiesExamineEarningRulesExamineResponseBodyMembership.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineRequestBody](docs/LoyaltiesExamineRewardsExamineRequestBody.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineRequestBodyCustomer](docs/LoyaltiesExamineRewardsExamineRequestBodyCustomer.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineRequestBodyMember](docs/LoyaltiesExamineRewardsExamineRequestBodyMember.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineResponseBody](docs/LoyaltiesExamineRewardsExamineResponseBody.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineResponseBodyCardEstimation](docs/LoyaltiesExamineRewardsExamineResponseBodyCardEstimation.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineResponseBodyCardRewardEstimation](docs/LoyaltiesExamineRewardsExamineResponseBodyCardRewardEstimation.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineResponseBodyMembership](docs/LoyaltiesExamineRewardsExamineResponseBodyMembership.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineResponseBodyRewardCost](docs/LoyaltiesExamineRewardsExamineResponseBodyRewardCost.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineResponseBodyRewardDetail](docs/LoyaltiesExamineRewardsExamineResponseBodyRewardDetail.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineResponseBodyRewardReference](docs/LoyaltiesExamineRewardsExamineResponseBodyRewardReference.md)
+ - [VoucherifySdk::LoyaltiesExamineRewardsExamineResponseBodyRewardUnavailabilityReason](docs/LoyaltiesExamineRewardsExamineResponseBodyRewardUnavailabilityReason.md)
  - [VoucherifySdk::LoyaltiesGetCampaignResponseBody](docs/LoyaltiesGetCampaignResponseBody.md)
  - [VoucherifySdk::LoyaltiesListCampaignsResponseBody](docs/LoyaltiesListCampaignsResponseBody.md)
  - [VoucherifySdk::LoyaltiesListMembersResponseBody](docs/LoyaltiesListMembersResponseBody.md)
@@ -1023,6 +1088,23 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltiesPointsExpirationExportCreateResponseBodyParametersFiltersCampaignIdConditions](docs/LoyaltiesPointsExpirationExportCreateResponseBodyParametersFiltersCampaignIdConditions.md)
  - [VoucherifySdk::LoyaltiesPointsExpirationExportCreateResponseBodyParametersFiltersVoucherId](docs/LoyaltiesPointsExpirationExportCreateResponseBodyParametersFiltersVoucherId.md)
  - [VoucherifySdk::LoyaltiesPointsExpirationExportCreateResponseBodyParametersFiltersVoucherIdConditions](docs/LoyaltiesPointsExpirationExportCreateResponseBodyParametersFiltersVoucherIdConditions.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersCardsTransactionsListRequestQuery](docs/LoyaltiesProgramsMembersCardsTransactionsListRequestQuery.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersCardsTransactionsListResponseBody](docs/LoyaltiesProgramsMembersCardsTransactionsListResponseBody.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersCreateInBulkResponseBody](docs/LoyaltiesProgramsMembersCreateInBulkResponseBody.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersCreateRequestBody](docs/LoyaltiesProgramsMembersCreateRequestBody.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersCreateResponseBody](docs/LoyaltiesProgramsMembersCreateResponseBody.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBody](docs/LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBody.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransaction](docs/LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransaction.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersOrdersPaymentsCreateRequestBody](docs/LoyaltiesProgramsMembersOrdersPaymentsCreateRequestBody.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery](docs/LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersOrdersPaymentsListResponseBody](docs/LoyaltiesProgramsMembersOrdersPaymentsListResponseBody.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBody](docs/LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBody.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransaction](docs/LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransaction.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetails](docs/LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetails.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersRewardsPurchasesCreateRequestBody](docs/LoyaltiesProgramsMembersRewardsPurchasesCreateRequestBody.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery](docs/LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembersRewardsPurchasesListResponseBody](docs/LoyaltiesProgramsMembersRewardsPurchasesListResponseBody.md)
+ - [VoucherifySdk::LoyaltiesProgramsMembershipsGetResponseBody](docs/LoyaltiesProgramsMembershipsGetResponseBody.md)
  - [VoucherifySdk::LoyaltiesRewardAssignmentsGetResponseBody](docs/LoyaltiesRewardAssignmentsGetResponseBody.md)
  - [VoucherifySdk::LoyaltiesRewardAssignmentsGetResponseBodyParameters](docs/LoyaltiesRewardAssignmentsGetResponseBodyParameters.md)
  - [VoucherifySdk::LoyaltiesRewardAssignmentsGetResponseBodyParametersLoyalty](docs/LoyaltiesRewardAssignmentsGetResponseBodyParametersLoyalty.md)
@@ -1105,6 +1187,9 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::LoyaltyTiersExpirationAllExpirationDate](docs/LoyaltyTiersExpirationAllExpirationDate.md)
  - [VoucherifySdk::LoyaltyTiersExpirationAllExpirationDateRounding](docs/LoyaltyTiersExpirationAllExpirationDateRounding.md)
  - [VoucherifySdk::LoyaltyTiersExpirationAllStartDate](docs/LoyaltyTiersExpirationAllStartDate.md)
+ - [VoucherifySdk::LoyaltyV2ActivityCardDefinitionLimitTimeBasedPeriod](docs/LoyaltyV2ActivityCardDefinitionLimitTimeBasedPeriod.md)
+ - [VoucherifySdk::LoyaltyV2ActivityCardDefinitionLimitTimeBasedPeriodCurrentPeriod](docs/LoyaltyV2ActivityCardDefinitionLimitTimeBasedPeriodCurrentPeriod.md)
+ - [VoucherifySdk::LoyaltyV2ActivityRewardPurchaseLimitsFrequencyLimitTriggers](docs/LoyaltyV2ActivityRewardPurchaseLimitsFrequencyLimitTriggers.md)
  - [VoucherifySdk::ManagementProject](docs/ManagementProject.md)
  - [VoucherifySdk::ManagementProjectApiUsageNotifications](docs/ManagementProjectApiUsageNotifications.md)
  - [VoucherifySdk::ManagementProjectDefaultCodeConfig](docs/ManagementProjectDefaultCodeConfig.md)
@@ -1230,7 +1315,16 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ManagementProjectsWebhooksUpdateRequestBody](docs/ManagementProjectsWebhooksUpdateRequestBody.md)
  - [VoucherifySdk::ManagementProjectsWebhooksUpdateResponseBody](docs/ManagementProjectsWebhooksUpdateResponseBody.md)
  - [VoucherifySdk::MappingPoints](docs/MappingPoints.md)
+ - [VoucherifySdk::Member](docs/Member.md)
  - [VoucherifySdk::MemberActivity](docs/MemberActivity.md)
+ - [VoucherifySdk::MemberCard](docs/MemberCard.md)
+ - [VoucherifySdk::MemberCreate](docs/MemberCreate.md)
+ - [VoucherifySdk::MemberTierProgress](docs/MemberTierProgress.md)
+ - [VoucherifySdk::MemberTierProgressDeferred](docs/MemberTierProgressDeferred.md)
+ - [VoucherifySdk::MemberTierProgressOpportunity](docs/MemberTierProgressOpportunity.md)
+ - [VoucherifySdk::MemberTierProgressRisk](docs/MemberTierProgressRisk.md)
+ - [VoucherifySdk::MemberWithCards](docs/MemberWithCards.md)
+ - [VoucherifySdk::MembershipCard](docs/MembershipCard.md)
  - [VoucherifySdk::MetadataSchemaDefinitionDeprecated](docs/MetadataSchemaDefinitionDeprecated.md)
  - [VoucherifySdk::MetadataSchemaDeprecated](docs/MetadataSchemaDeprecated.md)
  - [VoucherifySdk::MetadataSchemasGetResponseBody](docs/MetadataSchemasGetResponseBody.md)
@@ -1243,6 +1337,8 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::OrderItem](docs/OrderItem.md)
  - [VoucherifySdk::OrderItemProduct](docs/OrderItemProduct.md)
  - [VoucherifySdk::OrderItemSku](docs/OrderItemSku.md)
+ - [VoucherifySdk::OrderPaymentOrder](docs/OrderPaymentOrder.md)
+ - [VoucherifySdk::OrderPaymentTransaction](docs/OrderPaymentTransaction.md)
  - [VoucherifySdk::OrderRedemptionsEntry](docs/OrderRedemptionsEntry.md)
  - [VoucherifySdk::OrdersCreateRequestBody](docs/OrdersCreateRequestBody.md)
  - [VoucherifySdk::OrdersCreateResponseBody](docs/OrdersCreateResponseBody.md)
@@ -1379,6 +1475,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ProductsUpdateInBulkResponseBody](docs/ProductsUpdateInBulkResponseBody.md)
  - [VoucherifySdk::ProductsUpdateRequestBody](docs/ProductsUpdateRequestBody.md)
  - [VoucherifySdk::ProductsUpdateResponseBody](docs/ProductsUpdateResponseBody.md)
+ - [VoucherifySdk::ProgramSimple](docs/ProgramSimple.md)
  - [VoucherifySdk::PromotionStack](docs/PromotionStack.md)
  - [VoucherifySdk::PromotionStackBase](docs/PromotionStackBase.md)
  - [VoucherifySdk::PromotionStackBaseTiers](docs/PromotionStackBaseTiers.md)
@@ -1595,6 +1692,11 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::RewardAssignmentParameters](docs/RewardAssignmentParameters.md)
  - [VoucherifySdk::RewardAssignmentParametersLoyalty](docs/RewardAssignmentParametersLoyalty.md)
  - [VoucherifySdk::RewardAttributes](docs/RewardAttributes.md)
+ - [VoucherifySdk::RewardPurchaseLimits](docs/RewardPurchaseLimits.md)
+ - [VoucherifySdk::RewardPurchaseLimitsCooldown](docs/RewardPurchaseLimitsCooldown.md)
+ - [VoucherifySdk::RewardPurchaseLimitsFrequency](docs/RewardPurchaseLimitsFrequency.md)
+ - [VoucherifySdk::RewardPurchaseLimitsFrequencyLimit](docs/RewardPurchaseLimitsFrequencyLimit.md)
+ - [VoucherifySdk::RewardPurchaseTransaction](docs/RewardPurchaseTransaction.md)
  - [VoucherifySdk::RewardType](docs/RewardType.md)
  - [VoucherifySdk::RewardTypeCampaign](docs/RewardTypeCampaign.md)
  - [VoucherifySdk::RewardTypeCoin](docs/RewardTypeCoin.md)
@@ -1672,6 +1774,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ValidationRuleAssignment](docs/ValidationRuleAssignment.md)
  - [VoucherifySdk::ValidationRuleAssignmentsList](docs/ValidationRuleAssignmentsList.md)
  - [VoucherifySdk::ValidationRuleError](docs/ValidationRuleError.md)
+ - [VoucherifySdk::ValidationRuleErrorLibrary](docs/ValidationRuleErrorLibrary.md)
  - [VoucherifySdk::ValidationRulesAssignmentsCreateRequestBody](docs/ValidationRulesAssignmentsCreateRequestBody.md)
  - [VoucherifySdk::ValidationRulesAssignmentsCreateResponseBody](docs/ValidationRulesAssignmentsCreateResponseBody.md)
  - [VoucherifySdk::ValidationRulesAssignmentsList](docs/ValidationRulesAssignmentsList.md)
