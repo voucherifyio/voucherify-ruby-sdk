@@ -22,6 +22,7 @@ module VoucherifySdk
     # The result of the validation. It takes all of the redeemables into account and returns a `false` if at least one redeemable is inapplicable. Returns `true` if all redeemables are applicable.
     attr_accessor :valid
 
+    # Lists validation results of each redeemable. If  `redeemables_application_mode` is `PARTIAL` in the `stacking_rules` object, all redeemables here will be `APPLICABLE`. Read more in [the Stacking rules article](/orchestrate/stacking-rules).
     attr_accessor :redeemables
 
     # Lists validation results of each skipped redeemable.

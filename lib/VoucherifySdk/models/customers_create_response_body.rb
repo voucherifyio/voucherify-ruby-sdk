@@ -26,6 +26,9 @@ module VoucherifySdk
 
     attr_accessor :loyalty
 
+    # List of Loyalty v2 program memberships for the customer. `null` when no memberships are stored.
+    attr_accessor :loyalty_memberships
+
     attr_accessor :referrals
 
     # Object used to store system metadata information.
@@ -94,6 +97,7 @@ module VoucherifySdk
         :'source_id' => :'source_id',
         :'summary' => :'summary',
         :'loyalty' => :'loyalty',
+        :'loyalty_memberships' => :'loyalty_memberships',
         :'referrals' => :'referrals',
         :'system_metadata' => :'system_metadata',
         :'created_at' => :'created_at',
@@ -123,6 +127,7 @@ module VoucherifySdk
         :'source_id' => :'String',
         :'summary' => :'CustomerSummary',
         :'loyalty' => :'CustomerLoyalty',
+        :'loyalty_memberships' => :'Array<CustomerLoyaltyMembership>',
         :'referrals' => :'CustomerReferrals',
         :'system_metadata' => :'Object',
         :'created_at' => :'Time',
@@ -145,6 +150,7 @@ module VoucherifySdk
       Set.new([
         :'id',
         :'source_id',
+        :'loyalty_memberships',
         :'system_metadata',
         :'created_at',
         :'updated_at',
@@ -183,6 +189,12 @@ module VoucherifySdk
 
       if attributes.key?(:'loyalty')
         self.loyalty = attributes[:'loyalty']
+      end
+
+      if attributes.key?(:'loyalty_memberships')
+        if (value = attributes[:'loyalty_memberships']).is_a?(Array)
+          self.loyalty_memberships = value
+        end
       end
 
       if attributes.key?(:'referrals')
@@ -270,6 +282,7 @@ module VoucherifySdk
           source_id == o.source_id &&
           summary == o.summary &&
           loyalty == o.loyalty &&
+          loyalty_memberships == o.loyalty_memberships &&
           referrals == o.referrals &&
           system_metadata == o.system_metadata &&
           created_at == o.created_at &&
@@ -295,7 +308,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, source_id, summary, loyalty, referrals, system_metadata, created_at, updated_at, assets, object, name, description, email, phone, birthday, birthdate, address, metadata].hash
+      [id, source_id, summary, loyalty, loyalty_memberships, referrals, system_metadata, created_at, updated_at, assets, object, name, description, email, phone, birthday, birthdate, address, metadata].hash
     end
 
     # Builds the object from hash

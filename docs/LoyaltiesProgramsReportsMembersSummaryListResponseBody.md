@@ -1,0 +1,9 @@
+# VoucherifySdk::LoyaltiesProgramsReportsMembersSummaryListResponseBody
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **data** | [**Array&lt;MembersReportSummaryEntry&gt;**](MembersReportSummaryEntry.md) | List of summary rows for the program. Contains one row when activity was recorded, ordered by &#x60;id&#x60; descending. Empty when no activity was recorded. | [optional] |
+| **object** | **String** | Object type marker. Always &#x60;report&#x60;. | [optional][default to &#39;report&#39;] |
+

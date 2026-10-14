@@ -22,6 +22,7 @@ module VoucherifySdk
     # Identifies the name of the JSON property that contains the array of products and SKUs.
     attr_accessor :data_ref
 
+    # A dictionary that contains an array of products and SKUs.
     attr_accessor :data
 
     # Total number of products & SKUs in the product collection.

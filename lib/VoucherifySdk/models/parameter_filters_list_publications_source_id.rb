@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Filter publications by source id.
+  # Filter publications by source ID.
   class ParameterFiltersListPublicationsSourceId
     attr_accessor :conditions
 

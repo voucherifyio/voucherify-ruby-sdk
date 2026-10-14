@@ -25,7 +25,7 @@ module VoucherifySdk
     # A dictionary that contains an array of redeemables.
     attr_accessor :data
 
-    # Total number of results returned.
+    # Total number of results returned on this page.
     attr_accessor :total
 
     # As query results are always limited (by the limit parameter), the `has_more` flag indicates if there are more records for given filter parameters. This lets you know if you can run another request with a `starting_after_id` query or a different limit to get more records returned in the results.

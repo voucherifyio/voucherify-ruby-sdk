@@ -12,7 +12,7 @@
 | **min_length** | **Integer** | Value indicating the minimum length. Available only for the &#x60;string&#x60; type. | [optional] |
 | **max_length** | **Integer** | Value indicating the maximum length. Available only for the &#x60;string&#x60; type. | [optional] |
 | **exact_length** | **Integer** | Value indicating the exact length. Available only for the &#x60;string&#x60; type. | [optional] |
-| **eq** | **Array&lt;Object&gt;** |  | [optional] |
+| **eq** | **Array&lt;Object&gt;** | Array of values that are allowed. Available only for the &#x60;string&#x60; and &#x60;number&#x60; types. | [optional] |
 | **ne** | **Array&lt;Float&gt;** | Array of values that are not allowed. Available only for the &#x60;number&#x60; type. | [optional] |
 | **lt** | **Float** | A property of the &#x60;number&#x60; type must have &#x60;less than&#x60; this value. The value should be up to two decimal places. | [optional] |
 | **lte** | **Float** | A property of the &#x60;number&#x60; type must be &#x60;less than or equal&#x60; to this value. The value should be up to two decimal places. | [optional] |
