@@ -2087,7 +2087,6 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ValidationRuleAssignment](docs/ValidationRuleAssignment.md)
  - [VoucherifySdk::ValidationRuleAssignmentsList](docs/ValidationRuleAssignmentsList.md)
  - [VoucherifySdk::ValidationRuleError](docs/ValidationRuleError.md)
- - [VoucherifySdk::ValidationRuleErrorLibrary](docs/ValidationRuleErrorLibrary.md)
  - [VoucherifySdk::ValidationRulesAssignmentsCreateRequestBody](docs/ValidationRulesAssignmentsCreateRequestBody.md)
  - [VoucherifySdk::ValidationRulesAssignmentsCreateResponseBody](docs/ValidationRulesAssignmentsCreateResponseBody.md)
  - [VoucherifySdk::ValidationRulesAssignmentsList](docs/ValidationRulesAssignmentsList.md)
