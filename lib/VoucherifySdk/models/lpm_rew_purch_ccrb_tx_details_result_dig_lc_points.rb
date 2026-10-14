@@ -14,22 +14,22 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransactionDetailsRejectionDetails
-    # Spending cap type that was exceeded.
-    attr_accessor :type
+  class LpmRewPurchCcrbTxDetailsResultDigLcPoints
+    # Number of points credited to the target loyalty card.
+    attr_accessor :points
 
-    # Configured spending limit.
-    attr_accessor :limit
+    # Target card definition identifier (format `lcdef_...`).
+    attr_accessor :card_definition_id
 
-    # Projected total spendings that exceeded the limit. Present for `GLOBAL_SPENDING_LIMIT_EXCEEDED`.
-    attr_accessor :spendings
+    # Target loyalty card identifier (format `lcrd_...`).
+    attr_accessor :card_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'limit' => :'limit',
-        :'spendings' => :'spendings'
+        :'points' => :'points',
+        :'card_definition_id' => :'card_definition_id',
+        :'card_id' => :'card_id'
       }
     end
 
@@ -41,18 +41,18 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'limit' => :'Float',
-        :'spendings' => :'Float'
+        :'points' => :'Float',
+        :'card_definition_id' => :'String',
+        :'card_id' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'type',
-        :'limit',
-        :'spendings'
+        :'points',
+        :'card_definition_id',
+        :'card_id'
       ])
     end
 
@@ -64,16 +64,16 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'points')
+        self.points = attributes[:'points']
       end
 
-      if attributes.key?(:'limit')
-        self.limit = attributes[:'limit']
+      if attributes.key?(:'card_definition_id')
+        self.card_definition_id = attributes[:'card_definition_id']
       end
 
-      if attributes.key?(:'spendings')
-        self.spendings = attributes[:'spendings']
+      if attributes.key?(:'card_id')
+        self.card_id = attributes[:'card_id']
       end
     end
 
@@ -97,9 +97,9 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          limit == o.limit &&
-          spendings == o.spendings
+          points == o.points &&
+          card_definition_id == o.card_definition_id &&
+          card_id == o.card_id
     end
 
     # @see the `==` method
@@ -111,7 +111,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, limit, spendings].hash
+      [points, card_definition_id, card_id].hash
     end
 
     # Builds the object from hash

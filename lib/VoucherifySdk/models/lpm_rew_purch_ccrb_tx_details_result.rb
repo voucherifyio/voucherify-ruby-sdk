@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsResult
+  class LpmRewPurchCcrbTxDetailsResult
     attr_accessor :reward
 
     # Fulfilled quantity.
@@ -42,10 +42,10 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'reward' => :'LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsResultReward',
+        :'reward' => :'LpmRewPurchCcrbTxDetailsResultReward',
         :'quantity' => :'Float',
-        :'material' => :'LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsResultMaterial',
-        :'digital' => :'LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsResultDigital'
+        :'material' => :'LpmRewPurchCcrbTxDetailsResultMaterial',
+        :'digital' => :'LpmRewPurchCcrbTxDetailsResultDigital'
       }
     end
 

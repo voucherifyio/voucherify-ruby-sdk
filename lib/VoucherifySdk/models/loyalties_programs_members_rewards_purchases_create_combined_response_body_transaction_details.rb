@@ -47,10 +47,10 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'reason' => :'String',
-        :'rejection' => :'LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsRejection',
+        :'rejection' => :'LpmRewPurchCcrbTxDetailsRejection',
         :'metadata' => :'Hash<String, Object>',
-        :'points' => :'LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsPoints',
-        :'result' => :'LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsResult'
+        :'points' => :'LpmRewPurchCcrbTxDetailsPoints',
+        :'result' => :'LpmRewPurchCcrbTxDetailsResult'
       }
     end
 

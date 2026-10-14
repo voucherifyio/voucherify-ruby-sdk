@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransactionDetailsRejection
+  class LpmOrdPayCcrbTxDetailsRejection
     # Machine-readable rejection reason. Order-side: `ORDER_NOT_FOUND`, `PAYMENT_EXCEEDS_ORDER_TOTAL_AMOUNT`. Card-side (when the linked card transaction fails first): `NOT_ENOUGH_BALANCE`, `GLOBAL_SPENDING_LIMIT_EXCEEDED`, `TRANSACTION_SPENDING_LIMIT_EXCEEDED`.
     attr_accessor :reason
 
@@ -37,7 +37,7 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'reason' => :'String',
-        :'details' => :'LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransactionDetailsRejectionDetails'
+        :'details' => :'LpmOrdPayCcrbTxDetailsRejectionDetails'
       }
     end
 

@@ -14,15 +14,12 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsResultMaterial
-    # Material reward type.
+  class LpmRewPurchCcrbTxDetailsResultReward
+    # Reward identifier (format `lrew_...`).
+    attr_accessor :id
+
+    # Reward type.
     attr_accessor :type
-
-    # Product payload (present when `type` is `PRODUCT`).
-    attr_accessor :product
-
-    # SKU payload (present when `type` is `SKU`).
-    attr_accessor :sku
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -49,9 +46,8 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'product' => :'product',
-        :'sku' => :'sku'
+        :'id' => :'id',
+        :'type' => :'type'
       }
     end
 
@@ -63,18 +59,16 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'product' => :'Hash<String, Object>',
-        :'sku' => :'Hash<String, Object>'
+        :'id' => :'String',
+        :'type' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'type',
-        :'product',
-        :'sku'
+        :'id',
+        :'type'
       ])
     end
 
@@ -86,20 +80,12 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
       if attributes.key?(:'type')
         self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'product')
-        if (value = attributes[:'product']).is_a?(Hash)
-          self.product = value
-        end
-      end
-
-      if attributes.key?(:'sku')
-        if (value = attributes[:'sku']).is_a?(Hash)
-          self.sku = value
-        end
       end
     end
 
@@ -115,7 +101,7 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["PRODUCT", "SKU"])
+      type_validator = EnumAttributeValidator.new('String', ["MATERIAL", "DIGITAL"])
       return false unless type_validator.valid?(@type)
       true
     end
@@ -125,9 +111,8 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          product == o.product &&
-          sku == o.sku
+          id == o.id &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -139,7 +124,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, product, sku].hash
+      [id, type].hash
     end
 
     # Builds the object from hash

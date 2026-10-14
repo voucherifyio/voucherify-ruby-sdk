@@ -1,4 +1,4 @@
-# VoucherifySdk::LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransactionDetailsSpendingCap
+# VoucherifySdk::LpmOrdPayCcrbTxDetailsSpendingCap
 
 ## Properties
 

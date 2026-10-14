@@ -14,47 +14,14 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsResultDigital
-    # Digital reward type.
-    attr_accessor :type
-
-    # Fulfilled discount coupons (present when `type` is `DISCOUNT_COUPONS`).
-    attr_accessor :discount_coupons
-
-    # Fulfilled gift vouchers (present when `type` is `GIFT_VOUCHERS`).
-    attr_accessor :gift_vouchers
-
-    attr_accessor :loyalty_card_points
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+  class LpmRewPurchCcrbTxDetailsPoints
+    # Total number of points.
+    attr_accessor :total
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'discount_coupons' => :'discount_coupons',
-        :'gift_vouchers' => :'gift_vouchers',
-        :'loyalty_card_points' => :'loyalty_card_points'
+        :'total' => :'total'
       }
     end
 
@@ -66,20 +33,14 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'discount_coupons' => :'Array<RewardPurchaseDigitalCoupon>',
-        :'gift_vouchers' => :'Array<RewardPurchaseDigitalGiftVoucher>',
-        :'loyalty_card_points' => :'LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsResultDigitalLoyaltyCardPoints'
+        :'total' => :'Float'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'type',
-        :'discount_coupons',
-        :'gift_vouchers',
-        :'loyalty_card_points'
+        :'total'
       ])
     end
 
@@ -91,24 +52,8 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'discount_coupons')
-        if (value = attributes[:'discount_coupons']).is_a?(Array)
-          self.discount_coupons = value
-        end
-      end
-
-      if attributes.key?(:'gift_vouchers')
-        if (value = attributes[:'gift_vouchers']).is_a?(Array)
-          self.gift_vouchers = value
-        end
-      end
-
-      if attributes.key?(:'loyalty_card_points')
-        self.loyalty_card_points = attributes[:'loyalty_card_points']
+      if attributes.key?(:'total')
+        self.total = attributes[:'total']
       end
     end
 
@@ -124,8 +69,6 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["DISCOUNT_COUPONS", "GIFT_VOUCHERS", "LOYALTY_CARD_POINTS"])
-      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -134,10 +77,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          discount_coupons == o.discount_coupons &&
-          gift_vouchers == o.gift_vouchers &&
-          loyalty_card_points == o.loyalty_card_points
+          total == o.total
     end
 
     # @see the `==` method
@@ -149,7 +89,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, discount_coupons, gift_vouchers, loyalty_card_points].hash
+      [total].hash
     end
 
     # Builds the object from hash

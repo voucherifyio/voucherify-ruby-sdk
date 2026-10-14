@@ -14,14 +14,22 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsPoints
-    # Total number of points.
-    attr_accessor :total
+  class LpmOrdPayCcrbTxDetailsRejectionDetails
+    # Spending cap type that was exceeded.
+    attr_accessor :type
+
+    # Configured spending limit.
+    attr_accessor :limit
+
+    # Projected total spendings that exceeded the limit. Present for `GLOBAL_SPENDING_LIMIT_EXCEEDED`.
+    attr_accessor :spendings
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'total' => :'total'
+        :'type' => :'type',
+        :'limit' => :'limit',
+        :'spendings' => :'spendings'
       }
     end
 
@@ -33,14 +41,18 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'total' => :'Float'
+        :'type' => :'String',
+        :'limit' => :'Float',
+        :'spendings' => :'Float'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'total'
+        :'type',
+        :'limit',
+        :'spendings'
       ])
     end
 
@@ -52,8 +64,16 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'total')
-        self.total = attributes[:'total']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'limit')
+        self.limit = attributes[:'limit']
+      end
+
+      if attributes.key?(:'spendings')
+        self.spendings = attributes[:'spendings']
       end
     end
 
@@ -77,7 +97,9 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          total == o.total
+          type == o.type &&
+          limit == o.limit &&
+          spendings == o.spendings
     end
 
     # @see the `==` method
@@ -89,7 +111,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total].hash
+      [type, limit, spendings].hash
     end
 
     # Builds the object from hash

@@ -14,18 +14,44 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsRejection
-    # Machine-readable rejection reason.
-    attr_accessor :reason
+  class LpmOrdPayCcrbTxDetailsSpendingCap
+    # Identifies which cap limited the payment.
+    attr_accessor :type
 
-    # Additional structured context about the rejection. Fields depend on the rejection reason.
-    attr_accessor :details
+    # Whether `value` is points or an amount.
+    attr_accessor :unit
+
+    # Cap value in `unit`.
+    attr_accessor :value
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'reason' => :'reason',
-        :'details' => :'details'
+        :'type' => :'type',
+        :'unit' => :'unit',
+        :'value' => :'value'
       }
     end
 
@@ -37,16 +63,18 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'reason' => :'String',
-        :'details' => :'Hash<String, Object>'
+        :'type' => :'String',
+        :'unit' => :'String',
+        :'value' => :'Float'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'reason',
-        :'details'
+        :'type',
+        :'unit',
+        :'value'
       ])
     end
 
@@ -58,14 +86,16 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'reason')
-        self.reason = attributes[:'reason']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'details')
-        if (value = attributes[:'details']).is_a?(Hash)
-          self.details = value
-        end
+      if attributes.key?(:'unit')
+        self.unit = attributes[:'unit']
+      end
+
+      if attributes.key?(:'value')
+        self.value = attributes[:'value']
       end
     end
 
@@ -81,6 +111,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      type_validator = EnumAttributeValidator.new('String', ["CARD_SPENDING_GLOBAL_SPENDING_BASED_LIMIT", "CARD_SPENDING_GLOBAL_TIME_BASED_LIMIT", "CARD_SPENDING_TRANSACTIONS_LIMIT", "REQUEST_PAYMENT_LIMIT", "ORDER_TOTAL_AMOUNT", "CARD_BALANCE_POINTS"])
+      return false unless type_validator.valid?(@type)
+      unit_validator = EnumAttributeValidator.new('String', ["POINTS", "AMOUNT"])
+      return false unless unit_validator.valid?(@unit)
       true
     end
 
@@ -89,8 +123,9 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          reason == o.reason &&
-          details == o.details
+          type == o.type &&
+          unit == o.unit &&
+          value == o.value
     end
 
     # @see the `==` method
@@ -102,7 +137,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [reason, details].hash
+      [type, unit, value].hash
     end
 
     # Builds the object from hash

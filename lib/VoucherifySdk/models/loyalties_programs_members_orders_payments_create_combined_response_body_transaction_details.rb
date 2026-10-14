@@ -46,10 +46,10 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'reason' => :'String',
-        :'rejection' => :'LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransactionDetailsRejection',
-        :'metadata' => :'LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransactionDetailsMetadata',
+        :'rejection' => :'LpmOrdPayCcrbTxDetailsRejection',
+        :'metadata' => :'LpmOrdPayCcrbTxDetailsMetadata',
         :'payment' => :'OrderPaymentPaymentDetails',
-        :'spending_cap' => :'LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransactionDetailsSpendingCap'
+        :'spending_cap' => :'LpmOrdPayCcrbTxDetailsSpendingCap'
       }
     end
 

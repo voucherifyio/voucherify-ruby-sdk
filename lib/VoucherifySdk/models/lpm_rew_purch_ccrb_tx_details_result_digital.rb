@@ -14,22 +14,47 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsResultDigitalLoyaltyCardPoints
-    # Number of points credited to the target loyalty card.
-    attr_accessor :points
+  class LpmRewPurchCcrbTxDetailsResultDigital
+    # Digital reward type.
+    attr_accessor :type
 
-    # Target card definition identifier (format `lcdef_...`).
-    attr_accessor :card_definition_id
+    # Fulfilled discount coupons (present when `type` is `DISCOUNT_COUPONS`).
+    attr_accessor :discount_coupons
 
-    # Target loyalty card identifier (format `lcrd_...`).
-    attr_accessor :card_id
+    # Fulfilled gift vouchers (present when `type` is `GIFT_VOUCHERS`).
+    attr_accessor :gift_vouchers
+
+    attr_accessor :loyalty_card_points
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'points' => :'points',
-        :'card_definition_id' => :'card_definition_id',
-        :'card_id' => :'card_id'
+        :'type' => :'type',
+        :'discount_coupons' => :'discount_coupons',
+        :'gift_vouchers' => :'gift_vouchers',
+        :'loyalty_card_points' => :'loyalty_card_points'
       }
     end
 
@@ -41,18 +66,20 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'points' => :'Float',
-        :'card_definition_id' => :'String',
-        :'card_id' => :'String'
+        :'type' => :'String',
+        :'discount_coupons' => :'Array<RewardPurchaseDigitalCoupon>',
+        :'gift_vouchers' => :'Array<RewardPurchaseDigitalGiftVoucher>',
+        :'loyalty_card_points' => :'LpmRewPurchCcrbTxDetailsResultDigLcPoints'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'points',
-        :'card_definition_id',
-        :'card_id'
+        :'type',
+        :'discount_coupons',
+        :'gift_vouchers',
+        :'loyalty_card_points'
       ])
     end
 
@@ -64,16 +91,24 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'points')
-        self.points = attributes[:'points']
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'card_definition_id')
-        self.card_definition_id = attributes[:'card_definition_id']
+      if attributes.key?(:'discount_coupons')
+        if (value = attributes[:'discount_coupons']).is_a?(Array)
+          self.discount_coupons = value
+        end
       end
 
-      if attributes.key?(:'card_id')
-        self.card_id = attributes[:'card_id']
+      if attributes.key?(:'gift_vouchers')
+        if (value = attributes[:'gift_vouchers']).is_a?(Array)
+          self.gift_vouchers = value
+        end
+      end
+
+      if attributes.key?(:'loyalty_card_points')
+        self.loyalty_card_points = attributes[:'loyalty_card_points']
       end
     end
 
@@ -89,6 +124,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      type_validator = EnumAttributeValidator.new('String', ["DISCOUNT_COUPONS", "GIFT_VOUCHERS", "LOYALTY_CARD_POINTS"])
+      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -97,9 +134,10 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          points == o.points &&
-          card_definition_id == o.card_definition_id &&
-          card_id == o.card_id
+          type == o.type &&
+          discount_coupons == o.discount_coupons &&
+          gift_vouchers == o.gift_vouchers &&
+          loyalty_card_points == o.loyalty_card_points
     end
 
     # @see the `==` method
@@ -111,7 +149,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [points, card_definition_id, card_id].hash
+      [type, discount_coupons, gift_vouchers, loyalty_card_points].hash
     end
 
     # Builds the object from hash

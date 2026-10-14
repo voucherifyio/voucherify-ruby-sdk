@@ -1,4 +1,4 @@
-# VoucherifySdk::LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBodyTransactionDetailsResultReward
+# VoucherifySdk::LpmRewPurchCcrbTxDetailsResultReward
 
 ## Properties
 

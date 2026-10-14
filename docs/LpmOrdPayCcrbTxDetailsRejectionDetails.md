@@ -1,4 +1,4 @@
-# VoucherifySdk::LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransactionDetailsRejectionDetails
+# VoucherifySdk::LpmOrdPayCcrbTxDetailsRejectionDetails
 
 ## Properties
 

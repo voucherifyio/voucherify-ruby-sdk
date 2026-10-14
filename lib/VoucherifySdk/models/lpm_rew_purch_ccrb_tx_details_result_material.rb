@@ -14,15 +14,15 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransactionDetailsSpendingCap
-    # Identifies which cap limited the payment.
+  class LpmRewPurchCcrbTxDetailsResultMaterial
+    # Material reward type.
     attr_accessor :type
 
-    # Whether `value` is points or an amount.
-    attr_accessor :unit
+    # Product payload (present when `type` is `PRODUCT`).
+    attr_accessor :product
 
-    # Cap value in `unit`.
-    attr_accessor :value
+    # SKU payload (present when `type` is `SKU`).
+    attr_accessor :sku
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -50,8 +50,8 @@ module VoucherifySdk
     def self.attribute_map
       {
         :'type' => :'type',
-        :'unit' => :'unit',
-        :'value' => :'value'
+        :'product' => :'product',
+        :'sku' => :'sku'
       }
     end
 
@@ -64,8 +64,8 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'type' => :'String',
-        :'unit' => :'String',
-        :'value' => :'Float'
+        :'product' => :'Hash<String, Object>',
+        :'sku' => :'Hash<String, Object>'
       }
     end
 
@@ -73,8 +73,8 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'type',
-        :'unit',
-        :'value'
+        :'product',
+        :'sku'
       ])
     end
 
@@ -90,12 +90,16 @@ module VoucherifySdk
         self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'unit')
-        self.unit = attributes[:'unit']
+      if attributes.key?(:'product')
+        if (value = attributes[:'product']).is_a?(Hash)
+          self.product = value
+        end
       end
 
-      if attributes.key?(:'value')
-        self.value = attributes[:'value']
+      if attributes.key?(:'sku')
+        if (value = attributes[:'sku']).is_a?(Hash)
+          self.sku = value
+        end
       end
     end
 
@@ -111,10 +115,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["CARD_SPENDING_GLOBAL_SPENDING_BASED_LIMIT", "CARD_SPENDING_GLOBAL_TIME_BASED_LIMIT", "CARD_SPENDING_TRANSACTIONS_LIMIT", "REQUEST_PAYMENT_LIMIT", "ORDER_TOTAL_AMOUNT", "CARD_BALANCE_POINTS"])
+      type_validator = EnumAttributeValidator.new('String', ["PRODUCT", "SKU"])
       return false unless type_validator.valid?(@type)
-      unit_validator = EnumAttributeValidator.new('String', ["POINTS", "AMOUNT"])
-      return false unless unit_validator.valid?(@unit)
       true
     end
 
@@ -124,8 +126,8 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           type == o.type &&
-          unit == o.unit &&
-          value == o.value
+          product == o.product &&
+          sku == o.sku
     end
 
     # @see the `==` method
@@ -137,7 +139,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, unit, value].hash
+      [type, product, sku].hash
     end
 
     # Builds the object from hash

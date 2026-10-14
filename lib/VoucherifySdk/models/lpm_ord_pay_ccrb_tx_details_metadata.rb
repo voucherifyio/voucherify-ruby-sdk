@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBodyTransactionDetailsMetadata
+  class LpmOrdPayCcrbTxDetailsMetadata
     # Maximum amount limit applied to the payment (if any).
     attr_accessor :amount_limit
 
