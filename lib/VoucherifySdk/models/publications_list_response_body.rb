@@ -22,7 +22,7 @@ module VoucherifySdk
     # Identifies the name of the attribute that contains the array of publications.
     attr_accessor :data_ref
 
-    # Response schema model for publishing vouchers to a specific customer.
+    # Contains array of publication objects, voucher object will be simplified.
     attr_accessor :publications
 
     # Total number of publications.

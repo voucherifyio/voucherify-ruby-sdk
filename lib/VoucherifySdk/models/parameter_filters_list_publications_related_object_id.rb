@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Filter publications by related object id.
+  # Filter publications by related object ID.
   class ParameterFiltersListPublicationsRelatedObjectId
     attr_accessor :conditions
 
