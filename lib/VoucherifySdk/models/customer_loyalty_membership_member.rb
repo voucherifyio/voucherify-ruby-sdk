@@ -19,7 +19,7 @@ module VoucherifySdk
     # Identifies the Loyalty v2 program member.
     attr_accessor :id
 
-    # Member status. List responses include only ACTIVE memberships. INACTIVE and DELETED remain so existing SDK callers keep compiling.
+    # Member status. The value is `ACTIVE`.
     attr_accessor :status
 
     # Timestamp representing when the member was created. The value is shown in the ISO 8601 format.
@@ -99,6 +99,8 @@ module VoucherifySdk
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      else
+        self.status = 'ACTIVE'
       end
 
       if attributes.key?(:'created_at')
@@ -128,7 +130,7 @@ module VoucherifySdk
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@id.nil? && @id !~ Regexp.new(/^lmbr_[a-f0-9]+$/)
-      status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "INACTIVE", "DELETED"])
+      status_validator = EnumAttributeValidator.new('String', ["ACTIVE"])
       return false unless status_validator.valid?(@status)
       true
     end
