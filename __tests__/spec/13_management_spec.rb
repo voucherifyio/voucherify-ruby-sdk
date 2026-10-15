@@ -14,7 +14,12 @@ RSpec.describe 'Management API', :order => :defined do
 
   it 'list projects', :order => :first do
     projects_response = @management_api_instance.list_projects()
-    project_from_response = projects_response.data&.first
+    project_from_response =
+      if ENV['PROJECT_ID'].to_s != ''
+        projects_response.data&.find { |project| project.id == ENV['PROJECT_ID'] }
+      end
+    project_from_response ||= projects_response.data&.find { |project| project.cluster_id == 'dev2' }
+    project_from_response ||= projects_response.data&.first
 
     $management_project_id = project_from_response&.id
 
