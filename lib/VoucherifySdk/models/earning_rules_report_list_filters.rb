@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Filters for program earning-rules reports.
   class EarningRulesReportListFilters
-    # Logical junction between the field filters. Defaults to AND behavior.
+    # Joins the field filters. Allowed values are `AND` and `OR`. Defaults to `AND`.
     attr_accessor :junction
 
     attr_accessor :earning_rule_id

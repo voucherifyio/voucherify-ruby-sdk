@@ -14,22 +14,14 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  class PointsEarningsReportFilterCardDefinitionIdConditionsConditions
-    attr_accessor :is
-
-    attr_accessor :is_not
-
-    attr_accessor :_in
-
-    attr_accessor :not_in
+  # ID filter conditions for card definition IDs. Values must match pattern `^lcdef_[a-f0-9]+$`. `$is`/`$is_not` accept a single value (string or 1-element array); `$in`/`$not_in` accept a string or an array of 1-100 values.
+  class ReportCardDefinitionIdFilterConditions
+    attr_accessor :conditions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'is' => :'$is',
-        :'is_not' => :'$is_not',
-        :'_in' => :'$in',
-        :'not_in' => :'$not_in'
+        :'conditions' => :'conditions'
       }
     end
 
@@ -41,20 +33,14 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'is' => :'Object',
-        :'is_not' => :'Object',
-        :'_in' => :'Object',
-        :'not_in' => :'Object'
+        :'conditions' => :'ReportCardDefinitionIdFilterConditionsConditions'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'is',
-        :'is_not',
-        :'_in',
-        :'not_in'
+        :'conditions'
       ])
     end
 
@@ -66,20 +52,8 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'is')
-        self.is = attributes[:'is']
-      end
-
-      if attributes.key?(:'is_not')
-        self.is_not = attributes[:'is_not']
-      end
-
-      if attributes.key?(:'_in')
-        self._in = attributes[:'_in']
-      end
-
-      if attributes.key?(:'not_in')
-        self.not_in = attributes[:'not_in']
+      if attributes.key?(:'conditions')
+        self.conditions = attributes[:'conditions']
       end
     end
 
@@ -103,10 +77,7 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          is == o.is &&
-          is_not == o.is_not &&
-          _in == o._in &&
-          not_in == o.not_in
+          conditions == o.conditions
     end
 
     # @see the `==` method
@@ -118,7 +89,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [is, is_not, _in, not_in].hash
+      [conditions].hash
     end
 
     # Builds the object from hash

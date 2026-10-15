@@ -1,4 +1,4 @@
-# VoucherifySdk::PointsEarningsReportFilterCardDefinitionIdConditionsConditions
+# VoucherifySdk::ReportCardDefinitionIdFilterConditionsConditions
 
 ## Properties
 

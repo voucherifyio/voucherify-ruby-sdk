@@ -640,6 +640,7 @@ module VoucherifySdk
     # @option opts [Time] :updated_at_after Filter customers by date customer was updated last time.
     # @option opts [ParameterOrderListCustomers] :order This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :starting_after A cursor for pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.  
+    # @option opts [Object] :filters Filters customers by field conditions. Read [Advanced filters for fetching resources](/api-reference/listing#advanced-filters-for-fetching-resources) for examples.
     # @return [CustomersListResponseBody]
     def list_customers(opts = {})
       data, _status_code, _headers = list_customers_with_http_info(opts)
@@ -661,6 +662,7 @@ module VoucherifySdk
     # @option opts [Time] :updated_at_after Filter customers by date customer was updated last time.
     # @option opts [ParameterOrderListCustomers] :order This is a property that controls the sorting direction of the results. Sort the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :starting_after A cursor for pagination. This is a date-time value that defines your place in the list based on created_at property from the customer object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.  
+    # @option opts [Object] :filters Filters customers by field conditions. Read [Advanced filters for fetching resources](/api-reference/listing#advanced-filters-for-fetching-resources) for examples.
     # @return [Array<(CustomersListResponseBody, Integer, Hash)>] CustomersListResponseBody data, response status code and response headers
     private def list_customers_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -683,6 +685,7 @@ module VoucherifySdk
       query_params[:'updated_at[after]'] = opts[:'updated_at_after'] if !opts[:'updated_at_after'].nil?
       query_params[:'order'] = opts[:'order'] if !opts[:'order'].nil?
       query_params[:'starting_after'] = opts[:'starting_after'] if !opts[:'starting_after'].nil?
+      query_params[:'filters'] = opts[:'filters'] if !opts[:'filters'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

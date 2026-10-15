@@ -16,24 +16,27 @@ require 'time'
 module VoucherifySdk
   # A full loyalty card snapshot.
   class Card
+    # Identifies the card.
+    attr_accessor :id
+
+    # Identifies the card definition.
+    attr_accessor :card_definition_id
+
     # Card type. Currently only `INDIVIDUAL` is supported.
     attr_accessor :card_type
+
+    # Human-readable card code. Card code generation is asynchronous - this field is `null` right after member creation and is populated shortly after, once the background code generation completes.
+    attr_accessor :code
 
     attr_accessor :lifetime_bucket
 
     attr_accessor :balance
 
-    # Identifies the card.
-    attr_accessor :id
+    # Object type. Always `card`.
+    attr_accessor :object
 
     # Identifies the loyalty program.
     attr_accessor :program_id
-
-    # Identifies the card definition.
-    attr_accessor :card_definition_id
-
-    # Human-readable card code. `null` until asynchronous code generation finishes.
-    attr_accessor :code
 
     # Identifies the customer linked to the card.
     attr_accessor :customer_id
@@ -46,9 +49,6 @@ module VoucherifySdk
 
     # Records the last update (ISO 8601). `null` if the card has never been updated.
     attr_accessor :updated_at
-
-    # Object type. Always `card`.
-    attr_accessor :object
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -75,18 +75,18 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'id' => :'id',
+        :'card_definition_id' => :'card_definition_id',
         :'card_type' => :'card_type',
+        :'code' => :'code',
         :'lifetime_bucket' => :'lifetime_bucket',
         :'balance' => :'balance',
-        :'id' => :'id',
+        :'object' => :'object',
         :'program_id' => :'program_id',
-        :'card_definition_id' => :'card_definition_id',
-        :'code' => :'code',
         :'customer_id' => :'customer_id',
         :'member_id' => :'member_id',
         :'created_at' => :'created_at',
-        :'updated_at' => :'updated_at',
-        :'object' => :'object'
+        :'updated_at' => :'updated_at'
       }
     end
 
@@ -98,34 +98,34 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'id' => :'String',
+        :'card_definition_id' => :'String',
         :'card_type' => :'String',
+        :'code' => :'String',
         :'lifetime_bucket' => :'CardLifetimeBucket',
         :'balance' => :'CardBalance',
-        :'id' => :'String',
+        :'object' => :'String',
         :'program_id' => :'String',
-        :'card_definition_id' => :'String',
-        :'code' => :'String',
         :'customer_id' => :'String',
         :'member_id' => :'String',
         :'created_at' => :'Time',
-        :'updated_at' => :'Time',
-        :'object' => :'String'
+        :'updated_at' => :'Time'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'card_type',
         :'id',
-        :'program_id',
         :'card_definition_id',
+        :'card_type',
         :'code',
+        :'object',
+        :'program_id',
         :'customer_id',
         :'member_id',
         :'created_at',
-        :'updated_at',
-        :'object'
+        :'updated_at'
       ])
     end
 
@@ -137,10 +137,22 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'card_definition_id')
+        self.card_definition_id = attributes[:'card_definition_id']
+      end
+
       if attributes.key?(:'card_type')
         self.card_type = attributes[:'card_type']
       else
         self.card_type = 'INDIVIDUAL'
+      end
+
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
       end
 
       if attributes.key?(:'lifetime_bucket')
@@ -151,20 +163,14 @@ module VoucherifySdk
         self.balance = attributes[:'balance']
       end
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'object')
+        self.object = attributes[:'object']
+      else
+        self.object = 'card'
       end
 
       if attributes.key?(:'program_id')
         self.program_id = attributes[:'program_id']
-      end
-
-      if attributes.key?(:'card_definition_id')
-        self.card_definition_id = attributes[:'card_definition_id']
-      end
-
-      if attributes.key?(:'code')
-        self.code = attributes[:'code']
       end
 
       if attributes.key?(:'customer_id')
@@ -182,12 +188,6 @@ module VoucherifySdk
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
       end
-
-      if attributes.key?(:'object')
-        self.object = attributes[:'object']
-      else
-        self.object = 'card'
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -200,14 +200,14 @@ module VoucherifySdk
         invalid_properties.push("invalid value for \"id\", must conform to the pattern #{pattern}.")
       end
 
-      pattern = Regexp.new(/^lprg_[a-f0-9]+$/)
-      if !@program_id.nil? && @program_id !~ pattern
-        invalid_properties.push("invalid value for \"program_id\", must conform to the pattern #{pattern}.")
-      end
-
       pattern = Regexp.new(/^lcdef_[a-f0-9]+$/)
       if !@card_definition_id.nil? && @card_definition_id !~ pattern
         invalid_properties.push("invalid value for \"card_definition_id\", must conform to the pattern #{pattern}.")
+      end
+
+      pattern = Regexp.new(/^lprg_[a-f0-9]+$/)
+      if !@program_id.nil? && @program_id !~ pattern
+        invalid_properties.push("invalid value for \"program_id\", must conform to the pattern #{pattern}.")
       end
 
       pattern = Regexp.new(/^cust_[a-zA-Z0-9]+/)
@@ -227,15 +227,15 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@id.nil? && @id !~ Regexp.new(/^lcrd_[a-f0-9]+$/)
+      return false if !@card_definition_id.nil? && @card_definition_id !~ Regexp.new(/^lcdef_[a-f0-9]+$/)
       card_type_validator = EnumAttributeValidator.new('String', ["INDIVIDUAL"])
       return false unless card_type_validator.valid?(@card_type)
-      return false if !@id.nil? && @id !~ Regexp.new(/^lcrd_[a-f0-9]+$/)
-      return false if !@program_id.nil? && @program_id !~ Regexp.new(/^lprg_[a-f0-9]+$/)
-      return false if !@card_definition_id.nil? && @card_definition_id !~ Regexp.new(/^lcdef_[a-f0-9]+$/)
-      return false if !@customer_id.nil? && @customer_id !~ Regexp.new(/^cust_[a-zA-Z0-9]+/)
-      return false if !@member_id.nil? && @member_id !~ Regexp.new(/^lmbr_[a-f0-9]+$/)
       object_validator = EnumAttributeValidator.new('String', ["card"])
       return false unless object_validator.valid?(@object)
+      return false if !@program_id.nil? && @program_id !~ Regexp.new(/^lprg_[a-f0-9]+$/)
+      return false if !@customer_id.nil? && @customer_id !~ Regexp.new(/^cust_[a-zA-Z0-9]+/)
+      return false if !@member_id.nil? && @member_id !~ Regexp.new(/^lmbr_[a-f0-9]+$/)
       true
     end
 
@@ -244,18 +244,18 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          id == o.id &&
+          card_definition_id == o.card_definition_id &&
           card_type == o.card_type &&
+          code == o.code &&
           lifetime_bucket == o.lifetime_bucket &&
           balance == o.balance &&
-          id == o.id &&
+          object == o.object &&
           program_id == o.program_id &&
-          card_definition_id == o.card_definition_id &&
-          code == o.code &&
           customer_id == o.customer_id &&
           member_id == o.member_id &&
           created_at == o.created_at &&
-          updated_at == o.updated_at &&
-          object == o.object
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -267,7 +267,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [card_type, lifetime_bucket, balance, id, program_id, card_definition_id, code, customer_id, member_id, created_at, updated_at, object].hash
+      [id, card_definition_id, card_type, code, lifetime_bucket, balance, object, program_id, customer_id, member_id, created_at, updated_at].hash
     end
 
     # Builds the object from hash

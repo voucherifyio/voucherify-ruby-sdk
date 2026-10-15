@@ -21,7 +21,7 @@ module VoucherifySdk
     end
     # Get benefit
     # Returns a single benefit by its ID.
-    # @param benefit_id [String] Unique benefit ID, prefixed with lben_.
+    # @param benefit_id [String] Identifies the benefit. Format lben_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesBenefitsGetResponseBody]
     def get_benefit(benefit_id, opts = {})
@@ -31,7 +31,7 @@ module VoucherifySdk
 
     # Get benefit
     # Returns a single benefit by its ID.
-    # @param benefit_id [String] Unique benefit ID, prefixed with lben_.
+    # @param benefit_id [String] Identifies the benefit. Format lben_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesBenefitsGetResponseBody, Integer, Hash)>] V2LoyaltiesBenefitsGetResponseBody data, response status code and response headers
     private def get_benefit_with_http_info(benefit_id, opts = {})

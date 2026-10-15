@@ -34,7 +34,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2RewardsApi.new
-reward_id = 'reward_id_example' # String | Unique reward identifier, prefixed with lrew_.
+reward_id = 'reward_id_example' # String | Identifies the reward. Format lrew_[a-f0-9]+.
 
 begin
   # Get reward by ID
@@ -49,7 +49,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **reward_id** | **String** | Unique reward identifier, prefixed with lrew_. |  |
+| **reward_id** | **String** | Identifies the reward. Format lrew_[a-f0-9]+. |  |
 
 ### Return type
 

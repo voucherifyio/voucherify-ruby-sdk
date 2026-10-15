@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Enum filter conditions for card activity types. At least one condition is required.
+  # Enum conditions. At least one condition is required.
   class LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFiltersType
     attr_accessor :conditions
 

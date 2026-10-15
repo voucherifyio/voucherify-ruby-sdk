@@ -28,6 +28,9 @@ module VoucherifySdk
     # ID of the member owning the card.
     attr_accessor :member_id
 
+    # Card type. Currently, only `INDIVIDUAL` is supported.
+    attr_accessor :card_type
+
     # Timestamp when the bucket was created (ISO 8601).
     attr_accessor :created_at
 
@@ -36,9 +39,6 @@ module VoucherifySdk
 
     # Unique pending point bucket ID.
     attr_accessor :id
-
-    # Card type.
-    attr_accessor :card_type
 
     attr_accessor :points
 
@@ -83,10 +83,10 @@ module VoucherifySdk
         :'card_definition_id' => :'card_definition_id',
         :'program_id' => :'program_id',
         :'member_id' => :'member_id',
+        :'card_type' => :'card_type',
         :'created_at' => :'created_at',
         :'updated_at' => :'updated_at',
         :'id' => :'id',
-        :'card_type' => :'card_type',
         :'points' => :'points',
         :'date' => :'date',
         :'type' => :'type',
@@ -107,10 +107,10 @@ module VoucherifySdk
         :'card_definition_id' => :'String',
         :'program_id' => :'String',
         :'member_id' => :'String',
+        :'card_type' => :'String',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
         :'id' => :'String',
-        :'card_type' => :'String',
         :'points' => :'CardPendingPointsBucketPoints',
         :'date' => :'Date',
         :'type' => :'String',
@@ -126,10 +126,10 @@ module VoucherifySdk
         :'card_definition_id',
         :'program_id',
         :'member_id',
+        :'card_type',
         :'created_at',
         :'updated_at',
         :'id',
-        :'card_type',
         :'points',
         :'date',
         :'type',
@@ -162,6 +162,12 @@ module VoucherifySdk
         self.member_id = attributes[:'member_id']
       end
 
+      if attributes.key?(:'card_type')
+        self.card_type = attributes[:'card_type']
+      else
+        self.card_type = 'INDIVIDUAL'
+      end
+
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
       end
@@ -172,12 +178,6 @@ module VoucherifySdk
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'card_type')
-        self.card_type = attributes[:'card_type']
-      else
-        self.card_type = 'INDIVIDUAL'
       end
 
       if attributes.key?(:'points')
@@ -244,9 +244,9 @@ module VoucherifySdk
       return false if !@card_definition_id.nil? && @card_definition_id !~ Regexp.new(/^lcdef_[a-f0-9]+$/)
       return false if !@program_id.nil? && @program_id !~ Regexp.new(/^lprg_[a-f0-9]+$/)
       return false if !@member_id.nil? && @member_id !~ Regexp.new(/^lmbr_[a-f0-9]+$/)
-      return false if !@id.nil? && @id !~ Regexp.new(/^lcppb_[a-f0-9]+$/)
       card_type_validator = EnumAttributeValidator.new('String', ["INDIVIDUAL"])
       return false unless card_type_validator.valid?(@card_type)
+      return false if !@id.nil? && @id !~ Regexp.new(/^lcppb_[a-f0-9]+$/)
       type_validator = EnumAttributeValidator.new('String', ["PERIOD_BASED", "FIXED_DATES", "EVENT_BASED"])
       return false unless type_validator.valid?(@type)
       status_validator = EnumAttributeValidator.new('String', ["PENDING", "ACTIVATED", "CANCELED", "DELETED"])
@@ -265,10 +265,10 @@ module VoucherifySdk
           card_definition_id == o.card_definition_id &&
           program_id == o.program_id &&
           member_id == o.member_id &&
+          card_type == o.card_type &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
           id == o.id &&
-          card_type == o.card_type &&
           points == o.points &&
           date == o.date &&
           type == o.type &&
@@ -285,7 +285,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [card_id, card_definition_id, program_id, member_id, created_at, updated_at, id, card_type, points, date, type, status, object].hash
+      [card_id, card_definition_id, program_id, member_id, card_type, created_at, updated_at, id, points, date, type, status, object].hash
     end
 
     # Builds the object from hash

@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Filters for program rewards spendings reports.
   class RewardsSpendingsReportListFilters
-    # Sets the logical junction between the field filters. Defaults to `AND`.
+    # Joins the field filters. Allowed values are `AND` and `OR`. Defaults to `AND`.
     attr_accessor :junction
 
     attr_accessor :reward_id
@@ -70,7 +70,7 @@ module VoucherifySdk
       {
         :'junction' => :'String',
         :'reward_id' => :'RewardsReportFilterRewardIdConditions',
-        :'card_definition_id' => :'SpendingReportFilterCardDefinitionIdConditions',
+        :'card_definition_id' => :'ReportCardDefinitionIdFilterConditions',
         :'cost_id' => :'RewardsSpendingsReportFilterCostIdConditions',
         :'spending_id' => :'RewardsSpendingsReportFilterSpendingIdConditions'
       }

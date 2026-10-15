@@ -21,10 +21,10 @@ module VoucherifySdk
     end
     # Activate pending point bucket
     # Activates a pending points bucket and creates a PENDING_POINTS_ACTIVATED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
-    # @param bucket_id [String] Pending points bucket ID (format lcppb_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+    # @param bucket_id [String] Identifies the pending points bucket. Format lcppb_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesProgramsMembersCardsPendingPointsActivateResponseBody]
     def activate_card_pending_points_bucket(program_id, member_id, card_id, bucket_id, opts = {})
@@ -34,10 +34,10 @@ module VoucherifySdk
 
     # Activate pending point bucket
     # Activates a pending points bucket and creates a PENDING_POINTS_ACTIVATED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
-    # @param bucket_id [String] Pending points bucket ID (format lcppb_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+    # @param bucket_id [String] Identifies the pending points bucket. Format lcppb_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesProgramsMembersCardsPendingPointsActivateResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersCardsPendingPointsActivateResponseBody data, response status code and response headers
     private def activate_card_pending_points_bucket_with_http_info(program_id, member_id, card_id, bucket_id, opts = {})
@@ -86,8 +86,8 @@ module VoucherifySdk
 
     # Activate program member
     # Moves an INACTIVE member to ACTIVE and sets updated_at. Records a vl.member.activated activity. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already ACTIVE.
-    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+. Required.
-    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+. Required.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesProgramsMembersActivateResponseBody]
     def activate_program_member(program_id, member_id, opts = {})
@@ -97,8 +97,8 @@ module VoucherifySdk
 
     # Activate program member
     # Moves an INACTIVE member to ACTIVE and sets updated_at. Records a vl.member.activated activity. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already ACTIVE.
-    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+. Required.
-    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+. Required.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesProgramsMembersActivateResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersActivateResponseBody data, response status code and response headers
     private def activate_program_member_with_http_info(program_id, member_id, opts = {})
@@ -147,9 +147,9 @@ module VoucherifySdk
 
     # Adjust card points
     # Manually adjusts the points balance of the members card. A positive points value creates an ADMIN_CREDIT card transaction. The expiration date comes from the member tier when that tier defines its own points expiration. Otherwise the date comes from the card definition. expiration_date is null when points dont expire. A negative points value creates an ADMIN_DEBIT card transaction. When points is 0, no transaction is created and status is NO_CHANGE. The transaction is created with status PENDING and processed asynchronously. The program and the member must be ACTIVE. The program must also be inside its validity window. Otherwise the response is 423. The response is 404 when the program or the member doesnt exist, or when the card isnt assigned to that member.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersCardsPointsAdjustRequestBody] :v2_loyalties_programs_members_cards_points_adjust_request_body 
     # @return [V2LoyaltiesProgramsMembersCardsPointsAdjustResponseBody]
@@ -160,9 +160,9 @@ module VoucherifySdk
 
     # Adjust card points
     # Manually adjusts the points balance of the members card. A positive points value creates an ADMIN_CREDIT card transaction. The expiration date comes from the member tier when that tier defines its own points expiration. Otherwise the date comes from the card definition. expiration_date is null when points dont expire. A negative points value creates an ADMIN_DEBIT card transaction. When points is 0, no transaction is created and status is NO_CHANGE. The transaction is created with status PENDING and processed asynchronously. The program and the member must be ACTIVE. The program must also be inside its validity window. Otherwise the response is 423. The response is 404 when the program or the member doesnt exist, or when the card isnt assigned to that member.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersCardsPointsAdjustRequestBody] :v2_loyalties_programs_members_cards_points_adjust_request_body 
     # @return [Array<(V2LoyaltiesProgramsMembersCardsPointsAdjustResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersCardsPointsAdjustResponseBody data, response status code and response headers
@@ -217,7 +217,7 @@ module VoucherifySdk
 
     # Batch create program members
     # Schedules creation of program members from a JSON array and returns 202 with async_action_id. The program must exist, be ACTIVE, and be inside its validity window. The body isnt checked before that response. Entries are processed in batches of 100. The raw body must be at most 10 MB. Each entry uses the same fields as [Create program member](/api-reference/programs/create-program-member). A failed entry is skipped. Its report row sets created to false and explains the failure in error. Skipped cases include an invalid customer_identification, an unknown customer, an invalid status, a duplicate customer in the batch (Duplicate customer ID), a customer who is already a member (Member already exists), metadata that doesnt match the vl_member schema, and entries past the loyalty members plan limit. Successful entries enroll the customer and create a loyalty card for each card definition on the program. Report columns are identification_type, customer_id, customer_source_id, program_id, member_id, created, and error. An empty array or a null entry fails the async action with invalid_request_payload. A body that isnt a JSON array fails it with top_level_object_should_be_an_array. Use [Get async action](/api-reference/async-actions/get-async-action) to read the status and the report. You can also open the result from Audit log, [Background tasks](/analyze/audit-logs#background-tasks).
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [Array<MemberCreate>] :member_create 
     # @return [V2LoyaltiesProgramsMembersCreateInBulkResponseBody]
@@ -228,7 +228,7 @@ module VoucherifySdk
 
     # Batch create program members
     # Schedules creation of program members from a JSON array and returns 202 with async_action_id. The program must exist, be ACTIVE, and be inside its validity window. The body isnt checked before that response. Entries are processed in batches of 100. The raw body must be at most 10 MB. Each entry uses the same fields as [Create program member](/api-reference/programs/create-program-member). A failed entry is skipped. Its report row sets created to false and explains the failure in error. Skipped cases include an invalid customer_identification, an unknown customer, an invalid status, a duplicate customer in the batch (Duplicate customer ID), a customer who is already a member (Member already exists), metadata that doesnt match the vl_member schema, and entries past the loyalty members plan limit. Successful entries enroll the customer and create a loyalty card for each card definition on the program. Report columns are identification_type, customer_id, customer_source_id, program_id, member_id, created, and error. An empty array or a null entry fails the async action with invalid_request_payload. A body that isnt a JSON array fails it with top_level_object_should_be_an_array. Use [Get async action](/api-reference/async-actions/get-async-action) to read the status and the report. You can also open the result from Audit log, [Background tasks](/analyze/audit-logs#background-tasks).
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [Array<MemberCreate>] :member_create 
     # @return [Array<(V2LoyaltiesProgramsMembersCreateInBulkResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersCreateInBulkResponseBody data, response status code and response headers
@@ -283,10 +283,10 @@ module VoucherifySdk
 
     # Cancel pending point bucket
     # Cancels a pending points bucket so its points arent activated. Creates a PENDING_POINTS_CANCELED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
-    # @param bucket_id [String] Pending points bucket ID (format lcppb_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+    # @param bucket_id [String] Identifies the pending points bucket. Format lcppb_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesProgramsMembersCardsPendingPointsCancelResponseBody]
     def cancel_card_pending_points_bucket(program_id, member_id, card_id, bucket_id, opts = {})
@@ -296,10 +296,10 @@ module VoucherifySdk
 
     # Cancel pending point bucket
     # Cancels a pending points bucket so its points arent activated. Creates a PENDING_POINTS_CANCELED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
-    # @param bucket_id [String] Pending points bucket ID (format lcppb_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+    # @param bucket_id [String] Identifies the pending points bucket. Format lcppb_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesProgramsMembersCardsPendingPointsCancelResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersCardsPendingPointsCancelResponseBody data, response status code and response headers
     private def cancel_card_pending_points_bucket_with_http_info(program_id, member_id, card_id, bucket_id, opts = {})
@@ -348,8 +348,8 @@ module VoucherifySdk
 
     # Pay for order with points
     # Pays for an order with points from the members card. The amount and points come from the card definitions pay-with-points exchange ratio, limited by the order total, the card balance, card spending caps, and the optional payment_limit. The binding cap is returned as details.spending_cap. The program and member must be ACTIVE, and the program must be inside its validity window. The card must belong to the member. The card definition must have pay-with-points enabled and an exchange-ratio formula. The order must already exist, identified by id or source_id. Modes: - TRANSACTION (default): creates a PENDING order transaction and a PENDING card transaction. Returns 202. The same order can be paid again; each call creates a new transaction. - DRY_RUN: simulates the payment and doesnt create a transaction. Returns 200 with status SIMULATED.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Identifies the program member (lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersOrdersPaymentsCreateRequestBody] :v2_loyalties_programs_members_orders_payments_create_request_body 
     # @return [LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBody]
@@ -360,8 +360,8 @@ module VoucherifySdk
 
     # Pay for order with points
     # Pays for an order with points from the members card. The amount and points come from the card definitions pay-with-points exchange ratio, limited by the order total, the card balance, card spending caps, and the optional payment_limit. The binding cap is returned as details.spending_cap. The program and member must be ACTIVE, and the program must be inside its validity window. The card must belong to the member. The card definition must have pay-with-points enabled and an exchange-ratio formula. The order must already exist, identified by id or source_id. Modes: - TRANSACTION (default): creates a PENDING order transaction and a PENDING card transaction. Returns 202. The same order can be paid again; each call creates a new transaction. - DRY_RUN: simulates the payment and doesnt create a transaction. Returns 200 with status SIMULATED.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Identifies the program member (lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersOrdersPaymentsCreateRequestBody] :v2_loyalties_programs_members_orders_payments_create_request_body 
     # @return [Array<(LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBody, Integer, Hash)>] LoyaltiesProgramsMembersOrdersPaymentsCreateCombinedResponseBody data, response status code and response headers
@@ -416,7 +416,7 @@ module VoucherifySdk
 
     # Create program member
     # Enrolls an existing customer as a member of the loyalty program and creates a loyalty card for each card definition assigned to the program. Card code generation is asynchronous, so code can be null right after creation. The program must be ACTIVE and inside its validity window, and the customer must already exist. A customer can be a member of a program only once. Identify the customer with customer_identification. status defaults to ACTIVE.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersCreateRequestBody] :v2_loyalties_programs_members_create_request_body 
     # @return [V2LoyaltiesProgramsMembersCreateResponseBody]
@@ -427,7 +427,7 @@ module VoucherifySdk
 
     # Create program member
     # Enrolls an existing customer as a member of the loyalty program and creates a loyalty card for each card definition assigned to the program. Card code generation is asynchronous, so code can be null right after creation. The program must be ACTIVE and inside its validity window, and the customer must already exist. A customer can be a member of a program only once. Identify the customer with customer_identification. status defaults to ACTIVE.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersCreateRequestBody] :v2_loyalties_programs_members_create_request_body 
     # @return [Array<(V2LoyaltiesProgramsMembersCreateResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersCreateResponseBody data, response status code and response headers
@@ -482,8 +482,8 @@ module VoucherifySdk
 
     # Deactivate program member
     # Moves an ACTIVE member to INACTIVE and sets updated_at. Records a vl.member.deactivated activity. An INACTIVE member cant earn or spend points. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already INACTIVE.
-    # @param program_id [String] Identifies the loyalty program. Unique identifier in lprg_[a-f0-9]+ format.
-    # @param member_id [String] Identifies the member. Unique identifier in lmbr_[a-f0-9]+ format.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesProgramsMembersDeactivateResponseBody]
     def deactivate_program_member(program_id, member_id, opts = {})
@@ -493,8 +493,8 @@ module VoucherifySdk
 
     # Deactivate program member
     # Moves an ACTIVE member to INACTIVE and sets updated_at. Records a vl.member.deactivated activity. An INACTIVE member cant earn or spend points. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already INACTIVE.
-    # @param program_id [String] Identifies the loyalty program. Unique identifier in lprg_[a-f0-9]+ format.
-    # @param member_id [String] Identifies the member. Unique identifier in lmbr_[a-f0-9]+ format.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesProgramsMembersDeactivateResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersDeactivateResponseBody data, response status code and response headers
     private def deactivate_program_member_with_http_info(program_id, member_id, opts = {})
@@ -543,8 +543,8 @@ module VoucherifySdk
 
     # Delete program member
     # Deletes the member and sets status to DELETED. Removes the members card assignments in this program. Returns the member without a cards array. Delete doesnt change updated_at. Records a vl.member.deleted activity. Each unassigned card also records vl.member.card.unassigned and vl.card.unassigned. When an assignment has a tier, the delete records a LEFT tier transaction with origin member_card_deleted. The same customer can join the program again. The new member gets a new ID. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. Deleting a member that is already DELETED returns 404.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesProgramsMembersDeleteResponseBody]
     def delete_program_member(program_id, member_id, opts = {})
@@ -554,8 +554,8 @@ module VoucherifySdk
 
     # Delete program member
     # Deletes the member and sets status to DELETED. Removes the members card assignments in this program. Returns the member without a cards array. Delete doesnt change updated_at. Records a vl.member.deleted activity. Each unassigned card also records vl.member.card.unassigned and vl.card.unassigned. When an assignment has a tier, the delete records a LEFT tier transaction with origin member_card_deleted. The same customer can join the program again. The new member gets a new ID. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. Deleting a member that is already DELETED returns 404.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesProgramsMembersDeleteResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersDeleteResponseBody data, response status code and response headers
     private def delete_program_member_with_http_info(program_id, member_id, opts = {})
@@ -604,10 +604,10 @@ module VoucherifySdk
 
     # Expire point bucket
     # Expires an ACTIVE points bucket. Creates an ADMIN_POINTS_EXPIRATION card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be ACTIVE, and its expiration_date must be on or after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program, the member, or the card definition doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
-    # @param bucket_id [String] Points expiration bucket ID (format lcpeb_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+    # @param bucket_id [String] Identifies the points expiration bucket. Format lcpeb_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesProgramsMembersCardsExpiringPointsExpireResponseBody]
     def expire_card_points_bucket(program_id, member_id, card_id, bucket_id, opts = {})
@@ -617,10 +617,10 @@ module VoucherifySdk
 
     # Expire point bucket
     # Expires an ACTIVE points bucket. Creates an ADMIN_POINTS_EXPIRATION card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be ACTIVE, and its expiration_date must be on or after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program, the member, or the card definition doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
-    # @param bucket_id [String] Points expiration bucket ID (format lcpeb_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+    # @param bucket_id [String] Identifies the points expiration bucket. Format lcpeb_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesProgramsMembersCardsExpiringPointsExpireResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersCardsExpiringPointsExpireResponseBody data, response status code and response headers
     private def expire_card_points_bucket_with_http_info(program_id, member_id, card_id, bucket_id, opts = {})
@@ -669,12 +669,12 @@ module VoucherifySdk
 
     # List member earning-rule daily reports
     # Returns aggregated daily usage statistics for a specific earning rule and member over the given date range and resolution. Each entry sums successful earning-rule triggers recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the earning rule does not exist or is not assigned to the program.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Unique loyalty member identifier (format: lmbr_ followed by hexadecimal characters).
-    # @param earning_rule_id [String] Unique earning rule identifier (format: lern_ followed by hexadecimal characters).
-    # @param start_date [Date] Start of the report date range (inclusive), in YYYY-MM-DD format.
-    # @param end_date [Date] End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-    # @param resolution [String] Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param earning_rule_id [String] Identifies the earning rule. Format lern_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesProgramsMembersEarningRulesReportsDailyListResponseBody]
     def get_member_earning_rule_daily_report(program_id, member_id, earning_rule_id, start_date, end_date, resolution, opts = {})
@@ -684,12 +684,12 @@ module VoucherifySdk
 
     # List member earning-rule daily reports
     # Returns aggregated daily usage statistics for a specific earning rule and member over the given date range and resolution. Each entry sums successful earning-rule triggers recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the earning rule does not exist or is not assigned to the program.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Unique loyalty member identifier (format: lmbr_ followed by hexadecimal characters).
-    # @param earning_rule_id [String] Unique earning rule identifier (format: lern_ followed by hexadecimal characters).
-    # @param start_date [Date] Start of the report date range (inclusive), in YYYY-MM-DD format.
-    # @param end_date [Date] End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-    # @param resolution [String] Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param earning_rule_id [String] Identifies the earning rule. Format lern_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesProgramsMembersEarningRulesReportsDailyListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersEarningRulesReportsDailyListResponseBody data, response status code and response headers
     private def get_member_earning_rule_daily_report_with_http_info(program_id, member_id, earning_rule_id, start_date, end_date, resolution, opts = {})
@@ -741,8 +741,8 @@ module VoucherifySdk
 
     # Get program member
     # Returns one member of the program together with that members loyalty cards. Each card includes balance, lifetime_bucket, next_expiration, and next_activation. tier_progress is not included. Use [Get program membership](/api-reference/programs/get-program-membership) when you need tier progress. card.code can be null shortly after member creation, while code generation is still running. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesProgramsMembersGetResponseBody]
     def get_program_member(program_id, member_id, opts = {})
@@ -752,8 +752,8 @@ module VoucherifySdk
 
     # Get program member
     # Returns one member of the program together with that members loyalty cards. Each card includes balance, lifetime_bucket, next_expiration, and next_activation. tier_progress is not included. Use [Get program membership](/api-reference/programs/get-program-membership) when you need tier progress. card.code can be null shortly after member creation, while code generation is still running. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesProgramsMembersGetResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersGetResponseBody data, response status code and response headers
     private def get_program_member_with_http_info(program_id, member_id, opts = {})
@@ -802,10 +802,10 @@ module VoucherifySdk
 
     # Get program membership
     # Returns the membership for one customer in the program: the member, the program, and the members loyalty cards. A card includes tier_progress when its card definition has a tier structure and the member has a tier on that card. Otherwise tier_progress is omitted. identification_type chooses how customerId is read. It defaults to customer_id.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param customer_id [String] Unique identifier of the customer or member, interpreted according to identification_type: a Voucherify customer ID (cust_...), a customer source_id, or a loyalty member ID (lmbr_...).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param customer_id [String] Identifies the customer or member. identification_type selects the value: a Voucherify customer ID (cust_...), a customer source_id, or a loyalty member ID (lmbr_...).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :identification_type Chooses how customerId is read. customer_id is the Voucherify customer ID and the default. customer_source_id is the customers source_id. member_id is the loyalty member ID. (default to 'customer_id')
+    # @option opts [String] :identification_type Selects how customerId is read. customer_id is the Voucherify customer ID and the default. customer_source_id is the customers source_id. member_id is the loyalty member ID. (default to 'customer_id')
     # @return [V2LoyaltiesProgramsMembershipsGetResponseBody]
     def get_program_membership(program_id, customer_id, opts = {})
       data, _status_code, _headers = get_program_membership_with_http_info(program_id, customer_id, opts)
@@ -814,10 +814,10 @@ module VoucherifySdk
 
     # Get program membership
     # Returns the membership for one customer in the program: the member, the program, and the members loyalty cards. A card includes tier_progress when its card definition has a tier structure and the member has a tier on that card. Otherwise tier_progress is omitted. identification_type chooses how customerId is read. It defaults to customer_id.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param customer_id [String] Unique identifier of the customer or member, interpreted according to identification_type: a Voucherify customer ID (cust_...), a customer source_id, or a loyalty member ID (lmbr_...).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param customer_id [String] Identifies the customer or member. identification_type selects the value: a Voucherify customer ID (cust_...), a customer source_id, or a loyalty member ID (lmbr_...).
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :identification_type Chooses how customerId is read. customer_id is the Voucherify customer ID and the default. customer_source_id is the customers source_id. member_id is the loyalty member ID. (default to 'customer_id')
+    # @option opts [String] :identification_type Selects how customerId is read. customer_id is the Voucherify customer ID and the default. customer_source_id is the customers source_id. member_id is the loyalty member ID. (default to 'customer_id')
     # @return [Array<(V2LoyaltiesProgramsMembershipsGetResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembershipsGetResponseBody data, response status code and response headers
     private def get_program_membership_with_http_info(program_id, customer_id, opts = {})
       if @api_client.config.debugging
@@ -866,12 +866,12 @@ module VoucherifySdk
 
     # List program points-earnings daily reports
     # Returns aggregated daily points-earnings statistics for the program over the given date range and resolution, optionally filtered by earning rule and card definition. Each entry sums earning operations recorded for one period, earning rule, earning item, and card definition. Periods without recorded activity are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
-    # @param start_date [Date] Start of the report date range (inclusive), in YYYY-MM-DD format.
-    # @param end_date [Date] End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-    # @param resolution [String] Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [PointsEarningsReportListFilters] :filters Filters rows by earning rule ID and card definition ID. Each field takes a conditions object. Omitting filters or setting it to null applies no field filters.
+    # @option opts [PointsEarningsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsReportsPointsEarningsDailyListResponseBody]
     def get_program_points_earnings_daily_report(program_id, start_date, end_date, resolution, opts = {})
       data, _status_code, _headers = get_program_points_earnings_daily_report_with_http_info(program_id, start_date, end_date, resolution, opts)
@@ -880,12 +880,12 @@ module VoucherifySdk
 
     # List program points-earnings daily reports
     # Returns aggregated daily points-earnings statistics for the program over the given date range and resolution, optionally filtered by earning rule and card definition. Each entry sums earning operations recorded for one period, earning rule, earning item, and card definition. Periods without recorded activity are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
-    # @param start_date [Date] Start of the report date range (inclusive), in YYYY-MM-DD format.
-    # @param end_date [Date] End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-    # @param resolution [String] Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [PointsEarningsReportListFilters] :filters Filters rows by earning rule ID and card definition ID. Each field takes a conditions object. Omitting filters or setting it to null applies no field filters.
+    # @option opts [PointsEarningsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsReportsPointsEarningsDailyListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsReportsPointsEarningsDailyListResponseBody data, response status code and response headers
     private def get_program_points_earnings_daily_report_with_http_info(program_id, start_date, end_date, resolution, opts = {})
       if @api_client.config.debugging
@@ -937,9 +937,9 @@ module VoucherifySdk
 
     # List program points-earnings summary reports
     # Returns total points-earnings statistics for the program (all time), optionally filtered by earning rule or card definition. Each entry sums earning operations for one earning rule, earning item, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [PointsEarningsReportListFilters] :filters Filters rows by earning rule ID and card definition ID. Each field takes a conditions object. Omitting filters or setting it to null applies no field filters.
+    # @option opts [PointsEarningsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsReportsPointsEarningsSummaryListResponseBody]
     def get_program_points_earnings_summary_report(program_id, opts = {})
       data, _status_code, _headers = get_program_points_earnings_summary_report_with_http_info(program_id, opts)
@@ -948,9 +948,9 @@ module VoucherifySdk
 
     # List program points-earnings summary reports
     # Returns total points-earnings statistics for the program (all time), optionally filtered by earning rule or card definition. Each entry sums earning operations for one earning rule, earning item, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [PointsEarningsReportListFilters] :filters Filters rows by earning rule ID and card definition ID. Each field takes a conditions object. Omitting filters or setting it to null applies no field filters.
+    # @option opts [PointsEarningsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsReportsPointsEarningsSummaryListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsReportsPointsEarningsSummaryListResponseBody data, response status code and response headers
     private def get_program_points_earnings_summary_report_with_http_info(program_id, opts = {})
       if @api_client.config.debugging
@@ -999,14 +999,14 @@ module VoucherifySdk
 
     # List card activities
     # Returns a cursor-paginated list of activities recorded for the members card. The card must still be assigned to that member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, when the member doesnt exist in that program, or when the card isnt currently assigned to that member. The program is checked first, then the member. A DELETED member returns 404 with resource_type member. A missing assignment and a missing or deleted card both return 404 with resource_type card. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program, member, and card lookup. A cursor that doesnt match ^lcrsacrd_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program, member, and card are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of activities to return. An integer from 1 to 100. Numeric strings are accepted and rounded to the nearest integer. Defaults to 10 when omitted. (default to 10)
-    # @option opts [String] :order Sort field. Allowed values are created_at and -created_at. Defaults to -created_at when omitted, null, or an empty array. Accepts one value or an array of those values. Any other value is rejected. An array that contains both directions is rejected. Rows that share a created_at millisecond are then ordered by id ascending.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsacrd_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters] :filters Field-specific filter conditions, passed as a deep object, e.g. filters[type][conditions][$is] vl.card.created.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsacrd_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters] :filters Filters the results. Pass a deep object, for example filters[type][conditions][$is] vl.card.created. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsMembersCardsActivitiesListResponseBody]
     def list_card_activities(program_id, member_id, card_id, opts = {})
       data, _status_code, _headers = list_card_activities_with_http_info(program_id, member_id, card_id, opts)
@@ -1015,14 +1015,14 @@ module VoucherifySdk
 
     # List card activities
     # Returns a cursor-paginated list of activities recorded for the members card. The card must still be assigned to that member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, when the member doesnt exist in that program, or when the card isnt currently assigned to that member. The program is checked first, then the member. A DELETED member returns 404 with resource_type member. A missing assignment and a missing or deleted card both return 404 with resource_type card. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program, member, and card lookup. A cursor that doesnt match ^lcrsacrd_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program, member, and card are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of activities to return. An integer from 1 to 100. Numeric strings are accepted and rounded to the nearest integer. Defaults to 10 when omitted. (default to 10)
-    # @option opts [String] :order Sort field. Allowed values are created_at and -created_at. Defaults to -created_at when omitted, null, or an empty array. Accepts one value or an array of those values. Any other value is rejected. An array that contains both directions is rejected. Rows that share a created_at millisecond are then ordered by id ascending.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsacrd_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters] :filters Field-specific filter conditions, passed as a deep object, e.g. filters[type][conditions][$is] vl.card.created.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsacrd_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters] :filters Filters the results. Pass a deep object, for example filters[type][conditions][$is] vl.card.created. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsMembersCardsActivitiesListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersCardsActivitiesListResponseBody data, response status code and response headers
     private def list_card_activities_with_http_info(program_id, member_id, card_id, opts = {})
       if @api_client.config.debugging
@@ -1074,14 +1074,14 @@ module VoucherifySdk
 
     # List card expiring points buckets
     # Returns a cursor-paginated list of ACTIVE point expiration buckets for the members card. Each bucket groups points that share an expiration date and expiration type, including points from separate transactions. The list starts on the current project day. Earlier buckets are omitted. Results can be filtered by card definition ID and expiration date, and ordered by expiration_date. Returns an empty list when the card has no matching buckets. Returns 400 when the query is invalid or the cursor is invalid, expired, or doesnt match the query. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of buckets to return. Must be between 1 and 100. Defaults to 10 when not provided. (default to 10)
-    # @option opts [String] :order Field(s) to order results by. Valid orders are expiration_date and -expiration_date; defaults to expiration_date (soonest expiration first). Ordering by the same field in both directions simultaneously is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrspeb_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersCardsExpiringPointsListRequestQuery] :filters Field-specific filter conditions, passed as a deep object, for example filters[card_definition_id][conditions][$is] lcdef_1297339938ae248cea.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to expiration_date. Soonest expiration first. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrspeb_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersCardsExpiringPointsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_1297339938ae248cea. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsMembersCardsExpiringPointsListResponseBody]
     def list_card_expiring_points(program_id, member_id, card_id, opts = {})
       data, _status_code, _headers = list_card_expiring_points_with_http_info(program_id, member_id, card_id, opts)
@@ -1090,14 +1090,14 @@ module VoucherifySdk
 
     # List card expiring points buckets
     # Returns a cursor-paginated list of ACTIVE point expiration buckets for the members card. Each bucket groups points that share an expiration date and expiration type, including points from separate transactions. The list starts on the current project day. Earlier buckets are omitted. Results can be filtered by card definition ID and expiration date, and ordered by expiration_date. Returns an empty list when the card has no matching buckets. Returns 400 when the query is invalid or the cursor is invalid, expired, or doesnt match the query. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of buckets to return. Must be between 1 and 100. Defaults to 10 when not provided. (default to 10)
-    # @option opts [String] :order Field(s) to order results by. Valid orders are expiration_date and -expiration_date; defaults to expiration_date (soonest expiration first). Ordering by the same field in both directions simultaneously is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrspeb_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersCardsExpiringPointsListRequestQuery] :filters Field-specific filter conditions, passed as a deep object, for example filters[card_definition_id][conditions][$is] lcdef_1297339938ae248cea.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to expiration_date. Soonest expiration first. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrspeb_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersCardsExpiringPointsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_1297339938ae248cea. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsMembersCardsExpiringPointsListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersCardsExpiringPointsListResponseBody data, response status code and response headers
     private def list_card_expiring_points_with_http_info(program_id, member_id, card_id, opts = {})
       if @api_client.config.debugging
@@ -1149,14 +1149,14 @@ module VoucherifySdk
 
     # List card pending point buckets
     # Returns a cursor-paginated list of pending point buckets for the members card. Every bucket has status PENDING. Pending points wait for activation (PERIOD_BASED, FIXED_DATES, or EVENT_BASED), following the card definition. The list starts on the next project day. The current days bucket is omitted because its still accumulating. Results can be filtered by card definition ID and ordered by date. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member. Bucket IDs from this list are the bucketId for [Activate pending point bucket](/api-reference/programs/activate-pending-point-bucket) and [Cancel pending point bucket](/api-reference/programs/cancel-pending-point-bucket).
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of buckets to return. Must be between 1 and 100. Defaults to 10 when not provided. (default to 10)
-    # @option opts [String] :order Field(s) to order results by. Valid orders are date and -date; defaults to date (soonest activation first). Ordering by the same field in both directions simultaneously is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrscppb_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery] :filters Field-specific filter conditions, passed as a deep object, for example filters[card_definition_id][conditions][$is] lcdef_128f495f720c4bec8c.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to date. Soonest activation first. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrscppb_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_128f495f720c4bec8c. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsMembersCardsPendingPointsListResponseBody]
     def list_card_pending_points(program_id, member_id, card_id, opts = {})
       data, _status_code, _headers = list_card_pending_points_with_http_info(program_id, member_id, card_id, opts)
@@ -1165,14 +1165,14 @@ module VoucherifySdk
 
     # List card pending point buckets
     # Returns a cursor-paginated list of pending point buckets for the members card. Every bucket has status PENDING. Pending points wait for activation (PERIOD_BASED, FIXED_DATES, or EVENT_BASED), following the card definition. The list starts on the next project day. The current days bucket is omitted because its still accumulating. Results can be filtered by card definition ID and ordered by date. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member. Bucket IDs from this list are the bucketId for [Activate pending point bucket](/api-reference/programs/activate-pending-point-bucket) and [Cancel pending point bucket](/api-reference/programs/cancel-pending-point-bucket).
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of buckets to return. Must be between 1 and 100. Defaults to 10 when not provided. (default to 10)
-    # @option opts [String] :order Field(s) to order results by. Valid orders are date and -date; defaults to date (soonest activation first). Ordering by the same field in both directions simultaneously is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrscppb_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery] :filters Field-specific filter conditions, passed as a deep object, for example filters[card_definition_id][conditions][$is] lcdef_128f495f720c4bec8c.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to date. Soonest activation first. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrscppb_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_128f495f720c4bec8c. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsMembersCardsPendingPointsListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersCardsPendingPointsListResponseBody data, response status code and response headers
     private def list_card_pending_points_with_http_info(program_id, member_id, card_id, opts = {})
       if @api_client.config.debugging
@@ -1224,14 +1224,14 @@ module VoucherifySdk
 
     # List card transactions
     # Returns a cursor-paginated list of transactions on the members card. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Returns 404 when the program, member, or card doesnt exist. The program is checked first, then the member, then the card. A member of another program, or a card that isnt assigned to this member, is not found.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of transactions to return. Must be between 1 and 100. Defaults to 10 when not provided. (default to 10)
-    # @option opts [String] :order Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsctx_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersCardsTransactionsListRequestQuery] :filters Field-specific filter conditions, passed as a deep object, e.g. filters[id][conditions][$is] lctx_0f5d0a8878caa3ee5c.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsctx_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersCardsTransactionsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[id][conditions][$is] lctx_0f5d0a8878caa3ee5c. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsMembersCardsTransactionsListResponseBody]
     def list_card_transactions(program_id, member_id, card_id, opts = {})
       data, _status_code, _headers = list_card_transactions_with_http_info(program_id, member_id, card_id, opts)
@@ -1240,14 +1240,14 @@ module VoucherifySdk
 
     # List card transactions
     # Returns a cursor-paginated list of transactions on the members card. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Returns 404 when the program, member, or card doesnt exist. The program is checked first, then the member, then the card. A member of another program, or a card that isnt assigned to this member, is not found.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
-    # @param card_id [String] Loyalty card ID (format lcrd_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of transactions to return. Must be between 1 and 100. Defaults to 10 when not provided. (default to 10)
-    # @option opts [String] :order Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsctx_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersCardsTransactionsListRequestQuery] :filters Field-specific filter conditions, passed as a deep object, e.g. filters[id][conditions][$is] lctx_0f5d0a8878caa3ee5c.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsctx_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersCardsTransactionsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[id][conditions][$is] lctx_0f5d0a8878caa3ee5c. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsMembersCardsTransactionsListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersCardsTransactionsListResponseBody data, response status code and response headers
     private def list_card_transactions_with_http_info(program_id, member_id, card_id, opts = {})
       if @api_client.config.debugging
@@ -1299,13 +1299,13 @@ module VoucherifySdk
 
     # List member benefit transactions
     # Lists benefit transactions (benefit fulfillments) for a given program member, with cursor-based pagination. Supports filtering by benefit ID and creation date.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. (default to 10)
-    # @option opts [String] :order Field(s) to order results by. Valid orders are id and -id; defaults to -id (newest first). Ordering by the same field in both directions simultaneously is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response (format: lcrsbtx_ followed by hexadecimal characters).
-    # @option opts [V2LoyaltiesProgramsMembersBenefitsTransactionsListRequestQuery] :filters Field filters, e.g. filters[benefit_id][conditions][$is] lben_.... Each field accepts a conditions object with condition operators.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsbtx_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersBenefitsTransactionsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[benefit_id][conditions][$is] lben_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsMembersBenefitsTransactionsListResponseBody]
     def list_member_benefit_transactions(program_id, member_id, opts = {})
       data, _status_code, _headers = list_member_benefit_transactions_with_http_info(program_id, member_id, opts)
@@ -1314,13 +1314,13 @@ module VoucherifySdk
 
     # List member benefit transactions
     # Lists benefit transactions (benefit fulfillments) for a given program member, with cursor-based pagination. Supports filtering by benefit ID and creation date.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. (default to 10)
-    # @option opts [String] :order Field(s) to order results by. Valid orders are id and -id; defaults to -id (newest first). Ordering by the same field in both directions simultaneously is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response (format: lcrsbtx_ followed by hexadecimal characters).
-    # @option opts [V2LoyaltiesProgramsMembersBenefitsTransactionsListRequestQuery] :filters Field filters, e.g. filters[benefit_id][conditions][$is] lben_.... Each field accepts a conditions object with condition operators.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsbtx_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersBenefitsTransactionsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[benefit_id][conditions][$is] lben_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsMembersBenefitsTransactionsListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersBenefitsTransactionsListResponseBody data, response status code and response headers
     private def list_member_benefit_transactions_with_http_info(program_id, member_id, opts = {})
       if @api_client.config.debugging
@@ -1372,12 +1372,12 @@ module VoucherifySdk
 
     # List card daily points reports
     # Returns aggregated points statistics for a members loyalty card over the given date range and resolution. Each entry sums the point operations recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the card does not exist or is not assigned to the member in the program.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Unique loyalty member identifier (format: lmbr_ followed by hexadecimal characters).
-    # @param card_id [String] Unique loyalty card identifier (format: lcrd_ followed by hexadecimal characters).
-    # @param start_date [Date] Start of the report date range (inclusive), in YYYY-MM-DD format.
-    # @param end_date [Date] End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-    # @param resolution [String] Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
     # @return [LoyaltiesProgramsMembersCardsReportsDailyListResponseBody]
     def list_member_card_daily_reports(program_id, member_id, card_id, start_date, end_date, resolution, opts = {})
@@ -1387,12 +1387,12 @@ module VoucherifySdk
 
     # List card daily points reports
     # Returns aggregated points statistics for a members loyalty card over the given date range and resolution. Each entry sums the point operations recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the card does not exist or is not assigned to the member in the program.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Unique loyalty member identifier (format: lmbr_ followed by hexadecimal characters).
-    # @param card_id [String] Unique loyalty card identifier (format: lcrd_ followed by hexadecimal characters).
-    # @param start_date [Date] Start of the report date range (inclusive), in YYYY-MM-DD format.
-    # @param end_date [Date] End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-    # @param resolution [String] Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
+    # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltiesProgramsMembersCardsReportsDailyListResponseBody, Integer, Hash)>] LoyaltiesProgramsMembersCardsReportsDailyListResponseBody data, response status code and response headers
     private def list_member_card_daily_reports_with_http_info(program_id, member_id, card_id, start_date, end_date, resolution, opts = {})
@@ -1444,13 +1444,13 @@ module VoucherifySdk
 
     # List member order payments
     # Lists stored PAY_WITH_POINTS order transactions for the program member, with cursor pagination. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Dry-run (SIMULATED) results arent stored and dont appear. Returns 404 when the program or the member doesnt exist. The program is checked first.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Identifies the program member (lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. (default to 10)
-    # @option opts [String] :order Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response (format: lcrsotx_ followed by hexadecimal characters).
-    # @option opts [V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery] :filters Filters results by field, e.g. filters[id][conditions][$is] lotx_.... Each field accepts a conditions object with condition operators.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsotx_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[id][conditions][$is] lotx_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsMembersOrdersPaymentsListResponseBody]
     def list_member_order_payments(program_id, member_id, opts = {})
       data, _status_code, _headers = list_member_order_payments_with_http_info(program_id, member_id, opts)
@@ -1459,13 +1459,13 @@ module VoucherifySdk
 
     # List member order payments
     # Lists stored PAY_WITH_POINTS order transactions for the program member, with cursor pagination. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Dry-run (SIMULATED) results arent stored and dont appear. Returns 404 when the program or the member doesnt exist. The program is checked first.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Identifies the program member (lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. (default to 10)
-    # @option opts [String] :order Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response (format: lcrsotx_ followed by hexadecimal characters).
-    # @option opts [V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery] :filters Filters results by field, e.g. filters[id][conditions][$is] lotx_.... Each field accepts a conditions object with condition operators.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsotx_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[id][conditions][$is] lotx_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsMembersOrdersPaymentsListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersOrdersPaymentsListResponseBody data, response status code and response headers
     private def list_member_order_payments_with_http_info(program_id, member_id, opts = {})
       if @api_client.config.debugging
@@ -1517,13 +1517,13 @@ module VoucherifySdk
 
     # List member reward purchases
     # Lists stored PURCHASE reward transactions for the program member, with cursor pagination. Filter by id, reward_id, card_definition_id, and created_at. Order by id (default -id, newest first). Purchases rejected before a transaction is stored dont appear. A purchase accepted with 202 that later fails is stored as REJECTED with details.rejection. Returns 404 when the program or the member doesnt exist. The program is checked first.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. (default to 10)
-    # @option opts [String] :order Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response (format: lcrstrx_ followed by hexadecimal characters).
-    # @option opts [V2LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery] :filters Field filters, e.g. filters[reward_id][conditions][$is] lrew_.... Each field accepts a conditions object with condition operators.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrstrx_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsMembersRewardsPurchasesListResponseBody]
     def list_member_reward_purchases(program_id, member_id, opts = {})
       data, _status_code, _headers = list_member_reward_purchases_with_http_info(program_id, member_id, opts)
@@ -1532,13 +1532,13 @@ module VoucherifySdk
 
     # List member reward purchases
     # Lists stored PURCHASE reward transactions for the program member, with cursor pagination. Filter by id, reward_id, card_definition_id, and created_at. Order by id (default -id, newest first). Purchases rejected before a transaction is stored dont appear. A purchase accepted with 202 that later fails is stored as REJECTED with details.rejection. Returns 404 when the program or the member doesnt exist. The program is checked first.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. (default to 10)
-    # @option opts [String] :order Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response (format: lcrstrx_ followed by hexadecimal characters).
-    # @option opts [V2LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery] :filters Field filters, e.g. filters[reward_id][conditions][$is] lrew_.... Each field accepts a conditions object with condition operators.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrstrx_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsMembersRewardsPurchasesListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersRewardsPurchasesListResponseBody data, response status code and response headers
     private def list_member_reward_purchases_with_http_info(program_id, member_id, opts = {})
       if @api_client.config.debugging
@@ -1590,13 +1590,13 @@ module VoucherifySdk
 
     # List member tier transactions
     # Lists tier transactions for the member: joins, leaves, upgrades, downgrades, expiration changes, and evaluation refreshes. Results use cursor pagination. Default order is -id, newest first. Filters are card_id, card_definition_id, and created_at. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. order must be id or -id. An array that orders by both directions is rejected. A cursor that doesnt match ^lcrsttx_[a-f0-9]+$ fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. (default to 10)
-    # @option opts [String] :order Sort field. Allowed values are id and -id. Defaults to -id, newest first, when omitted, null, or an empty array. Accepts one value or an array of those values. An array that contains both directions is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response (format: lcrsttx_ followed by hexadecimal characters).
-    # @option opts [V2LoyaltiesProgramsMembersTiersTransactionsListRequestQuery] :filters Field filters. card_id, card_definition_id, and created_at. Example: filters[card_id][conditions][$is] lcrd_....
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsttx_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersTiersTransactionsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[card_id][conditions][$is] lcrd_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsMembersTiersTransactionsListResponseBody]
     def list_member_tier_transactions(program_id, member_id, opts = {})
       data, _status_code, _headers = list_member_tier_transactions_with_http_info(program_id, member_id, opts)
@@ -1605,13 +1605,13 @@ module VoucherifySdk
 
     # List member tier transactions
     # Lists tier transactions for the member: joins, leaves, upgrades, downgrades, expiration changes, and evaluation refreshes. Results use cursor pagination. Default order is -id, newest first. Filters are card_id, card_definition_id, and created_at. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. order must be id or -id. An array that orders by both directions is rejected. A cursor that doesnt match ^lcrsttx_[a-f0-9]+$ fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. (default to 10)
-    # @option opts [String] :order Sort field. Allowed values are id and -id. Defaults to -id, newest first, when omitted, null, or an empty array. Accepts one value or an array of those values. An array that contains both directions is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response (format: lcrsttx_ followed by hexadecimal characters).
-    # @option opts [V2LoyaltiesProgramsMembersTiersTransactionsListRequestQuery] :filters Field filters. card_id, card_definition_id, and created_at. Example: filters[card_id][conditions][$is] lcrd_....
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsttx_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersTiersTransactionsListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[card_id][conditions][$is] lcrd_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsMembersTiersTransactionsListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersTiersTransactionsListResponseBody data, response status code and response headers
     private def list_member_tier_transactions_with_http_info(program_id, member_id, opts = {})
       if @api_client.config.debugging
@@ -1663,11 +1663,11 @@ module VoucherifySdk
 
     # List program earning rule assignments
     # Returns a cursor-paginated list of earning rules assigned to the program.
-    # @param program_id [String] Unique program identifier.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :limit Maximum number of items to return. Between 1 and 100. Defaults to 10. (default to '10')
-    # @option opts [String] :order Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once.
-    # @option opts [String] :cursor Pagination cursor returned by a previous call (cursor.next).
+    # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrserna_[a-f0-9]+. The cursor matches the filters and order of that response.
     # @return [V2LoyaltiesProgramsEarningRulesListResponseBody]
     def list_program_earning_rule_assignments(program_id, opts = {})
       data, _status_code, _headers = list_program_earning_rule_assignments_with_http_info(program_id, opts)
@@ -1676,11 +1676,11 @@ module VoucherifySdk
 
     # List program earning rule assignments
     # Returns a cursor-paginated list of earning rules assigned to the program.
-    # @param program_id [String] Unique program identifier.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :limit Maximum number of items to return. Between 1 and 100. Defaults to 10. (default to '10')
-    # @option opts [String] :order Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once.
-    # @option opts [String] :cursor Pagination cursor returned by a previous call (cursor.next).
+    # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrserna_[a-f0-9]+. The cursor matches the filters and order of that response.
     # @return [Array<(V2LoyaltiesProgramsEarningRulesListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsEarningRulesListResponseBody data, response status code and response headers
     private def list_program_earning_rule_assignments_with_http_info(program_id, opts = {})
       if @api_client.config.debugging
@@ -1731,12 +1731,12 @@ module VoucherifySdk
 
     # List program earning-rules daily reports
     # Returns aggregated daily earning-rule evaluation statistics for the program over the given date range and resolution, optionally filtered by earning rule. Each entry counts eligibility checks for one period and earning rule. Periods without recorded activity are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param start_date [Date] Start of the report date range (inclusive), in YYYY-MM-DD format.
-    # @param end_date [Date] End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-    # @param resolution [String] Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [EarningRulesReportListFilters] :filters Field filters. Each field accepts a conditions object with condition operators.
+    # @option opts [EarningRulesReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsReportsEarningRulesDailyListResponseBody]
     def list_program_earning_rules_daily_reports(program_id, start_date, end_date, resolution, opts = {})
       data, _status_code, _headers = list_program_earning_rules_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts)
@@ -1745,12 +1745,12 @@ module VoucherifySdk
 
     # List program earning-rules daily reports
     # Returns aggregated daily earning-rule evaluation statistics for the program over the given date range and resolution, optionally filtered by earning rule. Each entry counts eligibility checks for one period and earning rule. Periods without recorded activity are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param start_date [Date] Start of the report date range (inclusive), in YYYY-MM-DD format.
-    # @param end_date [Date] End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-    # @param resolution [String] Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [EarningRulesReportListFilters] :filters Field filters. Each field accepts a conditions object with condition operators.
+    # @option opts [EarningRulesReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsReportsEarningRulesDailyListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsReportsEarningRulesDailyListResponseBody data, response status code and response headers
     private def list_program_earning_rules_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts = {})
       if @api_client.config.debugging
@@ -1802,9 +1802,9 @@ module VoucherifySdk
 
     # List program earning-rules summary reports
     # Returns total earning-rule evaluation statistics for the program (all time), optionally filtered by earning rule. Includes success and failure counts with a failures breakdown. Each entry counts eligibility checks for one earning rule. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [EarningRulesReportListFilters] :filters Filters rows by field. Each field accepts a conditions object with condition operators.
+    # @option opts [EarningRulesReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsReportsEarningRulesSummaryListResponseBody]
     def list_program_earning_rules_summary_reports(program_id, opts = {})
       data, _status_code, _headers = list_program_earning_rules_summary_reports_with_http_info(program_id, opts)
@@ -1813,9 +1813,9 @@ module VoucherifySdk
 
     # List program earning-rules summary reports
     # Returns total earning-rule evaluation statistics for the program (all time), optionally filtered by earning rule. Includes success and failure counts with a failures breakdown. Each entry counts eligibility checks for one earning rule. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [EarningRulesReportListFilters] :filters Filters rows by field. Each field accepts a conditions object with condition operators.
+    # @option opts [EarningRulesReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsReportsEarningRulesSummaryListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsReportsEarningRulesSummaryListResponseBody data, response status code and response headers
     private def list_program_earning_rules_summary_reports_with_http_info(program_id, opts = {})
       if @api_client.config.debugging
@@ -1864,13 +1864,13 @@ module VoucherifySdk
 
     # List program member activities
     # Returns a cursor-paginated list of lifecycle and card-assignment activities recorded for the member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. A cursor that doesnt match ^lcrsambr_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of activities to return. An integer from 1 to 100. Numeric strings are accepted and rounded to the nearest integer. Defaults to 10 when omitted. (default to 10)
-    # @option opts [String] :order Sort field. Allowed values are created_at and -created_at. Defaults to -created_at when omitted, null, or an empty array. Accepts one value or an array of those values. Any other value is rejected. An array that contains both directions is rejected. Rows that share a created_at millisecond are then ordered by id ascending.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsambr_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersActivitiesListRequestQueryFilters] :filters Field-specific filter conditions, passed as a deep object, e.g. filters[type][conditions][$is] vl.member.created.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsambr_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersActivitiesListRequestQueryFilters] :filters Filters the results. Pass a deep object, for example filters[type][conditions][$is] vl.member.created. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsMembersActivitiesListResponseBody]
     def list_program_member_activities(program_id, member_id, opts = {})
       data, _status_code, _headers = list_program_member_activities_with_http_info(program_id, member_id, opts)
@@ -1879,13 +1879,13 @@ module VoucherifySdk
 
     # List program member activities
     # Returns a cursor-paginated list of lifecycle and card-assignment activities recorded for the member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. A cursor that doesnt match ^lcrsambr_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of activities to return. An integer from 1 to 100. Numeric strings are accepted and rounded to the nearest integer. Defaults to 10 when omitted. (default to 10)
-    # @option opts [String] :order Sort field. Allowed values are created_at and -created_at. Defaults to -created_at when omitted, null, or an empty array. Accepts one value or an array of those values. Any other value is rejected. An array that contains both directions is rejected. Rows that share a created_at millisecond are then ordered by id ascending.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsambr_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersActivitiesListRequestQueryFilters] :filters Field-specific filter conditions, passed as a deep object, e.g. filters[type][conditions][$is] vl.member.created.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsambr_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersActivitiesListRequestQueryFilters] :filters Filters the results. Pass a deep object, for example filters[type][conditions][$is] vl.member.created. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsMembersActivitiesListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersActivitiesListResponseBody data, response status code and response headers
     private def list_program_member_activities_with_http_info(program_id, member_id, opts = {})
       if @api_client.config.debugging
@@ -1937,12 +1937,12 @@ module VoucherifySdk
 
     # List program members
     # Returns a cursor-paginated list of members of the program. Deleted members are omitted. Results can be filtered by ID, status, customer ID and creation date. Results can be ordered by creation date, status, or customer ID (ascending or descending). The same field cannot be ordered both ascending and descending at the same time. Returns 404 when the program does not exist. List items do not include the cards array. Use the following endpoints to retrieve cards for a given member: - [Get customer memberships](/api-reference/programs/get-customer-memberships), - [Get program member](/api-reference/programs/get-program-member), - [Get program membership](/api-reference/programs/get-program-membership).
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of members to return. Must be between 1 and 100. Defaults to 10 when not provided. (default to 10)
-    # @option opts [String] :order Field(s) to order results by. Prefix with - for descending order. Accepts a single value or an array of values. Defaults to -created_at. Ordering by the same field in both directions simultaneously is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsmbr_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersListRequestQuery] :filters Field-specific filter conditions, passed as a deep object, e.g. filters[status][conditions][$is] ACTIVE.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsmbr_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[status][conditions][$is] ACTIVE. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsMembersListResponseBody]
     def list_program_members(program_id, opts = {})
       data, _status_code, _headers = list_program_members_with_http_info(program_id, opts)
@@ -1951,12 +1951,12 @@ module VoucherifySdk
 
     # List program members
     # Returns a cursor-paginated list of members of the program. Deleted members are omitted. Results can be filtered by ID, status, customer ID and creation date. Results can be ordered by creation date, status, or customer ID (ascending or descending). The same field cannot be ordered both ascending and descending at the same time. Returns 404 when the program does not exist. List items do not include the cards array. Use the following endpoints to retrieve cards for a given member: - [Get customer memberships](/api-reference/programs/get-customer-memberships), - [Get program member](/api-reference/programs/get-program-member), - [Get program membership](/api-reference/programs/get-program-membership).
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :limit Maximum number of members to return. Must be between 1 and 100. Defaults to 10 when not provided. (default to 10)
-    # @option opts [String] :order Field(s) to order results by. Prefix with - for descending order. Accepts a single value or an array of values. Defaults to -created_at. Ordering by the same field in both directions simultaneously is rejected.
-    # @option opts [String] :cursor Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsmbr_[a-f0-9]+$.
-    # @option opts [V2LoyaltiesProgramsMembersListRequestQuery] :filters Field-specific filter conditions, passed as a deep object, e.g. filters[status][conditions][$is] ACTIVE.
+    # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsmbr_[a-f0-9]+. The cursor matches the filters and order of that response.
+    # @option opts [V2LoyaltiesProgramsMembersListRequestQuery] :filters Filters the results. Pass a deep object, for example filters[status][conditions][$is] ACTIVE. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsMembersListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersListResponseBody data, response status code and response headers
     private def list_program_members_with_http_info(program_id, opts = {})
       if @api_client.config.debugging
@@ -2008,10 +2008,10 @@ module VoucherifySdk
 
     # List program members daily reports
     # Returns member and card changes for the program over the given date range and resolution. Each row covers one period with recorded activity. Periods without activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-    # @param start_date [Date] Sets the inclusive start of the report date range, in YYYY-MM-DD format.
-    # @param end_date [Date] Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date.
-    # @param resolution [String] Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
     # @return [LoyaltiesProgramsReportsMembersDailyListResponseBody]
     def list_program_members_daily_reports(program_id, start_date, end_date, resolution, opts = {})
@@ -2021,10 +2021,10 @@ module VoucherifySdk
 
     # List program members daily reports
     # Returns member and card changes for the program over the given date range and resolution. Each row covers one period with recorded activity. Periods without activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-    # @param start_date [Date] Sets the inclusive start of the report date range, in YYYY-MM-DD format.
-    # @param end_date [Date] Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date.
-    # @param resolution [String] Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltiesProgramsReportsMembersDailyListResponseBody, Integer, Hash)>] LoyaltiesProgramsReportsMembersDailyListResponseBody data, response status code and response headers
     private def list_program_members_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts = {})
@@ -2076,7 +2076,7 @@ module VoucherifySdk
 
     # List program members summary reports
     # Returns all-time member and card totals for the program. The response contains one row when activity was recorded, and an empty data array otherwise. limit and order are not query parameters. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [LoyaltiesProgramsReportsMembersSummaryListResponseBody]
     def list_program_members_summary_reports(program_id, opts = {})
@@ -2086,7 +2086,7 @@ module VoucherifySdk
 
     # List program members summary reports
     # Returns all-time member and card totals for the program. The response contains one row when activity was recorded, and an empty data array otherwise. limit and order are not query parameters. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltiesProgramsReportsMembersSummaryListResponseBody, Integer, Hash)>] LoyaltiesProgramsReportsMembersSummaryListResponseBody data, response status code and response headers
     private def list_program_members_summary_reports_with_http_info(program_id, opts = {})
@@ -2135,11 +2135,11 @@ module VoucherifySdk
 
     # List program reward assignments
     # Returns a cursor-paginated list of rewards assigned to the program, including their stock configuration and redemption counters.
-    # @param program_id [String] Unique program identifier.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :limit Maximum number of items to return. Between 1 and 100. Defaults to 10. Non-integer values are rounded. (default to '10')
-    # @option opts [String] :order Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once.
-    # @option opts [String] :cursor Pagination cursor returned by a previous call (cursor.next).
+    # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsrewa_[a-f0-9]+. The cursor matches the filters and order of that response.
     # @return [V2LoyaltiesProgramsRewardsListResponseBody]
     def list_program_reward_assignments(program_id, opts = {})
       data, _status_code, _headers = list_program_reward_assignments_with_http_info(program_id, opts)
@@ -2148,11 +2148,11 @@ module VoucherifySdk
 
     # List program reward assignments
     # Returns a cursor-paginated list of rewards assigned to the program, including their stock configuration and redemption counters.
-    # @param program_id [String] Unique program identifier.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :limit Maximum number of items to return. Between 1 and 100. Defaults to 10. Non-integer values are rounded. (default to '10')
-    # @option opts [String] :order Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once.
-    # @option opts [String] :cursor Pagination cursor returned by a previous call (cursor.next).
+    # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrsrewa_[a-f0-9]+. The cursor matches the filters and order of that response.
     # @return [Array<(V2LoyaltiesProgramsRewardsListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsRewardsListResponseBody data, response status code and response headers
     private def list_program_reward_assignments_with_http_info(program_id, opts = {})
       if @api_client.config.debugging
@@ -2203,12 +2203,12 @@ module VoucherifySdk
 
     # List program rewards daily reports
     # Returns aggregated reward-purchase statistics for the program over the given date range and resolution, optionally filtered by reward. Each row covers one reward and one period with recorded purchases. Periods without recorded purchases are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-    # @param start_date [Date] Sets the inclusive start of the report date range, in YYYY-MM-DD format.
-    # @param end_date [Date] Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date.
-    # @param resolution [String] Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [RewardsReportListFilters] :filters Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+    # @option opts [RewardsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [LoyaltiesProgramsReportsRewardsDailyListResponseBody]
     def list_program_rewards_daily_reports(program_id, start_date, end_date, resolution, opts = {})
       data, _status_code, _headers = list_program_rewards_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts)
@@ -2217,12 +2217,12 @@ module VoucherifySdk
 
     # List program rewards daily reports
     # Returns aggregated reward-purchase statistics for the program over the given date range and resolution, optionally filtered by reward. Each row covers one reward and one period with recorded purchases. Periods without recorded purchases are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-    # @param start_date [Date] Sets the inclusive start of the report date range, in YYYY-MM-DD format.
-    # @param end_date [Date] Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date.
-    # @param resolution [String] Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [RewardsReportListFilters] :filters Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+    # @option opts [RewardsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(LoyaltiesProgramsReportsRewardsDailyListResponseBody, Integer, Hash)>] LoyaltiesProgramsReportsRewardsDailyListResponseBody data, response status code and response headers
     private def list_program_rewards_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts = {})
       if @api_client.config.debugging
@@ -2274,12 +2274,12 @@ module VoucherifySdk
 
     # List program rewards spendings daily reports
     # Returns aggregated points spent on reward purchases for the program over the given date range and resolution. Each row covers one reward, reward cost, reward spending, card definition, and period with an approved point spend. Periods without an approved point spend are omitted. Optionally filters by reward, cost, spending, and card definition. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-    # @param start_date [Date] Sets the inclusive start of the report date range, in YYYY-MM-DD format.
-    # @param end_date [Date] Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date.
-    # @param resolution [String] Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [RewardsSpendingsReportListFilters] :filters Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+    # @option opts [RewardsSpendingsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [LoyaltiesProgramsReportsRewardsSpendingsDailyListResponseBody]
     def list_program_rewards_spendings_daily_reports(program_id, start_date, end_date, resolution, opts = {})
       data, _status_code, _headers = list_program_rewards_spendings_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts)
@@ -2288,12 +2288,12 @@ module VoucherifySdk
 
     # List program rewards spendings daily reports
     # Returns aggregated points spent on reward purchases for the program over the given date range and resolution. Each row covers one reward, reward cost, reward spending, card definition, and period with an approved point spend. Periods without an approved point spend are omitted. Optionally filters by reward, cost, spending, and card definition. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-    # @param start_date [Date] Sets the inclusive start of the report date range, in YYYY-MM-DD format.
-    # @param end_date [Date] Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date.
-    # @param resolution [String] Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [RewardsSpendingsReportListFilters] :filters Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+    # @option opts [RewardsSpendingsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(LoyaltiesProgramsReportsRewardsSpendingsDailyListResponseBody, Integer, Hash)>] LoyaltiesProgramsReportsRewardsSpendingsDailyListResponseBody data, response status code and response headers
     private def list_program_rewards_spendings_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts = {})
       if @api_client.config.debugging
@@ -2345,9 +2345,9 @@ module VoucherifySdk
 
     # List program rewards spendings summary reports
     # Returns all-time points spent on reward purchases for the program. Each row covers one reward, reward cost, reward spending, and card definition with an approved point spend. Filters rows by reward, cost, spending, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [RewardsSpendingsReportListFilters] :filters Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+    # @option opts [RewardsSpendingsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [LoyaltiesProgramsReportsRewardsSpendingsSummaryListResponseBody]
     def list_program_rewards_spendings_summary_reports(program_id, opts = {})
       data, _status_code, _headers = list_program_rewards_spendings_summary_reports_with_http_info(program_id, opts)
@@ -2356,9 +2356,9 @@ module VoucherifySdk
 
     # List program rewards spendings summary reports
     # Returns all-time points spent on reward purchases for the program. Each row covers one reward, reward cost, reward spending, and card definition with an approved point spend. Filters rows by reward, cost, spending, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [RewardsSpendingsReportListFilters] :filters Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+    # @option opts [RewardsSpendingsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(LoyaltiesProgramsReportsRewardsSpendingsSummaryListResponseBody, Integer, Hash)>] LoyaltiesProgramsReportsRewardsSpendingsSummaryListResponseBody data, response status code and response headers
     private def list_program_rewards_spendings_summary_reports_with_http_info(program_id, opts = {})
       if @api_client.config.debugging
@@ -2407,9 +2407,9 @@ module VoucherifySdk
 
     # List program rewards summary reports
     # Returns all-time reward-purchase totals for the program, one row per reward with a recorded purchase attempt. Filters rows with filters[reward_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [RewardsReportListFilters] :filters Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+    # @option opts [RewardsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [LoyaltiesProgramsReportsRewardsSummaryListResponseBody]
     def list_program_rewards_summary_reports(program_id, opts = {})
       data, _status_code, _headers = list_program_rewards_summary_reports_with_http_info(program_id, opts)
@@ -2418,9 +2418,9 @@ module VoucherifySdk
 
     # List program rewards summary reports
     # Returns all-time reward-purchase totals for the program, one row per reward with a recorded purchase attempt. Filters rows with filters[reward_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program (lprg_ followed by hexadecimal characters).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [RewardsReportListFilters] :filters Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+    # @option opts [RewardsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(LoyaltiesProgramsReportsRewardsSummaryListResponseBody, Integer, Hash)>] LoyaltiesProgramsReportsRewardsSummaryListResponseBody data, response status code and response headers
     private def list_program_rewards_summary_reports_with_http_info(program_id, opts = {})
       if @api_client.config.debugging
@@ -2469,12 +2469,12 @@ module VoucherifySdk
 
     # List program spending daily reports
     # Returns aggregated points-spending statistics for the program over the given date range and resolution. Each row covers one card definition and one period with recorded spending. Periods without recorded spending are omitted. Optionally filters by card definition. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param start_date [Date] Sets the inclusive start of the report date range (YYYY-MM-DD). Must be before end_date.
-    # @param end_date [Date] Sets the inclusive end of the report date range (YYYY-MM-DD). Must be after start_date.
-    # @param resolution [String] Sets the aggregation resolution. Allowed date range: day max 90 days, week max 12 weeks, month max 12 months, quarter max 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [SpendingReportListFilters] :filters Filters rows by field conditions, e.g. filters[card_definition_id][conditions][$is] lcdef_....
+    # @option opts [SpendingReportListFilters] :filters Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [LoyaltiesProgramsReportsSpendingDailyListResponseBody]
     def list_program_spending_daily_reports(program_id, start_date, end_date, resolution, opts = {})
       data, _status_code, _headers = list_program_spending_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts)
@@ -2483,12 +2483,12 @@ module VoucherifySdk
 
     # List program spending daily reports
     # Returns aggregated points-spending statistics for the program over the given date range and resolution. Each row covers one card definition and one period with recorded spending. Periods without recorded spending are omitted. Optionally filters by card definition. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param start_date [Date] Sets the inclusive start of the report date range (YYYY-MM-DD). Must be before end_date.
-    # @param end_date [Date] Sets the inclusive end of the report date range (YYYY-MM-DD). Must be after start_date.
-    # @param resolution [String] Sets the aggregation resolution. Allowed date range: day max 90 days, week max 12 weeks, month max 12 months, quarter max 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [SpendingReportListFilters] :filters Filters rows by field conditions, e.g. filters[card_definition_id][conditions][$is] lcdef_....
+    # @option opts [SpendingReportListFilters] :filters Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(LoyaltiesProgramsReportsSpendingDailyListResponseBody, Integer, Hash)>] LoyaltiesProgramsReportsSpendingDailyListResponseBody data, response status code and response headers
     private def list_program_spending_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts = {})
       if @api_client.config.debugging
@@ -2540,9 +2540,9 @@ module VoucherifySdk
 
     # List program spending summary reports
     # Returns all-time point-spending totals for the program, one row per card definition that has recorded spending. Filters rows with filters[card_definition_id]. Returns at most 10 rows (max number of card definitions per program), ordered by id descending. limit and order are not query parameters. Returns 200 with an empty data array when no spending is recorded. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [SpendingReportListFilters] :filters Filters rows by field conditions, e.g. filters[card_definition_id][conditions][$is] lcdef_....
+    # @option opts [SpendingReportListFilters] :filters Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [LoyaltiesProgramsReportsSpendingSummaryListResponseBody]
     def list_program_spending_summary_reports(program_id, opts = {})
       data, _status_code, _headers = list_program_spending_summary_reports_with_http_info(program_id, opts)
@@ -2551,9 +2551,9 @@ module VoucherifySdk
 
     # List program spending summary reports
     # Returns all-time point-spending totals for the program, one row per card definition that has recorded spending. Filters rows with filters[card_definition_id]. Returns at most 10 rows (max number of card definitions per program), ordered by id descending. limit and order are not query parameters. Returns 200 with an empty data array when no spending is recorded. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [SpendingReportListFilters] :filters Filters rows by field conditions, e.g. filters[card_definition_id][conditions][$is] lcdef_....
+    # @option opts [SpendingReportListFilters] :filters Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(LoyaltiesProgramsReportsSpendingSummaryListResponseBody, Integer, Hash)>] LoyaltiesProgramsReportsSpendingSummaryListResponseBody data, response status code and response headers
     private def list_program_spending_summary_reports_with_http_info(program_id, opts = {})
       if @api_client.config.debugging
@@ -2602,11 +2602,11 @@ module VoucherifySdk
 
     # List program tier structure assignments
     # Returns a cursor-paginated list of tier structures assigned to the program. Currently, a program can have only one tier structure assigned.
-    # @param program_id [String] Unique program identifier.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :limit Maximum number of items to return. Between 1 and 100. Defaults to 10. Non-integer values are rounded. (default to '10')
-    # @option opts [String] :order Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once.
-    # @option opts [String] :cursor Pagination cursor returned by a previous call (cursor.next).
+    # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrstsa_[a-f0-9]+. The cursor matches the filters and order of that response.
     # @return [V2LoyaltiesProgramsTierStructuresListResponseBody]
     def list_program_tier_structure_assignments(program_id, opts = {})
       data, _status_code, _headers = list_program_tier_structure_assignments_with_http_info(program_id, opts)
@@ -2615,11 +2615,11 @@ module VoucherifySdk
 
     # List program tier structure assignments
     # Returns a cursor-paginated list of tier structures assigned to the program. Currently, a program can have only one tier structure assigned.
-    # @param program_id [String] Unique program identifier.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :limit Maximum number of items to return. Between 1 and 100. Defaults to 10. Non-integer values are rounded. (default to '10')
-    # @option opts [String] :order Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once.
-    # @option opts [String] :cursor Pagination cursor returned by a previous call (cursor.next).
+    # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
+    # @option opts [String] :order Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+    # @option opts [String] :cursor Continues pagination. Pass the cursor.next value from a previous response. Format lcrstsa_[a-f0-9]+. The cursor matches the filters and order of that response.
     # @return [Array<(V2LoyaltiesProgramsTierStructuresListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsTierStructuresListResponseBody data, response status code and response headers
     private def list_program_tier_structure_assignments_with_http_info(program_id, opts = {})
       if @api_client.config.debugging
@@ -2670,12 +2670,12 @@ module VoucherifySdk
 
     # List program tiers daily reports
     # Returns aggregated tier-movement statistics for the program over the given date range and resolution, optionally filtered by tier structure and tier. Each row covers one tier structure, one tier, and one period with recorded movement. Periods without recorded movement are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
-    # @param start_date [Date] Sets the inclusive start of the range, in YYYY-MM-DD format.
-    # @param end_date [Date] Sets the inclusive end of the range, in YYYY-MM-DD format. Must be after start_date.
-    # @param resolution [String] Sets the aggregation resolution. Allowed range: day up to 90 days, week up to 12 weeks, month up to 12 months, quarter up to 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [TiersReportListFilters] :filters Filters rows by tier_structure_id and tier_id. Example: filters[tier_structure_id][conditions][$is] lts_....
+    # @option opts [TiersReportListFilters] :filters Filters the results. Pass a deep object, for example filters[tier_structure_id][conditions][$is] lts_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsReportsTiersDailyListResponseBody]
     def list_program_tiers_daily_reports(program_id, start_date, end_date, resolution, opts = {})
       data, _status_code, _headers = list_program_tiers_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts)
@@ -2684,12 +2684,12 @@ module VoucherifySdk
 
     # List program tiers daily reports
     # Returns aggregated tier-movement statistics for the program over the given date range and resolution, optionally filtered by tier structure and tier. Each row covers one tier structure, one tier, and one period with recorded movement. Periods without recorded movement are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
-    # @param start_date [Date] Sets the inclusive start of the range, in YYYY-MM-DD format.
-    # @param end_date [Date] Sets the inclusive end of the range, in YYYY-MM-DD format. Must be after start_date.
-    # @param resolution [String] Sets the aggregation resolution. Allowed range: day up to 90 days, week up to 12 weeks, month up to 12 months, quarter up to 4 quarters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+    # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+    # @param resolution [String] Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
     # @param [Hash] opts the optional parameters
-    # @option opts [TiersReportListFilters] :filters Filters rows by tier_structure_id and tier_id. Example: filters[tier_structure_id][conditions][$is] lts_....
+    # @option opts [TiersReportListFilters] :filters Filters the results. Pass a deep object, for example filters[tier_structure_id][conditions][$is] lts_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsReportsTiersDailyListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsReportsTiersDailyListResponseBody data, response status code and response headers
     private def list_program_tiers_daily_reports_with_http_info(program_id, start_date, end_date, resolution, opts = {})
       if @api_client.config.debugging
@@ -2741,9 +2741,9 @@ module VoucherifySdk
 
     # List program tiers summary reports
     # Returns all-time tier-movement totals for the program, one row per tier structure and tier that has recorded movement. Filters rows with filters[tier_structure_id] and filters[tier_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [TiersReportListFilters] :filters Filters rows by tier_structure_id and tier_id. Omitting filters or setting it to null applies no field filter. Example: filters[tier_id][conditions][$is] lt_....
+    # @option opts [TiersReportListFilters] :filters Filters the results. Pass a deep object, for example filters[tier_id][conditions][$is] lt_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [V2LoyaltiesProgramsReportsTiersSummaryListResponseBody]
     def list_program_tiers_summary_reports(program_id, opts = {})
       data, _status_code, _headers = list_program_tiers_summary_reports_with_http_info(program_id, opts)
@@ -2752,9 +2752,9 @@ module VoucherifySdk
 
     # List program tiers summary reports
     # Returns all-time tier-movement totals for the program, one row per tier structure and tier that has recorded movement. Filters rows with filters[tier_structure_id] and filters[tier_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
-    # @param program_id [String] Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
-    # @option opts [TiersReportListFilters] :filters Filters rows by tier_structure_id and tier_id. Omitting filters or setting it to null applies no field filter. Example: filters[tier_id][conditions][$is] lt_....
+    # @option opts [TiersReportListFilters] :filters Filters the results. Pass a deep object, for example filters[tier_id][conditions][$is] lt_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
     # @return [Array<(V2LoyaltiesProgramsReportsTiersSummaryListResponseBody, Integer, Hash)>] V2LoyaltiesProgramsReportsTiersSummaryListResponseBody data, response status code and response headers
     private def list_program_tiers_summary_reports_with_http_info(program_id, opts = {})
       if @api_client.config.debugging
@@ -2803,8 +2803,8 @@ module VoucherifySdk
 
     # Purchase reward with points
     # Purchases a reward for the program member by spending points from the members card. The card comes from the matching reward costs card definition. The program, reward, and member must be ACTIVE. The program and reward must be inside their validity windows. The reward must be assigned to the program with stock available, a cost must match the customer, and the purchase must stay inside frequency, cooldown, balance, and spending limits. Modes: - TRANSACTION (default): creates a PENDING reward transaction and a PENDING card transaction. Returns 202. - DRY_RUN: simulates the purchase and doesnt create a transaction. Returns 200 with status SIMULATED.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersRewardsPurchasesCreateRequestBody] :v2_loyalties_programs_members_rewards_purchases_create_request_body 
     # @return [LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBody]
@@ -2815,8 +2815,8 @@ module VoucherifySdk
 
     # Purchase reward with points
     # Purchases a reward for the program member by spending points from the members card. The card comes from the matching reward costs card definition. The program, reward, and member must be ACTIVE. The program and reward must be inside their validity windows. The reward must be assigned to the program with stock available, a cost must match the customer, and the purchase must stay inside frequency, cooldown, balance, and spending limits. Modes: - TRANSACTION (default): creates a PENDING reward transaction and a PENDING card transaction. Returns 202. - DRY_RUN: simulates the purchase and doesnt create a transaction. Returns 200 with status SIMULATED.
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersRewardsPurchasesCreateRequestBody] :v2_loyalties_programs_members_rewards_purchases_create_request_body 
     # @return [Array<(LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBody, Integer, Hash)>] LoyaltiesProgramsMembersRewardsPurchasesCreateCombinedResponseBody data, response status code and response headers
@@ -2871,8 +2871,8 @@ module VoucherifySdk
 
     # Refund reward purchase
     # Refunds an APPROVED reward purchase made by a program member. The purchase transaction is marked REFUNDED, a new REFUND reward transaction is created with status APPROVED, and the points spent on the purchase are returned to the members card. The request body is optional and an empty payload is allowed. Policies default to refund: DEFAULT and stock: DEFAULT. The endpoint responds with 202 before the card balance changes. A POINTS_RETURNED card transaction is created for the members card and processed shortly after the response. When the members tier or the card definition expires points, returned points receive a new expiration date from that setting. They dont inherit the expiration of the originally spent points. A NO_EXPIRATION setting leaves the returned points without an expiration date. Card earning limits dont block the refund. For a LOYALTY_CARD_POINTS reward, the points credited to the target card are also reversed, with a POINTS_PURCHASE_REVERSED card transaction on that card. That transaction is processed shortly after the response. Its expiration is copied from the original points-purchased transaction. A DISCOUNT_COUPONS refund deletes the issued vouchers. details.result.digital.discount_coupons[].result is DELETED, or SKIPPED when the voucher isnt deleted. A GIFT_VOUCHERS refund subtracts the credited amount. details.result.digital.gift_vouchers[].result is CREDITS_SUBTRACTED, or SKIPPED when the balance update is rejected. The refund reverses that purchase in the rewards purchase limits for the project-local day of the original purchase. A day whose purchases are all refunded no longer counts as the members last purchase. Only rewards whose refunds.type is REFUNDABLE can be refunded. Any other reward is rejected with 423 and key reward_refund_policy_does_not_allow_refunds. policies.refund set to ALLOW refunds it anyway. The program must exist, and the reward transaction must belong to that program. Otherwise the request fails with 404. The program is checked first. The request is rejected with 423 when: - The program isnt ACTIVE (non_active_program) or is outside its validity window (program_outside_validity_window), - The transaction isnt a purchase (non_purchase_reward_transaction) or isnt APPROVED (non_approved_reward_transaction); refunding the same purchase twice fails here, - The reward no longer exists (reward_not_found), isnt assigned to the program (refund_reward_not_assigned_to_program), the members card is gone (refund_card_not_found), or the card definition is gone (refund_card_definition_not_found), - The reward type isnt supported (reward_type_not_supported_for_refunds), - For a LOYALTY_CARD_POINTS reward, the purchase result is missing (loyalty_card_points_purchase_result_not_found), the target card is gone (loyalty_card_points_target_card_not_found), the points-purchased card transaction is missing (loyalty_card_points_purchase_not_found), the target cards available balance is lower than the purchased points (loyalty_card_points_insufficient_balance), or the target card definition is gone (loyalty_card_points_target_card_definition_not_found).
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param reward_transaction_id [String] Unique reward transaction identifier of the purchase to refund (format: lrtx_ followed by hexadecimal characters).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param reward_transaction_id [String] Identifies the reward transaction of the purchase to refund. Format lrtx_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsRewardsPurchasesRefundRequestBody] :v2_loyalties_programs_rewards_purchases_refund_request_body Optional refund policies. An empty payload is allowed.
     # @return [V2LoyaltiesProgramsRewardsPurchasesRefundResponseBody]
@@ -2883,8 +2883,8 @@ module VoucherifySdk
 
     # Refund reward purchase
     # Refunds an APPROVED reward purchase made by a program member. The purchase transaction is marked REFUNDED, a new REFUND reward transaction is created with status APPROVED, and the points spent on the purchase are returned to the members card. The request body is optional and an empty payload is allowed. Policies default to refund: DEFAULT and stock: DEFAULT. The endpoint responds with 202 before the card balance changes. A POINTS_RETURNED card transaction is created for the members card and processed shortly after the response. When the members tier or the card definition expires points, returned points receive a new expiration date from that setting. They dont inherit the expiration of the originally spent points. A NO_EXPIRATION setting leaves the returned points without an expiration date. Card earning limits dont block the refund. For a LOYALTY_CARD_POINTS reward, the points credited to the target card are also reversed, with a POINTS_PURCHASE_REVERSED card transaction on that card. That transaction is processed shortly after the response. Its expiration is copied from the original points-purchased transaction. A DISCOUNT_COUPONS refund deletes the issued vouchers. details.result.digital.discount_coupons[].result is DELETED, or SKIPPED when the voucher isnt deleted. A GIFT_VOUCHERS refund subtracts the credited amount. details.result.digital.gift_vouchers[].result is CREDITS_SUBTRACTED, or SKIPPED when the balance update is rejected. The refund reverses that purchase in the rewards purchase limits for the project-local day of the original purchase. A day whose purchases are all refunded no longer counts as the members last purchase. Only rewards whose refunds.type is REFUNDABLE can be refunded. Any other reward is rejected with 423 and key reward_refund_policy_does_not_allow_refunds. policies.refund set to ALLOW refunds it anyway. The program must exist, and the reward transaction must belong to that program. Otherwise the request fails with 404. The program is checked first. The request is rejected with 423 when: - The program isnt ACTIVE (non_active_program) or is outside its validity window (program_outside_validity_window), - The transaction isnt a purchase (non_purchase_reward_transaction) or isnt APPROVED (non_approved_reward_transaction); refunding the same purchase twice fails here, - The reward no longer exists (reward_not_found), isnt assigned to the program (refund_reward_not_assigned_to_program), the members card is gone (refund_card_not_found), or the card definition is gone (refund_card_definition_not_found), - The reward type isnt supported (reward_type_not_supported_for_refunds), - For a LOYALTY_CARD_POINTS reward, the purchase result is missing (loyalty_card_points_purchase_result_not_found), the target card is gone (loyalty_card_points_target_card_not_found), the points-purchased card transaction is missing (loyalty_card_points_purchase_not_found), the target cards available balance is lower than the purchased points (loyalty_card_points_insufficient_balance), or the target card definition is gone (loyalty_card_points_target_card_definition_not_found).
-    # @param program_id [String] Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-    # @param reward_transaction_id [String] Unique reward transaction identifier of the purchase to refund (format: lrtx_ followed by hexadecimal characters).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param reward_transaction_id [String] Identifies the reward transaction of the purchase to refund. Format lrtx_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsRewardsPurchasesRefundRequestBody] :v2_loyalties_programs_rewards_purchases_refund_request_body Optional refund policies. An empty payload is allowed.
     # @return [Array<(V2LoyaltiesProgramsRewardsPurchasesRefundResponseBody, Integer, Hash)>] V2LoyaltiesProgramsRewardsPurchasesRefundResponseBody data, response status code and response headers
@@ -2939,8 +2939,8 @@ module VoucherifySdk
 
     # Update program member
     # Updates a program members metadata. Provided object keys are merged into the existing metadata; omitted keys are preserved. Pass metadata: null to clear all metadata (sets it to an empty object). This endpoint cannot change status. Use [Activate program member](/api-reference/programs/activate-program-member) or [Deactivate program member](/api-reference/programs/deactivate-program-member) for status transitions. Records a vl.member.updated activity. Returns the updated member without the cards array. Returns 404 when the program or member does not exist. Returns 400 when the request body fails validation or the project vl_member metadata schema rejects the payload.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersUpdateRequestBody] :v2_loyalties_programs_members_update_request_body 
     # @return [V2LoyaltiesProgramsMembersUpdateResponseBody]
@@ -2951,8 +2951,8 @@ module VoucherifySdk
 
     # Update program member
     # Updates a program members metadata. Provided object keys are merged into the existing metadata; omitted keys are preserved. Pass metadata: null to clear all metadata (sets it to an empty object). This endpoint cannot change status. Use [Activate program member](/api-reference/programs/activate-program-member) or [Deactivate program member](/api-reference/programs/deactivate-program-member) for status transitions. Records a vl.member.updated activity. Returns the updated member without the cards array. Returns 404 when the program or member does not exist. Returns 400 when the request body fails validation or the project vl_member metadata schema rejects the payload.
-    # @param program_id [String] Unique loyalty program ID (format lprg_[a-f0-9]+).
-    # @param member_id [String] Program member ID (format lmbr_[a-f0-9]+).
+    # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
+    # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersUpdateRequestBody] :v2_loyalties_programs_members_update_request_body 
     # @return [Array<(V2LoyaltiesProgramsMembersUpdateResponseBody, Integer, Hash)>] V2LoyaltiesProgramsMembersUpdateResponseBody data, response status code and response headers

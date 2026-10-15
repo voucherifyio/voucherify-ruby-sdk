@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Request query schema for **GET** `/v2/loyalties/programs/{programId}/members/{memberId}/cards/{cardId}/pending-points`.
   class V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery
-    # How multiple field filters are combined. Defaults to `AND`.
+    # Joins the field filters. Allowed values are `AND` and `OR`. Defaults to `AND`.
     attr_accessor :junction
 
     attr_accessor :card_definition_id

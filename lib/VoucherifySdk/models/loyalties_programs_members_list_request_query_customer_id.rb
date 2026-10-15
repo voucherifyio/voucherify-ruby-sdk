@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # ID filter conditions for customer IDs. At least one condition is required.
+  # ID conditions. Format `cust_[a-zA-Z0-9]+`. At least one condition is required.
   class LoyaltiesProgramsMembersListRequestQueryCustomerId
     attr_accessor :conditions
 

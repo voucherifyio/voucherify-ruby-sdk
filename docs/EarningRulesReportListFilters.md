@@ -4,6 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **junction** | **String** | Logical junction between the field filters. Defaults to AND behavior. | [optional] |
+| **junction** | **String** | Joins the field filters. Allowed values are &#x60;AND&#x60; and &#x60;OR&#x60;. Defaults to &#x60;AND&#x60;. | [optional] |
 | **earning_rule_id** | [**EarningRuleIdFilterConditions**](EarningRuleIdFilterConditions.md) |  | [optional] |
 

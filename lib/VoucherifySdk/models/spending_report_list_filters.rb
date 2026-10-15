@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Filters for spending reports.
   class SpendingReportListFilters
-    # Sets the logical junction between field filters. Allowed values: `AND`, `OR`. Defaults to `AND`.
+    # Joins the field filters. Allowed values are `AND` and `OR`. Defaults to `AND`.
     attr_accessor :junction
 
     attr_accessor :card_definition_id
@@ -60,7 +60,7 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'junction' => :'String',
-        :'card_definition_id' => :'SpendingReportFilterCardDefinitionIdConditions'
+        :'card_definition_id' => :'ReportCardDefinitionIdFilterConditions'
       }
     end
 

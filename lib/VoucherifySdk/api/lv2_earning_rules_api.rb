@@ -21,7 +21,7 @@ module VoucherifySdk
     end
     # Get earning rule
     # Returns a single earning rule by its ID.
-    # @param earning_rule_id [String] Earning rule ID.
+    # @param earning_rule_id [String] Identifies the earning rule. Format lern_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesEarningRulesGetResponseBody]
     def get_earning_rule(earning_rule_id, opts = {})
@@ -31,7 +31,7 @@ module VoucherifySdk
 
     # Get earning rule
     # Returns a single earning rule by its ID.
-    # @param earning_rule_id [String] Earning rule ID.
+    # @param earning_rule_id [String] Identifies the earning rule. Format lern_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesEarningRulesGetResponseBody, Integer, Hash)>] V2LoyaltiesEarningRulesGetResponseBody data, response status code and response headers
     private def get_earning_rule_with_http_info(earning_rule_id, opts = {})

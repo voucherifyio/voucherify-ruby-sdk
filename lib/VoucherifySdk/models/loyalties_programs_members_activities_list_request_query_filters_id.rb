@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # ID filter conditions for member activity IDs. At least one condition is required.
+  # ID conditions. Format `lambr_[a-f0-9]+`. At least one condition is required.
   class LoyaltiesProgramsMembersActivitiesListRequestQueryFiltersId
     attr_accessor :conditions
 

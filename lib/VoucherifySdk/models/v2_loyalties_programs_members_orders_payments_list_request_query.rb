@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Request query schema for **GET** `/v2/loyalties/programs/{programId}/members/{memberId}/orders/payments`.
   class V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery
-    # Joins field filters with `AND` or `OR`. Defaults to `AND`.
+    # Joins the field filters. Allowed values are `AND` and `OR`. Defaults to `AND`.
     attr_accessor :junction
 
     attr_accessor :id

@@ -21,7 +21,7 @@ module VoucherifySdk
     end
     # Get reward by ID
     # Returns a single reward by its ID.
-    # @param reward_id [String] Unique reward identifier, prefixed with lrew_.
+    # @param reward_id [String] Identifies the reward. Format lrew_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesRewardsGetResponseBody]
     def get_reward(reward_id, opts = {})
@@ -31,7 +31,7 @@ module VoucherifySdk
 
     # Get reward by ID
     # Returns a single reward by its ID.
-    # @param reward_id [String] Unique reward identifier, prefixed with lrew_.
+    # @param reward_id [String] Identifies the reward. Format lrew_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesRewardsGetResponseBody, Integer, Hash)>] V2LoyaltiesRewardsGetResponseBody data, response status code and response headers
     private def get_reward_with_http_info(reward_id, opts = {})

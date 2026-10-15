@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # ID filter conditions for card activity IDs. At least one condition is required.
+  # ID conditions. Format `lacrd_[a-f0-9]+`. At least one condition is required.
   class LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFiltersId
     attr_accessor :conditions
 

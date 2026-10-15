@@ -77,10 +77,10 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
-card_id = 'card_id_example' # String | Loyalty card ID (format lcrd_[a-f0-9]+).
-bucket_id = 'bucket_id_example' # String | Pending points bucket ID (format lcppb_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
+card_id = 'card_id_example' # String | Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+bucket_id = 'bucket_id_example' # String | Identifies the pending points bucket. Format lcppb_[a-f0-9]+.
 
 begin
   # Activate pending point bucket
@@ -95,10 +95,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **card_id** | **String** | Loyalty card ID (format lcrd_[a-f0-9]+). |  |
-| **bucket_id** | **String** | Pending points bucket ID (format lcppb_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **card_id** | **String** | Identifies the loyalty card. Format lcrd_[a-f0-9]+. |  |
+| **bucket_id** | **String** | Identifies the pending points bucket. Format lcppb_[a-f0-9]+. |  |
 
 ### Return type
 
@@ -141,8 +141,8 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+. Required.
-member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+. Required.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 
 begin
   # Activate program member
@@ -157,8 +157,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. Required. |  |
-| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. Required. |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
 
 ### Return type
 
@@ -201,9 +201,9 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
-card_id = 'card_id_example' # String | Loyalty card ID (format lcrd_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
+card_id = 'card_id_example' # String | Identifies the loyalty card. Format lcrd_[a-f0-9]+.
 opts = {
   v2_loyalties_programs_members_cards_points_adjust_request_body: VoucherifySdk::V2LoyaltiesProgramsMembersCardsPointsAdjustRequestBody.new # V2LoyaltiesProgramsMembersCardsPointsAdjustRequestBody | 
 }
@@ -221,9 +221,9 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **card_id** | **String** | Loyalty card ID (format lcrd_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **card_id** | **String** | Identifies the loyalty card. Format lcrd_[a-f0-9]+. |  |
 | **v2_loyalties_programs_members_cards_points_adjust_request_body** | [**V2LoyaltiesProgramsMembersCardsPointsAdjustRequestBody**](V2LoyaltiesProgramsMembersCardsPointsAdjustRequestBody.md) |  | [optional] |
 
 ### Return type
@@ -267,7 +267,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
   member_create: [VoucherifySdk::MemberCreate.new({customer_identification: 3.56})] # Array<MemberCreate> | 
 }
@@ -285,7 +285,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
 | **member_create** | [**Array&lt;MemberCreate&gt;**](MemberCreate.md) |  | [optional] |
 
 ### Return type
@@ -329,10 +329,10 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
-card_id = 'card_id_example' # String | Loyalty card ID (format lcrd_[a-f0-9]+).
-bucket_id = 'bucket_id_example' # String | Pending points bucket ID (format lcppb_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
+card_id = 'card_id_example' # String | Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+bucket_id = 'bucket_id_example' # String | Identifies the pending points bucket. Format lcppb_[a-f0-9]+.
 
 begin
   # Cancel pending point bucket
@@ -347,10 +347,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **card_id** | **String** | Loyalty card ID (format lcrd_[a-f0-9]+). |  |
-| **bucket_id** | **String** | Pending points bucket ID (format lcppb_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **card_id** | **String** | Identifies the loyalty card. Format lcrd_[a-f0-9]+. |  |
+| **bucket_id** | **String** | Identifies the pending points bucket. Format lcppb_[a-f0-9]+. |  |
 
 ### Return type
 
@@ -393,8 +393,8 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-member_id = 'member_id_example' # String | Identifies the program member (lmbr_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 opts = {
   v2_loyalties_programs_members_orders_payments_create_request_body: VoucherifySdk::V2LoyaltiesProgramsMembersOrdersPaymentsCreateRequestBody.new({order: VoucherifySdk::OrderPaymentOrder.new}) # V2LoyaltiesProgramsMembersOrdersPaymentsCreateRequestBody | 
 }
@@ -412,8 +412,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program (lprg_ followed by hexadecimal characters). |  |
-| **member_id** | **String** | Identifies the program member (lmbr_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
 | **v2_loyalties_programs_members_orders_payments_create_request_body** | [**V2LoyaltiesProgramsMembersOrdersPaymentsCreateRequestBody**](V2LoyaltiesProgramsMembersOrdersPaymentsCreateRequestBody.md) |  | [optional] |
 
 ### Return type
@@ -457,7 +457,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
   v2_loyalties_programs_members_create_request_body: VoucherifySdk::V2LoyaltiesProgramsMembersCreateRequestBody.new({customer_identification: 3.56}) # V2LoyaltiesProgramsMembersCreateRequestBody | 
 }
@@ -475,7 +475,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
 | **v2_loyalties_programs_members_create_request_body** | [**V2LoyaltiesProgramsMembersCreateRequestBody**](V2LoyaltiesProgramsMembersCreateRequestBody.md) |  | [optional] |
 
 ### Return type
@@ -519,8 +519,8 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program. Unique identifier in lprg_[a-f0-9]+ format.
-member_id = 'member_id_example' # String | Identifies the member. Unique identifier in lmbr_[a-f0-9]+ format.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 
 begin
   # Deactivate program member
@@ -535,8 +535,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program. Unique identifier in lprg_[a-f0-9]+ format. |  |
-| **member_id** | **String** | Identifies the member. Unique identifier in lmbr_[a-f0-9]+ format. |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
 
 ### Return type
 
@@ -579,8 +579,8 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 
 begin
   # Delete program member
@@ -595,8 +595,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
 
 ### Return type
 
@@ -639,10 +639,10 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
-card_id = 'card_id_example' # String | Loyalty card ID (format lcrd_[a-f0-9]+).
-bucket_id = 'bucket_id_example' # String | Points expiration bucket ID (format lcpeb_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
+card_id = 'card_id_example' # String | Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+bucket_id = 'bucket_id_example' # String | Identifies the points expiration bucket. Format lcpeb_[a-f0-9]+.
 
 begin
   # Expire point bucket
@@ -657,10 +657,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **card_id** | **String** | Loyalty card ID (format lcrd_[a-f0-9]+). |  |
-| **bucket_id** | **String** | Points expiration bucket ID (format lcpeb_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **card_id** | **String** | Identifies the loyalty card. Format lcrd_[a-f0-9]+. |  |
+| **bucket_id** | **String** | Identifies the points expiration bucket. Format lcpeb_[a-f0-9]+. |  |
 
 ### Return type
 
@@ -703,12 +703,12 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-member_id = 'member_id_example' # String | Unique loyalty member identifier (format: lmbr_ followed by hexadecimal characters).
-earning_rule_id = 'earning_rule_id_example' # String | Unique earning rule identifier (format: lern_ followed by hexadecimal characters).
-start_date = Date.parse('2013-10-20') # Date | Start of the report date range (inclusive), in YYYY-MM-DD format.
-end_date = Date.parse('2013-10-20') # Date | End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-resolution = 'day' # String | Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
+earning_rule_id = 'earning_rule_id_example' # String | Identifies the earning rule. Format lern_[a-f0-9]+.
+start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+resolution = 'day' # String | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
 
 begin
   # List member earning-rule daily reports
@@ -723,12 +723,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters). |  |
-| **member_id** | **String** | Unique loyalty member identifier (format: lmbr_ followed by hexadecimal characters). |  |
-| **earning_rule_id** | **String** | Unique earning rule identifier (format: lern_ followed by hexadecimal characters). |  |
-| **start_date** | **Date** | Start of the report date range (inclusive), in YYYY-MM-DD format. |  |
-| **end_date** | **Date** | End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date. |  |
-| **resolution** | **String** | Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters. |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **earning_rule_id** | **String** | Identifies the earning rule. Format lern_[a-f0-9]+. |  |
+| **start_date** | **Date** | Sets the inclusive start of the report date range. Format YYYY-MM-DD. |  |
+| **end_date** | **Date** | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date. |  |
+| **resolution** | **String** | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters. |  |
 
 ### Return type
 
@@ -771,8 +771,8 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 
 begin
   # Get program member
@@ -787,8 +787,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
 
 ### Return type
 
@@ -831,10 +831,10 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-customer_id = 'customer_id_example' # String | Unique identifier of the customer or member, interpreted according to identification_type: a Voucherify customer ID (cust_...), a customer source_id, or a loyalty member ID (lmbr_...).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+customer_id = 'customer_id_example' # String | Identifies the customer or member. identification_type selects the value: a Voucherify customer ID (cust_...), a customer source_id, or a loyalty member ID (lmbr_...).
 opts = {
-  identification_type: 'customer_id' # String | Chooses how customerId is read. customer_id is the Voucherify customer ID and the default. customer_source_id is the customers source_id. member_id is the loyalty member ID.
+  identification_type: 'customer_id' # String | Selects how customerId is read. customer_id is the Voucherify customer ID and the default. customer_source_id is the customers source_id. member_id is the loyalty member ID.
 }
 
 begin
@@ -850,9 +850,9 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **customer_id** | **String** | Unique identifier of the customer or member, interpreted according to identification_type: a Voucherify customer ID (cust_...), a customer source_id, or a loyalty member ID (lmbr_...). |  |
-| **identification_type** | **String** | Chooses how customerId is read. customer_id is the Voucherify customer ID and the default. customer_source_id is the customers source_id. member_id is the loyalty member ID. | [optional][default to &#39;customer_id&#39;] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **customer_id** | **String** | Identifies the customer or member. identification_type selects the value: a Voucherify customer ID (cust_...), a customer source_id, or a loyalty member ID (lmbr_...). |  |
+| **identification_type** | **String** | Selects how customerId is read. customer_id is the Voucherify customer ID and the default. customer_source_id is the customers source_id. member_id is the loyalty member ID. | [optional][default to &#39;customer_id&#39;] |
 
 ### Return type
 
@@ -895,12 +895,12 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
-start_date = Date.parse('2013-10-20') # Date | Start of the report date range (inclusive), in YYYY-MM-DD format.
-end_date = Date.parse('2013-10-20') # Date | End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-resolution = 'day' # String | Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+resolution = 'day' # String | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
 opts = {
-  filters: VoucherifySdk::PointsEarningsReportListFilters.new # PointsEarningsReportListFilters | Filters rows by earning rule ID and card definition ID. Each field takes a conditions object. Omitting filters or setting it to null applies no field filters.
+  filters: VoucherifySdk::PointsEarningsReportListFilters.new # PointsEarningsReportListFilters | Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -916,11 +916,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters. |  |
-| **start_date** | **Date** | Start of the report date range (inclusive), in YYYY-MM-DD format. |  |
-| **end_date** | **Date** | End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date. |  |
-| **resolution** | **String** | Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters. |  |
-| **filters** | [**PointsEarningsReportListFilters**](.md) | Filters rows by earning rule ID and card definition ID. Each field takes a conditions object. Omitting filters or setting it to null applies no field filters. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **start_date** | **Date** | Sets the inclusive start of the report date range. Format YYYY-MM-DD. |  |
+| **end_date** | **Date** | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date. |  |
+| **resolution** | **String** | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters. |  |
+| **filters** | [**PointsEarningsReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -963,9 +963,9 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
-  filters: VoucherifySdk::PointsEarningsReportListFilters.new # PointsEarningsReportListFilters | Filters rows by earning rule ID and card definition ID. Each field takes a conditions object. Omitting filters or setting it to null applies no field filters.
+  filters: VoucherifySdk::PointsEarningsReportListFilters.new # PointsEarningsReportListFilters | Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -981,8 +981,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters. |  |
-| **filters** | [**PointsEarningsReportListFilters**](.md) | Filters rows by earning rule ID and card definition ID. Each field takes a conditions object. Omitting filters or setting it to null applies no field filters. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **filters** | [**PointsEarningsReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1025,14 +1025,14 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
-card_id = 'card_id_example' # String | Loyalty card ID (format lcrd_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
+card_id = 'card_id_example' # String | Identifies the loyalty card. Format lcrd_[a-f0-9]+.
 opts = {
-  limit: 56, # Integer | Maximum number of activities to return. An integer from 1 to 100. Numeric strings are accepted and rounded to the nearest integer. Defaults to 10 when omitted.
-  order: 'created_at', # String | Sort field. Allowed values are created_at and -created_at. Defaults to -created_at when omitted, null, or an empty array. Accepts one value or an array of those values. Any other value is rejected. An array that contains both directions is rejected. Rows that share a created_at millisecond are then ordered by id ascending.
-  cursor: 'cursor_example', # String | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsacrd_[a-f0-9]+$.
-  filters: VoucherifySdk::V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters.new # V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters | Field-specific filter conditions, passed as a deep object, e.g. filters[type][conditions][$is] vl.card.created.
+  limit: 56, # Integer | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: 'created_at', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+  cursor: 'cursor_example', # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsacrd_[a-f0-9]+. The cursor matches the filters and order of that response.
+  filters: VoucherifySdk::V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters.new # V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters | Filters the results. Pass a deep object, for example filters[type][conditions][$is] vl.card.created. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1048,13 +1048,13 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **card_id** | **String** | Loyalty card ID (format lcrd_[a-f0-9]+). |  |
-| **limit** | **Integer** | Maximum number of activities to return. An integer from 1 to 100. Numeric strings are accepted and rounded to the nearest integer. Defaults to 10 when omitted. | [optional][default to 10] |
-| **order** | **String** | Sort field. Allowed values are created_at and -created_at. Defaults to -created_at when omitted, null, or an empty array. Accepts one value or an array of those values. Any other value is rejected. An array that contains both directions is rejected. Rows that share a created_at millisecond are then ordered by id ascending. | [optional] |
-| **cursor** | **String** | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsacrd_[a-f0-9]+$. | [optional] |
-| **filters** | [**V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters**](.md) | Field-specific filter conditions, passed as a deep object, e.g. filters[type][conditions][$is] vl.card.created. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **card_id** | **String** | Identifies the loyalty card. Format lcrd_[a-f0-9]+. |  |
+| **limit** | **Integer** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to 10] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsacrd_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
+| **filters** | [**V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters**](.md) | Filters the results. Pass a deep object, for example filters[type][conditions][$is] vl.card.created. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1097,14 +1097,14 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
-card_id = 'card_id_example' # String | Loyalty card ID (format lcrd_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
+card_id = 'card_id_example' # String | Identifies the loyalty card. Format lcrd_[a-f0-9]+.
 opts = {
-  limit: 56, # Integer | Maximum number of buckets to return. Must be between 1 and 100. Defaults to 10 when not provided.
-  order: 'expiration_date', # String | Field(s) to order results by. Valid orders are expiration_date and -expiration_date; defaults to expiration_date (soonest expiration first). Ordering by the same field in both directions simultaneously is rejected.
-  cursor: 'cursor_example', # String | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrspeb_[a-f0-9]+$.
-  filters: VoucherifySdk::V2LoyaltiesProgramsMembersCardsExpiringPointsListRequestQuery.new # V2LoyaltiesProgramsMembersCardsExpiringPointsListRequestQuery | Field-specific filter conditions, passed as a deep object, for example filters[card_definition_id][conditions][$is] lcdef_1297339938ae248cea.
+  limit: 56, # Integer | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: 'expiration_date', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to expiration_date. Soonest expiration first. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+  cursor: 'cursor_example', # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrspeb_[a-f0-9]+. The cursor matches the filters and order of that response.
+  filters: VoucherifySdk::V2LoyaltiesProgramsMembersCardsExpiringPointsListRequestQuery.new # V2LoyaltiesProgramsMembersCardsExpiringPointsListRequestQuery | Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_1297339938ae248cea. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1120,13 +1120,13 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **card_id** | **String** | Loyalty card ID (format lcrd_[a-f0-9]+). |  |
-| **limit** | **Integer** | Maximum number of buckets to return. Must be between 1 and 100. Defaults to 10 when not provided. | [optional][default to 10] |
-| **order** | **String** | Field(s) to order results by. Valid orders are expiration_date and -expiration_date; defaults to expiration_date (soonest expiration first). Ordering by the same field in both directions simultaneously is rejected. | [optional] |
-| **cursor** | **String** | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrspeb_[a-f0-9]+$. | [optional] |
-| **filters** | [**V2LoyaltiesProgramsMembersCardsExpiringPointsListRequestQuery**](.md) | Field-specific filter conditions, passed as a deep object, for example filters[card_definition_id][conditions][$is] lcdef_1297339938ae248cea. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **card_id** | **String** | Identifies the loyalty card. Format lcrd_[a-f0-9]+. |  |
+| **limit** | **Integer** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to 10] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to expiration_date. Soonest expiration first. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrspeb_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
+| **filters** | [**V2LoyaltiesProgramsMembersCardsExpiringPointsListRequestQuery**](.md) | Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_1297339938ae248cea. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1169,14 +1169,14 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
-card_id = 'card_id_example' # String | Loyalty card ID (format lcrd_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
+card_id = 'card_id_example' # String | Identifies the loyalty card. Format lcrd_[a-f0-9]+.
 opts = {
-  limit: 56, # Integer | Maximum number of buckets to return. Must be between 1 and 100. Defaults to 10 when not provided.
-  order: 'date', # String | Field(s) to order results by. Valid orders are date and -date; defaults to date (soonest activation first). Ordering by the same field in both directions simultaneously is rejected.
-  cursor: 'cursor_example', # String | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrscppb_[a-f0-9]+$.
-  filters: VoucherifySdk::V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery.new # V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery | Field-specific filter conditions, passed as a deep object, for example filters[card_definition_id][conditions][$is] lcdef_128f495f720c4bec8c.
+  limit: 56, # Integer | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: 'date', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to date. Soonest activation first. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+  cursor: 'cursor_example', # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrscppb_[a-f0-9]+. The cursor matches the filters and order of that response.
+  filters: VoucherifySdk::V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery.new # V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery | Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_128f495f720c4bec8c. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1192,13 +1192,13 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **card_id** | **String** | Loyalty card ID (format lcrd_[a-f0-9]+). |  |
-| **limit** | **Integer** | Maximum number of buckets to return. Must be between 1 and 100. Defaults to 10 when not provided. | [optional][default to 10] |
-| **order** | **String** | Field(s) to order results by. Valid orders are date and -date; defaults to date (soonest activation first). Ordering by the same field in both directions simultaneously is rejected. | [optional] |
-| **cursor** | **String** | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrscppb_[a-f0-9]+$. | [optional] |
-| **filters** | [**V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery**](.md) | Field-specific filter conditions, passed as a deep object, for example filters[card_definition_id][conditions][$is] lcdef_128f495f720c4bec8c. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **card_id** | **String** | Identifies the loyalty card. Format lcrd_[a-f0-9]+. |  |
+| **limit** | **Integer** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to 10] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to date. Soonest activation first. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrscppb_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
+| **filters** | [**V2LoyaltiesProgramsMembersCardsPendingPointsListRequestQuery**](.md) | Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_128f495f720c4bec8c. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1241,14 +1241,14 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
-card_id = 'card_id_example' # String | Loyalty card ID (format lcrd_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
+card_id = 'card_id_example' # String | Identifies the loyalty card. Format lcrd_[a-f0-9]+.
 opts = {
-  limit: 56, # Integer | Maximum number of transactions to return. Must be between 1 and 100. Defaults to 10 when not provided.
-  order: '-id', # String | Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected.
-  cursor: 'cursor_example', # String | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsctx_[a-f0-9]+$.
-  filters: VoucherifySdk::V2LoyaltiesProgramsMembersCardsTransactionsListRequestQuery.new # V2LoyaltiesProgramsMembersCardsTransactionsListRequestQuery | Field-specific filter conditions, passed as a deep object, e.g. filters[id][conditions][$is] lctx_0f5d0a8878caa3ee5c.
+  limit: 56, # Integer | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: '-id', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+  cursor: 'cursor_example', # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsctx_[a-f0-9]+. The cursor matches the filters and order of that response.
+  filters: VoucherifySdk::V2LoyaltiesProgramsMembersCardsTransactionsListRequestQuery.new # V2LoyaltiesProgramsMembersCardsTransactionsListRequestQuery | Filters the results. Pass a deep object, for example filters[id][conditions][$is] lctx_0f5d0a8878caa3ee5c. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1264,13 +1264,13 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **card_id** | **String** | Loyalty card ID (format lcrd_[a-f0-9]+). |  |
-| **limit** | **Integer** | Maximum number of transactions to return. Must be between 1 and 100. Defaults to 10 when not provided. | [optional][default to 10] |
-| **order** | **String** | Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected. | [optional] |
-| **cursor** | **String** | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsctx_[a-f0-9]+$. | [optional] |
-| **filters** | [**V2LoyaltiesProgramsMembersCardsTransactionsListRequestQuery**](.md) | Field-specific filter conditions, passed as a deep object, e.g. filters[id][conditions][$is] lctx_0f5d0a8878caa3ee5c. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **card_id** | **String** | Identifies the loyalty card. Format lcrd_[a-f0-9]+. |  |
+| **limit** | **Integer** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to 10] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsctx_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
+| **filters** | [**V2LoyaltiesProgramsMembersCardsTransactionsListRequestQuery**](.md) | Filters the results. Pass a deep object, for example filters[id][conditions][$is] lctx_0f5d0a8878caa3ee5c. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1313,13 +1313,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 opts = {
-  limit: 56, # Integer | Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10.
-  order: 'id', # String | Field(s) to order results by. Valid orders are id and -id; defaults to -id (newest first). Ordering by the same field in both directions simultaneously is rejected.
-  cursor: 'cursor_example', # String | Pagination cursor returned in the cursor.next field of a previous response (format: lcrsbtx_ followed by hexadecimal characters).
-  filters: VoucherifySdk::V2LoyaltiesProgramsMembersBenefitsTransactionsListRequestQuery.new # V2LoyaltiesProgramsMembersBenefitsTransactionsListRequestQuery | Field filters, e.g. filters[benefit_id][conditions][$is] lben_.... Each field accepts a conditions object with condition operators.
+  limit: 56, # Integer | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: 'id', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+  cursor: 'cursor_example', # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsbtx_[a-f0-9]+. The cursor matches the filters and order of that response.
+  filters: VoucherifySdk::V2LoyaltiesProgramsMembersBenefitsTransactionsListRequestQuery.new # V2LoyaltiesProgramsMembersBenefitsTransactionsListRequestQuery | Filters the results. Pass a deep object, for example filters[benefit_id][conditions][$is] lben_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1335,12 +1335,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **limit** | **Integer** | Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. | [optional][default to 10] |
-| **order** | **String** | Field(s) to order results by. Valid orders are id and -id; defaults to -id (newest first). Ordering by the same field in both directions simultaneously is rejected. | [optional] |
-| **cursor** | **String** | Pagination cursor returned in the cursor.next field of a previous response (format: lcrsbtx_ followed by hexadecimal characters). | [optional] |
-| **filters** | [**V2LoyaltiesProgramsMembersBenefitsTransactionsListRequestQuery**](.md) | Field filters, e.g. filters[benefit_id][conditions][$is] lben_.... Each field accepts a conditions object with condition operators. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **limit** | **Integer** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to 10] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsbtx_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
+| **filters** | [**V2LoyaltiesProgramsMembersBenefitsTransactionsListRequestQuery**](.md) | Filters the results. Pass a deep object, for example filters[benefit_id][conditions][$is] lben_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1383,12 +1383,12 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-member_id = 'member_id_example' # String | Unique loyalty member identifier (format: lmbr_ followed by hexadecimal characters).
-card_id = 'card_id_example' # String | Unique loyalty card identifier (format: lcrd_ followed by hexadecimal characters).
-start_date = Date.parse('2013-10-20') # Date | Start of the report date range (inclusive), in YYYY-MM-DD format.
-end_date = Date.parse('2013-10-20') # Date | End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-resolution = 'day' # String | Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
+card_id = 'card_id_example' # String | Identifies the loyalty card. Format lcrd_[a-f0-9]+.
+start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+resolution = 'day' # String | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
 
 begin
   # List card daily points reports
@@ -1403,12 +1403,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters). |  |
-| **member_id** | **String** | Unique loyalty member identifier (format: lmbr_ followed by hexadecimal characters). |  |
-| **card_id** | **String** | Unique loyalty card identifier (format: lcrd_ followed by hexadecimal characters). |  |
-| **start_date** | **Date** | Start of the report date range (inclusive), in YYYY-MM-DD format. |  |
-| **end_date** | **Date** | End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date. |  |
-| **resolution** | **String** | Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters. |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **card_id** | **String** | Identifies the loyalty card. Format lcrd_[a-f0-9]+. |  |
+| **start_date** | **Date** | Sets the inclusive start of the report date range. Format YYYY-MM-DD. |  |
+| **end_date** | **Date** | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date. |  |
+| **resolution** | **String** | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters. |  |
 
 ### Return type
 
@@ -1451,13 +1451,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-member_id = 'member_id_example' # String | Identifies the program member (lmbr_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 opts = {
-  limit: 56, # Integer | Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10.
-  order: '-id', # String | Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected.
-  cursor: 'cursor_example', # String | Pagination cursor returned in the cursor.next field of a previous response (format: lcrsotx_ followed by hexadecimal characters).
-  filters: VoucherifySdk::V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery.new # V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery | Filters results by field, e.g. filters[id][conditions][$is] lotx_.... Each field accepts a conditions object with condition operators.
+  limit: 56, # Integer | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: '-id', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+  cursor: 'cursor_example', # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsotx_[a-f0-9]+. The cursor matches the filters and order of that response.
+  filters: VoucherifySdk::V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery.new # V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery | Filters the results. Pass a deep object, for example filters[id][conditions][$is] lotx_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1473,12 +1473,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program (lprg_ followed by hexadecimal characters). |  |
-| **member_id** | **String** | Identifies the program member (lmbr_[a-f0-9]+). |  |
-| **limit** | **Integer** | Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. | [optional][default to 10] |
-| **order** | **String** | Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected. | [optional] |
-| **cursor** | **String** | Pagination cursor returned in the cursor.next field of a previous response (format: lcrsotx_ followed by hexadecimal characters). | [optional] |
-| **filters** | [**V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery**](.md) | Filters results by field, e.g. filters[id][conditions][$is] lotx_.... Each field accepts a conditions object with condition operators. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **limit** | **Integer** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to 10] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsotx_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
+| **filters** | [**V2LoyaltiesProgramsMembersOrdersPaymentsListRequestQuery**](.md) | Filters the results. Pass a deep object, for example filters[id][conditions][$is] lotx_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1521,13 +1521,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 opts = {
-  limit: 56, # Integer | Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10.
-  order: '-id', # String | Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected.
-  cursor: 'cursor_example', # String | Pagination cursor returned in the cursor.next field of a previous response (format: lcrstrx_ followed by hexadecimal characters).
-  filters: VoucherifySdk::V2LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery.new # V2LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery | Field filters, e.g. filters[reward_id][conditions][$is] lrew_.... Each field accepts a conditions object with condition operators.
+  limit: 56, # Integer | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: '-id', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+  cursor: 'cursor_example', # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrstrx_[a-f0-9]+. The cursor matches the filters and order of that response.
+  filters: VoucherifySdk::V2LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery.new # V2LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery | Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1543,12 +1543,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **limit** | **Integer** | Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. | [optional][default to 10] |
-| **order** | **String** | Orders results by transaction id. -id is newest first and the default. id is oldest first. An array that orders by id and -id together is rejected. | [optional] |
-| **cursor** | **String** | Pagination cursor returned in the cursor.next field of a previous response (format: lcrstrx_ followed by hexadecimal characters). | [optional] |
-| **filters** | [**V2LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery**](.md) | Field filters, e.g. filters[reward_id][conditions][$is] lrew_.... Each field accepts a conditions object with condition operators. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **limit** | **Integer** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to 10] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrstrx_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
+| **filters** | [**V2LoyaltiesProgramsMembersRewardsPurchasesListRequestQuery**](.md) | Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1591,13 +1591,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 opts = {
-  limit: 56, # Integer | Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10.
-  order: '-id', # String | Sort field. Allowed values are id and -id. Defaults to -id, newest first, when omitted, null, or an empty array. Accepts one value or an array of those values. An array that contains both directions is rejected.
-  cursor: 'cursor_example', # String | Pagination cursor returned in the cursor.next field of a previous response (format: lcrsttx_ followed by hexadecimal characters).
-  filters: VoucherifySdk::V2LoyaltiesProgramsMembersTiersTransactionsListRequestQuery.new # V2LoyaltiesProgramsMembersTiersTransactionsListRequestQuery | Field filters. card_id, card_definition_id, and created_at. Example: filters[card_id][conditions][$is] lcrd_....
+  limit: 56, # Integer | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: '-id', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions.
+  cursor: 'cursor_example', # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsttx_[a-f0-9]+. The cursor matches the filters and order of that response.
+  filters: VoucherifySdk::V2LoyaltiesProgramsMembersTiersTransactionsListRequestQuery.new # V2LoyaltiesProgramsMembersTiersTransactionsListRequestQuery | Filters the results. Pass a deep object, for example filters[card_id][conditions][$is] lcrd_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1613,12 +1613,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **limit** | **Integer** | Maximum number of items to return. An integer between 1 and 100; numeric strings are also accepted. Defaults to 10. | [optional][default to 10] |
-| **order** | **String** | Sort field. Allowed values are id and -id. Defaults to -id, newest first, when omitted, null, or an empty array. Accepts one value or an array of those values. An array that contains both directions is rejected. | [optional] |
-| **cursor** | **String** | Pagination cursor returned in the cursor.next field of a previous response (format: lcrsttx_ followed by hexadecimal characters). | [optional] |
-| **filters** | [**V2LoyaltiesProgramsMembersTiersTransactionsListRequestQuery**](.md) | Field filters. card_id, card_definition_id, and created_at. Example: filters[card_id][conditions][$is] lcrd_.... | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **limit** | **Integer** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to 10] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -id. Newest first. The same field cannot be used in both directions. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsttx_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
+| **filters** | [**V2LoyaltiesProgramsMembersTiersTransactionsListRequestQuery**](.md) | Filters the results. Pass a deep object, for example filters[card_id][conditions][$is] lcrd_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1661,11 +1661,11 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique program identifier.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
-  limit: 'limit_example', # String | Maximum number of items to return. Between 1 and 100. Defaults to 10.
-  order: '-created_at', # String | Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once.
-  cursor: 'cursor_example' # String | Pagination cursor returned by a previous call (cursor.next).
+  limit: 'limit_example', # String | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: '-created_at', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+  cursor: 'cursor_example' # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrserna_[a-f0-9]+. The cursor matches the filters and order of that response.
 }
 
 begin
@@ -1681,10 +1681,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique program identifier. |  |
-| **limit** | **String** | Maximum number of items to return. Between 1 and 100. Defaults to 10. | [optional][default to &#39;10&#39;] |
-| **order** | **String** | Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once. | [optional] |
-| **cursor** | **String** | Pagination cursor returned by a previous call (cursor.next). | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **limit** | **String** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to &#39;10&#39;] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrserna_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
 
 ### Return type
 
@@ -1727,12 +1727,12 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-start_date = Date.parse('2013-10-20') # Date | Start of the report date range (inclusive), in YYYY-MM-DD format.
-end_date = Date.parse('2013-10-20') # Date | End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date.
-resolution = 'day' # String | Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+resolution = 'day' # String | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
 opts = {
-  filters: VoucherifySdk::EarningRulesReportListFilters.new # EarningRulesReportListFilters | Field filters. Each field accepts a conditions object with condition operators.
+  filters: VoucherifySdk::EarningRulesReportListFilters.new # EarningRulesReportListFilters | Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1748,11 +1748,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters). |  |
-| **start_date** | **Date** | Start of the report date range (inclusive), in YYYY-MM-DD format. |  |
-| **end_date** | **Date** | End of the report date range (inclusive), in YYYY-MM-DD format. Must be after start_date. |  |
-| **resolution** | **String** | Aggregation resolution of the report. The allowed date range depends on the resolution: day – max 90 days; week – max 12 weeks; month – max 12 months; quarter – max 4 quarters. |  |
-| **filters** | [**EarningRulesReportListFilters**](.md) | Field filters. Each field accepts a conditions object with condition operators. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **start_date** | **Date** | Sets the inclusive start of the report date range. Format YYYY-MM-DD. |  |
+| **end_date** | **Date** | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date. |  |
+| **resolution** | **String** | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters. |  |
+| **filters** | [**EarningRulesReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1795,9 +1795,9 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
-  filters: VoucherifySdk::EarningRulesReportListFilters.new # EarningRulesReportListFilters | Filters rows by field. Each field accepts a conditions object with condition operators.
+  filters: VoucherifySdk::EarningRulesReportListFilters.new # EarningRulesReportListFilters | Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1813,8 +1813,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters. |  |
-| **filters** | [**EarningRulesReportListFilters**](.md) | Filters rows by field. Each field accepts a conditions object with condition operators. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **filters** | [**EarningRulesReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1857,13 +1857,13 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 opts = {
-  limit: 56, # Integer | Maximum number of activities to return. An integer from 1 to 100. Numeric strings are accepted and rounded to the nearest integer. Defaults to 10 when omitted.
-  order: 'created_at', # String | Sort field. Allowed values are created_at and -created_at. Defaults to -created_at when omitted, null, or an empty array. Accepts one value or an array of those values. Any other value is rejected. An array that contains both directions is rejected. Rows that share a created_at millisecond are then ordered by id ascending.
-  cursor: 'cursor_example', # String | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsambr_[a-f0-9]+$.
-  filters: VoucherifySdk::V2LoyaltiesProgramsMembersActivitiesListRequestQueryFilters.new # V2LoyaltiesProgramsMembersActivitiesListRequestQueryFilters | Field-specific filter conditions, passed as a deep object, e.g. filters[type][conditions][$is] vl.member.created.
+  limit: 56, # Integer | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: 'created_at', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+  cursor: 'cursor_example', # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsambr_[a-f0-9]+. The cursor matches the filters and order of that response.
+  filters: VoucherifySdk::V2LoyaltiesProgramsMembersActivitiesListRequestQueryFilters.new # V2LoyaltiesProgramsMembersActivitiesListRequestQueryFilters | Filters the results. Pass a deep object, for example filters[type][conditions][$is] vl.member.created. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1879,12 +1879,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
-| **limit** | **Integer** | Maximum number of activities to return. An integer from 1 to 100. Numeric strings are accepted and rounded to the nearest integer. Defaults to 10 when omitted. | [optional][default to 10] |
-| **order** | **String** | Sort field. Allowed values are created_at and -created_at. Defaults to -created_at when omitted, null, or an empty array. Accepts one value or an array of those values. Any other value is rejected. An array that contains both directions is rejected. Rows that share a created_at millisecond are then ordered by id ascending. | [optional] |
-| **cursor** | **String** | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsambr_[a-f0-9]+$. | [optional] |
-| **filters** | [**V2LoyaltiesProgramsMembersActivitiesListRequestQueryFilters**](.md) | Field-specific filter conditions, passed as a deep object, e.g. filters[type][conditions][$is] vl.member.created. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
+| **limit** | **Integer** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to 10] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsambr_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
+| **filters** | [**V2LoyaltiesProgramsMembersActivitiesListRequestQueryFilters**](.md) | Filters the results. Pass a deep object, for example filters[type][conditions][$is] vl.member.created. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1927,12 +1927,12 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
-  limit: 56, # Integer | Maximum number of members to return. Must be between 1 and 100. Defaults to 10 when not provided.
-  order: '-created_at', # String | Field(s) to order results by. Prefix with - for descending order. Accepts a single value or an array of values. Defaults to -created_at. Ordering by the same field in both directions simultaneously is rejected.
-  cursor: 'cursor_example', # String | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsmbr_[a-f0-9]+$.
-  filters: VoucherifySdk::V2LoyaltiesProgramsMembersListRequestQuery.new # V2LoyaltiesProgramsMembersListRequestQuery | Field-specific filter conditions, passed as a deep object, e.g. filters[status][conditions][$is] ACTIVE.
+  limit: 56, # Integer | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: '-created_at', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+  cursor: 'cursor_example', # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsmbr_[a-f0-9]+. The cursor matches the filters and order of that response.
+  filters: VoucherifySdk::V2LoyaltiesProgramsMembersListRequestQuery.new # V2LoyaltiesProgramsMembersListRequestQuery | Filters the results. Pass a deep object, for example filters[status][conditions][$is] ACTIVE. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -1948,11 +1948,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **limit** | **Integer** | Maximum number of members to return. Must be between 1 and 100. Defaults to 10 when not provided. | [optional][default to 10] |
-| **order** | **String** | Field(s) to order results by. Prefix with - for descending order. Accepts a single value or an array of values. Defaults to -created_at. Ordering by the same field in both directions simultaneously is rejected. | [optional] |
-| **cursor** | **String** | Pagination cursor returned in the cursor.next field of a previous response. Must match the pattern ^lcrsmbr_[a-f0-9]+$. | [optional] |
-| **filters** | [**V2LoyaltiesProgramsMembersListRequestQuery**](.md) | Field-specific filter conditions, passed as a deep object, e.g. filters[status][conditions][$is] ACTIVE. | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **limit** | **Integer** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to 10] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsmbr_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
+| **filters** | [**V2LoyaltiesProgramsMembersListRequestQuery**](.md) | Filters the results. Pass a deep object, for example filters[status][conditions][$is] ACTIVE. Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -1995,10 +1995,10 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range, in YYYY-MM-DD format.
-end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date.
-resolution = 'day' # String | Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+resolution = 'day' # String | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
 
 begin
   # List program members daily reports
@@ -2013,10 +2013,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program (lprg_ followed by hexadecimal characters). |  |
-| **start_date** | **Date** | Sets the inclusive start of the report date range, in YYYY-MM-DD format. |  |
-| **end_date** | **Date** | Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date. |  |
-| **resolution** | **String** | Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter. |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **start_date** | **Date** | Sets the inclusive start of the report date range. Format YYYY-MM-DD. |  |
+| **end_date** | **Date** | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date. |  |
+| **resolution** | **String** | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters. |  |
 
 ### Return type
 
@@ -2059,7 +2059,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program (lprg_ followed by hexadecimal characters).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 
 begin
   # List program members summary reports
@@ -2074,7 +2074,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program (lprg_ followed by hexadecimal characters). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
 
 ### Return type
 
@@ -2117,11 +2117,11 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique program identifier.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
-  limit: 'limit_example', # String | Maximum number of items to return. Between 1 and 100. Defaults to 10. Non-integer values are rounded.
-  order: '-created_at', # String | Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once.
-  cursor: 'cursor_example' # String | Pagination cursor returned by a previous call (cursor.next).
+  limit: 'limit_example', # String | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: '-created_at', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+  cursor: 'cursor_example' # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsrewa_[a-f0-9]+. The cursor matches the filters and order of that response.
 }
 
 begin
@@ -2137,10 +2137,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique program identifier. |  |
-| **limit** | **String** | Maximum number of items to return. Between 1 and 100. Defaults to 10. Non-integer values are rounded. | [optional][default to &#39;10&#39;] |
-| **order** | **String** | Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once. | [optional] |
-| **cursor** | **String** | Pagination cursor returned by a previous call (cursor.next). | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **limit** | **String** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to &#39;10&#39;] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrsrewa_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
 
 ### Return type
 
@@ -2183,12 +2183,12 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range, in YYYY-MM-DD format.
-end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date.
-resolution = 'day' # String | Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+resolution = 'day' # String | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
 opts = {
-  filters: VoucherifySdk::RewardsReportListFilters.new # RewardsReportListFilters | Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+  filters: VoucherifySdk::RewardsReportListFilters.new # RewardsReportListFilters | Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -2204,11 +2204,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program (lprg_ followed by hexadecimal characters). |  |
-| **start_date** | **Date** | Sets the inclusive start of the report date range, in YYYY-MM-DD format. |  |
-| **end_date** | **Date** | Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date. |  |
-| **resolution** | **String** | Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter. |  |
-| **filters** | [**RewardsReportListFilters**](.md) | Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_.... | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **start_date** | **Date** | Sets the inclusive start of the report date range. Format YYYY-MM-DD. |  |
+| **end_date** | **Date** | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date. |  |
+| **resolution** | **String** | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters. |  |
+| **filters** | [**RewardsReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -2251,12 +2251,12 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program (lprg_ followed by hexadecimal characters).
-start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range, in YYYY-MM-DD format.
-end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date.
-resolution = 'day' # String | Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+resolution = 'day' # String | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
 opts = {
-  filters: VoucherifySdk::RewardsSpendingsReportListFilters.new # RewardsSpendingsReportListFilters | Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+  filters: VoucherifySdk::RewardsSpendingsReportListFilters.new # RewardsSpendingsReportListFilters | Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -2272,11 +2272,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program (lprg_ followed by hexadecimal characters). |  |
-| **start_date** | **Date** | Sets the inclusive start of the report date range, in YYYY-MM-DD format. |  |
-| **end_date** | **Date** | Sets the inclusive end of the report date range, in YYYY-MM-DD format. Requires start_date to be before end_date. |  |
-| **resolution** | **String** | Sets the aggregation resolution. Allows at most 90 days for day, 12 weeks for week, 12 months for month, and 4 quarters for quarter. |  |
-| **filters** | [**RewardsSpendingsReportListFilters**](.md) | Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_.... | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **start_date** | **Date** | Sets the inclusive start of the report date range. Format YYYY-MM-DD. |  |
+| **end_date** | **Date** | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date. |  |
+| **resolution** | **String** | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters. |  |
+| **filters** | [**RewardsSpendingsReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -2319,9 +2319,9 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program (lprg_ followed by hexadecimal characters).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
-  filters: VoucherifySdk::RewardsSpendingsReportListFilters.new # RewardsSpendingsReportListFilters | Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+  filters: VoucherifySdk::RewardsSpendingsReportListFilters.new # RewardsSpendingsReportListFilters | Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -2337,8 +2337,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program (lprg_ followed by hexadecimal characters). |  |
-| **filters** | [**RewardsSpendingsReportListFilters**](.md) | Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_.... | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **filters** | [**RewardsSpendingsReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -2381,9 +2381,9 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program (lprg_ followed by hexadecimal characters).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
-  filters: VoucherifySdk::RewardsReportListFilters.new # RewardsReportListFilters | Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_....
+  filters: VoucherifySdk::RewardsReportListFilters.new # RewardsReportListFilters | Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -2399,8 +2399,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program (lprg_ followed by hexadecimal characters). |  |
-| **filters** | [**RewardsReportListFilters**](.md) | Filters rows by field conditions, e.g. filters[reward_id][conditions][$is] lrew_.... | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **filters** | [**RewardsReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -2443,12 +2443,12 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range (YYYY-MM-DD). Must be before end_date.
-end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range (YYYY-MM-DD). Must be after start_date.
-resolution = 'day' # String | Sets the aggregation resolution. Allowed date range: day max 90 days, week max 12 weeks, month max 12 months, quarter max 4 quarters.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+resolution = 'day' # String | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
 opts = {
-  filters: VoucherifySdk::SpendingReportListFilters.new # SpendingReportListFilters | Filters rows by field conditions, e.g. filters[card_definition_id][conditions][$is] lcdef_....
+  filters: VoucherifySdk::SpendingReportListFilters.new # SpendingReportListFilters | Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -2464,11 +2464,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters). |  |
-| **start_date** | **Date** | Sets the inclusive start of the report date range (YYYY-MM-DD). Must be before end_date. |  |
-| **end_date** | **Date** | Sets the inclusive end of the report date range (YYYY-MM-DD). Must be after start_date. |  |
-| **resolution** | **String** | Sets the aggregation resolution. Allowed date range: day max 90 days, week max 12 weeks, month max 12 months, quarter max 4 quarters. |  |
-| **filters** | [**SpendingReportListFilters**](.md) | Filters rows by field conditions, e.g. filters[card_definition_id][conditions][$is] lcdef_.... | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **start_date** | **Date** | Sets the inclusive start of the report date range. Format YYYY-MM-DD. |  |
+| **end_date** | **Date** | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date. |  |
+| **resolution** | **String** | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters. |  |
+| **filters** | [**SpendingReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -2511,9 +2511,9 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
-  filters: VoucherifySdk::SpendingReportListFilters.new # SpendingReportListFilters | Filters rows by field conditions, e.g. filters[card_definition_id][conditions][$is] lcdef_....
+  filters: VoucherifySdk::SpendingReportListFilters.new # SpendingReportListFilters | Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -2529,8 +2529,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters). |  |
-| **filters** | [**SpendingReportListFilters**](.md) | Filters rows by field conditions, e.g. filters[card_definition_id][conditions][$is] lcdef_.... | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **filters** | [**SpendingReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -2573,11 +2573,11 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique program identifier.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
-  limit: 'limit_example', # String | Maximum number of items to return. Between 1 and 100. Defaults to 10. Non-integer values are rounded.
-  order: '-created_at', # String | Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once.
-  cursor: 'cursor_example' # String | Pagination cursor returned by a previous call (cursor.next).
+  limit: 'limit_example', # String | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer.
+  order: '-created_at', # String | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending.
+  cursor: 'cursor_example' # String | Continues pagination. Pass the cursor.next value from a previous response. Format lcrstsa_[a-f0-9]+. The cursor matches the filters and order of that response.
 }
 
 begin
@@ -2593,10 +2593,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique program identifier. |  |
-| **limit** | **String** | Maximum number of items to return. Between 1 and 100. Defaults to 10. Non-integer values are rounded. | [optional][default to &#39;10&#39;] |
-| **order** | **String** | Sorting order. A single value or an array of values. Prefix with - for descending. Defaults to -created_at. The same field cannot be used in both ascending and descending order at once. | [optional] |
-| **cursor** | **String** | Pagination cursor returned by a previous call (cursor.next). | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **limit** | **String** | Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. | [optional][default to &#39;10&#39;] |
+| **order** | **String** | Orders the results. Accepts one value or an array. Prefix a field with - for descending order. Defaults to -created_at. The same field cannot be used in both directions. Rows with the same sort value are then ordered by id ascending. | [optional] |
+| **cursor** | **String** | Continues pagination. Pass the cursor.next value from a previous response. Format lcrstsa_[a-f0-9]+. The cursor matches the filters and order of that response. | [optional] |
 
 ### Return type
 
@@ -2639,12 +2639,12 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
-start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the range, in YYYY-MM-DD format.
-end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the range, in YYYY-MM-DD format. Must be after start_date.
-resolution = 'day' # String | Sets the aggregation resolution. Allowed range: day up to 90 days, week up to 12 weeks, month up to 12 months, quarter up to 4 quarters.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+start_date = Date.parse('2013-10-20') # Date | Sets the inclusive start of the report date range. Format YYYY-MM-DD.
+end_date = Date.parse('2013-10-20') # Date | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
+resolution = 'day' # String | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters.
 opts = {
-  filters: VoucherifySdk::TiersReportListFilters.new # TiersReportListFilters | Filters rows by tier_structure_id and tier_id. Example: filters[tier_structure_id][conditions][$is] lts_....
+  filters: VoucherifySdk::TiersReportListFilters.new # TiersReportListFilters | Filters the results. Pass a deep object, for example filters[tier_structure_id][conditions][$is] lts_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -2660,11 +2660,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters. |  |
-| **start_date** | **Date** | Sets the inclusive start of the range, in YYYY-MM-DD format. |  |
-| **end_date** | **Date** | Sets the inclusive end of the range, in YYYY-MM-DD format. Must be after start_date. |  |
-| **resolution** | **String** | Sets the aggregation resolution. Allowed range: day up to 90 days, week up to 12 weeks, month up to 12 months, quarter up to 4 quarters. |  |
-| **filters** | [**TiersReportListFilters**](.md) | Filters rows by tier_structure_id and tier_id. Example: filters[tier_structure_id][conditions][$is] lts_.... | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **start_date** | **Date** | Sets the inclusive start of the report date range. Format YYYY-MM-DD. |  |
+| **end_date** | **Date** | Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date. |  |
+| **resolution** | **String** | Sets the aggregation resolution. day allows at most 90 days, week at most 12 weeks, month at most 12 months, and quarter at most 4 quarters. |  |
+| **filters** | [**TiersReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[tier_structure_id][conditions][$is] lts_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -2707,9 +2707,9 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters.
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
 opts = {
-  filters: VoucherifySdk::TiersReportListFilters.new # TiersReportListFilters | Filters rows by tier_structure_id and tier_id. Omitting filters or setting it to null applies no field filter. Example: filters[tier_id][conditions][$is] lt_....
+  filters: VoucherifySdk::TiersReportListFilters.new # TiersReportListFilters | Filters the results. Pass a deep object, for example filters[tier_id][conditions][$is] lt_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
 }
 
 begin
@@ -2725,8 +2725,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Identifies the loyalty program. Format: lprg_ followed by hexadecimal characters. |  |
-| **filters** | [**TiersReportListFilters**](.md) | Filters rows by tier_structure_id and tier_id. Omitting filters or setting it to null applies no field filter. Example: filters[tier_id][conditions][$is] lt_.... | [optional] |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **filters** | [**TiersReportListFilters**](.md) | Filters the results. Pass a deep object, for example filters[tier_id][conditions][$is] lt_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter. | [optional] |
 
 ### Return type
 
@@ -2769,8 +2769,8 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 opts = {
   v2_loyalties_programs_members_rewards_purchases_create_request_body: VoucherifySdk::V2LoyaltiesProgramsMembersRewardsPurchasesCreateRequestBody.new # V2LoyaltiesProgramsMembersRewardsPurchasesCreateRequestBody | 
 }
@@ -2788,8 +2788,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
 | **v2_loyalties_programs_members_rewards_purchases_create_request_body** | [**V2LoyaltiesProgramsMembersRewardsPurchasesCreateRequestBody**](V2LoyaltiesProgramsMembersRewardsPurchasesCreateRequestBody.md) |  | [optional] |
 
 ### Return type
@@ -2833,8 +2833,8 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters).
-reward_transaction_id = 'reward_transaction_id_example' # String | Unique reward transaction identifier of the purchase to refund (format: lrtx_ followed by hexadecimal characters).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+reward_transaction_id = 'reward_transaction_id_example' # String | Identifies the reward transaction of the purchase to refund. Format lrtx_[a-f0-9]+.
 opts = {
   v2_loyalties_programs_rewards_purchases_refund_request_body: VoucherifySdk::V2LoyaltiesProgramsRewardsPurchasesRefundRequestBody.new # V2LoyaltiesProgramsRewardsPurchasesRefundRequestBody | Optional refund policies. An empty payload is allowed.
 }
@@ -2852,8 +2852,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program identifier (format: lprg_ followed by hexadecimal characters). |  |
-| **reward_transaction_id** | **String** | Unique reward transaction identifier of the purchase to refund (format: lrtx_ followed by hexadecimal characters). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **reward_transaction_id** | **String** | Identifies the reward transaction of the purchase to refund. Format lrtx_[a-f0-9]+. |  |
 | **v2_loyalties_programs_rewards_purchases_refund_request_body** | [**V2LoyaltiesProgramsRewardsPurchasesRefundRequestBody**](V2LoyaltiesProgramsRewardsPurchasesRefundRequestBody.md) | Optional refund policies. An empty payload is allowed. | [optional] |
 
 ### Return type
@@ -2897,8 +2897,8 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2ProgramsApi.new
-program_id = 'program_id_example' # String | Unique loyalty program ID (format lprg_[a-f0-9]+).
-member_id = 'member_id_example' # String | Program member ID (format lmbr_[a-f0-9]+).
+program_id = 'program_id_example' # String | Identifies the loyalty program. Format lprg_[a-f0-9]+.
+member_id = 'member_id_example' # String | Identifies the member. Format lmbr_[a-f0-9]+.
 opts = {
   v2_loyalties_programs_members_update_request_body: VoucherifySdk::V2LoyaltiesProgramsMembersUpdateRequestBody.new # V2LoyaltiesProgramsMembersUpdateRequestBody | 
 }
@@ -2916,8 +2916,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **program_id** | **String** | Unique loyalty program ID (format lprg_[a-f0-9]+). |  |
-| **member_id** | **String** | Program member ID (format lmbr_[a-f0-9]+). |  |
+| **program_id** | **String** | Identifies the loyalty program. Format lprg_[a-f0-9]+. |  |
+| **member_id** | **String** | Identifies the member. Format lmbr_[a-f0-9]+. |  |
 | **v2_loyalties_programs_members_update_request_body** | [**V2LoyaltiesProgramsMembersUpdateRequestBody**](V2LoyaltiesProgramsMembersUpdateRequestBody.md) |  | [optional] |
 
 ### Return type

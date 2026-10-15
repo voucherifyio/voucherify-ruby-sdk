@@ -19,7 +19,7 @@ module VoucherifySdk
     # Identifies the Loyalty v2 program member.
     attr_accessor :id
 
-    # Member status.
+    # Member status. List responses include only ACTIVE memberships. INACTIVE and DELETED remain so existing SDK callers keep compiling.
     attr_accessor :status
 
     # Timestamp representing when the member was created. The value is shown in the ISO 8601 format.

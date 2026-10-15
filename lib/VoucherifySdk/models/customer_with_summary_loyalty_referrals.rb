@@ -25,7 +25,7 @@ module VoucherifySdk
 
     attr_accessor :loyalty
 
-    # List of Loyalty v2 program memberships for the customer. `null` when no memberships are stored.
+    # List of Loyalty v2 program memberships for the customer. Lists only existing `ACTIVE` memberships. `null` when no memberships are stored. Absent or `null` for `v1/orders` and `v1/publications` endpoints and events.
     attr_accessor :loyalty_memberships
 
     attr_accessor :referrals

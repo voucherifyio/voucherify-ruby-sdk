@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Filters for program tiers reports.
   class TiersReportListFilters
-    # Joins the field filters. Allowed values: `AND`, `OR`. Defaults to `AND`.
+    # Joins the field filters. Allowed values are `AND` and `OR`. Defaults to `AND`.
     attr_accessor :junction
 
     attr_accessor :tier_structure_id

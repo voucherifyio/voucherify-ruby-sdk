@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Filters for program rewards reports.
   class RewardsReportListFilters
-    # Sets the logical junction between the field filters. Defaults to `AND`.
+    # Joins the field filters. Allowed values are `AND` and `OR`. Defaults to `AND`.
     attr_accessor :junction
 
     attr_accessor :reward_id

@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Field-specific filters for **GET** `/v2/loyalties/programs/{programId}/members/{memberId}/cards/{cardId}/activities`.
   class V2LoyaltiesProgramsMembersCardsActivitiesListRequestQueryFilters
-    # How multiple field filters are combined. Defaults to `AND`.
+    # Joins the field filters. Allowed values are `AND` and `OR`. Defaults to `AND`.
     attr_accessor :junction
 
     attr_accessor :id

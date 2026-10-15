@@ -16,28 +16,28 @@ require 'time'
 module VoucherifySdk
   # A loyalty card in its simple representation, as embedded in member responses.
   class CardSimple
+    # Identifies the card.
+    attr_accessor :id
+
+    # Identifies the card definition.
+    attr_accessor :card_definition_id
+
     # Card type. Currently only `INDIVIDUAL` is supported.
     attr_accessor :card_type
+
+    # Human-readable card code. Card code generation is asynchronous - this field is `null` right after member creation and is populated shortly after, once the background code generation completes.
+    attr_accessor :code
 
     attr_accessor :lifetime_bucket
 
     attr_accessor :balance
 
-    # Unique Voucherify ID of the card.
-    attr_accessor :id
-
-    # Unique Voucherify ID of the card definition the card was created from.
-    attr_accessor :card_definition_id
-
-    # Human-readable card code. Card code generation is asynchronous - this field is `null` right after member creation and is populated shortly after, once the background code generation completes.
-    attr_accessor :code
+    # Object type. Always `card`.
+    attr_accessor :object
 
     attr_accessor :next_expiration
 
     attr_accessor :next_activation
-
-    # Object type marker, always `card`.
-    attr_accessor :object
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -64,15 +64,15 @@ module VoucherifySdk
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'card_type' => :'card_type',
-        :'lifetime_bucket' => :'lifetime_bucket',
-        :'balance' => :'balance',
         :'id' => :'id',
         :'card_definition_id' => :'card_definition_id',
+        :'card_type' => :'card_type',
         :'code' => :'code',
+        :'lifetime_bucket' => :'lifetime_bucket',
+        :'balance' => :'balance',
+        :'object' => :'object',
         :'next_expiration' => :'next_expiration',
-        :'next_activation' => :'next_activation',
-        :'object' => :'object'
+        :'next_activation' => :'next_activation'
       }
     end
 
@@ -84,26 +84,26 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'card_type' => :'String',
-        :'lifetime_bucket' => :'CardLifetimeBucket',
-        :'balance' => :'CardBalance',
         :'id' => :'String',
         :'card_definition_id' => :'String',
+        :'card_type' => :'String',
         :'code' => :'String',
+        :'lifetime_bucket' => :'CardLifetimeBucket',
+        :'balance' => :'CardBalance',
+        :'object' => :'String',
         :'next_expiration' => :'CardNextExpiration',
-        :'next_activation' => :'CardNextActivation',
-        :'object' => :'String'
+        :'next_activation' => :'CardNextActivation'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'card_type',
         :'id',
         :'card_definition_id',
+        :'card_type',
         :'code',
-        :'object'
+        :'object',
       ])
     end
 
@@ -115,10 +115,22 @@ module VoucherifySdk
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'card_definition_id')
+        self.card_definition_id = attributes[:'card_definition_id']
+      end
+
       if attributes.key?(:'card_type')
         self.card_type = attributes[:'card_type']
       else
         self.card_type = 'INDIVIDUAL'
+      end
+
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
       end
 
       if attributes.key?(:'lifetime_bucket')
@@ -129,16 +141,10 @@ module VoucherifySdk
         self.balance = attributes[:'balance']
       end
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'card_definition_id')
-        self.card_definition_id = attributes[:'card_definition_id']
-      end
-
-      if attributes.key?(:'code')
-        self.code = attributes[:'code']
+      if attributes.key?(:'object')
+        self.object = attributes[:'object']
+      else
+        self.object = 'card'
       end
 
       if attributes.key?(:'next_expiration')
@@ -147,12 +153,6 @@ module VoucherifySdk
 
       if attributes.key?(:'next_activation')
         self.next_activation = attributes[:'next_activation']
-      end
-
-      if attributes.key?(:'object')
-        self.object = attributes[:'object']
-      else
-        self.object = 'card'
       end
     end
 
@@ -178,10 +178,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      card_type_validator = EnumAttributeValidator.new('String', ["INDIVIDUAL"])
-      return false unless card_type_validator.valid?(@card_type)
       return false if !@id.nil? && @id !~ Regexp.new(/^lcrd_[a-f0-9]+$/)
       return false if !@card_definition_id.nil? && @card_definition_id !~ Regexp.new(/^lcdef_[a-f0-9]+$/)
+      card_type_validator = EnumAttributeValidator.new('String', ["INDIVIDUAL"])
+      return false unless card_type_validator.valid?(@card_type)
       object_validator = EnumAttributeValidator.new('String', ["card"])
       return false unless object_validator.valid?(@object)
       true
@@ -192,15 +192,15 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          card_type == o.card_type &&
-          lifetime_bucket == o.lifetime_bucket &&
-          balance == o.balance &&
           id == o.id &&
           card_definition_id == o.card_definition_id &&
+          card_type == o.card_type &&
           code == o.code &&
+          lifetime_bucket == o.lifetime_bucket &&
+          balance == o.balance &&
+          object == o.object &&
           next_expiration == o.next_expiration &&
-          next_activation == o.next_activation &&
-          object == o.object
+          next_activation == o.next_activation
     end
 
     # @see the `==` method
@@ -212,7 +212,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [card_type, lifetime_bucket, balance, id, card_definition_id, code, next_expiration, next_activation, object].hash
+      [id, card_definition_id, card_type, code, lifetime_bucket, balance, object, next_expiration, next_activation].hash
     end
 
     # Builds the object from hash

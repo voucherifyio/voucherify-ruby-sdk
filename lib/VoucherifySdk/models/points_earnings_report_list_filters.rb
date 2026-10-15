@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Filters for program points-earnings reports.
   class PointsEarningsReportListFilters
-    # Combines the field filters. Allowed values are `AND` and `OR`. Defaults to `AND`.
+    # Joins the field filters. Allowed values are `AND` and `OR`. Defaults to `AND`.
     attr_accessor :junction
 
     attr_accessor :earning_rule_id
@@ -64,7 +64,7 @@ module VoucherifySdk
       {
         :'junction' => :'String',
         :'earning_rule_id' => :'EarningRuleIdFilterConditions',
-        :'card_definition_id' => :'PointsEarningsReportFilterCardDefinitionIdConditions'
+        :'card_definition_id' => :'ReportCardDefinitionIdFilterConditions'
       }
     end
 

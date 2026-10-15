@@ -34,7 +34,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2BenefitsApi.new
-benefit_id = 'benefit_id_example' # String | Unique benefit ID, prefixed with lben_.
+benefit_id = 'benefit_id_example' # String | Identifies the benefit. Format lben_[a-f0-9]+.
 
 begin
   # Get benefit
@@ -49,7 +49,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **benefit_id** | **String** | Unique benefit ID, prefixed with lben_. |  |
+| **benefit_id** | **String** | Identifies the benefit. Format lben_[a-f0-9]+. |  |
 
 ### Return type
 

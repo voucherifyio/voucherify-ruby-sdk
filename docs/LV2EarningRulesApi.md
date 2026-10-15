@@ -34,7 +34,7 @@ VoucherifySdk.configure do |config|
 end
 
 api_instance = VoucherifySdk::LV2EarningRulesApi.new
-earning_rule_id = 'earning_rule_id_example' # String | Earning rule ID.
+earning_rule_id = 'earning_rule_id_example' # String | Identifies the earning rule. Format lern_[a-f0-9]+.
 
 begin
   # Get earning rule
@@ -49,7 +49,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **earning_rule_id** | **String** | Earning rule ID. |  |
+| **earning_rule_id** | **String** | Identifies the earning rule. Format lern_[a-f0-9]+. |  |
 
 ### Return type
 

@@ -28,6 +28,9 @@ module VoucherifySdk
     # ID of the member owning the card.
     attr_accessor :member_id
 
+    # Card type. Currently, only `INDIVIDUAL` is supported.
+    attr_accessor :card_type
+
     # Timestamp when the bucket was created (ISO 8601).
     attr_accessor :created_at
 
@@ -39,9 +42,6 @@ module VoucherifySdk
 
     # Voucherify ID of the customer owning the card.
     attr_accessor :customer_id
-
-    # Card type. Currently, only `INDIVIDUAL` is supported.
-    attr_accessor :card_type
 
     attr_accessor :points
 
@@ -86,11 +86,11 @@ module VoucherifySdk
         :'card_definition_id' => :'card_definition_id',
         :'program_id' => :'program_id',
         :'member_id' => :'member_id',
+        :'card_type' => :'card_type',
         :'created_at' => :'created_at',
         :'updated_at' => :'updated_at',
         :'id' => :'id',
         :'customer_id' => :'customer_id',
-        :'card_type' => :'card_type',
         :'points' => :'points',
         :'expiration_date' => :'expiration_date',
         :'expiration_type' => :'expiration_type',
@@ -111,11 +111,11 @@ module VoucherifySdk
         :'card_definition_id' => :'String',
         :'program_id' => :'String',
         :'member_id' => :'String',
+        :'card_type' => :'String',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
         :'id' => :'String',
         :'customer_id' => :'String',
-        :'card_type' => :'String',
         :'points' => :'CardPointsBucketPoints',
         :'expiration_date' => :'Date',
         :'expiration_type' => :'String',
@@ -131,11 +131,11 @@ module VoucherifySdk
         :'card_definition_id',
         :'program_id',
         :'member_id',
+        :'card_type',
         :'created_at',
         :'updated_at',
         :'id',
         :'customer_id',
-        :'card_type',
         :'points',
         :'expiration_date',
         :'expiration_type',
@@ -168,6 +168,12 @@ module VoucherifySdk
         self.member_id = attributes[:'member_id']
       end
 
+      if attributes.key?(:'card_type')
+        self.card_type = attributes[:'card_type']
+      else
+        self.card_type = 'INDIVIDUAL'
+      end
+
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
       end
@@ -182,12 +188,6 @@ module VoucherifySdk
 
       if attributes.key?(:'customer_id')
         self.customer_id = attributes[:'customer_id']
-      end
-
-      if attributes.key?(:'card_type')
-        self.card_type = attributes[:'card_type']
-      else
-        self.card_type = 'INDIVIDUAL'
       end
 
       if attributes.key?(:'points')
@@ -259,10 +259,10 @@ module VoucherifySdk
       return false if !@card_definition_id.nil? && @card_definition_id !~ Regexp.new(/^lcdef_[a-f0-9]+$/)
       return false if !@program_id.nil? && @program_id !~ Regexp.new(/^lprg_[a-f0-9]+$/)
       return false if !@member_id.nil? && @member_id !~ Regexp.new(/^lmbr_[a-f0-9]+$/)
-      return false if !@id.nil? && @id !~ Regexp.new(/^lcpeb_[a-f0-9]+$/)
-      return false if !@customer_id.nil? && @customer_id !~ Regexp.new(/^cust_[a-zA-Z0-9]+/)
       card_type_validator = EnumAttributeValidator.new('String', ["INDIVIDUAL"])
       return false unless card_type_validator.valid?(@card_type)
+      return false if !@id.nil? && @id !~ Regexp.new(/^lcpeb_[a-f0-9]+$/)
+      return false if !@customer_id.nil? && @customer_id !~ Regexp.new(/^cust_[a-zA-Z0-9]+/)
       expiration_type_validator = EnumAttributeValidator.new('String', ["NO_EXPIRATION", "ROLLING_EXPIRATION", "CALENDAR_EXPIRATION", "SLIDING_EXPIRATION"])
       return false unless expiration_type_validator.valid?(@expiration_type)
       status_validator = EnumAttributeValidator.new('String', ["ACTIVE", "DELETED", "EXPIRED"])
@@ -281,11 +281,11 @@ module VoucherifySdk
           card_definition_id == o.card_definition_id &&
           program_id == o.program_id &&
           member_id == o.member_id &&
+          card_type == o.card_type &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
           id == o.id &&
           customer_id == o.customer_id &&
-          card_type == o.card_type &&
           points == o.points &&
           expiration_date == o.expiration_date &&
           expiration_type == o.expiration_type &&
@@ -302,7 +302,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [card_id, card_definition_id, program_id, member_id, created_at, updated_at, id, customer_id, card_type, points, expiration_date, expiration_type, status, object].hash
+      [card_id, card_definition_id, program_id, member_id, card_type, created_at, updated_at, id, customer_id, points, expiration_date, expiration_type, status, object].hash
     end
 
     # Builds the object from hash
