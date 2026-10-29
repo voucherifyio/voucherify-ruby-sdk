@@ -202,6 +202,7 @@ end
   - Added `loyalty_memberships` on customer summary models.
   - Added an optional `filters` query parameter on list customers.
   - Customer loyalty membership responses list only `ACTIVE` memberships.
+  - `redeemables` on `RedemptionsRedeemRequestBody`, `ValidationsValidateRequestBody`, and their `Client*` variants must contain 1 to 30 items. `valid?` returns `false` outside that range. The SDK does not check this on requests.
   - Added e2e coverage for Loyalty v2 member and runtime flows, with HTTP setup for admin endpoints that are not in the SDK.
 - **2026-08-26** - `8.1.1`
   - Fixed: `exchange_ratio` is `Float` on COIN reward models (create/update were `String`, `RedemptionRewardResultParametersCoin` was `Integer`). The API returns fractional values such as `0.01`.
