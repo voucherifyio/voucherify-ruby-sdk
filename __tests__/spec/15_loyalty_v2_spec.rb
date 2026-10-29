@@ -59,40 +59,9 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
     warn "#{label}: #{e.message}"
   end
 
-  before(:all) do
-    skip 'X_APP_ID and X_APP_TOKEN are required' unless credentials_configured?
-
-    @programs_api = Config.lv2_programs_api_instance
-    @customers_api = Config.customers_api_instance
-    @fixture_ctx = LoyaltyV2Fixture.setup
-
-    customer_body = VoucherifySdk::CustomersCreateRequestBody.new(
-      source_id: "lv2_customer_#{@fixture_ctx.suffix}",
-      name: 'Loyalty v2 Ruby SDK test'
-    )
-    @customer = @customers_api.create_customer(
-      customers_create_request_body: customer_body
-    )
-
-    member_body = VoucherifySdk::V2LoyaltiesProgramsMembersCreateRequestBody.new(
-      customer_identification: {
-        type: 'customer_id',
-        customer_id: @customer.id,
-        customer_source_id: nil
-      }
-    )
-    @member = @programs_api.create_program_member(
-      @fixture_ctx.program_id,
-      v2_loyalties_programs_members_create_request_body: member_body
-    )
-    @primary_card_id = resolve_primary_card_id(@member, @fixture_ctx.card_definition_id)
-  end
-
-  # Program teardown is deferred to prompt 06 so later examples can share the fixture.
-  after(:all) do
-    next if @fixture_ctx.nil?
-
-    if @fixture_ctx.program_id && @member&.id
+  def cleanup_loyalty_v2!
+    # 1) SDK: deactivate/delete member and customer (ignore 404).
+    if @programs_api && @fixture_ctx&.program_id && @member&.id
       ignore_api_error('deactivate_program_member') do
         @programs_api.deactivate_program_member(@fixture_ctx.program_id, @member.id)
       end
@@ -101,11 +70,57 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
       end
     end
 
-    if @customer&.id
+    if @customers_api && @customer&.id
       ignore_api_error('delete_customer') do
         delete_customer_permanently(@customers_api, @customer.id)
       end
     end
+
+    # 2) HTTP: delete program first (drops assignments), then children.
+    LoyaltyV2Fixture.teardown(@fixture_ctx) if @fixture_ctx
+  ensure
+    @fixture_ctx = nil
+    @member = nil
+    @customer = nil
+    @primary_card_id = nil
+  end
+
+  before(:all) do
+    skip 'X_APP_ID and X_APP_TOKEN are required' unless credentials_configured?
+
+    @programs_api = Config.lv2_programs_api_instance
+    @customers_api = Config.customers_api_instance
+    begin
+      @fixture_ctx = LoyaltyV2Fixture.setup
+
+      customer_body = VoucherifySdk::CustomersCreateRequestBody.new(
+        source_id: "lv2_customer_#{@fixture_ctx.suffix}",
+        name: 'Loyalty v2 Ruby SDK test'
+      )
+      @customer = @customers_api.create_customer(
+        customers_create_request_body: customer_body
+      )
+
+      member_body = VoucherifySdk::V2LoyaltiesProgramsMembersCreateRequestBody.new(
+        customer_identification: {
+          type: 'customer_id',
+          customer_id: @customer.id,
+          customer_source_id: nil
+        }
+      )
+      @member = @programs_api.create_program_member(
+        @fixture_ctx.program_id,
+        v2_loyalties_programs_members_create_request_body: member_body
+      )
+      @primary_card_id = resolve_primary_card_id(@member, @fixture_ctx.card_definition_id)
+    rescue StandardError
+      cleanup_loyalty_v2!
+      raise
+    end
+  end
+
+  after(:all) do
+    cleanup_loyalty_v2!
   end
 
   it 'sets up an activated program with card definition, earning rule, and reward', order: 1 do
