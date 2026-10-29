@@ -301,4 +301,79 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
     )
     expect(activated).not_to be_nil
   end
+
+  it 'examines earning rules and rewards via SDK', order: 7 do
+    examine_api = Config.lv2_examine_api_instance
+
+    earning_rules = examine_api.examine_earning_rules(
+      loyalties_examine_earning_rules_examine_request_body:
+        VoucherifySdk::LoyaltiesExamineEarningRulesExamineRequestBody.new(
+          trigger: {
+            type: 'SPECIFIC',
+            specific: { event: 'customer.order.paid' }
+          },
+          customer_identification: {
+            type: 'member_id',
+            member_id: @member.id
+          },
+          customer_order_paid: {
+            order: { amount: 5000 }
+          }
+        )
+    )
+    expect(earning_rules).not_to be_nil
+
+    rewards = examine_api.examine_rewards(
+      loyalties_examine_rewards_examine_request_body:
+        VoucherifySdk::LoyaltiesExamineRewardsExamineRequestBody.new(
+          customer_identification: {
+            type: 'member_id',
+            member_id: @member.id
+          }
+        )
+    )
+    expect(rewards).not_to be_nil
+  end
+
+  it 'lists selected Loyalty v2 reports via SDK', order: 8 do
+    members_summary = @programs_api.list_program_members_summary_reports(@fixture_ctx.program_id)
+    expect(members_summary).not_to be_nil
+    expect(members_summary.data || []).to be_a(Array)
+
+    rewards_summary = @programs_api.list_program_rewards_summary_reports(@fixture_ctx.program_id)
+    expect(rewards_summary).not_to be_nil
+    expect(rewards_summary.data || []).to be_a(Array)
+
+    end_date = Time.now.utc.strftime('%Y-%m-%d')
+    start_date = (Time.now.utc - 86_400).strftime('%Y-%m-%d')
+    members_daily = @programs_api.list_program_members_daily_reports(
+      @fixture_ctx.program_id,
+      start_date,
+      end_date,
+      'day'
+    )
+    expect(members_daily).not_to be_nil
+    expect(members_daily.data || []).to be_a(Array)
+
+    card_daily = @programs_api.list_member_card_daily_reports(
+      @fixture_ctx.program_id,
+      @member.id,
+      @primary_card_id,
+      start_date,
+      end_date,
+      'day'
+    )
+    expect(card_daily).not_to be_nil
+    expect(card_daily.data || []).to be_a(Array)
+  end
+
+  it 'gets the fixture earning rule and reward via allowlisted GET APIs', order: 9 do
+    earning_rule = Config.lv2_earning_rules_api_instance.get_earning_rule(@fixture_ctx.earning_rule_id)
+    expect(earning_rule).not_to be_nil
+    expect(earning_rule.id).to eq(@fixture_ctx.earning_rule_id)
+
+    reward = Config.lv2_rewards_api_instance.get_reward(@fixture_ctx.reward_id)
+    expect(reward).not_to be_nil
+    expect(reward.id).to eq(@fixture_ctx.reward_id)
+  end
 end
