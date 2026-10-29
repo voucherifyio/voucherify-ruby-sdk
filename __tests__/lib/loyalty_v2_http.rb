@@ -76,11 +76,17 @@ module LoyaltyV2Http
       'PATCH' => Net::HTTP::Patch
     }.fetch(verb) { raise ArgumentError, "Unsupported HTTP method: #{verb}" }
 
-    req = req_class.new(uri)
-    auth_headers.each { |key, value| req[key] = value }
-    req.body = JSON.generate(body) unless body.nil?
+    payload = body.nil? ? nil : JSON.generate(body)
+    response = nil
+    5.times do |attempt|
+      req = req_class.new(uri)
+      auth_headers.each { |key, value| req[key] = value }
+      req.body = payload unless payload.nil?
+      response = http.request(req)
+      break unless response.code.to_i == 429
 
-    response = http.request(req)
+      sleep(attempt + 1)
+    end
     text = response.body.to_s
     data =
       if text.empty?

@@ -9,6 +9,25 @@ dotenv_path = File.join(parent_directory, '.env')
 
 Dotenv.load(dotenv_path)
 
+# The full suite plus Loyalty v2 setup can exceed the project rate limit.
+# Retry only 429 so a short burst does not fail CI.
+module SdkRateLimitRetry
+  def call_api(http_method, path, opts = {})
+    attempts = 0
+    begin
+      super
+    rescue VoucherifySdk::ApiError => e
+      attempts += 1
+      raise unless e.code.to_i == 429 && attempts < 6
+
+      sleep(attempts)
+      retry
+    end
+  end
+end
+
+VoucherifySdk::ApiClient.prepend(SdkRateLimitRetry)
+
 module Config
     VoucherifySdk.configure do |config|
       config.api_key['X-App-Id'] = ENV['X_APP_ID']
