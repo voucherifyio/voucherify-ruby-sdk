@@ -8,7 +8,8 @@ on:
 jobs:
   publish:
     environment: prod
-    runs-on: ubuntu-latest
+    # ubuntu-latest is 26.04; ruby/setup-ruby has no Ruby 2.7 builds for that image.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
