@@ -3,14 +3,10 @@
 require 'json'
 require 'net/http'
 require 'uri'
-require 'dotenv'
-
-current_directory = File.dirname(__FILE__)
-parent_directory = File.expand_path('../..', current_directory)
-Dotenv.load(File.join(parent_directory, '.env'))
 
 # Authenticated HTTP helper for Loyalty v2 paths that are not published in the
 # Ruby SDK. Runtime member flows should use LV2*Api.
+# Credentials come from ENV (Config loads dotenv in the RSpec suite).
 module LoyaltyV2Http
   class Error < StandardError
     attr_reader :status, :body
