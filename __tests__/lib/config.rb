@@ -18,9 +18,9 @@ module SdkRateLimitRetry
       super
     rescue VoucherifySdk::ApiError => e
       attempts += 1
-      raise unless e.code.to_i == 429 && attempts < 6
+      raise unless e.code.to_i == 429 && attempts < 4
 
-      sleep(attempts)
+      sleep(5 * attempts)
       retry
     end
   end

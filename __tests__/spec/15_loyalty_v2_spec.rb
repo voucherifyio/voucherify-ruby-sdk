@@ -90,6 +90,8 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
 
     @programs_api = Config.lv2_programs_api_instance
     @customers_api = Config.customers_api_instance
+    # Let the earlier specs drain the project rate limit before program setup.
+    sleep 10
     begin
       @fixture_ctx = LoyaltyV2Fixture.setup
 
@@ -191,8 +193,8 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
 
     # ADMIN_CREDIT is async; wait until balance is visible before spend ops.
     points = 0
-    10.times do
-      sleep 1
+    4.times do
+      sleep 2
       @member = @programs_api.get_program_member(@fixture_ctx.program_id, @member.id)
       points = card_balance_points(@member, @primary_card_id)
       break if points.positive?
@@ -269,8 +271,8 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
     expect(reward_transaction_id).to be_a(String)
 
     approved_row = nil
-    15.times do
-      sleep 1
+    8.times do
+      sleep 2
       listed = @programs_api.list_member_reward_purchases(
         @fixture_ctx.program_id,
         @member.id

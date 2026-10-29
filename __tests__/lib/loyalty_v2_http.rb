@@ -78,14 +78,14 @@ module LoyaltyV2Http
 
     payload = body.nil? ? nil : JSON.generate(body)
     response = nil
-    5.times do |attempt|
+    4.times do |attempt|
       req = req_class.new(uri)
       auth_headers.each { |key, value| req[key] = value }
       req.body = payload unless payload.nil?
       response = http.request(req)
       break unless response.code.to_i == 429
 
-      sleep(attempt + 1)
+      sleep(5 * (attempt + 1))
     end
     text = response.body.to_s
     data =
