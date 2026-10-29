@@ -18,6 +18,7 @@ module VoucherifySdk
   class RedemptionsRedeemRequestBody
     attr_accessor :options
 
+    # An array of redeemables. You can combine `voucher`(s) and `promotion_tier`(s). Alternatively, send one unique`promotion_stack` in the array. Each unique redeemable can be sent in one request only once.
     attr_accessor :redeemables
 
     attr_accessor :order
@@ -117,6 +118,14 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@redeemables.nil? && @redeemables.length > 30
+        invalid_properties.push('invalid value for "redeemables", number of items must be less than or equal to 30.')
+      end
+
+      if !@redeemables.nil? && @redeemables.length < 1
+        invalid_properties.push('invalid value for "redeemables", number of items must be greater than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -124,6 +133,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@redeemables.nil? && @redeemables.length > 30
+      return false if !@redeemables.nil? && @redeemables.length < 1
       true
     end
 

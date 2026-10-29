@@ -76,6 +76,26 @@ module Config
       return VoucherifySdk::VouchersApi.new()
     end
 
+    def self.lv2_programs_api_instance
+      return VoucherifySdk::LV2ProgramsApi.new()
+    end
+
+    def self.lv2_examine_api_instance
+      return VoucherifySdk::LV2ExamineApi.new()
+    end
+
+    def self.lv2_earning_rules_api_instance
+      return VoucherifySdk::LV2EarningRulesApi.new()
+    end
+
+    def self.lv2_rewards_api_instance
+      return VoucherifySdk::LV2RewardsApi.new()
+    end
+
+    def self.lv2_benefits_api_instance
+      return VoucherifySdk::LV2BenefitsApi.new()
+    end
+
     def self.management_api_instance
       management_config = VoucherifySdk::Configuration.new
       management_config.api_key['X-Management-Id'] = ENV['X_MANAGEMENT_ID']

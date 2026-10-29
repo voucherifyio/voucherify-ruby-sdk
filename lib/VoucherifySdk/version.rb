@@ -11,5 +11,5 @@ OpenAPI Generator version: 7.0.1
 =end
 
 module VoucherifySdk
-  VERSION = '8.1.1'
+  VERSION = '8.2.0'
 end

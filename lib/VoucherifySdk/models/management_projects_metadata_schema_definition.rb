@@ -40,6 +40,7 @@ module VoucherifySdk
     # Value indicating the exact length. Available only for the `string` type.
     attr_accessor :exact_length
 
+    # Array of values that are allowed. Available only for the `string` and `number` types.
     attr_accessor :eq
 
     # Array of values that are not allowed. Available only for the `number` type.

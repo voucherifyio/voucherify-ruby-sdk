@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Filter publications by parent object id.
+  # Filter publications by parent object ID.
   class ParameterFiltersListPublicationsParentObjectId
     attr_accessor :conditions
 
