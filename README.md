@@ -198,7 +198,7 @@ end
 
 ## 📅 Changelog
 - **2026-10-14** - `8.2.0`
-  - Added Loyalty v2 API methods for members, memberships, cards, examine, reports, and related non-WIP reads under `/v2/loyalties`.
+  - Added Loyalty v2 API methods under `/v2/loyalties` for member create and batch create, update, delete, activate, and deactivate; card point adjustments, pending-points activate and cancel, and points-bucket expiration; order payments; reward purchase and refund; plus memberships, cards, examine, reports, and reads for a benefit, an earning rule, and a reward.
   - Added `loyalty_memberships` on customer summary models.
   - Added an optional `filters` query parameter on list customers.
   - Customer loyalty membership responses list only `ACTIVE` memberships.
