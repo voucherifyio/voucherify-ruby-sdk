@@ -93,8 +93,7 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
     remaining = LoyaltyV2Http.rate_limit_remaining
     if remaining < 40
       @skip_for_rate_limit = true
-      return
-    end
+    else
     begin
       @fixture_ctx = LoyaltyV2Fixture.setup
 
@@ -121,6 +120,7 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
     rescue StandardError
       cleanup_loyalty_v2!
       raise
+    end
     end
   end
 
