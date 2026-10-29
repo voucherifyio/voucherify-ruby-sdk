@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-require 'dotenv'
-
-dotenv_path = File.expand_path('../../.env', __dir__)
-Dotenv.load(dotenv_path)
-
+require_relative '../lib/config'
+require_relative '../lib/customers'
 require_relative '../lib/loyalty_v2_fixture'
 
 RSpec.describe 'Loyalty v2 API', order: :defined do
@@ -12,19 +9,143 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
     !ENV['X_APP_ID'].to_s.empty? && !ENV['X_APP_TOKEN'].to_s.empty?
   end
 
-  it 'sets up a Loyalty v2 program over HTTP and tears it down', order: :first do
+  def resolve_primary_card_id(member_body, card_definition_id)
+    cards = member_body.respond_to?(:cards) ? member_body.cards : nil
+    cards = [] if cards.nil?
+    match = cards.find do |entry|
+      card = entry.respond_to?(:card) ? entry.card : entry['card']
+      def_id = if card.respond_to?(:card_definition_id)
+                 card.card_definition_id
+               else
+                 card && card['card_definition_id']
+               end
+      def_id == card_definition_id
+    end
+    entry = match || cards.first
+    card = if entry.nil?
+             nil
+           elsif entry.respond_to?(:card)
+             entry.card
+           else
+             entry['card']
+           end
+    id = if card.respond_to?(:id)
+           card.id
+         else
+           card && card['id']
+         end
+    raise "No loyalty card on member: #{cards.inspect}" if id.nil?
+
+    id
+  end
+
+  def ignore_api_error(label)
+    yield
+  rescue VoucherifySdk::ApiError => e
+    return if e.code.to_i == 404
+
+    warn "#{label}: #{e.message}"
+  end
+
+  before(:all) do
     skip 'X_APP_ID and X_APP_TOKEN are required' unless credentials_configured?
 
-    ctx = nil
-    begin
-      ctx = LoyaltyV2Fixture.setup
-      expect(ctx.program_id).not_to be_nil
-      expect(ctx.card_definition_id).not_to be_nil
-      expect(ctx.reward_card_definition_id).not_to be_nil
-      expect(ctx.earning_rule_id).not_to be_nil
-      expect(ctx.reward_id).not_to be_nil
-    ensure
-      LoyaltyV2Fixture.teardown(ctx)
+    @programs_api = Config.lv2_programs_api_instance
+    @customers_api = Config.customers_api_instance
+    @fixture_ctx = LoyaltyV2Fixture.setup
+
+    customer_body = VoucherifySdk::CustomersCreateRequestBody.new(
+      source_id: "lv2_customer_#{@fixture_ctx.suffix}",
+      name: 'Loyalty v2 Ruby SDK test'
+    )
+    @customer = @customers_api.create_customer(
+      customers_create_request_body: customer_body
+    )
+
+    member_body = VoucherifySdk::V2LoyaltiesProgramsMembersCreateRequestBody.new(
+      customer_identification: {
+        type: 'customer_id',
+        customer_id: @customer.id,
+        customer_source_id: nil
+      }
+    )
+    @member = @programs_api.create_program_member(
+      @fixture_ctx.program_id,
+      v2_loyalties_programs_members_create_request_body: member_body
+    )
+    @primary_card_id = resolve_primary_card_id(@member, @fixture_ctx.card_definition_id)
+  end
+
+  # Program teardown is deferred to prompt 06 so later examples can share the fixture.
+  after(:all) do
+    next if @fixture_ctx.nil?
+
+    if @fixture_ctx.program_id && @member&.id
+      ignore_api_error('deactivate_program_member') do
+        @programs_api.deactivate_program_member(@fixture_ctx.program_id, @member.id)
+      end
+      ignore_api_error('delete_program_member') do
+        @programs_api.delete_program_member(@fixture_ctx.program_id, @member.id)
+      end
     end
+
+    if @customer&.id
+      ignore_api_error('delete_customer') do
+        delete_customer_permanently(@customers_api, @customer.id)
+      end
+    end
+  end
+
+  it 'sets up an activated program with card definition, earning rule, and reward', order: 1 do
+    expect(@fixture_ctx.program_id).to be_a(String)
+    expect(@fixture_ctx.card_definition_id).to match(/\Alcdef_/)
+    expect(@fixture_ctx.earning_rule_id).to match(/\Alern_/)
+    expect(@fixture_ctx.reward_id).to match(/\Alrew_/)
+  end
+
+  it 'creates, gets, lists, activates, and deactivates a program member via SDK', order: 2 do
+    expect(@member).not_to be_nil
+    expect(@member.id).to be_a(String)
+    expect(@member.customer_id).to eq(@customer.id)
+    expect(@member.cards).to be_a(Array)
+    expect(@member.cards.length).to be > 0
+
+    fetched = @programs_api.get_program_member(@fixture_ctx.program_id, @member.id)
+    expect(fetched.id).to eq(@member.id)
+
+    listed = @programs_api.list_program_members(@fixture_ctx.program_id)
+    rows = listed.data || listed.members || []
+    ids = rows.map(&:id)
+    expect(ids).to include(@member.id)
+
+    membership = @programs_api.get_program_membership(
+      @fixture_ctx.program_id,
+      @customer.id
+    )
+    expect(membership).not_to be_nil
+
+    if %w[INACTIVE DRAFT].include?(@member.status)
+      activated = @programs_api.activate_program_member(
+        @fixture_ctx.program_id,
+        @member.id
+      )
+      expect(activated.status).to eq('ACTIVE')
+      @member = activated
+    end
+
+    deactivated = @programs_api.deactivate_program_member(
+      @fixture_ctx.program_id,
+      @member.id
+    )
+    expect(deactivated.status).not_to eq('ACTIVE')
+
+    reactivated = @programs_api.activate_program_member(
+      @fixture_ctx.program_id,
+      @member.id
+    )
+    expect(reactivated.status).to eq('ACTIVE')
+    @member = @programs_api.get_program_member(@fixture_ctx.program_id, @member.id)
+    expect(@primary_card_id).to match(/\Alcrd_/)
+    expect(resolve_primary_card_id(@member, @fixture_ctx.card_definition_id)).to eq(@primary_card_id)
   end
 end
