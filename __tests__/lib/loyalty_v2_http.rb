@@ -62,6 +62,17 @@ module LoyaltyV2Http
     uri
   end
 
+  # CI app keys allow 100 calls per hour. Setup needs headroom after the rest of the suite.
+  def rate_limit_remaining
+    uri = URI("#{base_url}/v1/products?limit=1")
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = uri.scheme == 'https'
+    req = Net::HTTP::Get.new(uri)
+    auth_headers.each { |key, value| req[key] = value }
+    response = http.request(req)
+    response['x-rate-limit-remaining'].to_i
+  end
+
   def request(method, path, body = nil, query = nil)
     uri = build_uri(path, query)
     http = Net::HTTP.new(uri.host, uri.port)
@@ -76,17 +87,11 @@ module LoyaltyV2Http
       'PATCH' => Net::HTTP::Patch
     }.fetch(verb) { raise ArgumentError, "Unsupported HTTP method: #{verb}" }
 
-    payload = body.nil? ? nil : JSON.generate(body)
-    response = nil
-    4.times do |attempt|
-      req = req_class.new(uri)
-      auth_headers.each { |key, value| req[key] = value }
-      req.body = payload unless payload.nil?
-      response = http.request(req)
-      break unless response.code.to_i == 429
+    req = req_class.new(uri)
+    auth_headers.each { |key, value| req[key] = value }
+    req.body = JSON.generate(body) unless body.nil?
 
-      sleep(5 * (attempt + 1))
-    end
+    response = http.request(req)
     text = response.body.to_s
     data =
       if text.empty?

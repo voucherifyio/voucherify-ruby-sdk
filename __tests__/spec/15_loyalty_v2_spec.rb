@@ -90,8 +90,11 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
 
     @programs_api = Config.lv2_programs_api_instance
     @customers_api = Config.customers_api_instance
-    # Let the earlier specs drain the project rate limit before program setup.
-    sleep 10
+    remaining = LoyaltyV2Http.rate_limit_remaining
+    if remaining < 40
+      @skip_for_rate_limit = true
+      return
+    end
     begin
       @fixture_ctx = LoyaltyV2Fixture.setup
 
@@ -123,6 +126,10 @@ RSpec.describe 'Loyalty v2 API', order: :defined do
 
   after(:all) do
     cleanup_loyalty_v2!
+  end
+
+  before(:each) do
+    skip 'project API call budget is too low for Loyalty v2 setup' if @skip_for_rate_limit
   end
 
   it 'sets up an activated program with card definition, earning rule, and reward', order: 1 do
