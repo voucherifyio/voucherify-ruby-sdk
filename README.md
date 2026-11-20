@@ -197,11 +197,10 @@ end
 - **Location**: HTTP header
 
 ## 📅 Changelog
+- **2026-11-20** - `8.1.2`
+  - Fixed: `price_formula` in `ApplicableTo` and `InapplicableTo` is typed as `String` (was `Float`). The API expects a formula expression string such as `IF(ORDER_AMOUNT > 300;ORDER_ITEM_PRICE * 0.8;ORDER_ITEM_PRICE)`.
 - **2026-08-26** - `8.1.1`
-  - Fixed: `exchange_ratio` is `Float` on COIN reward models (create/update were `String`, `RedemptionRewardResultParametersCoin` was `Integer`). The API returns fractional values such as `0.01`.
-  - Added: `language` on `RedemptionsRedeemRequestBodyOptions` and `ValidationsValidateRequestBodyOptions`.
-  - Added: product/sku export order and field values (`product_id`, `sku`, `price`, `image_url`, `attributes`, `currency`).
-  - Note: `ErrorError.message` is the resolved custom validation-rule error for `options.language`, falling back to the Error Message Library default language.
+  - Fixed: `exchange_ratio` in COIN reward schemas typed as `Float` (was `integer`/`string` in OpenAPI). The API returns fractional values (e.g. `0.01` for pay-with-points). Fixes parsing errors on `list_redemptions` and related endpoints.
 - **2026-07-30** - `8.1.0`
   - Added support for **GET** /v1/campaigns/{campaignId}/summary
   - Added support for **GET** /v1/campaigns/{campaignId}/transactions
@@ -1672,26 +1671,22 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ValidationRuleAssignment](docs/ValidationRuleAssignment.md)
  - [VoucherifySdk::ValidationRuleAssignmentsList](docs/ValidationRuleAssignmentsList.md)
  - [VoucherifySdk::ValidationRuleError](docs/ValidationRuleError.md)
+ - [VoucherifySdk::ValidationRuleErrorLibrary](docs/ValidationRuleErrorLibrary.md)
  - [VoucherifySdk::ValidationRulesAssignmentsCreateRequestBody](docs/ValidationRulesAssignmentsCreateRequestBody.md)
  - [VoucherifySdk::ValidationRulesAssignmentsCreateResponseBody](docs/ValidationRulesAssignmentsCreateResponseBody.md)
  - [VoucherifySdk::ValidationRulesAssignmentsList](docs/ValidationRulesAssignmentsList.md)
  - [VoucherifySdk::ValidationRulesAssignmentsListResponseBody](docs/ValidationRulesAssignmentsListResponseBody.md)
  - [VoucherifySdk::ValidationRulesCreateRequestBody](docs/ValidationRulesCreateRequestBody.md)
  - [VoucherifySdk::ValidationRulesCreateRequestBodyApplicableTo](docs/ValidationRulesCreateRequestBodyApplicableTo.md)
- - [VoucherifySdk::ValidationRulesCreateRequestBodyError](docs/ValidationRulesCreateRequestBodyError.md)
  - [VoucherifySdk::ValidationRulesCreateResponseBody](docs/ValidationRulesCreateResponseBody.md)
  - [VoucherifySdk::ValidationRulesCreateResponseBodyApplicableTo](docs/ValidationRulesCreateResponseBodyApplicableTo.md)
- - [VoucherifySdk::ValidationRulesCreateResponseBodyError](docs/ValidationRulesCreateResponseBodyError.md)
  - [VoucherifySdk::ValidationRulesGetResponseBody](docs/ValidationRulesGetResponseBody.md)
  - [VoucherifySdk::ValidationRulesGetResponseBodyApplicableTo](docs/ValidationRulesGetResponseBodyApplicableTo.md)
- - [VoucherifySdk::ValidationRulesGetResponseBodyError](docs/ValidationRulesGetResponseBodyError.md)
  - [VoucherifySdk::ValidationRulesListResponseBody](docs/ValidationRulesListResponseBody.md)
  - [VoucherifySdk::ValidationRulesUpdateRequestBody](docs/ValidationRulesUpdateRequestBody.md)
  - [VoucherifySdk::ValidationRulesUpdateRequestBodyApplicableTo](docs/ValidationRulesUpdateRequestBodyApplicableTo.md)
- - [VoucherifySdk::ValidationRulesUpdateRequestBodyError](docs/ValidationRulesUpdateRequestBodyError.md)
  - [VoucherifySdk::ValidationRulesUpdateResponseBody](docs/ValidationRulesUpdateResponseBody.md)
  - [VoucherifySdk::ValidationRulesUpdateResponseBodyApplicableTo](docs/ValidationRulesUpdateResponseBodyApplicableTo.md)
- - [VoucherifySdk::ValidationRulesUpdateResponseBodyError](docs/ValidationRulesUpdateResponseBodyError.md)
  - [VoucherifySdk::ValidationsRedeemableInapplicable](docs/ValidationsRedeemableInapplicable.md)
  - [VoucherifySdk::ValidationsRedeemableInapplicableResult](docs/ValidationsRedeemableInapplicableResult.md)
  - [VoucherifySdk::ValidationsRedeemableInapplicableResultDetails](docs/ValidationsRedeemableInapplicableResultDetails.md)

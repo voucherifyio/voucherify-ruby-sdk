@@ -14,15 +14,48 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Contains the error message returned from API when validation / redemption fails to meet requirements of defined rules.
+  # Defines the custom error returned when validation or redemption fails this rule. Use legacy `message`, `mode: MESSAGES` with per-language `messages`, or `mode: LIBRARY` with a library `key`. `MESSAGES` and `LIBRARY` are mutually exclusive. At validation or redemption time the API resolves this object to a single `{ message }` using `options.language`.
   class ValidationRuleError
-    # The error message returned from API when validation / redemption fails to meet requirements of defined rules.
+    # Legacy single-language error message. Used when `mode` is omitted. In `MESSAGES` mode, used when neither the requested language nor the default language has a translation.
     attr_accessor :message
+
+    # Selects how the custom error is defined. `MESSAGES` stores per-language text in `messages`. `LIBRARY` references an Error Message Library entry in `library`. Omit `mode` to use the legacy `message` field only.
+    attr_accessor :mode
+
+    # Per-language custom messages keyed by language code (`en`, `pl`, `en-US`). Required when `mode` is `MESSAGES`. Must be omitted or `null` when `mode` is `LIBRARY`.
+    attr_accessor :messages
+
+    attr_accessor :library
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'message' => :'message'
+        :'message' => :'message',
+        :'mode' => :'mode',
+        :'messages' => :'messages',
+        :'library' => :'library'
       }
     end
 
@@ -34,14 +67,19 @@ module VoucherifySdk
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'message' => :'String'
+        :'message' => :'String',
+        :'mode' => :'String',
+        :'messages' => :'Hash<String, String>',
+        :'library' => :'ValidationRuleErrorLibrary'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'message'
+        :'message',
+        :'mode',
+        :'messages',
       ])
     end
 
@@ -56,6 +94,20 @@ module VoucherifySdk
       if attributes.key?(:'message')
         self.message = attributes[:'message']
       end
+
+      if attributes.key?(:'mode')
+        self.mode = attributes[:'mode']
+      end
+
+      if attributes.key?(:'messages')
+        if (value = attributes[:'messages']).is_a?(Hash)
+          self.messages = value
+        end
+      end
+
+      if attributes.key?(:'library')
+        self.library = attributes[:'library']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -63,6 +115,14 @@ module VoucherifySdk
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if !@message.nil? && @message.to_s.length > 255
+        invalid_properties.push('invalid value for "message", the character length must be smaller than or equal to 255.')
+      end
+
+      if !@messages.nil? && @messages.length > 100
+        invalid_properties.push('invalid value for "messages", number of items must be less than or equal to 100.')
+      end
+
       invalid_properties
     end
 
@@ -70,6 +130,10 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if !@message.nil? && @message.to_s.length > 255
+      mode_validator = EnumAttributeValidator.new('String', ["MESSAGES", "LIBRARY"])
+      return false unless mode_validator.valid?(@mode)
+      return false if !@messages.nil? && @messages.length > 100
       true
     end
 
@@ -78,7 +142,10 @@ module VoucherifySdk
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          message == o.message
+          message == o.message &&
+          mode == o.mode &&
+          messages == o.messages &&
+          library == o.library
     end
 
     # @see the `==` method
@@ -90,7 +157,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [message].hash
+      [message, mode, messages, library].hash
     end
 
     # Builds the object from hash

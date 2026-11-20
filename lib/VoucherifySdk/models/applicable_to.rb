@@ -191,7 +191,7 @@ module VoucherifySdk
         :'product_id' => :'String',
         :'product_source_id' => :'String',
         :'price' => :'Float',
-        :'price_formula' => :'Float',
+        :'price_formula' => :'String',
         :'effect' => :'ApplicableToEffect',
         :'quantity_limit' => :'Integer',
         :'aggregated_quantity_limit' => :'Integer',
