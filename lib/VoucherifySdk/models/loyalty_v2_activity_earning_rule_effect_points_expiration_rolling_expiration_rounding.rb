@@ -14,12 +14,12 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # `value` is the month (1-12). Required when `type` is `END_OF_PARTICULAR_MONTH`. Absent for other rounding types. The API validates field combinations that this schema does not express.
+  # `value` is the month (1–12). Required when `type` is `END_OF_PARTICULAR_MONTH`. Absent for other rounding types. The API validates field combinations that this schema does not express.
   class LoyaltyV2ActivityEarningRuleEffectPointsExpirationRollingExpirationRounding
     # Rounding type.
     attr_accessor :type
 
-    # Month number (1-12). Present only when `type` is `END_OF_PARTICULAR_MONTH`.
+    # Month number (1–12). Present only when `type` is `END_OF_PARTICULAR_MONTH`.
     attr_accessor :value
 
     class EnumAttributeValidator

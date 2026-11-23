@@ -197,6 +197,12 @@ end
 - **Location**: HTTP header
 
 ## 📅 Changelog
+- **2026-11-23** - `8.3.0`
+  - Added Loyalty referral fields: `referrer_points_earned` and `referee_points_earned` on `CardDailyReportEntry`, `referrer_earned` and `referee_earned` on `CardLifetimeBucketPoints`, the transaction types `REFERRER_POINTS_EARNED` and `REFEREE_POINTS_EARNED` on `CardTransaction`, and the status `DELETED` on `V2LoyaltiesEarningRulesGetResponseBody`.
+  - Added `referral_tier` as `related_object_type` on reward assignment models. `RewardsAssignmentsCreateRequestBody` accepts optional `related_object_type` (`campaign` or `referral_tier`) and `related_object_id` for assigning a `LOYALTY_POINTS` reward to a referral tier. The SDK does not set `related_object_type` by default, so assigning a reward to a campaign with `campaign` works as before.
+  - Added the `LOYALTY_POINTS` reward type: the `LOYALTY_POINTS` value on reward `type` fields, and `parameters.loyalty_points` (`points`, `program_id`, `card_definition_id`, `on_missing_member`) on reward create, update, response, and member activity parameter models.
+  - Added optional `type` on `RewardsCreateRequestBody` (`CAMPAIGN`, `MATERIAL`, `COIN`, `LOYALTY_POINTS`). The SDK does not set it by default and Voucherify infers the type from `parameters`, so creating a campaign, product, or pay-with-points reward without `type` works as before.
+  - Fixed: `price_formula` in `ApplicableTo` and `InapplicableTo` is typed as `String` (was `Float`). The API expects a formula expression string such as `IF(ORDER_AMOUNT > 300;ORDER_ITEM_PRICE * 0.8;ORDER_ITEM_PRICE)`.
 - **2026-10-14** - `8.2.0`
   - Added Loyalty v2 API methods under `/v2/loyalties` for member create and batch create, update, delete, activate, and deactivate; card point adjustments, pending-points activate and cancel, and points-bucket expiration; order payments; reward purchase and refund; plus memberships, cards, examine, reports, and reads for a benefit, an earning rule, and a reward.
   - Added `loyalty_memberships` on customer summary models.
@@ -1925,6 +1931,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::RewardType](docs/RewardType.md)
  - [VoucherifySdk::RewardTypeCampaign](docs/RewardTypeCampaign.md)
  - [VoucherifySdk::RewardTypeCoin](docs/RewardTypeCoin.md)
+ - [VoucherifySdk::RewardTypeLoyaltyPoints](docs/RewardTypeLoyaltyPoints.md)
  - [VoucherifySdk::RewardTypeProduct](docs/RewardTypeProduct.md)
  - [VoucherifySdk::RewardValidityHoursResponse](docs/RewardValidityHoursResponse.md)
  - [VoucherifySdk::RewardsAssignmentsCreateRequestBody](docs/RewardsAssignmentsCreateRequestBody.md)
@@ -1948,6 +1955,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::RewardsCreateRequestBodyParameters](docs/RewardsCreateRequestBodyParameters.md)
  - [VoucherifySdk::RewardsCreateRequestBodyParametersCampaign](docs/RewardsCreateRequestBodyParametersCampaign.md)
  - [VoucherifySdk::RewardsCreateRequestBodyParametersCoin](docs/RewardsCreateRequestBodyParametersCoin.md)
+ - [VoucherifySdk::RewardsCreateRequestBodyParametersLoyaltyPoints](docs/RewardsCreateRequestBodyParametersLoyaltyPoints.md)
  - [VoucherifySdk::RewardsCreateRequestBodyParametersProduct](docs/RewardsCreateRequestBodyParametersProduct.md)
  - [VoucherifySdk::RewardsCreateResponseBody](docs/RewardsCreateResponseBody.md)
  - [VoucherifySdk::RewardsCreateResponseBodyAttributes](docs/RewardsCreateResponseBodyAttributes.md)
@@ -1969,6 +1977,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::RewardsUpdateRequestBodyParameters](docs/RewardsUpdateRequestBodyParameters.md)
  - [VoucherifySdk::RewardsUpdateRequestBodyParametersCampaign](docs/RewardsUpdateRequestBodyParametersCampaign.md)
  - [VoucherifySdk::RewardsUpdateRequestBodyParametersCoin](docs/RewardsUpdateRequestBodyParametersCoin.md)
+ - [VoucherifySdk::RewardsUpdateRequestBodyParametersLoyaltyPoints](docs/RewardsUpdateRequestBodyParametersLoyaltyPoints.md)
  - [VoucherifySdk::RewardsUpdateRequestBodyParametersProduct](docs/RewardsUpdateRequestBodyParametersProduct.md)
  - [VoucherifySdk::RewardsUpdateResponseBody](docs/RewardsUpdateResponseBody.md)
  - [VoucherifySdk::RewardsUpdateResponseBodyAttributes](docs/RewardsUpdateResponseBodyAttributes.md)

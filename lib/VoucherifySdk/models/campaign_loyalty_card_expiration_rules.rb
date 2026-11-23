@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Defines the loyalty point expiration rule. This expiration rule applies when there are no `expiration_rules` defined for an earning rule.
+  # Defines the loyalty point expiration rule (**legacy loyalty**). This expiration rule applies when there are no `expiration_rules` defined for an earning rule.
   class CampaignLoyaltyCardExpirationRules
     # Type of period. Can be set for `MONTH` or `FIXED_DAY_OF_YEAR`. `MONTH` requires the `period_value` field. `FIXED_DAY_OF_YEAR` requires the `fixed_month` and `fixed_day` fields.
     attr_accessor :period_type

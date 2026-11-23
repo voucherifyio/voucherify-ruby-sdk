@@ -16,10 +16,10 @@ require 'time'
 module VoucherifySdk
   # Contains details about the users who will be assigned to the project. Only the `id` and `role` or `login` and `role` should be provided in the request.
   class ManagementProjectsCreateRequestBodyUsersItem
-    # The unique identifier of the user who will be assigned to the project. It can be found in Team Settings > Team > Edit member. **Required** with the `role` string.  Do **not** use with the `login` string.
+    # The unique identifier of the user who will be assigned to the project. It can be found in Team Settings > Team > Edit member. Required with the `role` string.  Do **not** use with the `login` string.
     attr_accessor :id
 
-    # The login data of the user who will be assigned to the project. **Required** with the `role` string.  Do **not** use with the `id` string.
+    # The login data of the user who will be assigned to the project. Required with the `role` string.  Do **not** use with the `id` string.
     attr_accessor :login
 
     # The role of the user to be added. It can be one of the following predefined roles: `ADMIN`, `USER`, `VIEWER`, `MERCHANT` or an ID of a custom role.

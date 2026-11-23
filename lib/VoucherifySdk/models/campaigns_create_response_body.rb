@@ -33,10 +33,10 @@ module VoucherifySdk
 
     attr_accessor :voucher
 
-    # Indicates whether customers will be able to auto-join a loyalty campaign if any earning rule is fulfilled.
+    # Indicates whether customers will be able to auto-join a **legacy loyalty** campaign if any earning rule is fulfilled.
     attr_accessor :auto_join
 
-    # If this value is set to `true`, customers will be able to join the campaign only once. It is always `false` for generic (standalone) vouchers campaigns and it cannot be changed in them. It is always `true` for loyalty campaigns and it cannot be changed in them.
+    # If this value is set to `true`, customers will be able to join the campaign only once. It is always `false` for generic (standalone) vouchers campaigns and it cannot be changed in them. It is always `true` for **legacy loyalty** campaigns and it cannot be changed in them.
     attr_accessor :join_once
 
     # Flag indicating whether the campaign is to use the voucher's metadata schema instead of the campaign metadata schema.

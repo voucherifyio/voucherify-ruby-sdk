@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for listing earning rules using **GET** `v1/loyalties/{campaignId}/earning-rules` endpoint.
+  # **Legacy loyalty.** Response body schema for listing earning rules using **GET** `v1/loyalties/{campaignId}/earning-rules` endpoint.
   class LoyaltiesEarningRulesListResponseBody
     # The type of the object represented by JSON. This object stores information about earning rules in a dictionary.
     attr_accessor :object

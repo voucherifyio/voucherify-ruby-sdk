@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Schema model for a campaign voucher.
+  # **Legacy loyalty.** Schema model for a campaign voucher.
   class LoyaltyCampaignVoucher
     # Type of voucher.
     attr_accessor :type

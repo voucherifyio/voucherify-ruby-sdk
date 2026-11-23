@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **Get** `/loyalties`.
+  # **Legacy loyalty.** Response body schema for **Get** `/loyalties`.
   class LoyaltiesListCampaignsResponseBody
     # The type of the object represented by JSON. This object stores information about loyalty campaigns in a dictionary.
     attr_accessor :object

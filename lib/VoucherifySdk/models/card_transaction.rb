@@ -236,7 +236,7 @@ module VoucherifySdk
       return false if !@card_definition_id.nil? && @card_definition_id !~ Regexp.new(/^lcdef_[a-f0-9]+$/)
       card_type_validator = EnumAttributeValidator.new('String', ["INDIVIDUAL"])
       return false unless card_type_validator.valid?(@card_type)
-      type_validator = EnumAttributeValidator.new('String', ["ADMIN_CREDIT", "ADMIN_DEBIT", "ADMIN_POINTS_EXPIRATION", "POINTS_EARNED", "POINTS_SPENT_ON_REWARD", "POINTS_PURCHASED", "POINTS_PURCHASE_REVERSED", "POINTS_SPENT_ON_ORDER", "POINTS_REFUNDED", "POINTS_RETURNED", "POINTS_EXPIRED", "PENDING_POINTS_ADDED", "PENDING_POINTS_ACTIVATED", "PENDING_POINTS_CANCELED"])
+      type_validator = EnumAttributeValidator.new('String', ["ADMIN_CREDIT", "ADMIN_DEBIT", "ADMIN_POINTS_EXPIRATION", "POINTS_EARNED", "POINTS_SPENT_ON_REWARD", "POINTS_PURCHASED", "POINTS_PURCHASE_REVERSED", "POINTS_SPENT_ON_ORDER", "POINTS_REFUNDED", "POINTS_RETURNED", "POINTS_EXPIRED", "PENDING_POINTS_ADDED", "PENDING_POINTS_ACTIVATED", "PENDING_POINTS_CANCELED", "REFERRER_POINTS_EARNED", "REFEREE_POINTS_EARNED"])
       return false unless type_validator.valid?(@type)
       status_validator = EnumAttributeValidator.new('String', ["PENDING", "PROCESSING", "APPROVED", "REJECTED"])
       return false unless status_validator.valid?(@status)

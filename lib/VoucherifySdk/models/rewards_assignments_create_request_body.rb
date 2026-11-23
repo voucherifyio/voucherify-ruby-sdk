@@ -18,16 +18,45 @@ module VoucherifySdk
     # The campaign ID of the campaign to which the reward is to be assigned.
     attr_accessor :campaign
 
+    attr_accessor :related_object_type
+
     attr_accessor :parameters
 
     attr_accessor :validation_rules
+
+    # Unique referral tier ID, assigned by Voucherify.
+    attr_accessor :related_object_id
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'campaign' => :'campaign',
+        :'related_object_type' => :'related_object_type',
         :'parameters' => :'parameters',
-        :'validation_rules' => :'validation_rules'
+        :'validation_rules' => :'validation_rules',
+        :'related_object_id' => :'related_object_id'
       }
     end
 
@@ -40,8 +69,10 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'campaign' => :'String',
+        :'related_object_type' => :'String',
         :'parameters' => :'RewardsAssignmentsCreateRequestBodyParameters',
-        :'validation_rules' => :'Array<String>'
+        :'validation_rules' => :'Array<String>',
+        :'related_object_id' => :'String'
       }
     end
 
@@ -49,8 +80,10 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'campaign',
+        :'related_object_type',
         :'parameters',
-        :'validation_rules'
+        :'validation_rules',
+        :'related_object_id'
       ])
     end
 
@@ -66,6 +99,10 @@ module VoucherifySdk
         self.campaign = attributes[:'campaign']
       end
 
+      if attributes.key?(:'related_object_type')
+        self.related_object_type = attributes[:'related_object_type']
+      end
+
       if attributes.key?(:'parameters')
         self.parameters = attributes[:'parameters']
       end
@@ -74,6 +111,10 @@ module VoucherifySdk
         if (value = attributes[:'validation_rules']).is_a?(Array)
           self.validation_rules = value
         end
+      end
+
+      if attributes.key?(:'related_object_id')
+        self.related_object_id = attributes[:'related_object_id']
       end
     end
 
@@ -89,6 +130,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      related_object_type_validator = EnumAttributeValidator.new('String', ["campaign", "referral_tier"])
+      return false unless related_object_type_validator.valid?(@related_object_type)
       true
     end
 
@@ -98,8 +141,10 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           campaign == o.campaign &&
+          related_object_type == o.related_object_type &&
           parameters == o.parameters &&
-          validation_rules == o.validation_rules
+          validation_rules == o.validation_rules &&
+          related_object_id == o.related_object_id
     end
 
     # @see the `==` method
@@ -111,7 +156,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign, parameters, validation_rules].hash
+      [campaign, related_object_type, parameters, validation_rules, related_object_id].hash
     end
 
     # Builds the object from hash

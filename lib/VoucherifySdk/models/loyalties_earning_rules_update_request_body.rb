@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Request body for updating an earning rule in a **legacy loyalty** campaign (`PUT /v1/loyalties/{campaignId}/earning-rules/{earningRuleId}`).
   class LoyaltiesEarningRulesUpdateRequestBody
     # A unique validation rule identifier assigned by the Voucherify API. The validation rule is verified before points are added to the balance.
     attr_accessor :validation_rule_id

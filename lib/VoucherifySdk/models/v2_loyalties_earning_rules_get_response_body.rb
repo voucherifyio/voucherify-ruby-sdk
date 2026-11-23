@@ -22,7 +22,7 @@ module VoucherifySdk
     # Earning rule name.
     attr_accessor :name
 
-    # Current status. `DELETED` also exists internally but deleted rules are excluded from API reads.
+    # Current status. `DELETED` is returned only by the delete operation.
     attr_accessor :status
 
     # Earning definitions of the rule. Contains at least one earning.
@@ -267,7 +267,7 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if !@id.nil? && @id !~ Regexp.new(/^lern_[a-f0-9]+$/)
       return false if !@name.nil? && @name.to_s.length > 200
-      status_validator = EnumAttributeValidator.new('String', ["DRAFT", "ACTIVE", "INACTIVE"])
+      status_validator = EnumAttributeValidator.new('String', ["DRAFT", "ACTIVE", "INACTIVE", "DELETED"])
       return false unless status_validator.valid?(@status)
       return false if !@earnings.nil? && @earnings.length < 1
       return false if @trigger.nil?

@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Get earning rule
-    # Returns a single earning rule by its ID.
+    # Returns a single earning rule by its ID. A successful call records no activity.
     # @param earning_rule_id [String] Identifies the earning rule. Format lern_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesEarningRulesGetResponseBody]
@@ -30,7 +30,7 @@ module VoucherifySdk
     end
 
     # Get earning rule
-    # Returns a single earning rule by its ID.
+    # Returns a single earning rule by its ID. A successful call records no activity.
     # @param earning_rule_id [String] Identifies the earning rule. Format lern_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesEarningRulesGetResponseBody, Integer, Hash)>] V2LoyaltiesEarningRulesGetResponseBody data, response status code and response headers

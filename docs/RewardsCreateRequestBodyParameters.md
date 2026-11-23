@@ -7,4 +7,5 @@
 | **campaign** | [**RewardsCreateRequestBodyParametersCampaign**](RewardsCreateRequestBodyParametersCampaign.md) |  | [optional] |
 | **product** | [**RewardsCreateRequestBodyParametersProduct**](RewardsCreateRequestBodyParametersProduct.md) |  | [optional] |
 | **coin** | [**RewardsCreateRequestBodyParametersCoin**](RewardsCreateRequestBodyParametersCoin.md) |  | [optional] |
+| **loyalty_points** | [**RewardsCreateRequestBodyParametersLoyaltyPoints**](RewardsCreateRequestBodyParametersLoyaltyPoints.md) |  | [optional] |
 

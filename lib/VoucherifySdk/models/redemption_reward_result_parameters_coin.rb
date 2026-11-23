@@ -14,12 +14,12 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Defines the ratio by mapping the number of loyalty points in `points_ratio` to a predefined cash amount in `exchange_ratio`.
+  # Defines the ratio by mapping the number of loyalty points (**legacy loyalty**) in `points_ratio` to a predefined cash amount in `exchange_ratio`.
   class RedemptionRewardResultParametersCoin
     # The cash equivalent of the points defined in the `points_ratio` property.
     attr_accessor :exchange_ratio
 
-    # The number of loyalty points that will map to the predefined cash amount defined by the `exchange_ratio` property.
+    # The number of loyalty points (**legacy loyalty**) that will map to the predefined cash amount defined by the `exchange_ratio` property.
     attr_accessor :points_ratio
 
     # Attribute mapping from ruby-style variable name to JSON key.

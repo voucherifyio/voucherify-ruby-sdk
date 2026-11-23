@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Schema model for a campaign loyalty card.
+  # Schema model for a campaign loyalty card (**legacy loyalty**).
   class CampaignLoyaltyCard
     # The initial number of points to assign to the loyalty card. This is the current loyalty card score i.e. the number of loyalty points on the card.
     attr_accessor :points

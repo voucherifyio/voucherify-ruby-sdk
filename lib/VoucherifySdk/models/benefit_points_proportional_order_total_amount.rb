@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Ratio definition - `value` points for every `every` units.
+  # Ratio definition. `value` points for every `every` units.
   class BenefitPointsProportionalOrderTotalAmount
     # Unit step (e.g. order amount in cents) for which `value` points are granted.
     attr_accessor :every

@@ -21,12 +21,15 @@ module VoucherifySdk
 
     attr_accessor :product
 
+    attr_accessor :loyalty_points
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'campaign' => :'campaign',
         :'coin' => :'coin',
-        :'product' => :'product'
+        :'product' => :'product',
+        :'loyalty_points' => :'loyalty_points'
       }
     end
 
@@ -40,7 +43,8 @@ module VoucherifySdk
       {
         :'campaign' => :'RewardTypeCampaign',
         :'coin' => :'RewardTypeCoin',
-        :'product' => :'RewardTypeProduct'
+        :'product' => :'RewardTypeProduct',
+        :'loyalty_points' => :'RewardTypeLoyaltyPoints'
       }
     end
 
@@ -49,7 +53,8 @@ module VoucherifySdk
       Set.new([
         :'campaign',
         :'coin',
-        :'product'
+        :'product',
+        :'loyalty_points'
       ])
     end
 
@@ -71,6 +76,10 @@ module VoucherifySdk
 
       if attributes.key?(:'product')
         self.product = attributes[:'product']
+      end
+
+      if attributes.key?(:'loyalty_points')
+        self.loyalty_points = attributes[:'loyalty_points']
       end
     end
 
@@ -96,7 +105,8 @@ module VoucherifySdk
       self.class == o.class &&
           campaign == o.campaign &&
           coin == o.coin &&
-          product == o.product
+          product == o.product &&
+          loyalty_points == o.loyalty_points
     end
 
     # @see the `==` method
@@ -108,7 +118,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign, coin, product].hash
+      [campaign, coin, product, loyalty_points].hash
     end
 
     # Builds the object from hash

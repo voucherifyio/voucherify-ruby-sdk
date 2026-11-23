@@ -16,4 +16,6 @@
 | **returned** | **Float** | Total returned points (by returning a purchased reward). | [optional][default to 0] |
 | **locked** | **Float** | Total locked points (by locking a purchased reward). | [optional][default to 0] |
 | **unlocked** | **Float** | Total unlocked points (by unlocking a purchased reward). | [optional][default to 0] |
+| **referrer_earned** | **Float** | Total points credited as a referrer from a &#x60;LOYALTY_POINTS&#x60; referral reward. Already included in &#x60;total&#x60;, not in &#x60;earned&#x60;. | [optional][default to 0] |
+| **referee_earned** | **Float** | Total points credited as a referee from a &#x60;LOYALTY_POINTS&#x60; referral reward. Already included in &#x60;total&#x60;, not in &#x60;earned&#x60;. | [optional][default to 0] |
 

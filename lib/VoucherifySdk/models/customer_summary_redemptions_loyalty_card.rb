@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Summary of loyalty points.
+  # Summary of loyalty points (**legacy loyalty**).
   class CustomerSummaryRedemptionsLoyaltyCard
     # Total number of loyalty points redeemed by the customer.
     attr_accessor :redeemed_points

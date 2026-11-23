@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Object representing loyalty card parameters. Child attributes are present only if `type` is `LOYALTY_CARD`. Defaults to `null`.
+  # Object representing legacy loyalty card parameters. Child attributes are present only if `type` is `LOYALTY_CARD`. Defaults to `null`.
   class LoyaltiesMembersRedemptionRedeemResponseBodyVoucherLoyaltyCard
     # Total number of points added to the loyalty card over its lifespan.
     attr_accessor :points

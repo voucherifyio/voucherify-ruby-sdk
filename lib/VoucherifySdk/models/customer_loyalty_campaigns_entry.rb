@@ -14,12 +14,12 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Contains details about the point balances left on loyalty cards and the number of referred customers in each campaign.
+  # Contains details about the point balances left on loyalty cards (**legacy loyalty**) and the number of referred customers in each campaign.
   class CustomerLoyaltyCampaignsEntry
     # Remaining point balance in campaign.
     attr_accessor :points
 
-    # Customer's loyalty tier within the campaign.
+    # Customer's loyalty tier within the **legacy loyalty** campaign.
     attr_accessor :loyalty_tier
 
     # Number of customers referred by the customer in campaign.

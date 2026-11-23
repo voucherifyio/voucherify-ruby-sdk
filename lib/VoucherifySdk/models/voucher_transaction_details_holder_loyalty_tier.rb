@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Loyalty tier of the loyalty card holder at the moment when the transaction occurred. The loyalty tier is the tier in which the holder was before the loyalty point balance changed.
+  # Legacy loyalty tier of the loyalty card holder at the moment when the transaction occurred. The loyalty tier is the tier in which the holder was before the loyalty point balance changed.
   class VoucherTransactionDetailsHolderLoyaltyTier
     # Unique identifier of the loyalty tier, assigned by Voucherify.
     attr_accessor :id

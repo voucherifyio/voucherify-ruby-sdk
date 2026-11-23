@@ -22,7 +22,7 @@ module VoucherifySdk
     # Identifies the name of the attribute that contains the array of voucher objects.
     attr_accessor :data_ref
 
-    # Contains array of voucher objects representing loyalty cards, in other words, loyalty program members.
+    # Contains an array of voucher objects representing loyalty cards (legacy loyalty campaign members).
     attr_accessor :vouchers
 
     # Total number of voucher objects.

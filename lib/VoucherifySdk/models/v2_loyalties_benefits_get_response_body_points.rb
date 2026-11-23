@@ -19,7 +19,7 @@ module VoucherifySdk
     # Number of points to add.
     attr_accessor :value
 
-    # ID of the card definition whose cards receive the points. The card definition must exist and be `ACTIVE`.
+    # ID of the card definition whose cards receive the points. The card definition must exist. Creating with `status: ACTIVE`, or updating with this object, requires an `ACTIVE` card definition.
     attr_accessor :card_definition_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

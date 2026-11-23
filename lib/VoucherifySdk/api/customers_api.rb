@@ -331,7 +331,7 @@ module VoucherifySdk
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :starting_after A cursor for pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.
     # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the events starting after an event with the given ID.
-    # @option opts [ParameterCampaignType] :campaign_type Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM
+    # @option opts [ParameterCampaignType] :campaign_type Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM LOYALTY_PROGRAM is the campaign type for **legacy loyalty** (loyalty card campaigns), not v2/loyalties programs.
     # @option opts [String] :campaign_id By applying this parameter you request only events related to specific campaign identified by its ID.
     # @option opts [String] :product_id By applying this parameter you request only events related to specific product identified by its ID.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -350,7 +350,7 @@ module VoucherifySdk
     # @option opts [ParameterOrder] :order Sorts the results using one of the filtering options, where the dash - preceding a sorting option means sorting in a descending order.
     # @option opts [Time] :starting_after A cursor for pagination. starting_after is a date-time value that defines your place in the list based on created_at property from the activity object. For instance, if you make a list request and receive 100 objects, ending with an object created at 2020-05-24T13:43:09.024Z, your subsequent call can include starting_after 2020-05-24T13:43:09.024Z in order to fetch the next page of the list.
     # @option opts [String] :starting_after_id A cursor for pagination. It retrieves the events starting after an event with the given ID.
-    # @option opts [ParameterCampaignType] :campaign_type Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM
+    # @option opts [ParameterCampaignType] :campaign_type Through this parameter you can control a type of campaign by which Voucherify will filter related customers activity. API will return only records related to that given type. Allowed values: DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM LOYALTY_PROGRAM is the campaign type for **legacy loyalty** (loyalty card campaigns), not v2/loyalties programs.
     # @option opts [String] :campaign_id By applying this parameter you request only events related to specific campaign identified by its ID.
     # @option opts [String] :product_id By applying this parameter you request only events related to specific product identified by its ID.
     # @option opts [Time] :start_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
@@ -419,7 +419,7 @@ module VoucherifySdk
     # @option opts [Time] :start_date Timestamp representing the date and time which results must begin on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
     # @option opts [String] :campaign_id Requests only events related to specific campaign identified by its ID.
-    # @option opts [ParameterCampaignType] :campaign_type Filters related customers activity for the selected campaign types. Allowed values:  DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM.
+    # @option opts [ParameterCampaignType] :campaign_type Filters related customers activity for the selected campaign types. Allowed values:  DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM. LOYALTY_PROGRAM is the campaign type for **legacy loyalty** (loyalty card campaigns), not v2/loyalties programs.
     # @option opts [ParameterActivityCategory] :category Filters activities for actions or effects. Allowed values:  ACTION, EFFECT.
     # @option opts [String] :type Event name of the customer event.
     # @return [CustomersActivityListResponseBody]
@@ -438,7 +438,7 @@ module VoucherifySdk
     # @option opts [Time] :start_date Timestamp representing the date and time which results must begin on. Represented in ISO 8601 format.
     # @option opts [Time] :end_date Timestamp representing the date and time which results must end on. Represented in ISO 8601 format.
     # @option opts [String] :campaign_id Requests only events related to specific campaign identified by its ID.
-    # @option opts [ParameterCampaignType] :campaign_type Filters related customers activity for the selected campaign types. Allowed values:  DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM.
+    # @option opts [ParameterCampaignType] :campaign_type Filters related customers activity for the selected campaign types. Allowed values:  DISCOUNT_COUPONS, REFERRAL_PROGRAM, GIFT_VOUCHERS, PROMOTION, LOYALTY_PROGRAM. LOYALTY_PROGRAM is the campaign type for **legacy loyalty** (loyalty card campaigns), not v2/loyalties programs.
     # @option opts [ParameterActivityCategory] :category Filters activities for actions or effects. Allowed values:  ACTION, EFFECT.
     # @option opts [String] :type Event name of the customer event.
     # @return [Array<(CustomersActivityListResponseBody, Integer, Hash)>] CustomersActivityListResponseBody data, response status code and response headers

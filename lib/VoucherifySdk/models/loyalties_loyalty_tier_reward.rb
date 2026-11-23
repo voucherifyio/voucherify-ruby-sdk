@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # This is an object representing a loyalty tier reward.
+  # **Legacy loyalty.** This is an object representing a loyalty tier reward.
   class LoyaltiesLoyaltyTierReward
     attr_accessor :reward
 

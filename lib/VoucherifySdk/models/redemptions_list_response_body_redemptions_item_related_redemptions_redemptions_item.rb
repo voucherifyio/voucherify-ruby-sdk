@@ -18,7 +18,6 @@ module VoucherifySdk
     # Unique redemption ID.
     attr_accessor :id
 
-    # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :date
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -38,7 +37,7 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'id' => :'String',
-        :'date' => :'Time'
+        :'date' => :'String'
       }
     end
 

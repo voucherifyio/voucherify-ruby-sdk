@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Earning rule for a **legacy loyalty** campaign. For Loyalty hub earning rules, see `/v2/loyalties/earning-rules`.
   class EarningRule
     # Assigned by the Voucherify API, identifies the earning rule object.
     attr_accessor :id

@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Loyalty tier within a **legacy loyalty** campaign.
   class LoyaltyTier
     # Loyalty Tier name.
     attr_accessor :name
