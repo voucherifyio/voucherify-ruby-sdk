@@ -38,7 +38,7 @@ def create_validation_rule_more_than(validation_rules_api_instance, product_id)
                         rules: {}
                     }
                 },
-                type:"basic",
+                type:"expression",
             })
         })
 
