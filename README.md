@@ -203,6 +203,7 @@ end
   - Added the `LOYALTY_POINTS` reward type: the `LOYALTY_POINTS` value on reward `type` fields, and `parameters.loyalty_points` (`points`, `program_id`, `card_definition_id`, `on_missing_member`) on reward create, update, response, and member activity parameter models.
   - Added optional `type` on `RewardsCreateRequestBody` (`CAMPAIGN`, `MATERIAL`, `COIN`, `LOYALTY_POINTS`). The SDK does not set it by default and Voucherify infers the type from `parameters`, so creating a campaign, product, or pay-with-points reward without `type` works as before.
   - Fixed: `price_formula` in `ApplicableTo` and `InapplicableTo` is typed as `String` (was `Float`). The API expects a formula expression string such as `IF(ORDER_AMOUNT > 300;ORDER_ITEM_PRICE * 0.8;ORDER_ITEM_PRICE)`.
+  - Fixed: `date` on nested related-redemption items in redemption models is typed as `Time` (was `String`).
 - **2026-10-14** - `8.2.0`
   - Added Loyalty v2 API methods under `/v2/loyalties` for member create and batch create, update, delete, activate, and deactivate; card point adjustments, pending-points activate and cancel, and points-bucket expiration; order payments; reward purchase and refund; plus memberships, cards, examine, reports, and reads for a benefit, an earning rule, and a reward.
   - Added `loyalty_memberships` on customer summary models.
@@ -645,6 +646,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::AccessSettings](docs/AccessSettings.md)
  - [VoucherifySdk::AccessSettingsAssign](docs/AccessSettingsAssign.md)
  - [VoucherifySdk::AccessSettingsCampaignAssignmentsList](docs/AccessSettingsCampaignAssignmentsList.md)
+ - [VoucherifySdk::AccessSettingsProductCollectionAssignmentsList](docs/AccessSettingsProductCollectionAssignmentsList.md)
  - [VoucherifySdk::AccessSettingsUnassign](docs/AccessSettingsUnassign.md)
  - [VoucherifySdk::ActivitySource](docs/ActivitySource.md)
  - [VoucherifySdk::ActivitySourceApiKey](docs/ActivitySourceApiKey.md)
@@ -655,6 +657,7 @@ Class | Method | HTTP request | Description
  - [VoucherifySdk::ApplicableToResultList](docs/ApplicableToResultList.md)
  - [VoucherifySdk::ApplicationDetailsItem](docs/ApplicationDetailsItem.md)
  - [VoucherifySdk::AreaStoreCampaignAssignment](docs/AreaStoreCampaignAssignment.md)
+ - [VoucherifySdk::AreaStoreProductCollectionAssignment](docs/AreaStoreProductCollectionAssignment.md)
  - [VoucherifySdk::AsyncActionBase](docs/AsyncActionBase.md)
  - [VoucherifySdk::AsyncActionGetResponseBody](docs/AsyncActionGetResponseBody.md)
  - [VoucherifySdk::AsyncActionsListResponseBody](docs/AsyncActionsListResponseBody.md)

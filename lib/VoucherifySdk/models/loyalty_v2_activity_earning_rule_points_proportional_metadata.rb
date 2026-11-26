@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # \"Every X gives Y points\" formula based on a numeric metadata property.
   class LoyaltyV2ActivityEarningRulePointsProportionalMetadata
-    # The divisor – every this metadata value awards `value` points.
+    # The divisor - every this metadata value awards `value` points.
     attr_accessor :every
 
     # Points awarded per `every` unit.

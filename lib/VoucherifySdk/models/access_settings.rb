@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Assigns or unassigns an area or store to the campaign.  **NOTE**: this object can be sent if the Areas and Stores enterprise feature is enabled. Contact [Voucherify Sales](https://www.voucherify.io/contact-sales) to learn more.
+  # Assigns or unassigns an area or store to the resource, for example a campaign or a product collection.  <Note>This object can be sent if the Areas and Stores enterprise feature is enabled for the given resource type. Contact [Voucherify Sales](https://www.voucherify.io/contact-sales) to learn more.</Note>
   class AccessSettings
     attr_accessor :assign
 

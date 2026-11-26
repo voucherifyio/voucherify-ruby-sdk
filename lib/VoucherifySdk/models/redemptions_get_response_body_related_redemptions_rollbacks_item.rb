@@ -17,6 +17,7 @@ module VoucherifySdk
   class RedemptionsGetResponseBodyRelatedRedemptionsRollbacksItem
     attr_accessor :id
 
+    # Timestamp representing the date and time when the object was created. The value is shown in the ISO 8601 format.
     attr_accessor :date
 
     # Defines the rollback mode for the order. `WITH_ORDER` is a default setting. The redemption is rolled back together with the data about the order, including related discount values. `WITHOUT_ORDER` allows rolling the redemption back without affecting order data, including the applied discount values. This is returned only in GET `v1/redemptions/` and GET `v1/redemptions/{redemptionId}` endpoints.
@@ -62,7 +63,7 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'id' => :'String',
-        :'date' => :'String',
+        :'date' => :'Time',
         :'rollback_order_mode' => :'String'
       }
     end
