@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Request body schema for **POST** `/loyalties`.
+  # **Legacy loyalty.** Request body schema for **POST** `/loyalties`.
   class LoyaltiesCreateCampaignRequestBody
     # Campaign name.
     attr_accessor :name
@@ -25,10 +25,10 @@ module VoucherifySdk
     # Defines whether the campaign can be updated with new vouchers after campaign creation or if the campaign consists of generic (standalone) vouchers.  - `AUTO_UPDATE`: the campaign is dynamic, i.e. vouchers will generate based on set criteria -  `STATIC`: vouchers need to be manually published - `STANDALONE`: the campaign is a generic (standalone) one with a single voucher for public use (only for discount and gift card campaigns)
     attr_accessor :type
 
-    # If this value is set to `true`, customers will be able to join the campaign only once. For loyalty campaigns, it's forced to `true`, even if `join_once: false` is passed in the request.
+    # If this value is set to `true`, customers will be able to join the campaign only once. For **legacy loyalty** campaigns, it's forced to `true`, even if `join_once: false` is passed in the request.
     attr_accessor :join_once
 
-    # Indicates whether customers will be able to auto-join a loyalty campaign if any earning rule is fulfilled.
+    # Indicates whether customers will be able to auto-join a **legacy loyalty** campaign if any earning rule is fulfilled.
     attr_accessor :auto_join
 
     # Flag indicating whether the campaign is to use the voucher's metadata schema instead of the campaign metadata schema.

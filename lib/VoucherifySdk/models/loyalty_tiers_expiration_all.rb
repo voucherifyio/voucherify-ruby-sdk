@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Defines the Loyalty Tiers Expiration.
+  # **Legacy loyalty.** Defines the Loyalty Tiers Expiration.
   class LoyaltyTiersExpirationAll
     # Tier qualification.     `BALANCE`: Points balance is based on the customer's current points balance. Customers qualify for the tier if their points balance is in the points range of the tier.   `POINTS_IN_PERIOD`: A customer qualifies for the tier only if the sum of the accumulated points in a **defined time interval** reaches the tier threshold.
     attr_accessor :qualification_type

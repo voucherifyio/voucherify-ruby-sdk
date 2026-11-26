@@ -14,6 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Request body for transferring points between **legacy loyalty** cards.
   class LoyaltiesTransferPoints
     # Unique loyalty card code from which the user wants to transfer loyalty points (source).
     attr_accessor :code

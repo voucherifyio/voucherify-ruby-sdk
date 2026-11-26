@@ -17,5 +17,5 @@
 | **updated_at** | **Time** | Timestamp in ISO 8601 format indicating when the reward was updated. | [optional] |
 | **parameters** | [**RedemptionRewardResultParameters**](RedemptionRewardResultParameters.md) |  | [optional] |
 | **metadata** | **Object** | A set of custom key/value pairs that you can attach to a reward. The metadata object stores all custom attributes assigned to the reward. | [optional] |
-| **type** | **String** | Reward type. | [optional] |
+| **type** | **String** | Reward type. &#x60;LOYALTY_POINTS&#x60; credits points on a &#x60;v2/loyalties&#x60; (loyalty hub) card (for example from a referral tier). | [optional] |
 

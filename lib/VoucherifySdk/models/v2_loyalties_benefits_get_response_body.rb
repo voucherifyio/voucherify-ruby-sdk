@@ -19,7 +19,7 @@ module VoucherifySdk
     # Unique benefit ID, prefixed with `lben_`.
     attr_accessor :id
 
-    # Benefit name, unique within the project.
+    # Benefit name.
     attr_accessor :name
 
     # Benefit type.

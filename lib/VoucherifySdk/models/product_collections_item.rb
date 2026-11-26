@@ -34,6 +34,11 @@ module VoucherifySdk
     # Timestamp representing the date and time when the product collection was created. The value is shown in the ISO 8601 format.
     attr_accessor :created_at
 
+    # Indicates whether the product collection can only be read by the caller in the Areas and Stores enterprise feature. Returned only when area and store visibility rules apply to the caller. A read-only product collection can't be updated or deleted.
+    attr_accessor :readonly
+
+    attr_accessor :access_settings_assignments
+
     # The type of the object represented by JSON. This object stores information about the static product collection.
     attr_accessor :object
 
@@ -68,6 +73,8 @@ module VoucherifySdk
         :'filter' => :'filter',
         :'products' => :'products',
         :'created_at' => :'created_at',
+        :'readonly' => :'readonly',
+        :'access_settings_assignments' => :'access_settings_assignments',
         :'object' => :'object'
       }
     end
@@ -86,6 +93,8 @@ module VoucherifySdk
         :'filter' => :'Object',
         :'products' => :'Array<ProductCollectionsItemProductsItem>',
         :'created_at' => :'Time',
+        :'readonly' => :'Boolean',
+        :'access_settings_assignments' => :'AccessSettingsProductCollectionAssignmentsList',
         :'object' => :'String'
       }
     end
@@ -99,6 +108,7 @@ module VoucherifySdk
         :'filter',
         :'products',
         :'created_at',
+        :'readonly',
         :'object'
       ])
     end
@@ -135,6 +145,14 @@ module VoucherifySdk
 
       if attributes.key?(:'created_at')
         self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'readonly')
+        self.readonly = attributes[:'readonly']
+      end
+
+      if attributes.key?(:'access_settings_assignments')
+        self.access_settings_assignments = attributes[:'access_settings_assignments']
       end
 
       if attributes.key?(:'object')
@@ -174,6 +192,8 @@ module VoucherifySdk
           filter == o.filter &&
           products == o.products &&
           created_at == o.created_at &&
+          readonly == o.readonly &&
+          access_settings_assignments == o.access_settings_assignments &&
           object == o.object
     end
 
@@ -186,7 +206,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, type, filter, products, created_at, object].hash
+      [id, name, type, filter, products, created_at, readonly, access_settings_assignments, object].hash
     end
 
     # Builds the object from hash

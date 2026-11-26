@@ -52,6 +52,12 @@ module VoucherifySdk
     # Total unlocked points (by unlocking a purchased reward).
     attr_accessor :unlocked
 
+    # Total points credited as a referrer from a `LOYALTY_POINTS` referral reward. Already included in `total`, not in `earned`.
+    attr_accessor :referrer_earned
+
+    # Total points credited as a referee from a `LOYALTY_POINTS` referral reward. Already included in `total`, not in `earned`.
+    attr_accessor :referee_earned
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -66,7 +72,9 @@ module VoucherifySdk
         :'refunded' => :'refunded',
         :'returned' => :'returned',
         :'locked' => :'locked',
-        :'unlocked' => :'unlocked'
+        :'unlocked' => :'unlocked',
+        :'referrer_earned' => :'referrer_earned',
+        :'referee_earned' => :'referee_earned'
       }
     end
 
@@ -89,7 +97,9 @@ module VoucherifySdk
         :'refunded' => :'Float',
         :'returned' => :'Float',
         :'locked' => :'Float',
-        :'unlocked' => :'Float'
+        :'unlocked' => :'Float',
+        :'referrer_earned' => :'Float',
+        :'referee_earned' => :'Float'
       }
     end
 
@@ -107,7 +117,9 @@ module VoucherifySdk
         :'refunded',
         :'returned',
         :'locked',
-        :'unlocked'
+        :'unlocked',
+        :'referrer_earned',
+        :'referee_earned'
       ])
     end
 
@@ -190,6 +202,18 @@ module VoucherifySdk
       else
         self.unlocked = 0
       end
+
+      if attributes.key?(:'referrer_earned')
+        self.referrer_earned = attributes[:'referrer_earned']
+      else
+        self.referrer_earned = 0
+      end
+
+      if attributes.key?(:'referee_earned')
+        self.referee_earned = attributes[:'referee_earned']
+      else
+        self.referee_earned = 0
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -223,7 +247,9 @@ module VoucherifySdk
           refunded == o.refunded &&
           returned == o.returned &&
           locked == o.locked &&
-          unlocked == o.unlocked
+          unlocked == o.unlocked &&
+          referrer_earned == o.referrer_earned &&
+          referee_earned == o.referee_earned
     end
 
     # @see the `==` method
@@ -235,7 +261,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [total, earned, added, purchased, purchased_reversed, subtracted, expired, spent, refunded, returned, locked, unlocked].hash
+      [total, earned, added, purchased, purchased_reversed, subtracted, expired, spent, refunded, returned, locked, unlocked, referrer_earned, referee_earned].hash
     end
 
     # Builds the object from hash

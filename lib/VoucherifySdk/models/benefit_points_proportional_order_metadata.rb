@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Metadata-based ratio definition - `value` points for every `every` units of the metadata property.
+  # Metadata-based ratio definition. `value` points for every `every` units of the metadata property.
   class BenefitPointsProportionalOrderMetadata
     # Unit step of the metadata property value for which `value` points are granted.
     attr_accessor :every

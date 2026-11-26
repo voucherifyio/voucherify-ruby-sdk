@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Activate pending point bucket
-    # Activates a pending points bucket and creates a PENDING_POINTS_ACTIVATED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
+    # Activates a pending points bucket and creates a PENDING_POINTS_ACTIVATED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -33,7 +33,7 @@ module VoucherifySdk
     end
 
     # Activate pending point bucket
-    # Activates a pending points bucket and creates a PENDING_POINTS_ACTIVATED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
+    # Activates a pending points bucket and creates a PENDING_POINTS_ACTIVATED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -85,7 +85,7 @@ module VoucherifySdk
     end
 
     # Activate program member
-    # Moves an INACTIVE member to ACTIVE and sets updated_at. Records a vl.member.activated activity. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already ACTIVE.
+    # Moves an INACTIVE member to ACTIVE and sets updated_at. Records a vl.member.activated activity. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already ACTIVE. A successful call records [vl.member.activated](/api-reference/loyalty-activity/members/activated).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -96,7 +96,7 @@ module VoucherifySdk
     end
 
     # Activate program member
-    # Moves an INACTIVE member to ACTIVE and sets updated_at. Records a vl.member.activated activity. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already ACTIVE.
+    # Moves an INACTIVE member to ACTIVE and sets updated_at. Records a vl.member.activated activity. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already ACTIVE. A successful call records [vl.member.activated](/api-reference/loyalty-activity/members/activated).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -146,7 +146,7 @@ module VoucherifySdk
     end
 
     # Adjust card points
-    # Manually adjusts the points balance of the members card. A positive points value creates an ADMIN_CREDIT card transaction. The expiration date comes from the member tier when that tier defines its own points expiration. Otherwise the date comes from the card definition. expiration_date is null when points dont expire. A negative points value creates an ADMIN_DEBIT card transaction. When points is 0, no transaction is created and status is NO_CHANGE. The transaction is created with status PENDING and processed asynchronously. The program and the member must be ACTIVE. The program must also be inside its validity window. Otherwise the response is 423. The response is 404 when the program or the member doesnt exist, or when the card isnt assigned to that member.
+    # Manually adjusts the points balance of the members card. A positive points value creates an ADMIN_CREDIT card transaction. The expiration date comes from the member tier when that tier defines its own points expiration. Otherwise the date comes from the card definition. expiration_date is null when points dont expire. A negative points value creates an ADMIN_DEBIT card transaction. When points is 0, no transaction is created and status is NO_CHANGE. The transaction is created with status PENDING and processed asynchronously. The program and the member must be ACTIVE. The program must also be inside its validity window. Otherwise the response is 423. The response is 404 when the program or the member doesnt exist, or when the card isnt assigned to that member. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -159,7 +159,7 @@ module VoucherifySdk
     end
 
     # Adjust card points
-    # Manually adjusts the points balance of the members card. A positive points value creates an ADMIN_CREDIT card transaction. The expiration date comes from the member tier when that tier defines its own points expiration. Otherwise the date comes from the card definition. expiration_date is null when points dont expire. A negative points value creates an ADMIN_DEBIT card transaction. When points is 0, no transaction is created and status is NO_CHANGE. The transaction is created with status PENDING and processed asynchronously. The program and the member must be ACTIVE. The program must also be inside its validity window. Otherwise the response is 423. The response is 404 when the program or the member doesnt exist, or when the card isnt assigned to that member.
+    # Manually adjusts the points balance of the members card. A positive points value creates an ADMIN_CREDIT card transaction. The expiration date comes from the member tier when that tier defines its own points expiration. Otherwise the date comes from the card definition. expiration_date is null when points dont expire. A negative points value creates an ADMIN_DEBIT card transaction. When points is 0, no transaction is created and status is NO_CHANGE. The transaction is created with status PENDING and processed asynchronously. The program and the member must be ACTIVE. The program must also be inside its validity window. Otherwise the response is 423. The response is 404 when the program or the member doesnt exist, or when the card isnt assigned to that member. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -216,7 +216,7 @@ module VoucherifySdk
     end
 
     # Batch create program members
-    # Schedules creation of program members from a JSON array and returns 202 with async_action_id. The program must exist, be ACTIVE, and be inside its validity window. The body isnt checked before that response. Entries are processed in batches of 100. The raw body must be at most 10 MB. Each entry uses the same fields as [Create program member](/api-reference/programs/create-program-member). A failed entry is skipped. Its report row sets created to false and explains the failure in error. Skipped cases include an invalid customer_identification, an unknown customer, an invalid status, a duplicate customer in the batch (Duplicate customer ID), a customer who is already a member (Member already exists), metadata that doesnt match the vl_member schema, and entries past the loyalty members plan limit. Successful entries enroll the customer and create a loyalty card for each card definition on the program. Report columns are identification_type, customer_id, customer_source_id, program_id, member_id, created, and error. An empty array or a null entry fails the async action with invalid_request_payload. A body that isnt a JSON array fails it with top_level_object_should_be_an_array. Use [Get async action](/api-reference/async-actions/get-async-action) to read the status and the report. You can also open the result from Audit log, [Background tasks](/analyze/audit-logs#background-tasks).
+    # Schedules creation of program members from a JSON array and returns 202 with async_action_id. The program must exist, be ACTIVE, and be inside its validity window. The body isnt checked before that response. Entries are processed in batches of 100. The raw body must be at most 10 MB. Each entry uses the same fields as [Create program member](/api-reference/programs/create-program-member). A failed entry is skipped. Its report row sets created to false and explains the failure in error. Skipped cases include an invalid customer_identification, an unknown customer, an invalid status, a duplicate customer in the batch (Duplicate customer ID), a customer who is already a member (Member already exists), metadata that doesnt match the vl_member schema, and entries past the loyalty members plan limit. Successful entries enroll the customer and create a loyalty card for each card definition on the program. Report columns are identification_type, customer_id, customer_source_id, program_id, member_id, created, and error. An empty array or a null entry fails the async action with invalid_request_payload. A body that isnt a JSON array fails it with top_level_object_should_be_an_array. Use [Get async action](/api-reference/async-actions/get-async-action) to read the status and the report. You can also open the result from Audit log, [Background tasks](/analyze/audit-logs#background-tasks). A successful call records no activity; the scheduled batch records [vl.member.created](/api-reference/loyalty-activity/members/created) and, for each card, [vl.card.created](/api-reference/loyalty-activity/cards/created), [vl.card.assigned](/api-reference/loyalty-activity/cards/assigned), and [vl.member.card.assigned](/api-reference/loyalty-activity/members/card-assigned), and card code generation later records [vl.card.code_generation.succeeded](/api-reference/loyalty-activity/cards/code-generation-succeeded) or [vl.card.code_generation.failed](/api-reference/loyalty-activity/cards/code-generation-failed).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [Array<MemberCreate>] :member_create 
@@ -227,7 +227,7 @@ module VoucherifySdk
     end
 
     # Batch create program members
-    # Schedules creation of program members from a JSON array and returns 202 with async_action_id. The program must exist, be ACTIVE, and be inside its validity window. The body isnt checked before that response. Entries are processed in batches of 100. The raw body must be at most 10 MB. Each entry uses the same fields as [Create program member](/api-reference/programs/create-program-member). A failed entry is skipped. Its report row sets created to false and explains the failure in error. Skipped cases include an invalid customer_identification, an unknown customer, an invalid status, a duplicate customer in the batch (Duplicate customer ID), a customer who is already a member (Member already exists), metadata that doesnt match the vl_member schema, and entries past the loyalty members plan limit. Successful entries enroll the customer and create a loyalty card for each card definition on the program. Report columns are identification_type, customer_id, customer_source_id, program_id, member_id, created, and error. An empty array or a null entry fails the async action with invalid_request_payload. A body that isnt a JSON array fails it with top_level_object_should_be_an_array. Use [Get async action](/api-reference/async-actions/get-async-action) to read the status and the report. You can also open the result from Audit log, [Background tasks](/analyze/audit-logs#background-tasks).
+    # Schedules creation of program members from a JSON array and returns 202 with async_action_id. The program must exist, be ACTIVE, and be inside its validity window. The body isnt checked before that response. Entries are processed in batches of 100. The raw body must be at most 10 MB. Each entry uses the same fields as [Create program member](/api-reference/programs/create-program-member). A failed entry is skipped. Its report row sets created to false and explains the failure in error. Skipped cases include an invalid customer_identification, an unknown customer, an invalid status, a duplicate customer in the batch (Duplicate customer ID), a customer who is already a member (Member already exists), metadata that doesnt match the vl_member schema, and entries past the loyalty members plan limit. Successful entries enroll the customer and create a loyalty card for each card definition on the program. Report columns are identification_type, customer_id, customer_source_id, program_id, member_id, created, and error. An empty array or a null entry fails the async action with invalid_request_payload. A body that isnt a JSON array fails it with top_level_object_should_be_an_array. Use [Get async action](/api-reference/async-actions/get-async-action) to read the status and the report. You can also open the result from Audit log, [Background tasks](/analyze/audit-logs#background-tasks). A successful call records no activity; the scheduled batch records [vl.member.created](/api-reference/loyalty-activity/members/created) and, for each card, [vl.card.created](/api-reference/loyalty-activity/cards/created), [vl.card.assigned](/api-reference/loyalty-activity/cards/assigned), and [vl.member.card.assigned](/api-reference/loyalty-activity/members/card-assigned), and card code generation later records [vl.card.code_generation.succeeded](/api-reference/loyalty-activity/cards/code-generation-succeeded) or [vl.card.code_generation.failed](/api-reference/loyalty-activity/cards/code-generation-failed).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [Array<MemberCreate>] :member_create 
@@ -282,7 +282,7 @@ module VoucherifySdk
     end
 
     # Cancel pending point bucket
-    # Cancels a pending points bucket so its points arent activated. Creates a PENDING_POINTS_CANCELED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
+    # Cancels a pending points bucket so its points arent activated. Creates a PENDING_POINTS_CANCELED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -295,7 +295,7 @@ module VoucherifySdk
     end
 
     # Cancel pending point bucket
-    # Cancels a pending points bucket so its points arent activated. Creates a PENDING_POINTS_CANCELED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
+    # Cancels a pending points bucket so its points arent activated. Creates a PENDING_POINTS_CANCELED card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be PENDING, and its date must be after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program or the member doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -347,7 +347,7 @@ module VoucherifySdk
     end
 
     # Pay for order with points
-    # Pays for an order with points from the members card. The amount and points come from the card definitions pay-with-points exchange ratio, limited by the order total, the card balance, card spending caps, and the optional payment_limit. The binding cap is returned as details.spending_cap. The program and member must be ACTIVE, and the program must be inside its validity window. The card must belong to the member. The card definition must have pay-with-points enabled and an exchange-ratio formula. The order must already exist, identified by id or source_id. Modes: - TRANSACTION (default): creates a PENDING order transaction and a PENDING card transaction. Returns 202. The same order can be paid again; each call creates a new transaction. - DRY_RUN: simulates the payment and doesnt create a transaction. Returns 200 with status SIMULATED.
+    # Pays for an order with points from the members card. The amount and points come from the card definitions pay-with-points exchange ratio, limited by the order total, the card balance, card spending caps, and the optional payment_limit. The binding cap is returned as details.spending_cap. The program and member must be ACTIVE, and the program must be inside its validity window. The card must belong to the member. The card definition must have pay-with-points enabled and an exchange-ratio formula. The order must already exist, identified by id or source_id. Modes: - TRANSACTION (default): creates a PENDING order transaction and a PENDING card transaction. Returns 202. The same order can be paid again; each call creates a new transaction. - DRY_RUN: simulates the payment and doesnt create a transaction. Returns 200 with status SIMULATED. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -359,7 +359,7 @@ module VoucherifySdk
     end
 
     # Pay for order with points
-    # Pays for an order with points from the members card. The amount and points come from the card definitions pay-with-points exchange ratio, limited by the order total, the card balance, card spending caps, and the optional payment_limit. The binding cap is returned as details.spending_cap. The program and member must be ACTIVE, and the program must be inside its validity window. The card must belong to the member. The card definition must have pay-with-points enabled and an exchange-ratio formula. The order must already exist, identified by id or source_id. Modes: - TRANSACTION (default): creates a PENDING order transaction and a PENDING card transaction. Returns 202. The same order can be paid again; each call creates a new transaction. - DRY_RUN: simulates the payment and doesnt create a transaction. Returns 200 with status SIMULATED.
+    # Pays for an order with points from the members card. The amount and points come from the card definitions pay-with-points exchange ratio, limited by the order total, the card balance, card spending caps, and the optional payment_limit. The binding cap is returned as details.spending_cap. The program and member must be ACTIVE, and the program must be inside its validity window. The card must belong to the member. The card definition must have pay-with-points enabled and an exchange-ratio formula. The order must already exist, identified by id or source_id. Modes: - TRANSACTION (default): creates a PENDING order transaction and a PENDING card transaction. Returns 202. The same order can be paid again; each call creates a new transaction. - DRY_RUN: simulates the payment and doesnt create a transaction. Returns 200 with status SIMULATED. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -415,7 +415,7 @@ module VoucherifySdk
     end
 
     # Create program member
-    # Enrolls an existing customer as a member of the loyalty program and creates a loyalty card for each card definition assigned to the program. Card code generation is asynchronous, so code can be null right after creation. The program must be ACTIVE and inside its validity window, and the customer must already exist. A customer can be a member of a program only once. Identify the customer with customer_identification. status defaults to ACTIVE.
+    # Enrolls an existing customer as a member of the loyalty program and creates a loyalty card for each card definition assigned to the program. Card code generation is asynchronous, so code can be null right after creation. The program must be ACTIVE and inside its validity window, and the customer must already exist. A customer can be a member of a program only once. Identify the customer with customer_identification. status defaults to ACTIVE. A successful call records [vl.member.created](/api-reference/loyalty-activity/members/created) and, for each card, [vl.card.created](/api-reference/loyalty-activity/cards/created), [vl.card.assigned](/api-reference/loyalty-activity/cards/assigned), and [vl.member.card.assigned](/api-reference/loyalty-activity/members/card-assigned); card code generation later records [vl.card.code_generation.succeeded](/api-reference/loyalty-activity/cards/code-generation-succeeded) or [vl.card.code_generation.failed](/api-reference/loyalty-activity/cards/code-generation-failed).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersCreateRequestBody] :v2_loyalties_programs_members_create_request_body 
@@ -426,7 +426,7 @@ module VoucherifySdk
     end
 
     # Create program member
-    # Enrolls an existing customer as a member of the loyalty program and creates a loyalty card for each card definition assigned to the program. Card code generation is asynchronous, so code can be null right after creation. The program must be ACTIVE and inside its validity window, and the customer must already exist. A customer can be a member of a program only once. Identify the customer with customer_identification. status defaults to ACTIVE.
+    # Enrolls an existing customer as a member of the loyalty program and creates a loyalty card for each card definition assigned to the program. Card code generation is asynchronous, so code can be null right after creation. The program must be ACTIVE and inside its validity window, and the customer must already exist. A customer can be a member of a program only once. Identify the customer with customer_identification. status defaults to ACTIVE. A successful call records [vl.member.created](/api-reference/loyalty-activity/members/created) and, for each card, [vl.card.created](/api-reference/loyalty-activity/cards/created), [vl.card.assigned](/api-reference/loyalty-activity/cards/assigned), and [vl.member.card.assigned](/api-reference/loyalty-activity/members/card-assigned); card code generation later records [vl.card.code_generation.succeeded](/api-reference/loyalty-activity/cards/code-generation-succeeded) or [vl.card.code_generation.failed](/api-reference/loyalty-activity/cards/code-generation-failed).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [V2LoyaltiesProgramsMembersCreateRequestBody] :v2_loyalties_programs_members_create_request_body 
@@ -481,7 +481,7 @@ module VoucherifySdk
     end
 
     # Deactivate program member
-    # Moves an ACTIVE member to INACTIVE and sets updated_at. Records a vl.member.deactivated activity. An INACTIVE member cant earn or spend points. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already INACTIVE.
+    # Moves an ACTIVE member to INACTIVE and sets updated_at. Records a vl.member.deactivated activity. An INACTIVE member cant earn or spend points. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already INACTIVE. A successful call records [vl.member.deactivated](/api-reference/loyalty-activity/members/deactivated).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -492,7 +492,7 @@ module VoucherifySdk
     end
 
     # Deactivate program member
-    # Moves an ACTIVE member to INACTIVE and sets updated_at. Records a vl.member.deactivated activity. An INACTIVE member cant earn or spend points. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already INACTIVE.
+    # Moves an ACTIVE member to INACTIVE and sets updated_at. Records a vl.member.deactivated activity. An INACTIVE member cant earn or spend points. No request body. Returns the member without a cards array. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_state_transition when the member is already INACTIVE. A successful call records [vl.member.deactivated](/api-reference/loyalty-activity/members/deactivated).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -542,7 +542,7 @@ module VoucherifySdk
     end
 
     # Delete program member
-    # Deletes the member and sets status to DELETED. Removes the members card assignments in this program. Returns the member without a cards array. Delete doesnt change updated_at. Records a vl.member.deleted activity. Each unassigned card also records vl.member.card.unassigned and vl.card.unassigned. When an assignment has a tier, the delete records a LEFT tier transaction with origin member_card_deleted. The same customer can join the program again. The new member gets a new ID. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. Deleting a member that is already DELETED returns 404.
+    # Deletes the member and sets status to DELETED. Removes the members card assignments in this program. Returns the member without a cards array. Delete doesnt change updated_at. Each unassigned card also records vl.member.card.unassigned and vl.card.unassigned. When an assignment has a tier, the delete records a LEFT tier transaction with origin member_card_deleted. The same customer can join the program again. The new member gets a new ID. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. Deleting a member that is already DELETED returns 404. A successful call records [vl.member.card.unassigned](/api-reference/loyalty-activity/members/card-unassigned) and [vl.card.unassigned](/api-reference/loyalty-activity/cards/unassigned) for each assigned card, then [vl.member.deleted](/api-reference/loyalty-activity/members/deleted).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -553,7 +553,7 @@ module VoucherifySdk
     end
 
     # Delete program member
-    # Deletes the member and sets status to DELETED. Removes the members card assignments in this program. Returns the member without a cards array. Delete doesnt change updated_at. Records a vl.member.deleted activity. Each unassigned card also records vl.member.card.unassigned and vl.card.unassigned. When an assignment has a tier, the delete records a LEFT tier transaction with origin member_card_deleted. The same customer can join the program again. The new member gets a new ID. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. Deleting a member that is already DELETED returns 404.
+    # Deletes the member and sets status to DELETED. Removes the members card assignments in this program. Returns the member without a cards array. Delete doesnt change updated_at. Each unassigned card also records vl.member.card.unassigned and vl.card.unassigned. When an assignment has a tier, the delete records a LEFT tier transaction with origin member_card_deleted. The same customer can join the program again. The new member gets a new ID. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. Deleting a member that is already DELETED returns 404. A successful call records [vl.member.card.unassigned](/api-reference/loyalty-activity/members/card-unassigned) and [vl.card.unassigned](/api-reference/loyalty-activity/cards/unassigned) for each assigned card, then [vl.member.deleted](/api-reference/loyalty-activity/members/deleted).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -603,7 +603,7 @@ module VoucherifySdk
     end
 
     # Expire point bucket
-    # Expires an ACTIVE points bucket. Creates an ADMIN_POINTS_EXPIRATION card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be ACTIVE, and its expiration_date must be on or after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program, the member, or the card definition doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
+    # Expires an ACTIVE points bucket. Creates an ADMIN_POINTS_EXPIRATION card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be ACTIVE, and its expiration_date must be on or after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program, the member, or the card definition doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -616,7 +616,7 @@ module VoucherifySdk
     end
 
     # Expire point bucket
-    # Expires an ACTIVE points bucket. Creates an ADMIN_POINTS_EXPIRATION card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be ACTIVE, and its expiration_date must be on or after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program, the member, or the card definition doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card.
+    # Expires an ACTIVE points bucket. Creates an ADMIN_POINTS_EXPIRATION card transaction. The transaction is created with status PENDING and processed asynchronously. No request body. The bucket must be ACTIVE, and its expiration_date must be on or after the current project day. The program and the member must be ACTIVE, and the program must be inside its validity window. Otherwise the response is 423. Returns 404 when the program, the member, or the card definition doesnt exist, when the card isnt assigned to that member, or when the bucket isnt on that card. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -668,7 +668,7 @@ module VoucherifySdk
     end
 
     # List member earning-rule daily reports
-    # Returns aggregated daily usage statistics for a specific earning rule and member over the given date range and resolution. Each entry sums successful earning-rule triggers recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the earning rule does not exist or is not assigned to the program.
+    # Returns aggregated daily usage statistics for a specific earning rule and member over the given date range and resolution. Each entry sums successful earning-rule triggers recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the earning rule does not exist or is not assigned to the program. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param earning_rule_id [String] Identifies the earning rule. Format lern_[a-f0-9]+.
@@ -683,7 +683,7 @@ module VoucherifySdk
     end
 
     # List member earning-rule daily reports
-    # Returns aggregated daily usage statistics for a specific earning rule and member over the given date range and resolution. Each entry sums successful earning-rule triggers recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the earning rule does not exist or is not assigned to the program.
+    # Returns aggregated daily usage statistics for a specific earning rule and member over the given date range and resolution. Each entry sums successful earning-rule triggers recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the earning rule does not exist or is not assigned to the program. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param earning_rule_id [String] Identifies the earning rule. Format lern_[a-f0-9]+.
@@ -740,7 +740,7 @@ module VoucherifySdk
     end
 
     # Get program member
-    # Returns one member of the program together with that members loyalty cards. Each card includes balance, lifetime_bucket, next_expiration, and next_activation. tier_progress is not included. Use [Get program membership](/api-reference/programs/get-program-membership) when you need tier progress. card.code can be null shortly after member creation, while code generation is still running. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first.
+    # Returns one member of the program together with that members loyalty cards. Each card includes balance, lifetime_bucket, next_expiration, and next_activation. tier_progress is not included. Use [Get program membership](/api-reference/programs/get-program-membership) when you need tier progress. card.code can be null shortly after member creation, while code generation is still running. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -751,7 +751,7 @@ module VoucherifySdk
     end
 
     # Get program member
-    # Returns one member of the program together with that members loyalty cards. Each card includes balance, lifetime_bucket, next_expiration, and next_activation. tier_progress is not included. Use [Get program membership](/api-reference/programs/get-program-membership) when you need tier progress. card.code can be null shortly after member creation, while code generation is still running. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first.
+    # Returns one member of the program together with that members loyalty cards. Each card includes balance, lifetime_bucket, next_expiration, and next_activation. tier_progress is not included. Use [Get program membership](/api-reference/programs/get-program-membership) when you need tier progress. card.code can be null shortly after member creation, while code generation is still running. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -801,7 +801,7 @@ module VoucherifySdk
     end
 
     # Get program membership
-    # Returns the membership for one customer in the program: the member, the program, and the members loyalty cards. A card includes tier_progress when its card definition has a tier structure and the member has a tier on that card. Otherwise tier_progress is omitted. identification_type chooses how customerId is read. It defaults to customer_id.
+    # Returns the membership for one customer in the program: the member, the program, and the members loyalty cards. A card includes tier_progress when its card definition has a tier structure and the member has a tier on that card. Otherwise tier_progress is omitted. identification_type chooses how customerId is read. It defaults to customer_id. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param customer_id [String] Identifies the customer or member. identification_type selects the value: a Voucherify customer ID (cust_...), a customer source_id, or a loyalty member ID (lmbr_...).
     # @param [Hash] opts the optional parameters
@@ -813,7 +813,7 @@ module VoucherifySdk
     end
 
     # Get program membership
-    # Returns the membership for one customer in the program: the member, the program, and the members loyalty cards. A card includes tier_progress when its card definition has a tier structure and the member has a tier on that card. Otherwise tier_progress is omitted. identification_type chooses how customerId is read. It defaults to customer_id.
+    # Returns the membership for one customer in the program: the member, the program, and the members loyalty cards. A card includes tier_progress when its card definition has a tier structure and the member has a tier on that card. Otherwise tier_progress is omitted. identification_type chooses how customerId is read. It defaults to customer_id. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param customer_id [String] Identifies the customer or member. identification_type selects the value: a Voucherify customer ID (cust_...), a customer source_id, or a loyalty member ID (lmbr_...).
     # @param [Hash] opts the optional parameters
@@ -865,7 +865,7 @@ module VoucherifySdk
     end
 
     # List program points-earnings daily reports
-    # Returns aggregated daily points-earnings statistics for the program over the given date range and resolution, optionally filtered by earning rule and card definition. Each entry sums earning operations recorded for one period, earning rule, earning item, and card definition. Periods without recorded activity are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated daily points-earnings statistics for the program over the given date range and resolution, optionally filtered by earning rule and card definition. Each entry sums earning operations recorded for one period, earning rule, earning item, and card definition. Periods without recorded activity are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -879,7 +879,7 @@ module VoucherifySdk
     end
 
     # List program points-earnings daily reports
-    # Returns aggregated daily points-earnings statistics for the program over the given date range and resolution, optionally filtered by earning rule and card definition. Each entry sums earning operations recorded for one period, earning rule, earning item, and card definition. Periods without recorded activity are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated daily points-earnings statistics for the program over the given date range and resolution, optionally filtered by earning rule and card definition. Each entry sums earning operations recorded for one period, earning rule, earning item, and card definition. Periods without recorded activity are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -936,7 +936,7 @@ module VoucherifySdk
     end
 
     # List program points-earnings summary reports
-    # Returns total points-earnings statistics for the program (all time), optionally filtered by earning rule or card definition. Each entry sums earning operations for one earning rule, earning item, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns total points-earnings statistics for the program (all time), optionally filtered by earning rule or card definition. Each entry sums earning operations for one earning rule, earning item, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [PointsEarningsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -947,7 +947,7 @@ module VoucherifySdk
     end
 
     # List program points-earnings summary reports
-    # Returns total points-earnings statistics for the program (all time), optionally filtered by earning rule or card definition. Each entry sums earning operations for one earning rule, earning item, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns total points-earnings statistics for the program (all time), optionally filtered by earning rule or card definition. Each entry sums earning operations for one earning rule, earning item, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [PointsEarningsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -998,7 +998,7 @@ module VoucherifySdk
     end
 
     # List card activities
-    # Returns a cursor-paginated list of activities recorded for the members card. The card must still be assigned to that member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, when the member doesnt exist in that program, or when the card isnt currently assigned to that member. The program is checked first, then the member. A DELETED member returns 404 with resource_type member. A missing assignment and a missing or deleted card both return 404 with resource_type card. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program, member, and card lookup. A cursor that doesnt match ^lcrsacrd_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program, member, and card are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
+    # Returns a cursor-paginated list of activities recorded for the members card. The card must still be assigned to that member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, when the member doesnt exist in that program, or when the card isnt currently assigned to that member. The program is checked first, then the member. A DELETED member returns 404 with resource_type member. A missing assignment and a missing or deleted card both return 404 with resource_type card. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program, member, and card lookup. A cursor that doesnt match ^lcrsacrd_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program, member, and card are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -1014,7 +1014,7 @@ module VoucherifySdk
     end
 
     # List card activities
-    # Returns a cursor-paginated list of activities recorded for the members card. The card must still be assigned to that member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, when the member doesnt exist in that program, or when the card isnt currently assigned to that member. The program is checked first, then the member. A DELETED member returns 404 with resource_type member. A missing assignment and a missing or deleted card both return 404 with resource_type card. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program, member, and card lookup. A cursor that doesnt match ^lcrsacrd_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program, member, and card are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
+    # Returns a cursor-paginated list of activities recorded for the members card. The card must still be assigned to that member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, when the member doesnt exist in that program, or when the card isnt currently assigned to that member. The program is checked first, then the member. A DELETED member returns 404 with resource_type member. A missing assignment and a missing or deleted card both return 404 with resource_type card. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program, member, and card lookup. A cursor that doesnt match ^lcrsacrd_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program, member, and card are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -1073,7 +1073,7 @@ module VoucherifySdk
     end
 
     # List card expiring points buckets
-    # Returns a cursor-paginated list of ACTIVE point expiration buckets for the members card. Each bucket groups points that share an expiration date and expiration type, including points from separate transactions. The list starts on the current project day. Earlier buckets are omitted. Results can be filtered by card definition ID and expiration date, and ordered by expiration_date. Returns an empty list when the card has no matching buckets. Returns 400 when the query is invalid or the cursor is invalid, expired, or doesnt match the query. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member.
+    # Returns a cursor-paginated list of ACTIVE point expiration buckets for the members card. Each bucket groups points that share an expiration date and expiration type, including points from separate transactions. The list starts on the current project day. Earlier buckets are omitted. Results can be filtered by card definition ID and expiration date, and ordered by expiration_date. Returns an empty list when the card has no matching buckets. Returns 400 when the query is invalid or the cursor is invalid, expired, or doesnt match the query. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -1089,7 +1089,7 @@ module VoucherifySdk
     end
 
     # List card expiring points buckets
-    # Returns a cursor-paginated list of ACTIVE point expiration buckets for the members card. Each bucket groups points that share an expiration date and expiration type, including points from separate transactions. The list starts on the current project day. Earlier buckets are omitted. Results can be filtered by card definition ID and expiration date, and ordered by expiration_date. Returns an empty list when the card has no matching buckets. Returns 400 when the query is invalid or the cursor is invalid, expired, or doesnt match the query. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member.
+    # Returns a cursor-paginated list of ACTIVE point expiration buckets for the members card. Each bucket groups points that share an expiration date and expiration type, including points from separate transactions. The list starts on the current project day. Earlier buckets are omitted. Results can be filtered by card definition ID and expiration date, and ordered by expiration_date. Returns an empty list when the card has no matching buckets. Returns 400 when the query is invalid or the cursor is invalid, expired, or doesnt match the query. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -1148,7 +1148,7 @@ module VoucherifySdk
     end
 
     # List card pending point buckets
-    # Returns a cursor-paginated list of pending point buckets for the members card. Every bucket has status PENDING. Pending points wait for activation (PERIOD_BASED, FIXED_DATES, or EVENT_BASED), following the card definition. The list starts on the next project day. The current days bucket is omitted because its still accumulating. Results can be filtered by card definition ID and ordered by date. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member. Bucket IDs from this list are the bucketId for [Activate pending point bucket](/api-reference/programs/activate-pending-point-bucket) and [Cancel pending point bucket](/api-reference/programs/cancel-pending-point-bucket).
+    # Returns a cursor-paginated list of pending point buckets for the members card. Every bucket has status PENDING. Pending points wait for activation (PERIOD_BASED, FIXED_DATES, or EVENT_BASED), following the card definition. The list starts on the next project day. The current days bucket is omitted because its still accumulating. Results can be filtered by card definition ID and ordered by date. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member. Bucket IDs from this list are the bucketId for [Activate pending point bucket](/api-reference/programs/activate-pending-point-bucket) and [Cancel pending point bucket](/api-reference/programs/cancel-pending-point-bucket). A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -1164,7 +1164,7 @@ module VoucherifySdk
     end
 
     # List card pending point buckets
-    # Returns a cursor-paginated list of pending point buckets for the members card. Every bucket has status PENDING. Pending points wait for activation (PERIOD_BASED, FIXED_DATES, or EVENT_BASED), following the card definition. The list starts on the next project day. The current days bucket is omitted because its still accumulating. Results can be filtered by card definition ID and ordered by date. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member. Bucket IDs from this list are the bucketId for [Activate pending point bucket](/api-reference/programs/activate-pending-point-bucket) and [Cancel pending point bucket](/api-reference/programs/cancel-pending-point-bucket).
+    # Returns a cursor-paginated list of pending point buckets for the members card. Every bucket has status PENDING. Pending points wait for activation (PERIOD_BASED, FIXED_DATES, or EVENT_BASED), following the card definition. The list starts on the next project day. The current days bucket is omitted because its still accumulating. Results can be filtered by card definition ID and ordered by date. Returns 404 when the program or the member doesnt exist, or when the card isnt assigned to that member. Bucket IDs from this list are the bucketId for [Activate pending point bucket](/api-reference/programs/activate-pending-point-bucket) and [Cancel pending point bucket](/api-reference/programs/cancel-pending-point-bucket). A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -1223,7 +1223,7 @@ module VoucherifySdk
     end
 
     # List card transactions
-    # Returns a cursor-paginated list of transactions on the members card. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Returns 404 when the program, member, or card doesnt exist. The program is checked first, then the member, then the card. A member of another program, or a card that isnt assigned to this member, is not found.
+    # Returns a cursor-paginated list of transactions on the members card. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Returns 404 when the program, member, or card doesnt exist. The program is checked first, then the member, then the card. A member of another program, or a card that isnt assigned to this member, is not found. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -1239,7 +1239,7 @@ module VoucherifySdk
     end
 
     # List card transactions
-    # Returns a cursor-paginated list of transactions on the members card. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Returns 404 when the program, member, or card doesnt exist. The program is checked first, then the member, then the card. A member of another program, or a card that isnt assigned to this member, is not found.
+    # Returns a cursor-paginated list of transactions on the members card. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Returns 404 when the program, member, or card doesnt exist. The program is checked first, then the member, then the card. A member of another program, or a card that isnt assigned to this member, is not found. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -1298,7 +1298,7 @@ module VoucherifySdk
     end
 
     # List member benefit transactions
-    # Lists benefit transactions (benefit fulfillments) for a given program member, with cursor-based pagination. Supports filtering by benefit ID and creation date.
+    # Lists benefit transactions (benefit fulfillments) for a given program member, with cursor-based pagination. Supports filtering by benefit ID and creation date. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -1313,7 +1313,7 @@ module VoucherifySdk
     end
 
     # List member benefit transactions
-    # Lists benefit transactions (benefit fulfillments) for a given program member, with cursor-based pagination. Supports filtering by benefit ID and creation date.
+    # Lists benefit transactions (benefit fulfillments) for a given program member, with cursor-based pagination. Supports filtering by benefit ID and creation date. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -1371,7 +1371,7 @@ module VoucherifySdk
     end
 
     # List card daily points reports
-    # Returns aggregated points statistics for a members loyalty card over the given date range and resolution. Each entry sums the point operations recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the card does not exist or is not assigned to the member in the program.
+    # Returns aggregated points statistics for a members loyalty card over the given date range and resolution. Each entry sums the point operations recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the card does not exist or is not assigned to the member in the program. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -1386,7 +1386,7 @@ module VoucherifySdk
     end
 
     # List card daily points reports
-    # Returns aggregated points statistics for a members loyalty card over the given date range and resolution. Each entry sums the point operations recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the card does not exist or is not assigned to the member in the program.
+    # Returns aggregated points statistics for a members loyalty card over the given date range and resolution. Each entry sums the point operations recorded in one period. Periods without recorded activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program or member does not exist, or when the card does not exist or is not assigned to the member in the program. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param card_id [String] Identifies the loyalty card. Format lcrd_[a-f0-9]+.
@@ -1443,7 +1443,7 @@ module VoucherifySdk
     end
 
     # List member order payments
-    # Lists stored PAY_WITH_POINTS order transactions for the program member, with cursor pagination. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Dry-run (SIMULATED) results arent stored and dont appear. Returns 404 when the program or the member doesnt exist. The program is checked first.
+    # Lists stored PAY_WITH_POINTS order transactions for the program member, with cursor pagination. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Dry-run (SIMULATED) results arent stored and dont appear. Returns 404 when the program or the member doesnt exist. The program is checked first. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -1458,7 +1458,7 @@ module VoucherifySdk
     end
 
     # List member order payments
-    # Lists stored PAY_WITH_POINTS order transactions for the program member, with cursor pagination. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Dry-run (SIMULATED) results arent stored and dont appear. Returns 404 when the program or the member doesnt exist. The program is checked first.
+    # Lists stored PAY_WITH_POINTS order transactions for the program member, with cursor pagination. Filter by id, card_definition_id, and created_at. Order by id (default -id, newest first). Dry-run (SIMULATED) results arent stored and dont appear. Returns 404 when the program or the member doesnt exist. The program is checked first. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -1516,7 +1516,7 @@ module VoucherifySdk
     end
 
     # List member reward purchases
-    # Lists stored PURCHASE reward transactions for the program member, with cursor pagination. Filter by id, reward_id, card_definition_id, and created_at. Order by id (default -id, newest first). Purchases rejected before a transaction is stored dont appear. A purchase accepted with 202 that later fails is stored as REJECTED with details.rejection. Returns 404 when the program or the member doesnt exist. The program is checked first.
+    # Lists stored PURCHASE reward transactions for the program member, with cursor pagination. Filter by id, reward_id, card_definition_id, and created_at. Order by id (default -id, newest first). Purchases rejected before a transaction is stored dont appear. A purchase accepted with 202 that later fails is stored as REJECTED with details.rejection. Returns 404 when the program or the member doesnt exist. The program is checked first. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -1531,7 +1531,7 @@ module VoucherifySdk
     end
 
     # List member reward purchases
-    # Lists stored PURCHASE reward transactions for the program member, with cursor pagination. Filter by id, reward_id, card_definition_id, and created_at. Order by id (default -id, newest first). Purchases rejected before a transaction is stored dont appear. A purchase accepted with 202 that later fails is stored as REJECTED with details.rejection. Returns 404 when the program or the member doesnt exist. The program is checked first.
+    # Lists stored PURCHASE reward transactions for the program member, with cursor pagination. Filter by id, reward_id, card_definition_id, and created_at. Order by id (default -id, newest first). Purchases rejected before a transaction is stored dont appear. A purchase accepted with 202 that later fails is stored as REJECTED with details.rejection. Returns 404 when the program or the member doesnt exist. The program is checked first. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -1589,7 +1589,7 @@ module VoucherifySdk
     end
 
     # List member tier transactions
-    # Lists tier transactions for the member: joins, leaves, upgrades, downgrades, expiration changes, and evaluation refreshes. Results use cursor pagination. Default order is -id, newest first. Filters are card_id, card_definition_id, and created_at. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. order must be id or -id. An array that orders by both directions is rejected. A cursor that doesnt match ^lcrsttx_[a-f0-9]+$ fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
+    # Lists tier transactions for the member: joins, leaves, upgrades, downgrades, expiration changes, and evaluation refreshes. Results use cursor pagination. Default order is -id, newest first. Filters are card_id, card_definition_id, and created_at. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. order must be id or -id. An array that orders by both directions is rejected. A cursor that doesnt match ^lcrsttx_[a-f0-9]+$ fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -1604,7 +1604,7 @@ module VoucherifySdk
     end
 
     # List member tier transactions
-    # Lists tier transactions for the member: joins, leaves, upgrades, downgrades, expiration changes, and evaluation refreshes. Results use cursor pagination. Default order is -id, newest first. Filters are card_id, card_definition_id, and created_at. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. order must be id or -id. An array that orders by both directions is rejected. A cursor that doesnt match ^lcrsttx_[a-f0-9]+$ fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
+    # Lists tier transactions for the member: joins, leaves, upgrades, downgrades, expiration changes, and evaluation refreshes. Results use cursor pagination. Default order is -id, newest first. Filters are card_id, card_definition_id, and created_at. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. order must be id or -id. An array that orders by both directions is rejected. A cursor that doesnt match ^lcrsttx_[a-f0-9]+$ fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -1662,7 +1662,7 @@ module VoucherifySdk
     end
 
     # List program earning rule assignments
-    # Returns a cursor-paginated list of earning rules assigned to the program.
+    # Returns a cursor-paginated list of earning rules assigned to the program. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
@@ -1675,7 +1675,7 @@ module VoucherifySdk
     end
 
     # List program earning rule assignments
-    # Returns a cursor-paginated list of earning rules assigned to the program.
+    # Returns a cursor-paginated list of earning rules assigned to the program. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
@@ -1730,7 +1730,7 @@ module VoucherifySdk
     end
 
     # List program earning-rules daily reports
-    # Returns aggregated daily earning-rule evaluation statistics for the program over the given date range and resolution, optionally filtered by earning rule. Each entry counts eligibility checks for one period and earning rule. Periods without recorded activity are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated daily earning-rule evaluation statistics for the program over the given date range and resolution, optionally filtered by earning rule. Each entry counts eligibility checks for one period and earning rule. Periods without recorded activity are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -1744,7 +1744,7 @@ module VoucherifySdk
     end
 
     # List program earning-rules daily reports
-    # Returns aggregated daily earning-rule evaluation statistics for the program over the given date range and resolution, optionally filtered by earning rule. Each entry counts eligibility checks for one period and earning rule. Periods without recorded activity are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated daily earning-rule evaluation statistics for the program over the given date range and resolution, optionally filtered by earning rule. Each entry counts eligibility checks for one period and earning rule. Periods without recorded activity are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -1801,7 +1801,7 @@ module VoucherifySdk
     end
 
     # List program earning-rules summary reports
-    # Returns total earning-rule evaluation statistics for the program (all time), optionally filtered by earning rule. Includes success and failure counts with a failures breakdown. Each entry counts eligibility checks for one earning rule. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns total earning-rule evaluation statistics for the program (all time), optionally filtered by earning rule. Includes success and failure counts with a failures breakdown. Each entry counts eligibility checks for one earning rule. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [EarningRulesReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -1812,7 +1812,7 @@ module VoucherifySdk
     end
 
     # List program earning-rules summary reports
-    # Returns total earning-rule evaluation statistics for the program (all time), optionally filtered by earning rule. Includes success and failure counts with a failures breakdown. Each entry counts eligibility checks for one earning rule. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns total earning-rule evaluation statistics for the program (all time), optionally filtered by earning rule. Includes success and failure counts with a failures breakdown. Each entry counts eligibility checks for one earning rule. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [EarningRulesReportListFilters] :filters Filters the results. Pass a deep object, for example filters[earning_rule_id][conditions][$is] lern_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -1863,7 +1863,7 @@ module VoucherifySdk
     end
 
     # List program member activities
-    # Returns a cursor-paginated list of lifecycle and card-assignment activities recorded for the member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. A cursor that doesnt match ^lcrsambr_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
+    # Returns a cursor-paginated list of lifecycle and card-assignment activities recorded for the member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. A cursor that doesnt match ^lcrsambr_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -1878,7 +1878,7 @@ module VoucherifySdk
     end
 
     # List program member activities
-    # Returns a cursor-paginated list of lifecycle and card-assignment activities recorded for the member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. A cursor that doesnt match ^lcrsambr_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes.
+    # Returns a cursor-paginated list of lifecycle and card-assignment activities recorded for the member. Filters are id, type, and created_at. Default order is -created_at, then id ascending. Returns 404 when the program doesnt exist, or when the member doesnt exist in that program. The program is checked first. A DELETED member returns 404. Returns 400 with key invalid_query_params when the query fails validation. That check runs before the program and member lookup. A cursor that doesnt match ^lcrsambr_[a-f0-9]+$, a limit outside 1 to 100, an order other than created_at or -created_at, or an array that orders by both directions fails here. After the program and member are found, an unknown or expired cursor returns invalid_or_expired_cursor. A cursor recorded for different filters or order returns cursor_and_query_mismatch. The cursor stays valid when only limit changes. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -1936,7 +1936,7 @@ module VoucherifySdk
     end
 
     # List program members
-    # Returns a cursor-paginated list of members of the program. Deleted members are omitted. Results can be filtered by ID, status, customer ID and creation date. Results can be ordered by creation date, status, or customer ID (ascending or descending). The same field cannot be ordered both ascending and descending at the same time. Returns 404 when the program does not exist. List items do not include the cards array. Use the following endpoints to retrieve cards for a given member: - [Get customer memberships](/api-reference/programs/get-customer-memberships), - [Get program member](/api-reference/programs/get-program-member), - [Get program membership](/api-reference/programs/get-program-membership).
+    # Returns a cursor-paginated list of members of the program. Deleted members are omitted. Results can be filtered by ID, status, customer ID and creation date. Results can be ordered by creation date, status, or customer ID (ascending or descending). The same field cannot be ordered both ascending and descending at the same time. Returns 404 when the program does not exist. List items do not include the cards array. Use the following endpoints to retrieve cards for a given member: - [Get customer memberships](/api-reference/programs/get-customer-memberships), - [Get program member](/api-reference/programs/get-program-member), - [Get program membership](/api-reference/programs/get-program-membership). A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
@@ -1950,7 +1950,7 @@ module VoucherifySdk
     end
 
     # List program members
-    # Returns a cursor-paginated list of members of the program. Deleted members are omitted. Results can be filtered by ID, status, customer ID and creation date. Results can be ordered by creation date, status, or customer ID (ascending or descending). The same field cannot be ordered both ascending and descending at the same time. Returns 404 when the program does not exist. List items do not include the cards array. Use the following endpoints to retrieve cards for a given member: - [Get customer memberships](/api-reference/programs/get-customer-memberships), - [Get program member](/api-reference/programs/get-program-member), - [Get program membership](/api-reference/programs/get-program-membership).
+    # Returns a cursor-paginated list of members of the program. Deleted members are omitted. Results can be filtered by ID, status, customer ID and creation date. Results can be ordered by creation date, status, or customer ID (ascending or descending). The same field cannot be ordered both ascending and descending at the same time. Returns 404 when the program does not exist. List items do not include the cards array. Use the following endpoints to retrieve cards for a given member: - [Get customer memberships](/api-reference/programs/get-customer-memberships), - [Get program member](/api-reference/programs/get-program-member), - [Get program membership](/api-reference/programs/get-program-membership). A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to 10)
@@ -2007,7 +2007,7 @@ module VoucherifySdk
     end
 
     # List program members daily reports
-    # Returns member and card changes for the program over the given date range and resolution. Each row covers one period with recorded activity. Periods without activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns member and card changes for the program over the given date range and resolution. Each row covers one period with recorded activity. Periods without activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -2020,7 +2020,7 @@ module VoucherifySdk
     end
 
     # List program members daily reports
-    # Returns member and card changes for the program over the given date range and resolution. Each row covers one period with recorded activity. Periods without activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns member and card changes for the program over the given date range and resolution. Each row covers one period with recorded activity. Periods without activity are omitted. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -2075,7 +2075,7 @@ module VoucherifySdk
     end
 
     # List program members summary reports
-    # Returns all-time member and card totals for the program. The response contains one row when activity was recorded, and an empty data array otherwise. limit and order are not query parameters. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns all-time member and card totals for the program. The response contains one row when activity was recorded, and an empty data array otherwise. limit and order are not query parameters. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [LoyaltiesProgramsReportsMembersSummaryListResponseBody]
@@ -2085,7 +2085,7 @@ module VoucherifySdk
     end
 
     # List program members summary reports
-    # Returns all-time member and card totals for the program. The response contains one row when activity was recorded, and an empty data array otherwise. limit and order are not query parameters. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns all-time member and card totals for the program. The response contains one row when activity was recorded, and an empty data array otherwise. limit and order are not query parameters. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(LoyaltiesProgramsReportsMembersSummaryListResponseBody, Integer, Hash)>] LoyaltiesProgramsReportsMembersSummaryListResponseBody data, response status code and response headers
@@ -2134,7 +2134,7 @@ module VoucherifySdk
     end
 
     # List program reward assignments
-    # Returns a cursor-paginated list of rewards assigned to the program, including their stock configuration and redemption counters.
+    # Returns a cursor-paginated list of rewards assigned to the program, including their stock configuration and redemption counters. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
@@ -2147,7 +2147,7 @@ module VoucherifySdk
     end
 
     # List program reward assignments
-    # Returns a cursor-paginated list of rewards assigned to the program, including their stock configuration and redemption counters.
+    # Returns a cursor-paginated list of rewards assigned to the program, including their stock configuration and redemption counters. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
@@ -2202,7 +2202,7 @@ module VoucherifySdk
     end
 
     # List program rewards daily reports
-    # Returns aggregated reward-purchase statistics for the program over the given date range and resolution, optionally filtered by reward. Each row covers one reward and one period with recorded purchases. Periods without recorded purchases are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated reward-purchase statistics for the program over the given date range and resolution, optionally filtered by reward. Each row covers one reward and one period with recorded purchases. Periods without recorded purchases are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -2216,7 +2216,7 @@ module VoucherifySdk
     end
 
     # List program rewards daily reports
-    # Returns aggregated reward-purchase statistics for the program over the given date range and resolution, optionally filtered by reward. Each row covers one reward and one period with recorded purchases. Periods without recorded purchases are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated reward-purchase statistics for the program over the given date range and resolution, optionally filtered by reward. Each row covers one reward and one period with recorded purchases. Periods without recorded purchases are omitted. failures_breakdown is always an empty object. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -2273,7 +2273,7 @@ module VoucherifySdk
     end
 
     # List program rewards spendings daily reports
-    # Returns aggregated points spent on reward purchases for the program over the given date range and resolution. Each row covers one reward, reward cost, reward spending, card definition, and period with an approved point spend. Periods without an approved point spend are omitted. Optionally filters by reward, cost, spending, and card definition. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated points spent on reward purchases for the program over the given date range and resolution. Each row covers one reward, reward cost, reward spending, card definition, and period with an approved point spend. Periods without an approved point spend are omitted. Optionally filters by reward, cost, spending, and card definition. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -2287,7 +2287,7 @@ module VoucherifySdk
     end
 
     # List program rewards spendings daily reports
-    # Returns aggregated points spent on reward purchases for the program over the given date range and resolution. Each row covers one reward, reward cost, reward spending, card definition, and period with an approved point spend. Periods without an approved point spend are omitted. Optionally filters by reward, cost, spending, and card definition. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated points spent on reward purchases for the program over the given date range and resolution. Each row covers one reward, reward cost, reward spending, card definition, and period with an approved point spend. Periods without an approved point spend are omitted. Optionally filters by reward, cost, spending, and card definition. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -2344,7 +2344,7 @@ module VoucherifySdk
     end
 
     # List program rewards spendings summary reports
-    # Returns all-time points spent on reward purchases for the program. Each row covers one reward, reward cost, reward spending, and card definition with an approved point spend. Filters rows by reward, cost, spending, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns all-time points spent on reward purchases for the program. Each row covers one reward, reward cost, reward spending, and card definition with an approved point spend. Filters rows by reward, cost, spending, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [RewardsSpendingsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -2355,7 +2355,7 @@ module VoucherifySdk
     end
 
     # List program rewards spendings summary reports
-    # Returns all-time points spent on reward purchases for the program. Each row covers one reward, reward cost, reward spending, and card definition with an approved point spend. Filters rows by reward, cost, spending, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns all-time points spent on reward purchases for the program. Each row covers one reward, reward cost, reward spending, and card definition with an approved point spend. Filters rows by reward, cost, spending, and card definition. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [RewardsSpendingsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -2406,7 +2406,7 @@ module VoucherifySdk
     end
 
     # List program rewards summary reports
-    # Returns all-time reward-purchase totals for the program, one row per reward with a recorded purchase attempt. Filters rows with filters[reward_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns all-time reward-purchase totals for the program, one row per reward with a recorded purchase attempt. Filters rows with filters[reward_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [RewardsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -2417,7 +2417,7 @@ module VoucherifySdk
     end
 
     # List program rewards summary reports
-    # Returns all-time reward-purchase totals for the program, one row per reward with a recorded purchase attempt. Filters rows with filters[reward_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns all-time reward-purchase totals for the program, one row per reward with a recorded purchase attempt. Filters rows with filters[reward_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [RewardsReportListFilters] :filters Filters the results. Pass a deep object, for example filters[reward_id][conditions][$is] lrew_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -2468,7 +2468,7 @@ module VoucherifySdk
     end
 
     # List program spending daily reports
-    # Returns aggregated points-spending statistics for the program over the given date range and resolution. Each row covers one card definition and one period with recorded spending. Periods without recorded spending are omitted. Optionally filters by card definition. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated points-spending statistics for the program over the given date range and resolution. Each row covers one card definition and one period with recorded spending. Periods without recorded spending are omitted. Optionally filters by card definition. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -2482,7 +2482,7 @@ module VoucherifySdk
     end
 
     # List program spending daily reports
-    # Returns aggregated points-spending statistics for the program over the given date range and resolution. Each row covers one card definition and one period with recorded spending. Periods without recorded spending are omitted. Optionally filters by card definition. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated points-spending statistics for the program over the given date range and resolution. Each row covers one card definition and one period with recorded spending. Periods without recorded spending are omitted. Optionally filters by card definition. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -2539,7 +2539,7 @@ module VoucherifySdk
     end
 
     # List program spending summary reports
-    # Returns all-time point-spending totals for the program, one row per card definition that has recorded spending. Filters rows with filters[card_definition_id]. Returns at most 10 rows (max number of card definitions per program), ordered by id descending. limit and order are not query parameters. Returns 200 with an empty data array when no spending is recorded. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns all-time point-spending totals for the program, one row per card definition that has recorded spending. Filters rows with filters[card_definition_id]. Returns at most 10 rows (max number of card definitions per program), ordered by id descending. limit and order are not query parameters. Returns 200 with an empty data array when no spending is recorded. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [SpendingReportListFilters] :filters Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -2550,7 +2550,7 @@ module VoucherifySdk
     end
 
     # List program spending summary reports
-    # Returns all-time point-spending totals for the program, one row per card definition that has recorded spending. Filters rows with filters[card_definition_id]. Returns at most 10 rows (max number of card definitions per program), ordered by id descending. limit and order are not query parameters. Returns 200 with an empty data array when no spending is recorded. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns all-time point-spending totals for the program, one row per card definition that has recorded spending. Filters rows with filters[card_definition_id]. Returns at most 10 rows (max number of card definitions per program), ordered by id descending. limit and order are not query parameters. Returns 200 with an empty data array when no spending is recorded. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [SpendingReportListFilters] :filters Filters the results. Pass a deep object, for example filters[card_definition_id][conditions][$is] lcdef_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -2601,7 +2601,7 @@ module VoucherifySdk
     end
 
     # List program tier structure assignments
-    # Returns a cursor-paginated list of tier structures assigned to the program. Currently, a program can have only one tier structure assigned.
+    # Returns a cursor-paginated list of tier structures assigned to the program. Currently, a program can have only one tier structure assigned. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
@@ -2614,7 +2614,7 @@ module VoucherifySdk
     end
 
     # List program tier structure assignments
-    # Returns a cursor-paginated list of tier structures assigned to the program. Currently, a program can have only one tier structure assigned.
+    # Returns a cursor-paginated list of tier structures assigned to the program. Currently, a program can have only one tier structure assigned. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :limit Limits the page size to an integer from 1 to 100. Defaults to 10. A numeric string is accepted and rounded to the nearest integer. (default to '10')
@@ -2669,7 +2669,7 @@ module VoucherifySdk
     end
 
     # List program tiers daily reports
-    # Returns aggregated tier-movement statistics for the program over the given date range and resolution, optionally filtered by tier structure and tier. Each row covers one tier structure, one tier, and one period with recorded movement. Periods without recorded movement are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated tier-movement statistics for the program over the given date range and resolution, optionally filtered by tier structure and tier. Each row covers one tier structure, one tier, and one period with recorded movement. Periods without recorded movement are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -2683,7 +2683,7 @@ module VoucherifySdk
     end
 
     # List program tiers daily reports
-    # Returns aggregated tier-movement statistics for the program over the given date range and resolution, optionally filtered by tier structure and tier. Each row covers one tier structure, one tier, and one period with recorded movement. Periods without recorded movement are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns aggregated tier-movement statistics for the program over the given date range and resolution, optionally filtered by tier structure and tier. Each row covers one tier structure, one tier, and one period with recorded movement. Periods without recorded movement are omitted. A filter that matches no rows returns an empty data array. The date range is limited per resolution: - 90 days for day, - 12 weeks for week, - 12 months for month, - 4 quarters for quarter, - start_date must be before end_date, - start_date and end_date are inclusive. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param start_date [Date] Sets the inclusive start of the report date range. Format YYYY-MM-DD.
     # @param end_date [Date] Sets the inclusive end of the report date range. Format YYYY-MM-DD. Must be after start_date.
@@ -2740,7 +2740,7 @@ module VoucherifySdk
     end
 
     # List program tiers summary reports
-    # Returns all-time tier-movement totals for the program, one row per tier structure and tier that has recorded movement. Filters rows with filters[tier_structure_id] and filters[tier_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns all-time tier-movement totals for the program, one row per tier structure and tier that has recorded movement. Filters rows with filters[tier_structure_id] and filters[tier_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [TiersReportListFilters] :filters Filters the results. Pass a deep object, for example filters[tier_id][conditions][$is] lt_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -2751,7 +2751,7 @@ module VoucherifySdk
     end
 
     # List program tiers summary reports
-    # Returns all-time tier-movement totals for the program, one row per tier structure and tier that has recorded movement. Filters rows with filters[tier_structure_id] and filters[tier_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist.
+    # Returns all-time tier-movement totals for the program, one row per tier structure and tier that has recorded movement. Filters rows with filters[tier_structure_id] and filters[tier_id]. Returns at most 100 rows, ordered by id descending. limit and order are not query parameters. A filter that matches no rows returns an empty data array. Returns 400 when query validation fails. Returns 404 when the program does not exist. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @option opts [TiersReportListFilters] :filters Filters the results. Pass a deep object, for example filters[tier_id][conditions][$is] lt_.... Fields combine through junction, which defaults to AND. Omit filters to apply no field filter.
@@ -2802,7 +2802,7 @@ module VoucherifySdk
     end
 
     # Purchase reward with points
-    # Purchases a reward for the program member by spending points from the members card. The card comes from the matching reward costs card definition. The program, reward, and member must be ACTIVE. The program and reward must be inside their validity windows. The reward must be assigned to the program with stock available, a cost must match the customer, and the purchase must stay inside frequency, cooldown, balance, and spending limits. Modes: - TRANSACTION (default): creates a PENDING reward transaction and a PENDING card transaction. Returns 202. - DRY_RUN: simulates the purchase and doesnt create a transaction. Returns 200 with status SIMULATED.
+    # Purchases a reward for the program member by spending points from the members card. The card comes from the matching reward costs card definition. The program, reward, and member must be ACTIVE. The program and reward must be inside their validity windows. The reward must be assigned to the program with stock available, a cost must match the customer, and the purchase must stay inside frequency, cooldown, balance, and spending limits. Modes: - TRANSACTION (default): creates a PENDING reward transaction and a PENDING card transaction. Returns 202. - DRY_RUN: simulates the purchase and doesnt create a transaction. Returns 200 with status SIMULATED. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -2814,7 +2814,7 @@ module VoucherifySdk
     end
 
     # Purchase reward with points
-    # Purchases a reward for the program member by spending points from the members card. The card comes from the matching reward costs card definition. The program, reward, and member must be ACTIVE. The program and reward must be inside their validity windows. The reward must be assigned to the program with stock available, a cost must match the customer, and the purchase must stay inside frequency, cooldown, balance, and spending limits. Modes: - TRANSACTION (default): creates a PENDING reward transaction and a PENDING card transaction. Returns 202. - DRY_RUN: simulates the purchase and doesnt create a transaction. Returns 200 with status SIMULATED.
+    # Purchases a reward for the program member by spending points from the members card. The card comes from the matching reward costs card definition. The program, reward, and member must be ACTIVE. The program and reward must be inside their validity windows. The reward must be assigned to the program with stock available, a cost must match the customer, and the purchase must stay inside frequency, cooldown, balance, and spending limits. Modes: - TRANSACTION (default): creates a PENDING reward transaction and a PENDING card transaction. Returns 202. - DRY_RUN: simulates the purchase and doesnt create a transaction. Returns 200 with status SIMULATED. A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -2870,7 +2870,7 @@ module VoucherifySdk
     end
 
     # Refund reward purchase
-    # Refunds an APPROVED reward purchase made by a program member. The purchase transaction is marked REFUNDED, a new REFUND reward transaction is created with status APPROVED, and the points spent on the purchase are returned to the members card. The request body is optional and an empty payload is allowed. Policies default to refund: DEFAULT and stock: DEFAULT. The endpoint responds with 202 before the card balance changes. A POINTS_RETURNED card transaction is created for the members card and processed shortly after the response. When the members tier or the card definition expires points, returned points receive a new expiration date from that setting. They dont inherit the expiration of the originally spent points. A NO_EXPIRATION setting leaves the returned points without an expiration date. Card earning limits dont block the refund. For a LOYALTY_CARD_POINTS reward, the points credited to the target card are also reversed, with a POINTS_PURCHASE_REVERSED card transaction on that card. That transaction is processed shortly after the response. Its expiration is copied from the original points-purchased transaction. A DISCOUNT_COUPONS refund deletes the issued vouchers. details.result.digital.discount_coupons[].result is DELETED, or SKIPPED when the voucher isnt deleted. A GIFT_VOUCHERS refund subtracts the credited amount. details.result.digital.gift_vouchers[].result is CREDITS_SUBTRACTED, or SKIPPED when the balance update is rejected. The refund reverses that purchase in the rewards purchase limits for the project-local day of the original purchase. A day whose purchases are all refunded no longer counts as the members last purchase. Only rewards whose refunds.type is REFUNDABLE can be refunded. Any other reward is rejected with 423 and key reward_refund_policy_does_not_allow_refunds. policies.refund set to ALLOW refunds it anyway. The program must exist, and the reward transaction must belong to that program. Otherwise the request fails with 404. The program is checked first. The request is rejected with 423 when: - The program isnt ACTIVE (non_active_program) or is outside its validity window (program_outside_validity_window), - The transaction isnt a purchase (non_purchase_reward_transaction) or isnt APPROVED (non_approved_reward_transaction); refunding the same purchase twice fails here, - The reward no longer exists (reward_not_found), isnt assigned to the program (refund_reward_not_assigned_to_program), the members card is gone (refund_card_not_found), or the card definition is gone (refund_card_definition_not_found), - The reward type isnt supported (reward_type_not_supported_for_refunds), - For a LOYALTY_CARD_POINTS reward, the purchase result is missing (loyalty_card_points_purchase_result_not_found), the target card is gone (loyalty_card_points_target_card_not_found), the points-purchased card transaction is missing (loyalty_card_points_purchase_not_found), the target cards available balance is lower than the purchased points (loyalty_card_points_insufficient_balance), or the target card definition is gone (loyalty_card_points_target_card_definition_not_found).
+    # Refunds an APPROVED reward purchase made by a program member. The purchase transaction is marked REFUNDED, a new REFUND reward transaction is created with status APPROVED, and the points spent on the purchase are returned to the members card. The request body is optional and an empty payload is allowed. Policies default to refund: DEFAULT and stock: DEFAULT. The endpoint responds with 202 before the card balance changes. A POINTS_RETURNED card transaction is created for the members card and processed shortly after the response. When the members tier or the card definition expires points, returned points receive a new expiration date from that setting. They dont inherit the expiration of the originally spent points. A NO_EXPIRATION setting leaves the returned points without an expiration date. Card earning limits dont block the refund. For a legacy LOYALTY_CARD_POINTS reward, the points credited to the target card are also reversed, with a POINTS_PURCHASE_REVERSED card transaction on that card. That transaction is processed shortly after the response. Its expiration is copied from the original points-purchased transaction. A DISCOUNT_COUPONS refund deletes the issued vouchers. details.result.digital.discount_coupons[].result is DELETED, or SKIPPED when the voucher isnt deleted. A GIFT_VOUCHERS refund subtracts the credited amount. details.result.digital.gift_vouchers[].result is CREDITS_SUBTRACTED, or SKIPPED when the balance update is rejected. The refund reverses that purchase in the rewards purchase limits for the project-local day of the original purchase. A day whose purchases are all refunded no longer counts as the members last purchase. Only rewards whose refunds.type is REFUNDABLE can be refunded. Any other reward is rejected with 423 and key reward_refund_policy_does_not_allow_refunds. policies.refund set to ALLOW refunds it anyway. The program must exist, and the reward transaction must belong to that program. Otherwise the request fails with 404. The program is checked first. The request is rejected with 423 when: - The program isnt ACTIVE (non_active_program) or is outside its validity window (program_outside_validity_window), - The transaction isnt a purchase (non_purchase_reward_transaction) or isnt APPROVED (non_approved_reward_transaction); refunding the same purchase twice fails here, - The reward no longer exists (reward_not_found), isnt assigned to the program (refund_reward_not_assigned_to_program), the members card is gone (refund_card_not_found), or the card definition is gone (refund_card_definition_not_found), - The reward type isnt supported (reward_type_not_supported_for_refunds), - For a legacy LOYALTY_CARD_POINTS reward, the purchase result is missing (loyalty_card_points_purchase_result_not_found), the target card is gone (loyalty_card_points_target_card_not_found), the points-purchased card transaction is missing (loyalty_card_points_purchase_not_found), the target cards available balance is lower than the purchased points (loyalty_card_points_insufficient_balance), or the target card definition is gone (loyalty_card_points_target_card_definition_not_found). A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param reward_transaction_id [String] Identifies the reward transaction of the purchase to refund. Format lrtx_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -2882,7 +2882,7 @@ module VoucherifySdk
     end
 
     # Refund reward purchase
-    # Refunds an APPROVED reward purchase made by a program member. The purchase transaction is marked REFUNDED, a new REFUND reward transaction is created with status APPROVED, and the points spent on the purchase are returned to the members card. The request body is optional and an empty payload is allowed. Policies default to refund: DEFAULT and stock: DEFAULT. The endpoint responds with 202 before the card balance changes. A POINTS_RETURNED card transaction is created for the members card and processed shortly after the response. When the members tier or the card definition expires points, returned points receive a new expiration date from that setting. They dont inherit the expiration of the originally spent points. A NO_EXPIRATION setting leaves the returned points without an expiration date. Card earning limits dont block the refund. For a LOYALTY_CARD_POINTS reward, the points credited to the target card are also reversed, with a POINTS_PURCHASE_REVERSED card transaction on that card. That transaction is processed shortly after the response. Its expiration is copied from the original points-purchased transaction. A DISCOUNT_COUPONS refund deletes the issued vouchers. details.result.digital.discount_coupons[].result is DELETED, or SKIPPED when the voucher isnt deleted. A GIFT_VOUCHERS refund subtracts the credited amount. details.result.digital.gift_vouchers[].result is CREDITS_SUBTRACTED, or SKIPPED when the balance update is rejected. The refund reverses that purchase in the rewards purchase limits for the project-local day of the original purchase. A day whose purchases are all refunded no longer counts as the members last purchase. Only rewards whose refunds.type is REFUNDABLE can be refunded. Any other reward is rejected with 423 and key reward_refund_policy_does_not_allow_refunds. policies.refund set to ALLOW refunds it anyway. The program must exist, and the reward transaction must belong to that program. Otherwise the request fails with 404. The program is checked first. The request is rejected with 423 when: - The program isnt ACTIVE (non_active_program) or is outside its validity window (program_outside_validity_window), - The transaction isnt a purchase (non_purchase_reward_transaction) or isnt APPROVED (non_approved_reward_transaction); refunding the same purchase twice fails here, - The reward no longer exists (reward_not_found), isnt assigned to the program (refund_reward_not_assigned_to_program), the members card is gone (refund_card_not_found), or the card definition is gone (refund_card_definition_not_found), - The reward type isnt supported (reward_type_not_supported_for_refunds), - For a LOYALTY_CARD_POINTS reward, the purchase result is missing (loyalty_card_points_purchase_result_not_found), the target card is gone (loyalty_card_points_target_card_not_found), the points-purchased card transaction is missing (loyalty_card_points_purchase_not_found), the target cards available balance is lower than the purchased points (loyalty_card_points_insufficient_balance), or the target card definition is gone (loyalty_card_points_target_card_definition_not_found).
+    # Refunds an APPROVED reward purchase made by a program member. The purchase transaction is marked REFUNDED, a new REFUND reward transaction is created with status APPROVED, and the points spent on the purchase are returned to the members card. The request body is optional and an empty payload is allowed. Policies default to refund: DEFAULT and stock: DEFAULT. The endpoint responds with 202 before the card balance changes. A POINTS_RETURNED card transaction is created for the members card and processed shortly after the response. When the members tier or the card definition expires points, returned points receive a new expiration date from that setting. They dont inherit the expiration of the originally spent points. A NO_EXPIRATION setting leaves the returned points without an expiration date. Card earning limits dont block the refund. For a legacy LOYALTY_CARD_POINTS reward, the points credited to the target card are also reversed, with a POINTS_PURCHASE_REVERSED card transaction on that card. That transaction is processed shortly after the response. Its expiration is copied from the original points-purchased transaction. A DISCOUNT_COUPONS refund deletes the issued vouchers. details.result.digital.discount_coupons[].result is DELETED, or SKIPPED when the voucher isnt deleted. A GIFT_VOUCHERS refund subtracts the credited amount. details.result.digital.gift_vouchers[].result is CREDITS_SUBTRACTED, or SKIPPED when the balance update is rejected. The refund reverses that purchase in the rewards purchase limits for the project-local day of the original purchase. A day whose purchases are all refunded no longer counts as the members last purchase. Only rewards whose refunds.type is REFUNDABLE can be refunded. Any other reward is rejected with 423 and key reward_refund_policy_does_not_allow_refunds. policies.refund set to ALLOW refunds it anyway. The program must exist, and the reward transaction must belong to that program. Otherwise the request fails with 404. The program is checked first. The request is rejected with 423 when: - The program isnt ACTIVE (non_active_program) or is outside its validity window (program_outside_validity_window), - The transaction isnt a purchase (non_purchase_reward_transaction) or isnt APPROVED (non_approved_reward_transaction); refunding the same purchase twice fails here, - The reward no longer exists (reward_not_found), isnt assigned to the program (refund_reward_not_assigned_to_program), the members card is gone (refund_card_not_found), or the card definition is gone (refund_card_definition_not_found), - The reward type isnt supported (reward_type_not_supported_for_refunds), - For a legacy LOYALTY_CARD_POINTS reward, the purchase result is missing (loyalty_card_points_purchase_result_not_found), the target card is gone (loyalty_card_points_target_card_not_found), the points-purchased card transaction is missing (loyalty_card_points_purchase_not_found), the target cards available balance is lower than the purchased points (loyalty_card_points_insufficient_balance), or the target card definition is gone (loyalty_card_points_target_card_definition_not_found). A successful call records no activity.
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param reward_transaction_id [String] Identifies the reward transaction of the purchase to refund. Format lrtx_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -2938,7 +2938,7 @@ module VoucherifySdk
     end
 
     # Update program member
-    # Updates a program members metadata. Provided object keys are merged into the existing metadata; omitted keys are preserved. Pass metadata: null to clear all metadata (sets it to an empty object). This endpoint cannot change status. Use [Activate program member](/api-reference/programs/activate-program-member) or [Deactivate program member](/api-reference/programs/deactivate-program-member) for status transitions. Records a vl.member.updated activity. Returns the updated member without the cards array. Returns 404 when the program or member does not exist. Returns 400 when the request body fails validation or the project vl_member metadata schema rejects the payload.
+    # Updates a program members metadata. Provided object keys are merged into the existing metadata; omitted keys are preserved. Pass metadata: null to clear all metadata (sets it to an empty object). This endpoint cannot change status. Use [Activate program member](/api-reference/programs/activate-program-member) or [Deactivate program member](/api-reference/programs/deactivate-program-member) for status transitions. Returns the updated member without the cards array. Returns 404 when the program or member does not exist. Returns 400 when the request body fails validation or the project vl_member metadata schema rejects the payload. A successful call records [vl.member.updated](/api-reference/loyalty-activity/members/updated).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
@@ -2950,7 +2950,7 @@ module VoucherifySdk
     end
 
     # Update program member
-    # Updates a program members metadata. Provided object keys are merged into the existing metadata; omitted keys are preserved. Pass metadata: null to clear all metadata (sets it to an empty object). This endpoint cannot change status. Use [Activate program member](/api-reference/programs/activate-program-member) or [Deactivate program member](/api-reference/programs/deactivate-program-member) for status transitions. Records a vl.member.updated activity. Returns the updated member without the cards array. Returns 404 when the program or member does not exist. Returns 400 when the request body fails validation or the project vl_member metadata schema rejects the payload.
+    # Updates a program members metadata. Provided object keys are merged into the existing metadata; omitted keys are preserved. Pass metadata: null to clear all metadata (sets it to an empty object). This endpoint cannot change status. Use [Activate program member](/api-reference/programs/activate-program-member) or [Deactivate program member](/api-reference/programs/deactivate-program-member) for status transitions. Returns the updated member without the cards array. Returns 404 when the program or member does not exist. Returns 400 when the request body fails validation or the project vl_member metadata schema rejects the payload. A successful call records [vl.member.updated](/api-reference/loyalty-activity/members/updated).
     # @param program_id [String] Identifies the loyalty program. Format lprg_[a-f0-9]+.
     # @param member_id [String] Identifies the member. Format lmbr_[a-f0-9]+.
     # @param [Hash] opts the optional parameters

@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Get reward by ID
-    # Returns a single reward by its ID.
+    # Returns a single reward by its ID. A successful call records no activity.
     # @param reward_id [String] Identifies the reward. Format lrew_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesRewardsGetResponseBody]
@@ -30,7 +30,7 @@ module VoucherifySdk
     end
 
     # Get reward by ID
-    # Returns a single reward by its ID.
+    # Returns a single reward by its ID. A successful call records no activity.
     # @param reward_id [String] Identifies the reward. Format lrew_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesRewardsGetResponseBody, Integer, Hash)>] V2LoyaltiesRewardsGetResponseBody data, response status code and response headers

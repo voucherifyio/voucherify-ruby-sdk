@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # Limited stock configuration.
   class LoyaltyV2ActivityBenefitStockLimited
-    # Available Remaining stock quantity. For responses, updates with each benefit purchase.
+    # Remaining stock quantity. On create, this is the starting quantity. Each benefit purchase decreases it by one.
     attr_accessor :quantity
 
     # Attribute mapping from ruby-style variable name to JSON key.

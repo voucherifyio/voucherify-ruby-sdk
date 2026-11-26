@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Get benefit
-    # Returns a single benefit by its ID.
+    # Returns a single benefit by its ID. A successful call records no activity.
     # @param benefit_id [String] Identifies the benefit. Format lben_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [V2LoyaltiesBenefitsGetResponseBody]
@@ -30,7 +30,7 @@ module VoucherifySdk
     end
 
     # Get benefit
-    # Returns a single benefit by its ID.
+    # Returns a single benefit by its ID. A successful call records no activity.
     # @param benefit_id [String] Identifies the benefit. Format lben_[a-f0-9]+.
     # @param [Hash] opts the optional parameters
     # @return [Array<(V2LoyaltiesBenefitsGetResponseBody, Integer, Hash)>] V2LoyaltiesBenefitsGetResponseBody data, response status code and response headers

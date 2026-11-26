@@ -19,7 +19,7 @@ module VoucherifySdk
     # Identifies the start of the truncated aggregation period (`YYYY-MM-DD`). For `week` this is Monday. For `month` this is the first day. For `quarter` this is the quarter start.
     attr_accessor :date
 
-    # Points credited to the card in the period. Sums `points_earned`, `points_added`, and `points_purchased`. Points spent, expired, subtracted, refunded, returned, or reversed are not deducted.
+    # Points credited to the card in the period. Sums `points_earned`, `points_added`, `points_purchased`, `referrer_points_earned`, and `referee_points_earned`. Points spent, expired, subtracted, refunded, returned, or reversed are not deducted.
     attr_accessor :points_total
 
     # Points earned through earning rules in the period. Includes pending points activated in the period.
@@ -54,6 +54,12 @@ module VoucherifySdk
 
     # Points unlocked in the period. Includes points released when a spending transaction is approved (also counted in `points_spent`) or rejected.
     attr_accessor :points_unlocked
+
+    # Points credited from referral referrer awards in the period (`REFERRER_POINTS_EARNED` card transactions, for example a `LOYALTY_POINTS` reward assigned to a referrer tier). Also counted in `points_total`. Not counted in `points_earned`.
+    attr_accessor :referrer_points_earned
+
+    # Points credited from referral referee awards in the period (`REFEREE_POINTS_EARNED` card transactions, for example a `LOYALTY_POINTS` reward assigned to a referee tier). Also counted in `points_total`. Not counted in `points_earned`.
+    attr_accessor :referee_points_earned
 
     # Pending points added in the period. Activated and canceled pending points are not deducted.
     attr_accessor :pending_points_total
@@ -105,6 +111,8 @@ module VoucherifySdk
         :'points_returned' => :'points_returned',
         :'points_locked' => :'points_locked',
         :'points_unlocked' => :'points_unlocked',
+        :'referrer_points_earned' => :'referrer_points_earned',
+        :'referee_points_earned' => :'referee_points_earned',
         :'pending_points_total' => :'pending_points_total',
         :'pending_points_activated' => :'pending_points_activated',
         :'pending_points_canceled' => :'pending_points_canceled',
@@ -133,6 +141,8 @@ module VoucherifySdk
         :'points_returned' => :'Float',
         :'points_locked' => :'Float',
         :'points_unlocked' => :'Float',
+        :'referrer_points_earned' => :'Float',
+        :'referee_points_earned' => :'Float',
         :'pending_points_total' => :'Float',
         :'pending_points_activated' => :'Float',
         :'pending_points_canceled' => :'Float',
@@ -156,6 +166,8 @@ module VoucherifySdk
         :'points_returned',
         :'points_locked',
         :'points_unlocked',
+        :'referrer_points_earned',
+        :'referee_points_earned',
         :'pending_points_total',
         :'pending_points_activated',
         :'pending_points_canceled',
@@ -223,6 +235,14 @@ module VoucherifySdk
         self.points_unlocked = attributes[:'points_unlocked']
       end
 
+      if attributes.key?(:'referrer_points_earned')
+        self.referrer_points_earned = attributes[:'referrer_points_earned']
+      end
+
+      if attributes.key?(:'referee_points_earned')
+        self.referee_points_earned = attributes[:'referee_points_earned']
+      end
+
       if attributes.key?(:'pending_points_total')
         self.pending_points_total = attributes[:'pending_points_total']
       end
@@ -277,6 +297,8 @@ module VoucherifySdk
           points_returned == o.points_returned &&
           points_locked == o.points_locked &&
           points_unlocked == o.points_unlocked &&
+          referrer_points_earned == o.referrer_points_earned &&
+          referee_points_earned == o.referee_points_earned &&
           pending_points_total == o.pending_points_total &&
           pending_points_activated == o.pending_points_activated &&
           pending_points_canceled == o.pending_points_canceled &&
@@ -292,7 +314,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [date, points_total, points_earned, points_added, points_purchased, points_purchased_reversed, points_subtracted, points_expired, points_spent, points_refunded, points_returned, points_locked, points_unlocked, pending_points_total, pending_points_activated, pending_points_canceled, object].hash
+      [date, points_total, points_earned, points_added, points_purchased, points_purchased_reversed, points_subtracted, points_expired, points_spent, points_refunded, points_returned, points_locked, points_unlocked, referrer_points_earned, referee_points_earned, pending_points_total, pending_points_activated, pending_points_canceled, object].hash
     end
 
     # Builds the object from hash

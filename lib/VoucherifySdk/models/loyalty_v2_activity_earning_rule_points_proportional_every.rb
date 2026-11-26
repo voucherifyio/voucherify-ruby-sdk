@@ -16,7 +16,7 @@ require 'time'
 module VoucherifySdk
   # \"Every X gives Y points\" formula based on an amount.
   class LoyaltyV2ActivityEarningRulePointsProportionalEvery
-    # The divisor – every this amount (e.g. in cents) awards `value` points.
+    # The divisor - every this amount (e.g. in cents) awards `value` points.
     attr_accessor :every
 
     # Points awarded per `every` unit.

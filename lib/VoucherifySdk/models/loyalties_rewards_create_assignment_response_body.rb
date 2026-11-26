@@ -31,10 +31,10 @@ module VoucherifySdk
     # The type of the object represented by the JSON. This object stores information about the reward assignment.
     attr_accessor :object
 
-    # Related object ID to which the reward was assigned.
+    # Related object ID to which the reward was assigned. For `related_object_type` `campaign`, this is the campaign ID. For `referral_tier`, this is the referral tier ID.
     attr_accessor :related_object_id
 
-    # Related object type to which the reward was assigned.
+    # Related object type to which the reward was assigned. Use `campaign` for **legacy loyalty** campaign rewards. Use `referral_tier` for `LOYALTY_POINTS` rewards that credit a `v2/loyalties` (loyalty hub) card from a referral tier. A `LOYALTY_POINTS` reward can only be assigned to a referral tier.
     attr_accessor :related_object_type
 
     attr_accessor :parameters
@@ -167,7 +167,7 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       object_validator = EnumAttributeValidator.new('String', ["reward_assignment"])
       return false unless object_validator.valid?(@object)
-      related_object_type_validator = EnumAttributeValidator.new('String', ["campaign"])
+      related_object_type_validator = EnumAttributeValidator.new('String', ["campaign", "referral_tier"])
       return false unless related_object_type_validator.valid?(@related_object_type)
       true
     end

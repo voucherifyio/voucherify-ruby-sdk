@@ -14,7 +14,7 @@ def create_validation_rule_applicable_to(validation_rules_api_instance, product_
                         id: product_id
                     })]
                 }),
-                type:"basic",
+                type:"expression",
             })
         })
 
@@ -38,7 +38,7 @@ def create_validation_rule_more_than(validation_rules_api_instance, product_id)
                         rules: {}
                     }
                 },
-                type:"basic",
+                type:"expression",
             })
         })
 

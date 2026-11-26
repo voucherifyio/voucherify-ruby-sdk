@@ -19,7 +19,7 @@ module VoucherifySdk
     # Day of month (1-31; validated against the month length).
     attr_accessor :day
 
-    # Month number (1-12).
+    # Month number (1–12).
     attr_accessor :month
 
     # Attribute mapping from ruby-style variable name to JSON key.

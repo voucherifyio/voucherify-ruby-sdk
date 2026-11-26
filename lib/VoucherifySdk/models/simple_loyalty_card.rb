@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Simplified loyalty card data.
+  # Simplified legacy loyalty card data.
   class SimpleLoyaltyCard
     # Total number of points added to the loyalty card over its lifespan.
     attr_accessor :points

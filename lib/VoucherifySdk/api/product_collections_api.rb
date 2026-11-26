@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Create Product Collection
-    # This method creates a new product collection.
+    # Creates a new product collection. To assign the collection to areas, stores, or all stores, send access_settings with assign. Assignments are available only when the Areas and Stores enterprise feature is enabled for product collections. <Note>A restricted user must assign the new collection to at least one area or store. Areas and stores that the restricted user isnt assigned to are ignored. If none are left, the request fails with a 400 error. A restricted user is a user with the Restricted user role, or with a custom role that has the Join areas and stores permission. An API key with the Restricted user role is also restricted. Users who cant join areas and stores can assign any area or store.</Note>
     # @param [Hash] opts the optional parameters
     # @option opts [ProductCollectionsCreateRequestBody] :product_collections_create_request_body 
     # @return [ProductCollectionsCreateResponseBody]
@@ -30,7 +30,7 @@ module VoucherifySdk
     end
 
     # Create Product Collection
-    # This method creates a new product collection.
+    # Creates a new product collection. To assign the collection to areas, stores, or all stores, send access_settings with assign. Assignments are available only when the Areas and Stores enterprise feature is enabled for product collections. &lt;Note&gt;A restricted user must assign the new collection to at least one area or store. Areas and stores that the restricted user isnt assigned to are ignored. If none are left, the request fails with a 400 error. A restricted user is a user with the Restricted user role, or with a custom role that has the Join areas and stores permission. An API key with the Restricted user role is also restricted. Users who cant join areas and stores can assign any area or store.&lt;/Note&gt;
     # @param [Hash] opts the optional parameters
     # @option opts [ProductCollectionsCreateRequestBody] :product_collections_create_request_body 
     # @return [Array<(ProductCollectionsCreateResponseBody, Integer, Hash)>] ProductCollectionsCreateResponseBody data, response status code and response headers
@@ -84,7 +84,7 @@ module VoucherifySdk
     end
 
     # Delete Product Collection
-    # Deletes a product collection. <Warning>This endpoint performs database-heavy operations. It is not designed for highly frequent use.</Warning>
+    # Deletes a product collection. <Note>If the Areas and Stores enterprise feature is enabled for product collections, the area and store assignments of the product collection are deleted with it. A restricted user cant delete a product collection that is read-only for them or that is not assigned to their areas and stores. Contact [Voucherify Sales](https://www.voucherify.io/contact-sales) to learn more.</Note> <Warning>This endpoint performs database-heavy operations. It is not designed for highly frequent use.</Warning>
     # @param product_collection_id [String] A unique product collection ID.
     # @param [Hash] opts the optional parameters
     # @return [nil]
@@ -94,7 +94,7 @@ module VoucherifySdk
     end
 
     # Delete Product Collection
-    # Deletes a product collection. &lt;Warning&gt;This endpoint performs database-heavy operations. It is not designed for highly frequent use.&lt;/Warning&gt;
+    # Deletes a product collection. &lt;Note&gt;If the Areas and Stores enterprise feature is enabled for product collections, the area and store assignments of the product collection are deleted with it. A restricted user cant delete a product collection that is read-only for them or that is not assigned to their areas and stores. Contact [Voucherify Sales](https://www.voucherify.io/contact-sales) to learn more.&lt;/Note&gt; &lt;Warning&gt;This endpoint performs database-heavy operations. It is not designed for highly frequent use.&lt;/Warning&gt;
     # @param product_collection_id [String] A unique product collection ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -141,7 +141,7 @@ module VoucherifySdk
     end
 
     # Get Product Collection
-    # Retrieves the product collection.
+    # Retrieves the product collection. <Note>If the Areas and Stores enterprise feature is enabled for product collections, a restricted user receives a forbidden error when the product collection is not assigned to their areas and stores. Contact [Voucherify Sales](https://www.voucherify.io/contact-sales) to learn more.</Note>
     # @param product_collection_id [String] A unique product collection ID.
     # @param [Hash] opts the optional parameters
     # @return [ProductCollectionsGetResponseBody]
@@ -151,7 +151,7 @@ module VoucherifySdk
     end
 
     # Get Product Collection
-    # Retrieves the product collection.
+    # Retrieves the product collection. &lt;Note&gt;If the Areas and Stores enterprise feature is enabled for product collections, a restricted user receives a forbidden error when the product collection is not assigned to their areas and stores. Contact [Voucherify Sales](https://www.voucherify.io/contact-sales) to learn more.&lt;/Note&gt;
     # @param product_collection_id [String] A unique product collection ID.
     # @param [Hash] opts the optional parameters
     # @return [Array<(ProductCollectionsGetResponseBody, Integer, Hash)>] ProductCollectionsGetResponseBody data, response status code and response headers
@@ -200,7 +200,7 @@ module VoucherifySdk
     end
 
     # List Product Collections
-    # This method returns a list of product collections.
+    # This method returns a list of product collections. <Note>A restricted user sees only the product collections assigned to their areas and stores. A restricted user is a user with the Restricted user role, or with a custom role that has the Join areas and stores permission. An API key with the Restricted user role is also restricted.</Note>
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
@@ -212,7 +212,7 @@ module VoucherifySdk
     end
 
     # List Product Collections
-    # This method returns a list of product collections.
+    # This method returns a list of product collections. &lt;Note&gt;A restricted user sees only the product collections assigned to their areas and stores. A restricted user is a user with the Restricted user role, or with a custom role that has the Join areas and stores permission. An API key with the Restricted user role is also restricted.&lt;/Note&gt;
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [Integer] :page Which page of results to return. The lowest value is 1.

@@ -21,12 +21,15 @@ module VoucherifySdk
 
     attr_accessor :coin
 
+    attr_accessor :loyalty_points
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'campaign' => :'campaign',
         :'product' => :'product',
-        :'coin' => :'coin'
+        :'coin' => :'coin',
+        :'loyalty_points' => :'loyalty_points'
       }
     end
 
@@ -40,7 +43,8 @@ module VoucherifySdk
       {
         :'campaign' => :'RewardsCreateRequestBodyParametersCampaign',
         :'product' => :'RewardsCreateRequestBodyParametersProduct',
-        :'coin' => :'RewardsCreateRequestBodyParametersCoin'
+        :'coin' => :'RewardsCreateRequestBodyParametersCoin',
+        :'loyalty_points' => :'RewardsCreateRequestBodyParametersLoyaltyPoints'
       }
     end
 
@@ -49,7 +53,8 @@ module VoucherifySdk
       Set.new([
         :'campaign',
         :'product',
-        :'coin'
+        :'coin',
+        :'loyalty_points'
       ])
     end
 
@@ -71,6 +76,10 @@ module VoucherifySdk
 
       if attributes.key?(:'coin')
         self.coin = attributes[:'coin']
+      end
+
+      if attributes.key?(:'loyalty_points')
+        self.loyalty_points = attributes[:'loyalty_points']
       end
     end
 
@@ -96,7 +105,8 @@ module VoucherifySdk
       self.class == o.class &&
           campaign == o.campaign &&
           product == o.product &&
-          coin == o.coin
+          coin == o.coin &&
+          loyalty_points == o.loyalty_points
     end
 
     # @see the `==` method
@@ -108,7 +118,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [campaign, product, coin].hash
+      [campaign, product, coin, loyalty_points].hash
     end
 
     # Builds the object from hash

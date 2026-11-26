@@ -22,7 +22,7 @@ module VoucherifySdk
     # Identifies the name of the JSON property that contains the array of product collections.
     attr_accessor :data_ref
 
-    # A dictionary that contains an array of product collections and their details.
+    # A dictionary that contains an array of product collections and their details.  <Note>If the Areas and Stores enterprise feature is enabled for product collections, this list does not return `access_settings_assignments`. To get the areas and stores to which a product collection is assigned, use [GET Product Collection](/api-reference/product-collections/get-product-collection). Contact [Voucherify Sales](https://www.voucherify.io/contact-sales) to learn more.</Note>
     attr_accessor :data
 
     # Total number of product collections.

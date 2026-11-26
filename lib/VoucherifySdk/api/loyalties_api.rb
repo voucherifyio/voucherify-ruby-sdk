@@ -82,7 +82,7 @@ module VoucherifySdk
 
     # Add Member
     # <Warning> <Badge color yellow>Legacy loyalty API</Badge> This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). </Warning> This method assigns a loyalty card to a customer. It selects a [loyalty card](/api-reference/vouchers/get-voucher) suitable for publication, adds a publish entry, and returns the published voucher.   A voucher is suitable for publication when its active and hasnt been published yet.   <Note> <Badge color blue>Auto-update campaign</Badge> In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use **auto-update** campaign. </Note>
-    # @param campaign_id [String] Unique campaign ID of the loyalty program.
+    # @param campaign_id [String] Unique campaign ID of the legacy loyalty campaign.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesMembersCreateRequestBody] :loyalties_members_create_request_body Provide details to whom the loyalty card should be assigned.     You can choose to either specify the exact loyalty card code that you want to publish from existin (non-assigned) codes, or choose not to specify a voucher code. If you choose not to specify a code in the request paylaod, then the system will choose the next available voucher code available to be assigned to a customer.   You can also include metadata in the request payload. This metadata will be assigned to the publication object, but will not be returned in the response to this endpoint. To see of publications (assignments of particular codes to customers) and publication metadata, use the [List Publications](/api-reference/publications/list-publications) endpoint.
     # @return [LoyaltiesMembersCreateResponseBody]
@@ -93,7 +93,7 @@ module VoucherifySdk
 
     # Add Member
     # &lt;Warning&gt; &lt;Badge color yellow&gt;Legacy loyalty API&lt;/Badge&gt; This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). &lt;/Warning&gt; This method assigns a loyalty card to a customer. It selects a [loyalty card](/api-reference/vouchers/get-voucher) suitable for publication, adds a publish entry, and returns the published voucher.   A voucher is suitable for publication when its active and hasnt been published yet.   &lt;Note&gt; &lt;Badge color blue&gt;Auto-update campaign&lt;/Badge&gt; In case you want to ensure the number of publishable codes increases automatically with the number of customers, you should use **auto-update** campaign. &lt;/Note&gt;
-    # @param campaign_id [String] Unique campaign ID of the loyalty program.
+    # @param campaign_id [String] Unique campaign ID of the legacy loyalty campaign.
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesMembersCreateRequestBody] :loyalties_members_create_request_body Provide details to whom the loyalty card should be assigned.     You can choose to either specify the exact loyalty card code that you want to publish from existin (non-assigned) codes, or choose not to specify a voucher code. If you choose not to specify a code in the request paylaod, then the system will choose the next available voucher code available to be assigned to a customer.   You can also include metadata in the request payload. This metadata will be assigned to the publication object, but will not be returned in the response to this endpoint. To see of publications (assignments of particular codes to customers) and publication metadata, use the [List Publications](/api-reference/publications/list-publications) endpoint.
     # @return [Array<(LoyaltiesMembersCreateResponseBody, Integer, Hash)>] LoyaltiesMembersCreateResponseBody data, response status code and response headers
@@ -536,7 +536,7 @@ module VoucherifySdk
     end
 
     # Create Loyalty Campaign Reward Assignment
-    # <Warning> <Badge color yellow>Legacy loyalty API</Badge> This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). </Warning> Add rewards to a loyalty campaign.
+    # <Warning> <Badge color yellow>Legacy loyalty API</Badge> This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). </Warning> Add rewards to a loyalty campaign. A LOYALTY_POINTS reward cannot be assigned to a campaign. Use **POST** v1/rewards/{rewardId}/assignments with related_object_type referral_tier instead.
     # @param campaign_id [String] Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<LoyaltiesRewardsCreateAssignmentItemRequestBody>] :loyalties_rewards_create_assignment_item_request_body Define the cost of the rewards in loyalty points.
@@ -547,7 +547,7 @@ module VoucherifySdk
     end
 
     # Create Loyalty Campaign Reward Assignment
-    # &lt;Warning&gt; &lt;Badge color yellow&gt;Legacy loyalty API&lt;/Badge&gt; This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). &lt;/Warning&gt; Add rewards to a loyalty campaign.
+    # &lt;Warning&gt; &lt;Badge color yellow&gt;Legacy loyalty API&lt;/Badge&gt; This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). &lt;/Warning&gt; Add rewards to a loyalty campaign. A LOYALTY_POINTS reward cannot be assigned to a campaign. Use **POST** v1/rewards/{rewardId}/assignments with related_object_type referral_tier instead.
     # @param campaign_id [String] Unique campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [Array<LoyaltiesRewardsCreateAssignmentItemRequestBody>] :loyalties_rewards_create_assignment_item_request_body Define the cost of the rewards in loyalty points.
@@ -2590,7 +2590,7 @@ module VoucherifySdk
 
     # List Members
     # <Warning> <Badge color yellow>Legacy loyalty API</Badge> This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). </Warning> Returns a list of your loyalty cards. The loyalty cards are sorted by creation date, with the most recent loyalty cards appearing first.
-    # @param campaign_id [String] Unique campaign ID of the loyalty program.
+    # @param campaign_id [String] Unique campaign ID of the legacy loyalty campaign.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
@@ -2608,7 +2608,7 @@ module VoucherifySdk
 
     # List Members
     # &lt;Warning&gt; &lt;Badge color yellow&gt;Legacy loyalty API&lt;/Badge&gt; This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). &lt;/Warning&gt; Returns a list of your loyalty cards. The loyalty cards are sorted by creation date, with the most recent loyalty cards appearing first.
-    # @param campaign_id [String] Unique campaign ID of the loyalty program.
+    # @param campaign_id [String] Unique campaign ID of the legacy loyalty campaign.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
     # @option opts [Integer] :page Which page of results to return. The lowest value is 1.
@@ -3279,7 +3279,7 @@ module VoucherifySdk
     end
 
     # Update Loyalty Campaign
-    # <Warning> <Badge color yellow>Legacy loyalty API</Badge> This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). </Warning> Updates a loyalty program.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the [loyalty cards](/api-reference/loyalties/get-member) which have not been published or redeemed yet.
+    # <Warning> <Badge color yellow>Legacy loyalty API</Badge> This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). </Warning> Updates a loyalty campaign.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the [loyalty cards](/api-reference/loyalties/get-member) which have not been published or redeemed yet.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesUpdateCampaignRequestBody] :loyalties_update_campaign_request_body Specify the new values for the parameters that you would like to update for the given loyalty campaign.
@@ -3290,7 +3290,7 @@ module VoucherifySdk
     end
 
     # Update Loyalty Campaign
-    # &lt;Warning&gt; &lt;Badge color yellow&gt;Legacy loyalty API&lt;/Badge&gt; This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). &lt;/Warning&gt; Updates a loyalty program.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the [loyalty cards](/api-reference/loyalties/get-member) which have not been published or redeemed yet.
+    # &lt;Warning&gt; &lt;Badge color yellow&gt;Legacy loyalty API&lt;/Badge&gt; This endpoint belongs to the legacy loyalty API (/v1/loyalties). Voucherify will not develop new features for this API. However, critical issues may still receive fixes. For new integrations, use [Loyalty v2](/build/loyalty-overview). If you have questions, contact [Voucherify support](https://www.voucherify.io/contact-support Contact Voucherify support). &lt;/Warning&gt; Updates a loyalty campaign.  Fields other than those specified in the allowed request body payload wont be modified (even if provided they are silently skipped). Any parameters not provided will be left unchanged.  This method will update the [loyalty cards](/api-reference/loyalties/get-member) which have not been published or redeemed yet.
     # @param campaign_id [String] The campaign ID or name of the loyalty campaign. You can either pass the campaign ID, which was assigned by Voucherify, or the name of the campaign as the path parameter value, e.g., Loyalty%20Campaign. 
     # @param [Hash] opts the optional parameters
     # @option opts [LoyaltiesUpdateCampaignRequestBody] :loyalties_update_campaign_request_body Specify the new values for the parameters that you would like to update for the given loyalty campaign.

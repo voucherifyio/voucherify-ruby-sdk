@@ -19,7 +19,7 @@ module VoucherifySdk
     # Defines how many points are required to obtain the reward.
     attr_accessor :points
 
-    # Determines if the reward is redeemed automatically when the customer reaches the sufficient number of points to redeem it. Value `true` means that the automatic reward redemption is active. Only one reward can be set to be redeemed automatically in a loyalty campaign, i.e. only one can have the value `true`.
+    # Determines if the reward is redeemed automatically when the customer reaches the sufficient number of points to redeem it. Value `true` means that the automatic reward redemption is active. Only one reward can be set to be redeemed automatically in a **legacy loyalty** campaign, i.e. only one can have the value `true`.
     attr_accessor :auto_redeem
 
     # Attribute mapping from ruby-style variable name to JSON key.

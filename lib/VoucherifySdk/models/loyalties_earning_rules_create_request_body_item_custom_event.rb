@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Contains the schema id of a custom event. **Required** for the custom event option in `event`.
+  # Contains the schema ID of a custom event. Required for the custom event option in `event`.
   class LoyaltiesEarningRulesCreateRequestBodyItemCustomEvent
     # Contains a unique identifier of a custom event schema. Assigned by the Voucherify API.
     attr_accessor :schema_id

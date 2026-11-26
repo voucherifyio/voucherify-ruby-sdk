@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **date** | **Date** | Identifies the start of the truncated aggregation period (&#x60;YYYY-MM-DD&#x60;). For &#x60;week&#x60; this is Monday. For &#x60;month&#x60; this is the first day. For &#x60;quarter&#x60; this is the quarter start. | [optional] |
-| **points_total** | **Float** | Points credited to the card in the period. Sums &#x60;points_earned&#x60;, &#x60;points_added&#x60;, and &#x60;points_purchased&#x60;. Points spent, expired, subtracted, refunded, returned, or reversed are not deducted. | [optional] |
+| **points_total** | **Float** | Points credited to the card in the period. Sums &#x60;points_earned&#x60;, &#x60;points_added&#x60;, &#x60;points_purchased&#x60;, &#x60;referrer_points_earned&#x60;, and &#x60;referee_points_earned&#x60;. Points spent, expired, subtracted, refunded, returned, or reversed are not deducted. | [optional] |
 | **points_earned** | **Float** | Points earned through earning rules in the period. Includes pending points activated in the period. | [optional] |
 | **points_added** | **Float** | Points added manually in the period. | [optional] |
 | **points_purchased** | **Float** | Points purchased (e.g. via loyalty-card-points rewards) in the period. | [optional] |
@@ -17,6 +17,8 @@
 | **points_returned** | **Float** | Points returned in the period. | [optional] |
 | **points_locked** | **Float** | Points locked in the period. | [optional] |
 | **points_unlocked** | **Float** | Points unlocked in the period. Includes points released when a spending transaction is approved (also counted in &#x60;points_spent&#x60;) or rejected. | [optional] |
+| **referrer_points_earned** | **Float** | Points credited from referral referrer awards in the period (&#x60;REFERRER_POINTS_EARNED&#x60; card transactions, for example a &#x60;LOYALTY_POINTS&#x60; reward assigned to a referrer tier). Also counted in &#x60;points_total&#x60;. Not counted in &#x60;points_earned&#x60;. | [optional] |
+| **referee_points_earned** | **Float** | Points credited from referral referee awards in the period (&#x60;REFEREE_POINTS_EARNED&#x60; card transactions, for example a &#x60;LOYALTY_POINTS&#x60; reward assigned to a referee tier). Also counted in &#x60;points_total&#x60;. Not counted in &#x60;points_earned&#x60;. | [optional] |
 | **pending_points_total** | **Float** | Pending points added in the period. Activated and canceled pending points are not deducted. | [optional] |
 | **pending_points_activated** | **Float** | Pending points activated in the period. Also counted in &#x60;points_earned&#x60; and &#x60;points_total&#x60;. | [optional] |
 | **pending_points_canceled** | **Float** | Pending points canceled in the period. | [optional] |

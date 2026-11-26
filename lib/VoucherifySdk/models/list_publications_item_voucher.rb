@@ -26,7 +26,7 @@ module VoucherifySdk
 
     attr_accessor :gift
 
-    # Defines the loyalty card details.
+    # Defines the legacy loyalty card details.
     attr_accessor :loyalty_card
 
     attr_accessor :discount

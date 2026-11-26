@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # Response body schema for **POST** `/loyalties`.
+  # **Legacy loyalty.** Response body schema for **POST** `/loyalties`.
   class LoyaltiesCreateCampaignResponseBody
     # Unique campaign ID, assigned by Voucherify.
     attr_accessor :id
@@ -33,10 +33,10 @@ module VoucherifySdk
 
     attr_accessor :voucher
 
-    # Indicates whether customers will be able to auto-join a loyalty campaign if any earning rule is fulfilled.
+    # Indicates whether customers will be able to auto-join a **legacy loyalty** campaign if any earning rule is fulfilled.
     attr_accessor :auto_join
 
-    # Always set to `true` for loyalty campaigns, meaning customers can join the campaign only once. It can't be changed to `false`.
+    # Always set to `true` for **legacy loyalty** campaigns, meaning customers can join the campaign only once. It can't be changed to `false`.
     attr_accessor :join_once
 
     # Flag indicating whether the campaign is to use the voucher's metadata schema instead of the campaign metadata schema.

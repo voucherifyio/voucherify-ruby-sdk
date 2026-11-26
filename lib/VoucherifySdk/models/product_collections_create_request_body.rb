@@ -23,6 +23,8 @@ module VoucherifySdk
     # Defines a set of products for a `STATIC` product collection type.
     attr_accessor :products
 
+    attr_accessor :access_settings
+
     # Defines a set of criteria and boundary conditions for an `AUTO_UPDATE` product collection type.
     attr_accessor :filter
 
@@ -54,6 +56,7 @@ module VoucherifySdk
         :'type' => :'type',
         :'name' => :'name',
         :'products' => :'products',
+        :'access_settings' => :'access_settings',
         :'filter' => :'filter'
       }
     end
@@ -69,6 +72,7 @@ module VoucherifySdk
         :'type' => :'String',
         :'name' => :'String',
         :'products' => :'Array<ProductCollectionsCreateRequestBodyProductsItem>',
+        :'access_settings' => :'AccessSettings',
         :'filter' => :'Object'
       }
     end
@@ -105,6 +109,10 @@ module VoucherifySdk
         end
       end
 
+      if attributes.key?(:'access_settings')
+        self.access_settings = attributes[:'access_settings']
+      end
+
       if attributes.key?(:'filter')
         self.filter = attributes[:'filter']
       end
@@ -135,6 +143,7 @@ module VoucherifySdk
           type == o.type &&
           name == o.name &&
           products == o.products &&
+          access_settings == o.access_settings &&
           filter == o.filter
     end
 
@@ -147,7 +156,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, name, products, filter].hash
+      [type, name, products, access_settings, filter].hash
     end
 
     # Builds the object from hash

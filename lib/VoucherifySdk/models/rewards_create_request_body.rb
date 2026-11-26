@@ -18,6 +18,8 @@ module VoucherifySdk
     # Reward name.
     attr_accessor :name
 
+    attr_accessor :type
+
     attr_accessor :parameters
 
     # The metadata object stores all custom attributes assigned to the reward. A set of key/value pairs that you can attach to a reward object. It can be useful for storing additional information about the reward in a structured format.
@@ -28,10 +30,33 @@ module VoucherifySdk
 
     attr_accessor :attributes
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
+        :'type' => :'type',
         :'parameters' => :'parameters',
         :'metadata' => :'metadata',
         :'stock' => :'stock',
@@ -48,6 +73,7 @@ module VoucherifySdk
     def self.openapi_types
       {
         :'name' => :'String',
+        :'type' => :'String',
         :'parameters' => :'RewardsCreateRequestBodyParameters',
         :'metadata' => :'Object',
         :'stock' => :'Integer',
@@ -59,6 +85,7 @@ module VoucherifySdk
     def self.openapi_nullable
       Set.new([
         :'name',
+        :'type',
         :'parameters',
         :'metadata',
         :'stock',
@@ -76,6 +103,10 @@ module VoucherifySdk
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
       end
 
       if attributes.key?(:'parameters')
@@ -107,6 +138,8 @@ module VoucherifySdk
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      type_validator = EnumAttributeValidator.new('String', ["CAMPAIGN", "MATERIAL", "COIN", "LOYALTY_POINTS"])
+      return false unless type_validator.valid?(@type)
       true
     end
 
@@ -116,6 +149,7 @@ module VoucherifySdk
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
+          type == o.type &&
           parameters == o.parameters &&
           metadata == o.metadata &&
           stock == o.stock &&
@@ -131,7 +165,7 @@ module VoucherifySdk
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, parameters, metadata, stock, attributes].hash
+      [name, type, parameters, metadata, stock, attributes].hash
     end
 
     # Builds the object from hash

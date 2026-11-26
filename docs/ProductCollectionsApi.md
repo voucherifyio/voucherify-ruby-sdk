@@ -17,7 +17,7 @@ All URIs are relative to *https://api.voucherify.io*
 
 Create Product Collection
 
-This method creates a new product collection.
+Creates a new product collection. To assign the collection to areas, stores, or all stores, send access_settings with assign. Assignments are available only when the Areas and Stores enterprise feature is enabled for product collections. <Note>A restricted user must assign the new collection to at least one area or store. Areas and stores that the restricted user isnt assigned to are ignored. If none are left, the request fails with a 400 error. A restricted user is a user with the Restricted user role, or with a custom role that has the Join areas and stores permission. An API key with the Restricted user role is also restricted. Users who cant join areas and stores can assign any area or store.</Note>
 
 ### Examples
 
@@ -77,7 +77,7 @@ end
 
 Delete Product Collection
 
-Deletes a product collection. <Warning>This endpoint performs database-heavy operations. It is not designed for highly frequent use.</Warning>
+Deletes a product collection. <Note>If the Areas and Stores enterprise feature is enabled for product collections, the area and store assignments of the product collection are deleted with it. A restricted user cant delete a product collection that is read-only for them or that is not assigned to their areas and stores. Contact [Voucherify Sales](https://www.voucherify.io/contact-sales) to learn more.</Note> <Warning>This endpoint performs database-heavy operations. It is not designed for highly frequent use.</Warning>
 
 ### Examples
 
@@ -134,7 +134,7 @@ nil (empty response body)
 
 Get Product Collection
 
-Retrieves the product collection.
+Retrieves the product collection. <Note>If the Areas and Stores enterprise feature is enabled for product collections, a restricted user receives a forbidden error when the product collection is not assigned to their areas and stores. Contact [Voucherify Sales](https://www.voucherify.io/contact-sales) to learn more.</Note>
 
 ### Examples
 
@@ -192,7 +192,7 @@ end
 
 List Product Collections
 
-This method returns a list of product collections.
+This method returns a list of product collections. <Note>A restricted user sees only the product collections assigned to their areas and stores. A restricted user is a user with the Restricted user role, or with a custom role that has the Join areas and stores permission. An API key with the Restricted user role is also restricted.</Note>
 
 ### Examples
 

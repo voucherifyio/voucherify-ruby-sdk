@@ -20,7 +20,7 @@ module VoucherifySdk
       @api_client = api_client
     end
     # Create Voucher
-    # Create a generic (standalone) voucher or a voucher in a campaign. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a LOYALTY_CARD. The code path parameter can use all letters of the English alphabet, Arabic numerals and special characters. When you create a new voucher, you can specify a type to create it. If no campaign name or campaign_id is provided, the new voucher will be a generic (standalone) one. However, if an ID or name of a campaign with the type set to STANDALONE is provided, the voucher will be added to this campaign. For a loyalty card, a campaign name or ID is required. <Warning> <Badge color yellow>Standalone Vouchers and Campaigns</Badge> Generic (standalone) vouchers created through the Voucherify dashboard always create a campaign for that voucher. However, vouchers created through The vouchers created with POST Create voucher and POST Generate random code endpoints do not have a campaign attached, so the values for campaign and campaign_id are null. To create a generic (standalone) voucher with a type: STANDALONE, use the [POST Create campaign](/api-reference/campaigns/create-campaign) endpoint. </Warning>
+    # Create a generic (standalone) voucher or a voucher in a campaign. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a legacy LOYALTY_CARD. The code path parameter can use all letters of the English alphabet, Arabic numerals and special characters. When you create a new voucher, you can specify a type to create it. If no campaign name or campaign_id is provided, the new voucher will be a generic (standalone) one. However, if an ID or name of a campaign with the type set to STANDALONE is provided, the voucher will be added to this campaign. For a loyalty card, a campaign name or ID is required. <Warning> <Badge color yellow>Standalone Vouchers and Campaigns</Badge> Generic (standalone) vouchers created through the Voucherify dashboard always create a campaign for that voucher. However, vouchers created through The vouchers created with POST Create voucher and POST Generate random code endpoints do not have a campaign attached, so the values for campaign and campaign_id are null. To create a generic (standalone) voucher with a type: STANDALONE, use the [POST Create campaign](/api-reference/campaigns/create-campaign) endpoint. </Warning>
     # @param code [String] A unique **code** that identifies the voucher.
     # @param [Hash] opts the optional parameters
     # @option opts [VouchersCreateWithSpecificCodeRequestBody] :vouchers_create_with_specific_code_request_body Specify the details of the voucher that you would like to create.
@@ -31,7 +31,7 @@ module VoucherifySdk
     end
 
     # Create Voucher
-    # Create a generic (standalone) voucher or a voucher in a campaign. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a LOYALTY_CARD. The code path parameter can use all letters of the English alphabet, Arabic numerals and special characters. When you create a new voucher, you can specify a type to create it. If no campaign name or campaign_id is provided, the new voucher will be a generic (standalone) one. However, if an ID or name of a campaign with the type set to STANDALONE is provided, the voucher will be added to this campaign. For a loyalty card, a campaign name or ID is required. &lt;Warning&gt; &lt;Badge color yellow&gt;Standalone Vouchers and Campaigns&lt;/Badge&gt; Generic (standalone) vouchers created through the Voucherify dashboard always create a campaign for that voucher. However, vouchers created through The vouchers created with POST Create voucher and POST Generate random code endpoints do not have a campaign attached, so the values for campaign and campaign_id are null. To create a generic (standalone) voucher with a type: STANDALONE, use the [POST Create campaign](/api-reference/campaigns/create-campaign) endpoint. &lt;/Warning&gt;
+    # Create a generic (standalone) voucher or a voucher in a campaign. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a legacy LOYALTY_CARD. The code path parameter can use all letters of the English alphabet, Arabic numerals and special characters. When you create a new voucher, you can specify a type to create it. If no campaign name or campaign_id is provided, the new voucher will be a generic (standalone) one. However, if an ID or name of a campaign with the type set to STANDALONE is provided, the voucher will be added to this campaign. For a loyalty card, a campaign name or ID is required. &lt;Warning&gt; &lt;Badge color yellow&gt;Standalone Vouchers and Campaigns&lt;/Badge&gt; Generic (standalone) vouchers created through the Voucherify dashboard always create a campaign for that voucher. However, vouchers created through The vouchers created with POST Create voucher and POST Generate random code endpoints do not have a campaign attached, so the values for campaign and campaign_id are null. To create a generic (standalone) voucher with a type: STANDALONE, use the [POST Create campaign](/api-reference/campaigns/create-campaign) endpoint. &lt;/Warning&gt;
     # @param code [String] A unique **code** that identifies the voucher.
     # @param [Hash] opts the optional parameters
     # @option opts [VouchersCreateWithSpecificCodeRequestBody] :vouchers_create_with_specific_code_request_body Specify the details of the voucher that you would like to create.
@@ -264,7 +264,7 @@ module VoucherifySdk
     end
 
     # Export Voucher Transactions
-    # Export transactions that are associated with credit movements on a gift card or loyalty card.   
+    # Export transactions that are associated with credit movements on a gift card or loyalty card (**legacy loyalty**).   
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
     # @param [Hash] opts the optional parameters
     # @option opts [VouchersTransactionsExportCreateRequestBody] :vouchers_transactions_export_create_request_body Specify the parameters for the camapign transaction export.
@@ -275,7 +275,7 @@ module VoucherifySdk
     end
 
     # Export Voucher Transactions
-    # Export transactions that are associated with credit movements on a gift card or loyalty card.   
+    # Export transactions that are associated with credit movements on a gift card or loyalty card (**legacy loyalty**).   
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
     # @param [Hash] opts the optional parameters
     # @option opts [VouchersTransactionsExportCreateRequestBody] :vouchers_transactions_export_create_request_body Specify the parameters for the camapign transaction export.
@@ -330,7 +330,7 @@ module VoucherifySdk
     end
 
     # Generate Random Code
-    # Create a generic (standalone) vouchers. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a LOYALTY_CARD.  When you create a new voucher, you can specify a type to create it. Creating a new voucher will create a new generic (standalone) vouchers if no campaign name or campaign_id is provided. However, if an ID or name of a campaign with the type set to STANDALONE is provided, the voucher will be added to such campaign. In case of the loyalty card, a campaign name is required. You can optionally use the code parameter to define a specific code or the code_config parameter to design rules for Voucherify API to create a random code. If neither of the two parameters are passed, then a random code is generated by the Voucherify API. This method will return an error when trying to create a voucher that already exists. <Warning> <Badge color yellow>Standalone Vouchers and Campaigns</Badge> Generic (standalone) vouchers created through the Voucherify dashboard always create a campaign for that voucher. The vouchers created with POST Create voucher and POST Generate random code endpoints do not have a campaign attached, so the values for campaign and campaign_id are null. To create a generic (standalone) voucher with a type: STANDALONE, use the [POST Create campaign](/api-reference/campaigns/create-campaign) endpoint. </Warning>
+    # Create a generic (standalone) vouchers. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a legacy LOYALTY_CARD.  When you create a new voucher, you can specify a type to create it. Creating a new voucher will create a new generic (standalone) vouchers if no campaign name or campaign_id is provided. However, if an ID or name of a campaign with the type set to STANDALONE is provided, the voucher will be added to such campaign. In case of the loyalty card, a campaign name is required. You can optionally use the code parameter to define a specific code or the code_config parameter to design rules for Voucherify API to create a random code. If neither of the two parameters are passed, then a random code is generated by the Voucherify API. This method will return an error when trying to create a voucher that already exists. <Warning> <Badge color yellow>Standalone Vouchers and Campaigns</Badge> Generic (standalone) vouchers created through the Voucherify dashboard always create a campaign for that voucher. The vouchers created with POST Create voucher and POST Generate random code endpoints do not have a campaign attached, so the values for campaign and campaign_id are null. To create a generic (standalone) voucher with a type: STANDALONE, use the [POST Create campaign](/api-reference/campaigns/create-campaign) endpoint. </Warning>
     # @param [Hash] opts the optional parameters
     # @option opts [VouchersCreateRequestBody] :vouchers_create_request_body Specify the details of the voucher that you would like to create.
     # @return [VouchersCreateResponseBody]
@@ -340,7 +340,7 @@ module VoucherifySdk
     end
 
     # Generate Random Code
-    # Create a generic (standalone) vouchers. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a LOYALTY_CARD.  When you create a new voucher, you can specify a type to create it. Creating a new voucher will create a new generic (standalone) vouchers if no campaign name or campaign_id is provided. However, if an ID or name of a campaign with the type set to STANDALONE is provided, the voucher will be added to such campaign. In case of the loyalty card, a campaign name is required. You can optionally use the code parameter to define a specific code or the code_config parameter to design rules for Voucherify API to create a random code. If neither of the two parameters are passed, then a random code is generated by the Voucherify API. This method will return an error when trying to create a voucher that already exists. &lt;Warning&gt; &lt;Badge color yellow&gt;Standalone Vouchers and Campaigns&lt;/Badge&gt; Generic (standalone) vouchers created through the Voucherify dashboard always create a campaign for that voucher. The vouchers created with POST Create voucher and POST Generate random code endpoints do not have a campaign attached, so the values for campaign and campaign_id are null. To create a generic (standalone) voucher with a type: STANDALONE, use the [POST Create campaign](/api-reference/campaigns/create-campaign) endpoint. &lt;/Warning&gt;
+    # Create a generic (standalone) vouchers. You can choose to create a GIFT_VOUCHER, a DISCOUNT_VOUCHER, or a legacy LOYALTY_CARD.  When you create a new voucher, you can specify a type to create it. Creating a new voucher will create a new generic (standalone) vouchers if no campaign name or campaign_id is provided. However, if an ID or name of a campaign with the type set to STANDALONE is provided, the voucher will be added to such campaign. In case of the loyalty card, a campaign name is required. You can optionally use the code parameter to define a specific code or the code_config parameter to design rules for Voucherify API to create a random code. If neither of the two parameters are passed, then a random code is generated by the Voucherify API. This method will return an error when trying to create a voucher that already exists. &lt;Warning&gt; &lt;Badge color yellow&gt;Standalone Vouchers and Campaigns&lt;/Badge&gt; Generic (standalone) vouchers created through the Voucherify dashboard always create a campaign for that voucher. The vouchers created with POST Create voucher and POST Generate random code endpoints do not have a campaign attached, so the values for campaign and campaign_id are null. To create a generic (standalone) voucher with a type: STANDALONE, use the [POST Create campaign](/api-reference/campaigns/create-campaign) endpoint. &lt;/Warning&gt;
     # @param [Hash] opts the optional parameters
     # @option opts [VouchersCreateRequestBody] :vouchers_create_request_body Specify the details of the voucher that you would like to create.
     # @return [Array<(VouchersCreateResponseBody, Integer, Hash)>] VouchersCreateResponseBody data, response status code and response headers
@@ -585,7 +585,7 @@ module VoucherifySdk
     end
 
     # List Voucher Transactions
-    # List transactions that are associated with credit movements on a gift card or loyalty card.
+    # List transactions that are associated with credit movements on a gift card or loyalty card (**legacy loyalty**).
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
@@ -598,7 +598,7 @@ module VoucherifySdk
     end
 
     # List Voucher Transactions
-    # List transactions that are associated with credit movements on a gift card or loyalty card.
+    # List transactions that are associated with credit movements on a gift card or loyalty card (**legacy loyalty**).
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :limit Limits the number of objects to be returned. The limit can range between 1 and 100 items. If no limit is set, it returns 10 items.
@@ -802,7 +802,7 @@ module VoucherifySdk
     end
 
     # Update Voucher
-    # Updates the specified voucher by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged. Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped. If you want to change the amount on a gift card or the number of points on a loyalty card, use the [Adjust voucher balance](/api-reference/vouchers/adjust-voucher-balance) endpoint.
+    # Updates the specified voucher by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged. Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped. If you want to change the amount on a gift card or the number of points on a loyalty card (**legacy loyalty**), use the [Adjust voucher balance](/api-reference/vouchers/adjust-voucher-balance) endpoint.
     # @param code [String] A unique **code** that identifies the voucher.
     # @param vouchers_update_request_body [VouchersUpdateRequestBody] Specify the parameters to be updated.
     # @param [Hash] opts the optional parameters
@@ -813,7 +813,7 @@ module VoucherifySdk
     end
 
     # Update Voucher
-    # Updates the specified voucher by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged. Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped. If you want to change the amount on a gift card or the number of points on a loyalty card, use the [Adjust voucher balance](/api-reference/vouchers/adjust-voucher-balance) endpoint.
+    # Updates the specified voucher by setting the values of the parameters passed in the request body. Any parameters not provided in the payload will be left unchanged. Fields other than the ones listed in the request body wont be modified. Even if provided, they will be silently skipped. If you want to change the amount on a gift card or the number of points on a loyalty card (**legacy loyalty**), use the [Adjust voucher balance](/api-reference/vouchers/adjust-voucher-balance) endpoint.
     # @param code [String] A unique **code** that identifies the voucher.
     # @param vouchers_update_request_body [VouchersUpdateRequestBody] Specify the parameters to be updated.
     # @param [Hash] opts the optional parameters
@@ -868,7 +868,7 @@ module VoucherifySdk
     end
 
     # Adjust Voucher Balance
-    # Add balance to an existing gift card or loyalty card. For loyalty cards, it must be assigned to a holder.
+    # Add balance to an existing gift card or loyalty card. For loyalty cards (**legacy loyalty**), the card must be assigned to a holder. For Loyalty hub cards, use /v2/loyalties card transaction endpoints.
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
     # @param vouchers_balance_update_request_body [VouchersBalanceUpdateRequestBody] Provide the amount to be added to/subtracted from the voucher.
     # @param [Hash] opts the optional parameters
@@ -879,7 +879,7 @@ module VoucherifySdk
     end
 
     # Adjust Voucher Balance
-    # Add balance to an existing gift card or loyalty card. For loyalty cards, it must be assigned to a holder.
+    # Add balance to an existing gift card or loyalty card. For loyalty cards (**legacy loyalty**), the card must be assigned to a holder. For Loyalty hub cards, use /v2/loyalties card transaction endpoints.
     # @param code [String] A **code** that identifies the voucher or a unique voucher ID assigned by Voucherify, i.e. v_TzD19aeNiqGc9LWciMWknyEZT8IW7u4u.
     # @param vouchers_balance_update_request_body [VouchersBalanceUpdateRequestBody] Provide the amount to be added to/subtracted from the voucher.
     # @param [Hash] opts the optional parameters

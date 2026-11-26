@@ -49,7 +49,7 @@ module VoucherifySdk
     # A set of custom key/value pairs that you can attach to a reward. The metadata object stores all custom attributes assigned to the reward.
     attr_accessor :metadata
 
-    # Reward type.
+    # Reward type. `LOYALTY_POINTS` credits points on a `v2/loyalties` (loyalty hub) card (for example from a referral tier).
     attr_accessor :type
 
     class EnumAttributeValidator
@@ -216,7 +216,7 @@ module VoucherifySdk
       warn '[DEPRECATED] the `valid?` method is obsolete'
       object_validator = EnumAttributeValidator.new('String', ["reward"])
       return false unless object_validator.valid?(@object)
-      type_validator = EnumAttributeValidator.new('String', ["CAMPAIGN", "COIN", "MATERIAL"])
+      type_validator = EnumAttributeValidator.new('String', ["CAMPAIGN", "COIN", "MATERIAL", "LOYALTY_POINTS"])
       return false unless type_validator.valid?(@type)
       true
     end

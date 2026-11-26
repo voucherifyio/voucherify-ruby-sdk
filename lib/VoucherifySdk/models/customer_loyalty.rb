@@ -14,14 +14,15 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
+  # Summary of the customer's **legacy loyalty** activity: points on loyalty cards and referred customers. Loyalty hub memberships are listed separately under `loyalty_memberships` on the customer object.
   class CustomerLoyalty
-    # Customer's loyalty points minus expired for all loyalty cards which the customer has.
+    # Customer's loyalty points minus expired points for all loyalty cards (**legacy loyalty**) which the customer has.
     attr_accessor :points
 
     # Total number of customers referred by the customer.
     attr_accessor :referred_customers
 
-    # Contains campaigns with details about point balances and how many customers were referred by the customer.
+    # Contains **legacy loyalty** and referral campaigns with details about point balances and how many customers were referred by the customer.
     attr_accessor :campaigns
 
     # Attribute mapping from ruby-style variable name to JSON key.

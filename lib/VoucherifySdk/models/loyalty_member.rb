@@ -14,7 +14,7 @@ require 'date'
 require 'time'
 
 module VoucherifySdk
-  # This is an object representing a loyalty member.
+  # **Legacy loyalty.** This is an object representing a loyalty member.
   class LoyaltyMember
     # Assigned by the Voucherify API, identifies the voucher.
     attr_accessor :id
